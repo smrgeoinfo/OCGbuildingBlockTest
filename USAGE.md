@@ -1,13 +1,8 @@
 # OGC Building Block template
 
-This repository can be used as a template to create new collections of
+This repository is generated from OGC template to create new collections of
 [OGC Building Blocks](https://ogcincubator.github.io/bblocks-docs/).
 
-Building Blocks can be reused by either:
-
-- cut and paste "ready to use" forms from the "build/" directory
-- directly reference the artefacts in the "build" directory using the URL pattern specified in the building block
-  description
 
 ## How-to
 
