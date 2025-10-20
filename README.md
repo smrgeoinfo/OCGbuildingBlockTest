@@ -1,4 +1,4 @@
-# Test Building Block REspository
+# Test Building Block Repository
 
 Generated using OGC template intended to provide a working example of an [OGC Building Block](https:blocks.ogc.org). For more info see [the Documentation](https://ogcincubator.github.io/bblocks-docs/).
 
