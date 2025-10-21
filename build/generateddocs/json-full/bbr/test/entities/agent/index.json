@@ -1,0 +1,104 @@
+
+
+{
+  "itemIdentifier": "ogc.bbr.test.entities.agent",
+  "$schema": "metaschema.yaml",
+  "name": "Agent",
+  "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibleParty.",
+  "status": "under-development",
+  "dateTimeAddition": "2025-10-21T00:00:00Z",
+  "itemClass": "schema",
+  "register": "ogc-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2025-10-21",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "Sample source document",
+      "link": "https://example.com/sources/1"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "metadata",
+    "agent"
+  ],
+  "shaclShapes": {
+    "ogc.bbr.test.entities.agent": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ogc.bbr.test.properties.person"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/",
+  "rdfData": [],
+  "validationPassed": false,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/entities/agent/",
+  "description": "## My Schema\n\nDefines a set of properties that may be used in **any** JSON schema.\n\n> Note these properties may be used in the \"properties\" sub-component of a GeoJSON object, as a simple object\n\nThe numeric properties \"b\" and \"c\" have an example SHACL rule that if c is present, then c > b",
+  "examples": [
+    {
+      "title": "This is an example with just a description and no code snippets.",
+      "content": "This an example.\n\nIn **Markdown** format.",
+      "prefixes": {
+        "mynamespace": "http://example.com/mythings/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "example.json",
+          "code": "{\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"mynamespace\": \"http://example.com/mythings/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld\"\n  ],\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Examples can have content and/or code snippets.",
+      "content": "The content of this example. ",
+      "snippets": [
+        {
+          "language": "shell",
+          "code": "echo 'Hello, world!'",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_1.shell"
+        },
+        {
+          "language": "python",
+          "code": "print('Hello, world!')",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_2.python"
+        },
+        {
+          "language": "javascript",
+          "code": "console.log('Hello, world!')",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_3.javascript"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: Agent entity; can be person, organization or (person or Organization)\n  with Role. The third option is represented using schema.org contributor\n$definitions:\n  Person:\n    type: object\n    properties:\n      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml\nallOf:\n- $ref: '#/$definitions/Person'\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/entities/agent"
+}

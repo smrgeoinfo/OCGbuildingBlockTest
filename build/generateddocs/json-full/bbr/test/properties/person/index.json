@@ -1,0 +1,100 @@
+
+
+{
+  "itemIdentifier": "ogc.bbr.test.properties.person",
+  "$schema": "metaschema.yaml",
+  "name": "Person",
+  "abstract": "Schema defining propertis of a person.",
+  "status": "under-development",
+  "dateTimeAddition": "2025-10-21T00:00:00Z",
+  "itemClass": "schema",
+  "register": "ogc-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2025-10-21",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "Sample source document",
+      "link": "https://example.com/sources/1"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "templates"
+  ],
+  "shaclShapes": {
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ogc.bbr.test.properties.identifier"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/",
+  "rdfData": [],
+  "validationPassed": false,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/person/",
+  "description": "## My Schema\n\nDefines a set of properties that may be used in **any** JSON schema.\n\n> Note these properties may be used in the \"properties\" sub-component of a GeoJSON object, as a simple object\n\nThe numeric properties \"b\" and \"c\" have an example SHACL rule that if c is present, then c > b",
+  "examples": [
+    {
+      "title": "This is an example with just a description and no code snippets.",
+      "content": "This an example.\n\nIn **Markdown** format.",
+      "prefixes": {
+        "mynamespace": "http://example.com/mythings/"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "example.json",
+          "code": "{\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"mynamespace\": \"http://example.com/mythings/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld\"\n  ],\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix : <http://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] :a \"mynamespace:aThing\" ;\n    :b 23 ;\n    :c 1 .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_1_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Examples can have content and/or code snippets.",
+      "content": "The content of this example. ",
+      "snippets": [
+        {
+          "language": "shell",
+          "code": "echo 'Hello, world!'",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_2_1.shell"
+        },
+        {
+          "language": "python",
+          "code": "print('Hello, world!')",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_2_2.python"
+        },
+        {
+          "language": "javascript",
+          "code": "console.log('Hello, world!')",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_2_3.javascript"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: My example schema\ntype: object\nproperties:\n  '@id':\n    type: string\n  '@type':\n    type: string\n    const: schema:Person\n  schema:name:\n    type: string\n    description: string label for person that is meaningful for human users\n  schema:alternateName:\n    type: string\n    description: other labels by which the person might be known\n  schema:affiliation:\n    type: string\n  schema:description:\n    type: string\n  schema:identifier:\n    description: identifier for person\n    anyOf:\n    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\n    - type: string\n  schema:sameAs:\n    type: array\n    description: other identifiers for the person\n    items:\n      type: string\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/properties/person"
+}

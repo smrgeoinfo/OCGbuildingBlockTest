@@ -1,0 +1,31 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+description: My example schema
+type: object
+properties:
+  '@id':
+    type: string
+  '@type':
+    type: string
+    const: schema:Person
+  schema:name:
+    type: string
+    description: string label for person that is meaningful for human users
+  schema:alternateName:
+    type: string
+    description: other labels by which the person might be known
+  schema:affiliation:
+    type: string
+  schema:description:
+    type: string
+  schema:identifier:
+    description: identifier for person
+    anyOf:
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml
+    - type: string
+  schema:sameAs:
+    type: array
+    description: other identifiers for the person
+    items:
+      type: string
+x-jsonld-extra-terms:
+  schema: https://schema.org
