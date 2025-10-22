@@ -1,46 +1,48 @@
 
-# Person (Schema)
+# Person or Organization in Role (Schema)
 
-`ogc.bbr.test.properties.person` *v0.1*
+`ogc.bbr.test.properties.agentInRole` *v0.1*
 
-Schema defining propertis of a person.
+Schema to documentn a person or organization in a role relative to some resoruce..
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
 ## Description
 
-## Person properties
+## Person or Organization in Role properties
 
-Defines a set of properties for use describing a person for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
+Defines a set of properties for use describing a role filled by a person or an organization (an 'agent') for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.  Use to relate people or organizations to resources in particular roles.  
+
+TBD-- extension for machine agents.
 ## Examples
 
-### Example person.
-Example person instance.
+### Example organization in role.
+Example role instance, organization.
 
 In **Markdown** format.
 #### json
 ```json
 {
-  "@context": {
-    "schema": "https://schema.org/",
-    "ex": "https://example.org/"
-  },
-  "@id": "ex:PersonExample_zZc",
-  "@type": "schema:Person",
-  "schema:name": "Joe Test",
-  "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
-  "schema:description": "Metadata specialist, based in Portland, Maine",
-  "schema:identifier": {
-    "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://doi.org",
-    "schema:value": "iY",
-    "schema:url": "https://doi.org/iY"
-  },
-  "schema:sameAs": [
-    "https://ark.org/46737",
-    "uri:test:43737"
-  ]
+    "@context": {
+        "schema": "https://schema.org/",
+        "ex": "https://example.org/"
+    },
+    "@type": "Role",
+    "roleName": "owner",
+    "contributor": {
+        "@id": "ex:exampleOrg_fW",
+        "@type": "schema:Organization",
+        "schema:name": "University of Arizona",
+        "schema:alternateName": "UAz",
+        "schema:description": "University in Tucson, Arizona",
+        "schema:identifier": {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+            "schema:value": "03m2x1q45",
+            "schema:url": "https://ror.org/03m2x1q45"
+        },
+        "schema:sameAs": ["Wildcats"]
+    }
 }
 ```
 
@@ -51,47 +53,148 @@ In **Markdown** format.
     {
       "schema": "https://schema.org"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
     {
       "schema": "https://schema.org/",
       "ex": "https://example.org/"
     }
   ],
-  "@id": "ex:PersonExample_zZc",
-  "@type": "schema:Person",
-  "schema:name": "Joe Test",
-  "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
-  "schema:description": "Metadata specialist, based in Portland, Maine",
-  "schema:identifier": {
-    "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://doi.org",
-    "schema:value": "iY",
-    "schema:url": "https://doi.org/iY"
-  },
-  "schema:sameAs": [
-    "https://ark.org/46737",
-    "uri:test:43737"
-  ]
+  "@type": "Role",
+  "roleName": "owner",
+  "contributor": {
+    "@id": "ex:exampleOrg_fW",
+    "@type": "schema:Organization",
+    "schema:name": "University of Arizona",
+    "schema:alternateName": "UAz",
+    "schema:description": "University in Tucson, Arizona",
+    "schema:identifier": {
+      "@type": "schema:PropertyValue",
+      "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+      "schema:value": "03m2x1q45",
+      "schema:url": "https://ror.org/03m2x1q45"
+    },
+    "schema:sameAs": [
+      "Wildcats"
+    ]
+  }
 }
 ```
 
 #### ttl
 ```ttl
+@prefix : <http://schema.org/> .
+@prefix ex: <https://example.org/> .
+@prefix schema: <https://schema.org/> .
+
+ex:exampleOrg_fW a schema:Organization ;
+    schema:alternateName "UAz" ;
+    schema:description "University in Tucson, Arizona" ;
+    schema:identifier [ a schema:PropertyValue ;
+            schema:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema:url "https://ror.org/03m2x1q45" ;
+            schema:value "03m2x1q45" ] ;
+    schema:name "University of Arizona" ;
+    schema:sameAs "Wildcats" .
+
+[] a :Role ;
+    :contributor ex:exampleOrg_fW ;
+    :roleName "owner" .
+
+
+```
+
+
+### Example person in role
+Example person in role instance.
+
+In **Markdown** format.
+#### json
+```json
+{
+    "@context": {
+        "schema": "https://schema.org/",
+        "ex": "https://example.org/"
+    },
+    "@type": "Role",
+    "roleName": "editor",
+    "contributor": {
+        "@id": "ex:PersonExample_zZc",
+        "@type": "schema:Person",
+        "schema:name": "Joe B. Test",
+        "schema:alternateName": "Test, J. B.",
+        "schema:affiliation": "some organization, schema TBD",
+        "schema:description": "Metadata specialist, based in Portland, Maine",
+        "schema:identifier": {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "https://orcid.org",
+            "schema:value": "iY",
+            "schema:url": "https://orcid.org/iY"
+        },
+        "schema:sameAs": [
+            "https://ark.org/46737",
+            "uri:test:43737"
+        ]
+    }
+}
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "https://schema.org"
+    },
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "ex": "https://example.org/"
+    }
+  ],
+  "@type": "Role",
+  "roleName": "editor",
+  "contributor": {
+    "@id": "ex:PersonExample_zZc",
+    "@type": "schema:Person",
+    "schema:name": "Joe B. Test",
+    "schema:alternateName": "Test, J. B.",
+    "schema:affiliation": "some organization, schema TBD",
+    "schema:description": "Metadata specialist, based in Portland, Maine",
+    "schema:identifier": {
+      "@type": "schema:PropertyValue",
+      "schema:propertyID": "https://orcid.org",
+      "schema:value": "iY",
+      "schema:url": "https://orcid.org/iY"
+    },
+    "schema:sameAs": [
+      "https://ark.org/46737",
+      "uri:test:43737"
+    ]
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix : <http://schema.org/> .
 @prefix ex: <https://example.org/> .
 @prefix schema: <https://schema.org/> .
 
 ex:PersonExample_zZc a schema:Person ;
     schema:affiliation "some organization, schema TBD" ;
-    schema:alternateName "Test, Joe" ;
+    schema:alternateName "Test, J. B." ;
     schema:description "Metadata specialist, based in Portland, Maine" ;
     schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://doi.org" ;
-            schema:url "https://doi.org/iY" ;
+            schema:propertyID "https://orcid.org" ;
+            schema:url "https://orcid.org/iY" ;
             schema:value "iY" ] ;
-    schema:name "Joe Test" ;
+    schema:name "Joe B. Test" ;
     schema:sameAs "https://ark.org/46737",
         "uri:test:43737" .
+
+[] a :Role ;
+    :contributor ex:PersonExample_zZc ;
+    :roleName "editor" .
 
 
 ```
@@ -100,41 +203,22 @@ ex:PersonExample_zZc a schema:Person ;
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-description: My example schema
+description: For more granularity on how a person contributed to a Dataset, use schema:Role.
+  The schema.org documentation does not state that the Role type is an expected data
+  type of author, creator and contributor, but that is addressed in this blog post
+  (http://blog.schema.org/2014/06/introducing-role.html). see https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people
 type: object
 properties:
-  '@id':
-    type: string
   '@type':
     type: string
-    const: schema:Person
-  schema:name:
+    const: schema:Role
+  schema:roleName:
     type: string
-    description: string label for person that is meaningful for human users
-  schema:description:
-    type: string
-  schema:identifier:
-    description: identifier for person
-    anyOf:
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml
-    - type: string
-  schema:alternateName:
-    type: string
-    description: other labels by which the person might be known
-  schema:affiliation:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
-  schema:contactPoint:
+  schema:contributor:
     type: object
-    properties:
-      schema:email:
-        type: string
-    description: restrict to email only. Schema.org allows telephone and postal contacts
-      as well
-  schema:sameAs:
-    type: array
-    description: other identifiers for the person
-    items:
-      type: string
+    oneOf:
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -142,8 +226,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/schema.yaml)
 
 
 # JSON-LD Context
@@ -3530,7 +3614,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld)
 
 ## Sources
 
@@ -3541,5 +3625,5 @@ You can find the full JSON-LD context here:
 The source code for this Building Block can be found in the following repository:
 
 * URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
-* Path: `_sources/properties/person`
+* Path: `_sources/properties/agentInRole`
 

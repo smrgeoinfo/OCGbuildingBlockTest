@@ -2,7 +2,7 @@
   "name": "Test Building Blocks repository",
   "abstract": "Temporary repository for testing OGC building block construction 2025-10-20\n",
   "description": "Try creating simple building block for metadata 'Agent' element that implements\ncontent of ISO19115-3 responsble party, a person or organization in a role with a \npoint of contact. Person may have an affiliation with an organization.\n",
-  "modified": "2025-10-22T17:54:32.525857",
+  "modified": "2025-10-22T23:32:23.583877",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"0834bcc055075708e98a7500bea7bc0f59b4b1bd",
@@ -74,6 +74,60 @@
       }
     },
     {
+      "itemIdentifier": "ogc.bbr.test.properties.organization",
+      "$schema": "metaschema.yaml",
+      "name": "Organization",
+      "abstract": "Schema defining propertis of an organization in CDIF context. Implementaqtion is based on Schema.org.",
+      "status": "under-development",
+      "dateTimeAddition": "2025-10-21T00:00:00Z",
+      "itemClass": "schema",
+      "register": "cdif-building-block-register",
+      "version": "0.1",
+      "dateOfLastChange": "2025-10-22",
+      "link": "https://github.com/opengeospatial/bblock-template",
+      "maturity": "draft",
+      "scope": "unstable",
+      "tags": [
+        "templates"
+      ],
+      "shaclShapes": {
+        "ogc.bbr.test.properties.organization": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.identifier": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+        ]
+      },
+      "dependsOn": [
+        "ogc.bbr.test.properties.identifier"
+      ],
+      "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld",
+      "schema": {
+        "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml",
+        "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.json"
+      },
+      "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/schema.yaml",
+      "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/context.jsonld",
+      "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/",
+      "rdfData": [],
+      "validationPassed": true,
+      "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/organization/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/markdown/bbr/test/properties/organization/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/json-full/bbr/test/properties/organization/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/bblock/ogc.bbr.test.properties.organization"
+        }
+      }
+    },
+    {
       "itemIdentifier": "ogc.bbr.test.properties.person",
       "$schema": "metaschema.yaml",
       "name": "Person",
@@ -100,11 +154,15 @@
         "ogc.bbr.test.properties.person": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
         ],
+        "ogc.bbr.test.properties.organization": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
         "ogc.bbr.test.properties.identifier": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
         ]
       },
       "dependsOn": [
+        "ogc.bbr.test.properties.organization",
         "ogc.bbr.test.properties.identifier"
       ],
       "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
@@ -116,7 +174,7 @@
       "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/context.jsonld",
       "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/",
       "rdfData": [],
-      "validationPassed": true,
+      "validationPassed": false,
       "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/person/",
       "documentation": {
         "markdown": {
@@ -134,10 +192,10 @@
       }
     },
     {
-      "itemIdentifier": "ogc.bbr.test.entities.agent",
+      "itemIdentifier": "ogc.bbr.test.properties.agentInRole",
       "$schema": "metaschema.yaml",
-      "name": "Agent",
-      "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibleParty.",
+      "name": "Person or Organization in Role",
+      "abstract": "Schema to documentn a person or organization in a role relative to some resoruce..",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00Z",
       "itemClass": "schema",
@@ -154,46 +212,115 @@
       "maturity": "draft",
       "scope": "unstable",
       "tags": [
+        "templates"
+      ],
+      "shaclShapes": {
+        "ogc.bbr.test.properties.agentInRole": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.organization": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.identifier": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.person": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
+        ]
+      },
+      "dependsOn": [
+        "ogc.bbr.test.properties.organization",
+        "ogc.bbr.test.properties.person"
+      ],
+      "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
+      "schema": {
+        "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/schema.yaml",
+        "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/schema.json"
+      },
+      "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/schema.yaml",
+      "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/context.jsonld",
+      "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/",
+      "rdfData": [],
+      "validationPassed": false,
+      "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/agentInRole/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/markdown/bbr/test/properties/agentInRole/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/json-full/bbr/test/properties/agentInRole/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/bblock/ogc.bbr.test.properties.agentInRole"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.bbr.test.entities.Responsibility",
+      "$schema": "metaschema.yaml",
+      "name": "Responsiblility",
+      "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibleParty.",
+      "status": "under-development",
+      "dateTimeAddition": "2025-10-21T00:00:00Z",
+      "itemClass": "schema",
+      "register": "cdif-building-block-register",
+      "version": "0.1",
+      "dateOfLastChange": "2025-10-22",
+      "link": "https://github.com/opengeospatial/bblock-template",
+      "maturity": "draft",
+      "scope": "unstable",
+      "tags": [
         "metadata",
         "agent"
       ],
       "shaclShapes": {
-        "ogc.bbr.test.entities.agent": [
-          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/rules.shacl"
+        "ogc.bbr.test.entities.Responsibility": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/Responsibility/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.organization": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.identifier": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
         ],
         "ogc.bbr.test.properties.person": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
         ],
-        "ogc.bbr.test.properties.identifier": [
-          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+        "ogc.bbr.test.properties.agentInRole": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
         ]
       },
       "dependsOn": [
-        "ogc.bbr.test.properties.person"
+        "ogc.bbr.test.properties.organization",
+        "ogc.bbr.test.properties.person",
+        "ogc.bbr.test.properties.agentInRole"
       ],
-      "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld",
+      "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld",
       "schema": {
-        "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.yaml",
-        "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.json"
+        "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/schema.yaml",
+        "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/schema.json"
       },
-      "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/schema.yaml",
-      "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/context.jsonld",
-      "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/",
+      "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/Responsibility/schema.yaml",
+      "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/Responsibility/context.jsonld",
+      "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/Responsibility/",
       "rdfData": [],
       "validationPassed": true,
-      "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/entities/agent/",
+      "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/entities/Responsibility/",
       "documentation": {
         "markdown": {
           "mediatype": "text/markdown",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/markdown/bbr/test/entities/agent/index.md"
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/markdown/bbr/test/entities/Responsibility/index.md"
         },
         "json-full": {
           "mediatype": "application/json",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/json-full/bbr/test/entities/agent/index.json"
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/json-full/bbr/test/entities/Responsibility/index.json"
         },
         "bblocks-viewer": {
           "mediatype": "text/html",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/bblock/ogc.bbr.test.entities.agent"
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/bblock/ogc.bbr.test.entities.Responsibility"
         }
       }
     }

@@ -1,46 +1,42 @@
 
-# Person (Schema)
+# Organization (Schema)
 
-`ogc.bbr.test.properties.person` *v0.1*
+`ogc.bbr.test.properties.organization` *v0.1*
 
-Schema defining propertis of a person.
+Schema defining propertis of an organization in CDIF context. Implementaqtion is based on Schema.org.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
 ## Description
 
-## Person properties
+## Organization properties
 
-Defines a set of properties for use describing a person for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
+Defines a set of properties for use describing a organization for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
 ## Examples
 
-### Example person.
-Example person instance.
+### Example organization.
+Example organization instance.
 
 In **Markdown** format.
 #### json
 ```json
 {
-  "@context": {
-    "schema": "https://schema.org/",
-    "ex": "https://example.org/"
-  },
-  "@id": "ex:PersonExample_zZc",
-  "@type": "schema:Person",
-  "schema:name": "Joe Test",
-  "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
-  "schema:description": "Metadata specialist, based in Portland, Maine",
-  "schema:identifier": {
-    "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://doi.org",
-    "schema:value": "iY",
-    "schema:url": "https://doi.org/iY"
-  },
-  "schema:sameAs": [
-    "https://ark.org/46737",
-    "uri:test:43737"
-  ]
+    "@context": {
+        "schema": "https://schema.org/",
+        "ex": "https://example.org/"
+    },
+    "@id": "ex:exampleOrg_fW",
+    "@type": "schema:Organization",
+    "schema:name": "University of Arizona",
+    "schema:alternateName": "UAz",
+    "schema:description": "University in Tucson, Arizona",
+    "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+        "schema:value": "03m2x1q45",
+        "schema:url": "https://ror.org/03m2x1q45"
+    },
+    "schema:sameAs": ["Wildcats"]
 }
 ```
 
@@ -51,27 +47,25 @@ In **Markdown** format.
     {
       "schema": "https://schema.org"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld",
     {
       "schema": "https://schema.org/",
       "ex": "https://example.org/"
     }
   ],
-  "@id": "ex:PersonExample_zZc",
-  "@type": "schema:Person",
-  "schema:name": "Joe Test",
-  "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
-  "schema:description": "Metadata specialist, based in Portland, Maine",
+  "@id": "ex:exampleOrg_fW",
+  "@type": "schema:Organization",
+  "schema:name": "University of Arizona",
+  "schema:alternateName": "UAz",
+  "schema:description": "University in Tucson, Arizona",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://doi.org",
-    "schema:value": "iY",
-    "schema:url": "https://doi.org/iY"
+    "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+    "schema:value": "03m2x1q45",
+    "schema:url": "https://ror.org/03m2x1q45"
   },
   "schema:sameAs": [
-    "https://ark.org/46737",
-    "uri:test:43737"
+    "Wildcats"
   ]
 }
 ```
@@ -81,17 +75,15 @@ In **Markdown** format.
 @prefix ex: <https://example.org/> .
 @prefix schema: <https://schema.org/> .
 
-ex:PersonExample_zZc a schema:Person ;
-    schema:affiliation "some organization, schema TBD" ;
-    schema:alternateName "Test, Joe" ;
-    schema:description "Metadata specialist, based in Portland, Maine" ;
+ex:exampleOrg_fW a schema:Organization ;
+    schema:alternateName "UAz" ;
+    schema:description "University in Tucson, Arizona" ;
     schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://doi.org" ;
-            schema:url "https://doi.org/iY" ;
-            schema:value "iY" ] ;
-    schema:name "Joe Test" ;
-    schema:sameAs "https://ark.org/46737",
-        "uri:test:43737" .
+            schema:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema:url "https://ror.org/03m2x1q45" ;
+            schema:value "03m2x1q45" ] ;
+    schema:name "University of Arizona" ;
+    schema:sameAs "Wildcats" .
 
 
 ```
@@ -100,41 +92,50 @@ ex:PersonExample_zZc a schema:Person ;
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-description: My example schema
 type: object
 properties:
   '@id':
     type: string
   '@type':
     type: string
-    const: schema:Person
+    enum:
+    - schema:Organization
+    - schema:FundingAgency
+    - schema:Consortium
+    - schema:Corporation
+    - schema:EducationalOrganization
+    - schema:FundingScheme
+    - schema:GovernmentOrganization
+    - schema:NGO
+    - schema:Project
+    - schema:ResearchOrganization
+    default: schema:Organization
   schema:name:
     type: string
-    description: string label for person that is meaningful for human users
+    description: string label for organization that is meaningful for human users
+  schema:alternateName:
+    type: string
+    description: other labels by which the organization might be known
   schema:description:
     type: string
   schema:identifier:
-    description: identifier for person
+    description: identifier for organization
     anyOf:
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml
     - type: string
-  schema:alternateName:
-    type: string
-    description: other labels by which the person might be known
-  schema:affiliation:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
-  schema:contactPoint:
-    type: object
-    properties:
-      schema:email:
-        type: string
-    description: restrict to email only. Schema.org allows telephone and postal contacts
-      as well
   schema:sameAs:
     type: array
-    description: other identifiers for the person
+    description: other identifiers for the organization
     items:
       type: string
+allOf:
+- required:
+  - '@type'
+- anyOf:
+  - required:
+    - schema:name
+  - required:
+    - schema:identifier
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -142,8 +143,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml)
 
 
 # JSON-LD Context
@@ -3530,16 +3531,13 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld)
 
-## Sources
-
-* [Sample source document](https://example.com/sources/1)
 
 # For developers
 
 The source code for this Building Block can be found in the following repository:
 
 * URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
-* Path: `_sources/properties/person`
+* Path: `_sources/properties/organization`
 

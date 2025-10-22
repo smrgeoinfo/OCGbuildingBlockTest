@@ -1,0 +1,75 @@
+Validation report for ogc.bbr.test.properties.agentInRole - Person or Organization in Role
+Generated 2025-10-22T23:32:26.160396+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using rules-fail.json from test resources
+JSON-LD context is present - uplifting
+Output JSON-LD rules-fail.jsonld created
+Output Turtle rules-fail.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'schema:Role' was expected
+
+Failed validating 'const' in schema['properties']['@type']:
+    {'const': 'schema:Role', 'type': 'string'}
+
+On instance['@type']:
+    'schema:Person'
+=== End JSON Schema ===
+
+=== SHACL ===
+
+** Validation error **
+Validation result for _sources/properties/agentInRole/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:datatype xsd:string ; sh:message Literal("a name for the person must be provided.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema:name ]
+  	Focus Node: ex:PersonExample_zZc
+  	Result Path: schema:name
+  	Message: a name for the person must be provided.
+  
+Focus nodes for _sources/properties/agentInRole/rules.shacl:
+ - Shape <https://www.ogc.org/rules/template/#orgName>: *none*
+ - Shape <https://www.ogc.org/rules/template/#personName>: ex:PersonExample_zZc
+
+Validation result for _sources/properties/organization/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/properties/organization/rules.shacl:
+ - Shape <https://www.ogc.org/rules/template/#personName>: *none*
+
+Validation result for _sources/properties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/properties/identifier/rules.shacl:
+ - Shape <https://www.ogc.org/rules/template/#valueRecommended>: ex:PersonExample_zZc/schema:identifier
+
+
+** Validation error **
+Validation result for _sources/properties/person/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:datatype xsd:string ; sh:message Literal("a name for the person must be provided.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema:name ]
+  	Focus Node: ex:PersonExample_zZc
+  	Result Path: schema:name
+  	Message: a name for the person must be provided.
+  
+Focus nodes for _sources/properties/person/rules.shacl:
+ - Shape <https://www.ogc.org/rules/template/#personName>: ex:PersonExample_zZc
+
+=== End SHACL ===
+

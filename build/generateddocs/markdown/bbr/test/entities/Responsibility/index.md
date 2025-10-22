@@ -1,7 +1,7 @@
 
-# Agent (Schema)
+# Responsiblility (Schema)
 
-`ogc.bbr.test.entities.agent` *v0.1*
+`ogc.bbr.test.entities.Responsibility` *v0.1*
 
 JSON schema for an agent, imports properties for person, organization, and responsibleParty.
 
@@ -17,7 +17,7 @@ Imports properties for person, organization and responsibility.  Person and orga
 ## Examples
 
 ### Simple agent that is a Person..
-Example Agent.
+Example that is a Person.
 
 In **Markdown** format.
 #### json
@@ -53,7 +53,7 @@ In **Markdown** format.
     {
       "schema": "https://schema.org/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld",
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld",
     {
       "schema": "https://schema.org/",
       "ex": "https://example.org/"
@@ -106,8 +106,18 @@ $definitions:
     type: object
     properties:
       $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml
-allOf:
+  Organization:
+    type: object
+    properties:
+      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
+  AgentInRole:
+    type: object
+    properties:
+      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/schema.yaml
+anyOf:
 - $ref: '#/$definitions/Person'
+- $ref: '#/$definitions/Organization'
+- $ref: '#/$definitions/AgentInRole'
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -115,8 +125,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/schema.yaml)
 
 
 # JSON-LD Context
@@ -131,16 +141,13 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld)
 
-## Sources
-
-* [Sample source document](https://example.com/sources/1)
 
 # For developers
 
 The source code for this Building Block can be found in the following repository:
 
 * URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
-* Path: `_sources/entities/agent`
+* Path: `_sources/entities/Responsibility`
 
