@@ -2,8 +2,8 @@
   "title": "Validation report for ogc.bbr.test.properties.identifier - Identifier",
   "bblockName": "Identifier",
   "bblockId": "ogc.bbr.test.properties.identifier",
-  "generated": "2025-10-21T23:34:47.662581+00:00",
-  "result": false,
+  "generated": "2025-10-22T17:54:34.023388+00:00",
+  "result": true,
   "items": [
     {
       "source": {
@@ -13,7 +13,7 @@
         "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/tests/rules-fail.json",
         "language": "json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "GENERAL",
@@ -21,8 +21,8 @@
           "entries": [
             {
               "op": "require-fail",
-              "isError": true,
-              "message": "Test was expected to fail but it did not."
+              "isError": false,
+              "message": "Test was expected to fail and it did."
             }
           ]
         },
@@ -74,19 +74,21 @@
             {
               "op": "shacl-report",
               "shaclFile": "_sources/properties/identifier/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/properties/identifier/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+              "graph": "@prefix schema: <https://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a schema:PropertyValue ;\n                    schema:propertyID \"CtYO\" ;\n                    schema:url \"vX\" ] ;\n            sh:resultMessage \"a value for the identifier should be provided.\" ;\n            sh:resultPath schema:value ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:datatype xsd:string ;\n                    sh:message \"a value for the identifier should be provided.\" ;\n                    sh:minCount 1 ;\n                    sh:path schema:value ] ] .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/properties/identifier/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:datatype xsd:string ; sh:message Literal(\"a value for the identifier should be provided.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema:value ]\n  \tFocus Node: [ rdf:type schema:PropertyValue ; schema:propertyID Literal(\"CtYO\") ; schema:url Literal(\"vX\") ]\n  \tResult Path: schema:value\n  \tMessage: a value for the identifier should be provided.\n  "
             },
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#valueRecommended>": {
+                  "nodes": [
+                    "_:Nb69b195f48654fb6966ca647be909229"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: _:Nb69b195f48654fb6966ca647be909229\n"
             }
           ]
         }
@@ -127,7 +129,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 3,
+              "size": 4,
               "isError": false,
               "message": "Output Turtle example_1_1.ttl created"
             }
@@ -159,12 +161,14 @@
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#valueRecommended>": {
+                  "nodes": [
+                    "_:N25ba745d31744f908e6605d3ac0b0d9f"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: _:N25ba745d31744f908e6605d3ac0b0d9f\n"
             }
           ]
         }
@@ -174,7 +178,7 @@
   "globalErrors": {},
   "counts": {
     "total": 2,
-    "passed": 1,
-    "failed": 1
+    "passed": 2,
+    "failed": 0
   }
 }

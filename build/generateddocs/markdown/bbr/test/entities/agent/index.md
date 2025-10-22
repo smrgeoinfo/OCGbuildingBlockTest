@@ -9,28 +9,41 @@ JSON schema for an agent, imports properties for person, organization, and respo
 
 ## Description
 
-## My Schema
+## Person, Organization, Responsibility
 
-Defines a set of properties that may be used in **any** JSON schema.
+Defines a set of properties to describe a person, an organization, or one of those in an assigned role (labeled 'responsibility'). 
 
-> Note these properties may be used in the "properties" sub-component of a GeoJSON object, as a simple object
-
-The numeric properties "b" and "c" have an example SHACL rule that if c is present, then c > b
+Imports properties for person, organization and responsibility.  Person and organization can be considered profiles of prov:Agent. Implementation is targeted here for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
 ## Examples
 
-### This is an example with just a description and no code snippets.
-This an example.
+### Simple agent that is a Person..
+Example Agent.
 
 In **Markdown** format.
 #### json
 ```json
 {
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+  "@context": {
+    "schema": "https://schema.org/",
+    "ex": "https://example.org/"
+  },
+  "@id": "ex:AgentExample_zZc",
+  "@type": "schema:Person",
+  "schema:name": "Joe Test",
+  "schema:alternateName": "Test, Joe",
+  "schema:affiliation": "some organization",
+  "schema:description": "Metadata specialist, based in Portland, Maine",
+  "schema:identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "https://doi.org",
+    "value": "iY",
+    "url": "https://doi.org/iY"
+  },
+  "schema:sameAs": [
+    "https://ark.org/46737",
+    "uri:test:43737"
+  ]
 }
-
-
 ```
 
 #### jsonld
@@ -38,38 +51,48 @@ In **Markdown** format.
 {
   "@context": [
     {
-      "mynamespace": "http://example.com/mythings/"
+      "schema": "https://schema.org/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld"
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "ex": "https://example.org/"
+    }
   ],
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+  "@id": "ex:AgentExample_zZc",
+  "@type": "schema:Person",
+  "schema:name": "Joe Test",
+  "schema:alternateName": "Test, Joe",
+  "schema:affiliation": "some organization",
+  "schema:description": "Metadata specialist, based in Portland, Maine",
+  "schema:identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "https://doi.org",
+    "value": "iY",
+    "url": "https://doi.org/iY"
+  },
+  "schema:sameAs": [
+    "https://ark.org/46737",
+    "uri:test:43737"
+  ]
 }
 ```
 
 #### ttl
 ```ttl
+@prefix ex: <https://example.org/> .
+@prefix schema: <https://schema.org/> .
+
+ex:AgentExample_zZc a schema:Person ;
+    schema:affiliation "some organization" ;
+    schema:alternateName "Test, Joe" ;
+    schema:description "Metadata specialist, based in Portland, Maine" ;
+    schema:identifier [ a <file:///github/workspace/PropertyValue> ] ;
+    schema:name "Joe Test" ;
+    schema:sameAs "https://ark.org/46737",
+        "uri:test:43737" .
 
 
-```
-
-
-### Examples can have content and/or code snippets.
-The content of this example. 
-#### shell
-```shell
-echo 'Hello, world!'
-```
-
-#### python
-```python
-print('Hello, world!')
-```
-
-#### javascript
-```javascript
-console.log('Hello, world!')
 ```
 
 ## Schema

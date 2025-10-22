@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "ogc-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-21",
+  "dateOfLastChange": "2025-10-22",
   "link": "https://github.com/opengeospatial/bblock-template",
   "sources": [
     {
@@ -47,53 +47,32 @@
   "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/context.jsonld",
   "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/agent/",
   "rdfData": [],
-  "validationPassed": false,
+  "validationPassed": true,
   "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/entities/agent/",
-  "description": "## My Schema\n\nDefines a set of properties that may be used in **any** JSON schema.\n\n> Note these properties may be used in the \"properties\" sub-component of a GeoJSON object, as a simple object\n\nThe numeric properties \"b\" and \"c\" have an example SHACL rule that if c is present, then c > b",
+  "description": "## Person, Organization, Responsibility\n\nDefines a set of properties to describe a person, an organization, or one of those in an assigned role (labeled 'responsibility'). \n\nImports properties for person, organization and responsibility.  Person and organization can be considered profiles of prov:Agent. Implementation is targeted here for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.",
   "examples": [
     {
-      "title": "This is an example with just a description and no code snippets.",
-      "content": "This an example.\n\nIn **Markdown** format.",
+      "title": "Simple agent that is a Person..",
+      "content": "Example Agent.\n\nIn **Markdown** format.",
       "prefixes": {
-        "mynamespace": "http://example.com/mythings/"
+        "schema": "https://schema.org/"
       },
       "snippets": [
         {
           "language": "json",
           "ref": "example.json",
-          "code": "{\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}\n\n",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\"\n  },\n  \"@id\": \"ex:AgentExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": \"some organization\",\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"PropertyValue\",\n    \"propertyID\": \"https://doi.org\",\n    \"value\": \"iY\",\n    \"url\": \"https://doi.org/iY\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"mynamespace\": \"http://example.com/mythings/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld\"\n  ],\n  \"a\": \"mynamespace:aThing\",\n  \"b\": 23,\n  \"c\": 1\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/agent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@id\": \"ex:AgentExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": \"some organization\",\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"PropertyValue\",\n    \"propertyID\": \"https://doi.org\",\n    \"value\": \"iY\",\n    \"url\": \"https://doi.org/iY\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "\n",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:AgentExample_zZc a schema:Person ;\n    schema:affiliation \"some organization\" ;\n    schema:alternateName \"Test, Joe\" ;\n    schema:description \"Metadata specialist, based in Portland, Maine\" ;\n    schema:identifier [ a <file:///github/workspace/PropertyValue> ] ;\n    schema:name \"Joe Test\" ;\n    schema:sameAs \"https://ark.org/46737\",\n        \"uri:test:43737\" .\n\n",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_1_1.ttl"
-        }
-      ]
-    },
-    {
-      "title": "Examples can have content and/or code snippets.",
-      "content": "The content of this example. ",
-      "snippets": [
-        {
-          "language": "shell",
-          "code": "echo 'Hello, world!'",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_1.shell"
-        },
-        {
-          "language": "python",
-          "code": "print('Hello, world!')",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_2.python"
-        },
-        {
-          "language": "javascript",
-          "code": "console.log('Hello, world!')",
-          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/agent/example_2_3.javascript"
         }
       ]
     }

@@ -9,28 +9,39 @@ Schema defining propertis of a person.
 
 ## Description
 
-## My Schema
+## Person properties
 
-Defines a set of properties that may be used in **any** JSON schema.
-
-> Note these properties may be used in the "properties" sub-component of a GeoJSON object, as a simple object
-
-The numeric properties "b" and "c" have an example SHACL rule that if c is present, then c > b
+Defines a set of properties for use describing a person for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
 ## Examples
 
-### This is an example with just a description and no code snippets.
-This an example.
+### Example person.
+Example person instance.
 
 In **Markdown** format.
 #### json
 ```json
 {
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+  "@context": {
+    "schema": "https://schema.org/",
+    "ex": "https://example.org/"
+  },
+  "@id": "ex:PersonExample_zZc",
+  "@type": "schema:Person",
+  "schema:name": "Joe Test",
+  "schema:alternateName": "Test, Joe",
+  "schema:affiliation": "some organization, schema TBD",
+  "schema:description": "Metadata specialist, based in Portland, Maine",
+  "schema:identifier": {
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "iY",
+    "schema:url": "https://doi.org/iY"
+  },
+  "schema:sameAs": [
+    "https://ark.org/46737",
+    "uri:test:43737"
+  ]
 }
-
-
 ```
 
 #### jsonld
@@ -38,44 +49,51 @@ In **Markdown** format.
 {
   "@context": [
     {
-      "mynamespace": "http://example.com/mythings/"
+      "schema": "https://schema.org"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld"
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "ex": "https://example.org/"
+    }
   ],
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+  "@id": "ex:PersonExample_zZc",
+  "@type": "schema:Person",
+  "schema:name": "Joe Test",
+  "schema:alternateName": "Test, Joe",
+  "schema:affiliation": "some organization, schema TBD",
+  "schema:description": "Metadata specialist, based in Portland, Maine",
+  "schema:identifier": {
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "iY",
+    "schema:url": "https://doi.org/iY"
+  },
+  "schema:sameAs": [
+    "https://ark.org/46737",
+    "uri:test:43737"
+  ]
 }
 ```
 
 #### ttl
 ```ttl
-@prefix : <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <https://example.org/> .
+@prefix schema: <https://schema.org/> .
 
-[] :a "mynamespace:aThing" ;
-    :b 23 ;
-    :c 1 .
+ex:PersonExample_zZc a schema:Person ;
+    schema:affiliation "some organization, schema TBD" ;
+    schema:alternateName "Test, Joe" ;
+    schema:description "Metadata specialist, based in Portland, Maine" ;
+    schema:identifier [ a schema:PropertyValue ;
+            schema:propertyID "https://doi.org" ;
+            schema:url "https://doi.org/iY" ;
+            schema:value "iY" ] ;
+    schema:name "Joe Test" ;
+    schema:sameAs "https://ark.org/46737",
+        "uri:test:43737" .
 
 
-```
-
-
-### Examples can have content and/or code snippets.
-The content of this example. 
-#### shell
-```shell
-echo 'Hello, world!'
-```
-
-#### python
-```python
-print('Hello, world!')
-```
-
-#### javascript
-```javascript
-console.log('Hello, world!')
 ```
 
 ## Schema
@@ -2949,6 +2967,7 @@ Links to the schema:
     "programmingLanguage": "http://schema.org/programmingLanguage",
     "programmingModel": "http://schema.org/programmingModel",
     "pronouns": "http://schema.org/pronouns",
+    "propertyID": "http://schema.org/propertyID",
     "proprietaryName": "http://schema.org/proprietaryName",
     "proteinContent": "http://schema.org/proteinContent",
     "provider": "http://schema.org/provider",
@@ -3374,6 +3393,10 @@ Links to the schema:
       "@type": "http://schema.org/Date"
     },
     "upvoteCount": "http://schema.org/upvoteCount",
+    "url": {
+      "@id": "http://schema.org/url",
+      "@type": "@id"
+    },
     "urlTemplate": "http://schema.org/urlTemplate",
     "usNPI": "http://schema.org/usNPI",
     "usageInfo": {
@@ -3400,6 +3423,7 @@ Links to the schema:
       "@id": "http://schema.org/validUntil",
       "@type": "http://schema.org/Date"
     },
+    "value": "http://schema.org/value",
     "valueAddedTaxIncluded": "http://schema.org/valueAddedTaxIncluded",
     "valueMaxLength": "http://schema.org/valueMaxLength",
     "valueMinLength": "http://schema.org/valueMinLength",
@@ -3466,12 +3490,6 @@ Links to the schema:
     "yearlyRevenue": "http://schema.org/yearlyRevenue",
     "yearsInOperation": "http://schema.org/yearsInOperation",
     "yield": "http://schema.org/yield",
-    "propertyID": "http://schema.org/propertyID",
-    "value": "http://schema.org/value",
-    "url": {
-      "@id": "http://schema.org/url",
-      "@type": "@id"
-    },
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "brick": "https://brickschema.org/schema/Brick#",
     "csvw": "http://www.w3.org/ns/csvw#",
