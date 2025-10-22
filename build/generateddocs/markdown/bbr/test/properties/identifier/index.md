@@ -9,28 +9,27 @@ An example schema defining the set of properties for an identifier.
 
 ## Description
 
-## My Schema
+## Identifier Properties
 
-Defines a set of properties that may be used in **any** JSON schema.
-
-> Note these properties may be used in the "properties" sub-component of a GeoJSON object, as a simple object
-
-The numeric properties "b" and "c" have an example SHACL rule that if c is present, then c > b
+Defines a set of properties to document an identifier, based on schema.org model, for use with schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
 ## Examples
 
-### This is an example with just a description and no code snippets.
-This an example.
+### Example identifier .
+Example identifier instance.
 
 In **Markdown** format.
 #### json
 ```json
 {
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+    "@context": {
+        "schema": "https://schema.org/",
+        "ex": "https://example.org/"
+    },
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "random identifier",
+    "schema:value": "wwyPcWQqoT",
+    "schema:url": "https://identifier.org/uri:test:wwyPcWQqoT"
 }
-
-
 ```
 
 #### jsonld
@@ -38,44 +37,31 @@ In **Markdown** format.
 {
   "@context": [
     {
-      "mynamespace": "http://example.com/mythings/"
+      "schema": "https://schema.org/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/context.jsonld"
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/context.jsonld",
+    {
+      "schema": "https://schema.org/",
+      "ex": "https://example.org/"
+    }
   ],
-  "a": "mynamespace:aThing",
-  "b": 23,
-  "c": 1
+  "@type": "schema:PropertyValue",
+  "schema:propertyID": "random identifier",
+  "schema:value": "wwyPcWQqoT",
+  "schema:url": "https://identifier.org/uri:test:wwyPcWQqoT"
 }
 ```
 
 #### ttl
 ```ttl
-@prefix schema1: <http://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
 
-[] schema1:a "mynamespace:aThing" ;
-    schema1:b 23 ;
-    schema1:c 1 .
-
-
-```
+[] a schema:PropertyValue ;
+    schema:propertyID "random identifier" ;
+    schema:url "https://identifier.org/uri:test:wwyPcWQqoT" ;
+    schema:value "wwyPcWQqoT" .
 
 
-### Examples can have content and/or code snippets.
-The content of this example. 
-#### shell
-```shell
-echo 'Hello, world!'
-```
-
-#### python
-```python
-print('Hello, world!')
-```
-
-#### javascript
-```javascript
-console.log('Hello, world!')
 ```
 
 ## Schema
@@ -87,23 +73,19 @@ type: object
 properties:
   '@type':
     type: string
-    const: PropertyValue
-  propertyID:
+    const: schema:PropertyValue
+  schema:propertyID:
     type: string
     description: identifier for the identifier schema, e.g. DOI, ARK.  Get values
       from https://registry.identifiers.org/registry/ for interoperability
-    x-jsonld-id: http://schema.org/propertyID
-  value:
+  schema:value:
     type: string
     description: the identifier string. E.g. 10.5066/F7VX0DMQ
-    x-jsonld-id: http://schema.org/value
-  url:
+  schema:url:
     type: string
     description: 'web-resolveable string for the identifier; host name part is location
       of a resolver that will return some representation for the given identifier
       value. E.g. https://doi.org/10.5066/F7VX0DMQ '
-    x-jsonld-id: http://schema.org/url
-    x-jsonld-type: '@id'
 x-jsonld-extra-terms:
   type: '@type'
   id: '@id'
@@ -2838,6 +2820,7 @@ x-jsonld-extra-terms:
   programmingLanguage: http://schema.org/programmingLanguage
   programmingModel: http://schema.org/programmingModel
   pronouns: http://schema.org/pronouns
+  propertyID: http://schema.org/propertyID
   proprietaryName: http://schema.org/proprietaryName
   proteinContent: http://schema.org/proteinContent
   provider: http://schema.org/provider
@@ -3234,6 +3217,9 @@ x-jsonld-extra-terms:
     x-jsonld-id: http://schema.org/uploadDate
     x-jsonld-type: http://schema.org/Date
   upvoteCount: http://schema.org/upvoteCount
+  url:
+    x-jsonld-id: http://schema.org/url
+    x-jsonld-type: '@id'
   urlTemplate: http://schema.org/urlTemplate
   usNPI: http://schema.org/usNPI
   usageInfo:
@@ -3256,6 +3242,7 @@ x-jsonld-extra-terms:
   validUntil:
     x-jsonld-id: http://schema.org/validUntil
     x-jsonld-type: http://schema.org/Date
+  value: http://schema.org/value
   valueAddedTaxIncluded: http://schema.org/valueAddedTaxIncluded
   valueMaxLength: http://schema.org/valueMaxLength
   valueMinLength: http://schema.org/valueMinLength
@@ -6185,6 +6172,7 @@ Links to the schema:
     "programmingLanguage": "schema:programmingLanguage",
     "programmingModel": "schema:programmingModel",
     "pronouns": "schema:pronouns",
+    "propertyID": "schema:propertyID",
     "proprietaryName": "schema:proprietaryName",
     "proteinContent": "schema:proteinContent",
     "provider": "schema:provider",
@@ -6610,6 +6598,10 @@ Links to the schema:
       "@type": "schema:Date"
     },
     "upvoteCount": "schema:upvoteCount",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
     "urlTemplate": "schema:urlTemplate",
     "usNPI": "schema:usNPI",
     "usageInfo": {
@@ -6636,6 +6628,7 @@ Links to the schema:
       "@id": "schema:validUntil",
       "@type": "schema:Date"
     },
+    "value": "schema:value",
     "valueAddedTaxIncluded": "schema:valueAddedTaxIncluded",
     "valueMaxLength": "schema:valueMaxLength",
     "valueMinLength": "schema:valueMinLength",
@@ -6702,12 +6695,6 @@ Links to the schema:
     "yearlyRevenue": "schema:yearlyRevenue",
     "yearsInOperation": "schema:yearsInOperation",
     "yield": "schema:yield",
-    "propertyID": "schema:propertyID",
-    "value": "schema:value",
-    "url": {
-      "@id": "schema:url",
-      "@type": "@id"
-    },
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "schema": "http://schema.org/",
     "brick": "https://brickschema.org/schema/Brick#",

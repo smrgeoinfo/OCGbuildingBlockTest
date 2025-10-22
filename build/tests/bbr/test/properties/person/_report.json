@@ -2,8 +2,8 @@
   "title": "Validation report for ogc.bbr.test.properties.person - Person",
   "bblockName": "Person",
   "bblockId": "ogc.bbr.test.properties.person",
-  "generated": "2025-10-21T23:34:47.763273+00:00",
-  "result": false,
+  "generated": "2025-10-22T17:54:34.170133+00:00",
+  "result": true,
   "items": [
     {
       "source": {
@@ -13,7 +13,7 @@
         "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/tests/rules-fail.json",
         "language": "json"
       },
-      "result": false,
+      "result": true,
       "sections": [
         {
           "name": "GENERAL",
@@ -21,8 +21,8 @@
           "entries": [
             {
               "op": "require-fail",
-              "isError": true,
-              "message": "Test was expected to fail but it did not."
+              "isError": false,
+              "message": "Test was expected to fail and it did."
             }
           ]
         },
@@ -49,7 +49,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "rules-fail.ttl",
-              "size": 3,
+              "size": 11,
               "isError": false,
               "message": "Output Turtle rules-fail.ttl created"
             }
@@ -74,19 +74,21 @@
             {
               "op": "shacl-report",
               "shaclFile": "_sources/properties/person/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/properties/person/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+              "graph": "@prefix schema: <https://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode <https://example.org/PersonExample_zZc> ;\n            sh:resultMessage \"a name for the person must be provided.\" ;\n            sh:resultPath schema:name ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:datatype xsd:string ;\n                    sh:message \"a name for the person must be provided.\" ;\n                    sh:minCount 1 ;\n                    sh:path schema:name ] ] .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/properties/person/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:datatype xsd:string ; sh:message Literal(\"a name for the person must be provided.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema:name ]\n  \tFocus Node: ex:PersonExample_zZc\n  \tResult Path: schema:name\n  \tMessage: a name for the person must be provided.\n  "
             },
             {
               "shaclFile": "_sources/properties/person/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#personName>": {
+                  "nodes": [
+                    "ex:PersonExample_zZc"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/person/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/person/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#personName>: ex:PersonExample_zZc\n"
             },
             {
               "op": "shacl-report",
@@ -98,12 +100,14 @@
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#valueRecommended>": {
+                  "nodes": [
+                    "ex:PersonExample_zZc/schema:identifier"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: ex:PersonExample_zZc/schema:identifier\n"
             }
           ]
         }
@@ -144,7 +148,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 3,
+              "size": 12,
               "isError": false,
               "message": "Output Turtle example_1_1.ttl created"
             }
@@ -176,12 +180,14 @@
             {
               "shaclFile": "_sources/properties/person/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#personName>": {
+                  "nodes": [
+                    "ex:PersonExample_zZc"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/person/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/person/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#personName>: ex:PersonExample_zZc\n"
             },
             {
               "op": "shacl-report",
@@ -193,12 +199,14 @@
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#testValues>": {
-                  "nodes": []
+                "<https://www.ogc.org/rules/template/#valueRecommended>": {
+                  "nodes": [
+                    "ex:PersonExample_zZc/schema:identifier"
+                  ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#testValues>: *none*\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: ex:PersonExample_zZc/schema:identifier\n"
             }
           ]
         }
@@ -208,7 +216,7 @@
   "globalErrors": {},
   "counts": {
     "total": 2,
-    "passed": 1,
-    "failed": 1
+    "passed": 2,
+    "failed": 0
   }
 }
