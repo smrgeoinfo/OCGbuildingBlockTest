@@ -1,7 +1,3 @@
-## My Schema
+## Identifier Properties
 
-Defines a set of properties that may be used in **any** JSON schema.
-
-> Note these properties may be used in the "properties" sub-component of a GeoJSON object, as a simple object
-
-The numeric properties "b" and "c" have an example SHACL rule that if c is present, then c > b
+Defines a set of properties to document an identifier, based on schema.org model, for use with schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.

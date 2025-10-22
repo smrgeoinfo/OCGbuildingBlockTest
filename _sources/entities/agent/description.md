@@ -1,7 +1,5 @@
-## My Schema
+## Person, Organization, Responsibility
 
-Defines a set of properties that may be used in **any** JSON schema.
+Defines a set of properties to describe a person, an organization, or one of those in an assigned role (labeled 'responsibility'). 
 
-> Note these properties may be used in the "properties" sub-component of a GeoJSON object, as a simple object
-
-The numeric properties "b" and "c" have an example SHACL rule that if c is present, then c > b
+Imports properties for person, organization and responsibility.  Person and organization can be considered profiles of prov:Agent. Implementation is targeted here for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
