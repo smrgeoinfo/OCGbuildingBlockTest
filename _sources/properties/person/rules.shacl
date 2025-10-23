@@ -3,15 +3,72 @@
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:      <https://schema.org/>.
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
 
-<#personName>
+cdifd:CDIFPersonShape
     a sh:NodeShape ;
     sh:targetClass schema:Person ;
+	sh:or (
+		[sh:property [
+			sh:path schema:identifier;
+			sh:minCount 1 ;
+			sh:nodeKind sh:IRIOrLiteral ;
+			# sh:severity sh:Info ;
+			sh:message "a person should have an identifier that is a URI; use of ORCID is strongly encouraged" ; 
+			];
+		]
+		[sh:property cdifd:nameProperty ;]
+	);
+	
+	sh:property cdifd:contactPointProperty ;
+	sh:property cdifd:affiliationProperty ;
+	sh:message "A person must have a name or an identifier provided; affiliation to an organization is recommended." 
+	.
+
+cdifd:CDIFContactPointShape
+    a sh:NodeShape ;
+    sh:targetClass schema:ContactPoint ;
     sh:property [
-        sh:path schema:name ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        sh:message "a name for the person must be provided."
-    ] .
+       sh:path schema:email ;
+       sh:minCount 1 ;
+       sh:datatype xsd:string ;
+       # REGEX for standard e-mail address format
+       sh:pattern "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$" ;
+       # sh:severity sh:Info ;
+       sh:message "a contact point should be provided; an e-mail address is strongly recommended" ; 
+    ].
+	
+cdifd:contactPointProperty 
+    a sh:PropertyShape ;
+    sh:path schema:contactPoint;
+    sh:or ( [sh:class  schema:ContactPoint;]
+    [sh:nodeKind sh:IRI ;]
+    );
+    sh:minCount 1 ;
+    .
+    
+cdifd:affiliationProperty
+# affiliation is always with an organization
+    a sh:PropertyShape ;
+    sh:path schema:affiliation ;
+    sh:or (
+        [sh:class  schema:Organization  ;]
+        [sh:nodeKind sh:IRI ;] 
+        );
+	sh:minCount 1 ;
+	sh:severity sh:Warning ;
+    sh:message "Optional: an affiliation must have object schema:Organization" 
+    .
+
+cdifd:nameProperty
+# names must be a literal, .
+    a sh:PropertyShape ;
+    sh:path schema:name;
+	sh:minCount 1 ;
+    sh:datatype xsd:string ;
+	sh:minLength 5 ;
+	# sh:severity sh:Warning ;
+    sh:message "a name for the person must be provided, and have a lenght of at least 5 characters." 
+    .

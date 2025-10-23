@@ -1,104 +1,43 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "My example schema",
     "type": "object",
-    "description": "For more granularity on how a person contributed to a Dataset, use schema:Role. The schema.org documentation does not state that the Role type is an expected data type of author, creator and contributor, but that is addressed in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people",
     "properties": {
+        "@id": {"type": "string"},
         "@type": {
             "type": "string",
-            "default": "schema:Role",
-            "const": "schema:Role"
+            "const": "schema:Person"
         },
-        "schema:roleName": {
-            "anyOf": [
-                {"type": "string"},
-                {"$ref": "#/$defs/definedTerm_type"}
-            ]
+        "schema:name": {
+            "type": "string",
+            "description": "string label for person that is meaningful for human users"
         },
-        "schema:contributor": {
-            "type": "object",
-            "items": {
-                "anyOf": [
-                    {"$ref": "#/$defs/Person"},
-                    {"$ref": "#/$defs/Organization"}
-                ]
-            }
-        }
-    },
-    "required": [
-        "schema:roleName",
-        "schema:contributor"
-    ],
-    "$defs": {
-        "Person": {
+        "schema:alternateName": {
+            "type": "string",
+            "description": "other labels by which the person might be known"
+        },
+        "schema:affiliation": {"$ref":"#/$defs/Organization" },
+        "schema:contactPoint": {
+            "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
             "type": "object",
             "properties": {
-                "@id": {"type": "string"},
                 "@type": {
                     "type": "string",
-                    "const": "schema:Person",
-                    "default": "schema:Person"
+                    "const": "schema:ContactPoint",
+                    "default": "schema:ContactPoint"
                 },
-                "schema:name": {
-                    "type": "string",
-                    "description": "string label for person that is meaningful for human users"
-                },
-                "schema:affiliation": {"$ref": "#/$defs/Organization"},
-                "schema:description": {"type": "string"},
-                "schema:identifier": {
-                    "description": "identifier for person",
-                    "anyOf": [
-                        {
-                            "description": "Properties for a schema.org identifier",
-                            "type": "object",
-                            "properties": {
-                                "@type": {
-                                    "type": "string",
-                                    "const": "schema:PropertyValue"
-                                },
-                                "schema:propertyID": {
-                                    "type": "string",
-                                    "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-                                },
-                                "schema:value": {
-                                    "type": "string",
-                                    "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-                                },
-                                "schema:url": {
-                                    "type": "string",
-                                    "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-                                }
-                            }
-                        },
-                        {"type": "string"}
-                    ]
-                },
-                "schema:contactPoint": {
-                    "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
-                    "type": "object",
-                    "properties": {
-                        "@type": {
-                            "type": "string",
-                            "const": "schema:ContactPoint",
-                            "default": "schema:ContactPoint"
-                        },
-                        "schema:email": {"type": "string"}
-                    }
-                },
-                "schema:alternateName": {
-                    "type": "string",
-                    "description": "other labels by which the person might be known"
-                },
-                "schema:sameAs": {
-                    "type": "array",
-                    "description": "other identifiers for the person",
-                    "items": {"type": "string"}
-                }
-            },
-            "required": [
-                "@type",
-                "schema:name"
-            ]
+                "schema:email": {"type": "string"}
+            }
         },
+        "schema:description": {"type": "string"},
+        "schema:identifier": {"$ref":"#/$defs/identifier_type"   },
+        "schema:sameAs": {
+            "type": "array",
+            "description": "other identifiers for the person",
+            "items": {"type": "string"}
+        }
+    },
+    "$defs": {
         "Organization": {
             "type": "object",
             "properties": {
@@ -234,5 +173,20 @@
                 }
             ]
         }
-    }
+    },
+    "allOf": [
+        {
+            "required": ["@type"]
+        },
+        {
+            "anyOf": [
+                {
+                    "required": ["schema:name"]
+                },
+                {
+                    "required": ["schema:identifier"]
+                }
+            ]
+        }
+    ]
 }

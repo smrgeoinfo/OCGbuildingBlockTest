@@ -5,18 +5,25 @@ properties:
     type: string
   '@type':
     type: string
-    enum:
-    - schema:Organization
-    - schema:FundingAgency
-    - schema:Consortium
-    - schema:Corporation
-    - schema:EducationalOrganization
-    - schema:FundingScheme
-    - schema:GovernmentOrganization
-    - schema:NGO
-    - schema:Project
-    - schema:ResearchOrganization
+    const: schema:Organization
     default: schema:Organization
+  schema:additionalType:
+    type: array
+    items:
+      anyOf:
+      - type: string
+        enum:
+        - schema:FundingAgency
+        - schema:Consortium
+        - schema:Corporation
+        - schema:EducationalOrganization
+        - schema:FundingScheme
+        - schema:GovernmentOrganization
+        - schema:NGO
+        - schema:Project
+        - schema:ResearchOrganization
+      - $ref: '../definedTerm/schema.yaml'
+      - type: string
   'schema:name':
     type: string
     description: string label for organization that is meaningful for human users

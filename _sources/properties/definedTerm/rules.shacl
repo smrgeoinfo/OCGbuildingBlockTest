@@ -3,27 +3,25 @@
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:      <https://schema.org/>.
-@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@prefix cdifd:       <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
 
-cdifd:CDIFOrganizationShape
+cdifd:CDIFDefinedTermShape
     a sh:NodeShape ;
-    sh:targetClass schema:Organization ;
-    sh:or (
-		[sh:property cdifd:nameProperty ;]
+    sh:targetClass schema:DefinedTerm ;
+	sh:or (
 		[sh:property [
 			sh:path schema:identifier;
 			sh:minCount 1 ;
 			sh:nodeKind sh:IRIOrLiteral ;
 			# sh:severity sh:Info ;
-			sh:message "an organization should have an identifier that is a URI; use of ORCID is strongly encouraged" ; 
-			]
+			sh:message "a defined term should have an identifier that is a resolvable URI" ; 
+			];
 		]
+		[sh:property cdifd:nameProperty ;]
 	);
-#	sh:minCount 1;
-#	sh:severity sh:Info;
-    sh:message "Organization must have an @id IRI, a name or an identifier that is a string" 
+	sh:message "A Term must have a name (label) or an identifier. It should have both!." 
 	.
 	
 cdifd:nameProperty
@@ -34,5 +32,5 @@ cdifd:nameProperty
     sh:datatype xsd:string ;
 	sh:minLength 5 ;
 	# sh:severity sh:Warning ;
-    sh:message "a label (schema:name) for the Organization must be provided, and must have at least 5 characters" 
+    sh:message "a label (schema:name) for the term must be provided, and must have at least 5 characters" 
     .

@@ -3,14 +3,25 @@
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:      <https://schema.org/>.
+@prefix cdifd:       <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
-<#valueRecommended>
+cdifd:CDIFIdentifierShape
     a sh:NodeShape ;
     sh:targetClass schema:PropertyValue ;
-    sh:property [
+    sh:or (
+    [sh:property [
         sh:path schema:value ;
         sh:minCount 1 ;
         sh:datatype xsd:string ;
-        sh:message "a value for the identifier should be provided."
-    ] .
+        sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+    ] ]
+    [sh:property [
+        sh:path schema:url ;
+        sh:minCount 1 ;
+        sh:datatype xsd:anyURI ;
+        sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves...."]
+        ]
+    );
+    sh:message "an identifier must provide either a value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URL that provides a description of the identified resource."
+     .

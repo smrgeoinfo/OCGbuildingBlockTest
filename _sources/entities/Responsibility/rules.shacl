@@ -3,15 +3,32 @@
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:      <https://schema.org/>.
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
-<#Person Name>
-    a              sh:NodeShape ;
-    sh:targetClass schema:Person ;
-    sh:message     "name is required" ;
-    sh:property    [ sh:path   schema:name     ;
-                     sh:minCount 1 ;
-                    sh:datatype xsd:string ;
-                    sh:message "a name for the person must be provided."  
-                    ]
-.
+cdifd:CDIFRoleShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Role ;
+	sh:property cdifd:roleNameProperty;
+	# CDIF only uses Role on schema:contributor
+    sh:property [
+	    sh:path schema:contributor  ;
+		sh:or (  [  sh:class  schema:Person ]
+				 [   sh:class  schema:Organization ] )  ;
+		sh:minCount 1;
+		sh:message "a Role must be filled by either a Person or an organization " ;
+		sh:description "https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html" ;
+		sh:severity sh:Info 
+	];
+    sh:message "The schema.org construct for assigining a role to an agent nests a schema:contributor node inside the agent node." 
+	.
+	
+cdifd:roleNameProperty
+    a sh:PropertyShape ;
+    sh:path schema:roleName;
+	sh:minCount 1 ;
+    sh:or ( [sh:nodeKind sh:IRI] 
+		[sh:datatype xsd:string] ) ;
+	#sh:severity sh:Warning ;
+    sh:message "a Role must provide a roleName, ideally the value is a term from a controlled vocabulary or an IRI for a role concept." 
+    .

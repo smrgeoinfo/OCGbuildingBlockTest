@@ -22,9 +22,12 @@ properties:
     description: other labels by which the person might be known
   'schema:affiliation':
     $ref: ../organization/schema.yaml
+    description: if affiliation is present, value must be a schema:Organization.
   'schema:contactPoint':
     type: object
     properties:
+      '@type': 
+        const: 'schema:ContactPoint'
       'schema:email':
         type: string
     description: restrict to email only. Schema.org allows telephone and postal contacts as well   
@@ -33,3 +36,11 @@ properties:
     description: other identifiers for the person
     items:
       type: string
+allOf:
+- required:
+  - '@type'
+- anyOf:
+  - required:
+    - schema:name
+  - required:
+    - schema:identifier
