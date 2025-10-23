@@ -3,7 +3,7 @@
 
 `ogc.bbr.test.properties.organization` *v0.1*
 
-Schema defining propertis of an organization in CDIF context. Implementaqtion is based on Schema.org.
+Schema defining propertis of an organization in CDIF context. Implementation is a profile of schema.org/Organization.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -27,6 +27,7 @@ In **Markdown** format.
     },
     "@id": "ex:exampleOrg_fW",
     "@type": "schema:Organization",
+    "schema:additionalType":["schema:ResearchOrganization","university"],
     "schema:name": "University of Arizona",
     "schema:alternateName": "UAz",
     "schema:description": "University in Tucson, Arizona",
@@ -55,6 +56,10 @@ In **Markdown** format.
   ],
   "@id": "ex:exampleOrg_fW",
   "@type": "schema:Organization",
+  "schema:additionalType": [
+    "schema:ResearchOrganization",
+    "university"
+  ],
   "schema:name": "University of Arizona",
   "schema:alternateName": "UAz",
   "schema:description": "University in Tucson, Arizona",
@@ -76,6 +81,8 @@ In **Markdown** format.
 @prefix schema: <https://schema.org/> .
 
 ex:exampleOrg_fW a schema:Organization ;
+    schema:additionalType "schema:ResearchOrganization",
+        "university" ;
     schema:alternateName "UAz" ;
     schema:description "University in Tucson, Arizona" ;
     schema:identifier [ a schema:PropertyValue ;
@@ -98,18 +105,25 @@ properties:
     type: string
   '@type':
     type: string
-    enum:
-    - schema:Organization
-    - schema:FundingAgency
-    - schema:Consortium
-    - schema:Corporation
-    - schema:EducationalOrganization
-    - schema:FundingScheme
-    - schema:GovernmentOrganization
-    - schema:NGO
-    - schema:Project
-    - schema:ResearchOrganization
+    const: schema:Organization
     default: schema:Organization
+  schema:additionalType:
+    type: array
+    items:
+      anyOf:
+      - type: string
+        enum:
+        - schema:FundingAgency
+        - schema:Consortium
+        - schema:Corporation
+        - schema:EducationalOrganization
+        - schema:FundingScheme
+        - schema:GovernmentOrganization
+        - schema:NGO
+        - schema:Project
+        - schema:ResearchOrganization
+      - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.yaml
+      - type: string
   schema:name:
     type: string
     description: string label for organization that is meaningful for human users
@@ -3533,6 +3547,9 @@ Links to the schema:
 You can find the full JSON-LD context here:
 [context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld)
 
+## Sources
+
+* [schema.org](https://schema.org/Organization)
 
 # For developers
 

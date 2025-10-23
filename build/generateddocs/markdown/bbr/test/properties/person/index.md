@@ -3,7 +3,7 @@
 
 `ogc.bbr.test.properties.person` *v0.1*
 
-Schema defining propertis of a person.
+Schema defining propertis of a person, a profile of schema.org/Person.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -29,13 +29,20 @@ In **Markdown** format.
   "@type": "schema:Person",
   "schema:name": "Joe Test",
   "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
+  "schema:affiliation": {
+    "@type":"schema:Organization",
+    "schema:name":"Test organization" 
+  },
   "schema:description": "Metadata specialist, based in Portland, Maine",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
     "schema:propertyID": "https://doi.org",
     "schema:value": "iY",
     "schema:url": "https://doi.org/iY"
+  },
+  "schema:contactPoint": {
+    "@type": "schema:ContactPoint",
+    "schema:email": "joe@bmanuco.org"
   },
   "schema:sameAs": [
     "https://ark.org/46737",
@@ -61,13 +68,20 @@ In **Markdown** format.
   "@type": "schema:Person",
   "schema:name": "Joe Test",
   "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization, schema TBD",
+  "schema:affiliation": {
+    "@type": "schema:Organization",
+    "schema:name": "Test organization"
+  },
   "schema:description": "Metadata specialist, based in Portland, Maine",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
     "schema:propertyID": "https://doi.org",
     "schema:value": "iY",
     "schema:url": "https://doi.org/iY"
+  },
+  "schema:contactPoint": {
+    "@type": "schema:ContactPoint",
+    "schema:email": "joe@bmanuco.org"
   },
   "schema:sameAs": [
     "https://ark.org/46737",
@@ -82,8 +96,11 @@ In **Markdown** format.
 @prefix schema: <https://schema.org/> .
 
 ex:PersonExample_zZc a schema:Person ;
-    schema:affiliation "some organization, schema TBD" ;
+    schema:affiliation [ a schema:Organization ;
+            schema:name "Test organization" ] ;
     schema:alternateName "Test, Joe" ;
+    schema:contactPoint [ a schema:ContactPoint ;
+            schema:email "joe@bmanuco.org" ] ;
     schema:description "Metadata specialist, based in Portland, Maine" ;
     schema:identifier [ a schema:PropertyValue ;
             schema:propertyID "https://doi.org" ;
@@ -123,9 +140,12 @@ properties:
     description: other labels by which the person might be known
   schema:affiliation:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
+    description: if affiliation is present, value must be a schema:Organization.
   schema:contactPoint:
     type: object
     properties:
+      '@type':
+        const: schema:ContactPoint
       schema:email:
         type: string
     description: restrict to email only. Schema.org allows telephone and postal contacts
@@ -135,6 +155,14 @@ properties:
     description: other identifiers for the person
     items:
       type: string
+allOf:
+- required:
+  - '@type'
+- anyOf:
+  - required:
+    - schema:name
+  - required:
+    - schema:identifier
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -3534,7 +3562,7 @@ You can find the full JSON-LD context here:
 
 ## Sources
 
-* [Sample source document](https://example.com/sources/1)
+* [schema.org](https://schema.org/Person)
 
 # For developers
 

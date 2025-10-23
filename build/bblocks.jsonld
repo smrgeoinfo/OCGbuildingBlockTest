@@ -112,7 +112,7 @@
   "name": "Building Blocks - Test Building Blocks repository",
   "abstract": "Temporary repository for testing OGC building block construction 2025-10-20\n",
   "description": "Try creating simple building block for metadata 'Agent' element that implements\ncontent of ISO19115-3 responsble party, a person or organization in a role with a \npoint of contact. Person may have an affiliation with an organization.\n",
-  "modified": "2025-10-22T23:32:23.583877",
+  "modified": "2025-10-23T20:00:52.199523",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"0834bcc055075708e98a7500bea7bc0f59b4b1bd",
@@ -139,18 +139,18 @@
       "itemIdentifier": "ogc.bbr.test.properties.identifier",
       "$schema": "metaschema.yaml",
       "name": "Identifier",
-      "abstract": "An example schema defining the set of properties for an identifier.",
+      "abstract": "schema.org properties for an identifier implemented as schema.org/PropertyValue.",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00",
       "itemClass": "schema",
-      "register": "cdif-building-block-test",
+      "register": "cdif-building-block-register",
       "version": "0.1",
-      "dateOfLastChange": "2025-10-22",
+      "dateOfLastChange": "2025-10-23",
       "link": "",
       "sources": [
         {
-          "title": "CDIF-JSONLD-schema",
-          "link": ""
+          "title": "schema.org",
+          "link": "https://schema.org/PropertyValue"
         }
       ],
       "maturity": "development",
@@ -195,17 +195,87 @@
       ]
     },
     {
-      "itemIdentifier": "ogc.bbr.test.properties.organization",
+      "itemIdentifier": "ogc.bbr.test.properties.definedTerm",
       "$schema": "metaschema.yaml",
-      "name": "Organization",
-      "abstract": "Schema defining propertis of an organization in CDIF context. Implementaqtion is based on Schema.org.",
+      "name": "Defined Term",
+      "abstract": "Schema defining propertis of a term from a named or identified vocabulary, with a label, and URI.Based on Schema.org/definedTerm",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00Z",
       "itemClass": "schema",
       "register": "cdif-building-block-register",
       "version": "0.1",
-      "dateOfLastChange": "2025-10-22",
+      "dateOfLastChange": "2025-10-23",
       "link": "https://github.com/opengeospatial/bblock-template",
+      "sources": [
+        {
+          "title": "schema.org",
+          "link": "https://schema.org/DefinedTerm"
+        }
+      ],
+      "maturity": "draft",
+      "scope": "unstable",
+      "tags": [
+        "templates"
+      ],
+      "shaclShapes": {
+        "ogc.bbr.test.properties.definedTerm": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.identifier": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+        ]
+      },
+      "dependsOn": [
+        "ogc.bbr.test.properties.identifier"
+      ],
+      "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/context.jsonld",
+      "schema": {
+        "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.yaml",
+        "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.json"
+      },
+      "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/schema.yaml",
+      "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/context.jsonld",
+      "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/",
+      "rdfData": [],
+      "validationPassed": true,
+      "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/definedTerm/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/markdown/bbr/test/properties/definedTerm/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/generateddocs/json-full/bbr/test/properties/definedTerm/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/bblock/ogc.bbr.test.properties.definedTerm"
+        }
+      },
+      "@type": [
+        "bblocks:Schema",
+        "skos:Concept",
+        "dcat:Dataset"
+      ]
+    },
+    {
+      "itemIdentifier": "ogc.bbr.test.properties.organization",
+      "$schema": "metaschema.yaml",
+      "name": "Organization",
+      "abstract": "Schema defining propertis of an organization in CDIF context. Implementation is a profile of schema.org/Organization.",
+      "status": "under-development",
+      "dateTimeAddition": "2025-10-21T00:00:00Z",
+      "itemClass": "schema",
+      "register": "cdif-building-block-register",
+      "version": "0.1",
+      "dateOfLastChange": "2025-10-23",
+      "sources": [
+        {
+          "title": "schema.org",
+          "link": "https://schema.org/Organization"
+        }
+      ],
       "maturity": "draft",
       "scope": "unstable",
       "tags": [
@@ -215,11 +285,15 @@
         "ogc.bbr.test.properties.organization": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
         ],
+        "ogc.bbr.test.properties.definedTerm": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+        ],
         "ogc.bbr.test.properties.identifier": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
         ]
       },
       "dependsOn": [
+        "ogc.bbr.test.properties.definedTerm",
         "ogc.bbr.test.properties.identifier"
       ],
       "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld",
@@ -257,18 +331,18 @@
       "itemIdentifier": "ogc.bbr.test.properties.person",
       "$schema": "metaschema.yaml",
       "name": "Person",
-      "abstract": "Schema defining propertis of a person.",
+      "abstract": "Schema defining propertis of a person, a profile of schema.org/Person.",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00Z",
       "itemClass": "schema",
-      "register": "ogc-building-block-register",
+      "register": "cdif-building-block-register",
       "version": "0.1",
-      "dateOfLastChange": "2025-10-22",
+      "dateOfLastChange": "2025-10-23",
       "link": "https://github.com/opengeospatial/bblock-template",
       "sources": [
         {
-          "title": "Sample source document",
-          "link": "https://example.com/sources/1"
+          "title": "schema.org",
+          "link": "https://schema.org/Person"
         }
       ],
       "maturity": "draft",
@@ -282,6 +356,9 @@
         ],
         "ogc.bbr.test.properties.organization": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.definedTerm": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
         ],
         "ogc.bbr.test.properties.identifier": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
@@ -300,7 +377,7 @@
       "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/context.jsonld",
       "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/",
       "rdfData": [],
-      "validationPassed": false,
+      "validationPassed": true,
       "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/person/",
       "documentation": {
         "markdown": {
@@ -326,18 +403,18 @@
       "itemIdentifier": "ogc.bbr.test.properties.agentInRole",
       "$schema": "metaschema.yaml",
       "name": "Person or Organization in Role",
-      "abstract": "Schema to documentn a person or organization in a role relative to some resoruce..",
+      "abstract": "Schema to documennt a person or organization in a role relative to some resoruce, uses schema.org/Role construct.",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00Z",
       "itemClass": "schema",
-      "register": "ogc-building-block-register",
+      "register": "cdif-building-block-register",
       "version": "0.1",
-      "dateOfLastChange": "2025-10-22",
+      "dateOfLastChange": "2025-10-23",
       "link": "https://github.com/opengeospatial/bblock-template",
       "sources": [
         {
-          "title": "Sample source document",
-          "link": "https://example.com/sources/1"
+          "title": "schema.org",
+          "link": "https://schema.org/Role"
         }
       ],
       "maturity": "draft",
@@ -351,6 +428,9 @@
         ],
         "ogc.bbr.test.properties.organization": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.definedTerm": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
         ],
         "ogc.bbr.test.properties.identifier": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
@@ -372,7 +452,7 @@
       "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/context.jsonld",
       "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/",
       "rdfData": [],
-      "validationPassed": false,
+      "validationPassed": true,
       "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/agentInRole/",
       "documentation": {
         "markdown": {
@@ -397,14 +477,14 @@
     {
       "itemIdentifier": "ogc.bbr.test.entities.Responsibility",
       "$schema": "metaschema.yaml",
-      "name": "Responsiblility",
-      "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibleParty.",
+      "name": "Any agent",
+      "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibility (person or org in role).",
       "status": "under-development",
       "dateTimeAddition": "2025-10-21T00:00:00Z",
       "itemClass": "schema",
       "register": "cdif-building-block-register",
       "version": "0.1",
-      "dateOfLastChange": "2025-10-22",
+      "dateOfLastChange": "2025-10-23",
       "link": "https://github.com/opengeospatial/bblock-template",
       "maturity": "draft",
       "scope": "unstable",
@@ -419,20 +499,23 @@
         "ogc.bbr.test.properties.organization": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
         ],
+        "ogc.bbr.test.properties.definedTerm": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+        ],
         "ogc.bbr.test.properties.identifier": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
         ],
-        "ogc.bbr.test.properties.person": [
-          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
-        ],
         "ogc.bbr.test.properties.agentInRole": [
           "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
+        ],
+        "ogc.bbr.test.properties.person": [
+          "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
         ]
       },
       "dependsOn": [
         "ogc.bbr.test.properties.organization",
-        "ogc.bbr.test.properties.person",
-        "ogc.bbr.test.properties.agentInRole"
+        "ogc.bbr.test.properties.agentInRole",
+        "ogc.bbr.test.properties.person"
       ],
       "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld",
       "schema": {

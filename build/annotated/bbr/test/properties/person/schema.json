@@ -33,11 +33,15 @@
       "description": "other labels by which the person might be known"
     },
     "schema:affiliation": {
-      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.json"
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.json",
+      "description": "if affiliation is present, value must be a schema:Organization."
     },
     "schema:contactPoint": {
       "type": "object",
       "properties": {
+        "@type": {
+          "const": "schema:ContactPoint"
+        },
         "schema:email": {
           "type": "string"
         }
@@ -52,6 +56,27 @@
       }
     }
   },
+  "allOf": [
+    {
+      "required": [
+        "@type"
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "schema:name"
+          ]
+        },
+        {
+          "required": [
+            "schema:identifier"
+          ]
+        }
+      ]
+    }
+  ],
   "x-jsonld-extra-terms": {
     "schema": "https://schema.org"
   }

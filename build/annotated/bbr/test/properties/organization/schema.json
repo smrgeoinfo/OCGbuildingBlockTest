@@ -7,19 +7,35 @@
     },
     "@type": {
       "type": "string",
-      "enum": [
-        "schema:Organization",
-        "schema:FundingAgency",
-        "schema:Consortium",
-        "schema:Corporation",
-        "schema:EducationalOrganization",
-        "schema:FundingScheme",
-        "schema:GovernmentOrganization",
-        "schema:NGO",
-        "schema:Project",
-        "schema:ResearchOrganization"
-      ],
+      "const": "schema:Organization",
       "default": "schema:Organization"
+    },
+    "schema:additionalType": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "schema:FundingAgency",
+              "schema:Consortium",
+              "schema:Corporation",
+              "schema:EducationalOrganization",
+              "schema:FundingScheme",
+              "schema:GovernmentOrganization",
+              "schema:NGO",
+              "schema:Project",
+              "schema:ResearchOrganization"
+            ]
+          },
+          {
+            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.json"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
     },
     "schema:name": {
       "type": "string",

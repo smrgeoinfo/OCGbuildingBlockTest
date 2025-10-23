@@ -2,7 +2,7 @@
   "title": "Validation report for ogc.bbr.test.properties.organization - Organization",
   "bblockName": "Organization",
   "bblockId": "ogc.bbr.test.properties.organization",
-  "generated": "2025-10-22T23:32:25.881720+00:00",
+  "generated": "2025-10-23T20:00:55.363963+00:00",
   "result": true,
   "items": [
     {
@@ -49,7 +49,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "rules-fail.ttl",
-              "size": 9,
+              "size": 5,
               "isError": false,
               "message": "Output Turtle rules-fail.ttl created"
             }
@@ -74,21 +74,50 @@
             {
               "op": "shacl-report",
               "shaclFile": "_sources/properties/organization/rules.shacl",
-              "graph": "@prefix schema: <https://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode <https://example.org/exampleOrg_fW> ;\n            sh:resultMessage \"a name for the person must be provided.\" ;\n            sh:resultPath schema:name ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:datatype xsd:string ;\n                    sh:message \"a name for the person must be provided.\" ;\n                    sh:minCount 1 ;\n                    sh:path schema:name ] ] .\n\n",
+              "graph": "@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode <https://example.org/exampleOrg_fW> ;\n            sh:resultMessage \"Organization must have an @id IRI, a name or an identifier that is a string\" ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:OrConstraintComponent ;\n            sh:sourceShape cdifd:CDIFOrganizationShape ;\n            sh:value <https://example.org/exampleOrg_fW> ] .\n\n",
               "isError": true,
-              "message": "Validation result for _sources/properties/organization/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:datatype xsd:string ; sh:message Literal(\"a name for the person must be provided.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema:name ]\n  \tFocus Node: ex:exampleOrg_fW\n  \tResult Path: schema:name\n  \tMessage: a name for the person must be provided.\n  "
+              "message": "Validation result for _sources/properties/organization/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:CDIFOrganizationShape\n  \tFocus Node: ex:exampleOrg_fW\n  \tValue Node: ex:exampleOrg_fW\n  \tMessage: Organization must have an @id IRI, a name or an identifier that is a string\n  "
             },
             {
               "shaclFile": "_sources/properties/organization/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#personName>": {
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape": {
                   "nodes": [
                     "ex:exampleOrg_fW"
                   ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/organization/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#personName>: ex:exampleOrg_fW\n"
+              "message": "Focus nodes for _sources/properties/organization/rules.shacl:\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape: ex:exampleOrg_fW\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/properties/definedTerm/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/properties/definedTerm/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/properties/definedTerm/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/properties/definedTerm/rules.shacl:\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -100,14 +129,18 @@
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#valueRecommended>": {
-                  "nodes": [
-                    "ex:exampleOrg_fW/schema:identifier"
-                  ]
+                "cdifd:CDIFIdentifierShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: ex:exampleOrg_fW/schema:identifier\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape cdifd:CDIFIdentifierShape: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*\n"
             }
           ]
         }
@@ -148,7 +181,7 @@
               "op": "ttl-create",
               "empty": false,
               "filename": "example_1_1.ttl",
-              "size": 10,
+              "size": 12,
               "isError": false,
               "message": "Output Turtle example_1_1.ttl created"
             }
@@ -180,14 +213,43 @@
             {
               "shaclFile": "_sources/properties/organization/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#personName>": {
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape": {
                   "nodes": [
                     "ex:exampleOrg_fW"
                   ]
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/organization/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#personName>: ex:exampleOrg_fW\n"
+              "message": "Focus nodes for _sources/properties/organization/rules.shacl:\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape: ex:exampleOrg_fW\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/properties/definedTerm/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/properties/definedTerm/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/properties/definedTerm/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/properties/definedTerm/rules.shacl:\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -199,14 +261,20 @@
             {
               "shaclFile": "_sources/properties/identifier/rules.shacl",
               "focusNodes": {
-                "<https://www.ogc.org/rules/template/#valueRecommended>": {
+                "cdifd:CDIFIdentifierShape": {
                   "nodes": [
                     "ex:exampleOrg_fW/schema:identifier"
                   ]
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape <https://www.ogc.org/rules/template/#valueRecommended>: ex:exampleOrg_fW/schema:identifier\n"
+              "message": "Focus nodes for _sources/properties/identifier/rules.shacl:\n - Shape cdifd:CDIFIdentifierShape: ex:exampleOrg_fW/schema:identifier\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*\n"
             }
           ]
         }

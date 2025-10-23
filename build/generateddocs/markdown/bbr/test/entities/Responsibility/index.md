@@ -1,9 +1,9 @@
 
-# Responsiblility (Schema)
+# Any agent (Schema)
 
 `ogc.bbr.test.entities.Responsibility` *v0.1*
 
-JSON schema for an agent, imports properties for person, organization, and responsibleParty.
+JSON schema for an agent, imports properties for person, organization, and responsibility (person or org in role).
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -27,17 +27,24 @@ In **Markdown** format.
     "schema": "https://schema.org/",
     "ex": "https://example.org/"
   },
-  "@id": "ex:AgentExample_zZc",
+  "@id": "ex:PersonExample_zZc",
   "@type": "schema:Person",
   "schema:name": "Joe Test",
   "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization",
+  "schema:affiliation": {
+    "@type":"schema:Organization",
+    "schema:name":"Test organization" 
+  },
   "schema:description": "Metadata specialist, based in Portland, Maine",
   "schema:identifier": {
-    "@type": "PropertyValue",
-    "propertyID": "https://doi.org",
-    "value": "iY",
-    "url": "https://doi.org/iY"
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "iY",
+    "schema:url": "https://doi.org/iY"
+  },
+  "schema:contactPoint": {
+    "@type": "schema:ContactPoint",
+    "schema:email": "joe@bmanuco.org"
   },
   "schema:sameAs": [
     "https://ark.org/46737",
@@ -59,17 +66,24 @@ In **Markdown** format.
       "ex": "https://example.org/"
     }
   ],
-  "@id": "ex:AgentExample_zZc",
+  "@id": "ex:PersonExample_zZc",
   "@type": "schema:Person",
   "schema:name": "Joe Test",
   "schema:alternateName": "Test, Joe",
-  "schema:affiliation": "some organization",
+  "schema:affiliation": {
+    "@type": "schema:Organization",
+    "schema:name": "Test organization"
+  },
   "schema:description": "Metadata specialist, based in Portland, Maine",
   "schema:identifier": {
-    "@type": "PropertyValue",
-    "propertyID": "https://doi.org",
-    "value": "iY",
-    "url": "https://doi.org/iY"
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "iY",
+    "schema:url": "https://doi.org/iY"
+  },
+  "schema:contactPoint": {
+    "@type": "schema:ContactPoint",
+    "schema:email": "joe@bmanuco.org"
   },
   "schema:sameAs": [
     "https://ark.org/46737",
@@ -83,11 +97,17 @@ In **Markdown** format.
 @prefix ex: <https://example.org/> .
 @prefix schema: <https://schema.org/> .
 
-ex:AgentExample_zZc a schema:Person ;
-    schema:affiliation "some organization" ;
+ex:PersonExample_zZc a schema:Person ;
+    schema:affiliation [ a schema:Organization ;
+            schema:name "Test organization" ] ;
     schema:alternateName "Test, Joe" ;
+    schema:contactPoint [ a schema:ContactPoint ;
+            schema:email "joe@bmanuco.org" ] ;
     schema:description "Metadata specialist, based in Portland, Maine" ;
-    schema:identifier [ a <file:///github/workspace/PropertyValue> ] ;
+    schema:identifier [ a schema:PropertyValue ;
+            schema:propertyID "https://doi.org" ;
+            schema:url "https://doi.org/iY" ;
+            schema:value "iY" ] ;
     schema:name "Joe Test" ;
     schema:sameAs "https://ark.org/46737",
         "uri:test:43737" .
