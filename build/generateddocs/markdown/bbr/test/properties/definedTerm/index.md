@@ -23,7 +23,8 @@ In **Markdown** format.
 {
   "@context": {
     "schema": "https://schema.org/",
-    "ex": "https://example.org/"
+    "ex": "https://example.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
   "@id": "ex:definedTerm_zZc",
   "@type": "schema:DefinedTerm",
@@ -48,7 +49,8 @@ In **Markdown** format.
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/context.jsonld",
     {
       "schema": "https://schema.org/",
-      "ex": "https://example.org/"
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "@id": "ex:definedTerm_zZc",

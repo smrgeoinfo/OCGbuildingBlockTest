@@ -23,11 +23,15 @@ In **Markdown** format.
 {
     "@context": {
         "schema": "https://schema.org/",
-        "ex": "https://example.org/"
+        "ex": "https://example.org/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
     "@id": "ex:exampleOrg_fW",
     "@type": "schema:Organization",
-    "schema:additionalType":["schema:ResearchOrganization","university"],
+    "schema:additionalType": [
+        "schema:ResearchOrganization",
+        "university"
+    ],
     "schema:name": "University of Arizona",
     "schema:alternateName": "UAz",
     "schema:description": "University in Tucson, Arizona",
@@ -51,7 +55,8 @@ In **Markdown** format.
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld",
     {
       "schema": "https://schema.org/",
-      "ex": "https://example.org/"
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "@id": "ex:exampleOrg_fW",
