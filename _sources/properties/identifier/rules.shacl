@@ -19,9 +19,23 @@ cdifd:CDIFIdentifierShape
     [sh:property [
         sh:path schema:url ;
         sh:minCount 1 ;
-        sh:datatype xsd:anyURI ;
-        sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves...."]
-        ]
+        sh:datatype xsd:string ;
+        # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+        sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+        sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+        ] 
+     [sh:property cdifd:nameProperty ;]
     );
-    sh:message "an identifier must provide either a value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URL that provides a description of the identified resource."
+    sh:message "Tricky, needs work; CDIF uses schema.org/PropertyValue both in the context of an identifier, and in the context of variableMeasured; the rules are slightly different-- for variableMeasured want a name, for identifier want a value. to an identifier must provide either a value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URL that provides a description of the identified resource."
      .
+     
+cdifd:nameProperty
+# names must be a literal, .
+    a sh:PropertyShape ;
+    sh:path schema:name;
+	sh:minCount 1 ;
+    sh:datatype xsd:string ;
+	sh:minLength 5 ;
+	# sh:severity sh:Warning ;
+    sh:message "a name for the PropertyValue must be provided, and have a lenght of at least 5 characters." 
+    .
