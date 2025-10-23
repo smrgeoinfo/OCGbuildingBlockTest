@@ -3,14 +3,14 @@
 {
   "itemIdentifier": "ogc.bbr.test.entities.Responsibility",
   "$schema": "metaschema.yaml",
-  "name": "Responsiblility",
-  "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibleParty.",
+  "name": "Any agent",
+  "abstract": "JSON schema for an agent, imports properties for person, organization, and responsibility (person or org in role).",
   "status": "under-development",
   "dateTimeAddition": "2025-10-21T00:00:00Z",
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-22",
+  "dateOfLastChange": "2025-10-23",
   "link": "https://github.com/opengeospatial/bblock-template",
   "maturity": "draft",
   "scope": "unstable",
@@ -25,20 +25,23 @@
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
+    "ogc.bbr.test.properties.definedTerm": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+    ],
     "ogc.bbr.test.properties.identifier": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
     ],
-    "ogc.bbr.test.properties.person": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
-    ],
     "ogc.bbr.test.properties.agentInRole": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ]
   },
   "dependsOn": [
     "ogc.bbr.test.properties.organization",
-    "ogc.bbr.test.properties.person",
-    "ogc.bbr.test.properties.agentInRole"
+    "ogc.bbr.test.properties.agentInRole",
+    "ogc.bbr.test.properties.person"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld",
   "schema": {
@@ -63,17 +66,17 @@
         {
           "language": "json",
           "ref": "examplePerson.json",
-          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\"\n  },\n  \"@id\": \"ex:AgentExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": \"some organization\",\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"PropertyValue\",\n    \"propertyID\": \"https://doi.org\",\n    \"value\": \"iY\",\n    \"url\": \"https://doi.org/iY\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\"\n  },\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\":\"schema:Organization\",\n    \"schema:name\":\"Test organization\" \n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/Responsibility/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@id\": \"ex:AgentExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": \"some organization\",\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"PropertyValue\",\n    \"propertyID\": \"https://doi.org\",\n    \"value\": \"iY\",\n    \"url\": \"https://doi.org/iY\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/Responsibility/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:AgentExample_zZc a schema:Person ;\n    schema:affiliation \"some organization\" ;\n    schema:alternateName \"Test, Joe\" ;\n    schema:description \"Metadata specialist, based in Portland, Maine\" ;\n    schema:identifier [ a <file:///github/workspace/PropertyValue> ] ;\n    schema:name \"Joe Test\" ;\n    schema:sameAs \"https://ark.org/46737\",\n        \"uri:test:43737\" .\n\n",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:PersonExample_zZc a schema:Person ;\n    schema:affiliation [ a schema:Organization ;\n            schema:name \"Test organization\" ] ;\n    schema:alternateName \"Test, Joe\" ;\n    schema:contactPoint [ a schema:ContactPoint ;\n            schema:email \"joe@bmanuco.org\" ] ;\n    schema:description \"Metadata specialist, based in Portland, Maine\" ;\n    schema:identifier [ a schema:PropertyValue ;\n            schema:propertyID \"https://doi.org\" ;\n            schema:url \"https://doi.org/iY\" ;\n            schema:value \"iY\" ] ;\n    schema:name \"Joe Test\" ;\n    schema:sameAs \"https://ark.org/46737\",\n        \"uri:test:43737\" .\n\n",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/Responsibility/example_1_1.ttl"
         }
       ]

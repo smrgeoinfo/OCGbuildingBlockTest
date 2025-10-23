@@ -3,7 +3,7 @@
 
 `ogc.bbr.test.properties.agentInRole` *v0.1*
 
-Schema to documentn a person or organization in a role relative to some resoruce..
+Schema to documennt a person or organization in a role relative to some resoruce, uses schema.org/Role construct.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -27,9 +27,9 @@ In **Markdown** format.
         "schema": "https://schema.org/",
         "ex": "https://example.org/"
     },
-    "@type": "Role",
-    "roleName": "owner",
-    "contributor": {
+    "@type": "schema:Role",
+    "schema:roleName": "owner",
+    "schema:contributor": {
         "@id": "ex:exampleOrg_fW",
         "@type": "schema:Organization",
         "schema:name": "University of Arizona",
@@ -59,9 +59,9 @@ In **Markdown** format.
       "ex": "https://example.org/"
     }
   ],
-  "@type": "Role",
-  "roleName": "owner",
-  "contributor": {
+  "@type": "schema:Role",
+  "schema:roleName": "owner",
+  "schema:contributor": {
     "@id": "ex:exampleOrg_fW",
     "@type": "schema:Organization",
     "schema:name": "University of Arizona",
@@ -82,7 +82,6 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix : <http://schema.org/> .
 @prefix ex: <https://example.org/> .
 @prefix schema: <https://schema.org/> .
 
@@ -96,9 +95,9 @@ ex:exampleOrg_fW a schema:Organization ;
     schema:name "University of Arizona" ;
     schema:sameAs "Wildcats" .
 
-[] a :Role ;
-    :contributor ex:exampleOrg_fW ;
-    :roleName "owner" .
+[] a schema:Role ;
+    schema:contributor ex:exampleOrg_fW ;
+    schema:roleName "owner" .
 
 
 ```
@@ -115,20 +114,27 @@ In **Markdown** format.
         "schema": "https://schema.org/",
         "ex": "https://example.org/"
     },
-    "@type": "Role",
-    "roleName": "editor",
-    "contributor": {
+    "@type": "schema:Role",
+    "schema:roleName": "editor",
+    "schema:contributor": {
         "@id": "ex:PersonExample_zZc",
         "@type": "schema:Person",
         "schema:name": "Joe B. Test",
         "schema:alternateName": "Test, J. B.",
-        "schema:affiliation": "some organization, schema TBD",
+        "schema:affiliation": {
+            "@type": "schema:Organization",
+            "schema:name": "The Big Manufacturing Co."
+        },
         "schema:description": "Metadata specialist, based in Portland, Maine",
         "schema:identifier": {
             "@type": "schema:PropertyValue",
             "schema:propertyID": "https://orcid.org",
             "schema:value": "iY",
             "schema:url": "https://orcid.org/iY"
+        },
+        "schema:contactPoint": {
+            "@type": "schema:ContactPoint",
+            "schema:email": "joe@bmanuco.org"
         },
         "schema:sameAs": [
             "https://ark.org/46737",
@@ -151,20 +157,27 @@ In **Markdown** format.
       "ex": "https://example.org/"
     }
   ],
-  "@type": "Role",
-  "roleName": "editor",
-  "contributor": {
+  "@type": "schema:Role",
+  "schema:roleName": "editor",
+  "schema:contributor": {
     "@id": "ex:PersonExample_zZc",
     "@type": "schema:Person",
     "schema:name": "Joe B. Test",
     "schema:alternateName": "Test, J. B.",
-    "schema:affiliation": "some organization, schema TBD",
+    "schema:affiliation": {
+      "@type": "schema:Organization",
+      "schema:name": "The Big Manufacturing Co."
+    },
     "schema:description": "Metadata specialist, based in Portland, Maine",
     "schema:identifier": {
       "@type": "schema:PropertyValue",
       "schema:propertyID": "https://orcid.org",
       "schema:value": "iY",
       "schema:url": "https://orcid.org/iY"
+    },
+    "schema:contactPoint": {
+      "@type": "schema:ContactPoint",
+      "schema:email": "joe@bmanuco.org"
     },
     "schema:sameAs": [
       "https://ark.org/46737",
@@ -176,13 +189,15 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix : <http://schema.org/> .
 @prefix ex: <https://example.org/> .
 @prefix schema: <https://schema.org/> .
 
 ex:PersonExample_zZc a schema:Person ;
-    schema:affiliation "some organization, schema TBD" ;
+    schema:affiliation [ a schema:Organization ;
+            schema:name "The Big Manufacturing Co." ] ;
     schema:alternateName "Test, J. B." ;
+    schema:contactPoint [ a schema:ContactPoint ;
+            schema:email "joe@bmanuco.org" ] ;
     schema:description "Metadata specialist, based in Portland, Maine" ;
     schema:identifier [ a schema:PropertyValue ;
             schema:propertyID "https://orcid.org" ;
@@ -192,9 +207,9 @@ ex:PersonExample_zZc a schema:Person ;
     schema:sameAs "https://ark.org/46737",
         "uri:test:43737" .
 
-[] a :Role ;
-    :contributor ex:PersonExample_zZc ;
-    :roleName "editor" .
+[] a schema:Role ;
+    schema:contributor ex:PersonExample_zZc ;
+    schema:roleName "editor" .
 
 
 ```
@@ -3618,7 +3633,7 @@ You can find the full JSON-LD context here:
 
 ## Sources
 
-* [Sample source document](https://example.com/sources/1)
+* [schema.org](https://schema.org/Role)
 
 # For developers
 

@@ -3,7 +3,7 @@
 
 `ogc.bbr.test.properties.identifier` *v0.1*
 
-An example schema defining the set of properties for an identifier.
+schema.org properties for an identifier implemented as schema.org/PropertyValue.
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -86,6 +86,14 @@ properties:
     description: 'web-resolveable string for the identifier; host name part is location
       of a resolver that will return some representation for the given identifier
       value. E.g. https://doi.org/10.5066/F7VX0DMQ '
+allOf:
+- required:
+  - '@type'
+- anyOf:
+  - required:
+    - schema:value
+  - required:
+    - schema:url
 x-jsonld-extra-terms:
   type: '@type'
   id: '@id'
@@ -6733,7 +6741,7 @@ You can find the full JSON-LD context here:
 
 ## Sources
 
-* CDIF-JSONLD-schema
+* [schema.org](https://schema.org/PropertyValue)
 
 # For developers
 
