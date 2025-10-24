@@ -31,8 +31,8 @@ In **Markdown** format.
   "schema:name": "TestTerm",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
-    "schema:value": "PHlSkPJvxy",
-    "schema:url": "http://ogc.org/defs/PHlSkPJvxy"
+    "schema:value": "rt45347278",
+    "schema:url": "http://ogc.org/defs/rt45347278"
   },
   "schema:inDefinedTermSet": "http://ogc.org/defs",
   "schema:termCode": "TT"
@@ -58,8 +58,8 @@ In **Markdown** format.
   "schema:name": "TestTerm",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
-    "schema:value": "PHlSkPJvxy",
-    "schema:url": "http://ogc.org/defs/PHlSkPJvxy"
+    "schema:value": "rt45347278",
+    "schema:url": "http://ogc.org/defs/rt45347278"
   },
   "schema:inDefinedTermSet": "http://ogc.org/defs",
   "schema:termCode": "TT"
@@ -73,8 +73,8 @@ In **Markdown** format.
 
 ex:definedTerm_zZc a schema:DefinedTerm ;
     schema:identifier [ a schema:PropertyValue ;
-            schema:url "http://ogc.org/defs/PHlSkPJvxy" ;
-            schema:value "PHlSkPJvxy" ] ;
+            schema:url "http://ogc.org/defs/rt45347278" ;
+            schema:value "rt45347278" ] ;
     schema:inDefinedTermSet "http://ogc.org/defs" ;
     schema:name "TestTerm" ;
     schema:termCode "TT" .

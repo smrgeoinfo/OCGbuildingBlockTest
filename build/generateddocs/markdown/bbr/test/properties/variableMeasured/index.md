@@ -47,7 +47,7 @@ In **Markdown** format.
     ],
     "schema:measurementTechnique": "thermometer",
     "schema:unitText": "deg C",
-    "schema:unitCode": "",
+    "schema:unitCode": "C",
     "schema:minValue": 0,
     "schema:maxValue": 200
 }
@@ -90,7 +90,7 @@ In **Markdown** format.
   ],
   "schema:measurementTechnique": "thermometer",
   "schema:unitText": "deg C",
-  "schema:unitCode": "",
+  "schema:unitCode": "C",
   "schema:minValue": 0,
   "schema:maxValue": 200
 }
@@ -109,7 +109,7 @@ ex:variableMeasured_346 a schema:PropertyValue ;
     schema:minValue 0 ;
     schema:name "temperature" ;
     schema:propertyID ex:definedTerm_zZc ;
-    schema:unitCode "" ;
+    schema:unitCode "C" ;
     schema:unitText "deg C" .
 
 ex:definedTerm_zZc a schema:DefinedTerm ;
