@@ -23,7 +23,8 @@ In **Markdown** format.
 {
     "@context": {
         "schema": "https://schema.org/",
-        "ex": "https://example.org/"
+        "ex": "https://example.org/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
     "@type": "schema:PropertyValue",
     "schema:propertyID": "random identifier",
@@ -42,7 +43,8 @@ In **Markdown** format.
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/context.jsonld",
     {
       "schema": "https://schema.org/",
-      "ex": "https://example.org/"
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "@type": "schema:PropertyValue",
@@ -83,6 +85,7 @@ properties:
     description: the identifier string. E.g. 10.5066/F7VX0DMQ
   schema:url:
     type: string
+    format: uri
     description: 'web-resolveable string for the identifier; host name part is location
       of a resolver that will return some representation for the given identifier
       value. E.g. https://doi.org/10.5066/F7VX0DMQ '

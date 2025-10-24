@@ -22,6 +22,12 @@
     "ogc.bbr.test.entities.Responsibility": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/entities/Responsibility/rules.shacl"
     ],
+    "ogc.bbr.test.properties.agentInRole": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
+    ],
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
@@ -30,18 +36,12 @@
     ],
     "ogc.bbr.test.properties.identifier": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
-    ],
-    "ogc.bbr.test.properties.agentInRole": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
-    ],
-    "ogc.bbr.test.properties.person": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ]
   },
   "dependsOn": [
-    "ogc.bbr.test.properties.organization",
     "ogc.bbr.test.properties.agentInRole",
-    "ogc.bbr.test.properties.person"
+    "ogc.bbr.test.properties.person",
+    "ogc.bbr.test.properties.organization"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld",
   "schema": {
@@ -66,12 +66,12 @@
         {
           "language": "json",
           "ref": "examplePerson.json",
-          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\"\n  },\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\":\"schema:Organization\",\n    \"schema:name\":\"Test organization\" \n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\":\n      \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/Responsibility/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/Responsibility/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/entities/Responsibility/example_1_1.jsonld"
         },
         {

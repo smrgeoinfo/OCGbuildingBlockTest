@@ -25,7 +25,8 @@ In **Markdown** format.
 {
     "@context": {
         "schema": "https://schema.org/",
-        "ex": "https://example.org/"
+        "ex": "https://example.org/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
     "@type": "schema:Role",
     "schema:roleName": "owner",
@@ -56,7 +57,8 @@ In **Markdown** format.
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
     {
       "schema": "https://schema.org/",
-      "ex": "https://example.org/"
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "@type": "schema:Role",

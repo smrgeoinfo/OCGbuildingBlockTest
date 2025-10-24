@@ -23,15 +23,16 @@ In **Markdown** format.
 {
   "@context": {
     "schema": "https://schema.org/",
-    "ex": "https://example.org/"
+    "ex": "https://example.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
   "@id": "ex:PersonExample_zZc",
   "@type": "schema:Person",
   "schema:name": "Joe Test",
   "schema:alternateName": "Test, Joe",
   "schema:affiliation": {
-    "@type":"schema:Organization",
-    "schema:name":"Test organization" 
+    "@type": "schema:Organization",
+    "schema:name": "Test organization"
   },
   "schema:description": "Metadata specialist, based in Portland, Maine",
   "schema:identifier": {
@@ -61,7 +62,8 @@ In **Markdown** format.
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
     {
       "schema": "https://schema.org/",
-      "ex": "https://example.org/"
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "@id": "ex:PersonExample_zZc",
