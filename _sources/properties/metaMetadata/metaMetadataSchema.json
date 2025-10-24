@@ -16,7 +16,7 @@
             "properties": {
                 "@id": {
                     "type": "string",
-                    "description": "this should be the @id value found in the parent sample metadata record"
+                    "description": "this must be the @id value of the node containing the resource description metadata"
                 }
             }
         },
@@ -34,9 +34,9 @@
         },
         "schema:maintainer": {
             "description": "iSamples Registrant. identification of the agent that registered the sample, with contact information. Should include person name and affiliation, or position name and affiliation, or just organization name. e-mail address is preferred contact information.",
-            "oneOf": [
-                {"$ref": "#/$defs/person_type"},
-                {"$ref": "#/$defs/organization_type"}
+            "anyOf": [
+                {"$ref": "#/$defs/Person"},
+                {"$ref": "#/$defs/Organization"}
             ]
         },
         "schema:sdDatePublished": {
@@ -60,13 +60,22 @@
                 "schema:name": {"type": "string"},
                 "schema:url": {
                     "type": "string",
+                    "format":"uri",
                     "description": "locator to access a landing page for the collection or catalog"
                 },
                 "schema:identifier": {
-                    "$ref": "#/$defs/identifier_type",
+                    "$ref": "#/$defs/Identifier",
                     "description": "identifier for the collection or catalog; use identifier_type to provide information on identifier scheme and context for identifier"
                 }
             }
         }
-    }
+    },
+    "required":[
+        "schema:about", "dcterms:conformsTo", "@type", "@id"
+    ],
+    "$defs":{
+        "Identifier":{"$ref": "../identifier/identifierSchema.json"},
+        "Person":{"$ref": "../person/personSchema.json"},
+        "Organization":{"$ref": "../organization/organizationSchema.json"}
+    } 
 }
