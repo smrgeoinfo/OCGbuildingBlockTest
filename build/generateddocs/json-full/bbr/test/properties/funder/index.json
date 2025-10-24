@@ -1,0 +1,94 @@
+
+
+{
+  "itemIdentifier": "ogc.bbr.test.properties.funder",
+  "$schema": "metaschema.yaml",
+  "name": "Funding",
+  "abstract": "properties for acknowledging funding, CDIF profile of schema.org/funding and schema.org/MonetaryGrant.",
+  "status": "under-development",
+  "dateTimeAddition": "2025-10-24T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2025-10-24",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "schema.org",
+      "link": "https://schema.org/funding"
+    },
+    {
+      "title": "schema.org",
+      "link": "https://schema.org/MonetaryGranht"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "templates"
+  ],
+  "shaclShapes": {
+    "ogc.bbr.test.properties.funder": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/funder/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.organization": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.definedTerm": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ogc.bbr.test.properties.identifier",
+    "ogc.bbr.test.properties.person",
+    "ogc.bbr.test.properties.organization"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/funder/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/funder/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/funder/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/funder/",
+  "description": "## Funding properties\n\nDefines a set of properties for use funding that supported development or maintenance of a resource, for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.  Based on schema.org/MonetaryGrant",
+  "examples": [
+    {
+      "title": "Example Funder.",
+      "content": "Example Funder instance.\n\nIn **Markdown** format.",
+      "prefixes": {
+        "schema": "https://schema.org"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleFunder.json",
+          "code": "{\n    \"@context\": {\n        \"schema\": \"https://schema.org/\",\n        \"ex\": \"https://example.org/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@type\": \"schema:MonetaryGrant\",\n    \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:propertyID\": \"NSF award number\",\n        \"schema:value\": \"2227407\",\n        \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n    },\n    \"schema:name\": \"Big Bucks for Research\",\n    \"schema:funder\": {\"@id\": \"https://ror.org/021nxhr62\"}\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@type\": \"schema:MonetaryGrant\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"NSF award number\",\n    \"schema:value\": \"2227407\",\n    \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n  },\n  \"schema:name\": \"Big Bucks for Research\",\n  \"schema:funder\": {\n    \"@id\": \"https://ror.org/021nxhr62\"\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix schema: <https://schema.org/> .\n\n[] a schema:MonetaryGrant ;\n    schema:funder <https://ror.org/021nxhr62> ;\n    schema:identifier [ a schema:PropertyValue ;\n            schema:propertyID \"NSF award number\" ;\n            schema:url \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\" ;\n            schema:value \"2227407\" ] ;\n    schema:name \"Big Bucks for Research\" .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: Funding acknowledgement properties, profile of schema.org/MonetaryGrant\ntype: object\nproperties:\n  '@type':\n    type: string\n    default: schema:MonetaryGrant\n    const: schema:MonetaryGrant\n  schema:identifier:\n    $ref: '#/$defs/Identifier'\n    description: identifier for a particular grant\n  schema:name:\n    type: string\n    description: title of the grant\n  schema:funder:\n    anyOf:\n    - type: object\n      properties:\n        '@id':\n          type: string\n          description: a identifier for an agent defined in this metadata, or externally;\n            must be dereferenceable\n    - $ref: '#/$defs/Person'\n    - $ref: '#/$defs/Organization'\nallOf:\n- required:\n  - schema:funder\n- anyOf:\n  - required:\n    - schema:identifier\n  - required:\n    - schema:name\n$defs:\n  Person:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml\n  Organization:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml\n  Identifier:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/properties/funder"
+}
