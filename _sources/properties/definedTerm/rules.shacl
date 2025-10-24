@@ -14,17 +14,39 @@ cdifd:CDIFDefinedTermShape
 		[sh:property [
 			sh:path schema:identifier;
 			sh:minCount 1 ;
-			sh:nodeKind sh:IRIOrLiteral ;
-			# sh:severity sh:Info ;
+			sh:or ( [sh:nodeKind sh:IRIOrLiteral ]
+			 [ 
+			     sh:and (
+			      [sh:class schema:PropertyValue ]
+    			  [sh:or (
+                        [sh:property [
+                            sh:path schema:value ;
+                            sh:minCount 1 ;
+                            sh:datatype xsd:string ;
+                            sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+                        ] ]
+                        [sh:property [
+                            sh:path schema:url ;
+                            sh:minCount 1 ;
+                            sh:datatype xsd:string ;
+                            # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+                            sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+                            sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+                            ] 
+                        );
+                ]
+			)]);
 			sh:message "a defined term should have an identifier that is a resolvable URI" ; 
 			];
 		]
-		[sh:property cdifd:nameProperty ;]
+		[sh:property cdifd:termLabelProperty ;]
 	);
 	sh:message "A Term must have a name (label) or an identifier. It should have both!." 
 	.
 	
-cdifd:nameProperty
+
+	
+cdifd:termLabelProperty
 # names must be a literal, .
     a sh:PropertyShape ;
     sh:path schema:name;

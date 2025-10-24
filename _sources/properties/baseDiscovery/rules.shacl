@@ -1,0 +1,99 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <https://schema.org/>.
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+cdifd:CDIFDatasetRecommendedShape a sh:NodeShape ;
+# only apply to elements that are child of root dataset
+	sh:target [
+	  a sh:SPARQLTarget ;
+	  sh:prefixes (
+		[ sh:prefix "schema" ; sh:namespace "https://schema.org/" ]
+		[ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#" ]
+		[ sh:prefix "dcterms" ; sh:namespace "http://purl.org/dc/terms/" ]
+		[ sh:prefix "time" ; sh:namespace "http://www.w3.org/2006/time#"]
+		[ sh:prefix "rdf" ; sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"]
+		[ sh:prefix "spdx" ; sh:namespace "http://spdx.org/rdf/terms#" ]
+	  ) ;
+	  sh:select """
+		SELECT ?this WHERE {
+		  ?this a schema:Dataset .
+		  FILTER NOT EXISTS {
+			?parent a schema:Dataset .
+			?parent ?p ?this .
+			FILTER (?parent != ?this)
+		  }
+		}
+	  """ ;
+	] ;	
+    sh:property	
+		cdifd:resourceIdentifierProperty,
+		cdifd:nameProperty,
+		cdifd:rightsProperty
+.
+
+cdifd:resourceIdentifierProperty
+# identifier for the resource described by the graph node
+    a sh:PropertyShape ;
+    sh:path schema:identifier ;
+	sh:minCount 1 ;
+	sh:or ( 
+		[sh:datatype xsd:string ;]
+		[sh:class  schema:PropertyValue ;
+			sh:property 
+				[sh:path schema:propertyID ;
+				  sh:datatype xsd:string ;
+				  sh:severity sh:Warning ;
+				  sh:message "If specifying an identifier via the PropertyValue, the scheme (authority, domain) within which the identifier is assigned and unique must be identifed, either by name or preferably using a URI. See https://registry.identifiers.org/registry"
+				];
+			sh:or (
+			   [sh:property 
+				[sh:path schema:url ;
+				  sh:datatype xsd:string ;
+				  sh:message "if possible, provide a resolvable URI that will provide a representation of the identified resource."
+				]]
+			   [sh:property 
+				[sh:path schema:value ;
+				  sh:datatype xsd:string ;
+				  sh:message "The identifer string; include applicable prefix (e.g. doi:, ark:, http:, isbn:)"
+				]]
+				)
+			]
+		);
+    sh:message "An identifier for the documented resource must be provided" 
+    .
+
+cdifd:nameProperty
+# names must be a literal, .
+    a sh:PropertyShape ;
+    sh:path schema:name;
+	sh:minCount 1 ;
+    sh:datatype xsd:string ;
+	sh:minLength 5 ;
+    sh:message "a name for the person must be provided, and have a lenght of at least 5 characters." 
+    .
+    
+cdifd:rightsProperty	
+	a sh:PropertyShape ;
+	sh:path [sh:alternativePath ( schema:license  schema:conditionsOfAccess ) ];
+	sh:or (
+		[sh:nodeKind sh:IRI ]
+		[sh:datatype xsd:string ]
+		[sh:class schema:CreativeWork;
+		  sh:property 
+				[
+                    sh:path schema:url ;
+                    sh:minCount 1 ;
+                    sh:datatype xsd:string ;
+                    # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+                    sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+                    sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."
+                   ]
+         ] 
+	);
+	sh:minCount 1 ;
+	sh:message "To meet the requirements for FAIR data, information about licenses or other security, usage, or access limitations must be described" 
+	.
