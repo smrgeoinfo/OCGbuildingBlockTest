@@ -10,22 +10,29 @@
 cdifd:spatialExtentProperty
     a sh:NodeShape ;
     sh:targetClass schema:Place ;
-    sh:property [
-        sh:or (  
-           [sh:path schema:geo ;
-              sh:or (  [  sh:node cdifd:geoCoordinatesNode ]
-                       [  sh:node cdifd:geoShapeNode ] )  ;
-              sh:minCount 1 ;
-              sh:message "spatial location MUST be specified either with GeoCoordinates lat/long pairs (for point location), or with GeoShape  Line or Box." ;
-           ]
-           [sh:path schema:name;
-              sh:or (
-                [sh:datatype xsd:string;]
-                [sh:node cdifd:CDIFDefinedTermShape ] 
-                );
-              sh:minCount 1 
+    sh:or (
+        [
+            sh:property [
+                sh:path schema:geo ;
+                sh:or (
+                    [ sh:node cdifd:geoCoordinatesNode ]
+                    [ sh:node cdifd:geoShapeNode ]
+                ) ;
+                sh:minCount 1 ;
+                sh:message "Spatial location MUST be specified either with GeoCoordinates lat/long pairs or with GeoShape Line or Box." ;
             ]
-      )
+        ]
+        [
+            sh:property [
+                sh:path schema:name ;
+                sh:or (
+                    [ sh:datatype xsd:string ]
+                    [ sh:node cdifd:CDIFDefinedTermShape ]
+                ) ;
+                sh:minCount 1 ;
+            ]
+        ]
+    )
       ];
     sh:message "Recommended: provide a spatial coverage description if applicable using schema:Place, either a place name,  point location(s) (GeoCoordinates), or GeoShape (bounding box, line profile location, or polygon)." ;
     .
