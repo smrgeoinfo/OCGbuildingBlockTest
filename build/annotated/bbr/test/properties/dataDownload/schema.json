@@ -3,6 +3,9 @@
   "description": "schema to document file-based access to a resoruce via URL, based on schema.org/DataDownload",
   "type": "object",
   "properties": {
+    "@id": {
+      "type": "string"
+    },
     "@type": {
       "type": "array",
       "description": "implement as array because extensions might need to add additional types",
@@ -44,6 +47,14 @@
       "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
       "items": {
         "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              }
+            }
+          },
           {
             "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.json"
           },

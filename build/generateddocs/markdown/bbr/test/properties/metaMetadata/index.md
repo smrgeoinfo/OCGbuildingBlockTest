@@ -103,7 +103,7 @@ properties:
     properties:
       '@id':
         type: string
-        description: this must be the @id value of the node containing the resource
+        description: this must be the '@id' value of the node containing the resource
           description metadata
   dcterms:conformsTo:
     type: array

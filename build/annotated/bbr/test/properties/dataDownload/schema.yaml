@@ -3,6 +3,8 @@ description: schema to document file-based access to a resoruce via URL, based o
   schema.org/DataDownload
 type: object
 properties:
+  '@id':
+    type: string
   '@type':
     type: array
     description: implement as array because extensions might need to add additional
@@ -37,6 +39,10 @@ properties:
       Use this property if there are multiple distributions from different providers
     items:
       anyOf:
+      - type: object
+        properties:
+          '@id':
+            type: string
       - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml
       - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml
 required:

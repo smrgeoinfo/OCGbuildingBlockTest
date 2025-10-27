@@ -1,0 +1,192 @@
+
+
+{
+  "itemIdentifier": "ogc.bbr.test.properties.spatialExtent",
+  "$schema": "metaschema.yaml",
+  "name": "Spatial Extent",
+  "abstract": "Schema defining properties for documenting the spatial extent of a resource; based on science on schema.org.",
+  "status": "under-development",
+  "dateTimeAddition": "2025-10-21T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2025-10-27",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "ESIP Science on Schema.org",
+      "link": "https://github.com/ESIPFed/science-on-schema.org/blob/main/guides/Dataset.md#spatial-coverage"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "templates"
+  ],
+  "shaclShapes": {
+    "ogc.bbr.test.properties.spatialExtent": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/spatialExtent/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.definedTerm": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "ogc.bbr.test.properties.definedTerm"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/spatialExtent/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/spatialExtent/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/spatialExtent/",
+  "rdfData": [],
+  "validationPassed": false,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/test/properties/spatialExtent/",
+  "description": "## Person properties\n\nDefines a set of properties for use describing the spatial extent of a resource for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.  Based on [ESIP science on schema.org recommendations](https://github.com/ESIPFed/science-on-schema.org/blob/main/guides/Dataset.md#spatial-coverage), with [option from Ocean Info Hub](https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt).",
+  "examples": [
+    {
+      "title": "Example spatial extent by point.",
+      "content": "Example point location spatial extent instance.",
+      "prefixes": {
+        "schema": "https://schema.org",
+        "geosparql": "http://www.opengis.net/ont/geosparql#,",
+        "sf": "http://www.opengis.net/ont/sf#"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleSpatialExtentPoint.json",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n  },\n  \"@id\": \"ex:SpatialExtentPoint_mdfd8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoCoordinates\",\n    \"schema:latitude\": 39.3280,\n    \"schema:longitude\": 120.1633\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#,\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n    }\n  ],\n  \"@id\": \"ex:SpatialExtentPoint_mdfd8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoCoordinates\",\n    \"schema:latitude\": 39.328,\n    \"schema:longitude\": 120.1633\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\nex:SpatialExtentPoint_mdfd8 a schema:Place ;\n    schema:geo [ a schema:GeoCoordinates ;\n            schema:latitude 3.9328e+01 ;\n            schema:longitude 1.201633e+02 ] .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_1_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Example spatial extent by place names.",
+      "content": "Example place names spatial extent instance.",
+      "prefixes": {
+        "schema": "https://schema.org",
+        "geosparql": "http://www.opengis.net/ont/geosparql#,",
+        "sf": "http://www.opengis.net/ont/sf#"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleSpatialExtentPlaceName.json",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n  },\n  \"@id\": \"ex:SpatialExtentPoint_mdfd8\",\n  \"@type\": \"schema:Place\",\n  \"schema:name\": [\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Harquahala Mountains\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\"\n    },\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Socorro Peak\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\"\n    },\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Hidden Treasure Mine\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://www.mindat.org/loc-33505.html\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.mindat.org/\"\n    }\n  ]\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_2_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#,\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n    }\n  ],\n  \"@id\": \"ex:SpatialExtentPoint_mdfd8\",\n  \"@type\": \"schema:Place\",\n  \"schema:name\": [\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Harquahala Mountains\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\"\n    },\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Socorro Peak\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\"\n    },\n    {\n      \"@type\": \"schema:DefinedTerm\",\n      \"schema:name\": \"Hidden Treasure Mine\",\n      \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:url\": \"https://www.mindat.org/loc-33505.html\"\n      },\n      \"schema:inDefinedTermSet\": \"https://www.mindat.org/\"\n    }\n  ]\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_2_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:SpatialExtentPoint_mdfd8 a schema:Place ;\n    schema:name [ a schema:DefinedTerm ;\n            schema:identifier [ a schema:PropertyValue ;\n                    schema:url \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573\" ] ;\n            schema:inDefinedTermSet \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\" ;\n            schema:name \"Harquahala Mountains\" ],\n        [ a schema:DefinedTerm ;\n            schema:identifier [ a schema:PropertyValue ;\n                    schema:url \"https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520\" ] ;\n            schema:inDefinedTermSet \"https://www.usgs.gov/us-board-on-geographic-names/domestic-names\" ;\n            schema:name \"Socorro Peak\" ],\n        [ a schema:DefinedTerm ;\n            schema:identifier [ a schema:PropertyValue ;\n                    schema:url \"https://www.mindat.org/loc-33505.html\" ] ;\n            schema:inDefinedTermSet \"https://www.mindat.org/\" ;\n            schema:name \"Hidden Treasure Mine\" ] .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_2_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Example spatial extent by line.",
+      "content": "Example curvilinear trace spatial extent instance.",
+      "prefixes": {
+        "schema": "https://schema.org",
+        "geosparql": "http://www.opengis.net/ont/geosparql#,",
+        "sf": "http://www.opengis.net/ont/sf#"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleSpatialExtentLine.json",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n  },\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoShape\",\n    \"schema:line\": \"39.33 120.77 40.44 123.96 41.00 121.34\"\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_3_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#,\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n    }\n  ],\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoShape\",\n    \"schema:line\": \"39.33 120.77 40.44 123.96 41.00 121.34\"\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_3_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:SpatialExtentBox_my8 a schema:Place ;\n    schema:geo [ a schema:GeoShape ;\n            schema:line \"39.33 120.77 40.44 123.96 41.00 121.34\" ] .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_3_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Example spatial extent by bounding box.",
+      "content": "Example bounding box spatial extent instance.",
+      "prefixes": {
+        "schema": "https://schema.org",
+        "geosparql": "http://www.opengis.net/ont/geosparql#,",
+        "sf": "http://www.opengis.net/ont/sf#"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleSpatialExtentBox.json",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n  },\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoShape\",\n    \"schema:box\": \"39.3280 120.1633 40.445 123.7878\"\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_4_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#,\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#\"\n    }\n  ],\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"schema:geo\": {\n    \"@type\": \"schema:GeoShape\",\n    \"schema:box\": \"39.3280 120.1633 40.445 123.7878\"\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_4_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:SpatialExtentBox_my8 a schema:Place ;\n    schema:geo [ a schema:GeoShape ;\n            schema:box \"39.3280 120.1633 40.445 123.7878\" ] .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_4_1.ttl"
+        }
+      ]
+    },
+    {
+      "title": "Example spatial extent by with WKT geometry.",
+      "content": "Example WKT spatial extent instance.",
+      "prefixes": {
+        "schema": "https://schema.org",
+        "geosparql": "http://www.opengis.net/ont/geosparql#,",
+        "sf": "http://www.opengis.net/ont/sf#"
+      },
+      "snippets": [
+        {
+          "language": "json",
+          "ref": "exampleSpatialExtentWKT.json",
+          "code": "{\n  \"@context\": {\n    \"schema\": \"https://schema.org/\",\n    \"ex\": \"https://example.org/\",\n    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n    \"geosparql\": \"http://www.opengis.net/ont/geosparql#\",\n    \"sf\": \"http://www.opengis.net/ont/sf#\"\n  },\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"geosparql:hasGeometry\": {\n    \"@type\": \"sf:Point\",\n    \"geosparql:asWKT\": {\n      \"@type\": \"geosparql:wktLiteral\",\n      \"@value\": \"POINT(-76 -18)\"\n    },\n    \"geosparql:crs\": {\"@id\": \"CRS84\"}\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_5_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#,\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n      \"geosparql\": \"http://www.opengis.net/ont/geosparql#\",\n      \"sf\": \"http://www.opengis.net/ont/sf#\"\n    }\n  ],\n  \"@id\": \"ex:SpatialExtentBox_my8\",\n  \"@type\": \"schema:Place\",\n  \"geosparql:hasGeometry\": {\n    \"@type\": \"sf:Point\",\n    \"geosparql:asWKT\": {\n      \"@type\": \"geosparql:wktLiteral\",\n      \"@value\": \"POINT(-76 -18)\"\n    },\n    \"geosparql:crs\": {\n      \"@id\": \"CRS84\"\n    }\n  }\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_5_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .\n@prefix schema: <https://schema.org/> .\n@prefix sf: <http://www.opengis.net/ont/sf#> .\n\nex:SpatialExtentBox_my8 a schema:Place ;\n    geosparql:hasGeometry [ a sf:Point ;\n            geosparql:asWKT \"POINT(-76 -18)\"^^geosparql:wktLiteral ;\n            geosparql:crs <file:///github/workspace/CRS84> ] .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/spatialExtent/example_5_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: Spatial Extent description for CDIF discovery profile.  Note required\n  prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#)\ntype: object\nproperties:\n  '@type':\n    type: string\n    const: schema:Place\n    default: schema:Place\n  schema:name:\n    description: multiple place names or DefinedTerms that have a place name and URI\n      for the location\n    type: array\n    items:\n      anyOf:\n      - type: string\n      - $ref: '#/$defs/DefinedTerm'\n  schema:geo:\n    description: Either a bounding box or a point location.\n    anyOf:\n    - type: object\n      description: A point location. Point locations are recommended for data that\n        is associated with specific sample locations, particularly if these are widely\n        spaced such that an enclosing bounding box would be a misleading representation\n        of the spatial location. Be aware that some client applications might only\n        index or display bounding box extents or a single point location.\n      properties:\n        '@type':\n          type: string\n          const: schema:GeoCoordinates\n          default: schema:GeoCoordinates\n        schema:latitude:\n          type: number\n        schema:longitude:\n          type: number\n      required:\n      - '@type'\n      - schema:latitude\n      - schema:longitude\n    - type: object\n      description: A schema:GeoShape bounding box. The geometry is described with\n        a set of latitude/longitude pairs (in that order).The documentation for schema:GeoShape\n        states 'Either whitespace or commas can be used to separate latitude and longitude;\n        whitespace should be used when writing a list of several such points.'\n      properties:\n        '@type':\n          type: string\n          const: schema:GeoShape\n          default: schema:GeoShape\n        schema:box:\n          type: string\n          description: A GeoShape box defines an area on the surface of the earth\n            defined by point locations of the southwest corner and northeast corner\n            of the rectangle in latitude-longitude coordinates. A space should be\n            used to separate the latitude and longitude values. The two corner coordinate\n            points are separated by a space. 'East longitude' means positive longitude\n            values are east of the prime (Greenwich) meridian.\n      required:\n      - '@type'\n      - schema:box\n    - type: object\n      description: A schema:GeoShape curvilinear trace, for resource related to a\n        linear trace like a ship track or airplane flight line\n      properties:\n        '@type':\n          type: string\n          const: schema:GeoShape\n          default: schema:GeoShape\n        schema:line:\n          type: string\n          description: 'A GeoShape box defines a curvilinear geometry as a string\n            of latitude-longitude coordinates. A space should be used to separate\n            the latitude and longitude values. The coordinate point pairs are also\n            separated by a space. ''East longitude'' means positive longitude values\n            are east of the prime (Greenwich) meridian. e.g. ''39.33 120.77 40.44\n            123.96 41.00 121.34'' '\n      required:\n      - '@type'\n      - schema:line\n  geosparql:hasGeometry:\n    type: object\n    description: Optional geographic extent using wkt geometry, see Ocean InfoHub\n      (https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt).\n      Other geometry schemes might be specified in a specific domain profile, e.g.\n      for atmospheric, subsurface data, or local coordinate systems. NOTE that the\n      location specified here should be the same as the schema.org point or contained\n      within the specified bounding box.\n    properties:\n      '@type':\n        type: string\n        description: 'MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature\n          geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl'\n      geosparql:asWKT:\n        type: object\n        properties:\n          '@type':\n            type: string\n            const: geosparql:wktLiteral\n          '@value':\n            type: string\n            description: a WKT geometry description string, e.g. 'POINT(-76 -18)'\n      geosparql:crs:\n        type: object\n        properties:\n          '@id':\n            type: string\n            description: identifier string for coordinate reference system, e.g.,\n              'CRS84'\n$defs:\n  DefinedTerm:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.yaml\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/properties/spatialExtent"
+}

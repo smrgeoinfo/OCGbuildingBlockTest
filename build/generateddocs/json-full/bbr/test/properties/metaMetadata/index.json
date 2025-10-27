@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-24",
+  "dateOfLastChange": "2025-10-27",
   "sources": [
     {
       "title": "CDIF book",
@@ -29,20 +29,20 @@
     "ogc.bbr.test.properties.person": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ],
-    "ogc.bbr.test.properties.identifier": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
-    ],
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
     "ogc.bbr.test.properties.definedTerm": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
     ]
   },
   "dependsOn": [
     "ogc.bbr.test.properties.person",
-    "ogc.bbr.test.properties.identifier",
-    "ogc.bbr.test.properties.organization"
+    "ogc.bbr.test.properties.organization",
+    "ogc.bbr.test.properties.identifier"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/context.jsonld",
   "schema": {
@@ -72,7 +72,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntype: object\ndescription: see https://github.com/Cross-Domain-Interoperability-Framework/Discovery/issues/13\n  for discussion on how to make assertion about the sample registration and metadata\n  distinct from statements about the physical object\nproperties:\n  '@type':\n    type: string\n    const: schema:Dataset\n  '@id':\n    type: string\n    description: identifier for the metadata record\n  schema:about:\n    type: object\n    properties:\n      '@id':\n        type: string\n        description: this must be the @id value of the node containing the resource\n          description metadata\n  dcterms:conformsTo:\n    type: array\n    items:\n      type: object\n      properties:\n        $id:\n          type: string\n          description: uri for specifications that this metadata record conforms to.\n            Minimimally should specify uri for CDIF discovery profile\n  schema:maintainer:\n    description: iSamples Registrant. identification of the agent that registered\n      the sample, with contact information. Should include person name and affiliation,\n      or position name and affiliation, or just organization name. e-mail address\n      is preferred contact information.\n    anyOf:\n    - $ref: '#/$defs/Person'\n    - $ref: '#/$defs/Organization'\n  schema:sdDatePublished:\n    description: date of most recent update to the metadata content, extends iSamples\n      schema\n    type: string\n  schema:includedInDataCatalog:\n    type: object\n    description: identify the data collection or repository that contains the described\n      dataset. The value is expected to be a schema:DataCatalog\n    properties:\n      '@id':\n        type: string\n        description: identifier for the containing catalog or repository; example\n          data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog\n          puts identifier here\n      '@type':\n        type: string\n        default: schema:DataCatalog\n        const: schema:DataCatalog\n      schema:name:\n        type: string\n      schema:url:\n        type: string\n        format: uri\n        description: locator to access a landing page for the collection or catalog\n      schema:identifier:\n        $ref: '#/$defs/Identifier'\n        description: identifier for the collection or catalog; use identifier_type\n          to provide information on identifier scheme and context for identifier\nrequired:\n- schema:about\n- dcterms:conformsTo\n- '@id'\n$defs:\n  Identifier:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\n  Person:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml\n  Organization:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml\nx-jsonld-prefixes:\n  schema: https://schema.org/\n  ex: https://example.org/\n  xsd: http://www.w3.org/2001/XMLSchema#\n  dcterms: http://purl.org/dc/terms/\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntype: object\ndescription: see https://github.com/Cross-Domain-Interoperability-Framework/Discovery/issues/13\n  for discussion on how to make assertion about the sample registration and metadata\n  distinct from statements about the physical object\nproperties:\n  '@type':\n    type: string\n    const: schema:Dataset\n  '@id':\n    type: string\n    description: identifier for the metadata record\n  schema:about:\n    type: object\n    properties:\n      '@id':\n        type: string\n        description: this must be the '@id' value of the node containing the resource\n          description metadata\n  dcterms:conformsTo:\n    type: array\n    items:\n      type: object\n      properties:\n        $id:\n          type: string\n          description: uri for specifications that this metadata record conforms to.\n            Minimimally should specify uri for CDIF discovery profile\n  schema:maintainer:\n    description: iSamples Registrant. identification of the agent that registered\n      the sample, with contact information. Should include person name and affiliation,\n      or position name and affiliation, or just organization name. e-mail address\n      is preferred contact information.\n    anyOf:\n    - $ref: '#/$defs/Person'\n    - $ref: '#/$defs/Organization'\n  schema:sdDatePublished:\n    description: date of most recent update to the metadata content, extends iSamples\n      schema\n    type: string\n  schema:includedInDataCatalog:\n    type: object\n    description: identify the data collection or repository that contains the described\n      dataset. The value is expected to be a schema:DataCatalog\n    properties:\n      '@id':\n        type: string\n        description: identifier for the containing catalog or repository; example\n          data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog\n          puts identifier here\n      '@type':\n        type: string\n        default: schema:DataCatalog\n        const: schema:DataCatalog\n      schema:name:\n        type: string\n      schema:url:\n        type: string\n        format: uri\n        description: locator to access a landing page for the collection or catalog\n      schema:identifier:\n        $ref: '#/$defs/Identifier'\n        description: identifier for the collection or catalog; use identifier_type\n          to provide information on identifier scheme and context for identifier\nrequired:\n- schema:about\n- dcterms:conformsTo\n- '@id'\n$defs:\n  Identifier:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\n  Person:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/schema.yaml\n  Organization:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml\nx-jsonld-prefixes:\n  schema: https://schema.org/\n  ex: https://example.org/\n  xsd: http://www.w3.org/2001/XMLSchema#\n  dcterms: http://purl.org/dc/terms/\n",
   "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
   "gitPath": "_sources/properties/metaMetadata"
 }
