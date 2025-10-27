@@ -10,45 +10,46 @@ cdifd:fundingShape
     a sh:NodeShape ;
     sh:targetClass schema:MonetaryGrant;
        sh:or (
-		[sh:property [
-			sh:path schema:identifier;
-			sh:minCount 1 ;
-			sh:or ( [sh:nodeKind sh:IRIOrLiteral ]
-			 [ 
-			     sh:and (
-			      [sh:class schema:PropertyValue ]
-    			  [sh:or (
-                        [sh:property [
-                            sh:path schema:value ;
-                            sh:minCount 1 ;
-                            sh:datatype xsd:string ;
-                            sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
-                        ] ]
-                        [sh:property [
-                            sh:path schema:url ;
-                            sh:minCount 1 ;
-                            sh:datatype xsd:string ;
-                            # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
-                            sh:pattern "^https?:\\/\\/[^\\s]+$" ;
-                            sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
-                            ] 
-                        );
-                ]
-			)]);
-			sh:message "a monetary Grant should have an identifier that is a resolvable URI" ; 
-			];
-		]
-		[sh:property cdifd:grantNameProperty ;]
-	);
-	sh:property [
-		sh:path schema:funder;
-		sh:or(  [sh:nodeKind sh:IRI]
-		        [sh:class  schema:Person;]
-				[sh:class schema:Organization; ]
-					);
-		sh:minCount 1;
-		];
-	sh:message "Funding for creation or maintenance of the resource can be acknowledged using schema:MonetaryGrant with a either a name or an identifier, and a Person or Organization identified as the funding source.";
+  		[sh:property [
+  			sh:path schema:identifier;
+  			sh:minCount 1 ;
+  			sh:or (
+  			 [sh:nodeKind sh:IRIOrLiteral ]
+  			 [ 
+  			     sh:and (
+  			      [sh:class schema:PropertyValue ]
+      			  [sh:or (
+                          [sh:property [
+                              sh:path schema:value ;
+                              sh:minCount 1 ;
+                              sh:datatype xsd:string ;
+                              sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+                          ] ]
+                          [sh:property [
+                              sh:path schema:url ;
+                              sh:minCount 1 ;
+                              sh:datatype xsd:string ;
+                              # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+                              sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+                              sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+                              ] 
+                          );
+                  ]
+  			)]);
+  			sh:message "a monetary Grant should have an identifier that is a resolvable URI" ; 
+  			];
+  		]
+  		[sh:property cdifd:grantNameProperty ;]
+	    );
+   	sh:property [
+   		sh:path schema:funder;
+   		sh:or(  [sh:nodeKind sh:IRI]
+   		        [sh:class schema:Person;]
+   				[sh:class schema:Organization; ]
+   					);
+   		sh:minCount 1;
+   		];
+   	sh:message "Funding for creation or maintenance of the resource can be acknowledged using schema:MonetaryGrant with a either a name or an identifier, and a Person or Organization identified as the funding source.";
 	.
 
 cdifd:grantNameProperty

@@ -10,7 +10,7 @@
             "minItems": 1
         },
         "schema:name": {"type": "string"},
-        "schema:contenturl": {
+        "schema:contentUrl": {
             "type": "string",
             "format": "uri"
         },
@@ -31,8 +31,17 @@
             "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
             "items": {
                 "anyOf": [
-                    {"$ref": "../person/personSchema.json"},
-                    {"$ref": "../organization/organizationSchema.json"}
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {
+                                "type": "string",
+                                "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
+                            }
+                        }
+                    },
+                    {"$ref": "#/$defs/Person"},
+                    {"$ref": "#/$defs/Organization"}
                 ]
             }
         }
@@ -40,5 +49,9 @@
     "required": [
         "schema:contentUrl",
         "@type"
-    ]
+    ],
+    "$defs": {
+        "Person": {"$ref": "../person/personSchema.json"},
+        "Organization": {"$ref": "../organization/organizationSchema.json"}
+    }
 }
