@@ -20,7 +20,7 @@ Example point location spatial extent instance.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -46,7 +46,7 @@ Example point location spatial extent instance.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -65,13 +65,13 @@ Example point location spatial extent instance.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:SpatialExtentPoint_mdfd8 a schema:Place ;
-    schema:geo [ a schema:GeoCoordinates ;
-            schema:latitude 3.9328e+01 ;
-            schema:longitude 1.201633e+02 ] .
+ex:SpatialExtentPoint_mdfd8 a schema1:Place ;
+    schema1:geo [ a schema1:GeoCoordinates ;
+            schema1:latitude 3.9328e+01 ;
+            schema1:longitude 1.201633e+02 ] .
 
 
 ```
@@ -83,7 +83,7 @@ Example place names spatial extent instance.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -133,7 +133,7 @@ Example place names spatial extent instance.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -176,24 +176,24 @@ Example place names spatial extent instance.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:SpatialExtentPoint_mdfd8 a schema:Place ;
-    schema:name [ a schema:DefinedTerm ;
-            schema:identifier [ a schema:PropertyValue ;
-                    schema:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573" ] ;
-            schema:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
-            schema:name "Harquahala Mountains" ],
-        [ a schema:DefinedTerm ;
-            schema:identifier [ a schema:PropertyValue ;
-                    schema:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520" ] ;
-            schema:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
-            schema:name "Socorro Peak" ],
-        [ a schema:DefinedTerm ;
-            schema:identifier [ a schema:PropertyValue ;
-                    schema:url "https://www.mindat.org/loc-33505.html" ] ;
-            schema:inDefinedTermSet "https://www.mindat.org/" ;
-            schema:name "Hidden Treasure Mine" ] .
+ex:SpatialExtentPoint_mdfd8 a schema1:Place ;
+    schema1:name [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:url "https://www.mindat.org/loc-33505.html" ] ;
+            schema1:inDefinedTermSet "https://www.mindat.org/" ;
+            schema1:name "Hidden Treasure Mine" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573" ] ;
+            schema1:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
+            schema1:name "Harquahala Mountains" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520" ] ;
+            schema1:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
+            schema1:name "Socorro Peak" ] .
 
 
 ```
@@ -205,7 +205,7 @@ Example curvilinear trace spatial extent instance.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -230,7 +230,7 @@ Example curvilinear trace spatial extent instance.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -248,11 +248,11 @@ Example curvilinear trace spatial extent instance.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:SpatialExtentBox_my8 a schema:Place ;
-    schema:geo [ a schema:GeoShape ;
-            schema:line "39.33 120.77 40.44 123.96 41.00 121.34" ] .
+ex:SpatialExtentBox_my8 a schema1:Place ;
+    schema1:geo [ a schema1:GeoShape ;
+            schema1:line "39.33 120.77 40.44 123.96 41.00 121.34" ] .
 
 
 ```
@@ -264,7 +264,7 @@ Example bounding box spatial extent instance.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -289,7 +289,7 @@ Example bounding box spatial extent instance.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "geosparql": "http://www.opengis.net/ont/geosparql#"
@@ -307,85 +307,11 @@ Example bounding box spatial extent instance.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:SpatialExtentBox_my8 a schema:Place ;
-    schema:geo [ a schema:GeoShape ;
-            schema:box "39.3280 120.1633 40.445 123.7878" ] .
-
-
-```
-
-
-### Example spatial extent by with WKT geometry.
-Example WKT spatial extent instance.
-#### json
-```json
-{
-  "@context": {
-    "schema": "https://schema.org/",
-    "ex": "https://example.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "sf": "http://www.opengis.net/ont/sf#"
-  },
-  "@id": "ex:SpatialExtentBox_my8",
-  "@type": "schema:Place",
-  "geosparql:hasGeometry": {
-    "@type": "sf:Point",
-    "geosparql:asWKT": {
-      "@type": "geosparql:wktLiteral",
-      "@value": "POINT(-76 -18)"
-    },
-    "geosparql:crs": {"@id": "CRS84"}
-  }
-}
-```
-
-#### jsonld
-```jsonld
-{
-  "@context": [
-    {
-      "schema": "https://schema.org",
-      "geosparql": "http://www.opengis.net/ont/geosparql#,",
-      "sf": "http://www.opengis.net/ont/sf#"
-    },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/context.jsonld",
-    {
-      "schema": "https://schema.org/",
-      "ex": "https://example.org/",
-      "xsd": "http://www.w3.org/2001/XMLSchema#",
-      "geosparql": "http://www.opengis.net/ont/geosparql#",
-      "sf": "http://www.opengis.net/ont/sf#"
-    }
-  ],
-  "@id": "ex:SpatialExtentBox_my8",
-  "@type": "schema:Place",
-  "geosparql:hasGeometry": {
-    "@type": "sf:Point",
-    "geosparql:asWKT": {
-      "@type": "geosparql:wktLiteral",
-      "@value": "POINT(-76 -18)"
-    },
-    "geosparql:crs": {
-      "@id": "CRS84"
-    }
-  }
-}
-```
-
-#### ttl
-```ttl
-@prefix ex: <https://example.org/> .
-@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix schema: <https://schema.org/> .
-@prefix sf: <http://www.opengis.net/ont/sf#> .
-
-ex:SpatialExtentBox_my8 a schema:Place ;
-    geosparql:hasGeometry [ a sf:Point ;
-            geosparql:asWKT "POINT(-76 -18)"^^geosparql:wktLiteral ;
-            geosparql:crs <file:///github/workspace/CRS84> ] .
+ex:SpatialExtentBox_my8 a schema1:Place ;
+    schema1:geo [ a schema1:GeoShape ;
+            schema1:box "39.3280 120.1633 40.445 123.7878" ] .
 
 
 ```

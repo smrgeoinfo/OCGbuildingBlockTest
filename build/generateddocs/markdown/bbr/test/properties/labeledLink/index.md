@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -43,7 +43,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/labeledLink/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -59,12 +59,12 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:LabeledLinkExample_zZc a schema:CreativeWork ;
-    schema:description "URL to get the related resource" ;
-    schema:name "Some relsted resource" ;
-    schema:url "https://example.org/relatedresoruce/2342747" .
+ex:LabeledLinkExample_zZc a schema1:CreativeWork ;
+    schema1:description "URL to get the related resource" ;
+    schema1:name "Some relsted resource" ;
+    schema1:url "https://example.org/relatedresoruce/2342747" .
 
 
 ```

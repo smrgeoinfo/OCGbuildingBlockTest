@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -62,7 +62,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/variableMeasured/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -99,27 +99,27 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:variableMeasured_346 a schema:PropertyValue ;
-    schema:description "missing" ;
-    schema:maxValue 200 ;
-    schema:measurementTechnique "thermometer" ;
-    schema:minValue 0 ;
-    schema:name "temperature" ;
-    schema:propertyID ex:definedTerm_zZc ;
-    schema:unitCode "C" ;
-    schema:unitText "deg C" .
+ex:variableMeasured_346 a schema1:PropertyValue ;
+    schema1:description "missing" ;
+    schema1:maxValue 200 ;
+    schema1:measurementTechnique "thermometer" ;
+    schema1:minValue 0 ;
+    schema1:name "temperature" ;
+    schema1:propertyID ex:definedTerm_zZc ;
+    schema1:unitCode "C" ;
+    schema1:unitText "deg C" .
 
-ex:definedTerm_zZc a schema:DefinedTerm ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "http URI" ;
-            schema:url "http://ogc.org/defs/PHlSkPJvxy" ;
-            schema:value "PHlSkPJvxy" ] ;
-    schema:inDefinedTermSet "http://ogc.org/defs" ;
-    schema:name "Temperature" ;
-    schema:termCode "T" .
+ex:definedTerm_zZc a schema1:DefinedTerm ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "http URI" ;
+            schema1:url "http://ogc.org/defs/PHlSkPJvxy" ;
+            schema1:value "PHlSkPJvxy" ] ;
+    schema1:inDefinedTermSet "http://ogc.org/defs" ;
+    schema1:name "Temperature" ;
+    schema1:termCode "T" .
 
 
 ```
@@ -218,7 +218,7 @@ allOf:
   - required:
     - schema:description
 x-jsonld-extra-terms:
-  schema: https://schema.org
+  schema: http://schema.org
 
 ```
 

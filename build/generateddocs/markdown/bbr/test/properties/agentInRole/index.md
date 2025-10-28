@@ -24,7 +24,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -56,7 +56,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -85,21 +85,21 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:exampleOrg_fW a schema:Organization ;
-    schema:alternateName "UAz" ;
-    schema:description "University in Tucson, Arizona" ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://registry.identifiers.org/registry/ror" ;
-            schema:url "https://ror.org/03m2x1q45" ;
-            schema:value "03m2x1q45" ] ;
-    schema:name "University of Arizona" ;
-    schema:sameAs "Wildcats" .
+ex:exampleOrg_fW a schema1:Organization ;
+    schema1:alternateName "UAz" ;
+    schema1:description "University in Tucson, Arizona" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema1:url "https://ror.org/03m2x1q45" ;
+            schema1:value "03m2x1q45" ] ;
+    schema1:name "University of Arizona" ;
+    schema1:sameAs "Wildcats" .
 
-[] a schema:Role ;
-    schema:contributor ex:exampleOrg_fW ;
-    schema:roleName "owner" .
+[] a schema1:Role ;
+    schema1:contributor ex:exampleOrg_fW ;
+    schema1:roleName "owner" .
 
 
 ```
@@ -113,7 +113,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/"
     },
     "@type": "schema:Role",
@@ -155,7 +155,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/"
     }
   ],
@@ -192,26 +192,26 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:PersonExample_zZc a schema:Person ;
-    schema:affiliation [ a schema:Organization ;
-            schema:name "The Big Manufacturing Co." ] ;
-    schema:alternateName "Test, J. B." ;
-    schema:contactPoint [ a schema:ContactPoint ;
-            schema:email "joe@bmanuco.org" ] ;
-    schema:description "Metadata specialist, based in Portland, Maine" ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://orcid.org" ;
-            schema:url "https://orcid.org/iY" ;
-            schema:value "iY" ] ;
-    schema:name "Joe B. Test" ;
-    schema:sameAs "https://ark.org/46737",
+ex:PersonExample_zZc a schema1:Person ;
+    schema1:affiliation [ a schema1:Organization ;
+            schema1:name "The Big Manufacturing Co." ] ;
+    schema1:alternateName "Test, J. B." ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "joe@bmanuco.org" ] ;
+    schema1:description "Metadata specialist, based in Portland, Maine" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://orcid.org" ;
+            schema1:url "https://orcid.org/iY" ;
+            schema1:value "iY" ] ;
+    schema1:name "Joe B. Test" ;
+    schema1:sameAs "https://ark.org/46737",
         "uri:test:43737" .
 
-[] a schema:Role ;
-    schema:contributor ex:PersonExample_zZc ;
-    schema:roleName "editor" .
+[] a schema1:Role ;
+    schema1:contributor ex:PersonExample_zZc ;
+    schema1:roleName "editor" .
 
 
 ```

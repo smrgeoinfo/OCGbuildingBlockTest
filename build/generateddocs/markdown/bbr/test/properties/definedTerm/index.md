@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
@@ -48,7 +48,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -69,15 +69,15 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:definedTerm_zZc a schema:DefinedTerm ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:url "http://ogc.org/defs/rt45347278" ;
-            schema:value "rt45347278" ] ;
-    schema:inDefinedTermSet "http://ogc.org/defs" ;
-    schema:name "TestTerm" ;
-    schema:termCode "TT" .
+ex:definedTerm_zZc a schema1:DefinedTerm ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:url "http://ogc.org/defs/rt45347278" ;
+            schema1:value "rt45347278" ] ;
+    schema1:inDefinedTermSet "http://ogc.org/defs" ;
+    schema1:name "TestTerm" ;
+    schema1:termCode "TT" .
 
 
 ```

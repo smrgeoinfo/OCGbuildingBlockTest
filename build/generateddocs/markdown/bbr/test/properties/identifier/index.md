@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -42,7 +42,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -56,12 +56,12 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-[] a schema:PropertyValue ;
-    schema:propertyID "random identifier" ;
-    schema:url "https://identifier.org/uri:test:wwyPcWQqoT" ;
-    schema:value "wwyPcWQqoT" .
+[] a schema1:PropertyValue ;
+    schema1:propertyID "random identifier" ;
+    schema1:url "https://identifier.org/uri:test:wwyPcWQqoT" ;
+    schema1:value "wwyPcWQqoT" .
 
 
 ```

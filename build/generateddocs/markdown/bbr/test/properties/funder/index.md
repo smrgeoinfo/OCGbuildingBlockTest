@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -47,7 +47,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -68,15 +68,15 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-[] a schema:MonetaryGrant ;
-    schema:funder <https://ror.org/021nxhr62> ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "NSF award number" ;
-            schema:url "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407" ;
-            schema:value "2227407" ] ;
-    schema:name "Big Bucks for Research" .
+[] a schema1:MonetaryGrant ;
+    schema1:funder <https://ror.org/021nxhr62> ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "NSF award number" ;
+            schema1:url "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407" ;
+            schema1:value "2227407" ] ;
+    schema1:name "Big Bucks for Research" .
 
 
 ```

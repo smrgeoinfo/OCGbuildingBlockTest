@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -72,7 +72,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/dataDownload/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -123,30 +123,30 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ns1: <spdx:> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-<https://orcid.org/3333-4444-5565> a schema:Person ;
-    schema:affiliation <https://ror.org/347237> ;
-    schema:alternateName "the datameister" ;
-    schema:contactPoint [ a schema:ContactPoint ;
-            schema:email "joe@email.org" ] ;
-    schema:description "Earth Science Data Custodian" ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://registry.identifiers.org/registry/orcid" ;
-            schema:url "https://orcid.org/3333-4444-5565" ;
-            schema:value "3333-4444-5565" ] ;
-    schema:name "Severus Data" .
+<https://orcid.org/3333-4444-5565> a schema1:Person ;
+    schema1:affiliation <https://ror.org/347237> ;
+    schema1:alternateName "the datameister" ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "joe@email.org" ] ;
+    schema1:description "Earth Science Data Custodian" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/orcid" ;
+            schema1:url "https://orcid.org/3333-4444-5565" ;
+            schema1:value "3333-4444-5565" ] ;
+    schema1:name "Severus Data" .
 
-<https://ror.org/347237> a schema:Organization ;
-    schema:additionalType "Data repository" ;
-    schema:identifier "https://ror.org/347237" ;
-    schema:name "Houndstooth Data Repository" .
+<https://ror.org/347237> a schema1:Organization ;
+    schema1:additionalType "Data repository" ;
+    schema1:identifier "https://ror.org/347237" ;
+    schema1:name "Houndstooth Data Repository" .
 
-[] a schema:DataDownload ;
-    schema:contentUrl "https://hounddata.org/354277.csv" ;
-    schema:encodingFormat "text/csv" ;
-    schema:name "Water levels in Beartooth reservoir, 1992-2020" ;
-    schema:provider <https://orcid.org/3333-4444-5565> ;
+[] a schema1:DataDownload ;
+    schema1:contentUrl "https://hounddata.org/354277.csv" ;
+    schema1:encodingFormat "text/csv" ;
+    schema1:name "Water levels in Beartooth reservoir, 1992-2020" ;
+    schema1:provider <https://orcid.org/3333-4444-5565> ;
     ns1:checksum [ ns1:algorithm "MD5" ;
             ns1:checksumValue "35247-39u83-7ik" ] .
 

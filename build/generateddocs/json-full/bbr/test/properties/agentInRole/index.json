@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-27",
+  "dateOfLastChange": "2025-10-28",
   "link": "https://github.com/opengeospatial/bblock-template",
   "sources": [
     {
@@ -27,9 +27,6 @@
     "ogc.bbr.test.properties.agentInRole": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/agentInRole/rules.shacl"
     ],
-    "ogc.bbr.test.properties.person": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
-    ],
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
@@ -38,11 +35,14 @@
     ],
     "ogc.bbr.test.properties.identifier": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ]
   },
   "dependsOn": [
-    "ogc.bbr.test.properties.person",
-    "ogc.bbr.test.properties.organization"
+    "ogc.bbr.test.properties.organization",
+    "ogc.bbr.test.properties.person"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld",
   "schema": {
@@ -67,17 +67,17 @@
         {
           "language": "json",
           "ref": "exampleOrgInRole.json",
-          "code": "{\n    \"@context\": {\n        \"schema\": \"https://schema.org/\",\n        \"ex\": \"https://example.org/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@type\": \"schema:Role\",\n    \"schema:roleName\": \"owner\",\n    \"schema:contributor\": {\n        \"@id\": \"ex:exampleOrg_fW\",\n        \"@type\": \"schema:Organization\",\n        \"schema:name\": \"University of Arizona\",\n        \"schema:alternateName\": \"UAz\",\n        \"schema:description\": \"University in Tucson, Arizona\",\n        \"schema:identifier\": {\n            \"@type\": \"schema:PropertyValue\",\n            \"schema:propertyID\": \"https://registry.identifiers.org/registry/ror\",\n            \"schema:value\": \"03m2x1q45\",\n            \"schema:url\": \"https://ror.org/03m2x1q45\"\n        },\n        \"schema:sameAs\": [\"Wildcats\"]\n    }\n}",
+          "code": "{\n    \"@context\": {\n        \"schema\": \"http://schema.org/\",\n        \"ex\": \"https://example.org/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@type\": \"schema:Role\",\n    \"schema:roleName\": \"owner\",\n    \"schema:contributor\": {\n        \"@id\": \"ex:exampleOrg_fW\",\n        \"@type\": \"schema:Organization\",\n        \"schema:name\": \"University of Arizona\",\n        \"schema:alternateName\": \"UAz\",\n        \"schema:description\": \"University in Tucson, Arizona\",\n        \"schema:identifier\": {\n            \"@type\": \"schema:PropertyValue\",\n            \"schema:propertyID\": \"https://registry.identifiers.org/registry/ror\",\n            \"schema:value\": \"03m2x1q45\",\n            \"schema:url\": \"https://ror.org/03m2x1q45\"\n        },\n        \"schema:sameAs\": [\"Wildcats\"]\n    }\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@type\": \"schema:Role\",\n  \"schema:roleName\": \"owner\",\n  \"schema:contributor\": {\n    \"@id\": \"ex:exampleOrg_fW\",\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"University of Arizona\",\n    \"schema:alternateName\": \"UAz\",\n    \"schema:description\": \"University in Tucson, Arizona\",\n    \"schema:identifier\": {\n      \"@type\": \"schema:PropertyValue\",\n      \"schema:propertyID\": \"https://registry.identifiers.org/registry/ror\",\n      \"schema:value\": \"03m2x1q45\",\n      \"schema:url\": \"https://ror.org/03m2x1q45\"\n    },\n    \"schema:sameAs\": [\n      \"Wildcats\"\n    ]\n  }\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld\",\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@type\": \"schema:Role\",\n  \"schema:roleName\": \"owner\",\n  \"schema:contributor\": {\n    \"@id\": \"ex:exampleOrg_fW\",\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"University of Arizona\",\n    \"schema:alternateName\": \"UAz\",\n    \"schema:description\": \"University in Tucson, Arizona\",\n    \"schema:identifier\": {\n      \"@type\": \"schema:PropertyValue\",\n      \"schema:propertyID\": \"https://registry.identifiers.org/registry/ror\",\n      \"schema:value\": \"03m2x1q45\",\n      \"schema:url\": \"https://ror.org/03m2x1q45\"\n    },\n    \"schema:sameAs\": [\n      \"Wildcats\"\n    ]\n  }\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:exampleOrg_fW a schema:Organization ;\n    schema:alternateName \"UAz\" ;\n    schema:description \"University in Tucson, Arizona\" ;\n    schema:identifier [ a schema:PropertyValue ;\n            schema:propertyID \"https://registry.identifiers.org/registry/ror\" ;\n            schema:url \"https://ror.org/03m2x1q45\" ;\n            schema:value \"03m2x1q45\" ] ;\n    schema:name \"University of Arizona\" ;\n    schema:sameAs \"Wildcats\" .\n\n[] a schema:Role ;\n    schema:contributor ex:exampleOrg_fW ;\n    schema:roleName \"owner\" .\n\n",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema1: <http://schema.org/> .\n\nex:exampleOrg_fW a schema1:Organization ;\n    schema1:alternateName \"UAz\" ;\n    schema1:description \"University in Tucson, Arizona\" ;\n    schema1:identifier [ a schema1:PropertyValue ;\n            schema1:propertyID \"https://registry.identifiers.org/registry/ror\" ;\n            schema1:url \"https://ror.org/03m2x1q45\" ;\n            schema1:value \"03m2x1q45\" ] ;\n    schema1:name \"University of Arizona\" ;\n    schema1:sameAs \"Wildcats\" .\n\n[] a schema1:Role ;\n    schema1:contributor ex:exampleOrg_fW ;\n    schema1:roleName \"owner\" .\n\n",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_1_1.ttl"
         }
       ]
@@ -92,17 +92,17 @@
         {
           "language": "json",
           "ref": "examplePersonInRole.json",
-          "code": "{\n    \"@context\": {\n        \"schema\": \"https://schema.org/\",\n        \"ex\": \"https://example.org/\"\n    },\n    \"@type\": \"schema:Role\",\n    \"schema:roleName\": \"editor\",\n    \"schema:contributor\": {\n        \"@id\": \"ex:PersonExample_zZc\",\n        \"@type\": \"schema:Person\",\n        \"schema:name\": \"Joe B. Test\",\n        \"schema:alternateName\": \"Test, J. B.\",\n        \"schema:affiliation\": {\n            \"@type\": \"schema:Organization\",\n            \"schema:name\": \"The Big Manufacturing Co.\"\n        },\n        \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n        \"schema:identifier\": {\n            \"@type\": \"schema:PropertyValue\",\n            \"schema:propertyID\": \"https://orcid.org\",\n            \"schema:value\": \"iY\",\n            \"schema:url\": \"https://orcid.org/iY\"\n        },\n        \"schema:contactPoint\": {\n            \"@type\": \"schema:ContactPoint\",\n            \"schema:email\": \"joe@bmanuco.org\"\n        },\n        \"schema:sameAs\": [\n            \"https://ark.org/46737\",\n            \"uri:test:43737\"\n        ]\n    }\n}",
+          "code": "{\n    \"@context\": {\n        \"schema\": \"http://schema.org/\",\n        \"ex\": \"https://example.org/\"\n    },\n    \"@type\": \"schema:Role\",\n    \"schema:roleName\": \"editor\",\n    \"schema:contributor\": {\n        \"@id\": \"ex:PersonExample_zZc\",\n        \"@type\": \"schema:Person\",\n        \"schema:name\": \"Joe B. Test\",\n        \"schema:alternateName\": \"Test, J. B.\",\n        \"schema:affiliation\": {\n            \"@type\": \"schema:Organization\",\n            \"schema:name\": \"The Big Manufacturing Co.\"\n        },\n        \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n        \"schema:identifier\": {\n            \"@type\": \"schema:PropertyValue\",\n            \"schema:propertyID\": \"https://orcid.org\",\n            \"schema:value\": \"iY\",\n            \"schema:url\": \"https://orcid.org/iY\"\n        },\n        \"schema:contactPoint\": {\n            \"@type\": \"schema:ContactPoint\",\n            \"schema:email\": \"joe@bmanuco.org\"\n        },\n        \"schema:sameAs\": [\n            \"https://ark.org/46737\",\n            \"uri:test:43737\"\n        ]\n    }\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_2_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@type\": \"schema:Role\",\n  \"schema:roleName\": \"editor\",\n  \"schema:contributor\": {\n    \"@id\": \"ex:PersonExample_zZc\",\n    \"@type\": \"schema:Person\",\n    \"schema:name\": \"Joe B. Test\",\n    \"schema:alternateName\": \"Test, J. B.\",\n    \"schema:affiliation\": {\n      \"@type\": \"schema:Organization\",\n      \"schema:name\": \"The Big Manufacturing Co.\"\n    },\n    \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n    \"schema:identifier\": {\n      \"@type\": \"schema:PropertyValue\",\n      \"schema:propertyID\": \"https://orcid.org\",\n      \"schema:value\": \"iY\",\n      \"schema:url\": \"https://orcid.org/iY\"\n    },\n    \"schema:contactPoint\": {\n      \"@type\": \"schema:ContactPoint\",\n      \"schema:email\": \"joe@bmanuco.org\"\n    },\n    \"schema:sameAs\": [\n      \"https://ark.org/46737\",\n      \"uri:test:43737\"\n    ]\n  }\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/agentInRole/context.jsonld\",\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ex\": \"https://example.org/\"\n    }\n  ],\n  \"@type\": \"schema:Role\",\n  \"schema:roleName\": \"editor\",\n  \"schema:contributor\": {\n    \"@id\": \"ex:PersonExample_zZc\",\n    \"@type\": \"schema:Person\",\n    \"schema:name\": \"Joe B. Test\",\n    \"schema:alternateName\": \"Test, J. B.\",\n    \"schema:affiliation\": {\n      \"@type\": \"schema:Organization\",\n      \"schema:name\": \"The Big Manufacturing Co.\"\n    },\n    \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n    \"schema:identifier\": {\n      \"@type\": \"schema:PropertyValue\",\n      \"schema:propertyID\": \"https://orcid.org\",\n      \"schema:value\": \"iY\",\n      \"schema:url\": \"https://orcid.org/iY\"\n    },\n    \"schema:contactPoint\": {\n      \"@type\": \"schema:ContactPoint\",\n      \"schema:email\": \"joe@bmanuco.org\"\n    },\n    \"schema:sameAs\": [\n      \"https://ark.org/46737\",\n      \"uri:test:43737\"\n    ]\n  }\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_2_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix ex: <https://example.org/> .\n@prefix schema: <https://schema.org/> .\n\nex:PersonExample_zZc a schema:Person ;\n    schema:affiliation [ a schema:Organization ;\n            schema:name \"The Big Manufacturing Co.\" ] ;\n    schema:alternateName \"Test, J. B.\" ;\n    schema:contactPoint [ a schema:ContactPoint ;\n            schema:email \"joe@bmanuco.org\" ] ;\n    schema:description \"Metadata specialist, based in Portland, Maine\" ;\n    schema:identifier [ a schema:PropertyValue ;\n            schema:propertyID \"https://orcid.org\" ;\n            schema:url \"https://orcid.org/iY\" ;\n            schema:value \"iY\" ] ;\n    schema:name \"Joe B. Test\" ;\n    schema:sameAs \"https://ark.org/46737\",\n        \"uri:test:43737\" .\n\n[] a schema:Role ;\n    schema:contributor ex:PersonExample_zZc ;\n    schema:roleName \"editor\" .\n\n",
+          "code": "@prefix ex: <https://example.org/> .\n@prefix schema1: <http://schema.org/> .\n\nex:PersonExample_zZc a schema1:Person ;\n    schema1:affiliation [ a schema1:Organization ;\n            schema1:name \"The Big Manufacturing Co.\" ] ;\n    schema1:alternateName \"Test, J. B.\" ;\n    schema1:contactPoint [ a schema1:ContactPoint ;\n            schema1:email \"joe@bmanuco.org\" ] ;\n    schema1:description \"Metadata specialist, based in Portland, Maine\" ;\n    schema1:identifier [ a schema1:PropertyValue ;\n            schema1:propertyID \"https://orcid.org\" ;\n            schema1:url \"https://orcid.org/iY\" ;\n            schema1:value \"iY\" ] ;\n    schema1:name \"Joe B. Test\" ;\n    schema1:sameAs \"https://ark.org/46737\",\n        \"uri:test:43737\" .\n\n[] a schema1:Role ;\n    schema1:contributor ex:PersonExample_zZc ;\n    schema1:roleName \"editor\" .\n\n",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/agentInRole/example_2_1.ttl"
         }
       ]

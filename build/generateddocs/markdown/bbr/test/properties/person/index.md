@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
   "@context": {
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
@@ -61,7 +61,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -95,21 +95,21 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:PersonExample_zZc a schema:Person ;
-    schema:affiliation [ a schema:Organization ;
-            schema:name "Test organization" ] ;
-    schema:alternateName "Test, Joe" ;
-    schema:contactPoint [ a schema:ContactPoint ;
-            schema:email "joe@bmanuco.org" ] ;
-    schema:description "Metadata specialist, based in Portland, Maine" ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://doi.org" ;
-            schema:url "https://doi.org/iY" ;
-            schema:value "iY" ] ;
-    schema:name "Joe Test" ;
-    schema:sameAs "https://ark.org/46737",
+ex:PersonExample_zZc a schema1:Person ;
+    schema1:affiliation [ a schema1:Organization ;
+            schema1:name "Test organization" ] ;
+    schema1:alternateName "Test, Joe" ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "joe@bmanuco.org" ] ;
+    schema1:description "Metadata specialist, based in Portland, Maine" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://doi.org" ;
+            schema1:url "https://doi.org/iY" ;
+            schema1:value "iY" ] ;
+    schema1:name "Joe Test" ;
+    schema1:sameAs "https://ark.org/46737",
         "uri:test:43737" .
 
 

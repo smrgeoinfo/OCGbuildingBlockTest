@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "dcterms": "http://purl.org/dc/terms/"
@@ -83,6 +83,126 @@ In **Markdown** format.
 }
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "https://schema.org"
+    },
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/context.jsonld",
+    {
+      "schema": "http://schema.org/",
+      "ex": "https://example.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "dcterms": "http://purl.org/dc/terms/"
+    }
+  ],
+  "@type": "schema:Dataset",
+  "@id": "ex:URIforMetadata3575",
+  "schema:about": {
+    "@id": "ex:URIforNode2246"
+  },
+  "dcterms:conformsTo": [
+    {
+      "@id": "ex:cdif_SDO_profile_uri"
+    }
+  ],
+  "schema:maintainer": {
+    "@id": "https://orcid.org/3333-4442-9456-9347",
+    "@type": "schema:Person",
+    "schema:name": "Goodge, Alice",
+    "schema:alternateName": "Metadata curator",
+    "schema:affiliation": {
+      "@id": "https://ror.org/04jpmwt24",
+      "@type": "schema:Organization",
+      "schema:additionalType": [
+        "schema:Consortium"
+      ],
+      "schema:name": "Big Wildlife Consortium",
+      "schema:alternateName": "BWC",
+      "schema:description": "Description of organizatioan BWC",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+        "schema:url": "https://ror.org/04jpmwt24"
+      },
+      "schema:sameAs": [
+        "ISNI 0000 0000 9427 2533",
+        "Wikidata Q4904147"
+      ]
+    },
+    "schema:contactPoint": {
+      "@type": "schema:ContactPoint",
+      "schema:email": "goodgea@bwc.org"
+    },
+    "schema:identifier": {
+      "@type": "schema:PropertyValue",
+      "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
+      "schema:url": "https://orcid.org/3333-4442-9456-9347"
+    }
+  },
+  "schema:sdDatePublished": "2025-10-24",
+  "schema:includedInDataCatalog": {
+    "@id": "https://ror.org/04sfkyrt24",
+    "@type": "schema:DataCatalog",
+    "schema:name": "Global Wildlife Aggregator",
+    "schema:url": "http://example.com/wildlifecatalog",
+    "schema:identifier": {
+      "@type": "schema:PropertyValue",
+      "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+      "schema:value": "04sfkyrt24",
+      "schema:url": "https://ror.org/04sfkyrt24"
+    }
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <https://example.org/> .
+@prefix schema1: <http://schema.org/> .
+
+ex:URIforMetadata3575 a schema1:Dataset ;
+    dct:conformsTo ex:cdif_SDO_profile_uri ;
+    schema1:about ex:URIforNode2246 ;
+    schema1:includedInDataCatalog <https://ror.org/04sfkyrt24> ;
+    schema1:maintainer <https://orcid.org/3333-4442-9456-9347> ;
+    schema1:sdDatePublished "2025-10-24" .
+
+<https://orcid.org/3333-4442-9456-9347> a schema1:Person ;
+    schema1:affiliation <https://ror.org/04jpmwt24> ;
+    schema1:alternateName "Metadata curator" ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "goodgea@bwc.org" ] ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/orcid" ;
+            schema1:url "https://orcid.org/3333-4442-9456-9347" ] ;
+    schema1:name "Goodge, Alice" .
+
+<https://ror.org/04jpmwt24> a schema1:Organization ;
+    schema1:additionalType "schema:Consortium" ;
+    schema1:alternateName "BWC" ;
+    schema1:description "Description of organizatioan BWC" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema1:url "https://ror.org/04jpmwt24" ] ;
+    schema1:name "Big Wildlife Consortium" ;
+    schema1:sameAs "ISNI 0000 0000 9427 2533",
+        "Wikidata Q4904147" .
+
+<https://ror.org/04sfkyrt24> a schema1:DataCatalog ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema1:url "https://ror.org/04sfkyrt24" ;
+            schema1:value "04sfkyrt24" ] ;
+    schema1:name "Global Wildlife Aggregator" ;
+    schema1:url "http://example.com/wildlifecatalog" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -110,7 +230,7 @@ properties:
     items:
       type: object
       properties:
-        $id:
+        '@id':
           type: string
           description: uri for specifications that this metadata record conforms to.
             Minimimally should specify uri for CDIF discovery profile

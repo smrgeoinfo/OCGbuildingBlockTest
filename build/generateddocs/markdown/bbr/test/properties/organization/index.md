@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -54,7 +54,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -83,19 +83,19 @@ In **Markdown** format.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:exampleOrg_fW a schema:Organization ;
-    schema:additionalType "schema:ResearchOrganization",
+ex:exampleOrg_fW a schema1:Organization ;
+    schema1:additionalType "schema:ResearchOrganization",
         "university" ;
-    schema:alternateName "UAz" ;
-    schema:description "University in Tucson, Arizona" ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://registry.identifiers.org/registry/ror" ;
-            schema:url "https://ror.org/03m2x1q45" ;
-            schema:value "03m2x1q45" ] ;
-    schema:name "University of Arizona" ;
-    schema:sameAs "Wildcats" .
+    schema1:alternateName "UAz" ;
+    schema1:description "University in Tucson, Arizona" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/ror" ;
+            schema1:url "https://ror.org/03m2x1q45" ;
+            schema1:value "03m2x1q45" ] ;
+    schema1:name "University of Arizona" ;
+    schema1:sameAs "Wildcats" .
 
 
 ```

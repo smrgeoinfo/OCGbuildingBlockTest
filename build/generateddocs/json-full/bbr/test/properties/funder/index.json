@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-27",
+  "dateOfLastChange": "2025-10-28",
   "link": "https://github.com/opengeospatial/bblock-template",
   "sources": [
     {
@@ -31,9 +31,6 @@
     "ogc.bbr.test.properties.funder": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/funder/rules.shacl"
     ],
-    "ogc.bbr.test.properties.person": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
-    ],
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
@@ -42,11 +39,14 @@
     ],
     "ogc.bbr.test.properties.identifier": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ],
+    "ogc.bbr.test.properties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ]
   },
   "dependsOn": [
-    "ogc.bbr.test.properties.person",
     "ogc.bbr.test.properties.organization",
+    "ogc.bbr.test.properties.person",
     "ogc.bbr.test.properties.identifier"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld",
@@ -72,17 +72,17 @@
         {
           "language": "json",
           "ref": "exampleFunder.json",
-          "code": "{\n    \"@context\": {\n        \"schema\": \"https://schema.org/\",\n        \"ex\": \"https://example.org/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@type\": \"schema:MonetaryGrant\",\n    \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:propertyID\": \"NSF award number\",\n        \"schema:value\": \"2227407\",\n        \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n    },\n    \"schema:name\": \"Big Bucks for Research\",\n    \"schema:funder\": {\"@id\": \"https://ror.org/021nxhr62\"}\n}",
+          "code": "{\n    \"@context\": {\n        \"schema\": \"http://schema.org/\",\n        \"ex\": \"https://example.org/\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    },\n    \"@type\": \"schema:MonetaryGrant\",\n    \"schema:identifier\": {\n        \"@type\": \"schema:PropertyValue\",\n        \"schema:propertyID\": \"NSF award number\",\n        \"schema:value\": \"2227407\",\n        \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n    },\n    \"schema:name\": \"Big Bucks for Research\",\n    \"schema:funder\": {\"@id\": \"https://ror.org/021nxhr62\"}\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.json"
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld\",\n    {\n      \"schema\": \"https://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@type\": \"schema:MonetaryGrant\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"NSF award number\",\n    \"schema:value\": \"2227407\",\n    \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n  },\n  \"schema:name\": \"Big Bucks for Research\",\n  \"schema:funder\": {\n    \"@id\": \"https://ror.org/021nxhr62\"\n  }\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/funder/context.jsonld\",\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@type\": \"schema:MonetaryGrant\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"NSF award number\",\n    \"schema:value\": \"2227407\",\n    \"schema:url\": \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\"\n  },\n  \"schema:name\": \"Big Bucks for Research\",\n  \"schema:funder\": {\n    \"@id\": \"https://ror.org/021nxhr62\"\n  }\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.jsonld"
         },
         {
           "language": "ttl",
-          "code": "@prefix schema: <https://schema.org/> .\n\n[] a schema:MonetaryGrant ;\n    schema:funder <https://ror.org/021nxhr62> ;\n    schema:identifier [ a schema:PropertyValue ;\n            schema:propertyID \"NSF award number\" ;\n            schema:url \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\" ;\n            schema:value \"2227407\" ] ;\n    schema:name \"Big Bucks for Research\" .\n\n",
+          "code": "@prefix schema1: <http://schema.org/> .\n\n[] a schema1:MonetaryGrant ;\n    schema1:funder <https://ror.org/021nxhr62> ;\n    schema1:identifier [ a schema1:PropertyValue ;\n            schema1:propertyID \"NSF award number\" ;\n            schema1:url \"https://www.nsf.gov/awardsearch/showAward?AWD_ID=2227407\" ;\n            schema1:value \"2227407\" ] ;\n    schema1:name \"Big Bucks for Research\" .\n\n",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/funder/example_1_1.ttl"
         }
       ]

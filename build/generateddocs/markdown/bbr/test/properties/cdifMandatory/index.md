@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "dcterms": "http://purl.org/dc/terms/"
@@ -47,10 +47,12 @@ In **Markdown** format.
             "schema:name": "Goodge, Alice",
             "schema:alternateName": "Metadata curator",
             "schema:contactPoint": {
+                "@id": "ex:aContactPoint",
                 "@type": "schema:ContactPoint",
                 "schema:email": "goodgea@bwc.org"
             },
             "schema:identifier": {
+                "@id": "ex:maintainerIdentifier", 
                 "@type": "schema:PropertyValue",
                 "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
                 "schema:url": "https://orcid.org/3333-4442-9456-9347"
@@ -76,7 +78,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifMandatory/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "dcterms": "http://purl.org/dc/terms/"
@@ -110,10 +112,12 @@ In **Markdown** format.
       "schema:name": "Goodge, Alice",
       "schema:alternateName": "Metadata curator",
       "schema:contactPoint": {
+        "@id": "ex:aContactPoint",
         "@type": "schema:ContactPoint",
         "schema:email": "goodgea@bwc.org"
       },
       "schema:identifier": {
+        "@id": "ex:maintainerIdentifier",
         "@type": "schema:PropertyValue",
         "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
         "schema:url": "https://orcid.org/3333-4442-9456-9347"
@@ -134,35 +138,39 @@ In **Markdown** format.
 ```ttl
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:URIforMetadata3575 a schema:Dataset ;
+ex:URIforMetadata3575 a schema1:Dataset ;
     dct:conformsTo ex:cdif_SDO_profile_uri ;
-    schema:about ex:baseDiscovery23578 ;
-    schema:includedInDataCatalog <https://ror.org/04sfkyrt24> ;
-    schema:maintainer <https://orcid.org/3333-4442-9456-9347> ;
-    schema:sdDatePublished "2025-10-24" .
+    schema1:about ex:baseDiscovery23578 ;
+    schema1:includedInDataCatalog <https://ror.org/04sfkyrt24> ;
+    schema1:maintainer <https://orcid.org/3333-4442-9456-9347> ;
+    schema1:sdDatePublished "2025-10-24" .
 
-ex:baseDiscovery23578 a schema:Dataset ;
-    schema:dateModified "2022-12-12" ;
-    schema:identifier "https://doi.org/23566/aslry" ;
-    schema:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
-    schema:name "Bathymetry Bay of Biscay" ;
-    schema:subjectOf ex:URIforMetadata3575 ;
-    schema:url "https://example.org/landingPage254266" .
+ex:aContactPoint a schema1:ContactPoint ;
+    schema1:email "goodgea@bwc.org" .
 
-<https://orcid.org/3333-4442-9456-9347> a schema:Person ;
-    schema:alternateName "Metadata curator" ;
-    schema:contactPoint [ a schema:ContactPoint ;
-            schema:email "goodgea@bwc.org" ] ;
-    schema:identifier [ a schema:PropertyValue ;
-            schema:propertyID "https://registry.identifiers.org/registry/orcid" ;
-            schema:url "https://orcid.org/3333-4442-9456-9347" ] ;
-    schema:name "Goodge, Alice" .
+ex:baseDiscovery23578 a schema1:Dataset ;
+    schema1:dateModified "2022-12-12" ;
+    schema1:identifier "https://doi.org/23566/aslry" ;
+    schema1:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    schema1:name "Bathymetry Bay of Biscay" ;
+    schema1:subjectOf ex:URIforMetadata3575 ;
+    schema1:url "https://example.org/landingPage254266" .
 
-<https://ror.org/04sfkyrt24> a schema:DataCatalog ;
-    schema:name "Global Wildlife Aggregator" ;
-    schema:url "http://example.com/wildlifecatalog" .
+ex:maintainerIdentifier a schema1:PropertyValue ;
+    schema1:propertyID "https://registry.identifiers.org/registry/orcid" ;
+    schema1:url "https://orcid.org/3333-4442-9456-9347" .
+
+<https://orcid.org/3333-4442-9456-9347> a schema1:Person ;
+    schema1:alternateName "Metadata curator" ;
+    schema1:contactPoint ex:aContactPoint ;
+    schema1:identifier ex:maintainerIdentifier ;
+    schema1:name "Goodge, Alice" .
+
+<https://ror.org/04sfkyrt24> a schema1:DataCatalog ;
+    schema1:name "Global Wildlife Aggregator" ;
+    schema1:url "http://example.com/wildlifecatalog" .
 
 
 ```
@@ -308,7 +316,7 @@ $defs:
   MetaMetadata:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/schema.yaml
 x-jsonld-extra-terms:
-  schema: https://schema.org
+  schema: http://schema.org
 
 ```
 

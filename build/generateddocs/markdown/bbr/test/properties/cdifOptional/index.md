@@ -22,7 +22,7 @@ In **Markdown** format.
 ```json
 {
     "@context": {
-        "schema": "https://schema.org/",
+        "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },"@id": "ex:baseDiscovery23578",
@@ -71,7 +71,7 @@ In **Markdown** format.
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifOptional/context.jsonld",
     {
-      "schema": "https://schema.org/",
+      "schema": "http://schema.org/",
       "ex": "https://example.org/",
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
@@ -123,34 +123,33 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix : <http://schema.org/> .
 @prefix ex: <https://example.org/> .
-@prefix schema: <https://schema.org/> .
+@prefix schema1: <http://schema.org/> .
 
-ex:baseDiscovery23578 a schema:Dataset ;
-    schema:additionalType "" ;
-    schema:conditionsOfAccess ex:LabeledLinkExample_qZc ;
-    schema:dateModified "2022-12-12" ;
-    schema:datePublished "2021-11-14" ;
-    schema:description "description of resource" ;
-    schema:identifier "https://doi.org/23566/aslry" ;
-    schema:inLanguage "en" ;
-    schema:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
-    schema:name "Bathymetry Bay of Biscay" ;
-    schema:publishingPrinciples "https://example.org/principles/3478" ;
-    schema:relatedLink [ a schema:LinkRole ;
-            :target [ a schema:EntryPoint ;
-                    schema:encodingFormat "image/jpg" ;
-                    schema:name "Image of seafloor geology map, bay of Biscay" ;
-                    schema:url "https://example.org/geology/baybiscay" ] ;
-            schema:linkRelationship "related data" ] ;
-    schema:url "https://example.org/landingPage254266" ;
-    schema:version "1.0" .
+ex:baseDiscovery23578 a schema1:Dataset ;
+    schema1:additionalType "" ;
+    schema1:conditionsOfAccess ex:LabeledLinkExample_qZc ;
+    schema1:dateModified "2022-12-12" ;
+    schema1:datePublished "2021-11-14" ;
+    schema1:description "description of resource" ;
+    schema1:identifier "https://doi.org/23566/aslry" ;
+    schema1:inLanguage "en" ;
+    schema1:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    schema1:name "Bathymetry Bay of Biscay" ;
+    schema1:publishingPrinciples "https://example.org/principles/3478" ;
+    schema1:relatedLink [ a schema1:LinkRole ;
+            schema1:linkRelationship "related data" ;
+            schema1:target [ a schema1:EntryPoint ;
+                    schema1:encodingFormat "image/jpg" ;
+                    schema1:name "Image of seafloor geology map, bay of Biscay" ;
+                    schema1:url "https://example.org/geology/baybiscay" ] ] ;
+    schema1:url "https://example.org/landingPage254266" ;
+    schema1:version "1.0" .
 
-ex:LabeledLinkExample_qZc a schema:CreativeWork ;
-    schema:description "URL to get the document" ;
-    schema:name "conditions of access statement" ;
-    schema:url "https://example.org/conditions/2342747" .
+ex:LabeledLinkExample_qZc a schema1:CreativeWork ;
+    schema1:description "URL to get the document" ;
+    schema1:name "conditions of access statement" ;
+    schema1:url "https://example.org/conditions/2342747" .
 
 
 ```
@@ -351,7 +350,7 @@ $defs:
   SpatialExtent:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/schema.yaml
 x-jsonld-extra-terms:
-  schema: https://schema.org
+  schema: http://schema.org
 
 ```
 
