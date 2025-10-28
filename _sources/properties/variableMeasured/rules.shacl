@@ -2,7 +2,7 @@
 @prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema:      <https://schema.org/>.
+@prefix schema:      <http://schema.org/>.
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
@@ -11,7 +11,28 @@
 
 cdifd:CDIFVariableMeasuredShape
     a sh:NodeShape;
-    sh:targetClass schema:PropertyValue ;
+#    sh:targetClass schema:PropertyValue ;
+# select PropertyValue for Variable definition
+    sh:target [
+	  a sh:SPARQLTarget ;
+	  sh:prefixes (
+         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
+         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
+       );
+      sh:select  """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+        
+          ?this a schema:PropertyValue .
+          FILTER (
+            NOT EXISTS { ?s ?p ?this . }
+            ||
+            EXISTS { ?s schema:variableMeasured ?this . }
+          )
+        }""";
+	] ;
+
 	sh:or (
 		[sh:property [
 			sh:path schema:propertyID;
@@ -24,7 +45,7 @@ cdifd:CDIFVariableMeasuredShape
 		[sh:property cdifd:nameProperty ;]
 		[sh:class schema:DefinedTerm]
 	);
-	sh:message "A variable must have a name or an identifier provided." 
+	sh:message "for variableMeasured property propertyValue must have a name, a propertID, or an a @id reference provided." 
     .
     
 cdifd:nameProperty
@@ -85,3 +106,46 @@ cdifd:termLabelProperty
 	# sh:severity sh:Warning ;
     sh:message "a label (schema:name) for the term must be provided, and must have at least 5 characters" 
     .
+    
+cdifd:CDIFPropertyIdentifierShape
+    a sh:NodeShape ;
+    sh:targetClass schema:PropertyValue ;
+# select PropertyValue for identifier definition
+    sh:target [
+	  a sh:SPARQLTarget ;
+	  sh:prefixes (
+         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
+         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
+       );
+      sh:select  """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+          ?this a schema:PropertyValue .
+          FILTER (
+            NOT EXISTS { ?s ?p ?this . }
+            ||
+            EXISTS { ?s schema:identifier ?this . }
+          )
+        }"""
+	] ;    
+    
+    sh:or (
+        [sh:property [
+            sh:path schema:value ;
+            sh:minCount 1 ;
+            sh:datatype xsd:string ;
+            sh:message "a value for the property identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+        ] ]
+        [sh:property [
+            sh:path schema:url ;
+            sh:minCount 1 ;
+            sh:datatype xsd:string ;
+            # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+            sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+            sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+            ] 
+         [sh:property cdifd:nameProperty ;]
+    );
+    sh:message "For a variableMeasaured DefinedTerm identifier, must provide either a value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URL that provides a description of the DefinedTerm."
+     .
