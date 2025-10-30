@@ -94,7 +94,9 @@ properties:
       for the dataset
     type: array
     items:
-      $ref: '#/$defs/DataDownload'
+      anyOf:
+        - $ref: '#/$defs/DataDownload'
+        - $ref: '#/$defs/WebAPI'
   'schema:subjectOf':
     $ref: '#/$defs/MetaMetadata'
 allOf:
@@ -125,5 +127,7 @@ $defs:
     $ref: ../definedTerm/schema.yaml
   DataDownload:
     $ref: ../dataDownload/schema.yaml
+  WebAPI:
+    $ref: ../webAPI/schema.yaml
   MetaMetadata:
     $ref: ../metaMetadata/schema.yaml
