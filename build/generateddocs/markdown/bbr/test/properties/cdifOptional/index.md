@@ -1,9 +1,9 @@
 
-# Base CDIF discovery metadata (Schema)
+# CDIF discovery metadata, Optional elements (Schema)
 
 `ogc.bbr.test.properties.cdifOptional` *v0.1*
 
-Definition of various Metadata elements not defined in other components for CDIF discovery profile
+Definition of optional metadata elements for CDIF discovery profile
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -14,10 +14,8 @@ Definition of various Metadata elements not defined in other components for CDIF
 Defines simple properties included in CDIF discvoery metadata for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.
 ## Examples
 
-### Example person.
-Example person instance.
-
-In **Markdown** format.
+### Example CDIF record
+Example CDIF record with mandatory and optional properties.
 #### json
 ```json
 {
@@ -25,7 +23,8 @@ In **Markdown** format.
         "schema": "http://schema.org/",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
-    },"@id": "ex:baseDiscovery23578",
+    },
+    "@id": "ex:cdifOptional_23578",
     "@type": ["schema:Dataset"],
     "schema:name": "Bathymetry Bay of Biscay",
     "schema:identifier":"https://doi.org/23566/aslry",
@@ -76,7 +75,7 @@ In **Markdown** format.
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
-  "@id": "ex:baseDiscovery23578",
+  "@id": "ex:cdifOptional_23578",
   "@type": [
     "schema:Dataset"
   ],
@@ -126,7 +125,7 @@ In **Markdown** format.
 @prefix ex: <https://example.org/> .
 @prefix schema1: <http://schema.org/> .
 
-ex:baseDiscovery23578 a schema1:Dataset ;
+ex:cdifOptional_23578 a schema1:Dataset ;
     schema1:additionalType "" ;
     schema1:conditionsOfAccess ex:LabeledLinkExample_qZc ;
     schema1:dateModified "2022-12-12" ;
@@ -330,6 +329,16 @@ properties:
     type: array
     items:
       $ref: '#/$defs/SpatialExtent'
+  schema:temporalCoverage:
+    description: The time interval during which data was collected or observations
+      were made; or a time period that an activity or collection is linked to intellectually
+      or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage).
+      For documentation of Earth Science, Paleobiology or Paleontology datasets, we
+      are interested in the second case-- the time period that data are linked to
+      thematically..
+    type: array
+    items:
+      $ref: '#/$defs/TemporalExtent'
 $defs:
   LabeledLink:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/labeledLink/schema.yaml
@@ -349,6 +358,8 @@ $defs:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/variableMeasured/schema.yaml
   SpatialExtent:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/spatialExtent/schema.yaml
+  TemporalExtent:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/temporalExtent/schema.yaml
 x-jsonld-extra-terms:
   schema: http://schema.org
 
@@ -3749,6 +3760,7 @@ You can find the full JSON-LD context here:
 ## Sources
 
 * [schema.org](https://schema.org/Dataset)
+* [Cross Domain Interoperability Framework Discovery Profile](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/discovery.html)
 
 # For developers
 

@@ -109,7 +109,14 @@
       "description": "specifies how to download the data in a specific format or access via a web API. This property describes where to get the data and in what format by using the schema:DataDownload type. If user must access data through a landing page, provide link to landing page in the 'url' property for the dataset",
       "type": "array",
       "items": {
-        "$ref": "#/$defs/DataDownload"
+        "anyOf": [
+          {
+            "$ref": "#/$defs/DataDownload"
+          },
+          {
+            "$ref": "#/$defs/WebAPI"
+          }
+        ]
       }
     },
     "schema:subjectOf": {
@@ -169,6 +176,9 @@
     },
     "DataDownload": {
       "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/dataDownload/schema.json"
+    },
+    "WebAPI": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/webAPI/schema.json"
     },
     "MetaMetadata": {
       "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/schema.json"

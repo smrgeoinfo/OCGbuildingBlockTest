@@ -1035,6 +1035,13 @@ ex:YOPx a schema1:Dataset ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
     schema1:distribution [ a schema1:DataDownload ;
             schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "VwuIdrCrJSsrGATePg" ;
+            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
+            spdx:checksum [ spdx:algorithm "MD5" ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
             schema1:encodingFormat "kpZDvhyVo",
                 "sMUGwSqxWzJOYEb",
                 "tNdpXaJgDeWbFkNM" ;
@@ -1042,21 +1049,14 @@ ex:YOPx a schema1:Dataset ;
             schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
                 ex:sr68lgy ;
             spdx:checksum [ spdx:algorithm "j" ;
-                    spdx:checksumValue "h" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "VwuIdrCrJSsrGATePg" ;
-            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
-            spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
+                    spdx:checksumValue "h" ] ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/fnjrj68> ;
+            schema1:funder <https://ror.org/3572wjht> ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "Grant identifier" ;
+                    schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "fMuiBjneudpV" ] ;
-            schema1:name "MWoPQAqRYHobey" ],
+                    schema1:value "lieopgXuumP" ] ;
+            schema1:name "fhhbzh" ],
         [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/sejer4w6u8> ;
             schema1:identifier [ a schema1:PropertyValue ;
@@ -1065,32 +1065,32 @@ ex:YOPx a schema1:Dataset ;
                     schema1:value "LZpo" ] ;
             schema1:name "ekckpBtI" ],
         [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/3572wjht> ;
+            schema1:funder <https://ror.org/fnjrj68> ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
+                    schema1:propertyID "Grant identifier" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "lieopgXuumP" ] ;
-            schema1:name "fhhbzh" ] ;
+                    schema1:value "fMuiBjneudpV" ] ;
+            schema1:name "MWoPQAqRYHobey" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
     schema1:inLanguage "bYiJT" ;
     schema1:keywords [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "rIPXjaCPQX" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "PVSajGtBPsLzeCTLv" ] ;
-            schema1:inDefinedTermSet "EfagQEQtAkwMBDvfKznc" ;
-            schema1:name "MiSqvcp" ;
-            schema1:termCode "bzOl" ],
-        [ a schema1:DefinedTerm ;
-            schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "icJPoVwSFiPaG" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
                     schema1:value "tdUMYBItIwdJe" ] ;
             schema1:inDefinedTermSet "sqH" ;
             schema1:name "TiMuawt" ;
-            schema1:termCode "RUUxHY" ] ;
+            schema1:termCode "RUUxHY" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "rIPXjaCPQX" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                    schema1:value "PVSajGtBPsLzeCTLv" ] ;
+            schema1:inDefinedTermSet "EfagQEQtAkwMBDvfKznc" ;
+            schema1:name "MiSqvcp" ;
+            schema1:termCode "bzOl" ] ;
     schema1:license "Kmp",
         "dXhuFoqL" ;
     schema1:name "Test dataset" ;
@@ -1102,19 +1102,6 @@ ex:YOPx a schema1:Dataset ;
     schema1:relatedLink [ a schema1:LinkRole ;
             schema1:linkRelationship [ a schema1:DefinedTerm ;
                     schema1:identifier [ a schema1:PropertyValue ;
-                            schema1:propertyID "kRF" ;
-                            schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                            schema1:value "OuJNu" ] ;
-                    schema1:inDefinedTermSet "OrtR" ;
-                    schema1:name "BOoRREnpDEUrdNaV" ;
-                    schema1:termCode "quWbxnaFyB" ] ;
-            schema1:target [ a schema1:EntryPoint ;
-                    schema1:encodingFormat "FNoslhw" ;
-                    schema1:name "atsDYJxuhHpivqLmw" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ] ],
-        [ a schema1:LinkRole ;
-            schema1:linkRelationship [ a schema1:DefinedTerm ;
-                    schema1:identifier [ a schema1:PropertyValue ;
                             schema1:propertyID "clbbbIvyDUyHNcOtU" ;
                             schema1:url "http://example.com/resource?foo=bar#fragment" ;
                             schema1:value "igcJkZMJiKehgkPjMCp" ] ;
@@ -1124,6 +1111,19 @@ ex:YOPx a schema1:Dataset ;
             schema1:target [ a schema1:EntryPoint ;
                     schema1:encodingFormat "gompgHAN" ;
                     schema1:name "oAuxEutsTEiB" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ] ],
+        [ a schema1:LinkRole ;
+            schema1:linkRelationship [ a schema1:DefinedTerm ;
+                    schema1:identifier [ a schema1:PropertyValue ;
+                            schema1:propertyID "kRF" ;
+                            schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                            schema1:value "OuJNu" ] ;
+                    schema1:inDefinedTermSet "OrtR" ;
+                    schema1:name "BOoRREnpDEUrdNaV" ;
+                    schema1:termCode "quWbxnaFyB" ] ;
+            schema1:target [ a schema1:EntryPoint ;
+                    schema1:encodingFormat "FNoslhw" ;
+                    schema1:name "atsDYJxuhHpivqLmw" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ] ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
             schema1:value "urn:idorg:test:p45689" ] ;
@@ -1241,7 +1241,7 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
         "spdx": "http://spdx.org/rdf/terms#"
     },
     "@id": "ada:record_44",
-    "@schema": "https://w3id.org/adaJSONLD/schema/1.0",
+    "@schema": ["https://w3id.org/adaJSONLD/schema/1.0"],
     "@type": [
         "schema:Dataset",
         "schema:Product"
@@ -1459,7 +1459,8 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
         "schema:value": "10.60707/2j0t-gq80"
     },
     "schema:funding": [
-        {"@id":"ex:monetaryGrant_gh35" ,
+        {
+            "@id": "ex:monetaryGrant_gh35",
             "@type": "schema:MonetaryGrant",
             "schema:description": "This material is supported by NASA under contract NNM10AA11C issued through the New Frontiers program.",
             "schema:funder": {"@id": "https://ror.org/027ka1x80"},
@@ -1467,7 +1468,7 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
         }
     ],
     "schema:measurementTechnique": {
-        "@id":"ex:measurementTechnique_gh35" ,
+        "@id": "ex:measurementTechnique_gh35",
         "@type": "schema:DefinedTerm",
         "schema:name": "X-ray diffraction",
         "schema:termCode": "XRD"
@@ -1546,7 +1547,9 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
     }
   ],
   "@id": "ada:record_44",
-  "@schema": "https://w3id.org/adaJSONLD/schema/1.0",
+  "@schema": [
+    "https://w3id.org/adaJSONLD/schema/1.0"
+  ],
   "@type": [
     "schema:Dataset",
     "schema:Product"
@@ -2024,18 +2027,18 @@ ex:monetaryGrant_gh35 a schema1:MonetaryGrant ;
             cdi:isStructuredBy [ a cdi:WideDataStructure ;
                     cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
                             cdi:has [ a cdi:ValueMapping ;
-                                    cdi:hasIndex 2 ;
-                                    cdi:physicalDataType "decimal" ] ;
-                            cdi:isDefinedBy_InstanceVariable <file:///github/workspace/#intensity> ;
-                            schema1:name "Intensity" ;
-                            schema1:unitOfMeasure "counts" ],
-                        [ a cdi:MeasureComponent ;
-                            cdi:has [ a cdi:ValueMapping ;
                                     cdi:hasIndex 1 ;
                                     cdi:physicalDataType "decimal" ] ;
                             cdi:isDefinedBy_InstanceVariable <file:///github/workspace/#angle> ;
                             schema1:name "Angle" ;
-                            schema1:unitOfMeasure "degrees 2theta" ] ] ;
+                            schema1:unitOfMeasure "degrees 2theta" ],
+                        [ a cdi:MeasureComponent ;
+                            cdi:has [ a cdi:ValueMapping ;
+                                    cdi:hasIndex 2 ;
+                                    cdi:physicalDataType "decimal" ] ;
+                            cdi:isDefinedBy_InstanceVariable <file:///github/workspace/#intensity> ;
+                            schema1:name "Intensity" ;
+                            schema1:unitOfMeasure "counts" ] ] ;
             schema1:componentType "ada:XRDTabular" ;
             schema1:countColumns 2 ;
             schema1:countRows 12571 ;
@@ -2086,17 +2089,17 @@ description: 'JSON schema for JSON-LD documents that describe science datasets f
   and the Earth Science Information Partners (ESIP) Science on Schema.org recommendations
   v1.3 prerelease (see https://doi.org/10.5281/zenodo.2628755 dataset.md for current
   recommendations document). The context is not specified in the schema, but must
-  be added in instance documents. ''"@context": {"schema":"https://schema.org/", "dcterms":
+  be added in instance documents. ''"@context": {"schema":"http://schema.org/", "dcterms":
   "http://purl.org/dc/terms/", "geosparql": "http://www.opengis.net/ont/geosparql#",
-  "spdx": "http://spdx.org/rdf/terms#" }'' 2024-07-24, SMR change handling of registration
+  "spdx": "http://spdx.org/rdf/terms#" }'' 2024-07-24, SMR change handling of metadata
   information to align with current proposal for cross-domain interoperability (CDIF).
   Created by Stephen Richard 2024-07-30 based on NSF GeoCODES dataset and iSamples
-  draft2 schema.org JSON schema. NOTE-- assumes that schema:https://schema.org is
-  declared in context, so schema: namespace prefix is required as prefix for all schema.org
-  elements.2025-07-24.  SMR 2025-10-23 update schemaversion to https://json-schema.org/draft/2020-12/schema;
+  draft2 schema.org JSON schema. 2025-07-24. NOTE-- assumes that schema:http://schema.org
+  is declared in context, so schema: namespace prefix is required as prefix for all
+  schema.org elements. SMR 2025-10-23 update schema version to https://json-schema.org/draft/2020-12/schema;
   add additionalType on organization with the alt schema.org types as one option,
   additional required constraints in various places; update constraint on @type to
-  require schema:Dataset. Implement using OGC buildign blocks approach. '
+  require schema:Dataset. Implement using OGC building blocks approach. '
 allOf:
 - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifMandatory/schema.yaml
 - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifOptional/schema.yaml

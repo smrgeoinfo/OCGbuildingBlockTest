@@ -102,7 +102,9 @@ properties:
       page, provide link to landing page in the 'url' property for the dataset
     type: array
     items:
-      $ref: '#/$defs/DataDownload'
+      anyOf:
+      - $ref: '#/$defs/DataDownload'
+      - $ref: '#/$defs/WebAPI'
   schema:subjectOf:
     $ref: '#/$defs/MetaMetadata'
 allOf:
@@ -133,6 +135,8 @@ $defs:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.yaml
   DataDownload:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/dataDownload/schema.yaml
+  WebAPI:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/webAPI/schema.yaml
   MetaMetadata:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/schema.yaml
 x-jsonld-extra-terms:

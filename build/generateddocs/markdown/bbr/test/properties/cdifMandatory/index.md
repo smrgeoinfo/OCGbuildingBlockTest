@@ -1,9 +1,9 @@
 
-# Base CDIF discovery metadata (Schema)
+# Base CDIF mandator metadata (Schema)
 
 `ogc.bbr.test.properties.cdifMandatory` *v0.1*
 
-Definition of various Metadata elements not defined in other components for CDIF discovery profile
+Definition of Metadata elements that are mandatory for CDIF discovery profile
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
@@ -282,7 +282,9 @@ properties:
       page, provide link to landing page in the 'url' property for the dataset
     type: array
     items:
-      $ref: '#/$defs/DataDownload'
+      anyOf:
+      - $ref: '#/$defs/DataDownload'
+      - $ref: '#/$defs/WebAPI'
   schema:subjectOf:
     $ref: '#/$defs/MetaMetadata'
 allOf:
@@ -313,6 +315,8 @@ $defs:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/definedTerm/schema.yaml
   DataDownload:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/dataDownload/schema.yaml
+  WebAPI:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/webAPI/schema.yaml
   MetaMetadata:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/metaMetadata/schema.yaml
 x-jsonld-extra-terms:
@@ -3716,6 +3720,7 @@ You can find the full JSON-LD context here:
 ## Sources
 
 * [schema.org](https://schema.org/Dataset)
+* [Cross Domain Interoperability Framework Discovery Profile](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/discovery.html)
 
 # For developers
 
