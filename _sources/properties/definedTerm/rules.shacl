@@ -9,39 +9,54 @@
 
 cdifd:CDIFDefinedTermShape
     a sh:NodeShape ;
-    sh:targetClass schema:DefinedTerm ;
-	sh:or (
-		[sh:property [
-			sh:path schema:identifier;
-			sh:minCount 1 ;
-			sh:or ( [sh:nodeKind sh:IRIOrLiteral ]
-			 [ 
-			     sh:and (
-			      [sh:class schema:PropertyValue ]
-    			  [sh:or (
-                        [sh:property [
-                            sh:path schema:value ;
-                            sh:minCount 1 ;
-                            sh:datatype xsd:string ;
-                            sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
-                        ] ]
-                        [sh:property [
-                            sh:path schema:url ;
-                            sh:minCount 1 ;
-                            sh:datatype xsd:string ;
-                            # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
-                            sh:pattern "^https?:\\/\\/[^\\s]+$" ;
-                            sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
-                            ] 
-                        );
-                ]
-			)]);
-			sh:message "a defined term should have an identifier that is a resolvable URI" ; 
-			];
-		]
-		[sh:property cdifd:termLabelProperty ;]
-	);
-	sh:message "A Term must have a name (label) or an identifier. It should have both!." 
+    sh:target [
+	  a sh:SPARQLTarget ;
+	  sh:prefixes (
+         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
+       );
+       #do not appy when defined term is child of another element
+      sh:select  """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+          ?this a schema:DefinedTerm .
+          FILTER (
+            NOT EXISTS { ?s ?p ?this . }
+          )
+        }""";
+	] ;
+	sh:property [
+		sh:path schema:identifier;
+		sh:minCount 1 ;
+		sh:or ( 
+		 [sh:datatype xsd:string ]
+		 [ 
+		     sh:and (
+		      [sh:class schema:PropertyValue ]
+    		  [sh:or (
+                    [sh:property [
+                        sh:path schema:value ;
+                        sh:minCount 1 ;
+                        sh:datatype xsd:string ;
+                        sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+                    ] ]
+                    [sh:property [
+                        sh:path schema:url ;
+                        sh:minCount 1 ;
+                        sh:datatype xsd:string ;
+                        # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+                        sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+                        sh:message "value expected to be a resolvable http URI, but we aren't testing to see if the URL resolves..."]
+                        ] 
+                    );
+            ]
+		     )
+		  ]
+		);
+		sh:message "a defined term should have an identifier that is a resolvable URI" ; 
+		];
+	sh:property cdifd:termLabelProperty ;
+	sh:message "A Term must have a name (label) and an identifier. It should have both!." 
 	.
 	
 cdifd:termLabelProperty

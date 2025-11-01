@@ -8,8 +8,6 @@
 
 cdifd:CDIFIdentifierShape
     a sh:NodeShape ;
-    sh:targetClass schema:PropertyValue ;
-# select PropertyValue for identifier definition
     sh:target [
 	  a sh:SPARQLTarget ;
 	  sh:prefixes (
@@ -23,18 +21,22 @@ cdifd:CDIFIdentifierShape
           ?this a schema:PropertyValue .
           FILTER (
             NOT EXISTS { ?s ?p ?this . }
-            ||
-            EXISTS { ?s schema:identifier ?this . }
+            &&
+            NOT EXISTS {?this schema:name ?n}
           )
         }"""
 	] ;    
+
+#  use when property value is in an identifier
+#            ||
+#            EXISTS { ?s schema:identifier ?this . }
     
     sh:or (
         [sh:property [
             sh:path schema:value ;
             sh:minCount 1 ;
             sh:datatype xsd:string ;
-            sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+            sh:message "identifier rules. a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
         ] ]
         [sh:property [
             sh:path schema:url ;
@@ -42,20 +44,67 @@ cdifd:CDIFIdentifierShape
             sh:datatype xsd:string ;
             # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
             sh:pattern "^https?:\\/\\/[^\\s]+$" ;
-            sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+            sh:message "identifier rules. schema:url is expected to be a resolvable HTTP URI, but we aren't testing to see if the URL resolves..."]
             ] 
-         [sh:property cdifd:nameProperty ;]
     );
-    sh:message "the context of an identifier, the PropertyValue provides the identifeir value string-- either as a schema:value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URI that identifies the resoruce."
+    sh:property [
+            sh:path schema:propertyID ;
+            sh:minCount 1 ;
+            sh:or (
+        	[sh:nodeKind sh:IRI] 
+        	[sh:datatype xsd:string ;
+               sh:minLength 5 ]
+        	[sh:class schema:DefinedTerm ]
+        )];
+            sh:message "identifier rules. for an identifier, the property ID is expected to specify an identifier scheme.Get values from https://registry.identifiers.org/registry/ for interoperability"
+        ;
+    sh:message "identifier rules. the context of an identifier, the PropertyValue provides the identifier value string-- either as a schema:value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URI that identifies the resource."
      .
      
-cdifd:nameProperty
-# names must be a literal, .
-    a sh:PropertyShape ;
-    sh:path schema:name;
-	sh:minCount 1 ;
-    sh:datatype xsd:string ;
-	sh:minLength 5 ;
-	# sh:severity sh:Warning ;
-    sh:message "a name for the PropertyValue must be provided, and have a lenght of at least 5 characters." 
-    .
+cdifd:CDIFIdentifierTypeTermShape
+    a sh:NodeShape ;
+    sh:target [
+	  a sh:SPARQLTarget ;
+	  sh:prefixes (
+         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
+       );
+      sh:select  """
+      PREFIX schema: <http://schema.org/>
+      SELECT DISTINCT ?this
+        WHERE {
+          ?this a schema:DefinedTerm .
+          FILTER (
+            EXISTS { ?s schema:propertyID ?this . }
+          )
+        }""";
+	] ;
+	sh:property [
+		sh:path schema:identifier;
+		sh:minCount 1 ;
+		sh:or ( 
+		 [sh:nodeKind sh:Literal ]
+		 [ 
+		     sh:and (
+		      [sh:class schema:PropertyValue ]
+    		  [sh:or (
+                    [sh:property [
+                        sh:path schema:value ;
+                        sh:minCount 1 ;
+                        sh:datatype xsd:string ;
+                        sh:message "identifier rules. a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+                    ] ]
+                    [sh:property [
+                        sh:path schema:url ;
+                        sh:minCount 1 ;
+                        sh:datatype xsd:string ;
+                        # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
+                        sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+                        sh:message "identifier rules. value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
+                        ] 
+                    );
+            ]
+		)]);
+		sh:message "identifier rules. a defined term should have an identifier that is a resolvable URI" ; 
+		];
+	sh:message "identifier rules. A Term must have a name (label) or an identifier. It should have both!." 
+	.

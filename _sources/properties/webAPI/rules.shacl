@@ -2,7 +2,7 @@
 @prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema:      <https://schema.org/>.
+@prefix schema:      <http://schema.org/>.
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
@@ -20,7 +20,8 @@ cdifd:webAPINode
 		];
 	sh:property 
 		[sh:path schema:documentation;
-			sh:or ( [sh:nodeKind sh:IRI] 
+			sh:or ( [sh:nodeKind schema:CreativeWork]
+			     [sh:node:Kind sh:IRI ]
 				[sh:datatype xsd:string] ) ;
 			sh:message "a link or URL to a machine-actionable service distribution object should be provided if it exists";
 			sh:minCount 1;
@@ -28,8 +29,8 @@ cdifd:webAPINode
 		];
 	sh:property 
         [sh:path schema:potentialAction;
-			sh:class schema:SearchAction;
+			sh:class schema:Action;
 			sh:minCount 1;
 			sh:message "at least one action must be provided for a webAPI distribution"
 			]
-			.
+	.
