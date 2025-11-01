@@ -25,7 +25,7 @@ Example identifier instance.
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
     "@type": "schema:PropertyValue",
-    "schema:propertyID": "random identifier",
+    "schema:propertyID": "example identifier",
     "schema:value": "wwyPcWQqoT",
     "schema:url": "https://identifier.org/uri:test:wwyPcWQqoT"
 }
@@ -46,7 +46,7 @@ Example identifier instance.
     }
   ],
   "@type": "schema:PropertyValue",
-  "schema:propertyID": "random identifier",
+  "schema:propertyID": "example identifier",
   "schema:value": "wwyPcWQqoT",
   "schema:url": "https://identifier.org/uri:test:wwyPcWQqoT"
 }
@@ -57,7 +57,7 @@ Example identifier instance.
 @prefix schema1: <http://schema.org/> .
 
 [] a schema1:PropertyValue ;
-    schema1:propertyID "random identifier" ;
+    schema1:propertyID "example identifier" ;
     schema1:url "https://identifier.org/uri:test:wwyPcWQqoT" ;
     schema1:value "wwyPcWQqoT" .
 

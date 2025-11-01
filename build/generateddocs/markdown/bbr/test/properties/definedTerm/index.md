@@ -26,7 +26,7 @@ Example Defined Term instance.
   },
   "@id": "ex:definedTerm_zZc",
   "@type": "schema:DefinedTerm",
-  "schema:name": "TestTerm",
+  "schema:name": "example defined term",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
     "schema:propertyID": "https://identifiers.org/scheme/rt45347278",
@@ -53,7 +53,7 @@ Example Defined Term instance.
   ],
   "@id": "ex:definedTerm_zZc",
   "@type": "schema:DefinedTerm",
-  "schema:name": "TestTerm",
+  "schema:name": "example defined term",
   "schema:identifier": {
     "@type": "schema:PropertyValue",
     "schema:propertyID": "https://identifiers.org/scheme/rt45347278",
@@ -74,7 +74,7 @@ ex:definedTerm_zZc a schema1:DefinedTerm ;
             schema1:propertyID "https://identifiers.org/scheme/rt45347278" ;
             schema1:url "http://ogc.org/defs/rt45347278" ] ;
     schema1:inDefinedTermSet "http://ogc.org/defs" ;
-    schema1:name "TestTerm" ;
+    schema1:name "example defined term" ;
     schema1:termCode "TT" .
 
 
@@ -93,7 +93,9 @@ properties:
     type: string
     description: text label for the term that is useful to human user
   schema:identifier:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml
+    anyOf:
+    - type: string
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml
   schema:inDefinedTermSet:
     type: string
     description: Identifier for the controlled vocabulary responsible for this keyword.

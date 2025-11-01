@@ -56,7 +56,8 @@ Implementation of schema.org Action as described in blog post at https://schema.
                 "@id": "ex:definedTerm_zZc",
                 "@type": ["schema:PropertyValue"],
                 "schema:name": "Viscosity",
-                "schema:propertyID":  ["http://ogc.org/defs/g35408y"]
+                "schema:propertyID":  ["http://ogc.org/defs/g35408y"],
+                "schema:description":"a quantity expressing the magnitude of internal friction"
             }
         ],
         "schema:encodingFormat-input": [
@@ -159,7 +160,8 @@ Implementation of schema.org Action as described in blog post at https://schema.
         "schema:name": "Viscosity",
         "schema:propertyID": [
           "http://ogc.org/defs/g35408y"
-        ]
+        ],
+        "schema:description": "a quantity expressing the magnitude of internal friction"
       }
     ],
     "schema:encodingFormat-input": [
@@ -236,6 +238,7 @@ ex:exampleAction_37467 a schema1:Action ;
             schema1:urlTemplate "http://portal.chordsrt.com/api/v1/data.{encoding}?instruments={instruments}&start={start}&end={end}" ] .
 
 ex:definedTerm_zZc a schema1:PropertyValue ;
+    schema1:description "a quantity expressing the magnitude of internal friction" ;
     schema1:name "Viscosity" ;
     schema1:propertyID "http://ogc.org/defs/g35408y" .
 

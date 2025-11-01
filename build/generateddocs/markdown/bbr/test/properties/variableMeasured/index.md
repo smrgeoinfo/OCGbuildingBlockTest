@@ -26,7 +26,7 @@ Implementation of Schema.org PropertyValue as value for variableMeasured propert
     },
     "@type": ["schema:PropertyValue"],
     "@id": "ex:variableMeasured_346",
-    "schema:name": "temperature",
+    "schema:name": "example variable measured",
     "schema:description": "description missing",
     "schema:propertyID": [
         {
@@ -69,7 +69,7 @@ Implementation of Schema.org PropertyValue as value for variableMeasured propert
     "schema:PropertyValue"
   ],
   "@id": "ex:variableMeasured_346",
-  "schema:name": "temperature",
+  "schema:name": "example variable measured",
   "schema:description": "description missing",
   "schema:propertyID": [
     {
@@ -105,7 +105,7 @@ ex:variableMeasured_346 a schema1:PropertyValue ;
     schema1:maxValue 200 ;
     schema1:measurementTechnique "thermometer" ;
     schema1:minValue 0 ;
-    schema1:name "temperature" ;
+    schema1:name "example variable measured" ;
     schema1:propertyID ex:definedTerm_zZc ;
     schema1:unitCode "C" ;
     schema1:unitText "deg C" .
@@ -211,11 +211,8 @@ $defs:
 allOf:
 - required:
   - '@type'
-- anyOf:
-  - required:
-    - schema:name
-  - required:
-    - schema:description
+  - schema:name
+  - schema:description
 x-jsonld-prefixes:
   schema: http://schema.org/
 

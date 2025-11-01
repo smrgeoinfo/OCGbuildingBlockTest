@@ -42,7 +42,7 @@ Example of soft-typed additional property implementation, based on schema.org Pr
             "schema:inDefinedTermSet": "http://ogc.org/defs"
         }
     ],
-    "schema:name": "Probe type",
+    "schema:name": "example additional property",
     "schema:value": "x-ray"
 }
 ```
@@ -79,7 +79,7 @@ Example of soft-typed additional property implementation, based on schema.org Pr
       "schema:inDefinedTermSet": "http://ogc.org/defs"
     }
   ],
-  "schema:name": "Probe type",
+  "schema:name": "example additional property",
   "schema:value": "x-ray"
 }
 ```
@@ -90,7 +90,7 @@ Example of soft-typed additional property implementation, based on schema.org Pr
 @prefix schema1: <http://schema.org/> .
 
 ex:exampleAdditionalProperty_lkj09 a schema1:PropertyValue ;
-    schema1:name "Probe type" ;
+    schema1:name "example additional property" ;
     schema1:propertyID ex:addPropdefinedTerm_zZc,
         "nxs:Field/NXsource/probe" ;
     schema1:value "x-ray" .

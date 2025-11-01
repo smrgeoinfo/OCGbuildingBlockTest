@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.test.properties.action - Action properties
-Generated 2025-11-01T02:26:50.261135+00:00
+Generated 2025-11-01T23:47:17.194757+00:00
 === General ===
 Test was expected to fail and it did.
 === End General ===
@@ -14,16 +14,20 @@ Output Turtle name-fail.ttl created
 === JSON Schema ===
 
 ** Validation error **
-ValidationError: 'schema:PropertyValue' is not of type 'array'
+ValidationError: 'schema:description' is a required property
 
-Failed validating 'type' in schema['properties']['schema:object']['properties']['schema:variableMeasured']['items']['properties']['@type']:
-    {'contains': {'const': 'schema:PropertyValue'},
-     'items': {'type': 'string'},
-     'minItems': 1,
-     'type': 'array'}
+Failed validating 'required' in schema['properties']['schema:object']['properties']['schema:variableMeasured']['items']['allOf'][0]:
+    {'required': ['@type', 'schema:name', 'schema:description']}
 
-On instance['schema:object']['schema:variableMeasured'][0]['@type']:
-    'schema:PropertyValue'
+On instance['schema:object']['schema:variableMeasured'][1]:
+    {'@id': 'ex:definedTerm_zZc',
+     '@type': 'schema:DefinedTerm',
+     'schema:identifier': {'@type': 'schema:PropertyValue',
+                           'schema:url': 'http://ogc.org/defs/g35408y',
+                           'schema:value': 'g35408y'},
+     'schema:inDefinedTermSet': 'http://ogc.org/defs',
+     'schema:name': 'Viscosity',
+     'schema:termCode': 'Vp'}
 === End JSON Schema ===
 
 === SHACL ===
@@ -49,49 +53,58 @@ Validation result for _sources/properties/variableMeasured/rules.shacl:
   Conforms: True
   
 Focus nodes for _sources/properties/variableMeasured/rules.shacl:
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb12: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb16: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb15: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb18: *none*
- - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb8: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb13: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb9: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb14: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b12: *none*
  - Shape cdifd:CDIFVariableMeasuredShape: *none*
- - Shape _:n5be91ca337a84afaa35e1df9be2b17bfb11: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b7: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b14: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b11: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b8: *none*
+ - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b9: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b10: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b4: *none*
+ - Shape _:n9efa27a7118c4b93b6e66f6a30978da3b5: *none*
 
 Validation result for _sources/properties/definedTerm/rules.shacl:
   Validation Report
   Conforms: True
   
 Focus nodes for _sources/properties/definedTerm/rules.shacl:
- - Shape _:neae9811e4c0d405dac893ce19ef4a2f6b7: *none*
- - Shape _:neae9811e4c0d405dac893ce19ef4a2f6b8: *none*
- - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
- - Shape _:neae9811e4c0d405dac893ce19ef4a2f6b9: *none*
+ - Shape _:n058eea9fff53473e8dc5f780a999e67bb7: *none*
+ - Shape _:n058eea9fff53473e8dc5f780a999e67bb5: *none*
+ - Shape _:n058eea9fff53473e8dc5f780a999e67bb6: *none*
  - Shape cdifd:CDIFDefinedTermShape: *none*
- - Shape _:neae9811e4c0d405dac893ce19ef4a2f6b11: *none*
- - Shape _:neae9811e4c0d405dac893ce19ef4a2f6b6: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n058eea9fff53473e8dc5f780a999e67bb9: *none*
+ - Shape _:n058eea9fff53473e8dc5f780a999e67bb4: *none*
 
+
+** Validation error **
 Validation result for _sources/properties/identifier/rules.shacl:
   Validation Report
-  Conforms: True
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("5", datatype=xsd:integer) ] [ sh:class schema1:DefinedTerm ] ) ; sh:path schema1:propertyID ]
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]
+  	Result Path: schema1:propertyID
+  	Message: Less than 1 values on [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]->schema1:propertyID
   
 Focus nodes for _sources/properties/identifier/rules.shacl:
- - Shape _:n2145c69c34694161a8865937b7de49bab29: *none*
- - Shape cdifd:CDIFIdentifierShape: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab14: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab27: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab26: *none*
- - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab24: *none*
- - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab25: *none*
  - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b21: *none*
  - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b25: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b10: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b11: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b20: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b22: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
  - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:n2145c69c34694161a8865937b7de49bab15: *none*
+ - Shape _:ne34d4c50f98c405e858b1c1660260420b23: *none*
 
 === End SHACL ===
 
