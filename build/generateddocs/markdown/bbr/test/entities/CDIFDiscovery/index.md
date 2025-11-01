@@ -461,7 +461,7 @@ In **Markdown** format.
 {
   "@context": [
     {
-      "schema": "https://schema.org",
+      "schema": "http://schema.org",
       "dcterms": "http://purl.org/dc/terms/"
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/CDIFDiscovery/context.jsonld",
@@ -946,7 +946,7 @@ In **Markdown** format.
 
 #### ttl
 ```ttl
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ex: <https://example.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema1: <http://schema.org/> .
@@ -980,7 +980,7 @@ ex:ABYcNWHKYhTiLLNEzJx a schema1:Person ;
     schema1:name "Walker, Longin" .
 
 ex:BAaR a schema1:Dataset ;
-    dct:conformsTo ex:AbxQQMnD,
+    dcterms:conformsTo ex:AbxQQMnD,
         ex:ESrkifcWtMnOisQmcXK,
         ex:wjZwFKFIoCdVDlxdrF ;
     schema1:about ex:YOPx ;
@@ -1035,13 +1035,6 @@ ex:YOPx a schema1:Dataset ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
     schema1:distribution [ a schema1:DataDownload ;
             schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "VwuIdrCrJSsrGATePg" ;
-            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
-            spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
             schema1:encodingFormat "kpZDvhyVo",
                 "sMUGwSqxWzJOYEb",
                 "tNdpXaJgDeWbFkNM" ;
@@ -1049,8 +1042,22 @@ ex:YOPx a schema1:Dataset ;
             schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
                 ex:sr68lgy ;
             spdx:checksum [ spdx:algorithm "j" ;
-                    spdx:checksumValue "h" ] ] ;
+                    spdx:checksumValue "h" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "VwuIdrCrJSsrGATePg" ;
+            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
+            spdx:checksum [ spdx:algorithm "MD5" ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
+            schema1:funder <https://ror.org/fnjrj68> ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "Grant identifier" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                    schema1:value "fMuiBjneudpV" ] ;
+            schema1:name "MWoPQAqRYHobey" ],
+        [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/3572wjht> ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
@@ -1063,34 +1070,27 @@ ex:YOPx a schema1:Dataset ;
                     schema1:propertyID "HmJzdEZIaqUSLLte" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
                     schema1:value "LZpo" ] ;
-            schema1:name "ekckpBtI" ],
-        [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/fnjrj68> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "Grant identifier" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "fMuiBjneudpV" ] ;
-            schema1:name "MWoPQAqRYHobey" ] ;
+            schema1:name "ekckpBtI" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
     schema1:inLanguage "bYiJT" ;
     schema1:keywords [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "icJPoVwSFiPaG" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "tdUMYBItIwdJe" ] ;
-            schema1:inDefinedTermSet "sqH" ;
-            schema1:name "TiMuawt" ;
-            schema1:termCode "RUUxHY" ],
-        [ a schema1:DefinedTerm ;
-            schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "rIPXjaCPQX" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
                     schema1:value "PVSajGtBPsLzeCTLv" ] ;
             schema1:inDefinedTermSet "EfagQEQtAkwMBDvfKznc" ;
             schema1:name "MiSqvcp" ;
-            schema1:termCode "bzOl" ] ;
+            schema1:termCode "bzOl" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "icJPoVwSFiPaG" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                    schema1:value "tdUMYBItIwdJe" ] ;
+            schema1:inDefinedTermSet "sqH" ;
+            schema1:name "TiMuawt" ;
+            schema1:termCode "RUUxHY" ] ;
     schema1:license "Kmp",
         "dXhuFoqL" ;
     schema1:name "Test dataset" ;
@@ -1102,29 +1102,21 @@ ex:YOPx a schema1:Dataset ;
     schema1:relatedLink [ a schema1:LinkRole ;
             schema1:linkRelationship [ a schema1:DefinedTerm ;
                     schema1:identifier [ a schema1:PropertyValue ;
-                            schema1:propertyID "clbbbIvyDUyHNcOtU" ;
-                            schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                            schema1:value "igcJkZMJiKehgkPjMCp" ] ;
-                    schema1:inDefinedTermSet "iTNLfdJYKNbvy" ;
-                    schema1:name "lfCzUaoftdtTPAhMnpC" ;
-                    schema1:termCode "EaApZcUMYjOM" ] ;
-            schema1:target [ a schema1:EntryPoint ;
-                    schema1:encodingFormat "gompgHAN" ;
-                    schema1:name "oAuxEutsTEiB" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ] ],
-        [ a schema1:LinkRole ;
-            schema1:linkRelationship [ a schema1:DefinedTerm ;
-                    schema1:identifier [ a schema1:PropertyValue ;
                             schema1:propertyID "kRF" ;
                             schema1:url "http://example.com/resource?foo=bar#fragment" ;
                             schema1:value "OuJNu" ] ;
                     schema1:inDefinedTermSet "OrtR" ;
                     schema1:name "BOoRREnpDEUrdNaV" ;
-                    schema1:termCode "quWbxnaFyB" ] ;
-            schema1:target [ a schema1:EntryPoint ;
-                    schema1:encodingFormat "FNoslhw" ;
-                    schema1:name "atsDYJxuhHpivqLmw" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ] ] ;
+                    schema1:termCode "quWbxnaFyB" ] ],
+        [ a schema1:LinkRole ;
+            schema1:linkRelationship [ a schema1:DefinedTerm ;
+                    schema1:identifier [ a schema1:PropertyValue ;
+                            schema1:propertyID "clbbbIvyDUyHNcOtU" ;
+                            schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                            schema1:value "igcJkZMJiKehgkPjMCp" ] ;
+                    schema1:inDefinedTermSet "iTNLfdJYKNbvy" ;
+                    schema1:name "lfCzUaoftdtTPAhMnpC" ;
+                    schema1:termCode "EaApZcUMYjOM" ] ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
             schema1:value "urn:idorg:test:p45689" ] ;
     schema1:subjectOf ex:BAaR ;
@@ -1228,300 +1220,493 @@ ex:PersonExample_zZc a schema1:Person ;
 
 
 ### Actual data CDIF discovery record.
-Metadata for an example dataset from the [Astromaterials Data System](https://astromat.org/) ].
+Metadata for an example XAS dataset.
 #### json
 ```json
 {
     "@context": {
-        "ada": "https://ada.astromat.org/metadata/",
-        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "@vocab": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "schema": "http://schema.org/",
         "dcterms": "http://purl.org/dc/terms/",
         "geosparql": "http://www.opengis.net/ont/geosparql#",
-        "schema": "http://schema.org/",
-        "spdx": "http://spdx.org/rdf/terms#"
+        "spdx": "http://spdx.org/rdf/terms#",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "time": "http://www.w3.org/2006/time#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "xas": "https://xas.org/dictionary/",
+        "nxs": "http://purl.org/nexusformat/definitions/",
+        "prov": "http://www.w3.org/ns/prov#"
     },
-    "@id": "ada:record_44",
-    "@schema": ["https://w3id.org/adaJSONLD/schema/1.0"],
+    "@id": "xas:487y54",
     "@type": [
         "schema:Dataset",
         "schema:Product"
+    ],
+    "schema:name": "X-ray absorption spectra for K edge, Iron metal, XDI CDIF example",
+    "schema:description": "Example metadata including all properties in the CDIF XAS profile",
+    "schema:identifier": "https://doi.org/10.9999/aqweropjh",
+    "schema:dateModified": "2025-06-22",
+    "schema:contributor": [
+        {
+            "@type": "schema:Role",
+            "schema:roleName": "Facility",
+            "schema:contributor": {
+                "@type": "schema:Organization",
+                "@id": "https://ror.org/aps",
+                "schema:name": "Argonne Synchotron"
+            }
+        },
+        {
+            "@type": "schema:Role",
+            "schema:roleName": "dataCollector",
+            "schema:contributor": {
+                "@type": "schema:Person",
+                "@id": "https://orcid.org/3547ulkj",
+                "schema:name": "Collectus, Poindexter",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "missing@email.org"
+                }
+            }
+        },
+        {
+            "@type": "schema:Role",
+            "schema:roleName": "principleInvestigator",
+            "schema:contributor": {
+                "@type": "schema:Person",
+                "@id": "https://orcid.org/35735ul",
+                "schema:name": "Scienceguy, Biggus",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "missing@email.org"
+                },
+                "schema:affiliation": {
+                    "@type": "schema:Organization",
+                    "@id": "https://ror.org/lejkthoj",
+                    "schema:name": "Big Science Institute"
+                }
+            }
+        }
+    ],
+    "schema:license": ["https://creativecommons.org/publicdomain/zero/1.0/"],
+    "schema:distribution": [
+        {
+            "@type": [
+                "schema:DataDownload",
+                "PhysicalDataSet"
+            ],
+            "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
+            "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
+            "schema:contentSize": "30 kb",
+            "schema:encodingFormat": ["text/plain"],
+            "dcterms:conformsTo": ["https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"],
+            "allowsDuplicates": false,
+            "isStructuredBy": {
+                "@type": "WideDataStructure",
+                "has_DataStructureComponent": [
+                    {
+                        "@type": "IdentifierComponent",
+                        "isDefinedBy_InstanceVariable": {"@id": "xas:monochromatorEnergy"},
+                        "has": {
+                            "@type": "ValueMapping",
+                            "hasIndex": 1,
+                            "length": 12
+                        }
+                    },
+                    {
+                        "@type": "MeasureComponent",
+                        "isDefinedBy_InstanceVariable": {"@id": "xas:incidentIntensity"},
+                        "has": {
+                            "@type": "ValueMapping",
+                            "hasIndex": 3,
+                            "length": 13
+                        }
+                    },
+                    {
+                        "@type": "MeasureComponent",
+                        "isDefinedBy_InstanceVariable": {"@id": "xas:transmittedIntensity"},
+                        "has": {
+                            "@type": "ValueMapping",
+                            "hasIndex": 2,
+                            "length": 12
+                        }
+                    }
+                ],
+                "allowsDuplicates": false,
+                "arrayBase": 1,
+                "commentPrefix": "#",
+                "hasHeader": true,
+                "headerRowCount": 27,
+                "skipInitialSpace": true,
+                "isDelimited": false,
+                "isFixedWidth": true
+            }
+        }
+    ],
+    "schema:measurementTechnique": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "X-Ray Absorption Spectroscopy",
+            "schema:termCode": "XAS",
+            "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
+            "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl"
+        },
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "Transmission",
+            "schema:inDefinedTermSet": "nxs:Field/NXxas/ENTRY/DATA/mode"
+        }
+    ],
+    "schema:keywords": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "K-edge",
+            "schema:termCode": "K",
+            "schema:inDefinedTermSet": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md"
+        },
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "Selenium",
+            "schema:identifier": "http://sweetontology.net/matrElement/Selenium",
+            "schema:termCode": "Se",
+            "schema:inDefinedTermSet": "http://sweetontology.net/matrElement"
+        }
     ],
     "prov:wasGeneratedBy": {
         "@type": [
             "schema:Event",
             "xas:AnalysisEvent",
+            "schema:Product",
             "prov:Activity"
         ],
+        "schema:identifier": "20241111_DSC_NU_OREX-803224-0_1",
+        "schema:startDate": "2008-04-10T21:58:50",
         "prov:used": [
             {
                 "@type": [
                     "schema:Thing",
-                    "prov:Entity",
-                    "nxs:BaseClass/NXinstrument"
+                    "schema:Product"
                 ],
-                "schema:identifier": "MPANX-JSC-ARES",
-                "schema:name": "(JSC-ARES)Malvern PANalytical XPert Pro XRD"
-            }
-        ],
-        "schema:identifier": "20230928_XRD_JSC-ARES_OREX-500005-0_1",
-        "schema:location": {
-            "@type": [
-                "schema:Place",
-                "nxs:BaseClass/NXsource"
-            ],
-            "schema:alternateName": "JSC-ARES",
-            "schema:name": "NASA Johnson Space Center"
-        },
-        "schema:mainEntity": [
+                "schema:additionalType": "nxs:BaseClass/NXsource",
+                "schema:name": "source, made up for this example",
+                "schema:identifier": "should have a registry with URIs",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXsource/type",
+                        "schema:value": "Synchrotron X-ray Source"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXsource/probe",
+                        "schema:name": "Probe",
+                        "schema:value": "x-ray"
+                    }
+                ]
+            },
             {
                 "@type": [
                     "schema:Thing",
-                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    "schema:Product"
                 ],
-                "schema:additionalType": ["MaterialSample"],
-                "schema:identifier": "OREX-500005-0"
+                "schema:additionalType": "xas:Beamline",
+                "schema:name": "13-BM-D",
+                "schema:identifier": "should have a registry with URIs",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "xas:collimation",
+                        "schema:value": "none"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "xas:focusing",
+                        "schema:name": "focusing",
+                        "schema:value": "???"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "xas:harmonic_rejection",
+                        "schema:name": "harmonic_rejection",
+                        "schema:value": "Rh-coated mirror, detuned"
+                    }
+                ]
+            },
+            {
+                "@type": [
+                    "schema:Thing",
+                    "schema:Product"
+                ],
+                "schema:additionalType": "nxs:BaseClass/NXmonochromator",
+                "schema:name": "Si 111",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXcrystal/d_spacing",
+                        "schema:value": "3.13550",
+                        "schema:unitText": "Angstrom"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXcrystal/chemical_formula",
+                        "schema:value": "Si"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXcrystal/type",
+                        "schema:value": "crystal type"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXcrystal/reflection",
+                        "schema:value": "1,1,1"
+                    }
+                ]
+            },
+            {
+                "@type": [
+                    "schema:Thing",
+                    "schema:Product"
+                ],
+                "schema:additionalType": "nxs:BaseClass/NXmonitor",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXmonitor/mode",
+                        "schema:name": "monitor mode",
+                        "schema:value": "monitor"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "nxs:Field/NXmonitor/preset",
+                        "schema:name": "monitor preset",
+                        "schema:value": "N.A."
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "xas:detector.i0",
+                        "schema:name": "detector mode i0",
+                        "schema:alternateName": "incident flux measurement method",
+                        "schema:value": "10cm  N2"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "xas:detector.it",
+                        "schema:name": "detector mode it",
+                        "schema:alternateName": "transmitted flux measurement method",
+                        "schema:value": "10cm  N2"
+                    }
+                ]
             }
         ],
-        "schema:startDate": "2024-01-28T14:06:04.101222+00:00"
-    },
-    "schema:additionalType": ["X-ray diffraction"],
-    "schema:creator": {
-        "@list": [
+        "schema:additionalProperty": [
             {
-                "@id": "https://ada.org/person/5489",
-                "@type": "schema:Person",
-                "schema:contactPoint": {
-                    "@type": "schema:ContactPoint",
-                    "schema:email": "a.king@nhm.ac.uk"
-                },
-                "schema:identifier": "https://orcid.org/0000-0001-6113-5417",
-                "schema:name": "King, Ashley"
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "xas:pressure",
+                "schema:description": "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential",
+                "schema:value": 3567,
+                "schema:unitText": "KPa"
+            },
+            {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "xas:edge_energy",
+                "schema:value": "12658.0",
+                "schema:unitText": "eV"
+            },
+            {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "nxs:Group/NXdetector/calibration_method",
+                "schema:name": "calibration method",
+                "schema:value": "description of calibration procedure",
+                "schema:url": "http://protocols.io/link/to/calibrationMethod"
+            },
+            {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "nxs:Group/NXentry/experiment_documentation",
+                "schema:name": "Instrument configuration",
+                "schema:value": "description of instrument configuration",
+                "schema:url": "http://protocols.io/link/to/calibrationMethod"
+            },
+            {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "xas:installedOptions",
+                "schema:name": "Installed Options",
+                "schema:value": "Description of extra equipment installed on the base instrument(?)"
             }
-        ]
-    },
-    "schema:datePublished": "2024-06-20",
-    "schema:dateModified": "2024-06-20",
-    "schema:description": "JSC-ARES Panalytical XRD data for sample OREX-500005-0",
-    "schema:license": [
-        {"@id": "http://www.opengis.net/def/nil/OGC/0/missing"}
-    ],
-    "schema:distribution": [
-        {
-            "@type": ["schema:DataDownload"],
-            "schema:contentUrl": "http://www.opengis.net/def/nil/OGC/0/withheld",
-            "schema:description": "this data product is distributed in zip archive; contents of the archive are listed as parts. The component files are not individually accessible",
-            "schema:encodingFormat": ["application/zip"],
-            "schema:hasPart": [
+        ],
+        "schema:location": {
+            "@type": "schema:Place",
+            "schema:additionalType": "xas:Facility",
+            "schema:identifier": "https://ror.org/aps",
+            "schema:name": "APS",
+            "schema:additionalProperty": [
                 {
-                    "@id": "#45cdecbbbf9f72f25aa8bdad035680b4",
-                    "@type": "schema:Dataset",
-                    "fileDetail": {
-                        "@type": [
-                            "cdi:PhysicalDataSet",
-                            "ada:tabularData"
-                        ],
-                        "cdi:isStructuredBy": {
-                            "@type": "cdi:WideDataStructure",
-                            "cdi:has_DataStructureComponent": [
-                                {
-                                    "@type": "cdi:MeasureComponent",
-                                    "cdi:has": {
-                                        "@type": "cdi:ValueMapping",
-                                        "cdi:hasIndex": 1,
-                                        "cdi:physicalDataType": "decimal"
-                                    },
-                                    "cdi:isDefinedBy_InstanceVariable": {"@id": "#angle"},
-                                    "schema:name": "Angle",
-                                    "unitOfMeasure": "degrees 2theta"
-                                },
-                                {
-                                    "@type": "cdi:MeasureComponent",
-                                    "cdi:has": {
-                                        "@type": "cdi:ValueMapping",
-                                        "cdi:hasIndex": 2,
-                                        "cdi:physicalDataType": "decimal"
-                                    },
-                                    "cdi:isDefinedBy_InstanceVariable": {"@id": "#intensity"},
-                                    "schema:name": "Intensity",
-                                    "unitOfMeasure": "counts"
-                                }
-                            ]
-                        },
-                        "componentType": "ada:XRDTabular",
-                        "countColumns": 2,
-                        "countRows": 12571,
-                        "geometry": "reflection",
-                        "sampleMount": "zero background",
-                        "stepSize": 0.007,
-                        "timePerStep": 5,
-                        "wavelength": 1.78901
-                    },
-                    "schema:description": "Panalytical XRD data for sample OREX-500005-0",
-                    "schema:encodingFormat": "text/csv",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.csv",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 311630
-                    },
-                    "spdx:checksum": "7f98ff5f2ce5078a6820725580280d742d020eb4cb99bcad296ffea565bdf4fa"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:energy",
+                    "schema:value": "7.00",
+                    "schema:unitText": "GeV"
                 },
                 {
-                    "@id": "#f4f6382d0c78fa623d6262d357ed43ce",
-                    "@type": "schema:Dataset",
-                    "schema:about": [
-                        {"@id": "#45cdecbbbf9f72f25aa8bdad035680b4"}
-                    ],
-                    "schema:description": "",
-                    "schema:encodingFormat": "application/yaml",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.yaml",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 765
-                    },
-                    "spdx:checksum": "37be2186d5fcd22e6695aca0d3fe903fce95b580c558b0d4e957751b062f2221"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:current",
+                    "schema:value": "120",
+                    "schema:unitText": "Amps"
                 },
                 {
-                    "@id": "#c7e1fba9edcb558853eae3ab879b0c92",
-                    "@type": "schema:Dataset",
-                    "schema:description": "Metadata for Panalytical XRD analysis of sample OREX-500005-0",
-                    "schema:encodingFormat": "text/plain",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.txt",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 232
-                    },
-                    "spdx:checksum": "255c055e7e7937f318e0db6a2847319618538f7caa40ac4e598173669955ab7d"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:xray_source",
+                    "schema:value": "APS bending magnet"
+                }
+            ]
+        },
+        "schema:mainEntity": {
+            "@type": [
+                "schema:Thing",
+                "schema:Product"
+            ],
+            "schema:additionalType": [
+                "MaterialSample",
+                "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+            ],
+            "schema:name": "Na2SeO4",
+            "schema:identifier": "igsn:10.6620/357lkj",
+            "schema:description": "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list...",
+            "schema:additionalProperty": [
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:porosity",
+                    "schema:value": 27,
+                    "schema:unitText": "percent"
                 },
                 {
-                    "@id": "#f2aec1be3078bdacf5e68570a5af7690",
-                    "@type": "schema:Dataset",
-                    "schema:about": [
-                        {"@id": "#c7e1fba9edcb558853eae3ab879b0c92"}
-                    ],
-                    "schema:description": "",
-                    "schema:encodingFormat": "application/yaml",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.yaml",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 200
-                    },
-                    "spdx:checksum": "f2092bb9336d1dc718ce56d7c92912038d8556c17d814a978a8351898567af23"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:stoichiometry",
+                    "schema:value": "Na2SeO4"
                 },
                 {
-                    "@id": "#18d65475a618cf414ee568fc801c164b",
-                    "@type": "schema:Dataset",
-                    "fileDetail": {
-                        "@type": [
-                            "ada:image",
-                            "schema:DigitalDocument"
-                        ],
-                        "componentType": "ada:plot",
-                        "numPixelsX": 2178,
-                        "numPixelsY": 2178
-                    },
-                    "schema:description": "Image of Panalytical XRD data for sample OREX-500005-0",
-                    "schema:encodingFormat": "image/jpeg",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.jpg",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 244385
-                    },
-                    "spdx:checksum": "6f86127a8542aed46f664e66d52b384a571a88474a37af8189f72d3b6b5632d2"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:samplePreparation",
+                    "schema:value": "powder on tape, 6 layers"
                 },
                 {
-                    "@id": "#ea1b4bca7e1d1b01b466b7c8aa377a79",
-                    "@type": "schema:Dataset",
-                    "schema:about": [
-                        {"@id": "#18d65475a618cf414ee568fc801c164b"}
-                    ],
-                    "schema:description": "",
-                    "schema:encodingFormat": "application/yaml",
-                    "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.yaml",
-                    "schema:size": {
-                        "@type": "schema:QuantitativeValue",
-                        "schema:unitText": "byte",
-                        "schema:value": 213
-                    },
-                    "spdx:checksum": "e669b4a4aee3488e635b94a0a790f42f5b04aaca21679e429e005a2f403f4605"
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "nxs:Field/NXsample/mass",
+                    "schema:value": "10",
+                    "schema:unitText": "mg"
+                },
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "nxs:Field/NXsample/point_group",
+                    "schema:value": "mm2"
+                },
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "nxs:Field/NXsample/unit_cell",
+                    "schema:value": "cubic; Z = 4; a = 5.46; V = 162.77"
+                },
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:parentSample",
+                    "schema:value": "igsn:10.3476/342573"
+                },
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "xas:materialState",
+                    "schema:value": "solid metal foil"
                 }
             ]
         }
-    ],
-    "schema:identifier": {
-        "@type": "schema:PropertyValue",
-        "schema:propertyID": "https://registry.identifiers.org/registry/doi",
-        "schema:url": "https://doi.org/10.60707/2j0t-gq80",
-        "schema:value": "10.60707/2j0t-gq80"
     },
-    "schema:funding": [
+    "schema:variableMeasured": [
         {
-            "@id": "ex:monetaryGrant_gh35",
-            "@type": "schema:MonetaryGrant",
-            "schema:description": "This material is supported by NASA under contract NNM10AA11C issued through the New Frontiers program.",
-            "schema:funder": {"@id": "https://ror.org/027ka1x80"},
-            "schema:name": "New Frontiers program, OSIRIS-REx"
+            "@id": "xas:monochromatorEnergy",
+            "@type": [
+                "InstanceVariable",
+                "schema:PropertyValue"
+            ],
+            "schema:name": "energy",
+            "schema:alternateName": "Monochromator energy",
+            "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+            "schema:propertyID": ["xas:monochromatorEnergyConcept"],
+            "schema:unitText": "eV",
+            "identifier": "should be URI from nexusFormat organization",
+            "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "simpleUnitOfMeasure": "eV",
+            "uses": "xas:monochromatorEnergyConcept",
+            "name": "energy",
+            "displayLabel": "monochromator energy"
+        },
+        {
+            "@id": "xas:incidentIntensity",
+            "@type": [
+                "InstanceVariable",
+                "schema:PropertyValue"
+            ],
+            "schema:name": "i0",
+            "schema:alternateName": "Monitor intensity",
+            "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description)",
+            "schema:propertyID": ["xas:incidentIntensityConcept"],
+            "schema:unitText": "counts",
+            "identifier": "should be URI from nexusFormat organization",
+            "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "uses": "xas:incidentIntensityConcept",
+            "name": "i0",
+            "displayLabel": "monitor intensity"
+        },
+        {
+            "@id": "xas:transmittedIntensity",
+            "@type": [
+                "InstanceVariable",
+                "schema:PropertyValue"
+            ],
+            "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+            "schema:propertyID": ["xas:transmittedIntensityConcept"],
+            "schema:unitText": "counts",
+            "schema:name": "itrans",
+            "schema:alternateName": "transmission intensity",
+            "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "identifier": "should be URI from nexusFormat organization",
+            "uses": "xas:transmittedIntensityConcept",
+            "name": "itrans",
+            "displayLabel": "transmission intensity"
         }
     ],
-    "schema:measurementTechnique": {
-        "@id": "ex:measurementTechnique_gh35",
-        "@type": "schema:DefinedTerm",
-        "schema:name": "X-ray diffraction",
-        "schema:termCode": "XRD"
-    },
-    "schema:name": "JSC-ARES Panalytical XRD data for sample OREX-500005-0",
+    "relatedLink": [
+        {
+            "@type": "LinkRole",
+            "linkRelationship": "projectProposal",
+            "target": {
+                "@type": "EntryPoint",
+                "encodingType": "text/html",
+                "name": "name of the proposal",
+                "url": "https://example.org/locatorForProposalText",
+                "identifier": "identifier for proposal, could used text or schema:PropertyValue pattern"
+            }
+        }
+    ],
     "schema:subjectOf": {
-        "@id": "ada:metadata_44",
+        "@id": "xas:ja51-pz63",
         "@type": "schema:Dataset",
-        "dcterms:conformsTo": [
-            {"@id": "ada:XRDTabular"},
-            {"@id": "ada:tabularData"},
-            {"@id": "ada:plot"},
-            {"@id": "ada:image"},
-            {"@id": "ada:instrumentMetadata"},
-            {"@id": "ada:metadata"},
-            {"@id": "CDIF_basic_1.0"}
-        ],
-        "schema:about": {"@id": "ada:record_44"},
+        "schema:dateModified": "2025-08-26",
         "schema:creator": [
             {
                 "@id": "https://ada.org/person/3479",
                 "@type": "schema:Person",
+                "schema:name": "Richard, Stephen M.",
+                "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
                 "schema:contactPoint": {
-                    "@id": "ex:creatorContactPoint",
                     "@type": "schema:ContactPoint",
                     "schema:email": "smrTucson@email.org"
-                },
-                "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
-                "schema:name": "Richard, Stephen M."
+                }
             }
         ],
-        "schema:dateModified": "2024-06-20",
-        "schema:description": "metadata about documentation for https://doi.org/10.60707/2j0t-gq80"
-    },
-    "schema:url": "http://www.opengis.net/def/nil/OGC/0/missing",
-    "schema:variableMeasured": [
-        {
-            "@id": "#angle",
-            "@type": ["schema:PropertyValue"],
-            "cdi:unitOfMeasureKind": "missing",
-            "schema:description": "Angle of the detector in 2theta",
-            "schema:name": "Angle",
-            "schema:propertyID": ["missing"]
-        },
-        {
-            "@id": "#intensity",
-            "@type": ["schema:PropertyValue"],
-            "cdi:unitOfMeasureKind": "missing",
-            "schema:description": "Intensity of diffracted X-rays in counts",
-            "schema:name": "Intensity",
-            "schema:propertyID": ["missing"]
-        }
-    ]
+        "schema:about": {"@id": "xas:485749"},
+        "schema:description": "metadata about documentation for se_na2so4",
+        "dcterms:conformsTo": [
+            {"@id": "cdif:profile_basic_1.0"},
+            {"@id": "cdif:profile_xasCDIF"}
+        ]
+    }
 }
 ```
 
@@ -1530,7 +1715,7 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
 {
   "@context": [
     {
-      "schema": "http://schema.org",
+      "schema": "http://schema.org/",
       "ada": "https://ada.astromat.org/metadata/",
       "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
       "dcterms": "http://purl.org/dc/terms/",
@@ -1538,541 +1723,815 @@ Metadata for an example dataset from the [Astromaterials Data System](https://as
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/entities/CDIFDiscovery/context.jsonld",
     {
-      "ada": "https://ada.astromat.org/metadata/",
-      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+      "@vocab": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+      "schema": "http://schema.org/",
       "dcterms": "http://purl.org/dc/terms/",
       "geosparql": "http://www.opengis.net/ont/geosparql#",
-      "schema": "http://schema.org/",
-      "spdx": "http://spdx.org/rdf/terms#"
+      "spdx": "http://spdx.org/rdf/terms#",
+      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+      "time": "http://www.w3.org/2006/time#",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "xas": "https://xas.org/dictionary/",
+      "nxs": "http://purl.org/nexusformat/definitions/",
+      "prov": "http://www.w3.org/ns/prov#"
     }
   ],
-  "@id": "ada:record_44",
-  "@schema": [
-    "https://w3id.org/adaJSONLD/schema/1.0"
-  ],
+  "@id": "xas:487y54",
   "@type": [
     "schema:Dataset",
     "schema:Product"
+  ],
+  "schema:name": "X-ray absorption spectra for K edge, Iron metal, XDI CDIF example",
+  "schema:description": "Example metadata including all properties in the CDIF XAS profile",
+  "schema:identifier": "https://doi.org/10.9999/aqweropjh",
+  "schema:dateModified": "2025-06-22",
+  "schema:contributor": [
+    {
+      "@type": "schema:Role",
+      "schema:roleName": "Facility",
+      "schema:contributor": {
+        "@type": "schema:Organization",
+        "@id": "https://ror.org/aps",
+        "schema:name": "Argonne Synchotron"
+      }
+    },
+    {
+      "@type": "schema:Role",
+      "schema:roleName": "dataCollector",
+      "schema:contributor": {
+        "@type": "schema:Person",
+        "@id": "https://orcid.org/3547ulkj",
+        "schema:name": "Collectus, Poindexter",
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "missing@email.org"
+        }
+      }
+    },
+    {
+      "@type": "schema:Role",
+      "schema:roleName": "principleInvestigator",
+      "schema:contributor": {
+        "@type": "schema:Person",
+        "@id": "https://orcid.org/35735ul",
+        "schema:name": "Scienceguy, Biggus",
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "missing@email.org"
+        },
+        "schema:affiliation": {
+          "@type": "schema:Organization",
+          "@id": "https://ror.org/lejkthoj",
+          "schema:name": "Big Science Institute"
+        }
+      }
+    }
+  ],
+  "schema:license": [
+    "https://creativecommons.org/publicdomain/zero/1.0/"
+  ],
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "PhysicalDataSet"
+      ],
+      "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
+      "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
+      "schema:contentSize": "30 kb",
+      "schema:encodingFormat": [
+        "text/plain"
+      ],
+      "dcterms:conformsTo": [
+        "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"
+      ],
+      "allowsDuplicates": false,
+      "isStructuredBy": {
+        "@type": "WideDataStructure",
+        "has_DataStructureComponent": [
+          {
+            "@type": "IdentifierComponent",
+            "isDefinedBy_InstanceVariable": {
+              "@id": "xas:monochromatorEnergy"
+            },
+            "has": {
+              "@type": "ValueMapping",
+              "hasIndex": 1,
+              "length": 12
+            }
+          },
+          {
+            "@type": "MeasureComponent",
+            "isDefinedBy_InstanceVariable": {
+              "@id": "xas:incidentIntensity"
+            },
+            "has": {
+              "@type": "ValueMapping",
+              "hasIndex": 3,
+              "length": 13
+            }
+          },
+          {
+            "@type": "MeasureComponent",
+            "isDefinedBy_InstanceVariable": {
+              "@id": "xas:transmittedIntensity"
+            },
+            "has": {
+              "@type": "ValueMapping",
+              "hasIndex": 2,
+              "length": 12
+            }
+          }
+        ],
+        "allowsDuplicates": false,
+        "arrayBase": 1,
+        "commentPrefix": "#",
+        "hasHeader": true,
+        "headerRowCount": 27,
+        "skipInitialSpace": true,
+        "isDelimited": false,
+        "isFixedWidth": true
+      }
+    }
+  ],
+  "schema:measurementTechnique": [
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "X-Ray Absorption Spectroscopy",
+      "schema:termCode": "XAS",
+      "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
+      "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl"
+    },
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "Transmission",
+      "schema:inDefinedTermSet": "nxs:Field/NXxas/ENTRY/DATA/mode"
+    }
+  ],
+  "schema:keywords": [
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "K-edge",
+      "schema:termCode": "K",
+      "schema:inDefinedTermSet": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md"
+    },
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "Selenium",
+      "schema:identifier": "http://sweetontology.net/matrElement/Selenium",
+      "schema:termCode": "Se",
+      "schema:inDefinedTermSet": "http://sweetontology.net/matrElement"
+    }
   ],
   "prov:wasGeneratedBy": {
     "@type": [
       "schema:Event",
       "xas:AnalysisEvent",
+      "schema:Product",
       "prov:Activity"
     ],
+    "schema:identifier": "20241111_DSC_NU_OREX-803224-0_1",
+    "schema:startDate": "2008-04-10T21:58:50",
     "prov:used": [
       {
         "@type": [
           "schema:Thing",
-          "prov:Entity",
-          "nxs:BaseClass/NXinstrument"
+          "schema:Product"
         ],
-        "schema:identifier": "MPANX-JSC-ARES",
-        "schema:name": "(JSC-ARES)Malvern PANalytical XPert Pro XRD"
-      }
-    ],
-    "schema:identifier": "20230928_XRD_JSC-ARES_OREX-500005-0_1",
-    "schema:location": {
-      "@type": [
-        "schema:Place",
-        "nxs:BaseClass/NXsource"
-      ],
-      "schema:alternateName": "JSC-ARES",
-      "schema:name": "NASA Johnson Space Center"
-    },
-    "schema:mainEntity": [
+        "schema:additionalType": "nxs:BaseClass/NXsource",
+        "schema:name": "source, made up for this example",
+        "schema:identifier": "should have a registry with URIs",
+        "schema:additionalProperty": [
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXsource/type",
+            "schema:value": "Synchrotron X-ray Source"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXsource/probe",
+            "schema:name": "Probe",
+            "schema:value": "x-ray"
+          }
+        ]
+      },
       {
         "@type": [
           "schema:Thing",
-          "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+          "schema:Product"
         ],
-        "schema:additionalType": [
-          "MaterialSample"
+        "schema:additionalType": "xas:Beamline",
+        "schema:name": "13-BM-D",
+        "schema:identifier": "should have a registry with URIs",
+        "schema:additionalProperty": [
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "xas:collimation",
+            "schema:value": "none"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "xas:focusing",
+            "schema:name": "focusing",
+            "schema:value": "???"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "xas:harmonic_rejection",
+            "schema:name": "harmonic_rejection",
+            "schema:value": "Rh-coated mirror, detuned"
+          }
+        ]
+      },
+      {
+        "@type": [
+          "schema:Thing",
+          "schema:Product"
         ],
-        "schema:identifier": "OREX-500005-0"
+        "schema:additionalType": "nxs:BaseClass/NXmonochromator",
+        "schema:name": "Si 111",
+        "schema:additionalProperty": [
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXcrystal/d_spacing",
+            "schema:value": "3.13550",
+            "schema:unitText": "Angstrom"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXcrystal/chemical_formula",
+            "schema:value": "Si"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXcrystal/type",
+            "schema:value": "crystal type"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXcrystal/reflection",
+            "schema:value": "1,1,1"
+          }
+        ]
+      },
+      {
+        "@type": [
+          "schema:Thing",
+          "schema:Product"
+        ],
+        "schema:additionalType": "nxs:BaseClass/NXmonitor",
+        "schema:additionalProperty": [
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXmonitor/mode",
+            "schema:name": "monitor mode",
+            "schema:value": "monitor"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "nxs:Field/NXmonitor/preset",
+            "schema:name": "monitor preset",
+            "schema:value": "N.A."
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "xas:detector.i0",
+            "schema:name": "detector mode i0",
+            "schema:alternateName": "incident flux measurement method",
+            "schema:value": "10cm  N2"
+          },
+          {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "xas:detector.it",
+            "schema:name": "detector mode it",
+            "schema:alternateName": "transmitted flux measurement method",
+            "schema:value": "10cm  N2"
+          }
+        ]
       }
     ],
-    "schema:startDate": "2024-01-28T14:06:04.101222+00:00"
-  },
-  "schema:additionalType": [
-    "X-ray diffraction"
-  ],
-  "schema:creator": {
-    "@list": [
+    "schema:additionalProperty": [
       {
-        "@id": "https://ada.org/person/5489",
-        "@type": "schema:Person",
-        "schema:contactPoint": {
-          "@type": "schema:ContactPoint",
-          "schema:email": "a.king@nhm.ac.uk"
-        },
-        "schema:identifier": "https://orcid.org/0000-0001-6113-5417",
-        "schema:name": "King, Ashley"
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "xas:pressure",
+        "schema:description": "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential",
+        "schema:value": 3567,
+        "schema:unitText": "KPa"
+      },
+      {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "xas:edge_energy",
+        "schema:value": "12658.0",
+        "schema:unitText": "eV"
+      },
+      {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "nxs:Group/NXdetector/calibration_method",
+        "schema:name": "calibration method",
+        "schema:value": "description of calibration procedure",
+        "schema:url": "http://protocols.io/link/to/calibrationMethod"
+      },
+      {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "nxs:Group/NXentry/experiment_documentation",
+        "schema:name": "Instrument configuration",
+        "schema:value": "description of instrument configuration",
+        "schema:url": "http://protocols.io/link/to/calibrationMethod"
+      },
+      {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "xas:installedOptions",
+        "schema:name": "Installed Options",
+        "schema:value": "Description of extra equipment installed on the base instrument(?)"
       }
-    ]
-  },
-  "schema:datePublished": "2024-06-20",
-  "schema:dateModified": "2024-06-20",
-  "schema:description": "JSC-ARES Panalytical XRD data for sample OREX-500005-0",
-  "schema:license": [
-    {
-      "@id": "http://www.opengis.net/def/nil/OGC/0/missing"
-    }
-  ],
-  "schema:distribution": [
-    {
+    ],
+    "schema:location": {
+      "@type": "schema:Place",
+      "schema:additionalType": "xas:Facility",
+      "schema:identifier": "https://ror.org/aps",
+      "schema:name": "APS",
+      "schema:additionalProperty": [
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:energy",
+          "schema:value": "7.00",
+          "schema:unitText": "GeV"
+        },
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:current",
+          "schema:value": "120",
+          "schema:unitText": "Amps"
+        },
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:xray_source",
+          "schema:value": "APS bending magnet"
+        }
+      ]
+    },
+    "schema:mainEntity": {
       "@type": [
-        "schema:DataDownload"
+        "schema:Thing",
+        "schema:Product"
       ],
-      "schema:contentUrl": "http://www.opengis.net/def/nil/OGC/0/withheld",
-      "schema:description": "this data product is distributed in zip archive; contents of the archive are listed as parts. The component files are not individually accessible",
-      "schema:encodingFormat": [
-        "application/zip"
+      "schema:additionalType": [
+        "MaterialSample",
+        "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
       ],
-      "schema:hasPart": [
+      "schema:name": "Na2SeO4",
+      "schema:identifier": "igsn:10.6620/357lkj",
+      "schema:description": "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list...",
+      "schema:additionalProperty": [
         {
-          "@id": "#45cdecbbbf9f72f25aa8bdad035680b4",
-          "@type": "schema:Dataset",
-          "fileDetail": {
-            "@type": [
-              "cdi:PhysicalDataSet",
-              "ada:tabularData"
-            ],
-            "cdi:isStructuredBy": {
-              "@type": "cdi:WideDataStructure",
-              "cdi:has_DataStructureComponent": [
-                {
-                  "@type": "cdi:MeasureComponent",
-                  "cdi:has": {
-                    "@type": "cdi:ValueMapping",
-                    "cdi:hasIndex": 1,
-                    "cdi:physicalDataType": "decimal"
-                  },
-                  "cdi:isDefinedBy_InstanceVariable": {
-                    "@id": "#angle"
-                  },
-                  "schema:name": "Angle",
-                  "unitOfMeasure": "degrees 2theta"
-                },
-                {
-                  "@type": "cdi:MeasureComponent",
-                  "cdi:has": {
-                    "@type": "cdi:ValueMapping",
-                    "cdi:hasIndex": 2,
-                    "cdi:physicalDataType": "decimal"
-                  },
-                  "cdi:isDefinedBy_InstanceVariable": {
-                    "@id": "#intensity"
-                  },
-                  "schema:name": "Intensity",
-                  "unitOfMeasure": "counts"
-                }
-              ]
-            },
-            "componentType": "ada:XRDTabular",
-            "countColumns": 2,
-            "countRows": 12571,
-            "geometry": "reflection",
-            "sampleMount": "zero background",
-            "stepSize": 0.007,
-            "timePerStep": 5,
-            "wavelength": 1.78901
-          },
-          "schema:description": "Panalytical XRD data for sample OREX-500005-0",
-          "schema:encodingFormat": "text/csv",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.csv",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 311630
-          },
-          "spdx:checksum": "7f98ff5f2ce5078a6820725580280d742d020eb4cb99bcad296ffea565bdf4fa"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:porosity",
+          "schema:value": 27,
+          "schema:unitText": "percent"
         },
         {
-          "@id": "#f4f6382d0c78fa623d6262d357ed43ce",
-          "@type": "schema:Dataset",
-          "schema:about": [
-            {
-              "@id": "#45cdecbbbf9f72f25aa8bdad035680b4"
-            }
-          ],
-          "schema:description": "",
-          "schema:encodingFormat": "application/yaml",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.yaml",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 765
-          },
-          "spdx:checksum": "37be2186d5fcd22e6695aca0d3fe903fce95b580c558b0d4e957751b062f2221"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:stoichiometry",
+          "schema:value": "Na2SeO4"
         },
         {
-          "@id": "#c7e1fba9edcb558853eae3ab879b0c92",
-          "@type": "schema:Dataset",
-          "schema:description": "Metadata for Panalytical XRD analysis of sample OREX-500005-0",
-          "schema:encodingFormat": "text/plain",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.txt",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 232
-          },
-          "spdx:checksum": "255c055e7e7937f318e0db6a2847319618538f7caa40ac4e598173669955ab7d"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:samplePreparation",
+          "schema:value": "powder on tape, 6 layers"
         },
         {
-          "@id": "#f2aec1be3078bdacf5e68570a5af7690",
-          "@type": "schema:Dataset",
-          "schema:about": [
-            {
-              "@id": "#c7e1fba9edcb558853eae3ab879b0c92"
-            }
-          ],
-          "schema:description": "",
-          "schema:encodingFormat": "application/yaml",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.yaml",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 200
-          },
-          "spdx:checksum": "f2092bb9336d1dc718ce56d7c92912038d8556c17d814a978a8351898567af23"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "nxs:Field/NXsample/mass",
+          "schema:value": "10",
+          "schema:unitText": "mg"
         },
         {
-          "@id": "#18d65475a618cf414ee568fc801c164b",
-          "@type": "schema:Dataset",
-          "fileDetail": {
-            "@type": [
-              "ada:image",
-              "schema:DigitalDocument"
-            ],
-            "componentType": "ada:plot",
-            "numPixelsX": 2178,
-            "numPixelsY": 2178
-          },
-          "schema:description": "Image of Panalytical XRD data for sample OREX-500005-0",
-          "schema:encodingFormat": "image/jpeg",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.jpg",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 244385
-          },
-          "spdx:checksum": "6f86127a8542aed46f664e66d52b384a571a88474a37af8189f72d3b6b5632d2"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "nxs:Field/NXsample/point_group",
+          "schema:value": "mm2"
         },
         {
-          "@id": "#ea1b4bca7e1d1b01b466b7c8aa377a79",
-          "@type": "schema:Dataset",
-          "schema:about": [
-            {
-              "@id": "#18d65475a618cf414ee568fc801c164b"
-            }
-          ],
-          "schema:description": "",
-          "schema:encodingFormat": "application/yaml",
-          "schema:name": "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.yaml",
-          "schema:size": {
-            "@type": "schema:QuantitativeValue",
-            "schema:unitText": "byte",
-            "schema:value": 213
-          },
-          "spdx:checksum": "e669b4a4aee3488e635b94a0a790f42f5b04aaca21679e429e005a2f403f4605"
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "nxs:Field/NXsample/unit_cell",
+          "schema:value": "cubic; Z = 4; a = 5.46; V = 162.77"
+        },
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:parentSample",
+          "schema:value": "igsn:10.3476/342573"
+        },
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": "xas:materialState",
+          "schema:value": "solid metal foil"
         }
       ]
     }
-  ],
-  "schema:identifier": {
-    "@type": "schema:PropertyValue",
-    "schema:propertyID": "https://registry.identifiers.org/registry/doi",
-    "schema:url": "https://doi.org/10.60707/2j0t-gq80",
-    "schema:value": "10.60707/2j0t-gq80"
   },
-  "schema:funding": [
+  "schema:variableMeasured": [
     {
-      "@id": "ex:monetaryGrant_gh35",
-      "@type": "schema:MonetaryGrant",
-      "schema:description": "This material is supported by NASA under contract NNM10AA11C issued through the New Frontiers program.",
-      "schema:funder": {
-        "@id": "https://ror.org/027ka1x80"
-      },
-      "schema:name": "New Frontiers program, OSIRIS-REx"
+      "@id": "xas:monochromatorEnergy",
+      "@type": [
+        "InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "energy",
+      "schema:alternateName": "Monochromator energy",
+      "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+      "schema:propertyID": [
+        "xas:monochromatorEnergyConcept"
+      ],
+      "schema:unitText": "eV",
+      "identifier": "should be URI from nexusFormat organization",
+      "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "simpleUnitOfMeasure": "eV",
+      "uses": "xas:monochromatorEnergyConcept",
+      "name": "energy",
+      "displayLabel": "monochromator energy"
+    },
+    {
+      "@id": "xas:incidentIntensity",
+      "@type": [
+        "InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "i0",
+      "schema:alternateName": "Monitor intensity",
+      "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description)",
+      "schema:propertyID": [
+        "xas:incidentIntensityConcept"
+      ],
+      "schema:unitText": "counts",
+      "identifier": "should be URI from nexusFormat organization",
+      "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "uses": "xas:incidentIntensityConcept",
+      "name": "i0",
+      "displayLabel": "monitor intensity"
+    },
+    {
+      "@id": "xas:transmittedIntensity",
+      "@type": [
+        "InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+      "schema:propertyID": [
+        "xas:transmittedIntensityConcept"
+      ],
+      "schema:unitText": "counts",
+      "schema:name": "itrans",
+      "schema:alternateName": "transmission intensity",
+      "physicalDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "identifier": "should be URI from nexusFormat organization",
+      "uses": "xas:transmittedIntensityConcept",
+      "name": "itrans",
+      "displayLabel": "transmission intensity"
     }
   ],
-  "schema:measurementTechnique": {
-    "@id": "ex:measurementTechnique_gh35",
-    "@type": "schema:DefinedTerm",
-    "schema:name": "X-ray diffraction",
-    "schema:termCode": "XRD"
-  },
-  "schema:name": "JSC-ARES Panalytical XRD data for sample OREX-500005-0",
-  "schema:subjectOf": {
-    "@id": "ada:metadata_44",
-    "@type": "schema:Dataset",
-    "dcterms:conformsTo": [
-      {
-        "@id": "ada:XRDTabular"
-      },
-      {
-        "@id": "ada:tabularData"
-      },
-      {
-        "@id": "ada:plot"
-      },
-      {
-        "@id": "ada:image"
-      },
-      {
-        "@id": "ada:instrumentMetadata"
-      },
-      {
-        "@id": "ada:metadata"
-      },
-      {
-        "@id": "CDIF_basic_1.0"
+  "relatedLink": [
+    {
+      "@type": "LinkRole",
+      "linkRelationship": "projectProposal",
+      "target": {
+        "@type": "EntryPoint",
+        "encodingType": "text/html",
+        "name": "name of the proposal",
+        "url": "https://example.org/locatorForProposalText",
+        "identifier": "identifier for proposal, could used text or schema:PropertyValue pattern"
       }
-    ],
-    "schema:about": {
-      "@id": "ada:record_44"
-    },
+    }
+  ],
+  "schema:subjectOf": {
+    "@id": "xas:ja51-pz63",
+    "@type": "schema:Dataset",
+    "schema:dateModified": "2025-08-26",
     "schema:creator": [
       {
         "@id": "https://ada.org/person/3479",
         "@type": "schema:Person",
+        "schema:name": "Richard, Stephen M.",
+        "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
         "schema:contactPoint": {
-          "@id": "ex:creatorContactPoint",
           "@type": "schema:ContactPoint",
           "schema:email": "smrTucson@email.org"
-        },
-        "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
-        "schema:name": "Richard, Stephen M."
+        }
       }
     ],
-    "schema:dateModified": "2024-06-20",
-    "schema:description": "metadata about documentation for https://doi.org/10.60707/2j0t-gq80"
-  },
-  "schema:url": "http://www.opengis.net/def/nil/OGC/0/missing",
-  "schema:variableMeasured": [
-    {
-      "@id": "#angle",
-      "@type": [
-        "schema:PropertyValue"
-      ],
-      "cdi:unitOfMeasureKind": "missing",
-      "schema:description": "Angle of the detector in 2theta",
-      "schema:name": "Angle",
-      "schema:propertyID": [
-        "missing"
-      ]
+    "schema:about": {
+      "@id": "xas:485749"
     },
-    {
-      "@id": "#intensity",
-      "@type": [
-        "schema:PropertyValue"
-      ],
-      "cdi:unitOfMeasureKind": "missing",
-      "schema:description": "Intensity of diffracted X-rays in counts",
-      "schema:name": "Intensity",
-      "schema:propertyID": [
-        "missing"
-      ]
-    }
-  ]
+    "schema:description": "metadata about documentation for se_na2so4",
+    "dcterms:conformsTo": [
+      {
+        "@id": "cdif:profile_basic_1.0"
+      },
+      {
+        "@id": "cdif:profile_xasCDIF"
+      }
+    ]
+  }
 }
 ```
 
 #### ttl
 ```ttl
-@prefix ada: <https://ada.astromat.org/metadata/> .
 @prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix ex: <https://example.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema1: <http://schema.org/> .
-@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix xas: <https://xas.org/dictionary/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<file:///github/workspace/#ea1b4bca7e1d1b01b466b7c8aa377a79> a schema1:Dataset ;
-    schema1:about <file:///github/workspace/#18d65475a618cf414ee568fc801c164b> ;
-    schema1:description "" ;
-    schema1:encodingFormat "application/yaml" ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.yaml" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 213 ] ;
-    spdx:checksum "e669b4a4aee3488e635b94a0a790f42f5b04aaca21679e429e005a2f403f4605" .
-
-<file:///github/workspace/#f2aec1be3078bdacf5e68570a5af7690> a schema1:Dataset ;
-    schema1:about <file:///github/workspace/#c7e1fba9edcb558853eae3ab879b0c92> ;
-    schema1:description "" ;
-    schema1:encodingFormat "application/yaml" ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.yaml" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 200 ] ;
-    spdx:checksum "f2092bb9336d1dc718ce56d7c92912038d8556c17d814a978a8351898567af23" .
-
-<file:///github/workspace/#f4f6382d0c78fa623d6262d357ed43ce> a schema1:Dataset ;
-    schema1:about <file:///github/workspace/#45cdecbbbf9f72f25aa8bdad035680b4> ;
-    schema1:description "" ;
-    schema1:encodingFormat "application/yaml" ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.yaml" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 765 ] ;
-    spdx:checksum "37be2186d5fcd22e6695aca0d3fe903fce95b580c558b0d4e957751b062f2221" .
-
-ada:metadata_44 a schema1:Dataset ;
-    dct:conformsTo <file:///github/workspace/CDIF_basic_1.0>,
-        ada:XRDTabular,
-        ada:image,
-        ada:instrumentMetadata,
-        ada:metadata,
-        ada:plot,
-        ada:tabularData ;
-    schema1:about ada:record_44 ;
-    schema1:creator <https://ada.org/person/3479> ;
-    schema1:dateModified "2024-06-20" ;
-    schema1:description "metadata about documentation for https://doi.org/10.60707/2j0t-gq80" .
-
-ada:record_44 a schema1:Dataset,
+xas:487y54 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "X-ray diffraction" ;
-    schema1:creator ( <https://ada.org/person/5489> ) ;
-    schema1:dateModified "2024-06-20" ;
-    schema1:datePublished "2024-06-20" ;
-    schema1:description "JSC-ARES Panalytical XRD data for sample OREX-500005-0" ;
-    schema1:distribution [ a schema1:DataDownload ;
-            schema1:contentUrl "http://www.opengis.net/def/nil/OGC/0/withheld" ;
-            schema1:description "this data product is distributed in zip archive; contents of the archive are listed as parts. The component files are not individually accessible" ;
-            schema1:encodingFormat "application/zip" ;
-            schema1:hasPart <file:///github/workspace/#18d65475a618cf414ee568fc801c164b>,
-                <file:///github/workspace/#45cdecbbbf9f72f25aa8bdad035680b4>,
-                <file:///github/workspace/#c7e1fba9edcb558853eae3ab879b0c92>,
-                <file:///github/workspace/#ea1b4bca7e1d1b01b466b7c8aa377a79>,
-                <file:///github/workspace/#f2aec1be3078bdacf5e68570a5af7690>,
-                <file:///github/workspace/#f4f6382d0c78fa623d6262d357ed43ce> ] ;
-    schema1:funding ex:monetaryGrant_gh35 ;
-    schema1:identifier [ a schema1:PropertyValue ;
-            schema1:propertyID "https://registry.identifiers.org/registry/doi" ;
-            schema1:url "https://doi.org/10.60707/2j0t-gq80" ;
-            schema1:value "10.60707/2j0t-gq80" ] ;
-    schema1:license <http://www.opengis.net/def/nil/OGC/0/missing> ;
-    schema1:measurementTechnique ex:measurementTechnique_gh35 ;
-    schema1:name "JSC-ARES Panalytical XRD data for sample OREX-500005-0" ;
-    schema1:subjectOf ada:metadata_44 ;
-    schema1:url "http://www.opengis.net/def/nil/OGC/0/missing" ;
-    schema1:variableMeasured <file:///github/workspace/#angle>,
-        <file:///github/workspace/#intensity> ;
+    cdi:relatedLink [ a cdi:LinkRole ;
+            cdi:linkRelationship "projectProposal" ;
+            cdi:target [ a cdi:EntryPoint ;
+                    cdi:encodingType "text/html" ;
+                    cdi:identifier "identifier for proposal, could used text or schema:PropertyValue pattern" ;
+                    cdi:name "name of the proposal" ;
+                    cdi:url "https://example.org/locatorForProposalText" ] ] ;
+    schema1:contributor [ a schema1:Role ;
+            schema1:contributor <https://orcid.org/35735ul> ;
+            schema1:roleName "principleInvestigator" ],
+        [ a schema1:Role ;
+            schema1:contributor <https://orcid.org/3547ulkj> ;
+            schema1:roleName "dataCollector" ],
+        [ a schema1:Role ;
+            schema1:contributor <https://ror.org/aps> ;
+            schema1:roleName "Facility" ] ;
+    schema1:dateModified "2025-06-22" ;
+    schema1:description "Example metadata including all properties in the CDIF XAS profile" ;
+    schema1:distribution [ a cdi:PhysicalDataSet,
+                schema1:DataDownload ;
+            cdi:allowsDuplicates false ;
+            cdi:isStructuredBy [ a cdi:WideDataStructure ;
+                    cdi:allowsDuplicates false ;
+                    cdi:arrayBase 1 ;
+                    cdi:commentPrefix "#" ;
+                    cdi:hasHeader true ;
+                    cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
+                            cdi:has [ a cdi:ValueMapping ;
+                                    cdi:hasIndex 2 ;
+                                    cdi:length 12 ] ;
+                            cdi:isDefinedBy_InstanceVariable xas:transmittedIntensity ],
+                        [ a cdi:MeasureComponent ;
+                            cdi:has [ a cdi:ValueMapping ;
+                                    cdi:hasIndex 3 ;
+                                    cdi:length 13 ] ;
+                            cdi:isDefinedBy_InstanceVariable xas:incidentIntensity ],
+                        [ a cdi:IdentifierComponent ;
+                            cdi:has [ a cdi:ValueMapping ;
+                                    cdi:hasIndex 1 ;
+                                    cdi:length 12 ] ;
+                            cdi:isDefinedBy_InstanceVariable xas:monochromatorEnergy ] ;
+                    cdi:headerRowCount 27 ;
+                    cdi:isDelimited false ;
+                    cdi:isFixedWidth true ;
+                    cdi:skipInitialSpace true ] ;
+            dcterms:conformsTo "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md" ;
+            schema1:contentSize "30 kb" ;
+            schema1:contentUrl "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi" ;
+            schema1:description "Distribution = PhysicalDataSet text file conformant with XDI specification" ;
+            schema1:encodingFormat "text/plain" ] ;
+    schema1:identifier "https://doi.org/10.9999/aqweropjh" ;
+    schema1:keywords [ a schema1:DefinedTerm ;
+            schema1:identifier "http://sweetontology.net/matrElement/Selenium" ;
+            schema1:inDefinedTermSet "http://sweetontology.net/matrElement" ;
+            schema1:name "Selenium" ;
+            schema1:termCode "Se" ],
+        [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md" ;
+            schema1:name "K-edge" ;
+            schema1:termCode "K" ] ;
+    schema1:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    schema1:measurementTechnique [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "nxs:Field/NXxas/ENTRY/DATA/mode" ;
+            schema1:name "Transmission" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier "http://purl.org/pan-science/PaNET/PaNET01196" ;
+            schema1:inDefinedTermSet "http://purl.org/pan-science/PaNET/PaNET.owl" ;
+            schema1:name "X-Ray Absorption Spectroscopy" ;
+            schema1:termCode "XAS" ] ;
+    schema1:name "X-ray absorption spectra for K edge, Iron metal, XDI CDIF example" ;
+    schema1:subjectOf xas:ja51-pz63 ;
+    schema1:variableMeasured xas:incidentIntensity,
+        xas:monochromatorEnergy,
+        xas:transmittedIntensity ;
     prov:wasGeneratedBy [ a schema1:Event,
+                schema1:Product,
                 prov:Activity,
-                <xas:AnalysisEvent> ;
-            schema1:identifier "20230928_XRD_JSC-ARES_OREX-500005-0_1" ;
-            schema1:location [ a schema1:Place,
-                        <nxs:BaseClass/NXsource> ;
-                    schema1:alternateName "JSC-ARES" ;
-                    schema1:name "NASA Johnson Space Center" ] ;
-            schema1:mainEntity [ a schema1:Thing,
-                        <https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample> ;
-                    schema1:additionalType "MaterialSample" ;
-                    schema1:identifier "OREX-500005-0" ] ;
-            schema1:startDate "2024-01-28T14:06:04.101222+00:00" ;
-            prov:used [ a schema1:Thing,
-                        prov:Entity,
-                        <nxs:BaseClass/NXinstrument> ;
-                    schema1:identifier "MPANX-JSC-ARES" ;
-                    schema1:name "(JSC-ARES)Malvern PANalytical XPert Pro XRD" ] ] .
+                xas:AnalysisEvent ;
+            schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:propertyID "xas:edge_energy" ;
+                    schema1:unitText "eV" ;
+                    schema1:value "12658.0" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Installed Options" ;
+                    schema1:propertyID "xas:installedOptions" ;
+                    schema1:value "Description of extra equipment installed on the base instrument(?)" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Instrument configuration" ;
+                    schema1:propertyID "nxs:Group/NXentry/experiment_documentation" ;
+                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
+                    schema1:value "description of instrument configuration" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "calibration method" ;
+                    schema1:propertyID "nxs:Group/NXdetector/calibration_method" ;
+                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
+                    schema1:value "description of calibration procedure" ],
+                [ a schema1:PropertyValue ;
+                    schema1:description "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential" ;
+                    schema1:propertyID "xas:pressure" ;
+                    schema1:unitText "KPa" ;
+                    schema1:value 3567 ] ;
+            schema1:identifier "20241111_DSC_NU_OREX-803224-0_1" ;
+            schema1:location [ a schema1:Place ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:xray_source" ;
+                            schema1:value "APS bending magnet" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:current" ;
+                            schema1:unitText "Amps" ;
+                            schema1:value "120" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:energy" ;
+                            schema1:unitText "GeV" ;
+                            schema1:value "7.00" ] ;
+                    schema1:additionalType "xas:Facility" ;
+                    schema1:identifier "https://ror.org/aps" ;
+                    schema1:name "APS" ] ;
+            schema1:mainEntity [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:samplePreparation" ;
+                            schema1:value "powder on tape, 6 layers" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:materialState" ;
+                            schema1:value "solid metal foil" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
+                            schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:porosity" ;
+                            schema1:unitText "percent" ;
+                            schema1:value 27 ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:stoichiometry" ;
+                            schema1:value "Na2SeO4" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:parentSample" ;
+                            schema1:value "igsn:10.3476/342573" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXsample/point_group" ;
+                            schema1:value "mm2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXsample/mass" ;
+                            schema1:unitText "mg" ;
+                            schema1:value "10" ] ;
+                    schema1:additionalType "MaterialSample",
+                        "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample" ;
+                    schema1:description "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list..." ;
+                    schema1:identifier "igsn:10.6620/357lkj" ;
+                    schema1:name "Na2SeO4" ] ;
+            schema1:startDate "2008-04-10T21:58:50" ;
+            prov:used [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:alternateName "incident flux measurement method" ;
+                            schema1:name "detector mode i0" ;
+                            schema1:propertyID "xas:detector.i0" ;
+                            schema1:value "10cm  N2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "monitor preset" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/preset" ;
+                            schema1:value "N.A." ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "monitor mode" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/mode" ;
+                            schema1:value "monitor" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:alternateName "transmitted flux measurement method" ;
+                            schema1:name "detector mode it" ;
+                            schema1:propertyID "xas:detector.it" ;
+                            schema1:value "10cm  N2" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonitor" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "harmonic_rejection" ;
+                            schema1:propertyID "xas:harmonic_rejection" ;
+                            schema1:value "Rh-coated mirror, detuned" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "xas:collimation" ;
+                            schema1:value "none" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "focusing" ;
+                            schema1:propertyID "xas:focusing" ;
+                            schema1:value "???" ] ;
+                    schema1:additionalType "xas:Beamline" ;
+                    schema1:identifier "should have a registry with URIs" ;
+                    schema1:name "13-BM-D" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "Probe" ;
+                            schema1:propertyID "nxs:Field/NXsource/probe" ;
+                            schema1:value "x-ray" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXsource/type" ;
+                            schema1:value "Synchrotron X-ray Source" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
+                    schema1:identifier "should have a registry with URIs" ;
+                    schema1:name "source, made up for this example" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                            schema1:value "1,1,1" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
+                            schema1:value "Si" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
+                            schema1:unitText "Angstrom" ;
+                            schema1:value "3.13550" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                            schema1:value "crystal type" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
+                    schema1:name "Si 111" ] ] .
 
 <https://ada.org/person/3479> a schema1:Person ;
-    schema1:contactPoint ex:creatorContactPoint ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "smrTucson@email.org" ] ;
     schema1:identifier "https://orcid.org/0000-0002-7933-2154" ;
     schema1:name "Richard, Stephen M." .
 
-<https://ada.org/person/5489> a schema1:Person ;
+<https://orcid.org/3547ulkj> a schema1:Person ;
     schema1:contactPoint [ a schema1:ContactPoint ;
-            schema1:email "a.king@nhm.ac.uk" ] ;
-    schema1:identifier "https://orcid.org/0000-0001-6113-5417" ;
-    schema1:name "King, Ashley" .
+            schema1:email "missing@email.org" ] ;
+    schema1:name "Collectus, Poindexter" .
 
-ex:creatorContactPoint a schema1:ContactPoint ;
-    schema1:email "smrTucson@email.org" .
+<https://orcid.org/35735ul> a schema1:Person ;
+    schema1:affiliation <https://ror.org/lejkthoj> ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "missing@email.org" ] ;
+    schema1:name "Scienceguy, Biggus" .
 
-ex:measurementTechnique_gh35 a schema1:DefinedTerm ;
-    schema1:name "X-ray diffraction" ;
-    schema1:termCode "XRD" .
+<https://ror.org/aps> a schema1:Organization ;
+    schema1:name "Argonne Synchotron" .
 
-ex:monetaryGrant_gh35 a schema1:MonetaryGrant ;
-    schema1:description "This material is supported by NASA under contract NNM10AA11C issued through the New Frontiers program." ;
-    schema1:funder <https://ror.org/027ka1x80> ;
-    schema1:name "New Frontiers program, OSIRIS-REx" .
+<https://ror.org/lejkthoj> a schema1:Organization ;
+    schema1:name "Big Science Institute" .
 
-<file:///github/workspace/#18d65475a618cf414ee568fc801c164b> a schema1:Dataset ;
-    schema1:description "Image of Panalytical XRD data for sample OREX-500005-0" ;
-    schema1:encodingFormat "image/jpeg" ;
-    schema1:fileDetail [ a schema1:DigitalDocument,
-                ada:image ;
-            schema1:componentType "ada:plot" ;
-            schema1:numPixelsX 2178 ;
-            schema1:numPixelsY 2178 ] ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_plot_1.jpg" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 244385 ] ;
-    spdx:checksum "6f86127a8542aed46f664e66d52b384a571a88474a37af8189f72d3b6b5632d2" .
+xas:ja51-pz63 a schema1:Dataset ;
+    dcterms:conformsTo <cdif:profile_basic_1.0>,
+        <cdif:profile_xasCDIF> ;
+    schema1:about xas:485749 ;
+    schema1:creator <https://ada.org/person/3479> ;
+    schema1:dateModified "2025-08-26" ;
+    schema1:description "metadata about documentation for se_na2so4" .
 
-<file:///github/workspace/#45cdecbbbf9f72f25aa8bdad035680b4> a schema1:Dataset ;
-    schema1:description "Panalytical XRD data for sample OREX-500005-0" ;
-    schema1:encodingFormat "text/csv" ;
-    schema1:fileDetail [ a cdi:PhysicalDataSet,
-                ada:tabularData ;
-            cdi:isStructuredBy [ a cdi:WideDataStructure ;
-                    cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
-                            cdi:has [ a cdi:ValueMapping ;
-                                    cdi:hasIndex 1 ;
-                                    cdi:physicalDataType "decimal" ] ;
-                            cdi:isDefinedBy_InstanceVariable <file:///github/workspace/#angle> ;
-                            schema1:name "Angle" ;
-                            schema1:unitOfMeasure "degrees 2theta" ],
-                        [ a cdi:MeasureComponent ;
-                            cdi:has [ a cdi:ValueMapping ;
-                                    cdi:hasIndex 2 ;
-                                    cdi:physicalDataType "decimal" ] ;
-                            cdi:isDefinedBy_InstanceVariable <file:///github/workspace/#intensity> ;
-                            schema1:name "Intensity" ;
-                            schema1:unitOfMeasure "counts" ] ] ;
-            schema1:componentType "ada:XRDTabular" ;
-            schema1:countColumns 2 ;
-            schema1:countRows 12571 ;
-            schema1:geometry "reflection" ;
-            schema1:sampleMount "zero background" ;
-            schema1:stepSize 7e-03 ;
-            schema1:timePerStep 5 ;
-            schema1:wavelength 1.78901e+00 ] ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_XRDTabular_1.csv" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 311630 ] ;
-    spdx:checksum "7f98ff5f2ce5078a6820725580280d742d020eb4cb99bcad296ffea565bdf4fa" .
+xas:incidentIntensity a cdi:InstanceVariable,
+        schema1:PropertyValue ;
+    cdi:displayLabel "monitor intensity" ;
+    cdi:identifier "should be URI from nexusFormat organization" ;
+    cdi:name "i0" ;
+    cdi:physicalDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:uses "xas:incidentIntensityConcept" ;
+    schema1:alternateName "Monitor intensity" ;
+    schema1:description "missing, definition of what this variable is about (maybe even an iAdopt description)" ;
+    schema1:name "i0" ;
+    schema1:propertyID "xas:incidentIntensityConcept" ;
+    schema1:unitText "counts" .
 
-<file:///github/workspace/#angle> a schema1:PropertyValue ;
-    cdi:unitOfMeasureKind "missing" ;
-    schema1:description "Angle of the detector in 2theta" ;
-    schema1:name "Angle" ;
-    schema1:propertyID "missing" .
+xas:monochromatorEnergy a cdi:InstanceVariable,
+        schema1:PropertyValue ;
+    cdi:displayLabel "monochromator energy" ;
+    cdi:identifier "should be URI from nexusFormat organization" ;
+    cdi:name "energy" ;
+    cdi:physicalDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:simpleUnitOfMeasure "eV" ;
+    cdi:uses "xas:monochromatorEnergyConcept" ;
+    schema1:alternateName "Monochromator energy" ;
+    schema1:description "missing, definition of what this variable is about (maybe even an iAdopt description" ;
+    schema1:name "energy" ;
+    schema1:propertyID "xas:monochromatorEnergyConcept" ;
+    schema1:unitText "eV" .
 
-<file:///github/workspace/#c7e1fba9edcb558853eae3ab879b0c92> a schema1:Dataset ;
-    schema1:description "Metadata for Panalytical XRD analysis of sample OREX-500005-0" ;
-    schema1:encodingFormat "text/plain" ;
-    schema1:name "20230928_XRD_JSC-ARES_OREX-500005-0_1_instrumentMetadata_1.txt" ;
-    schema1:size [ a schema1:QuantitativeValue ;
-            schema1:unitText "byte" ;
-            schema1:value 232 ] ;
-    spdx:checksum "255c055e7e7937f318e0db6a2847319618538f7caa40ac4e598173669955ab7d" .
-
-<file:///github/workspace/#intensity> a schema1:PropertyValue ;
-    cdi:unitOfMeasureKind "missing" ;
-    schema1:description "Intensity of diffracted X-rays in counts" ;
-    schema1:name "Intensity" ;
-    schema1:propertyID "missing" .
+xas:transmittedIntensity a cdi:InstanceVariable,
+        schema1:PropertyValue ;
+    cdi:displayLabel "transmission intensity" ;
+    cdi:identifier "should be URI from nexusFormat organization" ;
+    cdi:name "itrans" ;
+    cdi:physicalDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:uses "xas:transmittedIntensityConcept" ;
+    schema1:alternateName "transmission intensity" ;
+    schema1:description "missing, definition of what this variable is about (maybe even an iAdopt description" ;
+    schema1:name "itrans" ;
+    schema1:propertyID "xas:transmittedIntensityConcept" ;
+    schema1:unitText "counts" .
 
 
 ```
@@ -2103,14 +2562,17 @@ description: 'JSON schema for JSON-LD documents that describe science datasets f
 allOf:
 - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifMandatory/schema.yaml
 - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/cdifOptional/schema.yaml
-x-jsonld-extra-terms:
-  schema: https://schema.org
 x-jsonld-prefixes:
-  ada: https://ada.astromat.org/metadata/
+  schema: http://schema.org/
   cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
   dcterms: http://purl.org/dc/terms/
   geosparql: http://www.opengis.net/ont/geosparql#
   spdx: http://spdx.org/rdf/terms#
+  time: http://www.w3.org/2006/time#
+  skos: http://www.w3.org/2004/02/skos/core#
+  xas: https://xas.org/dictionary/
+  nxs: http://purl.org/nexusformat/definitions/
+  prov: http://www.w3.org/ns/prov#
 
 ```
 
@@ -2125,3384 +2587,18 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
-    "@vocab": "http://schema.org/",
-    "type": "@type",
-    "id": "@id",
-    "HTML": "rdf:HTML",
-    "xml": "http://www.w3.org/XML/1998/namespace",
-    "3DModel": "http://schema.org/3DModel",
-    "AMRadioChannel": "http://schema.org/AMRadioChannel",
-    "APIReference": "http://schema.org/APIReference",
-    "Abdomen": "http://schema.org/Abdomen",
-    "AboutPage": "http://schema.org/AboutPage",
-    "AcceptAction": "http://schema.org/AcceptAction",
-    "Accommodation": "http://schema.org/Accommodation",
-    "AccountingService": "http://schema.org/AccountingService",
-    "AchieveAction": "http://schema.org/AchieveAction",
-    "Action": "http://schema.org/Action",
-    "ActionAccessSpecification": "http://schema.org/ActionAccessSpecification",
-    "ActionStatusType": "http://schema.org/ActionStatusType",
-    "ActivateAction": "http://schema.org/ActivateAction",
-    "ActivationFee": "http://schema.org/ActivationFee",
-    "ActiveActionStatus": "http://schema.org/ActiveActionStatus",
-    "ActiveNotRecruiting": "http://schema.org/ActiveNotRecruiting",
-    "AddAction": "http://schema.org/AddAction",
-    "AdministrativeArea": "http://schema.org/AdministrativeArea",
-    "AdultEntertainment": "http://schema.org/AdultEntertainment",
-    "AdultOrientedEnumeration": "http://schema.org/AdultOrientedEnumeration",
-    "AdvertiserContentArticle": "http://schema.org/AdvertiserContentArticle",
-    "AerobicActivity": "http://schema.org/AerobicActivity",
-    "AggregateOffer": "http://schema.org/AggregateOffer",
-    "AggregateRating": "http://schema.org/AggregateRating",
-    "AgreeAction": "http://schema.org/AgreeAction",
-    "Airline": "http://schema.org/Airline",
-    "Airport": "http://schema.org/Airport",
-    "AlbumRelease": "http://schema.org/AlbumRelease",
-    "AlcoholConsideration": "http://schema.org/AlcoholConsideration",
-    "AlgorithmicMediaDigitalSource": "http://schema.org/AlgorithmicMediaDigitalSource",
-    "AlgorithmicallyEnhancedDigitalSource": "http://schema.org/AlgorithmicallyEnhancedDigitalSource",
-    "AlignmentObject": "http://schema.org/AlignmentObject",
-    "AllWheelDriveConfiguration": "http://schema.org/AllWheelDriveConfiguration",
-    "AllergiesHealthAspect": "http://schema.org/AllergiesHealthAspect",
-    "AllocateAction": "http://schema.org/AllocateAction",
-    "AmpStory": "http://schema.org/AmpStory",
-    "AmusementPark": "http://schema.org/AmusementPark",
-    "AnaerobicActivity": "http://schema.org/AnaerobicActivity",
-    "AnalysisNewsArticle": "http://schema.org/AnalysisNewsArticle",
-    "AnatomicalStructure": "http://schema.org/AnatomicalStructure",
-    "AnatomicalSystem": "http://schema.org/AnatomicalSystem",
-    "AndroidPlatform": "http://schema.org/AndroidPlatform",
-    "Anesthesia": "http://schema.org/Anesthesia",
-    "AnimalShelter": "http://schema.org/AnimalShelter",
-    "Answer": "http://schema.org/Answer",
-    "Apartment": "http://schema.org/Apartment",
-    "ApartmentComplex": "http://schema.org/ApartmentComplex",
-    "Appearance": "http://schema.org/Appearance",
-    "AppendAction": "http://schema.org/AppendAction",
-    "ApplyAction": "http://schema.org/ApplyAction",
-    "ApprovedIndication": "http://schema.org/ApprovedIndication",
-    "Aquarium": "http://schema.org/Aquarium",
-    "ArchiveComponent": "http://schema.org/ArchiveComponent",
-    "ArchiveOrganization": "http://schema.org/ArchiveOrganization",
-    "ArriveAction": "http://schema.org/ArriveAction",
-    "ArtGallery": "http://schema.org/ArtGallery",
-    "Artery": "http://schema.org/Artery",
-    "Article": "http://schema.org/Article",
-    "AskAction": "http://schema.org/AskAction",
-    "AskPublicNewsArticle": "http://schema.org/AskPublicNewsArticle",
-    "AssessAction": "http://schema.org/AssessAction",
-    "AssignAction": "http://schema.org/AssignAction",
-    "Atlas": "http://schema.org/Atlas",
-    "Attorney": "http://schema.org/Attorney",
-    "Audience": "http://schema.org/Audience",
-    "AudioObject": "http://schema.org/AudioObject",
-    "AudioObjectSnapshot": "http://schema.org/AudioObjectSnapshot",
-    "Audiobook": "http://schema.org/Audiobook",
-    "AudiobookFormat": "http://schema.org/AudiobookFormat",
-    "AuthoritativeLegalValue": "http://schema.org/AuthoritativeLegalValue",
-    "AuthorizeAction": "http://schema.org/AuthorizeAction",
-    "AutoBodyShop": "http://schema.org/AutoBodyShop",
-    "AutoDealer": "http://schema.org/AutoDealer",
-    "AutoPartsStore": "http://schema.org/AutoPartsStore",
-    "AutoRental": "http://schema.org/AutoRental",
-    "AutoRepair": "http://schema.org/AutoRepair",
-    "AutoWash": "http://schema.org/AutoWash",
-    "AutomatedTeller": "http://schema.org/AutomatedTeller",
-    "AutomotiveBusiness": "http://schema.org/AutomotiveBusiness",
-    "Ayurvedic": "http://schema.org/Ayurvedic",
-    "BackOrder": "http://schema.org/BackOrder",
-    "BackgroundNewsArticle": "http://schema.org/BackgroundNewsArticle",
-    "Bacteria": "http://schema.org/Bacteria",
-    "Bakery": "http://schema.org/Bakery",
-    "Balance": "http://schema.org/Balance",
-    "BankAccount": "http://schema.org/BankAccount",
-    "BankOrCreditUnion": "http://schema.org/BankOrCreditUnion",
-    "BarOrPub": "http://schema.org/BarOrPub",
-    "Barcode": "http://schema.org/Barcode",
-    "BasicIncome": "http://schema.org/BasicIncome",
-    "Beach": "http://schema.org/Beach",
-    "BeautySalon": "http://schema.org/BeautySalon",
-    "BedAndBreakfast": "http://schema.org/BedAndBreakfast",
-    "BedDetails": "http://schema.org/BedDetails",
-    "BedType": "http://schema.org/BedType",
-    "BefriendAction": "http://schema.org/BefriendAction",
-    "BenefitsHealthAspect": "http://schema.org/BenefitsHealthAspect",
-    "BikeStore": "http://schema.org/BikeStore",
-    "BioChemEntity": "http://schema.org/BioChemEntity",
-    "Blog": "http://schema.org/Blog",
-    "BlogPosting": "http://schema.org/BlogPosting",
-    "BloodTest": "http://schema.org/BloodTest",
-    "BoardingPolicyType": "http://schema.org/BoardingPolicyType",
-    "BoatReservation": "http://schema.org/BoatReservation",
-    "BoatTerminal": "http://schema.org/BoatTerminal",
-    "BoatTrip": "http://schema.org/BoatTrip",
-    "BodyMeasurementArm": "http://schema.org/BodyMeasurementArm",
-    "BodyMeasurementBust": "http://schema.org/BodyMeasurementBust",
-    "BodyMeasurementChest": "http://schema.org/BodyMeasurementChest",
-    "BodyMeasurementFoot": "http://schema.org/BodyMeasurementFoot",
-    "BodyMeasurementHand": "http://schema.org/BodyMeasurementHand",
-    "BodyMeasurementHead": "http://schema.org/BodyMeasurementHead",
-    "BodyMeasurementHeight": "http://schema.org/BodyMeasurementHeight",
-    "BodyMeasurementHips": "http://schema.org/BodyMeasurementHips",
-    "BodyMeasurementInsideLeg": "http://schema.org/BodyMeasurementInsideLeg",
-    "BodyMeasurementNeck": "http://schema.org/BodyMeasurementNeck",
-    "BodyMeasurementTypeEnumeration": "http://schema.org/BodyMeasurementTypeEnumeration",
-    "BodyMeasurementUnderbust": "http://schema.org/BodyMeasurementUnderbust",
-    "BodyMeasurementWaist": "http://schema.org/BodyMeasurementWaist",
-    "BodyMeasurementWeight": "http://schema.org/BodyMeasurementWeight",
-    "BodyOfWater": "http://schema.org/BodyOfWater",
-    "Bone": "http://schema.org/Bone",
-    "Book": "http://schema.org/Book",
-    "BookFormatType": "http://schema.org/BookFormatType",
-    "BookSeries": "http://schema.org/BookSeries",
-    "BookStore": "http://schema.org/BookStore",
-    "BookmarkAction": "http://schema.org/BookmarkAction",
-    "Boolean": "http://schema.org/Boolean",
-    "BorrowAction": "http://schema.org/BorrowAction",
-    "BowlingAlley": "http://schema.org/BowlingAlley",
-    "BrainStructure": "http://schema.org/BrainStructure",
-    "Brand": "http://schema.org/Brand",
-    "BreadcrumbList": "http://schema.org/BreadcrumbList",
-    "Brewery": "http://schema.org/Brewery",
-    "Bridge": "http://schema.org/Bridge",
-    "BroadcastChannel": "http://schema.org/BroadcastChannel",
-    "BroadcastEvent": "http://schema.org/BroadcastEvent",
-    "BroadcastFrequencySpecification": "http://schema.org/BroadcastFrequencySpecification",
-    "BroadcastRelease": "http://schema.org/BroadcastRelease",
-    "BroadcastService": "http://schema.org/BroadcastService",
-    "BrokerageAccount": "http://schema.org/BrokerageAccount",
-    "BuddhistTemple": "http://schema.org/BuddhistTemple",
-    "BusOrCoach": "http://schema.org/BusOrCoach",
-    "BusReservation": "http://schema.org/BusReservation",
-    "BusStation": "http://schema.org/BusStation",
-    "BusStop": "http://schema.org/BusStop",
-    "BusTrip": "http://schema.org/BusTrip",
-    "BusinessAudience": "http://schema.org/BusinessAudience",
-    "BusinessEntityType": "http://schema.org/BusinessEntityType",
-    "BusinessEvent": "http://schema.org/BusinessEvent",
-    "BusinessFunction": "http://schema.org/BusinessFunction",
-    "BusinessSupport": "http://schema.org/BusinessSupport",
-    "BuyAction": "http://schema.org/BuyAction",
-    "ByBankTransferInAdvance": "http://schema.org/ByBankTransferInAdvance",
-    "ByInvoice": "http://schema.org/ByInvoice",
-    "CDCPMDRecord": "http://schema.org/CDCPMDRecord",
-    "CDFormat": "http://schema.org/CDFormat",
-    "COD": "http://schema.org/COD",
-    "CT": "http://schema.org/CT",
-    "CableOrSatelliteService": "http://schema.org/CableOrSatelliteService",
-    "CafeOrCoffeeShop": "http://schema.org/CafeOrCoffeeShop",
-    "Campground": "http://schema.org/Campground",
-    "CampingPitch": "http://schema.org/CampingPitch",
-    "Canal": "http://schema.org/Canal",
-    "CancelAction": "http://schema.org/CancelAction",
-    "Car": "http://schema.org/Car",
-    "CarUsageType": "http://schema.org/CarUsageType",
-    "Cardiovascular": "http://schema.org/Cardiovascular",
-    "CardiovascularExam": "http://schema.org/CardiovascularExam",
-    "CaseSeries": "http://schema.org/CaseSeries",
-    "Cash": "http://schema.org/Cash",
-    "Casino": "http://schema.org/Casino",
-    "CassetteFormat": "http://schema.org/CassetteFormat",
-    "CategoryCode": "http://schema.org/CategoryCode",
-    "CategoryCodeSet": "http://schema.org/CategoryCodeSet",
-    "CatholicChurch": "http://schema.org/CatholicChurch",
-    "CausesHealthAspect": "http://schema.org/CausesHealthAspect",
-    "Cemetery": "http://schema.org/Cemetery",
-    "Certification": "http://schema.org/Certification",
-    "CertificationActive": "http://schema.org/CertificationActive",
-    "CertificationInactive": "http://schema.org/CertificationInactive",
-    "CertificationStatusEnumeration": "http://schema.org/CertificationStatusEnumeration",
-    "Chapter": "http://schema.org/Chapter",
-    "CharitableIncorporatedOrganization": "http://schema.org/CharitableIncorporatedOrganization",
-    "CheckAction": "http://schema.org/CheckAction",
-    "CheckInAction": "http://schema.org/CheckInAction",
-    "CheckInAdvance": "http://schema.org/CheckInAdvance",
-    "CheckOutAction": "http://schema.org/CheckOutAction",
-    "CheckoutPage": "http://schema.org/CheckoutPage",
-    "ChemicalSubstance": "http://schema.org/ChemicalSubstance",
-    "ChildCare": "http://schema.org/ChildCare",
-    "ChildrensEvent": "http://schema.org/ChildrensEvent",
-    "Chiropractic": "http://schema.org/Chiropractic",
-    "ChooseAction": "http://schema.org/ChooseAction",
-    "Church": "http://schema.org/Church",
-    "City": "http://schema.org/City",
-    "CityHall": "http://schema.org/CityHall",
-    "CivicStructure": "http://schema.org/CivicStructure",
-    "Claim": "http://schema.org/Claim",
-    "ClaimReview": "http://schema.org/ClaimReview",
-    "Class": "http://schema.org/Class",
-    "CleaningFee": "http://schema.org/CleaningFee",
-    "Clinician": "http://schema.org/Clinician",
-    "Clip": "http://schema.org/Clip",
-    "ClothingStore": "http://schema.org/ClothingStore",
-    "CoOp": "http://schema.org/CoOp",
-    "Code": "http://schema.org/Code",
-    "CohortStudy": "http://schema.org/CohortStudy",
-    "Collection": "http://schema.org/Collection",
-    "CollectionPage": "http://schema.org/CollectionPage",
-    "CollegeOrUniversity": "http://schema.org/CollegeOrUniversity",
-    "ComedyClub": "http://schema.org/ComedyClub",
-    "ComedyEvent": "http://schema.org/ComedyEvent",
-    "ComicCoverArt": "http://schema.org/ComicCoverArt",
-    "ComicIssue": "http://schema.org/ComicIssue",
-    "ComicSeries": "http://schema.org/ComicSeries",
-    "ComicStory": "http://schema.org/ComicStory",
-    "Comment": "http://schema.org/Comment",
-    "CommentAction": "http://schema.org/CommentAction",
-    "CommentPermission": "http://schema.org/CommentPermission",
-    "CommunicateAction": "http://schema.org/CommunicateAction",
-    "CommunityHealth": "http://schema.org/CommunityHealth",
-    "CompilationAlbum": "http://schema.org/CompilationAlbum",
-    "CompleteDataFeed": "http://schema.org/CompleteDataFeed",
-    "Completed": "http://schema.org/Completed",
-    "CompletedActionStatus": "http://schema.org/CompletedActionStatus",
-    "CompositeCaptureDigitalSource": "http://schema.org/CompositeCaptureDigitalSource",
-    "CompositeDigitalSource": "http://schema.org/CompositeDigitalSource",
-    "CompositeSyntheticDigitalSource": "http://schema.org/CompositeSyntheticDigitalSource",
-    "CompositeWithTrainedAlgorithmicMediaDigitalSource": "http://schema.org/CompositeWithTrainedAlgorithmicMediaDigitalSource",
-    "CompoundPriceSpecification": "http://schema.org/CompoundPriceSpecification",
-    "ComputerLanguage": "http://schema.org/ComputerLanguage",
-    "ComputerStore": "http://schema.org/ComputerStore",
-    "ConfirmAction": "http://schema.org/ConfirmAction",
-    "Consortium": "http://schema.org/Consortium",
-    "ConstraintNode": "http://schema.org/ConstraintNode",
-    "ConsumeAction": "http://schema.org/ConsumeAction",
-    "ContactPage": "http://schema.org/ContactPage",
-    "ContactPoint": "http://schema.org/ContactPoint",
-    "ContactPointOption": "http://schema.org/ContactPointOption",
-    "ContagiousnessHealthAspect": "http://schema.org/ContagiousnessHealthAspect",
-    "Continent": "http://schema.org/Continent",
-    "ControlAction": "http://schema.org/ControlAction",
-    "ConvenienceStore": "http://schema.org/ConvenienceStore",
-    "Conversation": "http://schema.org/Conversation",
-    "CookAction": "http://schema.org/CookAction",
-    "Cooperative": "http://schema.org/Cooperative",
-    "Corporation": "http://schema.org/Corporation",
-    "CorrectionComment": "http://schema.org/CorrectionComment",
-    "Country": "http://schema.org/Country",
-    "Course": "http://schema.org/Course",
-    "CourseInstance": "http://schema.org/CourseInstance",
-    "Courthouse": "http://schema.org/Courthouse",
-    "CoverArt": "http://schema.org/CoverArt",
-    "CovidTestingFacility": "http://schema.org/CovidTestingFacility",
-    "CreateAction": "http://schema.org/CreateAction",
-    "CreativeWork": "http://schema.org/CreativeWork",
-    "CreativeWorkSeason": "http://schema.org/CreativeWorkSeason",
-    "CreativeWorkSeries": "http://schema.org/CreativeWorkSeries",
-    "CreditCard": "http://schema.org/CreditCard",
-    "Crematorium": "http://schema.org/Crematorium",
-    "CriticReview": "http://schema.org/CriticReview",
-    "CrossSectional": "http://schema.org/CrossSectional",
-    "CssSelectorType": "http://schema.org/CssSelectorType",
-    "CurrencyConversionService": "http://schema.org/CurrencyConversionService",
-    "DDxElement": "http://schema.org/DDxElement",
-    "DJMixAlbum": "http://schema.org/DJMixAlbum",
-    "DVDFormat": "http://schema.org/DVDFormat",
-    "DamagedCondition": "http://schema.org/DamagedCondition",
-    "DanceEvent": "http://schema.org/DanceEvent",
-    "DanceGroup": "http://schema.org/DanceGroup",
-    "DangerousGoodConsideration": "http://schema.org/DangerousGoodConsideration",
-    "DataCatalog": "http://schema.org/DataCatalog",
-    "DataDownload": "http://schema.org/DataDownload",
-    "DataDrivenMediaDigitalSource": "http://schema.org/DataDrivenMediaDigitalSource",
-    "DataFeed": "http://schema.org/DataFeed",
-    "DataFeedItem": "http://schema.org/DataFeedItem",
-    "DataType": "http://schema.org/DataType",
-    "Dataset": "http://schema.org/Dataset",
-    "Date": "http://schema.org/Date",
-    "DateTime": "http://schema.org/DateTime",
-    "DatedMoneySpecification": "http://schema.org/DatedMoneySpecification",
-    "DayOfWeek": "http://schema.org/DayOfWeek",
-    "DaySpa": "http://schema.org/DaySpa",
-    "DeactivateAction": "http://schema.org/DeactivateAction",
-    "DecontextualizedContent": "http://schema.org/DecontextualizedContent",
-    "DefenceEstablishment": "http://schema.org/DefenceEstablishment",
-    "DefinedRegion": "http://schema.org/DefinedRegion",
-    "DefinedTerm": "http://schema.org/DefinedTerm",
-    "DefinedTermSet": "http://schema.org/DefinedTermSet",
-    "DefinitiveLegalValue": "http://schema.org/DefinitiveLegalValue",
-    "DeleteAction": "http://schema.org/DeleteAction",
-    "DeliveryChargeSpecification": "http://schema.org/DeliveryChargeSpecification",
-    "DeliveryEvent": "http://schema.org/DeliveryEvent",
-    "DeliveryMethod": "http://schema.org/DeliveryMethod",
-    "DeliveryTimeSettings": "http://schema.org/DeliveryTimeSettings",
-    "Demand": "http://schema.org/Demand",
-    "DemoAlbum": "http://schema.org/DemoAlbum",
-    "DemoGameAvailability": "http://schema.org/DemoGameAvailability",
-    "Dentist": "http://schema.org/Dentist",
-    "Dentistry": "http://schema.org/Dentistry",
-    "DepartAction": "http://schema.org/DepartAction",
-    "DepartmentStore": "http://schema.org/DepartmentStore",
-    "DepositAccount": "http://schema.org/DepositAccount",
-    "Dermatologic": "http://schema.org/Dermatologic",
-    "Dermatology": "http://schema.org/Dermatology",
-    "DesktopWebPlatform": "http://schema.org/DesktopWebPlatform",
-    "DiabeticDiet": "http://schema.org/DiabeticDiet",
-    "Diagnostic": "http://schema.org/Diagnostic",
-    "DiagnosticLab": "http://schema.org/DiagnosticLab",
-    "DiagnosticProcedure": "http://schema.org/DiagnosticProcedure",
-    "Diet": "http://schema.org/Diet",
-    "DietNutrition": "http://schema.org/DietNutrition",
-    "DietarySupplement": "http://schema.org/DietarySupplement",
-    "DigitalArtDigitalSource": "http://schema.org/DigitalArtDigitalSource",
-    "DigitalAudioTapeFormat": "http://schema.org/DigitalAudioTapeFormat",
-    "DigitalCaptureDigitalSource": "http://schema.org/DigitalCaptureDigitalSource",
-    "DigitalDocument": "http://schema.org/DigitalDocument",
-    "DigitalDocumentPermission": "http://schema.org/DigitalDocumentPermission",
-    "DigitalDocumentPermissionType": "http://schema.org/DigitalDocumentPermissionType",
-    "DigitalFormat": "http://schema.org/DigitalFormat",
-    "DigitalPlatformEnumeration": "http://schema.org/DigitalPlatformEnumeration",
-    "DirectDebit": "http://schema.org/DirectDebit",
-    "DisabilitySupport": "http://schema.org/DisabilitySupport",
-    "DisagreeAction": "http://schema.org/DisagreeAction",
-    "Discontinued": "http://schema.org/Discontinued",
-    "DiscoverAction": "http://schema.org/DiscoverAction",
-    "DiscussionForumPosting": "http://schema.org/DiscussionForumPosting",
-    "DislikeAction": "http://schema.org/DislikeAction",
-    "Distance": "http://schema.org/Distance",
-    "DistanceFee": "http://schema.org/DistanceFee",
-    "Distillery": "http://schema.org/Distillery",
-    "DonateAction": "http://schema.org/DonateAction",
-    "DoseSchedule": "http://schema.org/DoseSchedule",
-    "DoubleBlindedTrial": "http://schema.org/DoubleBlindedTrial",
-    "DownloadAction": "http://schema.org/DownloadAction",
-    "Downpayment": "http://schema.org/Downpayment",
-    "DrawAction": "http://schema.org/DrawAction",
-    "Drawing": "http://schema.org/Drawing",
-    "DrinkAction": "http://schema.org/DrinkAction",
-    "DriveWheelConfigurationValue": "http://schema.org/DriveWheelConfigurationValue",
-    "DrivingSchoolVehicleUsage": "http://schema.org/DrivingSchoolVehicleUsage",
-    "Drug": "http://schema.org/Drug",
-    "DrugClass": "http://schema.org/DrugClass",
-    "DrugCost": "http://schema.org/DrugCost",
-    "DrugCostCategory": "http://schema.org/DrugCostCategory",
-    "DrugLegalStatus": "http://schema.org/DrugLegalStatus",
-    "DrugPregnancyCategory": "http://schema.org/DrugPregnancyCategory",
-    "DrugPrescriptionStatus": "http://schema.org/DrugPrescriptionStatus",
-    "DrugStrength": "http://schema.org/DrugStrength",
-    "DryCleaningOrLaundry": "http://schema.org/DryCleaningOrLaundry",
-    "Duration": "http://schema.org/Duration",
-    "EBook": "http://schema.org/EBook",
-    "EPRelease": "http://schema.org/EPRelease",
-    "EUEnergyEfficiencyCategoryA": "http://schema.org/EUEnergyEfficiencyCategoryA",
-    "EUEnergyEfficiencyCategoryA1Plus": "http://schema.org/EUEnergyEfficiencyCategoryA1Plus",
-    "EUEnergyEfficiencyCategoryA2Plus": "http://schema.org/EUEnergyEfficiencyCategoryA2Plus",
-    "EUEnergyEfficiencyCategoryA3Plus": "http://schema.org/EUEnergyEfficiencyCategoryA3Plus",
-    "EUEnergyEfficiencyCategoryB": "http://schema.org/EUEnergyEfficiencyCategoryB",
-    "EUEnergyEfficiencyCategoryC": "http://schema.org/EUEnergyEfficiencyCategoryC",
-    "EUEnergyEfficiencyCategoryD": "http://schema.org/EUEnergyEfficiencyCategoryD",
-    "EUEnergyEfficiencyCategoryE": "http://schema.org/EUEnergyEfficiencyCategoryE",
-    "EUEnergyEfficiencyCategoryF": "http://schema.org/EUEnergyEfficiencyCategoryF",
-    "EUEnergyEfficiencyCategoryG": "http://schema.org/EUEnergyEfficiencyCategoryG",
-    "EUEnergyEfficiencyEnumeration": "http://schema.org/EUEnergyEfficiencyEnumeration",
-    "Ear": "http://schema.org/Ear",
-    "EatAction": "http://schema.org/EatAction",
-    "EditedOrCroppedContent": "http://schema.org/EditedOrCroppedContent",
-    "EducationEvent": "http://schema.org/EducationEvent",
-    "EducationalAudience": "http://schema.org/EducationalAudience",
-    "EducationalOccupationalCredential": "http://schema.org/EducationalOccupationalCredential",
-    "EducationalOccupationalProgram": "http://schema.org/EducationalOccupationalProgram",
-    "EducationalOrganization": "http://schema.org/EducationalOrganization",
-    "EffectivenessHealthAspect": "http://schema.org/EffectivenessHealthAspect",
-    "Electrician": "http://schema.org/Electrician",
-    "ElectronicsStore": "http://schema.org/ElectronicsStore",
-    "ElementarySchool": "http://schema.org/ElementarySchool",
-    "EmailMessage": "http://schema.org/EmailMessage",
-    "Embassy": "http://schema.org/Embassy",
-    "Emergency": "http://schema.org/Emergency",
-    "EmergencyService": "http://schema.org/EmergencyService",
-    "EmployeeRole": "http://schema.org/EmployeeRole",
-    "EmployerAggregateRating": "http://schema.org/EmployerAggregateRating",
-    "EmployerReview": "http://schema.org/EmployerReview",
-    "EmploymentAgency": "http://schema.org/EmploymentAgency",
-    "Endocrine": "http://schema.org/Endocrine",
-    "EndorseAction": "http://schema.org/EndorseAction",
-    "EndorsementRating": "http://schema.org/EndorsementRating",
-    "Energy": "http://schema.org/Energy",
-    "EnergyConsumptionDetails": "http://schema.org/EnergyConsumptionDetails",
-    "EnergyEfficiencyEnumeration": "http://schema.org/EnergyEfficiencyEnumeration",
-    "EnergyStarCertified": "http://schema.org/EnergyStarCertified",
-    "EnergyStarEnergyEfficiencyEnumeration": "http://schema.org/EnergyStarEnergyEfficiencyEnumeration",
-    "EngineSpecification": "http://schema.org/EngineSpecification",
-    "EnrollingByInvitation": "http://schema.org/EnrollingByInvitation",
-    "EntertainmentBusiness": "http://schema.org/EntertainmentBusiness",
-    "EntryPoint": "http://schema.org/EntryPoint",
-    "Enumeration": "http://schema.org/Enumeration",
-    "Episode": "http://schema.org/Episode",
-    "Event": "http://schema.org/Event",
-    "EventAttendanceModeEnumeration": "http://schema.org/EventAttendanceModeEnumeration",
-    "EventCancelled": "http://schema.org/EventCancelled",
-    "EventMovedOnline": "http://schema.org/EventMovedOnline",
-    "EventPostponed": "http://schema.org/EventPostponed",
-    "EventRescheduled": "http://schema.org/EventRescheduled",
-    "EventReservation": "http://schema.org/EventReservation",
-    "EventScheduled": "http://schema.org/EventScheduled",
-    "EventSeries": "http://schema.org/EventSeries",
-    "EventStatusType": "http://schema.org/EventStatusType",
-    "EventVenue": "http://schema.org/EventVenue",
-    "EvidenceLevelA": "http://schema.org/EvidenceLevelA",
-    "EvidenceLevelB": "http://schema.org/EvidenceLevelB",
-    "EvidenceLevelC": "http://schema.org/EvidenceLevelC",
-    "ExampleMeasurementMethodEnum": "http://schema.org/ExampleMeasurementMethodEnum",
-    "ExchangeRateSpecification": "http://schema.org/ExchangeRateSpecification",
-    "ExchangeRefund": "http://schema.org/ExchangeRefund",
-    "ExerciseAction": "http://schema.org/ExerciseAction",
-    "ExerciseGym": "http://schema.org/ExerciseGym",
-    "ExercisePlan": "http://schema.org/ExercisePlan",
-    "ExhibitionEvent": "http://schema.org/ExhibitionEvent",
-    "Eye": "http://schema.org/Eye",
-    "FAQPage": "http://schema.org/FAQPage",
-    "FDAcategoryA": "http://schema.org/FDAcategoryA",
-    "FDAcategoryB": "http://schema.org/FDAcategoryB",
-    "FDAcategoryC": "http://schema.org/FDAcategoryC",
-    "FDAcategoryD": "http://schema.org/FDAcategoryD",
-    "FDAcategoryX": "http://schema.org/FDAcategoryX",
-    "FDAnotEvaluated": "http://schema.org/FDAnotEvaluated",
-    "FMRadioChannel": "http://schema.org/FMRadioChannel",
-    "FailedActionStatus": "http://schema.org/FailedActionStatus",
-    "False": "http://schema.org/False",
-    "FastFoodRestaurant": "http://schema.org/FastFoodRestaurant",
-    "Female": "http://schema.org/Female",
-    "Festival": "http://schema.org/Festival",
-    "FilmAction": "http://schema.org/FilmAction",
-    "FinancialIncentive": "http://schema.org/FinancialIncentive",
-    "FinancialProduct": "http://schema.org/FinancialProduct",
-    "FinancialService": "http://schema.org/FinancialService",
-    "FindAction": "http://schema.org/FindAction",
-    "FireStation": "http://schema.org/FireStation",
-    "Flexibility": "http://schema.org/Flexibility",
-    "Flight": "http://schema.org/Flight",
-    "FlightReservation": "http://schema.org/FlightReservation",
-    "Float": "http://schema.org/Float",
-    "FloorPlan": "http://schema.org/FloorPlan",
-    "Florist": "http://schema.org/Florist",
-    "FollowAction": "http://schema.org/FollowAction",
-    "FoodEstablishment": "http://schema.org/FoodEstablishment",
-    "FoodEstablishmentReservation": "http://schema.org/FoodEstablishmentReservation",
-    "FoodEvent": "http://schema.org/FoodEvent",
-    "FoodService": "http://schema.org/FoodService",
-    "FourWheelDriveConfiguration": "http://schema.org/FourWheelDriveConfiguration",
-    "FreeReturn": "http://schema.org/FreeReturn",
-    "Friday": "http://schema.org/Friday",
-    "FrontWheelDriveConfiguration": "http://schema.org/FrontWheelDriveConfiguration",
-    "FulfillmentTypeCollectionPoint": "http://schema.org/FulfillmentTypeCollectionPoint",
-    "FulfillmentTypeDelivery": "http://schema.org/FulfillmentTypeDelivery",
-    "FulfillmentTypeEnumeration": "http://schema.org/FulfillmentTypeEnumeration",
-    "FulfillmentTypePickupDropoff": "http://schema.org/FulfillmentTypePickupDropoff",
-    "FulfillmentTypePickupInStore": "http://schema.org/FulfillmentTypePickupInStore",
-    "FulfillmentTypeScheduledDelivery": "http://schema.org/FulfillmentTypeScheduledDelivery",
-    "FullGameAvailability": "http://schema.org/FullGameAvailability",
-    "FullRefund": "http://schema.org/FullRefund",
-    "FundingAgency": "http://schema.org/FundingAgency",
-    "FundingScheme": "http://schema.org/FundingScheme",
-    "Fungus": "http://schema.org/Fungus",
-    "FurnitureStore": "http://schema.org/FurnitureStore",
-    "Game": "http://schema.org/Game",
-    "GameAvailabilityEnumeration": "http://schema.org/GameAvailabilityEnumeration",
-    "GamePlayMode": "http://schema.org/GamePlayMode",
-    "GameServer": "http://schema.org/GameServer",
-    "GameServerStatus": "http://schema.org/GameServerStatus",
-    "GardenStore": "http://schema.org/GardenStore",
-    "GasStation": "http://schema.org/GasStation",
-    "Gastroenterologic": "http://schema.org/Gastroenterologic",
-    "GatedResidenceCommunity": "http://schema.org/GatedResidenceCommunity",
-    "GenderType": "http://schema.org/GenderType",
-    "Gene": "http://schema.org/Gene",
-    "GeneralContractor": "http://schema.org/GeneralContractor",
-    "GenericWebPlatform": "http://schema.org/GenericWebPlatform",
-    "Genetic": "http://schema.org/Genetic",
-    "Genitourinary": "http://schema.org/Genitourinary",
-    "GeoCircle": "http://schema.org/GeoCircle",
-    "GeoCoordinates": "http://schema.org/GeoCoordinates",
-    "GeoShape": "http://schema.org/GeoShape",
-    "GeospatialGeometry": "http://schema.org/GeospatialGeometry",
-    "Geriatric": "http://schema.org/Geriatric",
-    "GettingAccessHealthAspect": "http://schema.org/GettingAccessHealthAspect",
-    "GiveAction": "http://schema.org/GiveAction",
-    "GlutenFreeDiet": "http://schema.org/GlutenFreeDiet",
-    "GolfCourse": "http://schema.org/GolfCourse",
-    "GovernmentBenefitsType": "http://schema.org/GovernmentBenefitsType",
-    "GovernmentBuilding": "http://schema.org/GovernmentBuilding",
-    "GovernmentOffice": "http://schema.org/GovernmentOffice",
-    "GovernmentOrganization": "http://schema.org/GovernmentOrganization",
-    "GovernmentPermit": "http://schema.org/GovernmentPermit",
-    "GovernmentService": "http://schema.org/GovernmentService",
-    "Grant": "http://schema.org/Grant",
-    "GraphicNovel": "http://schema.org/GraphicNovel",
-    "GroceryStore": "http://schema.org/GroceryStore",
-    "GroupBoardingPolicy": "http://schema.org/GroupBoardingPolicy",
-    "Guide": "http://schema.org/Guide",
-    "Gynecologic": "http://schema.org/Gynecologic",
-    "HVACBusiness": "http://schema.org/HVACBusiness",
-    "Hackathon": "http://schema.org/Hackathon",
-    "HairSalon": "http://schema.org/HairSalon",
-    "HalalDiet": "http://schema.org/HalalDiet",
-    "Hardcover": "http://schema.org/Hardcover",
-    "HardwareStore": "http://schema.org/HardwareStore",
-    "Head": "http://schema.org/Head",
-    "HealthAndBeautyBusiness": "http://schema.org/HealthAndBeautyBusiness",
-    "HealthAspectEnumeration": "http://schema.org/HealthAspectEnumeration",
-    "HealthCare": "http://schema.org/HealthCare",
-    "HealthClub": "http://schema.org/HealthClub",
-    "HealthInsurancePlan": "http://schema.org/HealthInsurancePlan",
-    "HealthPlanCostSharingSpecification": "http://schema.org/HealthPlanCostSharingSpecification",
-    "HealthPlanFormulary": "http://schema.org/HealthPlanFormulary",
-    "HealthPlanNetwork": "http://schema.org/HealthPlanNetwork",
-    "HealthTopicContent": "http://schema.org/HealthTopicContent",
-    "HealthcareConsideration": "http://schema.org/HealthcareConsideration",
-    "HearingImpairedSupported": "http://schema.org/HearingImpairedSupported",
-    "Hematologic": "http://schema.org/Hematologic",
-    "HighSchool": "http://schema.org/HighSchool",
-    "HinduDiet": "http://schema.org/HinduDiet",
-    "HinduTemple": "http://schema.org/HinduTemple",
-    "HobbyShop": "http://schema.org/HobbyShop",
-    "HomeAndConstructionBusiness": "http://schema.org/HomeAndConstructionBusiness",
-    "HomeGoodsStore": "http://schema.org/HomeGoodsStore",
-    "Homeopathic": "http://schema.org/Homeopathic",
-    "Hospital": "http://schema.org/Hospital",
-    "Hostel": "http://schema.org/Hostel",
-    "Hotel": "http://schema.org/Hotel",
-    "HotelRoom": "http://schema.org/HotelRoom",
-    "House": "http://schema.org/House",
-    "HousePainter": "http://schema.org/HousePainter",
-    "HowItWorksHealthAspect": "http://schema.org/HowItWorksHealthAspect",
-    "HowOrWhereHealthAspect": "http://schema.org/HowOrWhereHealthAspect",
-    "HowTo": "http://schema.org/HowTo",
-    "HowToDirection": "http://schema.org/HowToDirection",
-    "HowToItem": "http://schema.org/HowToItem",
-    "HowToSection": "http://schema.org/HowToSection",
-    "HowToStep": "http://schema.org/HowToStep",
-    "HowToSupply": "http://schema.org/HowToSupply",
-    "HowToTip": "http://schema.org/HowToTip",
-    "HowToTool": "http://schema.org/HowToTool",
-    "HyperToc": "http://schema.org/HyperToc",
-    "HyperTocEntry": "http://schema.org/HyperTocEntry",
-    "IOSPlatform": "http://schema.org/IOSPlatform",
-    "IPTCDigitalSourceEnumeration": "http://schema.org/IPTCDigitalSourceEnumeration",
-    "IceCreamShop": "http://schema.org/IceCreamShop",
-    "IgnoreAction": "http://schema.org/IgnoreAction",
-    "ImageGallery": "http://schema.org/ImageGallery",
-    "ImageObject": "http://schema.org/ImageObject",
-    "ImageObjectSnapshot": "http://schema.org/ImageObjectSnapshot",
-    "ImagingTest": "http://schema.org/ImagingTest",
-    "InForce": "http://schema.org/InForce",
-    "InStock": "http://schema.org/InStock",
-    "InStoreOnly": "http://schema.org/InStoreOnly",
-    "InStorePrepay": "http://schema.org/InStorePrepay",
-    "IncentiveQualifiedExpenseType": "http://schema.org/IncentiveQualifiedExpenseType",
-    "IncentiveQualifiedExpenseTypeGoodsOnly": "http://schema.org/IncentiveQualifiedExpenseTypeGoodsOnly",
-    "IncentiveQualifiedExpenseTypeGoodsOrServices": "http://schema.org/IncentiveQualifiedExpenseTypeGoodsOrServices",
-    "IncentiveQualifiedExpenseTypeServicesOnly": "http://schema.org/IncentiveQualifiedExpenseTypeServicesOnly",
-    "IncentiveQualifiedExpenseTypeUtilityBill": "http://schema.org/IncentiveQualifiedExpenseTypeUtilityBill",
-    "IncentiveStatus": "http://schema.org/IncentiveStatus",
-    "IncentiveStatusActive": "http://schema.org/IncentiveStatusActive",
-    "IncentiveStatusInDevelopment": "http://schema.org/IncentiveStatusInDevelopment",
-    "IncentiveStatusOnHold": "http://schema.org/IncentiveStatusOnHold",
-    "IncentiveStatusRetired": "http://schema.org/IncentiveStatusRetired",
-    "IncentiveType": "http://schema.org/IncentiveType",
-    "IncentiveTypeLoan": "http://schema.org/IncentiveTypeLoan",
-    "IncentiveTypeRebateOrSubsidy": "http://schema.org/IncentiveTypeRebateOrSubsidy",
-    "IncentiveTypeTaxCredit": "http://schema.org/IncentiveTypeTaxCredit",
-    "IncentiveTypeTaxDeduction": "http://schema.org/IncentiveTypeTaxDeduction",
-    "IncentiveTypeTaxWaiver": "http://schema.org/IncentiveTypeTaxWaiver",
-    "IndividualPhysician": "http://schema.org/IndividualPhysician",
-    "IndividualProduct": "http://schema.org/IndividualProduct",
-    "Infectious": "http://schema.org/Infectious",
-    "InfectiousAgentClass": "http://schema.org/InfectiousAgentClass",
-    "InfectiousDisease": "http://schema.org/InfectiousDisease",
-    "InformAction": "http://schema.org/InformAction",
-    "IngredientsHealthAspect": "http://schema.org/IngredientsHealthAspect",
-    "InsertAction": "http://schema.org/InsertAction",
-    "InstallAction": "http://schema.org/InstallAction",
-    "Installment": "http://schema.org/Installment",
-    "InsuranceAgency": "http://schema.org/InsuranceAgency",
-    "Intangible": "http://schema.org/Intangible",
-    "Integer": "http://schema.org/Integer",
-    "InteractAction": "http://schema.org/InteractAction",
-    "InteractionCounter": "http://schema.org/InteractionCounter",
-    "InternationalTrial": "http://schema.org/InternationalTrial",
-    "InternetCafe": "http://schema.org/InternetCafe",
-    "InvestmentFund": "http://schema.org/InvestmentFund",
-    "InvestmentOrDeposit": "http://schema.org/InvestmentOrDeposit",
-    "InviteAction": "http://schema.org/InviteAction",
-    "Invoice": "http://schema.org/Invoice",
-    "InvoicePrice": "http://schema.org/InvoicePrice",
-    "ItemAvailability": "http://schema.org/ItemAvailability",
-    "ItemList": "http://schema.org/ItemList",
-    "ItemListOrderAscending": "http://schema.org/ItemListOrderAscending",
-    "ItemListOrderDescending": "http://schema.org/ItemListOrderDescending",
-    "ItemListOrderType": "http://schema.org/ItemListOrderType",
-    "ItemListUnordered": "http://schema.org/ItemListUnordered",
-    "ItemPage": "http://schema.org/ItemPage",
-    "JewelryStore": "http://schema.org/JewelryStore",
-    "JobPosting": "http://schema.org/JobPosting",
-    "JoinAction": "http://schema.org/JoinAction",
-    "Joint": "http://schema.org/Joint",
-    "KeepProduct": "http://schema.org/KeepProduct",
-    "KosherDiet": "http://schema.org/KosherDiet",
-    "LaboratoryScience": "http://schema.org/LaboratoryScience",
-    "LakeBodyOfWater": "http://schema.org/LakeBodyOfWater",
-    "Landform": "http://schema.org/Landform",
-    "LandmarksOrHistoricalBuildings": "http://schema.org/LandmarksOrHistoricalBuildings",
-    "Language": "http://schema.org/Language",
-    "LaserDiscFormat": "http://schema.org/LaserDiscFormat",
-    "LearningResource": "http://schema.org/LearningResource",
-    "LeaveAction": "http://schema.org/LeaveAction",
-    "LeftHandDriving": "http://schema.org/LeftHandDriving",
-    "LegalForceStatus": "http://schema.org/LegalForceStatus",
-    "LegalService": "http://schema.org/LegalService",
-    "LegalValueLevel": "http://schema.org/LegalValueLevel",
-    "Legislation": "http://schema.org/Legislation",
-    "LegislationObject": "http://schema.org/LegislationObject",
-    "LegislativeBuilding": "http://schema.org/LegislativeBuilding",
-    "LeisureTimeActivity": "http://schema.org/LeisureTimeActivity",
-    "LendAction": "http://schema.org/LendAction",
-    "Library": "http://schema.org/Library",
-    "LibrarySystem": "http://schema.org/LibrarySystem",
-    "LifestyleModification": "http://schema.org/LifestyleModification",
-    "Ligament": "http://schema.org/Ligament",
-    "LikeAction": "http://schema.org/LikeAction",
-    "LimitedAvailability": "http://schema.org/LimitedAvailability",
-    "LimitedByGuaranteeCharity": "http://schema.org/LimitedByGuaranteeCharity",
-    "LinkRole": "http://schema.org/LinkRole",
-    "LiquorStore": "http://schema.org/LiquorStore",
-    "ListItem": "http://schema.org/ListItem",
-    "ListPrice": "http://schema.org/ListPrice",
-    "ListenAction": "http://schema.org/ListenAction",
-    "LiteraryEvent": "http://schema.org/LiteraryEvent",
-    "LiveAlbum": "http://schema.org/LiveAlbum",
-    "LiveBlogPosting": "http://schema.org/LiveBlogPosting",
-    "LivingWithHealthAspect": "http://schema.org/LivingWithHealthAspect",
-    "LoanOrCredit": "http://schema.org/LoanOrCredit",
-    "LocalBusiness": "http://schema.org/LocalBusiness",
-    "LocationFeatureSpecification": "http://schema.org/LocationFeatureSpecification",
-    "LockerDelivery": "http://schema.org/LockerDelivery",
-    "Locksmith": "http://schema.org/Locksmith",
-    "LodgingBusiness": "http://schema.org/LodgingBusiness",
-    "LodgingReservation": "http://schema.org/LodgingReservation",
-    "Longitudinal": "http://schema.org/Longitudinal",
-    "LoseAction": "http://schema.org/LoseAction",
-    "LowCalorieDiet": "http://schema.org/LowCalorieDiet",
-    "LowFatDiet": "http://schema.org/LowFatDiet",
-    "LowLactoseDiet": "http://schema.org/LowLactoseDiet",
-    "LowSaltDiet": "http://schema.org/LowSaltDiet",
-    "Lung": "http://schema.org/Lung",
-    "LymphaticVessel": "http://schema.org/LymphaticVessel",
-    "MRI": "http://schema.org/MRI",
-    "MSRP": "http://schema.org/MSRP",
-    "MadeToOrder": "http://schema.org/MadeToOrder",
-    "Male": "http://schema.org/Male",
-    "Manuscript": "http://schema.org/Manuscript",
-    "Map": "http://schema.org/Map",
-    "MapCategoryType": "http://schema.org/MapCategoryType",
-    "MarryAction": "http://schema.org/MarryAction",
-    "Mass": "http://schema.org/Mass",
-    "MathSolver": "http://schema.org/MathSolver",
-    "MaximumDoseSchedule": "http://schema.org/MaximumDoseSchedule",
-    "MayTreatHealthAspect": "http://schema.org/MayTreatHealthAspect",
-    "MeasurementMethodEnum": "http://schema.org/MeasurementMethodEnum",
-    "MeasurementTypeEnumeration": "http://schema.org/MeasurementTypeEnumeration",
-    "MediaEnumeration": "http://schema.org/MediaEnumeration",
-    "MediaGallery": "http://schema.org/MediaGallery",
-    "MediaManipulationRatingEnumeration": "http://schema.org/MediaManipulationRatingEnumeration",
-    "MediaObject": "http://schema.org/MediaObject",
-    "MediaReview": "http://schema.org/MediaReview",
-    "MediaReviewItem": "http://schema.org/MediaReviewItem",
-    "MediaSubscription": "http://schema.org/MediaSubscription",
-    "MedicalAudience": "http://schema.org/MedicalAudience",
-    "MedicalAudienceType": "http://schema.org/MedicalAudienceType",
-    "MedicalBusiness": "http://schema.org/MedicalBusiness",
-    "MedicalCause": "http://schema.org/MedicalCause",
-    "MedicalClinic": "http://schema.org/MedicalClinic",
-    "MedicalCode": "http://schema.org/MedicalCode",
-    "MedicalCondition": "http://schema.org/MedicalCondition",
-    "MedicalConditionStage": "http://schema.org/MedicalConditionStage",
-    "MedicalContraindication": "http://schema.org/MedicalContraindication",
-    "MedicalDevice": "http://schema.org/MedicalDevice",
-    "MedicalDevicePurpose": "http://schema.org/MedicalDevicePurpose",
-    "MedicalEntity": "http://schema.org/MedicalEntity",
-    "MedicalEnumeration": "http://schema.org/MedicalEnumeration",
-    "MedicalEvidenceLevel": "http://schema.org/MedicalEvidenceLevel",
-    "MedicalGuideline": "http://schema.org/MedicalGuideline",
-    "MedicalGuidelineContraindication": "http://schema.org/MedicalGuidelineContraindication",
-    "MedicalGuidelineRecommendation": "http://schema.org/MedicalGuidelineRecommendation",
-    "MedicalImagingTechnique": "http://schema.org/MedicalImagingTechnique",
-    "MedicalIndication": "http://schema.org/MedicalIndication",
-    "MedicalIntangible": "http://schema.org/MedicalIntangible",
-    "MedicalObservationalStudy": "http://schema.org/MedicalObservationalStudy",
-    "MedicalObservationalStudyDesign": "http://schema.org/MedicalObservationalStudyDesign",
-    "MedicalOrganization": "http://schema.org/MedicalOrganization",
-    "MedicalProcedure": "http://schema.org/MedicalProcedure",
-    "MedicalProcedureType": "http://schema.org/MedicalProcedureType",
-    "MedicalResearcher": "http://schema.org/MedicalResearcher",
-    "MedicalRiskCalculator": "http://schema.org/MedicalRiskCalculator",
-    "MedicalRiskEstimator": "http://schema.org/MedicalRiskEstimator",
-    "MedicalRiskFactor": "http://schema.org/MedicalRiskFactor",
-    "MedicalRiskScore": "http://schema.org/MedicalRiskScore",
-    "MedicalScholarlyArticle": "http://schema.org/MedicalScholarlyArticle",
-    "MedicalSign": "http://schema.org/MedicalSign",
-    "MedicalSignOrSymptom": "http://schema.org/MedicalSignOrSymptom",
-    "MedicalSpecialty": "http://schema.org/MedicalSpecialty",
-    "MedicalStudy": "http://schema.org/MedicalStudy",
-    "MedicalStudyStatus": "http://schema.org/MedicalStudyStatus",
-    "MedicalSymptom": "http://schema.org/MedicalSymptom",
-    "MedicalTest": "http://schema.org/MedicalTest",
-    "MedicalTestPanel": "http://schema.org/MedicalTestPanel",
-    "MedicalTherapy": "http://schema.org/MedicalTherapy",
-    "MedicalTrial": "http://schema.org/MedicalTrial",
-    "MedicalTrialDesign": "http://schema.org/MedicalTrialDesign",
-    "MedicalWebPage": "http://schema.org/MedicalWebPage",
-    "MedicineSystem": "http://schema.org/MedicineSystem",
-    "MeetingRoom": "http://schema.org/MeetingRoom",
-    "MemberProgram": "http://schema.org/MemberProgram",
-    "MemberProgramTier": "http://schema.org/MemberProgramTier",
-    "MensClothingStore": "http://schema.org/MensClothingStore",
-    "Menu": "http://schema.org/Menu",
-    "MenuItem": "http://schema.org/MenuItem",
-    "MenuSection": "http://schema.org/MenuSection",
-    "MerchantReturnEnumeration": "http://schema.org/MerchantReturnEnumeration",
-    "MerchantReturnFiniteReturnWindow": "http://schema.org/MerchantReturnFiniteReturnWindow",
-    "MerchantReturnNotPermitted": "http://schema.org/MerchantReturnNotPermitted",
-    "MerchantReturnPolicy": "http://schema.org/MerchantReturnPolicy",
-    "MerchantReturnPolicySeasonalOverride": "http://schema.org/MerchantReturnPolicySeasonalOverride",
-    "MerchantReturnUnlimitedWindow": "http://schema.org/MerchantReturnUnlimitedWindow",
-    "MerchantReturnUnspecified": "http://schema.org/MerchantReturnUnspecified",
-    "Message": "http://schema.org/Message",
-    "MiddleSchool": "http://schema.org/MiddleSchool",
-    "Midwifery": "http://schema.org/Midwifery",
-    "MinimumAdvertisedPrice": "http://schema.org/MinimumAdvertisedPrice",
-    "MinorHumanEditsDigitalSource": "http://schema.org/MinorHumanEditsDigitalSource",
-    "MisconceptionsHealthAspect": "http://schema.org/MisconceptionsHealthAspect",
-    "MixedEventAttendanceMode": "http://schema.org/MixedEventAttendanceMode",
-    "MixtapeAlbum": "http://schema.org/MixtapeAlbum",
-    "MobileApplication": "http://schema.org/MobileApplication",
-    "MobilePhoneStore": "http://schema.org/MobilePhoneStore",
-    "MobileWebPlatform": "http://schema.org/MobileWebPlatform",
-    "MolecularEntity": "http://schema.org/MolecularEntity",
-    "Monday": "http://schema.org/Monday",
-    "MonetaryAmount": "http://schema.org/MonetaryAmount",
-    "MonetaryAmountDistribution": "http://schema.org/MonetaryAmountDistribution",
-    "MonetaryGrant": "http://schema.org/MonetaryGrant",
-    "MoneyTransfer": "http://schema.org/MoneyTransfer",
-    "MortgageLoan": "http://schema.org/MortgageLoan",
-    "Mosque": "http://schema.org/Mosque",
-    "Motel": "http://schema.org/Motel",
-    "Motorcycle": "http://schema.org/Motorcycle",
-    "MotorcycleDealer": "http://schema.org/MotorcycleDealer",
-    "MotorcycleRepair": "http://schema.org/MotorcycleRepair",
-    "MotorizedBicycle": "http://schema.org/MotorizedBicycle",
-    "Mountain": "http://schema.org/Mountain",
-    "MoveAction": "http://schema.org/MoveAction",
-    "Movie": "http://schema.org/Movie",
-    "MovieClip": "http://schema.org/MovieClip",
-    "MovieRentalStore": "http://schema.org/MovieRentalStore",
-    "MovieSeries": "http://schema.org/MovieSeries",
-    "MovieTheater": "http://schema.org/MovieTheater",
-    "MovingCompany": "http://schema.org/MovingCompany",
-    "MultiCenterTrial": "http://schema.org/MultiCenterTrial",
-    "MultiFrameComputationalCaptureDigitalSource": "http://schema.org/MultiFrameComputationalCaptureDigitalSource",
-    "MultiPlayer": "http://schema.org/MultiPlayer",
-    "MulticellularParasite": "http://schema.org/MulticellularParasite",
-    "Muscle": "http://schema.org/Muscle",
-    "Musculoskeletal": "http://schema.org/Musculoskeletal",
-    "MusculoskeletalExam": "http://schema.org/MusculoskeletalExam",
-    "Museum": "http://schema.org/Museum",
-    "MusicAlbum": "http://schema.org/MusicAlbum",
-    "MusicAlbumProductionType": "http://schema.org/MusicAlbumProductionType",
-    "MusicAlbumReleaseType": "http://schema.org/MusicAlbumReleaseType",
-    "MusicComposition": "http://schema.org/MusicComposition",
-    "MusicEvent": "http://schema.org/MusicEvent",
-    "MusicGroup": "http://schema.org/MusicGroup",
-    "MusicPlaylist": "http://schema.org/MusicPlaylist",
-    "MusicRecording": "http://schema.org/MusicRecording",
-    "MusicRelease": "http://schema.org/MusicRelease",
-    "MusicReleaseFormatType": "http://schema.org/MusicReleaseFormatType",
-    "MusicStore": "http://schema.org/MusicStore",
-    "MusicVenue": "http://schema.org/MusicVenue",
-    "MusicVideoObject": "http://schema.org/MusicVideoObject",
-    "NGO": "http://schema.org/NGO",
-    "NLNonprofitType": "http://schema.org/NLNonprofitType",
-    "NailSalon": "http://schema.org/NailSalon",
-    "NarcoticConsideration": "http://schema.org/NarcoticConsideration",
-    "Neck": "http://schema.org/Neck",
-    "NegativeFilmDigitalSource": "http://schema.org/NegativeFilmDigitalSource",
-    "Nerve": "http://schema.org/Nerve",
-    "Neuro": "http://schema.org/Neuro",
-    "Neurologic": "http://schema.org/Neurologic",
-    "NewCondition": "http://schema.org/NewCondition",
-    "NewsArticle": "http://schema.org/NewsArticle",
-    "NewsMediaOrganization": "http://schema.org/NewsMediaOrganization",
-    "Newspaper": "http://schema.org/Newspaper",
-    "NightClub": "http://schema.org/NightClub",
-    "NoninvasiveProcedure": "http://schema.org/NoninvasiveProcedure",
-    "Nonprofit501a": "http://schema.org/Nonprofit501a",
-    "Nonprofit501c1": "http://schema.org/Nonprofit501c1",
-    "Nonprofit501c10": "http://schema.org/Nonprofit501c10",
-    "Nonprofit501c11": "http://schema.org/Nonprofit501c11",
-    "Nonprofit501c12": "http://schema.org/Nonprofit501c12",
-    "Nonprofit501c13": "http://schema.org/Nonprofit501c13",
-    "Nonprofit501c14": "http://schema.org/Nonprofit501c14",
-    "Nonprofit501c15": "http://schema.org/Nonprofit501c15",
-    "Nonprofit501c16": "http://schema.org/Nonprofit501c16",
-    "Nonprofit501c17": "http://schema.org/Nonprofit501c17",
-    "Nonprofit501c18": "http://schema.org/Nonprofit501c18",
-    "Nonprofit501c19": "http://schema.org/Nonprofit501c19",
-    "Nonprofit501c2": "http://schema.org/Nonprofit501c2",
-    "Nonprofit501c20": "http://schema.org/Nonprofit501c20",
-    "Nonprofit501c21": "http://schema.org/Nonprofit501c21",
-    "Nonprofit501c22": "http://schema.org/Nonprofit501c22",
-    "Nonprofit501c23": "http://schema.org/Nonprofit501c23",
-    "Nonprofit501c24": "http://schema.org/Nonprofit501c24",
-    "Nonprofit501c25": "http://schema.org/Nonprofit501c25",
-    "Nonprofit501c26": "http://schema.org/Nonprofit501c26",
-    "Nonprofit501c27": "http://schema.org/Nonprofit501c27",
-    "Nonprofit501c28": "http://schema.org/Nonprofit501c28",
-    "Nonprofit501c3": "http://schema.org/Nonprofit501c3",
-    "Nonprofit501c4": "http://schema.org/Nonprofit501c4",
-    "Nonprofit501c5": "http://schema.org/Nonprofit501c5",
-    "Nonprofit501c6": "http://schema.org/Nonprofit501c6",
-    "Nonprofit501c7": "http://schema.org/Nonprofit501c7",
-    "Nonprofit501c8": "http://schema.org/Nonprofit501c8",
-    "Nonprofit501c9": "http://schema.org/Nonprofit501c9",
-    "Nonprofit501d": "http://schema.org/Nonprofit501d",
-    "Nonprofit501e": "http://schema.org/Nonprofit501e",
-    "Nonprofit501f": "http://schema.org/Nonprofit501f",
-    "Nonprofit501k": "http://schema.org/Nonprofit501k",
-    "Nonprofit501n": "http://schema.org/Nonprofit501n",
-    "Nonprofit501q": "http://schema.org/Nonprofit501q",
-    "Nonprofit527": "http://schema.org/Nonprofit527",
-    "NonprofitANBI": "http://schema.org/NonprofitANBI",
-    "NonprofitSBBI": "http://schema.org/NonprofitSBBI",
-    "NonprofitType": "http://schema.org/NonprofitType",
-    "Nose": "http://schema.org/Nose",
-    "NotInForce": "http://schema.org/NotInForce",
-    "NotYetRecruiting": "http://schema.org/NotYetRecruiting",
-    "Notary": "http://schema.org/Notary",
-    "NoteDigitalDocument": "http://schema.org/NoteDigitalDocument",
-    "Number": "http://schema.org/Number",
-    "Nursing": "http://schema.org/Nursing",
-    "NutritionInformation": "http://schema.org/NutritionInformation",
-    "OTC": "http://schema.org/OTC",
-    "Observation": "http://schema.org/Observation",
-    "Observational": "http://schema.org/Observational",
-    "Obstetric": "http://schema.org/Obstetric",
-    "Occupation": "http://schema.org/Occupation",
-    "OccupationalActivity": "http://schema.org/OccupationalActivity",
-    "OccupationalExperienceRequirements": "http://schema.org/OccupationalExperienceRequirements",
-    "OccupationalTherapy": "http://schema.org/OccupationalTherapy",
-    "OceanBodyOfWater": "http://schema.org/OceanBodyOfWater",
-    "Offer": "http://schema.org/Offer",
-    "OfferCatalog": "http://schema.org/OfferCatalog",
-    "OfferForLease": "http://schema.org/OfferForLease",
-    "OfferForPurchase": "http://schema.org/OfferForPurchase",
-    "OfferItemCondition": "http://schema.org/OfferItemCondition",
-    "OfferShippingDetails": "http://schema.org/OfferShippingDetails",
-    "OfficeEquipmentStore": "http://schema.org/OfficeEquipmentStore",
-    "OfficialLegalValue": "http://schema.org/OfficialLegalValue",
-    "OfflineEventAttendanceMode": "http://schema.org/OfflineEventAttendanceMode",
-    "OfflinePermanently": "http://schema.org/OfflinePermanently",
-    "OfflineTemporarily": "http://schema.org/OfflineTemporarily",
-    "OnDemandEvent": "http://schema.org/OnDemandEvent",
-    "OnSitePickup": "http://schema.org/OnSitePickup",
-    "Oncologic": "http://schema.org/Oncologic",
-    "OneTimePayments": "http://schema.org/OneTimePayments",
-    "Online": "http://schema.org/Online",
-    "OnlineBusiness": "http://schema.org/OnlineBusiness",
-    "OnlineEventAttendanceMode": "http://schema.org/OnlineEventAttendanceMode",
-    "OnlineFull": "http://schema.org/OnlineFull",
-    "OnlineMarketplace": "http://schema.org/OnlineMarketplace",
-    "OnlineOnly": "http://schema.org/OnlineOnly",
-    "OnlineStore": "http://schema.org/OnlineStore",
-    "OpenTrial": "http://schema.org/OpenTrial",
-    "OpeningHoursSpecification": "http://schema.org/OpeningHoursSpecification",
-    "OpinionNewsArticle": "http://schema.org/OpinionNewsArticle",
-    "Optician": "http://schema.org/Optician",
-    "Optometric": "http://schema.org/Optometric",
-    "Order": "http://schema.org/Order",
-    "OrderAction": "http://schema.org/OrderAction",
-    "OrderCancelled": "http://schema.org/OrderCancelled",
-    "OrderDelivered": "http://schema.org/OrderDelivered",
-    "OrderInTransit": "http://schema.org/OrderInTransit",
-    "OrderItem": "http://schema.org/OrderItem",
-    "OrderPaymentDue": "http://schema.org/OrderPaymentDue",
-    "OrderPickupAvailable": "http://schema.org/OrderPickupAvailable",
-    "OrderProblem": "http://schema.org/OrderProblem",
-    "OrderProcessing": "http://schema.org/OrderProcessing",
-    "OrderReturned": "http://schema.org/OrderReturned",
-    "OrderStatus": "http://schema.org/OrderStatus",
-    "Organization": "http://schema.org/Organization",
-    "OrganizationRole": "http://schema.org/OrganizationRole",
-    "OrganizeAction": "http://schema.org/OrganizeAction",
-    "OriginalMediaContent": "http://schema.org/OriginalMediaContent",
-    "OriginalShippingFees": "http://schema.org/OriginalShippingFees",
-    "Osteopathic": "http://schema.org/Osteopathic",
-    "Otolaryngologic": "http://schema.org/Otolaryngologic",
-    "OutOfStock": "http://schema.org/OutOfStock",
-    "OutletStore": "http://schema.org/OutletStore",
-    "OverviewHealthAspect": "http://schema.org/OverviewHealthAspect",
-    "OwnershipInfo": "http://schema.org/OwnershipInfo",
-    "PET": "http://schema.org/PET",
-    "PaidLeave": "http://schema.org/PaidLeave",
-    "PaintAction": "http://schema.org/PaintAction",
-    "Painting": "http://schema.org/Painting",
-    "PalliativeProcedure": "http://schema.org/PalliativeProcedure",
-    "Paperback": "http://schema.org/Paperback",
-    "ParcelDelivery": "http://schema.org/ParcelDelivery",
-    "ParcelService": "http://schema.org/ParcelService",
-    "ParentAudience": "http://schema.org/ParentAudience",
-    "ParentalSupport": "http://schema.org/ParentalSupport",
-    "Park": "http://schema.org/Park",
-    "ParkingFacility": "http://schema.org/ParkingFacility",
-    "ParkingMap": "http://schema.org/ParkingMap",
-    "PartiallyInForce": "http://schema.org/PartiallyInForce",
-    "Pathology": "http://schema.org/Pathology",
-    "PathologyTest": "http://schema.org/PathologyTest",
-    "Patient": "http://schema.org/Patient",
-    "PatientExperienceHealthAspect": "http://schema.org/PatientExperienceHealthAspect",
-    "PawnShop": "http://schema.org/PawnShop",
-    "PayAction": "http://schema.org/PayAction",
-    "PaymentAutomaticallyApplied": "http://schema.org/PaymentAutomaticallyApplied",
-    "PaymentCard": "http://schema.org/PaymentCard",
-    "PaymentChargeSpecification": "http://schema.org/PaymentChargeSpecification",
-    "PaymentComplete": "http://schema.org/PaymentComplete",
-    "PaymentDeclined": "http://schema.org/PaymentDeclined",
-    "PaymentDue": "http://schema.org/PaymentDue",
-    "PaymentMethod": "http://schema.org/PaymentMethod",
-    "PaymentMethodType": "http://schema.org/PaymentMethodType",
-    "PaymentPastDue": "http://schema.org/PaymentPastDue",
-    "PaymentService": "http://schema.org/PaymentService",
-    "PaymentStatusType": "http://schema.org/PaymentStatusType",
-    "Pediatric": "http://schema.org/Pediatric",
-    "PeopleAudience": "http://schema.org/PeopleAudience",
-    "PercutaneousProcedure": "http://schema.org/PercutaneousProcedure",
-    "PerformAction": "http://schema.org/PerformAction",
-    "PerformanceRole": "http://schema.org/PerformanceRole",
-    "PerformingArtsTheater": "http://schema.org/PerformingArtsTheater",
-    "PerformingGroup": "http://schema.org/PerformingGroup",
-    "Periodical": "http://schema.org/Periodical",
-    "Permit": "http://schema.org/Permit",
-    "Person": "http://schema.org/Person",
-    "PetStore": "http://schema.org/PetStore",
-    "Pharmacy": "http://schema.org/Pharmacy",
-    "PharmacySpecialty": "http://schema.org/PharmacySpecialty",
-    "PhoneCarrierPayment": "http://schema.org/PhoneCarrierPayment",
-    "Photograph": "http://schema.org/Photograph",
-    "PhotographAction": "http://schema.org/PhotographAction",
-    "PhysicalActivity": "http://schema.org/PhysicalActivity",
-    "PhysicalActivityCategory": "http://schema.org/PhysicalActivityCategory",
-    "PhysicalExam": "http://schema.org/PhysicalExam",
-    "PhysicalTherapy": "http://schema.org/PhysicalTherapy",
-    "Physician": "http://schema.org/Physician",
-    "PhysiciansOffice": "http://schema.org/PhysiciansOffice",
-    "Physiotherapy": "http://schema.org/Physiotherapy",
-    "Place": "http://schema.org/Place",
-    "PlaceOfWorship": "http://schema.org/PlaceOfWorship",
-    "PlaceboControlledTrial": "http://schema.org/PlaceboControlledTrial",
-    "PlanAction": "http://schema.org/PlanAction",
-    "PlasticSurgery": "http://schema.org/PlasticSurgery",
-    "Play": "http://schema.org/Play",
-    "PlayAction": "http://schema.org/PlayAction",
-    "PlayGameAction": "http://schema.org/PlayGameAction",
-    "Playground": "http://schema.org/Playground",
-    "Plumber": "http://schema.org/Plumber",
-    "PodcastEpisode": "http://schema.org/PodcastEpisode",
-    "PodcastSeason": "http://schema.org/PodcastSeason",
-    "PodcastSeries": "http://schema.org/PodcastSeries",
-    "Podiatric": "http://schema.org/Podiatric",
-    "PoliceStation": "http://schema.org/PoliceStation",
-    "PoliticalParty": "http://schema.org/PoliticalParty",
-    "Pond": "http://schema.org/Pond",
-    "PositiveFilmDigitalSource": "http://schema.org/PositiveFilmDigitalSource",
-    "PostOffice": "http://schema.org/PostOffice",
-    "PostalAddress": "http://schema.org/PostalAddress",
-    "PostalCodeRangeSpecification": "http://schema.org/PostalCodeRangeSpecification",
-    "Poster": "http://schema.org/Poster",
-    "PotentialActionStatus": "http://schema.org/PotentialActionStatus",
-    "PreOrder": "http://schema.org/PreOrder",
-    "PreOrderAction": "http://schema.org/PreOrderAction",
-    "PreSale": "http://schema.org/PreSale",
-    "PregnancyHealthAspect": "http://schema.org/PregnancyHealthAspect",
-    "PrependAction": "http://schema.org/PrependAction",
-    "Preschool": "http://schema.org/Preschool",
-    "PrescriptionOnly": "http://schema.org/PrescriptionOnly",
-    "PresentationDigitalDocument": "http://schema.org/PresentationDigitalDocument",
-    "PreventionHealthAspect": "http://schema.org/PreventionHealthAspect",
-    "PreventionIndication": "http://schema.org/PreventionIndication",
-    "PriceComponentTypeEnumeration": "http://schema.org/PriceComponentTypeEnumeration",
-    "PriceSpecification": "http://schema.org/PriceSpecification",
-    "PriceTypeEnumeration": "http://schema.org/PriceTypeEnumeration",
-    "PrimaryCare": "http://schema.org/PrimaryCare",
-    "PrintDigitalSource": "http://schema.org/PrintDigitalSource",
-    "Prion": "http://schema.org/Prion",
-    "Product": "http://schema.org/Product",
-    "ProductCollection": "http://schema.org/ProductCollection",
-    "ProductGroup": "http://schema.org/ProductGroup",
-    "ProductModel": "http://schema.org/ProductModel",
-    "ProductReturnEnumeration": "http://schema.org/ProductReturnEnumeration",
-    "ProductReturnFiniteReturnWindow": "http://schema.org/ProductReturnFiniteReturnWindow",
-    "ProductReturnNotPermitted": "http://schema.org/ProductReturnNotPermitted",
-    "ProductReturnPolicy": "http://schema.org/ProductReturnPolicy",
-    "ProductReturnUnlimitedWindow": "http://schema.org/ProductReturnUnlimitedWindow",
-    "ProductReturnUnspecified": "http://schema.org/ProductReturnUnspecified",
-    "ProfessionalService": "http://schema.org/ProfessionalService",
-    "ProfilePage": "http://schema.org/ProfilePage",
-    "PrognosisHealthAspect": "http://schema.org/PrognosisHealthAspect",
-    "ProgramMembership": "http://schema.org/ProgramMembership",
-    "Project": "http://schema.org/Project",
-    "PronounceableText": "http://schema.org/PronounceableText",
-    "Property": "http://schema.org/Property",
-    "PropertyValue": "http://schema.org/PropertyValue",
-    "PropertyValueSpecification": "http://schema.org/PropertyValueSpecification",
-    "Protein": "http://schema.org/Protein",
-    "Protozoa": "http://schema.org/Protozoa",
-    "Psychiatric": "http://schema.org/Psychiatric",
-    "PsychologicalTreatment": "http://schema.org/PsychologicalTreatment",
-    "PublicHealth": "http://schema.org/PublicHealth",
-    "PublicHolidays": "http://schema.org/PublicHolidays",
-    "PublicSwimmingPool": "http://schema.org/PublicSwimmingPool",
-    "PublicToilet": "http://schema.org/PublicToilet",
-    "PublicationEvent": "http://schema.org/PublicationEvent",
-    "PublicationIssue": "http://schema.org/PublicationIssue",
-    "PublicationVolume": "http://schema.org/PublicationVolume",
-    "Pulmonary": "http://schema.org/Pulmonary",
-    "PurchaseType": "http://schema.org/PurchaseType",
-    "PurchaseTypeLease": "http://schema.org/PurchaseTypeLease",
-    "PurchaseTypeNewPurchase": "http://schema.org/PurchaseTypeNewPurchase",
-    "PurchaseTypeTradeIn": "http://schema.org/PurchaseTypeTradeIn",
-    "PurchaseTypeUsedPurchase": "http://schema.org/PurchaseTypeUsedPurchase",
-    "QAPage": "http://schema.org/QAPage",
-    "QualitativeValue": "http://schema.org/QualitativeValue",
-    "QuantitativeValue": "http://schema.org/QuantitativeValue",
-    "QuantitativeValueDistribution": "http://schema.org/QuantitativeValueDistribution",
-    "Quantity": "http://schema.org/Quantity",
-    "Question": "http://schema.org/Question",
-    "Quiz": "http://schema.org/Quiz",
-    "Quotation": "http://schema.org/Quotation",
-    "QuoteAction": "http://schema.org/QuoteAction",
-    "RVPark": "http://schema.org/RVPark",
-    "RadiationTherapy": "http://schema.org/RadiationTherapy",
-    "RadioBroadcastService": "http://schema.org/RadioBroadcastService",
-    "RadioChannel": "http://schema.org/RadioChannel",
-    "RadioClip": "http://schema.org/RadioClip",
-    "RadioEpisode": "http://schema.org/RadioEpisode",
-    "RadioSeason": "http://schema.org/RadioSeason",
-    "RadioSeries": "http://schema.org/RadioSeries",
-    "RadioStation": "http://schema.org/RadioStation",
-    "Radiography": "http://schema.org/Radiography",
-    "RandomizedTrial": "http://schema.org/RandomizedTrial",
-    "Rating": "http://schema.org/Rating",
-    "ReactAction": "http://schema.org/ReactAction",
-    "ReadAction": "http://schema.org/ReadAction",
-    "ReadPermission": "http://schema.org/ReadPermission",
-    "RealEstateAgent": "http://schema.org/RealEstateAgent",
-    "RealEstateListing": "http://schema.org/RealEstateListing",
-    "RearWheelDriveConfiguration": "http://schema.org/RearWheelDriveConfiguration",
-    "ReceiveAction": "http://schema.org/ReceiveAction",
-    "Recipe": "http://schema.org/Recipe",
-    "Recommendation": "http://schema.org/Recommendation",
-    "RecommendedDoseSchedule": "http://schema.org/RecommendedDoseSchedule",
-    "Recruiting": "http://schema.org/Recruiting",
-    "RecyclingCenter": "http://schema.org/RecyclingCenter",
-    "ReducedRelevanceForChildrenConsideration": "http://schema.org/ReducedRelevanceForChildrenConsideration",
-    "RefundTypeEnumeration": "http://schema.org/RefundTypeEnumeration",
-    "RefurbishedCondition": "http://schema.org/RefurbishedCondition",
-    "RegisterAction": "http://schema.org/RegisterAction",
-    "Registry": "http://schema.org/Registry",
-    "RegularPrice": "http://schema.org/RegularPrice",
-    "ReimbursementCap": "http://schema.org/ReimbursementCap",
-    "RejectAction": "http://schema.org/RejectAction",
-    "RelatedTopicsHealthAspect": "http://schema.org/RelatedTopicsHealthAspect",
-    "RemixAlbum": "http://schema.org/RemixAlbum",
-    "Renal": "http://schema.org/Renal",
-    "RentAction": "http://schema.org/RentAction",
-    "RentalCarReservation": "http://schema.org/RentalCarReservation",
-    "RentalVehicleUsage": "http://schema.org/RentalVehicleUsage",
-    "RepaymentSpecification": "http://schema.org/RepaymentSpecification",
-    "ReplaceAction": "http://schema.org/ReplaceAction",
-    "ReplyAction": "http://schema.org/ReplyAction",
-    "Report": "http://schema.org/Report",
-    "ReportageNewsArticle": "http://schema.org/ReportageNewsArticle",
-    "ReportedDoseSchedule": "http://schema.org/ReportedDoseSchedule",
-    "ResearchOrganization": "http://schema.org/ResearchOrganization",
-    "ResearchProject": "http://schema.org/ResearchProject",
-    "Researcher": "http://schema.org/Researcher",
-    "Reservation": "http://schema.org/Reservation",
-    "ReservationCancelled": "http://schema.org/ReservationCancelled",
-    "ReservationConfirmed": "http://schema.org/ReservationConfirmed",
-    "ReservationHold": "http://schema.org/ReservationHold",
-    "ReservationPackage": "http://schema.org/ReservationPackage",
-    "ReservationPending": "http://schema.org/ReservationPending",
-    "ReservationStatusType": "http://schema.org/ReservationStatusType",
-    "ReserveAction": "http://schema.org/ReserveAction",
-    "Reserved": "http://schema.org/Reserved",
-    "Reservoir": "http://schema.org/Reservoir",
-    "Residence": "http://schema.org/Residence",
-    "Resort": "http://schema.org/Resort",
-    "RespiratoryTherapy": "http://schema.org/RespiratoryTherapy",
-    "Restaurant": "http://schema.org/Restaurant",
-    "RestockingFees": "http://schema.org/RestockingFees",
-    "RestrictedDiet": "http://schema.org/RestrictedDiet",
-    "ResultsAvailable": "http://schema.org/ResultsAvailable",
-    "ResultsNotAvailable": "http://schema.org/ResultsNotAvailable",
-    "ResumeAction": "http://schema.org/ResumeAction",
-    "Retail": "http://schema.org/Retail",
-    "ReturnAction": "http://schema.org/ReturnAction",
-    "ReturnAtKiosk": "http://schema.org/ReturnAtKiosk",
-    "ReturnByMail": "http://schema.org/ReturnByMail",
-    "ReturnFeesCustomerResponsibility": "http://schema.org/ReturnFeesCustomerResponsibility",
-    "ReturnFeesEnumeration": "http://schema.org/ReturnFeesEnumeration",
-    "ReturnInStore": "http://schema.org/ReturnInStore",
-    "ReturnLabelCustomerResponsibility": "http://schema.org/ReturnLabelCustomerResponsibility",
-    "ReturnLabelDownloadAndPrint": "http://schema.org/ReturnLabelDownloadAndPrint",
-    "ReturnLabelInBox": "http://schema.org/ReturnLabelInBox",
-    "ReturnLabelSourceEnumeration": "http://schema.org/ReturnLabelSourceEnumeration",
-    "ReturnMethodEnumeration": "http://schema.org/ReturnMethodEnumeration",
-    "ReturnShippingFees": "http://schema.org/ReturnShippingFees",
-    "Review": "http://schema.org/Review",
-    "ReviewAction": "http://schema.org/ReviewAction",
-    "ReviewNewsArticle": "http://schema.org/ReviewNewsArticle",
-    "Rheumatologic": "http://schema.org/Rheumatologic",
-    "RightHandDriving": "http://schema.org/RightHandDriving",
-    "RisksOrComplicationsHealthAspect": "http://schema.org/RisksOrComplicationsHealthAspect",
-    "RiverBodyOfWater": "http://schema.org/RiverBodyOfWater",
-    "Role": "http://schema.org/Role",
-    "RoofingContractor": "http://schema.org/RoofingContractor",
-    "Room": "http://schema.org/Room",
-    "RsvpAction": "http://schema.org/RsvpAction",
-    "RsvpResponseMaybe": "http://schema.org/RsvpResponseMaybe",
-    "RsvpResponseNo": "http://schema.org/RsvpResponseNo",
-    "RsvpResponseType": "http://schema.org/RsvpResponseType",
-    "RsvpResponseYes": "http://schema.org/RsvpResponseYes",
-    "SRP": "http://schema.org/SRP",
-    "SafetyHealthAspect": "http://schema.org/SafetyHealthAspect",
-    "SaleEvent": "http://schema.org/SaleEvent",
-    "SalePrice": "http://schema.org/SalePrice",
-    "SatireOrParodyContent": "http://schema.org/SatireOrParodyContent",
-    "SatiricalArticle": "http://schema.org/SatiricalArticle",
-    "Saturday": "http://schema.org/Saturday",
-    "Schedule": "http://schema.org/Schedule",
-    "ScheduleAction": "http://schema.org/ScheduleAction",
-    "ScholarlyArticle": "http://schema.org/ScholarlyArticle",
-    "School": "http://schema.org/School",
-    "SchoolDistrict": "http://schema.org/SchoolDistrict",
-    "ScreenCaptureDigitalSource": "http://schema.org/ScreenCaptureDigitalSource",
-    "ScreeningEvent": "http://schema.org/ScreeningEvent",
-    "ScreeningHealthAspect": "http://schema.org/ScreeningHealthAspect",
-    "Sculpture": "http://schema.org/Sculpture",
-    "SeaBodyOfWater": "http://schema.org/SeaBodyOfWater",
-    "SearchAction": "http://schema.org/SearchAction",
-    "SearchRescueOrganization": "http://schema.org/SearchRescueOrganization",
-    "SearchResultsPage": "http://schema.org/SearchResultsPage",
-    "Season": "http://schema.org/Season",
-    "Seat": "http://schema.org/Seat",
-    "SeatingMap": "http://schema.org/SeatingMap",
-    "SeeDoctorHealthAspect": "http://schema.org/SeeDoctorHealthAspect",
-    "SeekToAction": "http://schema.org/SeekToAction",
-    "SelfCareHealthAspect": "http://schema.org/SelfCareHealthAspect",
-    "SelfStorage": "http://schema.org/SelfStorage",
-    "SellAction": "http://schema.org/SellAction",
-    "SendAction": "http://schema.org/SendAction",
-    "Series": "http://schema.org/Series",
-    "Service": "http://schema.org/Service",
-    "ServiceChannel": "http://schema.org/ServiceChannel",
-    "ServicePeriod": "http://schema.org/ServicePeriod",
-    "SexualContentConsideration": "http://schema.org/SexualContentConsideration",
-    "ShareAction": "http://schema.org/ShareAction",
-    "SheetMusic": "http://schema.org/SheetMusic",
-    "ShippingConditions": "http://schema.org/ShippingConditions",
-    "ShippingDeliveryTime": "http://schema.org/ShippingDeliveryTime",
-    "ShippingRateSettings": "http://schema.org/ShippingRateSettings",
-    "ShippingService": "http://schema.org/ShippingService",
-    "ShoeStore": "http://schema.org/ShoeStore",
-    "ShoppingCenter": "http://schema.org/ShoppingCenter",
-    "ShortStory": "http://schema.org/ShortStory",
-    "SideEffectsHealthAspect": "http://schema.org/SideEffectsHealthAspect",
-    "SingleBlindedTrial": "http://schema.org/SingleBlindedTrial",
-    "SingleCenterTrial": "http://schema.org/SingleCenterTrial",
-    "SingleFamilyResidence": "http://schema.org/SingleFamilyResidence",
-    "SinglePlayer": "http://schema.org/SinglePlayer",
-    "SingleRelease": "http://schema.org/SingleRelease",
-    "SiteNavigationElement": "http://schema.org/SiteNavigationElement",
-    "SizeGroupEnumeration": "http://schema.org/SizeGroupEnumeration",
-    "SizeSpecification": "http://schema.org/SizeSpecification",
-    "SizeSystemEnumeration": "http://schema.org/SizeSystemEnumeration",
-    "SizeSystemImperial": "http://schema.org/SizeSystemImperial",
-    "SizeSystemMetric": "http://schema.org/SizeSystemMetric",
-    "SkiResort": "http://schema.org/SkiResort",
-    "Skin": "http://schema.org/Skin",
-    "SocialEvent": "http://schema.org/SocialEvent",
-    "SocialMediaPosting": "http://schema.org/SocialMediaPosting",
-    "SoftwareApplication": "http://schema.org/SoftwareApplication",
-    "SoftwareSourceCode": "http://schema.org/SoftwareSourceCode",
-    "SoldOut": "http://schema.org/SoldOut",
-    "SolveMathAction": "http://schema.org/SolveMathAction",
-    "SomeProducts": "http://schema.org/SomeProducts",
-    "SoundtrackAlbum": "http://schema.org/SoundtrackAlbum",
-    "SpeakableSpecification": "http://schema.org/SpeakableSpecification",
-    "SpecialAnnouncement": "http://schema.org/SpecialAnnouncement",
-    "Specialty": "http://schema.org/Specialty",
-    "SpeechPathology": "http://schema.org/SpeechPathology",
-    "SpokenWordAlbum": "http://schema.org/SpokenWordAlbum",
-    "SportingGoodsStore": "http://schema.org/SportingGoodsStore",
-    "SportsActivityLocation": "http://schema.org/SportsActivityLocation",
-    "SportsClub": "http://schema.org/SportsClub",
-    "SportsEvent": "http://schema.org/SportsEvent",
-    "SportsOrganization": "http://schema.org/SportsOrganization",
-    "SportsTeam": "http://schema.org/SportsTeam",
-    "SpreadsheetDigitalDocument": "http://schema.org/SpreadsheetDigitalDocument",
-    "StadiumOrArena": "http://schema.org/StadiumOrArena",
-    "StagedContent": "http://schema.org/StagedContent",
-    "StagesHealthAspect": "http://schema.org/StagesHealthAspect",
-    "State": "http://schema.org/State",
-    "Statement": "http://schema.org/Statement",
-    "StatisticalPopulation": "http://schema.org/StatisticalPopulation",
-    "StatisticalVariable": "http://schema.org/StatisticalVariable",
-    "StatusEnumeration": "http://schema.org/StatusEnumeration",
-    "SteeringPositionValue": "http://schema.org/SteeringPositionValue",
-    "Store": "http://schema.org/Store",
-    "StoreCreditRefund": "http://schema.org/StoreCreditRefund",
-    "StrengthTraining": "http://schema.org/StrengthTraining",
-    "StrikethroughPrice": "http://schema.org/StrikethroughPrice",
-    "StructuredValue": "http://schema.org/StructuredValue",
-    "StudioAlbum": "http://schema.org/StudioAlbum",
-    "StupidType": "http://schema.org/StupidType",
-    "SubscribeAction": "http://schema.org/SubscribeAction",
-    "Subscription": "http://schema.org/Subscription",
-    "Substance": "http://schema.org/Substance",
-    "SubwayStation": "http://schema.org/SubwayStation",
-    "Suite": "http://schema.org/Suite",
-    "Sunday": "http://schema.org/Sunday",
-    "SuperficialAnatomy": "http://schema.org/SuperficialAnatomy",
-    "Surgical": "http://schema.org/Surgical",
-    "SurgicalProcedure": "http://schema.org/SurgicalProcedure",
-    "SuspendAction": "http://schema.org/SuspendAction",
-    "Suspended": "http://schema.org/Suspended",
-    "Syllabus": "http://schema.org/Syllabus",
-    "SymptomsHealthAspect": "http://schema.org/SymptomsHealthAspect",
-    "Synagogue": "http://schema.org/Synagogue",
-    "TVClip": "http://schema.org/TVClip",
-    "TVEpisode": "http://schema.org/TVEpisode",
-    "TVSeason": "http://schema.org/TVSeason",
-    "TVSeries": "http://schema.org/TVSeries",
-    "Table": "http://schema.org/Table",
-    "TakeAction": "http://schema.org/TakeAction",
-    "TattooParlor": "http://schema.org/TattooParlor",
-    "Taxi": "http://schema.org/Taxi",
-    "TaxiReservation": "http://schema.org/TaxiReservation",
-    "TaxiService": "http://schema.org/TaxiService",
-    "TaxiStand": "http://schema.org/TaxiStand",
-    "TaxiVehicleUsage": "http://schema.org/TaxiVehicleUsage",
-    "Taxon": "http://schema.org/Taxon",
-    "TechArticle": "http://schema.org/TechArticle",
-    "TelevisionChannel": "http://schema.org/TelevisionChannel",
-    "TelevisionStation": "http://schema.org/TelevisionStation",
-    "TennisComplex": "http://schema.org/TennisComplex",
-    "Terminated": "http://schema.org/Terminated",
-    "Text": "http://schema.org/Text",
-    "TextDigitalDocument": "http://schema.org/TextDigitalDocument",
-    "TextObject": "http://schema.org/TextObject",
-    "TheaterEvent": "http://schema.org/TheaterEvent",
-    "TheaterGroup": "http://schema.org/TheaterGroup",
-    "Therapeutic": "http://schema.org/Therapeutic",
-    "TherapeuticProcedure": "http://schema.org/TherapeuticProcedure",
-    "Thesis": "http://schema.org/Thesis",
-    "Thing": "http://schema.org/Thing",
-    "Throat": "http://schema.org/Throat",
-    "Thursday": "http://schema.org/Thursday",
-    "Ticket": "http://schema.org/Ticket",
-    "TieAction": "http://schema.org/TieAction",
-    "TierBenefitEnumeration": "http://schema.org/TierBenefitEnumeration",
-    "TierBenefitLoyaltyPoints": "http://schema.org/TierBenefitLoyaltyPoints",
-    "TierBenefitLoyaltyPrice": "http://schema.org/TierBenefitLoyaltyPrice",
-    "TierBenefitLoyaltyReturns": "http://schema.org/TierBenefitLoyaltyReturns",
-    "TierBenefitLoyaltyShipping": "http://schema.org/TierBenefitLoyaltyShipping",
-    "Time": "http://schema.org/Time",
-    "TipAction": "http://schema.org/TipAction",
-    "TireShop": "http://schema.org/TireShop",
-    "TobaccoNicotineConsideration": "http://schema.org/TobaccoNicotineConsideration",
-    "TollFree": "http://schema.org/TollFree",
-    "TouristAttraction": "http://schema.org/TouristAttraction",
-    "TouristDestination": "http://schema.org/TouristDestination",
-    "TouristInformationCenter": "http://schema.org/TouristInformationCenter",
-    "TouristTrip": "http://schema.org/TouristTrip",
-    "Toxicologic": "http://schema.org/Toxicologic",
-    "ToyStore": "http://schema.org/ToyStore",
-    "TrackAction": "http://schema.org/TrackAction",
-    "TradeAction": "http://schema.org/TradeAction",
-    "TraditionalChinese": "http://schema.org/TraditionalChinese",
-    "TrainReservation": "http://schema.org/TrainReservation",
-    "TrainStation": "http://schema.org/TrainStation",
-    "TrainTrip": "http://schema.org/TrainTrip",
-    "TrainedAlgorithmicMediaDigitalSource": "http://schema.org/TrainedAlgorithmicMediaDigitalSource",
-    "TransferAction": "http://schema.org/TransferAction",
-    "TransformedContent": "http://schema.org/TransformedContent",
-    "TransitMap": "http://schema.org/TransitMap",
-    "TravelAction": "http://schema.org/TravelAction",
-    "TravelAgency": "http://schema.org/TravelAgency",
-    "TreatmentIndication": "http://schema.org/TreatmentIndication",
-    "TreatmentsHealthAspect": "http://schema.org/TreatmentsHealthAspect",
-    "Trip": "http://schema.org/Trip",
-    "TripleBlindedTrial": "http://schema.org/TripleBlindedTrial",
-    "True": "http://schema.org/True",
-    "Tuesday": "http://schema.org/Tuesday",
-    "TypeAndQuantityNode": "http://schema.org/TypeAndQuantityNode",
-    "TypesHealthAspect": "http://schema.org/TypesHealthAspect",
-    "UKNonprofitType": "http://schema.org/UKNonprofitType",
-    "UKTrust": "http://schema.org/UKTrust",
-    "URL": "http://schema.org/URL",
-    "USNonprofitType": "http://schema.org/USNonprofitType",
-    "Ultrasound": "http://schema.org/Ultrasound",
-    "UnRegisterAction": "http://schema.org/UnRegisterAction",
-    "UnclassifiedAdultConsideration": "http://schema.org/UnclassifiedAdultConsideration",
-    "UnemploymentSupport": "http://schema.org/UnemploymentSupport",
-    "UnincorporatedAssociationCharity": "http://schema.org/UnincorporatedAssociationCharity",
-    "UnitPriceSpecification": "http://schema.org/UnitPriceSpecification",
-    "UnofficialLegalValue": "http://schema.org/UnofficialLegalValue",
-    "UpdateAction": "http://schema.org/UpdateAction",
-    "Urologic": "http://schema.org/Urologic",
-    "UsageOrScheduleHealthAspect": "http://schema.org/UsageOrScheduleHealthAspect",
-    "UseAction": "http://schema.org/UseAction",
-    "UsedCondition": "http://schema.org/UsedCondition",
-    "UserBlocks": "http://schema.org/UserBlocks",
-    "UserCheckins": "http://schema.org/UserCheckins",
-    "UserComments": "http://schema.org/UserComments",
-    "UserDownloads": "http://schema.org/UserDownloads",
-    "UserInteraction": "http://schema.org/UserInteraction",
-    "UserLikes": "http://schema.org/UserLikes",
-    "UserPageVisits": "http://schema.org/UserPageVisits",
-    "UserPlays": "http://schema.org/UserPlays",
-    "UserPlusOnes": "http://schema.org/UserPlusOnes",
-    "UserReview": "http://schema.org/UserReview",
-    "UserTweets": "http://schema.org/UserTweets",
-    "VacationRental": "http://schema.org/VacationRental",
-    "VeganDiet": "http://schema.org/VeganDiet",
-    "VegetarianDiet": "http://schema.org/VegetarianDiet",
-    "Vehicle": "http://schema.org/Vehicle",
-    "Vein": "http://schema.org/Vein",
-    "VenueMap": "http://schema.org/VenueMap",
-    "Vessel": "http://schema.org/Vessel",
-    "VeterinaryCare": "http://schema.org/VeterinaryCare",
-    "VideoGallery": "http://schema.org/VideoGallery",
-    "VideoGame": "http://schema.org/VideoGame",
-    "VideoGameClip": "http://schema.org/VideoGameClip",
-    "VideoGameSeries": "http://schema.org/VideoGameSeries",
-    "VideoObject": "http://schema.org/VideoObject",
-    "VideoObjectSnapshot": "http://schema.org/VideoObjectSnapshot",
-    "ViewAction": "http://schema.org/ViewAction",
-    "VinylFormat": "http://schema.org/VinylFormat",
-    "ViolenceConsideration": "http://schema.org/ViolenceConsideration",
-    "VirtualLocation": "http://schema.org/VirtualLocation",
-    "VirtualRecordingDigitalSource": "http://schema.org/VirtualRecordingDigitalSource",
-    "Virus": "http://schema.org/Virus",
-    "VisualArtsEvent": "http://schema.org/VisualArtsEvent",
-    "VisualArtwork": "http://schema.org/VisualArtwork",
-    "VitalSign": "http://schema.org/VitalSign",
-    "Volcano": "http://schema.org/Volcano",
-    "VoteAction": "http://schema.org/VoteAction",
-    "WPAdBlock": "http://schema.org/WPAdBlock",
-    "WPFooter": "http://schema.org/WPFooter",
-    "WPHeader": "http://schema.org/WPHeader",
-    "WPSideBar": "http://schema.org/WPSideBar",
-    "WantAction": "http://schema.org/WantAction",
-    "WarrantyPromise": "http://schema.org/WarrantyPromise",
-    "WarrantyScope": "http://schema.org/WarrantyScope",
-    "WatchAction": "http://schema.org/WatchAction",
-    "Waterfall": "http://schema.org/Waterfall",
-    "WeaponConsideration": "http://schema.org/WeaponConsideration",
-    "WearAction": "http://schema.org/WearAction",
-    "WearableMeasurementBack": "http://schema.org/WearableMeasurementBack",
-    "WearableMeasurementChestOrBust": "http://schema.org/WearableMeasurementChestOrBust",
-    "WearableMeasurementCollar": "http://schema.org/WearableMeasurementCollar",
-    "WearableMeasurementCup": "http://schema.org/WearableMeasurementCup",
-    "WearableMeasurementHeight": "http://schema.org/WearableMeasurementHeight",
-    "WearableMeasurementHips": "http://schema.org/WearableMeasurementHips",
-    "WearableMeasurementInseam": "http://schema.org/WearableMeasurementInseam",
-    "WearableMeasurementLength": "http://schema.org/WearableMeasurementLength",
-    "WearableMeasurementOutsideLeg": "http://schema.org/WearableMeasurementOutsideLeg",
-    "WearableMeasurementSleeve": "http://schema.org/WearableMeasurementSleeve",
-    "WearableMeasurementTypeEnumeration": "http://schema.org/WearableMeasurementTypeEnumeration",
-    "WearableMeasurementWaist": "http://schema.org/WearableMeasurementWaist",
-    "WearableMeasurementWidth": "http://schema.org/WearableMeasurementWidth",
-    "WearableSizeGroupBig": "http://schema.org/WearableSizeGroupBig",
-    "WearableSizeGroupBoys": "http://schema.org/WearableSizeGroupBoys",
-    "WearableSizeGroupEnumeration": "http://schema.org/WearableSizeGroupEnumeration",
-    "WearableSizeGroupExtraShort": "http://schema.org/WearableSizeGroupExtraShort",
-    "WearableSizeGroupExtraTall": "http://schema.org/WearableSizeGroupExtraTall",
-    "WearableSizeGroupGirls": "http://schema.org/WearableSizeGroupGirls",
-    "WearableSizeGroupHusky": "http://schema.org/WearableSizeGroupHusky",
-    "WearableSizeGroupInfants": "http://schema.org/WearableSizeGroupInfants",
-    "WearableSizeGroupJuniors": "http://schema.org/WearableSizeGroupJuniors",
-    "WearableSizeGroupMaternity": "http://schema.org/WearableSizeGroupMaternity",
-    "WearableSizeGroupMens": "http://schema.org/WearableSizeGroupMens",
-    "WearableSizeGroupMisses": "http://schema.org/WearableSizeGroupMisses",
-    "WearableSizeGroupPetite": "http://schema.org/WearableSizeGroupPetite",
-    "WearableSizeGroupPlus": "http://schema.org/WearableSizeGroupPlus",
-    "WearableSizeGroupRegular": "http://schema.org/WearableSizeGroupRegular",
-    "WearableSizeGroupShort": "http://schema.org/WearableSizeGroupShort",
-    "WearableSizeGroupTall": "http://schema.org/WearableSizeGroupTall",
-    "WearableSizeGroupWomens": "http://schema.org/WearableSizeGroupWomens",
-    "WearableSizeSystemAU": "http://schema.org/WearableSizeSystemAU",
-    "WearableSizeSystemBR": "http://schema.org/WearableSizeSystemBR",
-    "WearableSizeSystemCN": "http://schema.org/WearableSizeSystemCN",
-    "WearableSizeSystemContinental": "http://schema.org/WearableSizeSystemContinental",
-    "WearableSizeSystemDE": "http://schema.org/WearableSizeSystemDE",
-    "WearableSizeSystemEN13402": "http://schema.org/WearableSizeSystemEN13402",
-    "WearableSizeSystemEnumeration": "http://schema.org/WearableSizeSystemEnumeration",
-    "WearableSizeSystemEurope": "http://schema.org/WearableSizeSystemEurope",
-    "WearableSizeSystemFR": "http://schema.org/WearableSizeSystemFR",
-    "WearableSizeSystemGS1": "http://schema.org/WearableSizeSystemGS1",
-    "WearableSizeSystemIT": "http://schema.org/WearableSizeSystemIT",
-    "WearableSizeSystemJP": "http://schema.org/WearableSizeSystemJP",
-    "WearableSizeSystemMX": "http://schema.org/WearableSizeSystemMX",
-    "WearableSizeSystemUK": "http://schema.org/WearableSizeSystemUK",
-    "WearableSizeSystemUS": "http://schema.org/WearableSizeSystemUS",
-    "WebAPI": "http://schema.org/WebAPI",
-    "WebApplication": "http://schema.org/WebApplication",
-    "WebContent": "http://schema.org/WebContent",
-    "WebPage": "http://schema.org/WebPage",
-    "WebPageElement": "http://schema.org/WebPageElement",
-    "WebSite": "http://schema.org/WebSite",
-    "Wednesday": "http://schema.org/Wednesday",
-    "WesternConventional": "http://schema.org/WesternConventional",
-    "Wholesale": "http://schema.org/Wholesale",
-    "WholesaleStore": "http://schema.org/WholesaleStore",
-    "WinAction": "http://schema.org/WinAction",
-    "Winery": "http://schema.org/Winery",
-    "Withdrawn": "http://schema.org/Withdrawn",
-    "WorkBasedProgram": "http://schema.org/WorkBasedProgram",
-    "WorkersUnion": "http://schema.org/WorkersUnion",
-    "WriteAction": "http://schema.org/WriteAction",
-    "WritePermission": "http://schema.org/WritePermission",
-    "XPathType": "http://schema.org/XPathType",
-    "XRay": "http://schema.org/XRay",
-    "ZoneBoardingPolicy": "http://schema.org/ZoneBoardingPolicy",
-    "Zoo": "http://schema.org/Zoo",
-    "about": "http://schema.org/about",
-    "abridged": "http://schema.org/abridged",
-    "abstract": "http://schema.org/abstract",
-    "accelerationTime": "http://schema.org/accelerationTime",
-    "acceptedAnswer": "http://schema.org/acceptedAnswer",
-    "acceptedOffer": "http://schema.org/acceptedOffer",
-    "acceptedPaymentMethod": "http://schema.org/acceptedPaymentMethod",
-    "acceptsReservations": "http://schema.org/acceptsReservations",
-    "accessCode": "http://schema.org/accessCode",
-    "accessMode": "http://schema.org/accessMode",
-    "accessModeSufficient": "http://schema.org/accessModeSufficient",
-    "accessibilityAPI": "http://schema.org/accessibilityAPI",
-    "accessibilityControl": "http://schema.org/accessibilityControl",
-    "accessibilityFeature": "http://schema.org/accessibilityFeature",
-    "accessibilityHazard": "http://schema.org/accessibilityHazard",
-    "accessibilitySummary": "http://schema.org/accessibilitySummary",
-    "accommodationCategory": "http://schema.org/accommodationCategory",
-    "accommodationFloorPlan": "http://schema.org/accommodationFloorPlan",
-    "accountId": "http://schema.org/accountId",
-    "accountMinimumInflow": "http://schema.org/accountMinimumInflow",
-    "accountOverdraftLimit": "http://schema.org/accountOverdraftLimit",
-    "accountablePerson": "http://schema.org/accountablePerson",
-    "acquireLicensePage": {
-      "@id": "http://schema.org/acquireLicensePage",
-      "@type": "@id"
-    },
-    "acquiredFrom": "http://schema.org/acquiredFrom",
-    "acrissCode": "http://schema.org/acrissCode",
-    "actionAccessibilityRequirement": "http://schema.org/actionAccessibilityRequirement",
-    "actionApplication": "http://schema.org/actionApplication",
-    "actionOption": "http://schema.org/actionOption",
-    "actionPlatform": "http://schema.org/actionPlatform",
-    "actionProcess": "http://schema.org/actionProcess",
-    "actionStatus": "http://schema.org/actionStatus",
-    "actionableFeedbackPolicy": {
-      "@id": "http://schema.org/actionableFeedbackPolicy",
-      "@type": "@id"
-    },
-    "activeIngredient": "http://schema.org/activeIngredient",
-    "activityDuration": "http://schema.org/activityDuration",
-    "activityFrequency": "http://schema.org/activityFrequency",
-    "actor": "http://schema.org/actor",
-    "actors": "http://schema.org/actors",
-    "addOn": "http://schema.org/addOn",
-    "additionalName": "http://schema.org/additionalName",
-    "additionalNumberOfGuests": "http://schema.org/additionalNumberOfGuests",
-    "additionalProperty": "http://schema.org/additionalProperty",
-    "additionalType": "http://schema.org/additionalType",
-    "additionalVariable": "http://schema.org/additionalVariable",
-    "address": "http://schema.org/address",
-    "addressCountry": "http://schema.org/addressCountry",
-    "addressLocality": "http://schema.org/addressLocality",
-    "addressRegion": "http://schema.org/addressRegion",
-    "administrationRoute": "http://schema.org/administrationRoute",
-    "advanceBookingRequirement": "http://schema.org/advanceBookingRequirement",
-    "adverseOutcome": "http://schema.org/adverseOutcome",
-    "affectedBy": "http://schema.org/affectedBy",
-    "affiliation": "http://schema.org/affiliation",
-    "afterMedia": {
-      "@id": "http://schema.org/afterMedia",
-      "@type": "@id"
-    },
-    "agent": "http://schema.org/agent",
-    "agentInteractionStatistic": "http://schema.org/agentInteractionStatistic",
-    "aggregateElement": "http://schema.org/aggregateElement",
-    "aggregateRating": "http://schema.org/aggregateRating",
-    "aircraft": "http://schema.org/aircraft",
-    "album": "http://schema.org/album",
-    "albumProductionType": "http://schema.org/albumProductionType",
-    "albumRelease": "http://schema.org/albumRelease",
-    "albumReleaseType": "http://schema.org/albumReleaseType",
-    "albums": "http://schema.org/albums",
-    "alcoholWarning": "http://schema.org/alcoholWarning",
-    "algorithm": "http://schema.org/algorithm",
-    "alignmentType": "http://schema.org/alignmentType",
-    "alternateName": "http://schema.org/alternateName",
-    "alternativeHeadline": "http://schema.org/alternativeHeadline",
-    "alternativeOf": "http://schema.org/alternativeOf",
-    "alumni": "http://schema.org/alumni",
-    "alumniOf": "http://schema.org/alumniOf",
-    "amenityFeature": "http://schema.org/amenityFeature",
-    "amount": "http://schema.org/amount",
-    "amountOfThisGood": "http://schema.org/amountOfThisGood",
-    "announcementLocation": "http://schema.org/announcementLocation",
-    "annualPercentageRate": "http://schema.org/annualPercentageRate",
-    "answerCount": "http://schema.org/answerCount",
-    "answerExplanation": "http://schema.org/answerExplanation",
-    "antagonist": "http://schema.org/antagonist",
-    "appearance": "http://schema.org/appearance",
-    "applicableCountry": "http://schema.org/applicableCountry",
-    "applicableLocation": "http://schema.org/applicableLocation",
-    "applicantLocationRequirements": "http://schema.org/applicantLocationRequirements",
-    "application": "http://schema.org/application",
-    "applicationCategory": "http://schema.org/applicationCategory",
-    "applicationContact": "http://schema.org/applicationContact",
-    "applicationDeadline": "http://schema.org/applicationDeadline",
-    "applicationStartDate": {
-      "@id": "http://schema.org/applicationStartDate",
-      "@type": "http://schema.org/Date"
-    },
-    "applicationSubCategory": "http://schema.org/applicationSubCategory",
-    "applicationSuite": "http://schema.org/applicationSuite",
-    "appliesToDeliveryMethod": "http://schema.org/appliesToDeliveryMethod",
-    "appliesToPaymentMethod": "http://schema.org/appliesToPaymentMethod",
-    "archiveHeld": "http://schema.org/archiveHeld",
-    "archivedAt": {
-      "@id": "http://schema.org/archivedAt",
-      "@type": "@id"
-    },
-    "area": "http://schema.org/area",
-    "areaServed": "http://schema.org/areaServed",
-    "arrivalAirport": "http://schema.org/arrivalAirport",
-    "arrivalBoatTerminal": "http://schema.org/arrivalBoatTerminal",
-    "arrivalBusStop": "http://schema.org/arrivalBusStop",
-    "arrivalGate": "http://schema.org/arrivalGate",
-    "arrivalPlatform": "http://schema.org/arrivalPlatform",
-    "arrivalStation": "http://schema.org/arrivalStation",
-    "arrivalTerminal": "http://schema.org/arrivalTerminal",
-    "arrivalTime": "http://schema.org/arrivalTime",
-    "artEdition": "http://schema.org/artEdition",
-    "artMedium": "http://schema.org/artMedium",
-    "arterialBranch": "http://schema.org/arterialBranch",
-    "artform": "http://schema.org/artform",
-    "articleBody": "http://schema.org/articleBody",
-    "articleSection": "http://schema.org/articleSection",
-    "artist": "http://schema.org/artist",
-    "artworkSurface": "http://schema.org/artworkSurface",
-    "asin": "http://schema.org/asin",
-    "aspect": "http://schema.org/aspect",
-    "assembly": "http://schema.org/assembly",
-    "assemblyVersion": "http://schema.org/assemblyVersion",
-    "assesses": "http://schema.org/assesses",
-    "associatedAnatomy": "http://schema.org/associatedAnatomy",
-    "associatedArticle": "http://schema.org/associatedArticle",
-    "associatedClaimReview": "http://schema.org/associatedClaimReview",
-    "associatedDisease": {
-      "@id": "http://schema.org/associatedDisease",
-      "@type": "@id"
-    },
-    "associatedMedia": "http://schema.org/associatedMedia",
-    "associatedMediaReview": "http://schema.org/associatedMediaReview",
-    "associatedPathophysiology": "http://schema.org/associatedPathophysiology",
-    "associatedReview": "http://schema.org/associatedReview",
-    "athlete": "http://schema.org/athlete",
-    "attendee": "http://schema.org/attendee",
-    "attendees": "http://schema.org/attendees",
-    "audience": "http://schema.org/audience",
-    "audienceType": "http://schema.org/audienceType",
-    "audio": "http://schema.org/audio",
-    "auditDate": {
-      "@id": "http://schema.org/auditDate",
-      "@type": "http://schema.org/Date"
-    },
-    "authenticator": "http://schema.org/authenticator",
-    "author": "http://schema.org/author",
-    "availability": "http://schema.org/availability",
-    "availabilityEnds": {
-      "@id": "http://schema.org/availabilityEnds",
-      "@type": "http://schema.org/Date"
-    },
-    "availabilityStarts": {
-      "@id": "http://schema.org/availabilityStarts",
-      "@type": "http://schema.org/Date"
-    },
-    "availableAtOrFrom": "http://schema.org/availableAtOrFrom",
-    "availableChannel": "http://schema.org/availableChannel",
-    "availableDeliveryMethod": "http://schema.org/availableDeliveryMethod",
-    "availableFrom": "http://schema.org/availableFrom",
-    "availableIn": "http://schema.org/availableIn",
-    "availableLanguage": "http://schema.org/availableLanguage",
-    "availableOnDevice": "http://schema.org/availableOnDevice",
-    "availableService": "http://schema.org/availableService",
-    "availableStrength": "http://schema.org/availableStrength",
-    "availableTest": "http://schema.org/availableTest",
-    "availableThrough": "http://schema.org/availableThrough",
-    "award": "http://schema.org/award",
-    "awards": "http://schema.org/awards",
-    "awayTeam": "http://schema.org/awayTeam",
-    "backstory": "http://schema.org/backstory",
-    "bankAccountType": "http://schema.org/bankAccountType",
-    "baseSalary": "http://schema.org/baseSalary",
-    "bccRecipient": "http://schema.org/bccRecipient",
-    "bed": "http://schema.org/bed",
-    "beforeMedia": {
-      "@id": "http://schema.org/beforeMedia",
-      "@type": "@id"
-    },
-    "beneficiaryBank": "http://schema.org/beneficiaryBank",
-    "benefits": "http://schema.org/benefits",
-    "benefitsSummaryUrl": {
-      "@id": "http://schema.org/benefitsSummaryUrl",
-      "@type": "@id"
-    },
-    "bestRating": "http://schema.org/bestRating",
-    "billingAddress": "http://schema.org/billingAddress",
-    "billingDuration": "http://schema.org/billingDuration",
-    "billingIncrement": "http://schema.org/billingIncrement",
-    "billingPeriod": "http://schema.org/billingPeriod",
-    "billingStart": "http://schema.org/billingStart",
-    "bioChemInteraction": "http://schema.org/bioChemInteraction",
-    "bioChemSimilarity": "http://schema.org/bioChemSimilarity",
-    "biologicalRole": "http://schema.org/biologicalRole",
-    "biomechnicalClass": "http://schema.org/biomechnicalClass",
-    "birthDate": {
-      "@id": "http://schema.org/birthDate",
-      "@type": "http://schema.org/Date"
-    },
-    "birthPlace": "http://schema.org/birthPlace",
-    "bitrate": "http://schema.org/bitrate",
-    "blogPost": "http://schema.org/blogPost",
-    "blogPosts": "http://schema.org/blogPosts",
-    "bloodSupply": "http://schema.org/bloodSupply",
-    "boardingGroup": "http://schema.org/boardingGroup",
-    "boardingPolicy": "http://schema.org/boardingPolicy",
-    "bodyLocation": "http://schema.org/bodyLocation",
-    "bodyType": "http://schema.org/bodyType",
-    "bookEdition": "http://schema.org/bookEdition",
-    "bookFormat": "http://schema.org/bookFormat",
-    "bookingAgent": "http://schema.org/bookingAgent",
-    "bookingTime": "http://schema.org/bookingTime",
-    "borrower": "http://schema.org/borrower",
-    "box": "http://schema.org/box",
-    "branch": "http://schema.org/branch",
-    "branchCode": "http://schema.org/branchCode",
-    "branchOf": "http://schema.org/branchOf",
-    "brand": "http://schema.org/brand",
-    "breadcrumb": "http://schema.org/breadcrumb",
-    "breastfeedingWarning": "http://schema.org/breastfeedingWarning",
-    "broadcastAffiliateOf": "http://schema.org/broadcastAffiliateOf",
-    "broadcastChannelId": "http://schema.org/broadcastChannelId",
-    "broadcastDisplayName": "http://schema.org/broadcastDisplayName",
-    "broadcastFrequency": "http://schema.org/broadcastFrequency",
-    "broadcastFrequencyValue": "http://schema.org/broadcastFrequencyValue",
-    "broadcastOfEvent": "http://schema.org/broadcastOfEvent",
-    "broadcastServiceTier": "http://schema.org/broadcastServiceTier",
-    "broadcastSignalModulation": "http://schema.org/broadcastSignalModulation",
-    "broadcastSubChannel": "http://schema.org/broadcastSubChannel",
-    "broadcastTimezone": "http://schema.org/broadcastTimezone",
-    "broadcaster": "http://schema.org/broadcaster",
-    "broker": "http://schema.org/broker",
-    "browserRequirements": "http://schema.org/browserRequirements",
-    "busName": "http://schema.org/busName",
-    "busNumber": "http://schema.org/busNumber",
-    "businessDays": "http://schema.org/businessDays",
-    "businessFunction": "http://schema.org/businessFunction",
-    "buyer": "http://schema.org/buyer",
-    "byArtist": "http://schema.org/byArtist",
-    "byDay": "http://schema.org/byDay",
-    "byMonth": "http://schema.org/byMonth",
-    "byMonthDay": "http://schema.org/byMonthDay",
-    "byMonthWeek": "http://schema.org/byMonthWeek",
-    "callSign": "http://schema.org/callSign",
-    "calories": "http://schema.org/calories",
-    "candidate": "http://schema.org/candidate",
-    "caption": "http://schema.org/caption",
-    "carbohydrateContent": "http://schema.org/carbohydrateContent",
-    "cargoVolume": "http://schema.org/cargoVolume",
-    "carrier": "http://schema.org/carrier",
-    "carrierRequirements": "http://schema.org/carrierRequirements",
-    "cashBack": "http://schema.org/cashBack",
-    "catalog": "http://schema.org/catalog",
-    "catalogNumber": "http://schema.org/catalogNumber",
-    "category": "http://schema.org/category",
-    "causeOf": "http://schema.org/causeOf",
-    "ccRecipient": "http://schema.org/ccRecipient",
-    "certificationIdentification": "http://schema.org/certificationIdentification",
-    "certificationRating": "http://schema.org/certificationRating",
-    "certificationStatus": "http://schema.org/certificationStatus",
-    "character": "http://schema.org/character",
-    "characterAttribute": "http://schema.org/characterAttribute",
-    "characterName": "http://schema.org/characterName",
-    "cheatCode": "http://schema.org/cheatCode",
-    "checkinTime": "http://schema.org/checkinTime",
-    "checkoutPageURLTemplate": "http://schema.org/checkoutPageURLTemplate",
-    "checkoutTime": "http://schema.org/checkoutTime",
-    "chemicalComposition": "http://schema.org/chemicalComposition",
-    "chemicalRole": "http://schema.org/chemicalRole",
-    "childMaxAge": "http://schema.org/childMaxAge",
-    "childMinAge": "http://schema.org/childMinAge",
-    "childTaxon": "http://schema.org/childTaxon",
-    "children": "http://schema.org/children",
-    "cholesterolContent": "http://schema.org/cholesterolContent",
-    "circle": "http://schema.org/circle",
-    "citation": "http://schema.org/citation",
-    "claimInterpreter": "http://schema.org/claimInterpreter",
-    "claimReviewed": "http://schema.org/claimReviewed",
-    "clincalPharmacology": "http://schema.org/clincalPharmacology",
-    "clinicalPharmacology": "http://schema.org/clinicalPharmacology",
-    "clipNumber": "http://schema.org/clipNumber",
-    "closes": "http://schema.org/closes",
-    "coach": "http://schema.org/coach",
-    "code": "http://schema.org/code",
-    "codeRepository": {
-      "@id": "http://schema.org/codeRepository",
-      "@type": "@id"
-    },
-    "codeSampleType": "http://schema.org/codeSampleType",
-    "codeValue": "http://schema.org/codeValue",
-    "codingSystem": "http://schema.org/codingSystem",
-    "colleague": {
-      "@id": "http://schema.org/colleague",
-      "@type": "@id"
-    },
-    "colleagues": "http://schema.org/colleagues",
-    "collection": "http://schema.org/collection",
-    "collectionSize": "http://schema.org/collectionSize",
-    "color": "http://schema.org/color",
-    "colorSwatch": {
-      "@id": "http://schema.org/colorSwatch",
-      "@type": "@id"
-    },
-    "colorist": "http://schema.org/colorist",
-    "comment": "http://schema.org/comment",
-    "commentCount": "http://schema.org/commentCount",
-    "commentText": "http://schema.org/commentText",
-    "commentTime": {
-      "@id": "http://schema.org/commentTime",
-      "@type": "http://schema.org/Date"
-    },
-    "companyRegistration": "http://schema.org/companyRegistration",
-    "competencyRequired": "http://schema.org/competencyRequired",
-    "competitor": "http://schema.org/competitor",
-    "composer": "http://schema.org/composer",
-    "comprisedOf": "http://schema.org/comprisedOf",
-    "conditionsOfAccess": "http://schema.org/conditionsOfAccess",
-    "confirmationNumber": "http://schema.org/confirmationNumber",
-    "connectedTo": "http://schema.org/connectedTo",
-    "constraintProperty": {
-      "@id": "http://schema.org/constraintProperty",
-      "@type": "@id"
-    },
-    "contactOption": "http://schema.org/contactOption",
-    "contactPoint": "http://schema.org/contactPoint",
-    "contactPoints": "http://schema.org/contactPoints",
-    "contactType": "http://schema.org/contactType",
-    "contactlessPayment": "http://schema.org/contactlessPayment",
-    "containedIn": "http://schema.org/containedIn",
-    "containedInPlace": "http://schema.org/containedInPlace",
-    "containsPlace": "http://schema.org/containsPlace",
-    "containsSeason": "http://schema.org/containsSeason",
-    "contentLocation": "http://schema.org/contentLocation",
-    "contentRating": "http://schema.org/contentRating",
-    "contentReferenceTime": "http://schema.org/contentReferenceTime",
-    "contentSize": "http://schema.org/contentSize",
-    "contentType": "http://schema.org/contentType",
-    "contentUrl": {
-      "@id": "http://schema.org/contentUrl",
-      "@type": "@id"
-    },
-    "contraindication": "http://schema.org/contraindication",
-    "contributor": "http://schema.org/contributor",
-    "cookTime": "http://schema.org/cookTime",
-    "cookingMethod": "http://schema.org/cookingMethod",
-    "copyrightHolder": "http://schema.org/copyrightHolder",
-    "copyrightNotice": "http://schema.org/copyrightNotice",
-    "copyrightYear": "http://schema.org/copyrightYear",
-    "correction": "http://schema.org/correction",
-    "correctionsPolicy": {
-      "@id": "http://schema.org/correctionsPolicy",
-      "@type": "@id"
-    },
-    "costCategory": "http://schema.org/costCategory",
-    "costCurrency": "http://schema.org/costCurrency",
-    "costOrigin": "http://schema.org/costOrigin",
-    "costPerUnit": "http://schema.org/costPerUnit",
-    "countriesNotSupported": "http://schema.org/countriesNotSupported",
-    "countriesSupported": "http://schema.org/countriesSupported",
-    "countryOfAssembly": "http://schema.org/countryOfAssembly",
-    "countryOfLastProcessing": "http://schema.org/countryOfLastProcessing",
-    "countryOfOrigin": "http://schema.org/countryOfOrigin",
-    "course": "http://schema.org/course",
-    "courseCode": "http://schema.org/courseCode",
-    "courseMode": "http://schema.org/courseMode",
-    "coursePrerequisites": "http://schema.org/coursePrerequisites",
-    "courseSchedule": "http://schema.org/courseSchedule",
-    "courseWorkload": "http://schema.org/courseWorkload",
-    "coverageEndTime": "http://schema.org/coverageEndTime",
-    "coverageStartTime": "http://schema.org/coverageStartTime",
-    "creativeWorkStatus": "http://schema.org/creativeWorkStatus",
-    "creator": "http://schema.org/creator",
-    "credentialCategory": "http://schema.org/credentialCategory",
-    "creditText": "http://schema.org/creditText",
-    "creditedTo": "http://schema.org/creditedTo",
-    "cssSelector": "http://schema.org/cssSelector",
-    "currenciesAccepted": "http://schema.org/currenciesAccepted",
-    "currency": "http://schema.org/currency",
-    "currentExchangeRate": "http://schema.org/currentExchangeRate",
-    "customer": "http://schema.org/customer",
-    "customerRemorseReturnFees": "http://schema.org/customerRemorseReturnFees",
-    "customerRemorseReturnLabelSource": "http://schema.org/customerRemorseReturnLabelSource",
-    "customerRemorseReturnShippingFeesAmount": "http://schema.org/customerRemorseReturnShippingFeesAmount",
-    "cutoffTime": "http://schema.org/cutoffTime",
-    "cvdCollectionDate": "http://schema.org/cvdCollectionDate",
-    "cvdFacilityCounty": "http://schema.org/cvdFacilityCounty",
-    "cvdFacilityId": "http://schema.org/cvdFacilityId",
-    "cvdNumBeds": "http://schema.org/cvdNumBeds",
-    "cvdNumBedsOcc": "http://schema.org/cvdNumBedsOcc",
-    "cvdNumC19Died": "http://schema.org/cvdNumC19Died",
-    "cvdNumC19HOPats": "http://schema.org/cvdNumC19HOPats",
-    "cvdNumC19HospPats": "http://schema.org/cvdNumC19HospPats",
-    "cvdNumC19MechVentPats": "http://schema.org/cvdNumC19MechVentPats",
-    "cvdNumC19OFMechVentPats": "http://schema.org/cvdNumC19OFMechVentPats",
-    "cvdNumC19OverflowPats": "http://schema.org/cvdNumC19OverflowPats",
-    "cvdNumICUBeds": "http://schema.org/cvdNumICUBeds",
-    "cvdNumICUBedsOcc": "http://schema.org/cvdNumICUBedsOcc",
-    "cvdNumTotBeds": "http://schema.org/cvdNumTotBeds",
-    "cvdNumVent": "http://schema.org/cvdNumVent",
-    "cvdNumVentUse": "http://schema.org/cvdNumVentUse",
-    "dataFeedElement": "http://schema.org/dataFeedElement",
-    "dataset": "http://schema.org/dataset",
-    "datasetTimeInterval": "http://schema.org/datasetTimeInterval",
-    "dateCreated": {
-      "@id": "http://schema.org/dateCreated",
-      "@type": "http://schema.org/Date"
-    },
-    "dateDeleted": {
-      "@id": "http://schema.org/dateDeleted",
-      "@type": "http://schema.org/Date"
-    },
-    "dateIssued": {
-      "@id": "http://schema.org/dateIssued",
-      "@type": "http://schema.org/Date"
-    },
-    "dateModified": {
-      "@id": "http://schema.org/dateModified",
-      "@type": "http://schema.org/Date"
-    },
-    "datePosted": {
-      "@id": "http://schema.org/datePosted",
-      "@type": "http://schema.org/Date"
-    },
-    "datePublished": {
-      "@id": "http://schema.org/datePublished",
-      "@type": "http://schema.org/Date"
-    },
-    "dateRead": {
-      "@id": "http://schema.org/dateRead",
-      "@type": "http://schema.org/Date"
-    },
-    "dateReceived": "http://schema.org/dateReceived",
-    "dateSent": "http://schema.org/dateSent",
-    "dateVehicleFirstRegistered": {
-      "@id": "http://schema.org/dateVehicleFirstRegistered",
-      "@type": "http://schema.org/Date"
-    },
-    "dateline": "http://schema.org/dateline",
-    "dayOfWeek": "http://schema.org/dayOfWeek",
-    "deathDate": {
-      "@id": "http://schema.org/deathDate",
-      "@type": "http://schema.org/Date"
-    },
-    "deathPlace": "http://schema.org/deathPlace",
-    "defaultValue": "http://schema.org/defaultValue",
-    "deliveryAddress": "http://schema.org/deliveryAddress",
-    "deliveryLeadTime": "http://schema.org/deliveryLeadTime",
-    "deliveryMethod": "http://schema.org/deliveryMethod",
-    "deliveryStatus": "http://schema.org/deliveryStatus",
-    "deliveryTime": "http://schema.org/deliveryTime",
-    "department": "http://schema.org/department",
-    "departureAirport": "http://schema.org/departureAirport",
-    "departureBoatTerminal": "http://schema.org/departureBoatTerminal",
-    "departureBusStop": "http://schema.org/departureBusStop",
-    "departureGate": "http://schema.org/departureGate",
-    "departurePlatform": "http://schema.org/departurePlatform",
-    "departureStation": "http://schema.org/departureStation",
-    "departureTerminal": "http://schema.org/departureTerminal",
-    "departureTime": "http://schema.org/departureTime",
-    "dependencies": "http://schema.org/dependencies",
-    "depth": "http://schema.org/depth",
-    "description": "http://schema.org/description",
-    "device": "http://schema.org/device",
-    "diagnosis": "http://schema.org/diagnosis",
-    "diagram": "http://schema.org/diagram",
-    "diet": "http://schema.org/diet",
-    "dietFeatures": "http://schema.org/dietFeatures",
-    "differentialDiagnosis": "http://schema.org/differentialDiagnosis",
-    "digitalSourceType": "http://schema.org/digitalSourceType",
-    "directApply": "http://schema.org/directApply",
-    "director": "http://schema.org/director",
-    "directors": "http://schema.org/directors",
-    "disambiguatingDescription": "http://schema.org/disambiguatingDescription",
-    "discount": "http://schema.org/discount",
-    "discountCode": "http://schema.org/discountCode",
-    "discountCurrency": "http://schema.org/discountCurrency",
-    "discusses": "http://schema.org/discusses",
-    "discussionUrl": {
-      "@id": "http://schema.org/discussionUrl",
-      "@type": "@id"
-    },
-    "diseasePreventionInfo": {
-      "@id": "http://schema.org/diseasePreventionInfo",
-      "@type": "@id"
-    },
-    "diseaseSpreadStatistics": {
-      "@id": "http://schema.org/diseaseSpreadStatistics",
-      "@type": "@id"
-    },
-    "dissolutionDate": {
-      "@id": "http://schema.org/dissolutionDate",
-      "@type": "http://schema.org/Date"
-    },
-    "distance": "http://schema.org/distance",
-    "distinguishingSign": "http://schema.org/distinguishingSign",
-    "distribution": "http://schema.org/distribution",
-    "diversityPolicy": {
-      "@id": "http://schema.org/diversityPolicy",
-      "@type": "@id"
-    },
-    "diversityStaffingReport": {
-      "@id": "http://schema.org/diversityStaffingReport",
-      "@type": "@id"
-    },
-    "documentation": {
-      "@id": "http://schema.org/documentation",
-      "@type": "@id"
-    },
-    "doesNotShip": "http://schema.org/doesNotShip",
-    "domainIncludes": "http://schema.org/domainIncludes",
-    "domiciledMortgage": "http://schema.org/domiciledMortgage",
-    "doorTime": "http://schema.org/doorTime",
-    "dosageForm": "http://schema.org/dosageForm",
-    "doseSchedule": "http://schema.org/doseSchedule",
-    "doseUnit": "http://schema.org/doseUnit",
-    "doseValue": "http://schema.org/doseValue",
-    "downPayment": "http://schema.org/downPayment",
-    "downloadUrl": {
-      "@id": "http://schema.org/downloadUrl",
-      "@type": "@id"
-    },
-    "downvoteCount": "http://schema.org/downvoteCount",
-    "drainsTo": "http://schema.org/drainsTo",
-    "driveWheelConfiguration": "http://schema.org/driveWheelConfiguration",
-    "dropoffLocation": "http://schema.org/dropoffLocation",
-    "dropoffTime": "http://schema.org/dropoffTime",
-    "drug": "http://schema.org/drug",
-    "drugClass": "http://schema.org/drugClass",
-    "drugUnit": "http://schema.org/drugUnit",
-    "duns": "http://schema.org/duns",
-    "duplicateTherapy": "http://schema.org/duplicateTherapy",
-    "duration": "http://schema.org/duration",
-    "durationOfWarranty": "http://schema.org/durationOfWarranty",
-    "duringMedia": {
-      "@id": "http://schema.org/duringMedia",
-      "@type": "@id"
-    },
-    "earlyPrepaymentPenalty": "http://schema.org/earlyPrepaymentPenalty",
-    "editEIDR": "http://schema.org/editEIDR",
-    "editor": "http://schema.org/editor",
-    "eduQuestionType": "http://schema.org/eduQuestionType",
-    "educationRequirements": "http://schema.org/educationRequirements",
-    "educationalAlignment": "http://schema.org/educationalAlignment",
-    "educationalCredentialAwarded": "http://schema.org/educationalCredentialAwarded",
-    "educationalFramework": "http://schema.org/educationalFramework",
-    "educationalLevel": "http://schema.org/educationalLevel",
-    "educationalProgramMode": "http://schema.org/educationalProgramMode",
-    "educationalRole": "http://schema.org/educationalRole",
-    "educationalUse": "http://schema.org/educationalUse",
-    "elevation": "http://schema.org/elevation",
-    "eligibilityToWorkRequirement": "http://schema.org/eligibilityToWorkRequirement",
-    "eligibleCustomerType": "http://schema.org/eligibleCustomerType",
-    "eligibleDuration": "http://schema.org/eligibleDuration",
-    "eligibleQuantity": "http://schema.org/eligibleQuantity",
-    "eligibleRegion": "http://schema.org/eligibleRegion",
-    "eligibleTransactionVolume": "http://schema.org/eligibleTransactionVolume",
-    "eligibleWithSupplier": "http://schema.org/eligibleWithSupplier",
-    "email": "http://schema.org/email",
-    "embedUrl": {
-      "@id": "http://schema.org/embedUrl",
-      "@type": "@id"
-    },
-    "embeddedTextCaption": "http://schema.org/embeddedTextCaption",
-    "emissionsCO2": "http://schema.org/emissionsCO2",
-    "employee": "http://schema.org/employee",
-    "employees": "http://schema.org/employees",
-    "employerOverview": "http://schema.org/employerOverview",
-    "employmentType": "http://schema.org/employmentType",
-    "employmentUnit": "http://schema.org/employmentUnit",
-    "encodesBioChemEntity": "http://schema.org/encodesBioChemEntity",
-    "encodesCreativeWork": "http://schema.org/encodesCreativeWork",
-    "encoding": "http://schema.org/encoding",
-    "encodingFormat": "http://schema.org/encodingFormat",
-    "encodingType": "http://schema.org/encodingType",
-    "encodings": "http://schema.org/encodings",
-    "endDate": {
-      "@id": "http://schema.org/endDate",
-      "@type": "http://schema.org/Date"
-    },
-    "endOffset": "http://schema.org/endOffset",
-    "endTime": "http://schema.org/endTime",
-    "endorsee": "http://schema.org/endorsee",
-    "endorsers": "http://schema.org/endorsers",
-    "energyEfficiencyScaleMax": "http://schema.org/energyEfficiencyScaleMax",
-    "energyEfficiencyScaleMin": "http://schema.org/energyEfficiencyScaleMin",
-    "engineDisplacement": "http://schema.org/engineDisplacement",
-    "enginePower": "http://schema.org/enginePower",
-    "engineType": "http://schema.org/engineType",
-    "entertainmentBusiness": "http://schema.org/entertainmentBusiness",
-    "epidemiology": "http://schema.org/epidemiology",
-    "episode": "http://schema.org/episode",
-    "episodeNumber": "http://schema.org/episodeNumber",
-    "episodes": "http://schema.org/episodes",
-    "equal": "http://schema.org/equal",
-    "error": "http://schema.org/error",
-    "estimatedCost": "http://schema.org/estimatedCost",
-    "estimatedFlightDuration": "http://schema.org/estimatedFlightDuration",
-    "estimatedSalary": "http://schema.org/estimatedSalary",
-    "estimatesRiskOf": "http://schema.org/estimatesRiskOf",
-    "ethicsPolicy": {
-      "@id": "http://schema.org/ethicsPolicy",
-      "@type": "@id"
-    },
-    "event": "http://schema.org/event",
-    "eventAttendanceMode": "http://schema.org/eventAttendanceMode",
-    "eventSchedule": "http://schema.org/eventSchedule",
-    "eventStatus": "http://schema.org/eventStatus",
-    "events": "http://schema.org/events",
-    "evidenceLevel": "http://schema.org/evidenceLevel",
-    "evidenceOrigin": "http://schema.org/evidenceOrigin",
-    "exampleOfWork": "http://schema.org/exampleOfWork",
-    "exceptDate": {
-      "@id": "http://schema.org/exceptDate",
-      "@type": "http://schema.org/Date"
-    },
-    "exchangeRateSpread": "http://schema.org/exchangeRateSpread",
-    "executableLibraryName": "http://schema.org/executableLibraryName",
-    "exerciseCourse": "http://schema.org/exerciseCourse",
-    "exercisePlan": "http://schema.org/exercisePlan",
-    "exerciseRelatedDiet": "http://schema.org/exerciseRelatedDiet",
-    "exerciseType": "http://schema.org/exerciseType",
-    "exifData": "http://schema.org/exifData",
-    "expectedArrivalFrom": {
-      "@id": "http://schema.org/expectedArrivalFrom",
-      "@type": "http://schema.org/Date"
-    },
-    "expectedArrivalUntil": {
-      "@id": "http://schema.org/expectedArrivalUntil",
-      "@type": "http://schema.org/Date"
-    },
-    "expectedPrognosis": "http://schema.org/expectedPrognosis",
-    "expectsAcceptanceOf": "http://schema.org/expectsAcceptanceOf",
-    "experienceInPlaceOfEducation": "http://schema.org/experienceInPlaceOfEducation",
-    "experienceRequirements": "http://schema.org/experienceRequirements",
-    "expertConsiderations": "http://schema.org/expertConsiderations",
-    "expires": {
-      "@id": "http://schema.org/expires",
-      "@type": "http://schema.org/Date"
-    },
-    "expressedIn": "http://schema.org/expressedIn",
-    "extendedAddress": "http://schema.org/extendedAddress",
-    "familyName": "http://schema.org/familyName",
-    "fatContent": "http://schema.org/fatContent",
-    "faxNumber": "http://schema.org/faxNumber",
-    "featureList": "http://schema.org/featureList",
-    "feesAndCommissionsSpecification": "http://schema.org/feesAndCommissionsSpecification",
-    "fiberContent": "http://schema.org/fiberContent",
-    "fileFormat": "http://schema.org/fileFormat",
-    "fileSize": "http://schema.org/fileSize",
-    "financialAidEligible": "http://schema.org/financialAidEligible",
-    "firstAppearance": "http://schema.org/firstAppearance",
-    "firstPerformance": "http://schema.org/firstPerformance",
-    "flightDistance": "http://schema.org/flightDistance",
-    "flightNumber": "http://schema.org/flightNumber",
-    "floorLevel": "http://schema.org/floorLevel",
-    "floorLimit": "http://schema.org/floorLimit",
-    "floorSize": "http://schema.org/floorSize",
-    "followee": "http://schema.org/followee",
-    "follows": "http://schema.org/follows",
-    "followup": "http://schema.org/followup",
-    "foodEstablishment": "http://schema.org/foodEstablishment",
-    "foodEvent": "http://schema.org/foodEvent",
-    "foodWarning": "http://schema.org/foodWarning",
-    "founder": "http://schema.org/founder",
-    "founders": "http://schema.org/founders",
-    "foundingDate": {
-      "@id": "http://schema.org/foundingDate",
-      "@type": "http://schema.org/Date"
-    },
-    "foundingLocation": "http://schema.org/foundingLocation",
-    "free": "http://schema.org/free",
-    "freeShippingThreshold": "http://schema.org/freeShippingThreshold",
-    "frequency": "http://schema.org/frequency",
-    "fromLocation": "http://schema.org/fromLocation",
-    "fuelCapacity": "http://schema.org/fuelCapacity",
-    "fuelConsumption": "http://schema.org/fuelConsumption",
-    "fuelEfficiency": "http://schema.org/fuelEfficiency",
-    "fuelType": "http://schema.org/fuelType",
-    "fulfillmentType": "http://schema.org/fulfillmentType",
-    "functionalClass": "http://schema.org/functionalClass",
-    "fundedItem": "http://schema.org/fundedItem",
-    "funder": "http://schema.org/funder",
-    "funding": "http://schema.org/funding",
-    "game": "http://schema.org/game",
-    "gameAvailabilityType": "http://schema.org/gameAvailabilityType",
-    "gameEdition": "http://schema.org/gameEdition",
-    "gameItem": "http://schema.org/gameItem",
-    "gameLocation": {
-      "@id": "http://schema.org/gameLocation",
-      "@type": "@id"
-    },
-    "gamePlatform": "http://schema.org/gamePlatform",
-    "gameServer": "http://schema.org/gameServer",
-    "gameTip": "http://schema.org/gameTip",
-    "gender": "http://schema.org/gender",
-    "genre": "http://schema.org/genre",
-    "geo": "http://schema.org/geo",
-    "geoContains": "http://schema.org/geoContains",
-    "geoCoveredBy": "http://schema.org/geoCoveredBy",
-    "geoCovers": "http://schema.org/geoCovers",
-    "geoCrosses": "http://schema.org/geoCrosses",
-    "geoDisjoint": "http://schema.org/geoDisjoint",
-    "geoEquals": "http://schema.org/geoEquals",
-    "geoIntersects": "http://schema.org/geoIntersects",
-    "geoMidpoint": "http://schema.org/geoMidpoint",
-    "geoOverlaps": "http://schema.org/geoOverlaps",
-    "geoRadius": "http://schema.org/geoRadius",
-    "geoTouches": "http://schema.org/geoTouches",
-    "geoWithin": "http://schema.org/geoWithin",
-    "geographicArea": "http://schema.org/geographicArea",
-    "gettingTestedInfo": {
-      "@id": "http://schema.org/gettingTestedInfo",
-      "@type": "@id"
-    },
-    "givenName": "http://schema.org/givenName",
-    "globalLocationNumber": "http://schema.org/globalLocationNumber",
-    "governmentBenefitsInfo": "http://schema.org/governmentBenefitsInfo",
-    "gracePeriod": "http://schema.org/gracePeriod",
-    "grantee": "http://schema.org/grantee",
-    "greater": "http://schema.org/greater",
-    "greaterOrEqual": "http://schema.org/greaterOrEqual",
-    "gtin": "http://schema.org/gtin",
-    "gtin12": "http://schema.org/gtin12",
-    "gtin13": "http://schema.org/gtin13",
-    "gtin14": "http://schema.org/gtin14",
-    "gtin8": "http://schema.org/gtin8",
-    "guideline": "http://schema.org/guideline",
-    "guidelineDate": {
-      "@id": "http://schema.org/guidelineDate",
-      "@type": "http://schema.org/Date"
-    },
-    "guidelineSubject": "http://schema.org/guidelineSubject",
-    "handlingTime": "http://schema.org/handlingTime",
-    "hasAdultConsideration": "http://schema.org/hasAdultConsideration",
-    "hasBioChemEntityPart": "http://schema.org/hasBioChemEntityPart",
-    "hasBioPolymerSequence": "http://schema.org/hasBioPolymerSequence",
-    "hasBroadcastChannel": "http://schema.org/hasBroadcastChannel",
-    "hasCategoryCode": "http://schema.org/hasCategoryCode",
-    "hasCertification": "http://schema.org/hasCertification",
-    "hasCourse": "http://schema.org/hasCourse",
-    "hasCourseInstance": "http://schema.org/hasCourseInstance",
-    "hasCredential": "http://schema.org/hasCredential",
-    "hasDefinedTerm": "http://schema.org/hasDefinedTerm",
-    "hasDeliveryMethod": "http://schema.org/hasDeliveryMethod",
-    "hasDigitalDocumentPermission": "http://schema.org/hasDigitalDocumentPermission",
-    "hasDriveThroughService": "http://schema.org/hasDriveThroughService",
-    "hasEnergyConsumptionDetails": "http://schema.org/hasEnergyConsumptionDetails",
-    "hasEnergyEfficiencyCategory": "http://schema.org/hasEnergyEfficiencyCategory",
-    "hasGS1DigitalLink": {
-      "@id": "http://schema.org/hasGS1DigitalLink",
-      "@type": "@id"
-    },
-    "hasHealthAspect": "http://schema.org/hasHealthAspect",
-    "hasMap": {
-      "@id": "http://schema.org/hasMap",
-      "@type": "@id"
-    },
-    "hasMeasurement": "http://schema.org/hasMeasurement",
-    "hasMemberProgram": "http://schema.org/hasMemberProgram",
-    "hasMenu": "http://schema.org/hasMenu",
-    "hasMenuItem": "http://schema.org/hasMenuItem",
-    "hasMenuSection": "http://schema.org/hasMenuSection",
-    "hasMerchantReturnPolicy": "http://schema.org/hasMerchantReturnPolicy",
-    "hasMolecularFunction": {
-      "@id": "http://schema.org/hasMolecularFunction",
-      "@type": "@id"
-    },
-    "hasOccupation": "http://schema.org/hasOccupation",
-    "hasOfferCatalog": "http://schema.org/hasOfferCatalog",
-    "hasPOS": "http://schema.org/hasPOS",
-    "hasPart": "http://schema.org/hasPart",
-    "hasProductReturnPolicy": "http://schema.org/hasProductReturnPolicy",
-    "hasRepresentation": "http://schema.org/hasRepresentation",
-    "hasShippingService": "http://schema.org/hasShippingService",
-    "hasStore": "http://schema.org/hasStore",
-    "hasTierBenefit": "http://schema.org/hasTierBenefit",
-    "hasTierRequirement": "http://schema.org/hasTierRequirement",
-    "hasTiers": "http://schema.org/hasTiers",
-    "hasVariant": "http://schema.org/hasVariant",
-    "headline": "http://schema.org/headline",
-    "healthCondition": "http://schema.org/healthCondition",
-    "healthPlanCoinsuranceOption": "http://schema.org/healthPlanCoinsuranceOption",
-    "healthPlanCoinsuranceRate": "http://schema.org/healthPlanCoinsuranceRate",
-    "healthPlanCopay": "http://schema.org/healthPlanCopay",
-    "healthPlanCopayOption": "http://schema.org/healthPlanCopayOption",
-    "healthPlanCostSharing": "http://schema.org/healthPlanCostSharing",
-    "healthPlanDrugOption": "http://schema.org/healthPlanDrugOption",
-    "healthPlanDrugTier": "http://schema.org/healthPlanDrugTier",
-    "healthPlanId": "http://schema.org/healthPlanId",
-    "healthPlanMarketingUrl": {
-      "@id": "http://schema.org/healthPlanMarketingUrl",
-      "@type": "@id"
-    },
-    "healthPlanNetworkId": "http://schema.org/healthPlanNetworkId",
-    "healthPlanNetworkTier": "http://schema.org/healthPlanNetworkTier",
-    "healthPlanPharmacyCategory": "http://schema.org/healthPlanPharmacyCategory",
-    "healthcareReportingData": "http://schema.org/healthcareReportingData",
-    "height": "http://schema.org/height",
-    "highPrice": "http://schema.org/highPrice",
-    "hiringOrganization": "http://schema.org/hiringOrganization",
-    "holdingArchive": "http://schema.org/holdingArchive",
-    "homeLocation": "http://schema.org/homeLocation",
-    "homeTeam": "http://schema.org/homeTeam",
-    "honorificPrefix": "http://schema.org/honorificPrefix",
-    "honorificSuffix": "http://schema.org/honorificSuffix",
-    "hospitalAffiliation": "http://schema.org/hospitalAffiliation",
-    "hostingOrganization": "http://schema.org/hostingOrganization",
-    "hoursAvailable": "http://schema.org/hoursAvailable",
-    "howPerformed": "http://schema.org/howPerformed",
-    "httpMethod": "http://schema.org/httpMethod",
-    "iataCode": "http://schema.org/iataCode",
-    "icaoCode": "http://schema.org/icaoCode",
-    "identifier": "http://schema.org/identifier",
-    "identifyingExam": "http://schema.org/identifyingExam",
-    "identifyingTest": "http://schema.org/identifyingTest",
-    "illustrator": "http://schema.org/illustrator",
-    "image": {
-      "@id": "http://schema.org/image",
-      "@type": "@id"
-    },
-    "imagingTechnique": "http://schema.org/imagingTechnique",
-    "inAlbum": "http://schema.org/inAlbum",
-    "inBroadcastLineup": "http://schema.org/inBroadcastLineup",
-    "inChI": "http://schema.org/inChI",
-    "inChIKey": "http://schema.org/inChIKey",
-    "inCodeSet": {
-      "@id": "http://schema.org/inCodeSet",
-      "@type": "@id"
-    },
-    "inDefinedTermSet": {
-      "@id": "http://schema.org/inDefinedTermSet",
-      "@type": "@id"
-    },
-    "inLanguage": "http://schema.org/inLanguage",
-    "inPlaylist": "http://schema.org/inPlaylist",
-    "inProductGroupWithID": "http://schema.org/inProductGroupWithID",
-    "inStoreReturnsOffered": "http://schema.org/inStoreReturnsOffered",
-    "inSupportOf": "http://schema.org/inSupportOf",
-    "incentiveAmount": "http://schema.org/incentiveAmount",
-    "incentiveCompensation": "http://schema.org/incentiveCompensation",
-    "incentiveStatus": "http://schema.org/incentiveStatus",
-    "incentiveType": "http://schema.org/incentiveType",
-    "incentives": "http://schema.org/incentives",
-    "incentivizedItem": "http://schema.org/incentivizedItem",
-    "includedComposition": "http://schema.org/includedComposition",
-    "includedDataCatalog": "http://schema.org/includedDataCatalog",
-    "includedInDataCatalog": "http://schema.org/includedInDataCatalog",
-    "includedInHealthInsurancePlan": "http://schema.org/includedInHealthInsurancePlan",
-    "includedRiskFactor": "http://schema.org/includedRiskFactor",
-    "includesAttraction": "http://schema.org/includesAttraction",
-    "includesHealthPlanFormulary": "http://schema.org/includesHealthPlanFormulary",
-    "includesHealthPlanNetwork": "http://schema.org/includesHealthPlanNetwork",
-    "includesObject": "http://schema.org/includesObject",
-    "incomeLimit": "http://schema.org/incomeLimit",
-    "increasesRiskOf": "http://schema.org/increasesRiskOf",
-    "industry": "http://schema.org/industry",
-    "ineligibleRegion": "http://schema.org/ineligibleRegion",
-    "infectiousAgent": "http://schema.org/infectiousAgent",
-    "infectiousAgentClass": "http://schema.org/infectiousAgentClass",
-    "ingredients": "http://schema.org/ingredients",
-    "inker": "http://schema.org/inker",
-    "insertion": "http://schema.org/insertion",
-    "installUrl": {
-      "@id": "http://schema.org/installUrl",
-      "@type": "@id"
-    },
-    "instructor": "http://schema.org/instructor",
-    "instrument": "http://schema.org/instrument",
-    "intensity": "http://schema.org/intensity",
-    "interactingDrug": "http://schema.org/interactingDrug",
-    "interactionCount": "http://schema.org/interactionCount",
-    "interactionService": "http://schema.org/interactionService",
-    "interactionStatistic": "http://schema.org/interactionStatistic",
-    "interactionType": "http://schema.org/interactionType",
-    "interactivityType": "http://schema.org/interactivityType",
-    "interestRate": "http://schema.org/interestRate",
-    "interpretedAsClaim": "http://schema.org/interpretedAsClaim",
-    "inventoryLevel": "http://schema.org/inventoryLevel",
-    "inverseOf": "http://schema.org/inverseOf",
-    "isAcceptingNewPatients": "http://schema.org/isAcceptingNewPatients",
-    "isAccessibleForFree": "http://schema.org/isAccessibleForFree",
-    "isAccessoryOrSparePartFor": "http://schema.org/isAccessoryOrSparePartFor",
-    "isAvailableGenerically": "http://schema.org/isAvailableGenerically",
-    "isBasedOn": {
-      "@id": "http://schema.org/isBasedOn",
-      "@type": "@id"
-    },
-    "isBasedOnUrl": {
-      "@id": "http://schema.org/isBasedOnUrl",
-      "@type": "@id"
-    },
-    "isConsumableFor": "http://schema.org/isConsumableFor",
-    "isEncodedByBioChemEntity": "http://schema.org/isEncodedByBioChemEntity",
-    "isFamilyFriendly": "http://schema.org/isFamilyFriendly",
-    "isGift": "http://schema.org/isGift",
-    "isInvolvedInBiologicalProcess": {
-      "@id": "http://schema.org/isInvolvedInBiologicalProcess",
-      "@type": "@id"
-    },
-    "isLiveBroadcast": "http://schema.org/isLiveBroadcast",
-    "isLocatedInSubcellularLocation": {
-      "@id": "http://schema.org/isLocatedInSubcellularLocation",
-      "@type": "@id"
-    },
-    "isPartOf": {
-      "@id": "http://schema.org/isPartOf",
-      "@type": "@id"
-    },
-    "isPartOfBioChemEntity": "http://schema.org/isPartOfBioChemEntity",
-    "isPlanForApartment": "http://schema.org/isPlanForApartment",
-    "isProprietary": "http://schema.org/isProprietary",
-    "isRelatedTo": "http://schema.org/isRelatedTo",
-    "isResizable": "http://schema.org/isResizable",
-    "isSimilarTo": "http://schema.org/isSimilarTo",
-    "isStoreOn": "http://schema.org/isStoreOn",
-    "isTierOf": "http://schema.org/isTierOf",
-    "isUnlabelledFallback": "http://schema.org/isUnlabelledFallback",
-    "isVariantOf": "http://schema.org/isVariantOf",
-    "isbn": "http://schema.org/isbn",
-    "isicV4": "http://schema.org/isicV4",
-    "iso6523Code": "http://schema.org/iso6523Code",
-    "isrcCode": "http://schema.org/isrcCode",
-    "issn": "http://schema.org/issn",
-    "issueNumber": "http://schema.org/issueNumber",
-    "issuedBy": "http://schema.org/issuedBy",
-    "issuedThrough": "http://schema.org/issuedThrough",
-    "iswcCode": "http://schema.org/iswcCode",
-    "item": "http://schema.org/item",
-    "itemCondition": "http://schema.org/itemCondition",
-    "itemDefectReturnFees": "http://schema.org/itemDefectReturnFees",
-    "itemDefectReturnLabelSource": "http://schema.org/itemDefectReturnLabelSource",
-    "itemDefectReturnShippingFeesAmount": "http://schema.org/itemDefectReturnShippingFeesAmount",
-    "itemListElement": "http://schema.org/itemListElement",
-    "itemListOrder": "http://schema.org/itemListOrder",
-    "itemLocation": "http://schema.org/itemLocation",
-    "itemOffered": "http://schema.org/itemOffered",
-    "itemReviewed": "http://schema.org/itemReviewed",
-    "itemShipped": "http://schema.org/itemShipped",
-    "itinerary": "http://schema.org/itinerary",
-    "iupacName": "http://schema.org/iupacName",
-    "jobBenefits": "http://schema.org/jobBenefits",
-    "jobImmediateStart": "http://schema.org/jobImmediateStart",
-    "jobLocation": "http://schema.org/jobLocation",
-    "jobLocationType": "http://schema.org/jobLocationType",
-    "jobStartDate": "http://schema.org/jobStartDate",
-    "jobTitle": "http://schema.org/jobTitle",
-    "jurisdiction": "http://schema.org/jurisdiction",
-    "keywords": "http://schema.org/keywords",
-    "knownVehicleDamages": "http://schema.org/knownVehicleDamages",
-    "knows": "http://schema.org/knows",
-    "knowsAbout": "http://schema.org/knowsAbout",
-    "knowsLanguage": "http://schema.org/knowsLanguage",
-    "labelDetails": {
-      "@id": "http://schema.org/labelDetails",
-      "@type": "@id"
-    },
-    "landlord": "http://schema.org/landlord",
-    "language": "http://schema.org/language",
-    "lastReviewed": {
-      "@id": "http://schema.org/lastReviewed",
-      "@type": "http://schema.org/Date"
-    },
-    "latitude": "http://schema.org/latitude",
-    "layoutImage": {
-      "@id": "http://schema.org/layoutImage",
-      "@type": "@id"
-    },
-    "learningResourceType": "http://schema.org/learningResourceType",
-    "leaseLength": "http://schema.org/leaseLength",
-    "legalAddress": "http://schema.org/legalAddress",
-    "legalName": "http://schema.org/legalName",
-    "legalRepresentative": "http://schema.org/legalRepresentative",
-    "legalStatus": "http://schema.org/legalStatus",
-    "legislationAmends": "http://schema.org/legislationAmends",
-    "legislationApplies": "http://schema.org/legislationApplies",
-    "legislationChanges": "http://schema.org/legislationChanges",
-    "legislationCommences": "http://schema.org/legislationCommences",
-    "legislationConsolidates": "http://schema.org/legislationConsolidates",
-    "legislationCorrects": "http://schema.org/legislationCorrects",
-    "legislationCountersignedBy": "http://schema.org/legislationCountersignedBy",
-    "legislationDate": {
-      "@id": "http://schema.org/legislationDate",
-      "@type": "http://schema.org/Date"
-    },
-    "legislationDateOfApplicability": {
-      "@id": "http://schema.org/legislationDateOfApplicability",
-      "@type": "http://schema.org/Date"
-    },
-    "legislationDateVersion": {
-      "@id": "http://schema.org/legislationDateVersion",
-      "@type": "http://schema.org/Date"
-    },
-    "legislationEnsuresImplementationOf": "http://schema.org/legislationEnsuresImplementationOf",
-    "legislationIdentifier": "http://schema.org/legislationIdentifier",
-    "legislationJurisdiction": "http://schema.org/legislationJurisdiction",
-    "legislationLegalForce": "http://schema.org/legislationLegalForce",
-    "legislationLegalValue": "http://schema.org/legislationLegalValue",
-    "legislationPassedBy": "http://schema.org/legislationPassedBy",
-    "legislationRepeals": "http://schema.org/legislationRepeals",
-    "legislationResponsible": "http://schema.org/legislationResponsible",
-    "legislationTransposes": "http://schema.org/legislationTransposes",
-    "legislationType": "http://schema.org/legislationType",
-    "leiCode": "http://schema.org/leiCode",
-    "lender": "http://schema.org/lender",
-    "lesser": "http://schema.org/lesser",
-    "lesserOrEqual": "http://schema.org/lesserOrEqual",
-    "letterer": "http://schema.org/letterer",
-    "license": {
-      "@id": "http://schema.org/license",
-      "@type": "@id"
-    },
-    "line": "http://schema.org/line",
-    "linkRelationship": "http://schema.org/linkRelationship",
-    "liveBlogUpdate": "http://schema.org/liveBlogUpdate",
-    "loanMortgageMandateAmount": "http://schema.org/loanMortgageMandateAmount",
-    "loanPaymentAmount": "http://schema.org/loanPaymentAmount",
-    "loanPaymentFrequency": "http://schema.org/loanPaymentFrequency",
-    "loanRepaymentForm": "http://schema.org/loanRepaymentForm",
-    "loanTerm": "http://schema.org/loanTerm",
-    "loanType": "http://schema.org/loanType",
-    "location": "http://schema.org/location",
-    "locationCreated": "http://schema.org/locationCreated",
-    "lodgingUnitDescription": "http://schema.org/lodgingUnitDescription",
-    "lodgingUnitType": "http://schema.org/lodgingUnitType",
-    "logo": {
-      "@id": "http://schema.org/logo",
-      "@type": "@id"
-    },
-    "longitude": "http://schema.org/longitude",
-    "loser": "http://schema.org/loser",
-    "lowPrice": "http://schema.org/lowPrice",
-    "lyricist": "http://schema.org/lyricist",
-    "lyrics": "http://schema.org/lyrics",
-    "mainContentOfPage": "http://schema.org/mainContentOfPage",
-    "mainEntity": "http://schema.org/mainEntity",
-    "mainEntityOfPage": {
-      "@id": "http://schema.org/mainEntityOfPage",
-      "@type": "@id"
-    },
-    "maintainer": "http://schema.org/maintainer",
-    "makesOffer": "http://schema.org/makesOffer",
-    "manufacturer": "http://schema.org/manufacturer",
-    "map": {
-      "@id": "http://schema.org/map",
-      "@type": "@id"
-    },
-    "mapType": "http://schema.org/mapType",
-    "maps": {
-      "@id": "http://schema.org/maps",
-      "@type": "@id"
-    },
-    "marginOfError": "http://schema.org/marginOfError",
-    "masthead": {
-      "@id": "http://schema.org/masthead",
-      "@type": "@id"
-    },
-    "material": "http://schema.org/material",
-    "materialExtent": "http://schema.org/materialExtent",
-    "mathExpression": "http://schema.org/mathExpression",
-    "maxPrice": "http://schema.org/maxPrice",
-    "maxValue": "http://schema.org/maxValue",
-    "maximumAttendeeCapacity": "http://schema.org/maximumAttendeeCapacity",
-    "maximumEnrollment": "http://schema.org/maximumEnrollment",
-    "maximumIntake": "http://schema.org/maximumIntake",
-    "maximumPhysicalAttendeeCapacity": "http://schema.org/maximumPhysicalAttendeeCapacity",
-    "maximumVirtualAttendeeCapacity": "http://schema.org/maximumVirtualAttendeeCapacity",
-    "mealService": "http://schema.org/mealService",
-    "measuredProperty": "http://schema.org/measuredProperty",
-    "measurementDenominator": "http://schema.org/measurementDenominator",
-    "measurementMethod": "http://schema.org/measurementMethod",
-    "measurementQualifier": "http://schema.org/measurementQualifier",
-    "measurementTechnique": "http://schema.org/measurementTechnique",
-    "mechanismOfAction": "http://schema.org/mechanismOfAction",
-    "mediaAuthenticityCategory": "http://schema.org/mediaAuthenticityCategory",
-    "mediaItemAppearance": "http://schema.org/mediaItemAppearance",
-    "median": "http://schema.org/median",
-    "medicalAudience": "http://schema.org/medicalAudience",
-    "medicalSpecialty": "http://schema.org/medicalSpecialty",
-    "medicineSystem": "http://schema.org/medicineSystem",
-    "meetsEmissionStandard": "http://schema.org/meetsEmissionStandard",
-    "member": "http://schema.org/member",
-    "memberOf": "http://schema.org/memberOf",
-    "members": "http://schema.org/members",
-    "membershipNumber": "http://schema.org/membershipNumber",
-    "membershipPointsEarned": "http://schema.org/membershipPointsEarned",
-    "memoryRequirements": "http://schema.org/memoryRequirements",
-    "mentions": "http://schema.org/mentions",
-    "menu": "http://schema.org/menu",
-    "menuAddOn": "http://schema.org/menuAddOn",
-    "merchant": "http://schema.org/merchant",
-    "merchantReturnDays": {
-      "@id": "http://schema.org/merchantReturnDays",
-      "@type": "http://schema.org/Date"
-    },
-    "merchantReturnLink": {
-      "@id": "http://schema.org/merchantReturnLink",
-      "@type": "@id"
-    },
-    "messageAttachment": "http://schema.org/messageAttachment",
-    "mileageFromOdometer": "http://schema.org/mileageFromOdometer",
-    "minPrice": "http://schema.org/minPrice",
-    "minValue": "http://schema.org/minValue",
-    "minimumPaymentDue": "http://schema.org/minimumPaymentDue",
-    "missionCoveragePrioritiesPolicy": {
-      "@id": "http://schema.org/missionCoveragePrioritiesPolicy",
-      "@type": "@id"
-    },
-    "mobileUrl": "http://schema.org/mobileUrl",
-    "model": "http://schema.org/model",
-    "modelDate": {
-      "@id": "http://schema.org/modelDate",
-      "@type": "http://schema.org/Date"
-    },
-    "modifiedTime": "http://schema.org/modifiedTime",
-    "molecularFormula": "http://schema.org/molecularFormula",
-    "molecularWeight": "http://schema.org/molecularWeight",
-    "monoisotopicMolecularWeight": "http://schema.org/monoisotopicMolecularWeight",
-    "monthlyMinimumRepaymentAmount": "http://schema.org/monthlyMinimumRepaymentAmount",
-    "monthsOfExperience": "http://schema.org/monthsOfExperience",
-    "mpn": "http://schema.org/mpn",
-    "multipleValues": "http://schema.org/multipleValues",
-    "muscleAction": "http://schema.org/muscleAction",
-    "musicArrangement": "http://schema.org/musicArrangement",
-    "musicBy": "http://schema.org/musicBy",
-    "musicCompositionForm": "http://schema.org/musicCompositionForm",
-    "musicGroupMember": "http://schema.org/musicGroupMember",
-    "musicReleaseFormat": "http://schema.org/musicReleaseFormat",
-    "musicalKey": "http://schema.org/musicalKey",
-    "naics": "http://schema.org/naics",
-    "name": "http://schema.org/name",
-    "namedPosition": "http://schema.org/namedPosition",
-    "nationality": "http://schema.org/nationality",
-    "naturalProgression": "http://schema.org/naturalProgression",
-    "negativeNotes": "http://schema.org/negativeNotes",
-    "nerve": "http://schema.org/nerve",
-    "nerveMotor": "http://schema.org/nerveMotor",
-    "netWorth": "http://schema.org/netWorth",
-    "newsUpdatesAndGuidelines": {
-      "@id": "http://schema.org/newsUpdatesAndGuidelines",
-      "@type": "@id"
-    },
-    "nextItem": "http://schema.org/nextItem",
-    "noBylinesPolicy": {
-      "@id": "http://schema.org/noBylinesPolicy",
-      "@type": "@id"
-    },
-    "nonEqual": "http://schema.org/nonEqual",
-    "nonProprietaryName": "http://schema.org/nonProprietaryName",
-    "nonprofitStatus": "http://schema.org/nonprofitStatus",
-    "normalRange": "http://schema.org/normalRange",
-    "nsn": "http://schema.org/nsn",
-    "numAdults": "http://schema.org/numAdults",
-    "numChildren": "http://schema.org/numChildren",
-    "numConstraints": "http://schema.org/numConstraints",
-    "numItems": "http://schema.org/numItems",
-    "numTracks": "http://schema.org/numTracks",
-    "numberOfAccommodationUnits": "http://schema.org/numberOfAccommodationUnits",
-    "numberOfAirbags": "http://schema.org/numberOfAirbags",
-    "numberOfAvailableAccommodationUnits": "http://schema.org/numberOfAvailableAccommodationUnits",
-    "numberOfAxles": "http://schema.org/numberOfAxles",
-    "numberOfBathroomsTotal": "http://schema.org/numberOfBathroomsTotal",
-    "numberOfBedrooms": "http://schema.org/numberOfBedrooms",
-    "numberOfBeds": "http://schema.org/numberOfBeds",
-    "numberOfCredits": "http://schema.org/numberOfCredits",
-    "numberOfDoors": "http://schema.org/numberOfDoors",
-    "numberOfEmployees": "http://schema.org/numberOfEmployees",
-    "numberOfEpisodes": "http://schema.org/numberOfEpisodes",
-    "numberOfForwardGears": "http://schema.org/numberOfForwardGears",
-    "numberOfFullBathrooms": "http://schema.org/numberOfFullBathrooms",
-    "numberOfItems": "http://schema.org/numberOfItems",
-    "numberOfLoanPayments": "http://schema.org/numberOfLoanPayments",
-    "numberOfPages": "http://schema.org/numberOfPages",
-    "numberOfPartialBathrooms": "http://schema.org/numberOfPartialBathrooms",
-    "numberOfPlayers": "http://schema.org/numberOfPlayers",
-    "numberOfPreviousOwners": "http://schema.org/numberOfPreviousOwners",
-    "numberOfRooms": "http://schema.org/numberOfRooms",
-    "numberOfSeasons": "http://schema.org/numberOfSeasons",
-    "numberedPosition": "http://schema.org/numberedPosition",
-    "nutrition": "http://schema.org/nutrition",
-    "object": "http://schema.org/object",
-    "observationAbout": "http://schema.org/observationAbout",
-    "observationDate": "http://schema.org/observationDate",
-    "observationPeriod": "http://schema.org/observationPeriod",
-    "occupancy": "http://schema.org/occupancy",
-    "occupationLocation": "http://schema.org/occupationLocation",
-    "occupationalCategory": "http://schema.org/occupationalCategory",
-    "occupationalCredentialAwarded": "http://schema.org/occupationalCredentialAwarded",
-    "offerCount": "http://schema.org/offerCount",
-    "offeredBy": "http://schema.org/offeredBy",
-    "offers": "http://schema.org/offers",
-    "offersPrescriptionByMail": "http://schema.org/offersPrescriptionByMail",
-    "openingHours": "http://schema.org/openingHours",
-    "openingHoursSpecification": "http://schema.org/openingHoursSpecification",
-    "opens": "http://schema.org/opens",
-    "operatingSystem": "http://schema.org/operatingSystem",
-    "opponent": "http://schema.org/opponent",
-    "option": "http://schema.org/option",
-    "orderDate": {
-      "@id": "http://schema.org/orderDate",
-      "@type": "http://schema.org/Date"
-    },
-    "orderDelivery": "http://schema.org/orderDelivery",
-    "orderItemNumber": "http://schema.org/orderItemNumber",
-    "orderItemStatus": "http://schema.org/orderItemStatus",
-    "orderNumber": "http://schema.org/orderNumber",
-    "orderPercentage": "http://schema.org/orderPercentage",
-    "orderQuantity": "http://schema.org/orderQuantity",
-    "orderStatus": "http://schema.org/orderStatus",
-    "orderValue": "http://schema.org/orderValue",
-    "orderedItem": "http://schema.org/orderedItem",
-    "organizer": "http://schema.org/organizer",
-    "originAddress": "http://schema.org/originAddress",
-    "originalMediaContextDescription": "http://schema.org/originalMediaContextDescription",
-    "originalMediaLink": {
-      "@id": "http://schema.org/originalMediaLink",
-      "@type": "@id"
-    },
-    "originatesFrom": "http://schema.org/originatesFrom",
-    "overdosage": "http://schema.org/overdosage",
-    "ownedFrom": "http://schema.org/ownedFrom",
-    "ownedThrough": "http://schema.org/ownedThrough",
-    "ownershipFundingInfo": "http://schema.org/ownershipFundingInfo",
-    "owns": "http://schema.org/owns",
-    "pageEnd": "http://schema.org/pageEnd",
-    "pageStart": "http://schema.org/pageStart",
-    "pagination": "http://schema.org/pagination",
-    "parent": "http://schema.org/parent",
-    "parentItem": "http://schema.org/parentItem",
-    "parentOrganization": "http://schema.org/parentOrganization",
-    "parentService": "http://schema.org/parentService",
-    "parentTaxon": "http://schema.org/parentTaxon",
-    "parents": "http://schema.org/parents",
-    "partOfEpisode": "http://schema.org/partOfEpisode",
-    "partOfInvoice": "http://schema.org/partOfInvoice",
-    "partOfOrder": "http://schema.org/partOfOrder",
-    "partOfSeason": "http://schema.org/partOfSeason",
-    "partOfSeries": "http://schema.org/partOfSeries",
-    "partOfSystem": "http://schema.org/partOfSystem",
-    "partOfTVSeries": "http://schema.org/partOfTVSeries",
-    "partOfTrip": "http://schema.org/partOfTrip",
-    "participant": "http://schema.org/participant",
-    "partySize": "http://schema.org/partySize",
-    "passengerPriorityStatus": "http://schema.org/passengerPriorityStatus",
-    "passengerSequenceNumber": "http://schema.org/passengerSequenceNumber",
-    "pathophysiology": "http://schema.org/pathophysiology",
-    "pattern": "http://schema.org/pattern",
-    "payload": "http://schema.org/payload",
-    "paymentAccepted": "http://schema.org/paymentAccepted",
-    "paymentDue": "http://schema.org/paymentDue",
-    "paymentDueDate": {
-      "@id": "http://schema.org/paymentDueDate",
-      "@type": "http://schema.org/Date"
-    },
-    "paymentMethod": "http://schema.org/paymentMethod",
-    "paymentMethodId": "http://schema.org/paymentMethodId",
-    "paymentMethodType": "http://schema.org/paymentMethodType",
-    "paymentStatus": "http://schema.org/paymentStatus",
-    "paymentUrl": {
-      "@id": "http://schema.org/paymentUrl",
-      "@type": "@id"
-    },
-    "penciler": "http://schema.org/penciler",
-    "percentile10": "http://schema.org/percentile10",
-    "percentile25": "http://schema.org/percentile25",
-    "percentile75": "http://schema.org/percentile75",
-    "percentile90": "http://schema.org/percentile90",
-    "performTime": "http://schema.org/performTime",
-    "performer": "http://schema.org/performer",
-    "performerIn": "http://schema.org/performerIn",
-    "performers": "http://schema.org/performers",
-    "permissionType": "http://schema.org/permissionType",
-    "permissions": "http://schema.org/permissions",
-    "permitAudience": "http://schema.org/permitAudience",
-    "permittedUsage": "http://schema.org/permittedUsage",
-    "petsAllowed": "http://schema.org/petsAllowed",
-    "phoneticText": "http://schema.org/phoneticText",
-    "photo": "http://schema.org/photo",
-    "photos": "http://schema.org/photos",
-    "physicalRequirement": "http://schema.org/physicalRequirement",
-    "physiologicalBenefits": "http://schema.org/physiologicalBenefits",
-    "pickupLocation": "http://schema.org/pickupLocation",
-    "pickupTime": "http://schema.org/pickupTime",
-    "playMode": "http://schema.org/playMode",
-    "playerType": "http://schema.org/playerType",
-    "playersOnline": "http://schema.org/playersOnline",
-    "polygon": "http://schema.org/polygon",
-    "populationType": "http://schema.org/populationType",
-    "position": "http://schema.org/position",
-    "positiveNotes": "http://schema.org/positiveNotes",
-    "possibleComplication": "http://schema.org/possibleComplication",
-    "possibleTreatment": "http://schema.org/possibleTreatment",
-    "postOfficeBoxNumber": "http://schema.org/postOfficeBoxNumber",
-    "postOp": "http://schema.org/postOp",
-    "postalCode": "http://schema.org/postalCode",
-    "postalCodeBegin": "http://schema.org/postalCodeBegin",
-    "postalCodeEnd": "http://schema.org/postalCodeEnd",
-    "postalCodePrefix": "http://schema.org/postalCodePrefix",
-    "postalCodeRange": "http://schema.org/postalCodeRange",
-    "potentialAction": "http://schema.org/potentialAction",
-    "potentialUse": "http://schema.org/potentialUse",
-    "practicesAt": "http://schema.org/practicesAt",
-    "preOp": "http://schema.org/preOp",
-    "predecessorOf": "http://schema.org/predecessorOf",
-    "pregnancyCategory": "http://schema.org/pregnancyCategory",
-    "pregnancyWarning": "http://schema.org/pregnancyWarning",
-    "prepTime": "http://schema.org/prepTime",
-    "preparation": "http://schema.org/preparation",
-    "prescribingInfo": {
-      "@id": "http://schema.org/prescribingInfo",
-      "@type": "@id"
-    },
-    "prescriptionStatus": "http://schema.org/prescriptionStatus",
-    "previousItem": "http://schema.org/previousItem",
-    "previousStartDate": {
-      "@id": "http://schema.org/previousStartDate",
-      "@type": "http://schema.org/Date"
-    },
-    "price": "http://schema.org/price",
-    "priceComponent": "http://schema.org/priceComponent",
-    "priceComponentType": "http://schema.org/priceComponentType",
-    "priceCurrency": "http://schema.org/priceCurrency",
-    "priceRange": "http://schema.org/priceRange",
-    "priceSpecification": "http://schema.org/priceSpecification",
-    "priceType": "http://schema.org/priceType",
-    "priceValidUntil": {
-      "@id": "http://schema.org/priceValidUntil",
-      "@type": "http://schema.org/Date"
-    },
-    "primaryImageOfPage": "http://schema.org/primaryImageOfPage",
-    "primaryPrevention": "http://schema.org/primaryPrevention",
-    "printColumn": "http://schema.org/printColumn",
-    "printEdition": "http://schema.org/printEdition",
-    "printPage": "http://schema.org/printPage",
-    "printSection": "http://schema.org/printSection",
-    "procedure": "http://schema.org/procedure",
-    "procedureType": "http://schema.org/procedureType",
-    "processingTime": "http://schema.org/processingTime",
-    "processorRequirements": "http://schema.org/processorRequirements",
-    "producer": "http://schema.org/producer",
-    "produces": "http://schema.org/produces",
-    "productGroupID": "http://schema.org/productGroupID",
-    "productID": "http://schema.org/productID",
-    "productReturnDays": "http://schema.org/productReturnDays",
-    "productReturnLink": {
-      "@id": "http://schema.org/productReturnLink",
-      "@type": "@id"
-    },
-    "productSupported": "http://schema.org/productSupported",
-    "productionCompany": "http://schema.org/productionCompany",
-    "productionDate": {
-      "@id": "http://schema.org/productionDate",
-      "@type": "http://schema.org/Date"
-    },
-    "proficiencyLevel": "http://schema.org/proficiencyLevel",
-    "program": "http://schema.org/program",
-    "programMembershipUsed": "http://schema.org/programMembershipUsed",
-    "programName": "http://schema.org/programName",
-    "programPrerequisites": "http://schema.org/programPrerequisites",
-    "programType": "http://schema.org/programType",
-    "programmingLanguage": "http://schema.org/programmingLanguage",
-    "programmingModel": "http://schema.org/programmingModel",
-    "pronouns": "http://schema.org/pronouns",
-    "propertyID": "http://schema.org/propertyID",
-    "proprietaryName": "http://schema.org/proprietaryName",
-    "proteinContent": "http://schema.org/proteinContent",
-    "provider": "http://schema.org/provider",
-    "providerMobility": "http://schema.org/providerMobility",
-    "providesBroadcastService": "http://schema.org/providesBroadcastService",
-    "providesService": "http://schema.org/providesService",
-    "publicAccess": "http://schema.org/publicAccess",
-    "publicTransportClosuresInfo": {
-      "@id": "http://schema.org/publicTransportClosuresInfo",
-      "@type": "@id"
-    },
-    "publication": "http://schema.org/publication",
-    "publicationType": "http://schema.org/publicationType",
-    "publishedBy": "http://schema.org/publishedBy",
-    "publishedOn": "http://schema.org/publishedOn",
-    "publisher": "http://schema.org/publisher",
-    "publisherImprint": "http://schema.org/publisherImprint",
-    "publishingPrinciples": {
-      "@id": "http://schema.org/publishingPrinciples",
-      "@type": "@id"
-    },
-    "purchaseDate": {
-      "@id": "http://schema.org/purchaseDate",
-      "@type": "http://schema.org/Date"
-    },
-    "purchasePriceLimit": "http://schema.org/purchasePriceLimit",
-    "purchaseType": "http://schema.org/purchaseType",
-    "qualifications": "http://schema.org/qualifications",
-    "qualifiedExpense": "http://schema.org/qualifiedExpense",
-    "quarantineGuidelines": {
-      "@id": "http://schema.org/quarantineGuidelines",
-      "@type": "@id"
-    },
-    "query": "http://schema.org/query",
-    "quest": "http://schema.org/quest",
-    "question": "http://schema.org/question",
-    "rangeIncludes": "http://schema.org/rangeIncludes",
-    "ratingCount": "http://schema.org/ratingCount",
-    "ratingExplanation": "http://schema.org/ratingExplanation",
-    "ratingValue": "http://schema.org/ratingValue",
-    "readBy": "http://schema.org/readBy",
-    "readonlyValue": "http://schema.org/readonlyValue",
-    "realEstateAgent": "http://schema.org/realEstateAgent",
-    "recipe": "http://schema.org/recipe",
-    "recipeCategory": "http://schema.org/recipeCategory",
-    "recipeCuisine": "http://schema.org/recipeCuisine",
-    "recipeIngredient": "http://schema.org/recipeIngredient",
-    "recipeInstructions": "http://schema.org/recipeInstructions",
-    "recipeYield": "http://schema.org/recipeYield",
-    "recipient": "http://schema.org/recipient",
-    "recognizedBy": "http://schema.org/recognizedBy",
-    "recognizingAuthority": "http://schema.org/recognizingAuthority",
-    "recommendationStrength": "http://schema.org/recommendationStrength",
-    "recommendedIntake": "http://schema.org/recommendedIntake",
-    "recordLabel": "http://schema.org/recordLabel",
-    "recordedAs": "http://schema.org/recordedAs",
-    "recordedAt": "http://schema.org/recordedAt",
-    "recordedIn": "http://schema.org/recordedIn",
-    "recordingOf": "http://schema.org/recordingOf",
-    "recourseLoan": "http://schema.org/recourseLoan",
-    "referee": "http://schema.org/referee",
-    "referenceQuantity": "http://schema.org/referenceQuantity",
-    "referencesOrder": "http://schema.org/referencesOrder",
-    "refundType": "http://schema.org/refundType",
-    "regionDrained": "http://schema.org/regionDrained",
-    "regionsAllowed": "http://schema.org/regionsAllowed",
-    "relatedAnatomy": "http://schema.org/relatedAnatomy",
-    "relatedCondition": "http://schema.org/relatedCondition",
-    "relatedDrug": "http://schema.org/relatedDrug",
-    "relatedLink": {
-      "@id": "http://schema.org/relatedLink",
-      "@type": "@id"
-    },
-    "relatedStructure": "http://schema.org/relatedStructure",
-    "relatedTherapy": "http://schema.org/relatedTherapy",
-    "relatedTo": "http://schema.org/relatedTo",
-    "releaseDate": {
-      "@id": "http://schema.org/releaseDate",
-      "@type": "http://schema.org/Date"
-    },
-    "releaseNotes": "http://schema.org/releaseNotes",
-    "releaseOf": "http://schema.org/releaseOf",
-    "releasedEvent": "http://schema.org/releasedEvent",
-    "relevantOccupation": "http://schema.org/relevantOccupation",
-    "relevantSpecialty": "http://schema.org/relevantSpecialty",
-    "remainingAttendeeCapacity": "http://schema.org/remainingAttendeeCapacity",
-    "renegotiableLoan": "http://schema.org/renegotiableLoan",
-    "repeatCount": "http://schema.org/repeatCount",
-    "repeatFrequency": "http://schema.org/repeatFrequency",
-    "repetitions": "http://schema.org/repetitions",
-    "replacee": "http://schema.org/replacee",
-    "replacer": "http://schema.org/replacer",
-    "replyToUrl": {
-      "@id": "http://schema.org/replyToUrl",
-      "@type": "@id"
-    },
-    "reportNumber": "http://schema.org/reportNumber",
-    "representativeOfPage": "http://schema.org/representativeOfPage",
-    "requiredCollateral": "http://schema.org/requiredCollateral",
-    "requiredGender": "http://schema.org/requiredGender",
-    "requiredMaxAge": "http://schema.org/requiredMaxAge",
-    "requiredMinAge": "http://schema.org/requiredMinAge",
-    "requiredQuantity": "http://schema.org/requiredQuantity",
-    "requirements": "http://schema.org/requirements",
-    "requiresSubscription": "http://schema.org/requiresSubscription",
-    "reservationFor": "http://schema.org/reservationFor",
-    "reservationId": "http://schema.org/reservationId",
-    "reservationStatus": "http://schema.org/reservationStatus",
-    "reservedTicket": "http://schema.org/reservedTicket",
-    "responsibilities": "http://schema.org/responsibilities",
-    "restPeriods": "http://schema.org/restPeriods",
-    "restockingFee": "http://schema.org/restockingFee",
-    "result": "http://schema.org/result",
-    "resultComment": "http://schema.org/resultComment",
-    "resultReview": "http://schema.org/resultReview",
-    "returnFees": "http://schema.org/returnFees",
-    "returnLabelSource": "http://schema.org/returnLabelSource",
-    "returnMethod": "http://schema.org/returnMethod",
-    "returnPolicyCategory": "http://schema.org/returnPolicyCategory",
-    "returnPolicyCountry": "http://schema.org/returnPolicyCountry",
-    "returnPolicySeasonalOverride": "http://schema.org/returnPolicySeasonalOverride",
-    "returnShippingFeesAmount": "http://schema.org/returnShippingFeesAmount",
-    "review": "http://schema.org/review",
-    "reviewAspect": "http://schema.org/reviewAspect",
-    "reviewBody": "http://schema.org/reviewBody",
-    "reviewCount": "http://schema.org/reviewCount",
-    "reviewRating": "http://schema.org/reviewRating",
-    "reviewedBy": "http://schema.org/reviewedBy",
-    "reviews": "http://schema.org/reviews",
-    "riskFactor": "http://schema.org/riskFactor",
-    "risks": "http://schema.org/risks",
-    "roleName": "http://schema.org/roleName",
-    "roofLoad": "http://schema.org/roofLoad",
-    "rsvpResponse": "http://schema.org/rsvpResponse",
-    "runsTo": "http://schema.org/runsTo",
-    "runtime": "http://schema.org/runtime",
-    "runtimePlatform": "http://schema.org/runtimePlatform",
-    "rxcui": "http://schema.org/rxcui",
-    "safetyConsideration": "http://schema.org/safetyConsideration",
-    "salaryCurrency": "http://schema.org/salaryCurrency",
-    "salaryUponCompletion": "http://schema.org/salaryUponCompletion",
-    "sameAs": {
-      "@id": "http://schema.org/sameAs",
-      "@type": "@id"
-    },
-    "sampleType": "http://schema.org/sampleType",
-    "saturatedFatContent": "http://schema.org/saturatedFatContent",
-    "scheduleTimezone": "http://schema.org/scheduleTimezone",
-    "scheduledPaymentDate": {
-      "@id": "http://schema.org/scheduledPaymentDate",
-      "@type": "http://schema.org/Date"
-    },
-    "scheduledTime": {
-      "@id": "http://schema.org/scheduledTime",
-      "@type": "http://schema.org/Date"
-    },
-    "schemaVersion": "http://schema.org/schemaVersion",
-    "schoolClosuresInfo": {
-      "@id": "http://schema.org/schoolClosuresInfo",
-      "@type": "@id"
-    },
-    "screenCount": "http://schema.org/screenCount",
-    "screenshot": {
-      "@id": "http://schema.org/screenshot",
-      "@type": "@id"
-    },
-    "sdDatePublished": {
-      "@id": "http://schema.org/sdDatePublished",
-      "@type": "http://schema.org/Date"
-    },
-    "sdLicense": {
-      "@id": "http://schema.org/sdLicense",
-      "@type": "@id"
-    },
-    "sdPublisher": "http://schema.org/sdPublisher",
-    "season": {
-      "@id": "http://schema.org/season",
-      "@type": "@id"
-    },
-    "seasonNumber": "http://schema.org/seasonNumber",
-    "seasonalOverride": "http://schema.org/seasonalOverride",
-    "seasons": "http://schema.org/seasons",
-    "seatNumber": "http://schema.org/seatNumber",
-    "seatRow": "http://schema.org/seatRow",
-    "seatSection": "http://schema.org/seatSection",
-    "seatingCapacity": "http://schema.org/seatingCapacity",
-    "seatingType": "http://schema.org/seatingType",
-    "secondaryPrevention": "http://schema.org/secondaryPrevention",
-    "securityClearanceRequirement": "http://schema.org/securityClearanceRequirement",
-    "securityScreening": "http://schema.org/securityScreening",
-    "seeks": "http://schema.org/seeks",
-    "seller": "http://schema.org/seller",
-    "sender": "http://schema.org/sender",
-    "sensoryRequirement": "http://schema.org/sensoryRequirement",
-    "sensoryUnit": "http://schema.org/sensoryUnit",
-    "serialNumber": "http://schema.org/serialNumber",
-    "seriousAdverseOutcome": "http://schema.org/seriousAdverseOutcome",
-    "serverStatus": "http://schema.org/serverStatus",
-    "servesCuisine": "http://schema.org/servesCuisine",
-    "serviceArea": "http://schema.org/serviceArea",
-    "serviceAudience": "http://schema.org/serviceAudience",
-    "serviceLocation": "http://schema.org/serviceLocation",
-    "serviceOperator": "http://schema.org/serviceOperator",
-    "serviceOutput": "http://schema.org/serviceOutput",
-    "servicePhone": "http://schema.org/servicePhone",
-    "servicePostalAddress": "http://schema.org/servicePostalAddress",
-    "serviceSmsNumber": "http://schema.org/serviceSmsNumber",
-    "serviceType": "http://schema.org/serviceType",
-    "serviceUrl": {
-      "@id": "http://schema.org/serviceUrl",
-      "@type": "@id"
-    },
-    "servingSize": "http://schema.org/servingSize",
-    "sha256": "http://schema.org/sha256",
-    "sharedContent": "http://schema.org/sharedContent",
-    "shippingConditions": "http://schema.org/shippingConditions",
-    "shippingDestination": "http://schema.org/shippingDestination",
-    "shippingDetails": "http://schema.org/shippingDetails",
-    "shippingLabel": "http://schema.org/shippingLabel",
-    "shippingOrigin": "http://schema.org/shippingOrigin",
-    "shippingRate": "http://schema.org/shippingRate",
-    "shippingSettingsLink": {
-      "@id": "http://schema.org/shippingSettingsLink",
-      "@type": "@id"
-    },
-    "sibling": "http://schema.org/sibling",
-    "siblings": "http://schema.org/siblings",
-    "signDetected": "http://schema.org/signDetected",
-    "signOrSymptom": "http://schema.org/signOrSymptom",
-    "significance": "http://schema.org/significance",
-    "significantLink": {
-      "@id": "http://schema.org/significantLink",
-      "@type": "@id"
-    },
-    "significantLinks": {
-      "@id": "http://schema.org/significantLinks",
-      "@type": "@id"
-    },
-    "size": "http://schema.org/size",
-    "sizeGroup": "http://schema.org/sizeGroup",
-    "sizeSystem": "http://schema.org/sizeSystem",
-    "skills": "http://schema.org/skills",
-    "sku": "http://schema.org/sku",
-    "slogan": "http://schema.org/slogan",
-    "smiles": "http://schema.org/smiles",
-    "smokingAllowed": "http://schema.org/smokingAllowed",
-    "sodiumContent": "http://schema.org/sodiumContent",
-    "softwareAddOn": "http://schema.org/softwareAddOn",
-    "softwareHelp": "http://schema.org/softwareHelp",
-    "softwareRequirements": "http://schema.org/softwareRequirements",
-    "softwareVersion": "http://schema.org/softwareVersion",
-    "sourceOrganization": "http://schema.org/sourceOrganization",
-    "sourcedFrom": "http://schema.org/sourcedFrom",
-    "spatial": "http://schema.org/spatial",
-    "spatialCoverage": "http://schema.org/spatialCoverage",
-    "speakable": {
-      "@id": "http://schema.org/speakable",
-      "@type": "@id"
-    },
-    "specialCommitments": "http://schema.org/specialCommitments",
-    "specialOpeningHoursSpecification": "http://schema.org/specialOpeningHoursSpecification",
-    "specialty": "http://schema.org/specialty",
-    "speechToTextMarkup": "http://schema.org/speechToTextMarkup",
-    "speed": "http://schema.org/speed",
-    "spokenByCharacter": "http://schema.org/spokenByCharacter",
-    "sponsor": "http://schema.org/sponsor",
-    "sport": "http://schema.org/sport",
-    "sportsActivityLocation": "http://schema.org/sportsActivityLocation",
-    "sportsEvent": "http://schema.org/sportsEvent",
-    "sportsTeam": "http://schema.org/sportsTeam",
-    "spouse": "http://schema.org/spouse",
-    "stage": "http://schema.org/stage",
-    "stageAsNumber": "http://schema.org/stageAsNumber",
-    "starRating": "http://schema.org/starRating",
-    "startDate": {
-      "@id": "http://schema.org/startDate",
-      "@type": "http://schema.org/Date"
-    },
-    "startOffset": "http://schema.org/startOffset",
-    "startTime": "http://schema.org/startTime",
-    "statType": "http://schema.org/statType",
-    "status": "http://schema.org/status",
-    "steeringPosition": "http://schema.org/steeringPosition",
-    "step": "http://schema.org/step",
-    "stepValue": "http://schema.org/stepValue",
-    "steps": "http://schema.org/steps",
-    "storageRequirements": "http://schema.org/storageRequirements",
-    "streetAddress": "http://schema.org/streetAddress",
-    "strengthUnit": "http://schema.org/strengthUnit",
-    "strengthValue": "http://schema.org/strengthValue",
-    "structuralClass": "http://schema.org/structuralClass",
-    "study": "http://schema.org/study",
-    "studyDesign": "http://schema.org/studyDesign",
-    "studyLocation": "http://schema.org/studyLocation",
-    "studySubject": "http://schema.org/studySubject",
-    "stupidProperty": "http://schema.org/stupidProperty",
-    "subEvent": "http://schema.org/subEvent",
-    "subEvents": "http://schema.org/subEvents",
-    "subOrganization": "http://schema.org/subOrganization",
-    "subReservation": "http://schema.org/subReservation",
-    "subStageSuffix": "http://schema.org/subStageSuffix",
-    "subStructure": "http://schema.org/subStructure",
-    "subTest": "http://schema.org/subTest",
-    "subTrip": "http://schema.org/subTrip",
-    "subjectOf": "http://schema.org/subjectOf",
-    "subtitleLanguage": "http://schema.org/subtitleLanguage",
-    "successorOf": "http://schema.org/successorOf",
-    "sugarContent": "http://schema.org/sugarContent",
-    "suggestedAge": "http://schema.org/suggestedAge",
-    "suggestedAnswer": "http://schema.org/suggestedAnswer",
-    "suggestedGender": "http://schema.org/suggestedGender",
-    "suggestedMaxAge": "http://schema.org/suggestedMaxAge",
-    "suggestedMeasurement": "http://schema.org/suggestedMeasurement",
-    "suggestedMinAge": "http://schema.org/suggestedMinAge",
-    "suitableForDiet": "http://schema.org/suitableForDiet",
-    "superEvent": "http://schema.org/superEvent",
-    "supersededBy": "http://schema.org/supersededBy",
-    "supply": "http://schema.org/supply",
-    "supplyTo": "http://schema.org/supplyTo",
-    "supportingData": "http://schema.org/supportingData",
-    "surface": "http://schema.org/surface",
-    "syllabusSections": "http://schema.org/syllabusSections",
-    "target": {
-      "@id": "http://schema.org/target",
-      "@type": "@id"
-    },
-    "targetCollection": "http://schema.org/targetCollection",
-    "targetDescription": "http://schema.org/targetDescription",
-    "targetName": "http://schema.org/targetName",
-    "targetPlatform": "http://schema.org/targetPlatform",
-    "targetPopulation": "http://schema.org/targetPopulation",
-    "targetProduct": "http://schema.org/targetProduct",
-    "targetUrl": {
-      "@id": "http://schema.org/targetUrl",
-      "@type": "@id"
-    },
-    "taxID": "http://schema.org/taxID",
-    "taxonRank": "http://schema.org/taxonRank",
-    "taxonomicRange": "http://schema.org/taxonomicRange",
-    "teaches": "http://schema.org/teaches",
-    "telephone": "http://schema.org/telephone",
-    "temporal": "http://schema.org/temporal",
-    "temporalCoverage": "http://schema.org/temporalCoverage",
-    "termCode": "http://schema.org/termCode",
-    "termDuration": "http://schema.org/termDuration",
-    "termsOfService": "http://schema.org/termsOfService",
-    "termsPerYear": "http://schema.org/termsPerYear",
-    "text": "http://schema.org/text",
-    "textValue": "http://schema.org/textValue",
-    "thumbnail": "http://schema.org/thumbnail",
-    "thumbnailUrl": {
-      "@id": "http://schema.org/thumbnailUrl",
-      "@type": "@id"
-    },
-    "tickerSymbol": "http://schema.org/tickerSymbol",
-    "ticketNumber": "http://schema.org/ticketNumber",
-    "ticketToken": "http://schema.org/ticketToken",
-    "ticketedSeat": "http://schema.org/ticketedSeat",
-    "timeOfDay": "http://schema.org/timeOfDay",
-    "timeRequired": "http://schema.org/timeRequired",
-    "timeToComplete": "http://schema.org/timeToComplete",
-    "tissueSample": "http://schema.org/tissueSample",
-    "title": "http://schema.org/title",
-    "titleEIDR": "http://schema.org/titleEIDR",
-    "toLocation": "http://schema.org/toLocation",
-    "toRecipient": "http://schema.org/toRecipient",
-    "tocContinuation": "http://schema.org/tocContinuation",
-    "tocEntry": "http://schema.org/tocEntry",
-    "tongueWeight": "http://schema.org/tongueWeight",
-    "tool": "http://schema.org/tool",
-    "torque": "http://schema.org/torque",
-    "totalHistoricalEnrollment": "http://schema.org/totalHistoricalEnrollment",
-    "totalJobOpenings": "http://schema.org/totalJobOpenings",
-    "totalPaymentDue": "http://schema.org/totalPaymentDue",
-    "totalPrice": "http://schema.org/totalPrice",
-    "totalTime": "http://schema.org/totalTime",
-    "tourBookingPage": {
-      "@id": "http://schema.org/tourBookingPage",
-      "@type": "@id"
-    },
-    "touristType": "http://schema.org/touristType",
-    "track": "http://schema.org/track",
-    "trackingNumber": "http://schema.org/trackingNumber",
-    "trackingUrl": {
-      "@id": "http://schema.org/trackingUrl",
-      "@type": "@id"
-    },
-    "tracks": "http://schema.org/tracks",
-    "trailer": "http://schema.org/trailer",
-    "trailerWeight": "http://schema.org/trailerWeight",
-    "trainName": "http://schema.org/trainName",
-    "trainNumber": "http://schema.org/trainNumber",
-    "trainingSalary": "http://schema.org/trainingSalary",
-    "transFatContent": "http://schema.org/transFatContent",
-    "transcript": "http://schema.org/transcript",
-    "transitTime": "http://schema.org/transitTime",
-    "transitTimeLabel": "http://schema.org/transitTimeLabel",
-    "translationOfWork": "http://schema.org/translationOfWork",
-    "translator": "http://schema.org/translator",
-    "transmissionMethod": "http://schema.org/transmissionMethod",
-    "travelBans": {
-      "@id": "http://schema.org/travelBans",
-      "@type": "@id"
-    },
-    "trialDesign": "http://schema.org/trialDesign",
-    "tributary": "http://schema.org/tributary",
-    "tripOrigin": "http://schema.org/tripOrigin",
-    "typeOfBed": "http://schema.org/typeOfBed",
-    "typeOfGood": "http://schema.org/typeOfGood",
-    "typicalAgeRange": "http://schema.org/typicalAgeRange",
-    "typicalCreditsPerTerm": "http://schema.org/typicalCreditsPerTerm",
-    "typicalTest": "http://schema.org/typicalTest",
-    "underName": "http://schema.org/underName",
-    "unitCode": "http://schema.org/unitCode",
-    "unitText": "http://schema.org/unitText",
-    "unnamedSourcesPolicy": {
-      "@id": "http://schema.org/unnamedSourcesPolicy",
-      "@type": "@id"
-    },
-    "unsaturatedFatContent": "http://schema.org/unsaturatedFatContent",
-    "uploadDate": {
-      "@id": "http://schema.org/uploadDate",
-      "@type": "http://schema.org/Date"
-    },
-    "upvoteCount": "http://schema.org/upvoteCount",
-    "url": {
-      "@id": "http://schema.org/url",
-      "@type": "@id"
-    },
-    "urlTemplate": "http://schema.org/urlTemplate",
-    "usNPI": "http://schema.org/usNPI",
-    "usageInfo": {
-      "@id": "http://schema.org/usageInfo",
-      "@type": "@id"
-    },
-    "usedToDiagnose": "http://schema.org/usedToDiagnose",
-    "userInteractionCount": "http://schema.org/userInteractionCount",
-    "usesDevice": "http://schema.org/usesDevice",
-    "usesHealthPlanIdStandard": "http://schema.org/usesHealthPlanIdStandard",
-    "utterances": "http://schema.org/utterances",
-    "validFor": "http://schema.org/validFor",
-    "validForMemberTier": "http://schema.org/validForMemberTier",
-    "validFrom": {
-      "@id": "http://schema.org/validFrom",
-      "@type": "http://schema.org/Date"
-    },
-    "validIn": "http://schema.org/validIn",
-    "validThrough": {
-      "@id": "http://schema.org/validThrough",
-      "@type": "http://schema.org/Date"
-    },
-    "validUntil": {
-      "@id": "http://schema.org/validUntil",
-      "@type": "http://schema.org/Date"
-    },
-    "value": "http://schema.org/value",
-    "valueAddedTaxIncluded": "http://schema.org/valueAddedTaxIncluded",
-    "valueMaxLength": "http://schema.org/valueMaxLength",
-    "valueMinLength": "http://schema.org/valueMinLength",
-    "valueName": "http://schema.org/valueName",
-    "valuePattern": "http://schema.org/valuePattern",
-    "valueReference": "http://schema.org/valueReference",
-    "valueRequired": "http://schema.org/valueRequired",
-    "variableMeasured": "http://schema.org/variableMeasured",
-    "variablesMeasured": "http://schema.org/variablesMeasured",
-    "variantCover": "http://schema.org/variantCover",
-    "variesBy": "http://schema.org/variesBy",
-    "vatID": "http://schema.org/vatID",
-    "vehicleConfiguration": "http://schema.org/vehicleConfiguration",
-    "vehicleEngine": "http://schema.org/vehicleEngine",
-    "vehicleIdentificationNumber": "http://schema.org/vehicleIdentificationNumber",
-    "vehicleInteriorColor": "http://schema.org/vehicleInteriorColor",
-    "vehicleInteriorType": "http://schema.org/vehicleInteriorType",
-    "vehicleModelDate": {
-      "@id": "http://schema.org/vehicleModelDate",
-      "@type": "http://schema.org/Date"
-    },
-    "vehicleSeatingCapacity": "http://schema.org/vehicleSeatingCapacity",
-    "vehicleSpecialUsage": "http://schema.org/vehicleSpecialUsage",
-    "vehicleTransmission": "http://schema.org/vehicleTransmission",
-    "vendor": "http://schema.org/vendor",
-    "verificationFactCheckingPolicy": {
-      "@id": "http://schema.org/verificationFactCheckingPolicy",
-      "@type": "@id"
-    },
-    "version": "http://schema.org/version",
-    "video": "http://schema.org/video",
-    "videoFormat": "http://schema.org/videoFormat",
-    "videoFrameSize": "http://schema.org/videoFrameSize",
-    "videoQuality": "http://schema.org/videoQuality",
-    "volumeNumber": "http://schema.org/volumeNumber",
-    "warning": "http://schema.org/warning",
-    "warranty": "http://schema.org/warranty",
-    "warrantyPromise": "http://schema.org/warrantyPromise",
-    "warrantyScope": "http://schema.org/warrantyScope",
-    "webCheckinTime": "http://schema.org/webCheckinTime",
-    "webFeed": {
-      "@id": "http://schema.org/webFeed",
-      "@type": "@id"
-    },
-    "weight": "http://schema.org/weight",
-    "weightPercentage": "http://schema.org/weightPercentage",
-    "weightTotal": "http://schema.org/weightTotal",
-    "wheelbase": "http://schema.org/wheelbase",
-    "width": "http://schema.org/width",
-    "winner": "http://schema.org/winner",
-    "wordCount": "http://schema.org/wordCount",
-    "workExample": "http://schema.org/workExample",
-    "workFeatured": "http://schema.org/workFeatured",
-    "workHours": "http://schema.org/workHours",
-    "workLocation": "http://schema.org/workLocation",
-    "workPerformed": "http://schema.org/workPerformed",
-    "workPresented": "http://schema.org/workPresented",
-    "workTranslation": "http://schema.org/workTranslation",
-    "workload": "http://schema.org/workload",
-    "worksFor": "http://schema.org/worksFor",
-    "worstRating": "http://schema.org/worstRating",
-    "xpath": "http://schema.org/xpath",
-    "yearBuilt": "http://schema.org/yearBuilt",
-    "yearlyRevenue": "http://schema.org/yearlyRevenue",
-    "yearsInOperation": "http://schema.org/yearsInOperation",
-    "yield": "http://schema.org/yield",
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "brick": "https://brickschema.org/schema/Brick#",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "dc": "http://purl.org/dc/elements/1.1/",
-    "dcat": "http://www.w3.org/ns/dcat#",
-    "dcmitype": "http://purl.org/dc/dcmitype/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "dcam": "http://purl.org/dc/dcam/",
-    "doap": "http://usefulinc.com/ns/doap#",
-    "foaf": "http://xmlns.com/foaf/0.1/",
-    "odrl": "http://www.w3.org/ns/odrl/2/",
-    "org": "http://www.w3.org/ns/org#",
-    "owl": "http://www.w3.org/2002/07/owl#",
-    "prof": "http://www.w3.org/ns/dx/prof/",
-    "prov": "http://www.w3.org/ns/prov#",
-    "qb": "http://purl.org/linked-data/cube#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "sh": "http://www.w3.org/ns/shacl#",
-    "skos": "http://www.w3.org/2004/02/skos/core#",
-    "sosa": "http://www.w3.org/ns/sosa/",
-    "ssn": "http://www.w3.org/ns/ssn/",
-    "time": "http://www.w3.org/2006/time#",
-    "vann": "http://purl.org/vocab/vann/",
-    "void": "http://rdfs.org/ns/void#",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "dct": "http://purl.org/dc/terms/",
-    "dctype": "http://purl.org/dc/dcmitype/",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
-    "ada": "https://ada.astromat.org/metadata/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
     "spdx": "http://spdx.org/rdf/terms#",
+    "time": "http://www.w3.org/2006/time#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xas": "https://xas.org/dictionary/",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "prov": "http://www.w3.org/ns/prov#",
     "@version": 1.1
   }
 }

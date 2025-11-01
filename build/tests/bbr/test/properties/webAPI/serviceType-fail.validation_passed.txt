@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.test.properties.webAPI - WebAPI properties
-Generated 2025-10-30T02:11:37.223574+00:00
+Generated 2025-11-01T02:26:51.190115+00:00
 === General ===
 Test was expected to fail and it did.
 === End General ===
@@ -14,29 +14,46 @@ Output Turtle serviceType-fail.ttl created
 === JSON Schema ===
 
 ** Validation error **
-ValidationError: 'schema:PropertyValue' is not of type 'array'
+ValidationError: {'@type': 'schema:PropertyValue', 'schema:propertyID': {'@id': 'ex:definedTerm_zZc', '@type': 'schema:DefinedTerm', 'schema:name': 'Viscosity', 'schema:identifier': {'@type': 'schema:PropertyValue', 'schema:value': 'g35408y', 'schema:url': 'http://ogc.org/defs/g35408y'}, 'schema:inDefinedTermSet': 'http://ogc.org/defs', 'schema:termCode': 'Vp'}} is not valid under any of the given schemas
 
-Failed validating 'type' in schema['properties']['schema:potentialAction']['items']['properties']['schema:object']['properties']['schema:variableMeasured']['items']['properties']['@type']:
-    {'contains': {'const': 'schema:PropertyValue'},
-     'items': {'type': 'string'},
-     'minItems': 1,
-     'type': 'array'}
+Failed validating 'anyOf' in schema['properties']['schema:potentialAction']['items']['properties']['schema:object']['properties']['schema:variableMeasured']['items']['allOf'][1]:
+    {'anyOf': [{'required': ['schema:name']},
+               {'required': ['schema:description']}]}
 
-On instance['schema:potentialAction'][0]['schema:object']['schema:variableMeasured'][0]['@type']:
-    'schema:PropertyValue'
+On instance['schema:potentialAction'][0]['schema:object']['schema:variableMeasured'][1]:
+    {'@type': 'schema:PropertyValue',
+     'schema:propertyID': {'@id': 'ex:definedTerm_zZc',
+                           '@type': 'schema:DefinedTerm',
+                           'schema:identifier': {'@type': 'schema:PropertyValue',
+                                                 'schema:url': 'http://ogc.org/defs/g35408y',
+                                                 'schema:value': 'g35408y'},
+                           'schema:inDefinedTermSet': 'http://ogc.org/defs',
+                           'schema:name': 'Viscosity',
+                           'schema:termCode': 'Vp'}}
 === End JSON Schema ===
 
 === SHACL ===
+
+** Validation error **
 Validation result for _sources/properties/webAPI/rules.shacl:
   Validation Report
-  Conforms: True
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("A WebAPI node must specify a service type with a string or IRI. string must have length >=3") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("3", datatype=xsd:integer) ] ) ; sh:path schema1:serviceType ]
+  	Focus Node: ex:exampleWebAPI_354btrh
+  	Value Node: Literal("")
+  	Result Path: schema1:serviceType
+  	Message: A WebAPI node must specify a service type with a string or IRI. string must have length >=3
   
 Focus nodes for _sources/properties/webAPI/rules.shacl:
- - Shape _:nb73c6da872884cecaeafa46f7bb507b5b3: *none*
- - Shape cdifd:webAPINode: *none*
+ - Shape _:ncd2117613c7f46f08355287ea6399f06b9: *none*
  - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*
  - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*
- - Shape _:nb73c6da872884cecaeafa46f7bb507b5b8: *none*
+ - Shape _:ncd2117613c7f46f08355287ea6399f06b3: *none*
+ - Shape cdifd:webAPINode: ex:exampleWebAPI_354btrh
+ - Shape _:ncd2117613c7f46f08355287ea6399f06b8: *none*
 
 Validation result for _sources/properties/labeledLink/rules.shacl:
   Validation Report
@@ -45,6 +62,38 @@ Validation result for _sources/properties/labeledLink/rules.shacl:
 Focus nodes for _sources/properties/labeledLink/rules.shacl:
  - Shape cdifd:CDIFLabeledLinkShape: ex:exampleWebAPI_354btrh/schema1:documentation,ex:exampleWebAPI_354btrh/schema1:termsOfService
 
+Validation result for _sources/properties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/properties/definedTerm/rules.shacl:
+ - Shape _:nc7119d926a13410582f8671bced4310fb8: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:nc7119d926a13410582f8671bced4310fb7: *none*
+ - Shape _:nc7119d926a13410582f8671bced4310fb6: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+ - Shape _:nc7119d926a13410582f8671bced4310fb9: *none*
+ - Shape _:nc7119d926a13410582f8671bced4310fb11: *none*
+
+Validation result for _sources/properties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/properties/identifier/rules.shacl:
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b25: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b27: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b26: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b14: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b24: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b15: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:nc52c86449ee949bdba28da1e11441ec2b29: *none*
+
 Validation result for _sources/properties/action/rules.shacl:
   Validation Report
   Conforms: True
@@ -52,53 +101,31 @@ Validation result for _sources/properties/action/rules.shacl:
 Focus nodes for _sources/properties/action/rules.shacl:
  - Shape cdifd:CDIFActionShape: ex:exampleAction_37467
 
+
+** Validation error **
 Validation result for _sources/properties/variableMeasured/rules.shacl:
   Validation Report
-  Conforms: True
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:name3Property
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID ex:definedTerm_zZc ]
+  	Result Path: schema1:name
+  	Message: a name for the variable must be provided, and have a length of at least 5 characters.
   
 Focus nodes for _sources/properties/variableMeasured/rules.shacl:
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb16: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb21: *none*
- - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b11: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b18: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b16: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b13: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b15: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b8: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b9: *none*
+ - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b12: *none*
  - Shape cdifd:CDIFVariableMeasuredShape: *none*
- - Shape cdifd:CDIFPropertyIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb18: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb9: *none*
- - Shape cdifd:CDIFPropertyIdentifierShape: ex:definedTerm_zZc/schema1:identifier,ex:exampleAction_37467/schema1:object/schema1:variableMeasured
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb41: *none*
- - Shape cdifd:CDIFDefinedTermShape: ex:definedTerm_zZc
- - Shape cdifd:CDIFPropertyIdentifierShape/sh:or/rdf:first: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb15: *none*
- - Shape cdifd:CDIFVariableMeasuredShape/sh:or/rdf:first: *none*
- - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb19: *none*
- - Shape cdifd:CDIFVariableMeasuredShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:nbb2f2b775be743d9afd7eb5658ae9f1bb17: *none*
-
-Validation result for _sources/properties/definedTerm/rules.shacl:
-  Validation Report
-  Conforms: True
-  
-Focus nodes for _sources/properties/definedTerm/rules.shacl:
- - Shape cdifd:CDIFDefinedTermShape: ex:definedTerm_zZc
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b7: *none*
- - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
- - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b4: *none*
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b9: *none*
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b3: *none*
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b5: *none*
- - Shape _:n60dc93fccf4f475f8756d89f28ba3a36b6: *none*
-
-Validation result for _sources/properties/identifier/rules.shacl:
-  Validation Report
-  Conforms: True
-  
-Focus nodes for _sources/properties/identifier/rules.shacl:
- - Shape _:n8d69e6a3270f4346a1a428e7f7bf8f54b10: *none*
- - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
- - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
- - Shape cdifd:CDIFIdentifierShape: ex:definedTerm_zZc/schema1:identifier,ex:exampleAction_37467/schema1:object/schema1:variableMeasured
+ - Shape _:nf05a5374507e45849815f2fdf0ff41f6b14: *none*
 
 === End SHACL ===
 

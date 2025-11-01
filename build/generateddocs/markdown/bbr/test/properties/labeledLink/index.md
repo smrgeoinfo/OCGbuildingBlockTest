@@ -16,8 +16,6 @@ Defines a set of properties for use describing a web link (url) with a label to 
 
 ### Labeled Link building block.
 Example labeled link instance.
-
-In **Markdown** format.
 #### json
 ```json
 {
@@ -39,7 +37,7 @@ In **Markdown** format.
 {
   "@context": [
     {
-      "schema": "https://schema.org"
+      "schema": "http://schema.org/"
     },
     "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/labeledLink/context.jsonld",
     {
@@ -90,8 +88,8 @@ properties:
 required:
 - '@type'
 - schema:url
-x-jsonld-extra-terms:
-  schema: https://schema.org
+x-jsonld-prefixes:
+  schema: http://schema.org/
 
 ```
 
@@ -106,7 +104,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "@version": 1.1
   }
 }

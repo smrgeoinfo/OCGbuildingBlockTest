@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.test.properties.identifier - Identifier
-Generated 2025-10-30T02:11:34.620305+00:00
+Generated 2025-11-01T02:26:49.429499+00:00
 === General ===
 Test was expected to fail and it did.
 === End General ===
@@ -21,19 +21,36 @@ Validation passed
 Validation result for _sources/properties/identifier/rules.shacl:
   Validation Report
   Conforms: False
-  Results (1):
+  Results (2):
   Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
   	Severity: sh:Violation
   	Source Shape: cdifd:CDIFIdentifierShape
   	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID Literal("CtYO") ; schema1:url Literal("vX") ]
   	Value Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID Literal("CtYO") ; schema1:url Literal("vX") ]
-  	Message: the context of an identifier, the PropertyValue provides the identifeir value string-- either as a schema:value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URI that identifies the resoruce.
+  	Message: identifier rules. for an identifier, the property ID is expected to specify an identifier scheme.Get values from https://registry.identifiers.org/registry/ for interoperability
+  	Message: identifier rules. the context of an identifier, the PropertyValue provides the identifier value string-- either as a schema:value or a url. The value can be either a full URI or identifier token part of URI if a url is provided. url value must be a resolvable URI that identifies the resource.
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("5", datatype=xsd:integer) ] [ sh:class schema1:DefinedTerm ] ) ; sh:path schema1:propertyID ]
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID Literal("CtYO") ; schema1:url Literal("vX") ]
+  	Value Node: Literal("CtYO")
+  	Result Path: schema1:propertyID
+  	Message: Node Literal("CtYO") does not conform to one or more shapes in [ sh:nodeKind sh:IRI ] , [ sh:datatype xsd:string ; sh:minLength Literal("5", datatype=xsd:integer) ] , [ sh:class schema1:DefinedTerm ]
   
 Focus nodes for _sources/properties/identifier/rules.shacl:
+ - Shape cdifd:CDIFIdentifierShape: *none*
  - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b14: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b15: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b25: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b24: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b27: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b26: *none*
+ - Shape _:n5234c5d28a834cbca2ef7285c3cf6a86b29: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
  - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
- - Shape _:n8dc7ac659b884ee0b91d225367ade0cfb10: *none*
- - Shape cdifd:CDIFIdentifierShape: _:Nb71b3192ca064f66a74c107edb183716
 
 === End SHACL ===
 

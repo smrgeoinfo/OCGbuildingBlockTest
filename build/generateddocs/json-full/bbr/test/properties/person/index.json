@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2025-10-30",
+  "dateOfLastChange": "2025-11-01",
   "link": "https://github.com/opengeospatial/bblock-template",
   "sources": [
     {
@@ -27,19 +27,19 @@
     "ogc.bbr.test.properties.person": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/person/rules.shacl"
     ],
+    "ogc.bbr.test.properties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
+    ],
     "ogc.bbr.test.properties.organization": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/organization/rules.shacl"
     ],
     "ogc.bbr.test.properties.definedTerm": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/definedTerm/rules.shacl"
-    ],
-    "ogc.bbr.test.properties.identifier": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/properties/identifier/rules.shacl"
     ]
   },
   "dependsOn": [
-    "ogc.bbr.test.properties.organization",
-    "ogc.bbr.test.properties.identifier"
+    "ogc.bbr.test.properties.identifier",
+    "ogc.bbr.test.properties.organization"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld",
   "schema": {
@@ -56,9 +56,9 @@
   "examples": [
     {
       "title": "Example person.",
-      "content": "Example person instance.\n\nIn **Markdown** format.",
+      "content": "Example person instance.",
       "prefixes": {
-        "schema": "https://schema.org"
+        "schema": "http://schema.org/"
       },
       "snippets": [
         {
@@ -69,7 +69,7 @@
         },
         {
           "language": "jsonld",
-          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"https://schema.org\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld\",\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
+          "code": "{\n  \"@context\": [\n    {\n      \"schema\": \"http://schema.org/\"\n    },\n    \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/person/context.jsonld\",\n    {\n      \"schema\": \"http://schema.org/\",\n      \"ex\": \"https://example.org/\",\n      \"xsd\": \"http://www.w3.org/2001/XMLSchema#\"\n    }\n  ],\n  \"@id\": \"ex:PersonExample_zZc\",\n  \"@type\": \"schema:Person\",\n  \"schema:name\": \"Joe Test\",\n  \"schema:alternateName\": \"Test, Joe\",\n  \"schema:affiliation\": {\n    \"@type\": \"schema:Organization\",\n    \"schema:name\": \"Test organization\"\n  },\n  \"schema:description\": \"Metadata specialist, based in Portland, Maine\",\n  \"schema:identifier\": {\n    \"@type\": \"schema:PropertyValue\",\n    \"schema:propertyID\": \"https://doi.org\",\n    \"schema:value\": \"iY\",\n    \"schema:url\": \"https://doi.org/iY\"\n  },\n  \"schema:contactPoint\": {\n    \"@type\": \"schema:ContactPoint\",\n    \"schema:email\": \"joe@bmanuco.org\"\n  },\n  \"schema:sameAs\": [\n    \"https://ark.org/46737\",\n    \"uri:test:43737\"\n  ]\n}",
           "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/test/properties/person/example_1_1.jsonld"
         },
         {
@@ -80,7 +80,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: My example schema\ntype: object\nproperties:\n  '@id':\n    type: string\n  '@type':\n    type: string\n    const: schema:Person\n  schema:name:\n    type: string\n    description: string label for person that is meaningful for human users\n  schema:description:\n    type: string\n  schema:identifier:\n    description: identifier for person\n    anyOf:\n    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\n    - type: string\n  schema:alternateName:\n    type: string\n    description: other labels by which the person might be known\n  schema:affiliation:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml\n    description: if affiliation is present, value must be a schema:Organization.\n  schema:contactPoint:\n    type: object\n    properties:\n      '@type':\n        const: schema:ContactPoint\n      schema:email:\n        type: string\n    description: restrict to email only. Schema.org allows telephone and postal contacts\n      as well\n  schema:sameAs:\n    type: array\n    description: other identifiers for the person\n    items:\n      type: string\nallOf:\n- required:\n  - '@type'\n- anyOf:\n  - required:\n    - schema:name\n  - required:\n    - schema:identifier\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: My example schema\ntype: object\nproperties:\n  '@id':\n    type: string\n  '@type':\n    type: string\n    const: schema:Person\n  schema:name:\n    type: string\n    description: string label for person that is meaningful for human users\n  schema:description:\n    type: string\n  schema:identifier:\n    description: identifier for person\n    anyOf:\n    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/identifier/schema.yaml\n    - type: string\n  schema:alternateName:\n    type: string\n    description: other labels by which the person might be known\n  schema:affiliation:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/test/properties/organization/schema.yaml\n    description: if affiliation is present, value must be a schema:Organization.\n  schema:contactPoint:\n    type: object\n    properties:\n      '@type':\n        const: schema:ContactPoint\n      schema:email:\n        type: string\n    description: restrict to email only. Schema.org allows telephone and postal contacts\n      as well\n  schema:sameAs:\n    type: array\n    description: other identifiers for the person\n    items:\n      type: string\nallOf:\n- required:\n  - '@type'\n- anyOf:\n  - required:\n    - schema:name\n  - required:\n    - schema:identifier\nx-jsonld-prefixes:\n  schema: http://schema.org/\n",
   "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
   "gitPath": "_sources/properties/person"
 }

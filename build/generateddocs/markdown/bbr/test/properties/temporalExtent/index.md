@@ -189,9 +189,8 @@ $defs:
         default: http://www.opengis.net/def/crs/OGC/0/ChronometricGeologicTime
       time:numericPosition:
         type: number
-x-jsonld-extra-terms:
-  schema: https://schema.org
 x-jsonld-prefixes:
+  schema: http://schema.org/
   time: http://www.w3.org/2006/time#
 
 ```
@@ -207,7 +206,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "time": "http://www.w3.org/2006/time#",
     "@version": 1.1
   }
