@@ -11,21 +11,21 @@ cdifd:CDIFVariableMeasuredShape
     a sh:NodeShape;
     sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
-         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
-       );
+      # query to get PropertyValues that are for variableMeasured, not others
       sh:select  """
       PREFIX schema: <http://schema.org/>
       SELECT DISTINCT ?this
         WHERE {
-          ?this a schema:PropertyValue .
-          FILTER (
-            NOT EXISTS { ?s ?p ?this . }
-            ||
-            EXISTS { ?s schema:variableMeasured ?this . }
-          )
-        }""";
+        ?this a schema:PropertyValue .
+        {
+          ?this schema:name "example variable measured" .
+          FILTER NOT EXISTS { ?s ?p ?this . }
+        }
+        Union
+        {
+          ?s schema:variableMeasured ?this .
+        }
+      }""";
 	] ;
 	sh:property [
         sh:path schema:propertyID;
@@ -42,14 +42,14 @@ cdifd:CDIFVariableMeasuredShape
              	    [sh:nodeKind sh:IRI] 
                      [sh:datatype xsd:string ;
                              sh:minLength 5 ]
-             	    [ sh:and (
+             	    [sh:and (
              	      [sh:class schema:PropertyValue ]
                  	  [sh:or (
                              [sh:property [
                                  sh:path schema:value ;
                                  sh:minCount 1 ;
                                  sh:datatype xsd:string ;
-                                 sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+                                 sh:message "a value for the definedTerm identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
                              ] ]
                              [sh:property [
                                  sh:path schema:url ;

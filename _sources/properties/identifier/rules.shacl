@@ -10,21 +10,21 @@ cdifd:CDIFIdentifierShape
     a sh:NodeShape ;
     sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
-         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
-       );
+      # query to get PropertyValues that are for identifier, not others
       sh:select  """
       PREFIX schema: <http://schema.org/>
       SELECT DISTINCT ?this
         WHERE {
-          ?this a schema:PropertyValue .
-          FILTER (
-            NOT EXISTS { ?s ?p ?this . }
-            &&
-            NOT EXISTS {?this schema:name ?n}
-          )
-        }"""
+        ?this a schema:PropertyValue .
+        {
+          ?this schema:propertyID "example identifier" .
+          FILTER NOT EXISTS { ?s ?p ?this . }
+        }
+        Union
+        {
+          ?s schema:identifier ?this .
+        }
+      }"""
 	] ;    
 
 #  use when property value is in an identifier

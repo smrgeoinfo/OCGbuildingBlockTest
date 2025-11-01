@@ -13,25 +13,22 @@ cdifd:CDIFadditionalPropertyShape
 # select PropertyValue for additional Property definition; use to validate bb example.
     sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
-       );
-       
-      #  modify query appropriately when this is a child of an additionalProperty .
+ # query to get PropertyValues that are for additionalProperty, not others
       sh:select  """
       PREFIX schema: <http://schema.org/>
       SELECT DISTINCT ?this
         WHERE {
-          ?this a schema:PropertyValue .
-          FILTER (
-            NOT EXISTS { ?s ?p ?this . }
-          )
-        }"""
+        ?this a schema:PropertyValue .
+        {
+          ?this schema:name "example additional property" .
+          FILTER NOT EXISTS { ?s ?p ?this . }
+        }
+        Union
+        {
+          ?s schema:additionalProperty ?this .
+        }
+      }"""
 	] ;    
-
-#  condition when in an module as a additional property value
-#            ||
-#           EXISTS { ?s schema:additionalProperty ?this . }
     
     sh:property cdifd:additionalPropertyNameProperty ;
     sh:property [
@@ -39,8 +36,7 @@ cdifd:CDIFadditionalPropertyShape
         sh:minCount 1 ;
         sh:datatype xsd:string ;
         sh:message "a value for the additional property must be provided."
-    ] ;
-    
+    ] ; 
     sh:property [
         sh:path schema:url ;
         sh:minCount 0 ;
@@ -83,16 +79,13 @@ cdifd:CDIFAddPropertyTermShape
     a sh:NodeShape ;
     sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "http://schema.org/" ]
-       );
       sh:select  """
       PREFIX schema: <http://schema.org/>
       SELECT DISTINCT ?this
         WHERE {
           ?this a schema:DefinedTerm .
           FILTER (
-            EXISTS { ?s schema:propertyID ?this . }
+            EXISTS {  ?s schema:propertyID ?this . }
           )
         }""";
 	] ;
@@ -115,7 +108,6 @@ cdifd:CDIFAddPropertyTermShape
                         sh:path schema:url ;
                         sh:minCount 1 ;
                         sh:datatype xsd:string ;
-                        # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
                         sh:pattern "^https?:\\/\\/[^\\s]+$" ;
                         sh:message "value must be a resolvable URL, but we aren't testing to see if the URL resolves..... Can't get xsd:anyURI to work with JSON Schema validation..."]
                         ] 
