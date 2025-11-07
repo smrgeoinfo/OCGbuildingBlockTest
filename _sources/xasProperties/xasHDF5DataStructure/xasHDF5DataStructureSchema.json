@@ -1,0 +1,91 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "@type": {
+            "type": "array",
+            "description": "implement as array because extensions might need to add additional types",
+            "items": {"type": "string"},
+            "contains": {"const": "cdi:DimensionalDataStructure"},
+            "minItems": 1
+        },
+        "cdi:has_DataStructureComponent": {
+           "type":"array",
+           "items":{
+                "type":"object",
+                "properties":{
+                    "@type": {
+                        "oneOf": [
+                            {"const": "cdi:DimensionComponent"},
+                            {"const": "cdi:MeasureComponent"}
+                        ]
+                    },
+                    "cdi:isDefinedBy_InstanceVariable": {
+                        "type": "object",
+                        "description": "this must be a reference to a variable defined in the schema:variableMeasured part of the metadata record; This condition will need to be validated by SHACL rule",
+                        "properties": {
+                            "@id": {"type": "string"}
+                        }
+                    },
+                    "cdi:has": {
+                        "type": "object",
+                        "properties": {
+                            "@type": {"const": "cdi:ValueMapping"},
+                            "cdifq:hdf5path": {"type":"string"},
+                            "cdifq:length": {"type":"integer"},
+                            "cdifq:index": {"type":"integer",
+                            "description":"Only applies to Dimension Components. The index of the dimension in ordered tuples that identify a measure component"}
+                        },
+                        "required": ["cdi:ValueMapping"]
+                    }
+                }
+           } 
+           
+           
+           
+        }
+        
+        
+               {
+                "@type": "WideDataStructure",
+                "@id": "xas:fec3d001RawData",
+                "cdifq:nRows": 443,
+                "cdifq:nColumns": 35,
+                "has": {
+                    "@type": "ValueMapping",
+                    "cdifq:hdf5path": "Fe_c3d.001/scan/data"
+                },
+                "schema:description": "this is the raw data in an array, represented here as a 35 column table with 443 rows, one for each step in the scan. The columns are described here as components in this wide data structure. In the hdf5 file, we only have column labels in a dataset at Fe_c3d.001/scan/column_labels. Use h5dump to get the column labels, don't have instance varaiables, datatypes, or definitions for these... Make MeasureComponents by default.",
+                "has_DataStructureComponent": [
+                    {
+                        "@type": "identifierComponent",
+                        "isDefinedBy_RepresentedVariable": "xas:Monochromator_Energy_Variable",
+                        "has_ValueMappingPosition": {
+                            "@type": "ValueMappingPosition",
+                            "column": 0
+                        },
+                        "cdi:name": "energy"
+                    },
+                    {
+                        "@type": "measureComponent",
+                        "has_ValueMappingPosition": {
+                            "@type": "ValueMappingPosition",
+                            "column": 1
+                        },
+                        "cdi:name": "tscaler"
+                    }
+                ]
+            }
+        ],
+        "allowsDuplicates": false
+        
+    },
+    "required": [
+        "schema:contentUrl",
+        "@type"
+    ],
+    "$defs": {
+        "Person": {"$ref": "../person/personSchema.json"},
+        "Organization": {"$ref": "../organization/organizationSchema.json"}
+    }
+}

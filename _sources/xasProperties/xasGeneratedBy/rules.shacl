@@ -1,0 +1,33 @@
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <https://schema.org/>.
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@prefix xas: <https://xas.org/dictionary/> .
+@prefix nxs: <http://purl.org/nexusformat/definitions/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wd: <https://www.wikidata.org/entity/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+
+cdifd:generatedByNode
+	a sh:NodeShape; 
+	sh:targetClass "xas:AnalysisEvent" ;
+	sh:property [
+      sh:path rdf:type ;
+      sh:hasValue "prov:Activity" ;
+      sh:message "Must have rdf:type prov:Activity."
+    ] ;
+    sh:property [
+      sh:path rdf:type ;
+      sh:hasValue "schema:Event" ;
+      sh:message "Must have rdf:type schema:Event."
+    ] ;
+	sh:property 
+        [sh:path [sh:alternativePath ( prov:used schema:additionalProperty schema:location schema:mainEntity ) ]  ;
+			sh:minCount 1;
+			sh:message "at least one of prov:used, schema:additionalProperty, schema:location, schema:mainEntity must be provided in a generatedBy node."
+			]
+			.
