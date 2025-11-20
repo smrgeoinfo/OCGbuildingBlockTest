@@ -2,7 +2,7 @@
 @prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:          <http://www.w3.org/ns/shacl#> .
 @prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema:      <https://schema.org/>.
+@prefix schema:      <http://schema.org/>.
 @prefix dcterms: <http://purl.org/dc/terms/>.
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
@@ -11,12 +11,8 @@ cdifd:CDIFDatasetMandatoryShape a sh:NodeShape ;
 # only apply to elements that are child of root dataset 
 	sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "https://schema.org/" ]
-         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
-       );
     sh:select """
-       PREFIX schema: <https://schema.org/>
+       PREFIX schema: <http://schema.org/>
        PREFIX ex: <https://example.org/>
             SELECT ?this
             WHERE {
@@ -118,12 +114,8 @@ cdifd:CDIFMetaMetadataShape
     # only apply to dataset nodes that are 'about' a dataset node 
 	sh:target [
 	  a sh:SPARQLTarget ;
-	  sh:prefixes (
-         [ sh:prefix "schema" ; sh:namespace "https://schema.org/" ]
-         [ sh:prefix "ex" ; sh:namespace "https://example.org/" ]
-       );
         sh:select  """
-            PREFIX schema: <https://schema.org/>
+            PREFIX schema: <http://schema.org/>
             SELECT ?this
             WHERE {
             ?this a schema:Dataset ;
