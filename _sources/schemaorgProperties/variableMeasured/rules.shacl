@@ -74,10 +74,53 @@ cdifd:CDIFVariableMeasuredShape
     sh:property [
        sh:path schema:description;
        sh:datatype xsd:string ;
-        sh:minLength 10;
-        sh:severity sh:info;
-        sh:mincount 1;
-        sh:message "a variableMeasured should have a text description explaining the variable"
+       sh:minLength 10;
+       sh:severity sh:Info;
+       sh:minCount 1;
+       sh:message "a variableMeasured should have a text description explaining the variable"
+    ];
+    sh:property [
+       sh:path schema:measurementTechnique;
+       sh:minCount 0;
+       sh:or (
+           [sh:datatype xsd:string]
+           [sh:nodeKind sh:IRI]
+           [sh:class schema:DefinedTerm]
+       );
+       sh:severity sh:Info;
+       sh:message "measurementTechnique describes how the variable values were determined"
+    ];
+    sh:property [
+       sh:path schema:unitText;
+       sh:minCount 0;
+       sh:datatype xsd:string;
+       sh:severity sh:Info;
+       sh:message "unitText identifies the unit of measurement as a string"
+    ];
+    sh:property [
+       sh:path schema:unitCode;
+       sh:minCount 0;
+       sh:or (
+           [sh:datatype xsd:string]
+           [sh:nodeKind sh:IRI]
+           [sh:class schema:DefinedTerm]
+       );
+       sh:severity sh:Info;
+       sh:message "unitCode identifies the unit of measurement, preferably as a URI from QUDT or similar vocabulary"
+    ];
+    sh:property [
+       sh:path schema:minValue;
+       sh:minCount 0;
+       sh:datatype xsd:decimal;
+       sh:severity sh:Info;
+       sh:message "minValue is the minimum numeric value in the dataset for this variable"
+    ];
+    sh:property [
+       sh:path schema:maxValue;
+       sh:minCount 0;
+       sh:datatype xsd:decimal;
+       sh:severity sh:Info;
+       sh:message "maxValue is the maximum numeric value in the dataset for this variable"
     ]
   .
   

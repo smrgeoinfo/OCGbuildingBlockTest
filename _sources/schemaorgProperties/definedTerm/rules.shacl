@@ -35,38 +35,57 @@ cdifd:CDIFDefinedTermShape
         }
       }""";
 	] ;
+	sh:or (
+		[sh:property [
+			sh:path schema:identifier;
+			sh:minCount 1 ;
+			sh:or (
+			 [sh:datatype xsd:string ]
+			 [
+			     sh:and (
+			      [sh:class schema:PropertyValue ]
+	    		  [sh:or (
+	                    [sh:property [
+	                        sh:path schema:value ;
+	                        sh:minCount 1 ;
+	                        sh:datatype xsd:string ;
+	                        sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
+	                    ] ]
+	                    [sh:property [
+	                        sh:path schema:url ;
+	                        sh:minCount 1 ;
+	                        sh:datatype xsd:string ;
+	                        sh:pattern "^https?:\\/\\/[^\\s]+$" ;
+	                        sh:message "value expected to be a resolvable http URI, but we aren't testing to see if the URL resolves..."]
+	                        ]
+	                    );
+	            ]
+			     )
+			  ]
+			);
+			sh:message "a defined term should have an identifier that is a resolvable URI" ;
+			];
+		]
+		[sh:property cdifd:termLabelProperty ;]
+	);
 	sh:property [
-		sh:path schema:identifier;
-		sh:minCount 1 ;
-		sh:or ( 
-		 [sh:datatype xsd:string ]
-		 [ 
-		     sh:and (
-		      [sh:class schema:PropertyValue ]
-    		  [sh:or (
-                    [sh:property [
-                        sh:path schema:value ;
-                        sh:minCount 1 ;
-                        sh:datatype xsd:string ;
-                        sh:message "a value for the identifier should be provided; can provide either full URI or identifier token part of URI if a url is provided."
-                    ] ]
-                    [sh:property [
-                        sh:path schema:url ;
-                        sh:minCount 1 ;
-                        sh:datatype xsd:string ;
-                        # sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$";
-                        sh:pattern "^https?:\\/\\/[^\\s]+$" ;
-                        sh:message "value expected to be a resolvable http URI, but we aren't testing to see if the URL resolves..."]
-                        ] 
-                    );
-            ]
-		     )
-		  ]
+		sh:path schema:inDefinedTermSet;
+		sh:minCount 0 ;
+		sh:or (
+			[sh:nodeKind sh:IRI]
+			[sh:datatype xsd:string]
 		);
-		sh:message "a defined term should have an identifier that is a resolvable URI" ; 
-		];
-	sh:property cdifd:termLabelProperty ;
-	sh:message "A Term must have a name (label) and an identifier. It should have both!." 
+		sh:severity sh:Info;
+		sh:message "inDefinedTermSet identifies the controlled vocabulary from which this term comes; should be a URI or string identifier"
+	];
+	sh:property [
+		sh:path schema:termCode;
+		sh:minCount 0 ;
+		sh:datatype xsd:string;
+		sh:severity sh:Info;
+		sh:message "termCode is a short code or notation for the term within its vocabulary (analogous to skos:notation)"
+	];
+	sh:message "A DefinedTerm must have a name (label) OR an identifier. Both are recommended."
 	.
 	
 cdifd:termLabelProperty
