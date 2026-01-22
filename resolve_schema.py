@@ -6,12 +6,18 @@ This program reads a building block JSON schema and generates a complete
 standalone schema by resolving all external $ref references recursively.
 All definitions are flattened to a single top-level $defs section.
 
+With the --inline-single-use flag, definitions that are only referenced once
+are inlined directly into the schema, while definitions used multiple times
+remain in the $defs section. This produces a more compact, readable schema
+similar to hand-authored schemas.
+
 Usage:
     python resolve_schema.py <input_schema_path> [output_path]
 
 Examples:
     python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json
     python resolve_schema.py _sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json output.json
+    python resolve_schema.py schema.json -o output.json --inline-single-use
 """
 
 import json
@@ -27,14 +33,16 @@ from typing import Any, Dict, Set, Optional, Tuple
 class SchemaResolver:
     """Resolves all $ref references in a JSON Schema to produce a standalone schema."""
 
-    def __init__(self, verbose: bool = False):
+    def __init__(self, verbose: bool = False, inline_single_use: bool = False):
         """
         Initialize the resolver.
 
         Args:
             verbose: If True, print progress information
+            inline_single_use: If True, inline definitions that are only referenced once
         """
         self.verbose = verbose
+        self.inline_single_use = inline_single_use
         self.schema_cache: Dict[str, dict] = {}  # Cache loaded schemas by absolute path
         self.global_defs: Dict[str, dict] = {}  # All flattened definitions
         self.processing_stack: Set[str] = set()  # Track schemas being processed (cycle detection)
@@ -337,6 +345,126 @@ class SchemaResolver:
                 if name not in result['$defs']:
                     result['$defs'][name] = definition
 
+        # Optionally inline single-use definitions
+        if self.inline_single_use:
+            result = self.optimize_inlining(result)
+
+        return result
+
+    def count_refs(self, schema: Any, counts: Dict[str, int]) -> None:
+        """
+        Count references to each $def in the schema.
+
+        Args:
+            schema: The schema to scan
+            counts: Dictionary to update with reference counts
+        """
+        if isinstance(schema, dict):
+            if '$ref' in schema:
+                ref = schema['$ref']
+                if ref.startswith('#/$defs/'):
+                    def_name = ref[8:]  # Remove '#/$defs/' prefix
+                    counts[def_name] = counts.get(def_name, 0) + 1
+            for key, value in schema.items():
+                if key != '$defs':  # Don't count references within $defs itself
+                    self.count_refs(value, counts)
+        elif isinstance(schema, list):
+            for item in schema:
+                self.count_refs(item, counts)
+
+    def count_refs_in_defs(self, defs: Dict[str, Any], counts: Dict[str, int]) -> None:
+        """
+        Count references within $defs to other $defs.
+
+        Args:
+            defs: The $defs dictionary
+            counts: Dictionary to update with reference counts
+        """
+        for def_name, definition in defs.items():
+            self.count_refs(definition, counts)
+
+    def inline_refs(self, schema: Any, defs: Dict[str, Any], single_use: Set[str]) -> Any:
+        """
+        Replace single-use $ref with inlined definitions.
+
+        Args:
+            schema: The schema to process
+            defs: The $defs dictionary
+            single_use: Set of definition names that are only used once
+
+        Returns:
+            Schema with single-use refs inlined
+        """
+        if isinstance(schema, dict):
+            if '$ref' in schema and len(schema) == 1:
+                ref = schema['$ref']
+                if ref.startswith('#/$defs/'):
+                    def_name = ref[8:]
+                    if def_name in single_use and def_name in defs:
+                        # Inline this definition
+                        inlined = copy.deepcopy(defs[def_name])
+                        # Recursively inline within the inlined definition
+                        return self.inline_refs(inlined, defs, single_use)
+            # Process all values in the dict
+            result = {}
+            for key, value in schema.items():
+                if key == '$defs':
+                    # Filter out single-use defs
+                    result[key] = {
+                        k: self.inline_refs(v, defs, single_use)
+                        for k, v in value.items()
+                        if k not in single_use
+                    }
+                    # Remove $defs entirely if empty
+                    if not result[key]:
+                        del result[key]
+                else:
+                    result[key] = self.inline_refs(value, defs, single_use)
+            return result
+        elif isinstance(schema, list):
+            return [self.inline_refs(item, defs, single_use) for item in schema]
+        else:
+            return schema
+
+    def optimize_inlining(self, schema: dict) -> dict:
+        """
+        Inline definitions that are only referenced once.
+
+        Args:
+            schema: The resolved schema with all definitions in $defs
+
+        Returns:
+            Optimized schema with single-use definitions inlined
+        """
+        if '$defs' not in schema:
+            return schema
+
+        defs = schema['$defs']
+
+        # Count references in main schema (excluding $defs section)
+        counts: Dict[str, int] = {}
+        for key, value in schema.items():
+            if key != '$defs':
+                self.count_refs(value, counts)
+
+        # Also count references within $defs to other $defs
+        self.count_refs_in_defs(defs, counts)
+
+        # Find definitions used only once
+        single_use = {name for name, count in counts.items() if count == 1}
+
+        # Also include defs that are never referenced (count == 0 or not in counts)
+        # These might be aliases or unused - include them for inlining too
+        for def_name in defs:
+            if def_name not in counts:
+                single_use.add(def_name)
+
+        self.log(f"Single-use definitions to inline: {single_use}")
+        self.log(f"Multi-use definitions to keep: {set(defs.keys()) - single_use}")
+
+        # Inline single-use definitions
+        result = self.inline_refs(schema, defs, single_use)
+
         return result
 
 
@@ -375,6 +503,12 @@ Examples:
         help='JSON indentation level (default: 2)'
     )
 
+    parser.add_argument(
+        '--inline-single-use',
+        action='store_true',
+        help='Inline definitions that are only referenced once (produces more compact schema)'
+    )
+
     args = parser.parse_args()
 
     # Check if input file exists
@@ -383,7 +517,7 @@ Examples:
         sys.exit(1)
 
     # Create resolver and process
-    resolver = SchemaResolver(verbose=args.verbose)
+    resolver = SchemaResolver(verbose=args.verbose, inline_single_use=args.inline_single_use)
 
     try:
         result = resolver.resolve(args.input_schema)

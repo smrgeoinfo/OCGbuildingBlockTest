@@ -75,6 +75,7 @@ python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.jso
 | `-o, --output` | Output file path (default: prints to stdout) |
 | `-v, --verbose` | Print progress information to stderr |
 | `--indent` | JSON indentation level (default: 2) |
+| `--inline-single-use` | Inline definitions that are only referenced once |
 
 ## How It Works
 
@@ -200,6 +201,29 @@ When a `$ref` has sibling properties (uncommon but valid), they are preserved:
 // Output
 {"$ref": "#/$defs/Identifier", "description": "Custom desc"}
 ```
+
+### Inline Single-Use Definitions
+
+With the `--inline-single-use` flag, the resolver produces a more compact schema by:
+1. Keeping definitions in `$defs` only if they are referenced multiple times
+2. Inlining definitions that are referenced only once directly where they are used
+
+This produces output similar to hand-authored schemas like `CDIF-JSONLD-schema-schemaprefix.json`.
+
+```bash
+python resolve_schema.py schema.json -o output.json --inline-single-use -v
+```
+
+Example output (verbose mode):
+```
+Single-use definitions to inline: {'DataDownload', 'MetaMetadata', 'WebAPI', ...}
+Multi-use definitions to keep: {'Person', 'Organization', 'Identifier', 'DefinedTerm', ...}
+```
+
+The optimization considers:
+- References in the main schema properties
+- References within other definitions (if A references B multiple times, B is kept in `$defs`)
+- Unreferenced definitions are also inlined (they may be dead code)
 
 ## Output Format
 
