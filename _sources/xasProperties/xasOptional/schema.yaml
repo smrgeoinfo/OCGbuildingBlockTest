@@ -1,0 +1,19 @@
+---
+$schema: https://json-schema.org/draft/2020-12/schema
+type: object
+allOf:
+- $ref: ../../schemaorgProperties/metaMetadata/metaMetadataSchema.json
+- properties:
+    'dcterms:conformsTo':
+      type: array
+      items:
+        $ref: ../../schemaorgProperties/metaMetadata/metaMetadataSchema.json#/$defs/conformsTo_item
+      minItems: 2
+      contains:
+        type: object
+        properties:
+          '@id':
+            const: 'cdif:profile_xasCDIF'
+        required:
+        - '@id'
+      minContains: 1

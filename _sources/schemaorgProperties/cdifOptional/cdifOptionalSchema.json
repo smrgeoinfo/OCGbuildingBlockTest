@@ -209,30 +209,23 @@
             "description": "The time interval during which data was collected or observations were made; or a time period that an activity or collection is linked to intellectually or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage). For documentation of Earth Science, Paleobiology or Paleontology datasets, we are interested in the second case-- the time period that data are linked to thematically.",
             "type": "array",
             "items": {"$ref": "#/$defs/TemporalExtent"}
+        },
+        "prov:wasGeneratedBy": {
+            "description": "Brief information about instruments, software or experimental protocols used",
+            "type": "array",
+            "items": {"$ref": "#/$defs/GeneratedBy"}
+        },
+        "prov:wasDerivedFrom": {
+            "description": "Brief information about sources of data used in aggregate datasets",
+            "type": "array",
+            "items": {"$ref": "#/$defs/DerivedFrom"}
+        },
+        "dqv:hasQualityMeasurement": {
+            "description": "Brief information quality measurements reported to assess the resource",
+            "type": "array",
+            "items": {"$ref": "#/$defs/QualityMeasure"}
         }
     },
-    "allOf": [
-        {
-            "required": [
-                "@id",
-                "@type",
-                "@context",
-                "schema:name",
-                "schema:identifier",
-                "schema:dateModified"
-            ]
-        },
-        {
-            "anyOf": [
-                {
-                    "required": ["schema:license"]
-                },
-                {
-                    "required": ["schema:conditionsOfAccess"]
-                }
-            ]
-        }
-    ],
     "$defs": {
         "LabeledLink": {"$ref": "../labeledLink/labeledLinkSchema.json"},
         "Identifier": {"$ref": "../identifier/identifierSchema.json"},
@@ -243,6 +236,9 @@
         "Funder": {"$ref": "../funder/funderSchema.json"},
         "VariableMeasured": {"$ref": "../variableMeasured/variableMeasuredSchema.json"},
         "SpatialExtent": {"$ref": "../spatialExtent/spatialExtentSchema.json"},
+        "DerivedFrom": {"$ref": "../../provProperties/derivedFrom/derivedFromSchema.json"},
+        "GeneratedBy": {"$ref": "../../provProperties/generatedBy/generatedBySchema.json"},
+        "QualityMeasure": {"$ref": "../../qualityProperties/qualityMeasure/qualityMeasureSchema.json"},
         "TemporalExtent": {"$ref": "../temporalExtent/temporalExtentSchema.json"}
     }
 }
