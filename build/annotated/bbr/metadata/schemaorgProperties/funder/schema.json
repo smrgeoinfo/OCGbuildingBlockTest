@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Funding acknowledgement properties, profile of schema.org/MonetaryGrant",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "default": "schema:MonetaryGrant",
+      "const": "schema:MonetaryGrant"
+    },
+    "schema:identifier": {
+      "$ref": "#/$defs/Identifier",
+      "description": "identifier for a particular grant"
+    },
+    "schema:name": {
+      "type": "string",
+      "description": "title of the grant"
+    },
+    "schema:funder": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "a identifier for an agent defined in this metadata, or externally; must be dereferenceable"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/Person"
+        },
+        {
+          "$ref": "#/$defs/Organization"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "required": [
+        "schema:funder"
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "schema:identifier"
+          ]
+        },
+        {
+          "required": [
+            "schema:name"
+          ]
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "Person": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json"
+    },
+    "Organization": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.json"
+    },
+    "Identifier": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json"
+    }
+  },
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/"
+  }
+}

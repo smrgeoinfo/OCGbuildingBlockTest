@@ -1,0 +1,44 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.adaProperties.physicalMapping",
+  "$schema": "metaschema.yaml",
+  "name": "Physical Mapping Type",
+  "abstract": "DDI-CDI variable mapping for data structure components",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "ddi-cdi",
+    "data-structure"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/physicalMapping/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/physicalMapping/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/physicalMapping/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Physical Mapping Type\n\nDescribes DDI-CDI data structure mapping for tabular data files. Uses the WideDataStructure pattern with DataStructureComponents that can be IdentifierComponent, MeasureComponent, or AttributeComponent. Each component includes ValueMapping for physical data layout.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Physical Mapping Type\ndescription: DDI-CDI data structure description for tabular data using WideDataStructure\n  with DataStructureComponents including IdentifierComponent, MeasureComponent, and\n  AttributeComponent with ValueMapping.\ntype: object\nproperties:\n  '@type':\n    const: cdi:WideDataStructure\n  cdi:has_DataStructureComponent:\n    type: array\n    items:\n      type: object\n      properties:\n        '@id':\n          type: string\n        '@type':\n          oneOf:\n          - const: cdi:IdentifierComponent\n          - const: cdi:MeasureComponent\n          - const: cdi:AttributeComponent\n        schema:name:\n          type: string\n          description: Label for this component in the datafile; overrides name in\n            associated InstanceVariable if specified.\n        cdi:isDefinedBy_InstanceVariable:\n          type: object\n          description: Use @id to reference one of the variables defined in the measuredVariable\n            section at the product level.\n          properties:\n            '@id':\n              type: string\n        cdi:qualifies:\n          type: object\n          description: Only for Attribute components, use @id to link to the component\n            the attribute qualifies.\n          properties:\n            '@id':\n              type: string\n        cdi:has:\n          type: object\n          description: If isDelimited is false, cdi:length is required.\n          properties:\n            '@type':\n              const: cdi:ValueMapping\n            cdi:hasIndex:\n              description: Column number in the table layout\n              type: integer\n            cdi:length:\n              description: Number of characters in this column\n              type: integer\n            cdi:physicalDataType:\n              type: string\n  allowsDuplicates:\n    type: boolean\n    description: Can rows in the table have identical values\n    default: false\n  arrayBase:\n    type: string\n    enum:\n    - '0'\n    - '1'\n    description: If 0, then left most column is column 0\n  commentPrefix:\n    type: string\n    description: Lines beginning with this string will be ignored\n  headerRowCount:\n    type: integer\n    description: Number of rows in the file to skip before data start\n  isDelimited:\n    type: boolean\n  delimiter:\n    type: string\n    description: Required if isDelimited is true\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/adaProperties/physicalMapping"
+}

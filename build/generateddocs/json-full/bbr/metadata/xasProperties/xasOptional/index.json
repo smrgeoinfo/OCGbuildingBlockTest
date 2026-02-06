@@ -1,0 +1,72 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.xasProperties.xasOptional",
+  "$schema": "metaschema.yaml",
+  "name": "Optional Fields for XAS data",
+  "abstract": "XAS profile files that provide additional useful information",
+  "status": "under-development",
+  "dateTimeAddition": "2025-11-11T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "CDIF-4-XAS OSCARS Project",
+      "link": "https://doi.org/10.5281/zenodo.17421917"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "templates"
+  ],
+  "shaclShapes": {
+    "cdif.bbr.metadata.xasProperties.xasOptional": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasOptional/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.metaMetadata": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/metaMetadata/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.organization": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/organization/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/definedTerm/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/person/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "cdif.bbr.metadata.schemaorgProperties.metaMetadata"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasOptional/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasOptional/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasOptional/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "##  XAS profile extension properties\n\nXAS profile files that extend requirements of CDIF discovery. Field content: x-ray source,definition, Data/mode, element/symbol, edge,Instrument/source/type, Instrument/source/name, Instrument/source/probe, Instrument/monochromator/type, Instrument/monochromator/d_spacing, Instrument/monochromator/reflection, Sample/name",
+  "examples": [
+    {
+      "title": "Example XAS metadata conforms to extension.",
+      "content": "Import base schema.org SubjectOf, add requiremnet that dcterms:conformsTo has XAS profile URI.",
+      "prefixes": {
+        "schema": "http://schema.org/"
+      }
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntype: object\nallOf:\n- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.yaml\n- properties:\n    dcterms:conformsTo:\n      type: array\n      items:\n        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.yaml#/$defs/conformsTo_item\n      minItems: 2\n      contains:\n        type: object\n        properties:\n          '@id':\n            const: cdif:profile_xasCDIF\n        required:\n        - '@id'\n      minContains: 1\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/xasProperties/xasOptional"
+}

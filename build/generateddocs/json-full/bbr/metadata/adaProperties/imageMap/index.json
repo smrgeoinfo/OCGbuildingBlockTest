@@ -1,0 +1,48 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.adaProperties.imageMap",
+  "$schema": "metaschema.yaml",
+  "name": "Image Map Type",
+  "abstract": "Spatially registered image map with pixel coordinates and component types",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "image",
+    "spatial"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "cdif.bbr.metadata.adaProperties.spatialRegistration",
+    "cdif.bbr.metadata.adaProperties.details"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/imageMap/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/imageMap/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/imageMap/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Image Map Type\n\nDescribes spatially registered image maps with pixel coordinates, component type classification (including EMPA details), and spatial registration metadata. Extends the basic image type with pixel dimensions and spatial registration.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Image Map Type\ndescription: Spatially registered image maps with pixel coordinates, component type\n  classification, and spatial registration metadata.\ntype: object\nproperties:\n  '@type':\n    const:\n    - ada:imageMap\n    - schema:ImageObject\n  acquisitionTime:\n    type: string\n  componentType:\n    anyOf:\n    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/empa_detail\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - basemap\n          - supplementalBasemap\n          - L2MSOverviewImage\n          - NanoIRMap\n          - LITImage\n          - UVFMImage\n          - VLMImage\n          - SEMEBSDGrainImageMap\n          - SEMEDSElementalMap\n          - SEMHRCLMap\n          - SEMImageMap\n          - STEMImage\n          - TEMImage\n          - TEMPatternsImage\n          - VLMImage\n          - NanoSIMSMap\n          - XANESimage\n          - VNMIROverviewImage\n      required:\n      - '@type'\n  channel1:\n    type: string\n  channel2:\n    type: string\n  channel3:\n    type: string\n  illuminationType:\n    type: string\n    description: Type of illumination used to create the image.\n  imageType:\n    type: string\n    description: Specifies the nature of the sample's response to the illumination.\n  numPixelsX:\n    type: integer\n  numPixelsY:\n    type: integer\n  spatialRegistration:\n    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/adaProperties/imageMap"
+}

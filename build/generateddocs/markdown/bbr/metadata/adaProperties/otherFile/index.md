@@ -1,0 +1,90 @@
+
+# Other File Type (Schema)
+
+`cdif.bbr.metadata.adaProperties.otherFile` *v0.1*
+
+Non-standard file formats approved for ADA submission
+
+[*Status*](http://www.opengis.net/def/status): Under development
+
+## Description
+
+# Other File Type
+
+Describes files in non-standard formats that have been approved for submission to the Astromat Archive. Supports EMSA spectral data, OBJ 3D models, STL files, XLSX workbooks, and Neptune Plus exports.
+
+## Schema
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Other File Type
+description: Files in other widely-used formats approved for submission to the Astromat
+  Archive. Includes EMSA, OBJ, STL, XLSX, and Neptune Plus export formats.
+type: object
+properties:
+  '@type':
+    const:
+    - ada:otherFileType
+  componentType:
+    anyOf:
+    - type: object
+      properties:
+        '@type':
+          enum:
+          - ada:other
+      required:
+      - '@type'
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/slsshapemodel_detail
+  schema:encodingFormat:
+    description: One of the approved non-standard file formats
+    enum:
+    - Spectral Data Exchange File (.emsa)
+    - 3D model file (.obj)
+    - Standard Triangle Language (.stl)
+    - Open XML workbook (.xlsx)
+    - Neptune Plus export (.exp)
+  formatDescription:
+    type: string
+    description: Free text explanation of file format, or a link to a publicly accessible
+      specification for the format.
+required:
+- '@type'
+- componentType
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+
+```
+
+Links to the schema:
+
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml)
+
+
+# JSON-LD Context
+
+```jsonld
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "@version": 1.1
+  }
+}
+```
+
+You can find the full JSON-LD context here:
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld)
+
+## Sources
+
+* [ADA Metadata Schema v3](https://github.com/amds-ldeo/metadata)
+
+# For developers
+
+The source code for this Building Block can be found in the following repository:
+
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* Path: `_sources/adaProperties/otherFile`
+

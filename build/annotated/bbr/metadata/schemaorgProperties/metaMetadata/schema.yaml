@@ -1,0 +1,86 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+type: object
+description: see https://github.com/Cross-Domain-Interoperability-Framework/Discovery/issues/13
+  for discussion on how to make assertion about the sample registration and metadata
+  distinct from statements about the physical object
+properties:
+  '@type':
+    type: string
+    const: schema:Dataset
+  '@id':
+    type: string
+    description: identifier for the metadata record
+  schema:about:
+    type: object
+    properties:
+      '@id':
+        type: string
+        description: this must be the '@id' value of the node containing the resource
+          description metadata
+  dcterms:conformsTo:
+    type: array
+    items:
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: uri for specifications that this metadata record conforms to.
+            Minimimally should specify uri for CDIF discovery profile
+  schema:maintainer:
+    description: iSamples Registrant. identification of the agent that registered
+      the sample, with contact information. Should include person name and affiliation,
+      or position name and affiliation, or just organization name. e-mail address
+      is preferred contact information.
+    anyOf:
+    - $ref: '#/$defs/Person'
+    - $ref: '#/$defs/Organization'
+  schema:sdDatePublished:
+    description: date of most recent update to the metadata content, extends iSamples
+      schema
+    type: string
+  schema:includedInDataCatalog:
+    type: object
+    description: identify the data collection or repository that contains the described
+      dataset. The value is expected to be a schema:DataCatalog
+    properties:
+      '@id':
+        type: string
+        description: identifier for the containing catalog or repository; example
+          data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog
+          puts identifier here
+      '@type':
+        type: string
+        default: schema:DataCatalog
+        const: schema:DataCatalog
+      schema:name:
+        type: string
+      schema:url:
+        type: string
+        format: uri
+        description: locator to access a landing page for the collection or catalog
+      schema:identifier:
+        $ref: '#/$defs/Identifier'
+        description: identifier for the collection or catalog; use identifier_type
+          to provide information on identifier scheme and context for identifier
+required:
+- schema:about
+- dcterms:conformsTo
+- '@id'
+$defs:
+  Identifier:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
+  Person:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/person/schema.yaml
+  Organization:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.yaml
+  conformsTo_item:
+    type: object
+    properties:
+      '@id':
+        type: string
+        description: uri for specifications that this metadata record conforms to
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ex: https://example.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  dcterms: http://purl.org/dc/terms/

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.json"
+    },
+    {
+      "properties": {
+        "dcterms:conformsTo": {
+          "type": "array",
+          "items": {
+            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.json#/$defs/conformsTo_item"
+          },
+          "minItems": 2,
+          "contains": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "const": "cdif:profile_xasCDIF"
+              }
+            },
+            "required": [
+              "@id"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    }
+  ],
+  "x-jsonld-extra-terms": {
+    "schema": "https://schema.org"
+  }
+}

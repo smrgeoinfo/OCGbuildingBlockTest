@@ -1,0 +1,155 @@
+Validation report for cdif.bbr.metadata.schemaorgProperties.webAPI - WebAPI properties
+Generated 2026-02-06T14:04:54.062108+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using serviceType-fail.json from test resources
+JSON-LD context is present - uplifting
+Output JSON-LD serviceType-fail.jsonld created
+Output Turtle serviceType-fail.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'schema:name' is a required property
+
+Failed validating 'required' in schema['properties']['schema:potentialAction']['items']['properties']['schema:object']['properties']['schema:variableMeasured']['items']['allOf'][0]:
+    {'required': ['@type', 'schema:name', 'schema:description']}
+
+On instance['schema:potentialAction'][0]['schema:object']['schema:variableMeasured'][1]:
+    {'@type': 'schema:PropertyValue',
+     'schema:propertyID': {'@id': 'ex:definedTerm_zZc',
+                           '@type': 'schema:DefinedTerm',
+                           'schema:identifier': {'@type': 'schema:PropertyValue',
+                                                 'schema:url': 'http://ogc.org/defs/g35408y',
+                                                 'schema:value': 'g35408y'},
+                           'schema:inDefinedTermSet': 'http://ogc.org/defs',
+                           'schema:name': 'Viscosity',
+                           'schema:termCode': 'Vp'}}
+=== End JSON Schema ===
+
+=== SHACL ===
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/webAPI/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("A WebAPI node must specify a service type with a string or IRI. string must have length >=3") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("3", datatype=xsd:integer) ] ) ; sh:path schema1:serviceType ]
+  	Focus Node: ex:exampleWebAPI_354btrh
+  	Value Node: Literal("")
+  	Result Path: schema1:serviceType
+  	Message: A WebAPI node must specify a service type with a string or IRI. string must have length >=3
+  
+Focus nodes for _sources/schemaorgProperties/webAPI/rules.shacl:
+ - Shape _:n4a334833ee024e478f08bb5166f05f33b9: *none*
+ - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n4a334833ee024e478f08bb5166f05f33b8: *none*
+ - Shape _:n4a334833ee024e478f08bb5166f05f33b3: *none*
+ - Shape cdifd:webAPINode: ex:exampleWebAPI_354btrh
+ - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/action/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/action/rules.shacl:
+ - Shape cdifd:CDIFActionShape: ex:exampleAction_37467
+
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/variableMeasured/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (2):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:name3Property
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID ex:definedTerm_zZc ]
+  	Result Path: schema1:name
+  	Message: a name for the variable must be provided, and have a length of at least 5 characters.
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Info
+  	Source Shape: [ sh:datatype xsd:string ; sh:message Literal("a variableMeasured should have a text description explaining the variable") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:minLength Literal("10", datatype=xsd:integer) ; sh:path schema1:description ; sh:severity sh:Info ]
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:propertyID ex:definedTerm_zZc ]
+  	Result Path: schema1:description
+  	Message: a variableMeasured should have a text description explaining the variable
+  
+Focus nodes for _sources/schemaorgProperties/variableMeasured/rules.shacl:
+ - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b10: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b5: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b4: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b8: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b9: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b37: *none*
+ - Shape cdifd:CDIFVariableMeasuredShape: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b11: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b29: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b7: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b12: *none*
+ - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b30: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b14: *none*
+ - Shape _:n2d21222c6e8a417498adaee91b00a905b38: *none*
+ - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:n3c25403e38a841759dc3adc957711c43b8: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b23: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b5: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b6: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b4: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b10: *none*
+ - Shape _:n3c25403e38a841759dc3adc957711c43b7: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("5", datatype=xsd:integer) ] [ sh:class schema1:DefinedTerm ] ) ; sh:path schema1:propertyID ]
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]
+  	Result Path: schema1:propertyID
+  	Message: Less than 1 values on [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]->schema1:propertyID
+  
+Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb20: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb23: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb22: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb25: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb10: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb21: *none*
+ - Shape _:nd6ff2ccc90934b57b5418b8ff40d6abcb11: *none*
+
+Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:
+ - Shape cdifd:CDIFLabeledLinkShape: ex:exampleWebAPI_354btrh/schema1:documentation,ex:exampleWebAPI_354btrh/schema1:termsOfService
+
+=== End SHACL ===
+

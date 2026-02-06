@@ -1,0 +1,2698 @@
+{
+  "x-defs": {
+    "cdif.bbr.metadata.adaProperties.instrument": {
+      "title": "Analysis Instrument Type",
+      "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "schema:Thing",
+              "prov:Entity",
+              "nxs:BaseClass/NXinstrument"
+            ]
+          ]
+        },
+        "schema:additionalType": {
+          "description": "Identifier for an instrument or component in the analytical instrumentation, e.g. GCMD instrument identifier.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "nxs": "http://purl.org/nexusformat/definitions/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.creativeWork": {
+      "title": "Creative Work Type",
+      "description": "Shell type for labeled links to other resources. Any schema.org CreativeWork property could be included.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "default": "schema:CreativeWork",
+          "enum": [
+            "schema:CreativeWork"
+          ]
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "schema:url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.laboratory": {
+      "title": "Analysis Laboratory Type",
+      "description": "Laboratory or facility definition combining NeXus NXsource with schema:Place. Used to identify the location where analysis was performed.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "schema:Place",
+              "nxs:BaseClass/NXsource"
+            ]
+          ]
+        },
+        "schema:identifier": {
+          "type": "string",
+          "format": "uri"
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:alternateName": {
+          "type": "string"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "nxs": "http://purl.org/nexusformat/definitions/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/laboratory/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.files": {
+      "title": "Files Type",
+      "description": "Properties for any file in an ADA product. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document).",
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string"
+        },
+        "@type": {
+          "enum": [
+            "schema:Dataset"
+          ]
+        },
+        "schema:additionalType": {
+          "type": "array",
+          "description": "The dataComponentType or supDocType",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "String name of file, must be unique within the containing package"
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "spdx:checksum": {
+          "type": "string"
+        },
+        "schema:size": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "schema:QuantitativeValue"
+              ]
+            },
+            "schema:value": {
+              "type": "integer"
+            },
+            "schema:unitText": {
+              "type": "string",
+              "default": "byte"
+            }
+          }
+        },
+        "schema:encodingFormat": {
+          "type": "string",
+          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
+        },
+        "resultTarget": {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
+        },
+        "fileDetail": {
+          "anyOf": [
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.image"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.imageMap"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.tabularData"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.collection"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.dataCube"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.document"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.supDocImage"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.otherFile"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    [
+                      "Metadata"
+                    ]
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            }
+          ]
+        },
+        "schema:relatedLink": {
+          "type": "array",
+          "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "enum": [
+                  "schema:LinkRole"
+                ]
+              },
+              "schema:linkRelationship": {
+                "type": "string"
+              },
+              "schema:target": {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "type": "string",
+                    "enum": [
+                      "schema:EntryPoint"
+                    ]
+                  },
+                  "schema:encodingFormat": {
+                    "type": "string"
+                  },
+                  "schema:name": {
+                    "type": "string"
+                  },
+                  "schema:url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "spdx": "http://spdx.org/rdf/terms#"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.json",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.stringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.image": {
+      "title": "Image Type",
+      "description": "Image objects with acquisition details and component type classification. Typed as ada:image and schema:ImageObject.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "description": "GeneralType for images",
+          "enum": [
+            [
+              "ada:image",
+              "schema:ImageObject"
+            ]
+          ]
+        },
+        "acquisitionTime": {
+          "type": "string"
+        },
+        "componentType": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "ada:AIVAImage",
+                "ada:EMPAImage",
+                "ada:LITImage",
+                "ada:STEMImage",
+                "ada:TEMImage",
+                "ada:TEMPatternsImage",
+                "ada:UVFMImage",
+                "ada:VLMImage",
+                "ada:SEMEBSDGrainImage",
+                "ada:SEMEDSElementalMap",
+                "ada:SEMHRCLImage",
+                "ada:SEMImageCollection",
+                "ada:TEMEDSImageCollection",
+                "ada:NanoSIMSImage",
+                "ada:XANESImageStack",
+                "ada:XANESStackOverviewImage",
+                "ada:XRDDiffractionPattern",
+                "ada:ShapeModelImage"
+              ]
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        },
+        "channel1": {
+          "type": "string"
+        },
+        "channel2": {
+          "type": "string"
+        },
+        "channel3": {
+          "type": "string"
+        },
+        "pixelSize": {
+          "type": "string"
+        },
+        "illuminationType": {
+          "type": "string",
+          "description": "Type of illumination used to create the image. Examples include Visible light, Cross-polarized visible light, ultraviolet light, Electron beam, X-ray."
+        },
+        "imageType": {
+          "type": "string",
+          "description": "Specifies the nature of the sample's response to the illumination that was detected and measured."
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/image/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.imageMap": {
+      "title": "Image Map Type",
+      "description": "Spatially registered image maps with pixel coordinates, component type classification, and spatial registration metadata.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "ada:imageMap",
+              "schema:ImageObject"
+            ]
+          ]
+        },
+        "acquisitionTime": {
+          "type": "string"
+        },
+        "componentType": {
+          "anyOf": [
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/empa_detail"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    "basemap",
+                    "supplementalBasemap",
+                    "L2MSOverviewImage",
+                    "NanoIRMap",
+                    "LITImage",
+                    "UVFMImage",
+                    "VLMImage",
+                    "SEMEBSDGrainImageMap",
+                    "SEMEDSElementalMap",
+                    "SEMHRCLMap",
+                    "SEMImageMap",
+                    "STEMImage",
+                    "TEMImage",
+                    "TEMPatternsImage",
+                    "VLMImage",
+                    "NanoSIMSMap",
+                    "XANESimage",
+                    "VNMIROverviewImage"
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            }
+          ]
+        },
+        "channel1": {
+          "type": "string"
+        },
+        "channel2": {
+          "type": "string"
+        },
+        "channel3": {
+          "type": "string"
+        },
+        "illuminationType": {
+          "type": "string",
+          "description": "Type of illumination used to create the image."
+        },
+        "imageType": {
+          "type": "string",
+          "description": "Specifies the nature of the sample's response to the illumination."
+        },
+        "numPixelsX": {
+          "type": "integer"
+        },
+        "numPixelsY": {
+          "type": "integer"
+        },
+        "spatialRegistration": {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.spatialRegistration"
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.tabularData": {
+      "title": "Tabular Data Type",
+      "description": "Tabular/structured data files typed as cdi:PhysicalDataSet and ada:tabularData. Includes DDI-CDI WideDataStructure for column layout description.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "cdi:PhysicalDataSet",
+              "ada:tabularData"
+            ]
+          ]
+        },
+        "componentType": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    "ada:AMSRawData",
+                    "ada:AMSProcessedData",
+                    "ada:DSCResultsTabular",
+                    "ada:FTICRMSTabular",
+                    "ada:GPYCProcessedTabular",
+                    "ada:GPYCRawTabular",
+                    "ada:HRICPMSProcessed",
+                    "ada:HRICPMSRaw",
+                    "ada:ICPOESIntermediateTabular",
+                    "ada:ICPOESProcessedTabular",
+                    "ada:ICPOESRawTabular",
+                    "ada:ICTabular",
+                    "ada:MCICPMSTabular",
+                    "ada:NGNSMSRaw",
+                    "ada:NGNSMSProcessed",
+                    "ada:QICPMSProcessedTabular",
+                    "ada:QICPMSRawTabular",
+                    "ada:RAMANRawTabular",
+                    "ada:RITOFNGMSTabular",
+                    "ada:RITOFNGMSCollection",
+                    "ada:SEMEDSPointData",
+                    "ada:SIMSTabular",
+                    "ada:STEMEDSTabular",
+                    "ada:STEMEELSTabular",
+                    "ada:SVRUECTabular",
+                    "ada:XANESRawTabular",
+                    "ada:XANESProcessedTabular"
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/dsc_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/eairms_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/empa_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/laf_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/nanosims_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/nanoir_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/psfd_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/vnmir_detail"
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/xrd_detail"
+            }
+          ]
+        },
+        "cdi:isStructuredBy": {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.physicalMapping"
+        },
+        "countRows": {
+          "type": "integer"
+        },
+        "countColumns": {
+          "type": "integer"
+        },
+        "xCoordCol": {
+          "description": "Column name for X coordinates",
+          "type": "string"
+        },
+        "yCoordCol": {
+          "type": "string"
+        },
+        "zCoordCol": {
+          "type": "string"
+        },
+        "coordUnits": {
+          "type": "string"
+        },
+        "spatialRegistration": {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.spatialRegistration"
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.collection": {
+      "title": "Collection Type",
+      "description": "A collection can be a set of files with identical information model and serialization/formatting, or a heterogeneous set of files that together constitute a dataset (a composite dataset).",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "description": "GeneralType for collections",
+          "enum": [
+            [
+              "ada:collection",
+              "https://schema.org/Collection"
+            ]
+          ]
+        },
+        "componentType": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "ada:AIVAImageCollection",
+                "ada:ARGTCollection",
+                "ada:EAIRMSCollection",
+                "ada:EMPAImageCollection",
+                "ada:GCMSCollection",
+                "ada:GCGCMSCollection",
+                "ada:LCMSCollection",
+                "ada:LCMSMSCollection",
+                "ada:LIT2DDataCollection",
+                "ada:LITPolarDataCollection",
+                "ada:MCICPMSCollection",
+                "ada:NanoIRMapCollection",
+                "ada:NanoIRPointCollection",
+                "ada:NanoSIMSCollection",
+                "ada:NanoSIMSImageCollection",
+                "ada:QRISCalibratedCollection",
+                "ada:QRISRawCollection",
+                "ada:RITOFNGMSCollection",
+                "ada:SEMEDSElementalMaps",
+                "ada:SEMEDSPointDataCollection",
+                "ada:SEMImageCollection",
+                "ada:SIMSCollection",
+                "ada:TEMEDSImageCollection",
+                "ada:TOFSIMSCollection",
+                "ada:UVFMImageCollection",
+                "ada:VLMImageCollection",
+                "ada:XANESCollection",
+                "XCTImageCollection"
+              ]
+            }
+          }
+        },
+        "memberTypes": {
+          "description": "List of the component types in the collection",
+          "allOf": [
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
+            }
+          ]
+        },
+        "nFiles": {
+          "type": "integer",
+          "description": "Number of files in the collection, including metadata files"
+        },
+        "filelist": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fileName": {
+                "type": "string",
+                "description": "Full path to file in container object"
+              },
+              "fileNamePattern": {
+                "type": "string",
+                "description": "Pattern for collection members with differentiating suffix at '*'"
+              },
+              "componentType": {
+                "description": "The component type for the file(s)",
+                "type": "string"
+              },
+              "schema:encodingFormat": {
+                "type": "string",
+                "description": "MIME type with extension"
+              }
+            },
+            "oneOf": [
+              {
+                "required": [
+                  "fileName"
+                ]
+              },
+              {
+                "required": [
+                  "fileNamePattern"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/collection/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.dataCube": {
+      "title": "Data Cube Type",
+      "description": "Multidimensional data structure typed as ada:dataCube and cdi:DimensionalDataStructure. Supports various analytical data cube formats.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "ada:dataCube",
+              "cdi:DimensionalDataStructure"
+            ]
+          ]
+        },
+        "componentType": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    "ada:GCMSCollection",
+                    "ada:GCMSCube",
+                    "ada:FTICRMSCube",
+                    "ada:LCMSCollection",
+                    "ada:SEMEBSDGrainImageMapCube",
+                    "ada:SEMEDSElementalMapsCube",
+                    "ada:SEMEDSPointDataCube",
+                    "ada:SEMHRCLCube",
+                    "ada:STEMEDSCube",
+                    "ada:STEMEDSTomo",
+                    "ada:STEMEELSCube",
+                    "ada:VNMIRSpectralMap"
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/l2ms_detail"
+            }
+          ]
+        },
+        "dataComponentResource": {
+          "type": "string"
+        },
+        "cdi:isStructuredBy": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "cdi:DimensionalDataStructure"
+              ]
+            },
+            "cdi:has_DataStructureComponent": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "enum": [
+                          "cdi:DimensionComponent"
+                        ]
+                      },
+                      "schema:name": {
+                        "type": "string"
+                      },
+                      "cdi:isDefinedBy_InstanceVariable": {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "cdi:physicalDataType": {
+                        "type": "string"
+                      },
+                      "cdi:isStructuredBy": {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string"
+                          },
+                          "@type": {
+                            "enum": [
+                              "cdi:SubstantiveValueDomain"
+                            ]
+                          },
+                          "schema:description": {
+                            "type": "string"
+                          },
+                          "cdi:takesValuesFrom": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "enum": [
+                                      "sequence"
+                                    ]
+                                  },
+                                  "valueDomainMin": {
+                                    "type": "number"
+                                  },
+                                  "valueDomainMax": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@id": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "has": {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "enum": [
+                              "cdi:ValueMapping"
+                            ]
+                          },
+                          "cdi:valuepath": {
+                            "type": "string"
+                          },
+                          "cdi:length": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0
+                          },
+                          "cdi:index": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "oneOf": [
+                          {
+                            "enum": [
+                              "cdi:MeasureComponent"
+                            ]
+                          },
+                          {
+                            "enum": [
+                              "cdi:AttributeComponent"
+                            ]
+                          }
+                        ]
+                      },
+                      "cdi:isDefinedBy_InstanceVariable": {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "cdi:isStructuredBy": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "@id": {
+                                "type": "string"
+                              },
+                              "@type": {
+                                "enum": [
+                                  "cdi:SubstantiveValueDomain"
+                                ]
+                              },
+                              "schema:description": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "@id": {
+                                "type": "string"
+                              },
+                              "@type": {
+                                "enum": [
+                                  "cdi:DataStructure"
+                                ]
+                              },
+                              "schema:description": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "cdi:qualifies": {
+                        "type": "object",
+                        "properties": {
+                          "@id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "has": {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "enum": [
+                              "cdi:ValueMapping"
+                            ]
+                          },
+                          "cdi:cubepath": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.document": {
+      "title": "Document Type",
+      "description": "Text or PDF/A documents providing supplemental information, typically related to calibration, instrument metadata details, analysis methods, or data representation. Typed as ada:document and schema:DigitalDocument.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "ada:document",
+              "schema:DigitalDocument"
+            ]
+          ]
+        },
+        "componentType": {
+          "description": "One of the supplemental document types if applicable",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    "ada:calibrationFile",
+                    "ada:contextVideo",
+                    "ada:logFile",
+                    "ada:methodDescription",
+                    "ada:peaks",
+                    "ada:processingDescription",
+                    "ada:QRISCalibrationFile",
+                    "ada:samplePreparation",
+                    "ada:shapefiles"
+                  ]
+                }
+              }
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/argt_detail"
+            }
+          ]
+        },
+        "schema:version": {
+          "type": "string"
+        },
+        "schema:isBasedOn": {
+          "description": "same as ada/samis '_originalName'",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.supDocImage": {
+      "title": "Supplemental Document Image Type",
+      "description": "Supplemental document images including analysis location images, annotated products, context photography, and other supplemental visual materials.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "description": "GeneralType for supplemental document images",
+          "enum": [
+            [
+              "ada:image",
+              "schema:DigitalDocument"
+            ]
+          ]
+        },
+        "componentType": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "enum": [
+                "ada:analysisLocation",
+                "ada:annotatedProduct",
+                "ada:contextPhotography",
+                "ada:areaOfInterest",
+                "ada:instrumentMetadata",
+                "ada:supplementalBasemap",
+                "ada:plot",
+                "ada:quickLook",
+                "ada:report",
+                "ada:visImage"
+              ]
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        },
+        "numPixelsX": {
+          "type": "integer"
+        },
+        "numPixelsY": {
+          "type": "integer"
+        },
+        "_original_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.otherFile": {
+      "title": "Other File Type",
+      "description": "Files in other widely-used formats approved for submission to the Astromat Archive. Includes EMSA, OBJ, STL, XLSX, and Neptune Plus export formats.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            [
+              "ada:otherFileType"
+            ]
+          ]
+        },
+        "componentType": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "enum": [
+                    "ada:other"
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/slsshapemodel_detail"
+            }
+          ]
+        },
+        "schema:encodingFormat": {
+          "description": "One of the approved non-standard file formats",
+          "enum": [
+            "Spectral Data Exchange File (.emsa)",
+            "3D model file (.obj)",
+            "Standard Triangle Language (.stl)",
+            "Open XML workbook (.xlsx)",
+            "Neptune Plus export (.exp)"
+          ]
+        },
+        "formatDescription": {
+          "type": "string",
+          "description": "Free text explanation of file format, or a link to a publicly accessible specification for the format."
+        }
+      },
+      "required": [
+        "@type",
+        "componentType"
+      ],
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.details": {
+      "title": "Instrument Detail Types",
+      "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions.",
+      "type": "object",
+      "anyOf": [
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/basemap_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/argt_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/dsc_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/empa_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/eairms_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/icpoes_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/l2ms_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/laf_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/nanoir_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/nanosims_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/psfd_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/vnmir_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/qris_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/slsshapemodel_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/xctimage_detail"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.details/$defs/xrd_detail"
+        }
+      ],
+      "$defs": {
+        "basemap_detail": {
+          "type": "object",
+          "description": "Basemap images with RGB channels and pixel scaling.",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:basemap",
+                  "schema:Map"
+                ]
+              ]
+            },
+            "schema:description": {
+              "type": "string"
+            },
+            "pixelUnits": {
+              "type": "string"
+            },
+            "pixelScaleX": {
+              "type": "number"
+            },
+            "pixelScaleY": {
+              "type": "number"
+            },
+            "channel1": {
+              "type": "string"
+            },
+            "channel2": {
+              "type": "string"
+            },
+            "channel3": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "pixelScaleX",
+            "pixelScaleY",
+            "pixelUnits"
+          ]
+        },
+        "argt_detail": {
+          "type": "object",
+          "description": "ARGT (Argon) document type with phase and isotope analysis",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:ARGTDocument"
+                ]
+              ]
+            },
+            "phaseAnalyzed": {
+              "type": "string"
+            },
+            "isotopeType": {
+              "type": "string"
+            }
+          }
+        },
+        "dsc_detail": {
+          "type": "object",
+          "description": "Differential Scanning Calorimetry heat tabular data",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:DSCHeatTabular"
+                ]
+              ]
+            },
+            "analysisType": {
+              "type": "string"
+            }
+          }
+        },
+        "empa_detail": {
+          "type": "object",
+          "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:EMPAImage"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:EMPAQEATabular"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:EMPAImageCollection"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "spectrometersUsed": {
+              "type": "string",
+              "description": "Spectrometers used in analysis"
+            },
+            "signalUsed": {
+              "type": "string"
+            }
+          }
+        },
+        "eairms_detail": {
+          "type": "object",
+          "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:EAIRMSCollection"
+                ]
+              ]
+            },
+            "massConsumed": {
+              "type": "string"
+            },
+            "elementType": {
+              "type": "string"
+            }
+          }
+        },
+        "icpoes_detail": {
+          "type": "object",
+          "description": "Inductively Coupled Plasma Optical Emission Spectrometry",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:ICPOESIntermediateTabular"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:ICPOESProcessedTabular"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:ICPOESRawTabular"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "mass": {
+              "type": "string"
+            },
+            "dissolutionFactor": {
+              "type": "number"
+            }
+          }
+        },
+        "l2ms_detail": {
+          "type": "object",
+          "description": "Laser-2 Mass Spectrometry cube data with ionization parameters",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:L2MSCube"
+                ]
+              ]
+            },
+            "sampleName": {
+              "type": "string"
+            },
+            "ionizationTimeDelay": {
+              "type": "integer"
+            },
+            "massGate": {
+              "type": "boolean"
+            },
+            "photoionizationWavelength": {
+              "type": "integer"
+            },
+            "plasmaShutter": {
+              "type": "boolean"
+            },
+            "timeDelayUnits": {
+              "type": "string"
+            },
+            "wavelengthUnits": {
+              "type": "string"
+            }
+          }
+        },
+        "laf_detail": {
+          "type": "object",
+          "description": "Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:LAFProcessed"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:LAFRaw"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "elementAnalyzed": {
+              "type": "string"
+            },
+            "sampleMassConsumed": {
+              "type": "string"
+            },
+            "sampleType": {
+              "type": "string"
+            }
+          }
+        },
+        "nanoir_detail": {
+          "type": "object",
+          "description": "Nano-IR spectroscopy collections with phase analysis",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:NanoIRBackground"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:NanoIRMapCollection"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:NanoIRPointCollection"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "phaseAnalyzed": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "nanosims_detail": {
+          "type": "object",
+          "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:NanoSIMSCollection"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:NanoSIMSImageCollection"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:NanoSIMSTabular"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:NanoSIMSMap"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "phaseAnalyzed": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
+            },
+            "isotopeAnalyzed": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "psfd_detail": {
+          "type": "object",
+          "description": "Point Spread Function Data with image names and conditions",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:PSFDTabular"
+                ]
+              ]
+            },
+            "imageName": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
+            },
+            "imageViewingConditions": {
+              "type": "string"
+            }
+          }
+        },
+        "vnmir_detail": {
+          "type": "object",
+          "description": "Very-Near Mid-IR spectroscopy with detailed measurement parameters",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:VNMIRSpectralPoint"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:VNMIROverviewImage"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:VNMIRSpectralMap"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "detector": {
+              "type": "string"
+            },
+            "beamsplitter": {
+              "type": "string"
+            },
+            "calibrationStandards": {
+              "type": "string"
+            },
+            "comments": {
+              "type": "string"
+            },
+            "numberOfScans": {
+              "type": "integer"
+            },
+            "eMaxFitRegionMax": {
+              "type": "string"
+            },
+            "eMaxFitRegionMin": {
+              "type": "string"
+            },
+            "emissionAngle": {
+              "type": "number"
+            },
+            "emissivityMaximum": {
+              "type": "string"
+            },
+            "environmentalPressure": {
+              "type": "number"
+            },
+            "incidenceAngle": {
+              "type": "number"
+            },
+            "measurement": {
+              "type": "string"
+            },
+            "measurementEnvironment": {
+              "type": "string"
+            },
+            "phaseAngle": {
+              "type": "number"
+            },
+            "sampleHeated": {
+              "type": "boolean"
+            },
+            "samplePreparation": {
+              "type": "string"
+            },
+            "sampleTemperature": {
+              "type": "integer"
+            },
+            "spectralRangeMax": {
+              "type": "string"
+            },
+            "spectralRangeMin": {
+              "type": "string"
+            },
+            "spectralResolution": {
+              "type": "string"
+            },
+            "spectralSampling": {
+              "type": "string"
+            },
+            "spotSize": {
+              "type": "string"
+            },
+            "uncertaintyNoise": {
+              "type": "number"
+            },
+            "vacuumExposedSample": {
+              "type": "boolean"
+            }
+          }
+        },
+        "qris_detail": {
+          "type": "object",
+          "description": "QRIS (Raman) with calibration and illumination parameters",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:QRISCalibrated"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:QRISRaw"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "calibrationFile": {
+              "type": "string"
+            },
+            "pipelineVersion": {
+              "type": "string"
+            },
+            "focalLength": {
+              "type": "integer"
+            },
+            "illuminationColor": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
+            },
+            "illuminationLevel": {
+              "type": "integer"
+            },
+            "exposureTime": {
+              "type": "integer"
+            },
+            "target": {
+              "type": "string"
+            }
+          }
+        },
+        "slsshapemodel_detail": {
+          "type": "object",
+          "description": "Structured Light Scanning shape models and partial scans",
+          "properties": {
+            "@type": {
+              "anyOf": [
+                {
+                  "enum": [
+                    [
+                      "ada:SLSShapeModel"
+                    ]
+                  ]
+                },
+                {
+                  "enum": [
+                    [
+                      "ada:SLSPartialScan"
+                    ]
+                  ]
+                }
+              ]
+            },
+            "countScans": {
+              "type": "integer"
+            },
+            "facets": {
+              "type": "integer"
+            },
+            "unitsOfMeasurement": {
+              "type": "string"
+            },
+            "version": {
+              "type": "integer"
+            },
+            "vertices": {
+              "type": "integer"
+            },
+            "watertight": {
+              "type": "boolean"
+            }
+          }
+        },
+        "xctimage_detail": {
+          "type": "object",
+          "description": "X-ray Computed Tomography images with detailed scan parameters",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:XCTImageCollection"
+                ]
+              ]
+            },
+            "beamFilterMaterial": {
+              "type": "string"
+            },
+            "beamFilterThickness": {
+              "type": "number"
+            },
+            "dataRangeLower": {
+              "type": "integer"
+            },
+            "dataRangeUpper": {
+              "type": "integer"
+            },
+            "detectorGain": {
+              "type": "string"
+            },
+            "detectorBinning": {
+              "type": "string"
+            },
+            "detectorSize": {
+              "type": "string"
+            },
+            "detectorType": {
+              "type": "string"
+            },
+            "imageExposure": {
+              "type": "number"
+            },
+            "imageFPS": {
+              "type": "string"
+            },
+            "imageGain": {
+              "type": "number"
+            },
+            "imageSize": {
+              "type": "string"
+            },
+            "instrumentType": {
+              "type": "string"
+            },
+            "nsiBeamHardening": {
+              "type": "number"
+            },
+            "numberOfFramesAveragedPerProjection": {
+              "type": "integer"
+            },
+            "numberOfProjections": {
+              "type": "integer"
+            },
+            "numberOfSlices": {
+              "type": "integer"
+            },
+            "pixelPitch": {
+              "type": "string"
+            },
+            "reconstructedDataFormat": {
+              "type": "string"
+            },
+            "reconstructedVoxelSize": {
+              "type": "string"
+            },
+            "reconstructionSoftware": {
+              "type": "string"
+            },
+            "rotationAngle": {
+              "type": "string"
+            },
+            "rotationType": {
+              "type": "string"
+            },
+            "sourceToDetectorDistance": {
+              "type": "string"
+            },
+            "sourceToObjectDistance": {
+              "type": "number"
+            },
+            "subPixGrid": {
+              "type": "string"
+            },
+            "subPixShift": {
+              "type": "string"
+            },
+            "xraySource": {
+              "type": "string"
+            },
+            "xrayTargetMaterial": {
+              "type": "string"
+            },
+            "xrayTubeCurrent": {
+              "type": "number"
+            },
+            "xrayTubeEnergy": {
+              "type": "number"
+            },
+            "xrayTubePower": {
+              "type": "number"
+            }
+          }
+        },
+        "xrd_detail": {
+          "type": "object",
+          "description": "X-ray Diffraction tabular data with geometry and wavelength",
+          "properties": {
+            "@type": {
+              "enum": [
+                [
+                  "ada:XRDTabular"
+                ]
+              ]
+            },
+            "geometry": {
+              "type": "string"
+            },
+            "sampleMount": {
+              "type": "string"
+            },
+            "stepSize": {
+              "type": "number"
+            },
+            "timePerStep": {
+              "type": "number"
+            },
+            "wavelength": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.spatialRegistration": {
+      "title": "Spatial Registration Type",
+      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+      "type": "object",
+      "properties": {
+        "basemap": {
+          "type": "string",
+          "description": "link to appropriate basemap image map"
+        },
+        "originX": {
+          "type": "number"
+        },
+        "originY": {
+          "type": "number"
+        },
+        "originZ": {
+          "type": "number"
+        },
+        "coordDef": {
+          "type": "string",
+          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+        },
+        "coordUnits": {
+          "type": "string"
+        },
+        "pixelUnits": {
+          "type": "string"
+        },
+        "pixelScaleX": {
+          "type": "number"
+        },
+        "pixelScaleY": {
+          "type": "number"
+        },
+        "originLocation": {
+          "type": "string",
+          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+        }
+      },
+      "required": [
+        "originX",
+        "originY",
+        "pixelScaleX",
+        "pixelScaleY",
+        "pixelUnits",
+        "originLocation",
+        "coordDef"
+      ],
+      "x-jsonld-prefixes": {
+        "ada": "https://ada.astromat.org/metadata/"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.physicalMapping": {
+      "title": "Physical Mapping Type",
+      "description": "DDI-CDI data structure description for tabular data using WideDataStructure with DataStructureComponents including IdentifierComponent, MeasureComponent, and AttributeComponent with ValueMapping.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "enum": [
+            "cdi:WideDataStructure"
+          ]
+        },
+        "cdi:has_DataStructureComponent": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              },
+              "@type": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      "cdi:IdentifierComponent"
+                    ]
+                  },
+                  {
+                    "enum": [
+                      "cdi:MeasureComponent"
+                    ]
+                  },
+                  {
+                    "enum": [
+                      "cdi:AttributeComponent"
+                    ]
+                  }
+                ]
+              },
+              "schema:name": {
+                "type": "string",
+                "description": "Label for this component in the datafile; overrides name in associated InstanceVariable if specified."
+              },
+              "cdi:isDefinedBy_InstanceVariable": {
+                "type": "object",
+                "description": "Use @id to reference one of the variables defined in the measuredVariable section at the product level.",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "cdi:qualifies": {
+                "type": "object",
+                "description": "Only for Attribute components, use @id to link to the component the attribute qualifies.",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "cdi:has": {
+                "type": "object",
+                "description": "If isDelimited is false, cdi:length is required.",
+                "properties": {
+                  "@type": {
+                    "enum": [
+                      "cdi:ValueMapping"
+                    ]
+                  },
+                  "cdi:hasIndex": {
+                    "description": "Column number in the table layout",
+                    "type": "integer"
+                  },
+                  "cdi:length": {
+                    "description": "Number of characters in this column",
+                    "type": "integer"
+                  },
+                  "cdi:physicalDataType": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allowsDuplicates": {
+          "type": "boolean",
+          "description": "Can rows in the table have identical values",
+          "default": false
+        },
+        "arrayBase": {
+          "type": "string",
+          "enum": [
+            "0",
+            "1"
+          ],
+          "description": "If 0, then left most column is column 0"
+        },
+        "commentPrefix": {
+          "type": "string",
+          "description": "Lines beginning with this string will be ignored"
+        },
+        "headerRowCount": {
+          "type": "integer",
+          "description": "Number of rows in the file to skip before data start"
+        },
+        "isDelimited": {
+          "type": "boolean"
+        },
+        "delimiter": {
+          "type": "string",
+          "description": "Required if isDelimited is true"
+        }
+      },
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "csvw": "http://www.w3.org/ns/csvw#"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    }
+  },
+  "title": "Astromat Archive Product Metadata",
+  "description": "Schema for JSON metadata documenting products in Astromata Data Archive (ADA). Each project consists of one or more data files and 0 to many supplemental files. Each file MUST have an associated YAML metadata file, with the same name, but '.yaml' as the file extension.",
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string"
+    },
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "schema:Dataset",
+          "schema:Product"
+        ]
+      }
+    },
+    "schema:name": {
+      "type": "string"
+    },
+    "schema:description": {
+      "type": "string"
+    },
+    "schema:additionalType": {
+      "type": "array",
+      "description": "Should have the ada product type and 'ada:DataDeliveryPackage'",
+      "items": {
+        "type": "string"
+      }
+    },
+    "submissionType": {
+      "type": "string"
+    },
+    "schema:funding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:MonetaryGrant",
+            "enum": [
+              "schema:MonetaryGrant"
+            ]
+          },
+          "identifier": {
+            "type": "string",
+            "description": "String that identifies a particular grant"
+          },
+          "name": {
+            "type": "string",
+            "description": "Title of the grant"
+          },
+          "funder": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for an agent defined in metadata or externally"
+                  }
+                }
+              },
+              {
+                "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.instrument"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "anyOf": [
+                      {
+                        "enum": [
+                          [
+                            "schema:Organization"
+                          ]
+                        ]
+                      },
+                      {
+                        "enum": [
+                          [
+                            "schema:FundingAgency"
+                          ]
+                        ]
+                      }
+                    ],
+                    "default": [
+                      "schema:Organization"
+                    ]
+                  },
+                  "schema:name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@type",
+                  "schema:name"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "schema:identifier": {
+      "description": "Primary identifier for the dataset",
+      "anyOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "type": "string",
+                    "default": "schema:PropertyValue",
+                    "enum": [
+                      "schema:PropertyValue"
+                    ]
+                  },
+                  "schema:propertyID": {
+                    "type": "string",
+                    "default": "https://registry.identifiers.org/registry/doi"
+                  },
+                  "schema:value": {
+                    "type": "string"
+                  },
+                  "schema:url": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "default": "schema:PropertyValue",
+              "enum": [
+                "schema:PropertyValue"
+              ]
+            },
+            "schema:propertyID": {
+              "type": "string"
+            },
+            "schema:value": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "schema:creator": {
+      "description": "Author or originator of intellectual content of dataset",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@list": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string"
+                    },
+                    "@type": {
+                      "type": "string",
+                      "default": "schema:Person",
+                      "enum": [
+                        "schema:Person"
+                      ]
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    },
+                    "schema:alternateName": {
+                      "type": "string"
+                    },
+                    "schema:affiliation": {
+                      "type": "object"
+                    },
+                    "schema:description": {
+                      "type": "string"
+                    },
+                    "schema:identifier": {
+                      "anyOf": [
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "schema:sameAs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "@type",
+                    "schema:name"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string"
+                    },
+                    "@type": {
+                      "anyOf": [
+                        {
+                          "enum": [
+                            [
+                              "schema:Organization"
+                            ]
+                          ]
+                        },
+                        {
+                          "enum": [
+                            [
+                              "schema:ResearchOrganization"
+                            ]
+                          ]
+                        }
+                      ],
+                      "default": [
+                        "schema:Organization"
+                      ]
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "@type",
+                    "schema:name"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schema:contributor": {
+      "description": "Other parties who played a role in production of dataset",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "enum": [
+                  "schema:Person"
+                ]
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@type",
+              "schema:name"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      [
+                        "schema:Organization"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            },
+            "schema:name": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "object",
+            "description": "Role-based contributor",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "Role",
+                "enum": [
+                  "Role"
+                ]
+              },
+              "roleName": {
+                "type": "string"
+              },
+              "contributor": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "schema:license": {
+      "description": "Legal statement of conditions for use and access",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.creativeWork"
+          }
+        ]
+      }
+    },
+    "schema:relatedLink": {
+      "type": "array",
+      "description": "Links to related resources at the product level",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "enum": [
+              "schema:LinkRole"
+            ]
+          },
+          "schema:linkRelationship": {
+            "type": "string"
+          },
+          "schema:target": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "enum": [
+                  "schema:EntryPoint"
+                ]
+              },
+              "schema:encodingFormat": {
+                "type": "string"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "schema:dateModified": {
+      "type": "string"
+    },
+    "schema:datePublished": {
+      "type": "string"
+    },
+    "schema:creativeWorkStatus": {
+      "type": "string"
+    },
+    "schema:measurementTechnique": {
+      "type": "object",
+      "description": "Text description of the measurement method",
+      "properties": {
+        "@type": {
+          "enum": [
+            "schema:DefinedTerm"
+          ]
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "type": "string"
+        }
+      }
+    },
+    "prov:wasGeneratedBy": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "description": "Include 'schema:Event', 'xas:AnalysisEvent', 'prov:Activity'",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prov:used": {
+          "type": "array",
+          "description": "Instruments used in the analysis",
+          "items": {
+            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.instrument"
+          }
+        },
+        "schema:location": {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.laboratory"
+        },
+        "schema:mainEntity": {
+          "type": "array",
+          "description": "Samples analyzed",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "enum": [
+                  [
+                    "schema:Thing",
+                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                  ]
+                ]
+              },
+              "schema:additionalType": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "schema:identifier": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "schema:identifier": {
+          "description": "Identifier for the analysis event (sessionID)",
+          "type": "string"
+        },
+        "schema:startDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "prov:used"
+      ]
+    },
+    "schema:variableMeasured": {
+      "description": "What does the dataset measure? Define the variables here at the conceptual level; the physical implementation details are in the data structure.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@id": {
+            "type": "string"
+          },
+          "@type": {
+            "enum": [
+              "schema:PropertyValue"
+            ]
+          },
+          "schema:description": {
+            "type": "string"
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:alternateName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema:propertyID": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema:maxValue": {
+            "type": "number"
+          },
+          "schema:minValue": {
+            "type": "number"
+          },
+          "cdi:unitOfMeasureKind": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "@id",
+          "schema:description",
+          "schema:name"
+        ]
+      }
+    },
+    "schema:distribution": {
+      "type": "array",
+      "description": "Access options for the dataset",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "schema:DataDownload"
+              ]
+            }
+          },
+          "schema:encodingFormat": {
+            "type": "string",
+            "default": "application/zip"
+          },
+          "schema:description": {
+            "type": "string"
+          },
+          "schema:contentURL": {
+            "type": "string",
+            "format": "anyURI"
+          },
+          "schema:hasPart": {
+            "type": "array",
+            "description": "Files in the zip archive",
+            "items": {
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.files"
+            }
+          }
+        }
+      }
+    },
+    "schema:subjectOf": {
+      "type": "object",
+      "description": "Metadata record about this dataset",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "enum": [
+            "schema:Dataset"
+          ]
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for the metadata record"
+        },
+        "schema:about": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            }
+          }
+        },
+        "dcterms:conformsTo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "x-schema-id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "schema:maintainer": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "enum": [
+                    "schema:Person"
+                  ]
+                },
+                "schema:name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@type",
+                "schema:name"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        [
+                          "schema:Organization"
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                "schema:name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schema:name"
+              ]
+            }
+          ]
+        },
+        "schema:sdDatePublished": {
+          "description": "Date of most recent update to the metadata content",
+          "type": "string",
+          "format": "datetime"
+        },
+        "schema:includedInDataCatalog": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "@type": {
+              "type": "string",
+              "default": "schema:DataCatalog",
+              "enum": [
+                "schema:DataCatalog"
+              ]
+            },
+            "schema:name": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string"
+            },
+            "schema:identifier": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "enum": [
+                    "schema:PropertyValue"
+                  ]
+                },
+                "schema:propertyID": {
+                  "type": "string"
+                },
+                "schema:value": {
+                  "type": "string"
+                },
+                "schema:url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/"
+  },
+  "x-schema-id": "https://w3id.org/adaJSONLD/schema/1.0",
+  "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+}

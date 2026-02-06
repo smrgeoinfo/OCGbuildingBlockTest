@@ -1,0 +1,92 @@
+
+# Document Type (Schema)
+
+`cdif.bbr.metadata.adaProperties.document` *v0.1*
+
+Supplemental documents for calibration, methods, and analysis info
+
+[*Status*](http://www.opengis.net/def/status): Under development
+
+## Description
+
+# Document Type
+
+Describes supplemental documents in ADA metadata including calibration files, method descriptions, log files, processing descriptions, and other supplemental information. Typed as `ada:document` and `schema:DigitalDocument`.
+
+## Schema
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Document Type
+description: Text or PDF/A documents providing supplemental information, typically
+  related to calibration, instrument metadata details, analysis methods, or data representation.
+  Typed as ada:document and schema:DigitalDocument.
+type: object
+properties:
+  '@type':
+    const:
+    - ada:document
+    - schema:DigitalDocument
+  componentType:
+    description: One of the supplemental document types if applicable
+    anyOf:
+    - type: object
+      properties:
+        '@type':
+          enum:
+          - ada:calibrationFile
+          - ada:contextVideo
+          - ada:logFile
+          - ada:methodDescription
+          - ada:peaks
+          - ada:processingDescription
+          - ada:QRISCalibrationFile
+          - ada:samplePreparation
+          - ada:shapefiles
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/argt_detail
+  schema:version:
+    type: string
+  schema:isBasedOn:
+    description: same as ada/samis '_originalName'
+    type: string
+required:
+- '@type'
+- componentType
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+
+```
+
+Links to the schema:
+
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.yaml)
+
+
+# JSON-LD Context
+
+```jsonld
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "@version": 1.1
+  }
+}
+```
+
+You can find the full JSON-LD context here:
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/context.jsonld)
+
+## Sources
+
+* [ADA Metadata Schema v3](https://github.com/amds-ldeo/metadata)
+
+# For developers
+
+The source code for this Building Block can be found in the following repository:
+
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* Path: `_sources/adaProperties/document`
+

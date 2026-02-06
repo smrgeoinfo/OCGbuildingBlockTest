@@ -1,0 +1,190 @@
+
+# Data Cube Type (Schema)
+
+`cdif.bbr.metadata.adaProperties.dataCube` *v0.1*
+
+CDI DimensionalDataStructure for multidimensional data
+
+[*Status*](http://www.opengis.net/def/status): Under development
+
+## Description
+
+# Data Cube Type
+
+Describes multidimensional data structures in ADA metadata. Typed as `ada:dataCube` and `cdi:DimensionalDataStructure`. Supports DimensionComponent, MeasureComponent, and AttributeComponent with value domain specifications and value mappings.
+
+## Schema
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Data Cube Type
+description: Multidimensional data structure typed as ada:dataCube and cdi:DimensionalDataStructure.
+  Supports various analytical data cube formats.
+type: object
+properties:
+  '@type':
+    const:
+    - ada:dataCube
+    - cdi:DimensionalDataStructure
+  componentType:
+    anyOf:
+    - type: object
+      properties:
+        '@type':
+          enum:
+          - ada:GCMSCollection
+          - ada:GCMSCube
+          - ada:FTICRMSCube
+          - ada:LCMSCollection
+          - ada:SEMEBSDGrainImageMapCube
+          - ada:SEMEDSElementalMapsCube
+          - ada:SEMEDSPointDataCube
+          - ada:SEMHRCLCube
+          - ada:STEMEDSCube
+          - ada:STEMEDSTomo
+          - ada:STEMEELSCube
+          - ada:VNMIRSpectralMap
+      required:
+      - '@type'
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/l2ms_detail
+  dataComponentResource:
+    type: string
+  cdi:isStructuredBy:
+    type: object
+    properties:
+      '@type':
+        const: cdi:DimensionalDataStructure
+      cdi:has_DataStructureComponent:
+        type: array
+        items:
+          oneOf:
+          - type: object
+            properties:
+              '@type':
+                const: cdi:DimensionComponent
+              schema:name:
+                type: string
+              cdi:isDefinedBy_InstanceVariable:
+                type: object
+                properties:
+                  '@id':
+                    type: string
+              cdi:physicalDataType:
+                type: string
+              cdi:isStructuredBy:
+                type: object
+                properties:
+                  '@id':
+                    type: string
+                  '@type':
+                    const: cdi:SubstantiveValueDomain
+                  schema:description:
+                    type: string
+                  cdi:takesValuesFrom:
+                    anyOf:
+                    - type: object
+                      properties:
+                        '@type':
+                          const: sequence
+                        valueDomainMin:
+                          type: number
+                        valueDomainMax:
+                          type: number
+                    - type: object
+                      properties:
+                        '@id':
+                          type: string
+              has:
+                type: object
+                properties:
+                  '@type':
+                    const: cdi:ValueMapping
+                  cdi:valuepath:
+                    type: string
+                  cdi:length:
+                    type: integer
+                    exclusiveMinimum: 0
+                  cdi:index:
+                    type: integer
+                    minimum: 0
+          - type: object
+            properties:
+              '@type':
+                oneOf:
+                - const: cdi:MeasureComponent
+                - const: cdi:AttributeComponent
+              cdi:isDefinedBy_InstanceVariable:
+                type: object
+                properties:
+                  '@id':
+                    type: string
+              cdi:isStructuredBy:
+                anyOf:
+                - type: object
+                  properties:
+                    '@id':
+                      type: string
+                    '@type':
+                      const: cdi:SubstantiveValueDomain
+                    schema:description:
+                      type: string
+                - type: object
+                  properties:
+                    '@id':
+                      type: string
+                    '@type':
+                      const: cdi:DataStructure
+                    schema:description:
+                      type: string
+              cdi:qualifies:
+                type: object
+                properties:
+                  '@id':
+                    type: string
+              has:
+                type: object
+                properties:
+                  '@type':
+                    const: cdi:ValueMapping
+                  cdi:cubepath:
+                    type: string
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+
+```
+
+Links to the schema:
+
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml)
+
+
+# JSON-LD Context
+
+```jsonld
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "@version": 1.1
+  }
+}
+```
+
+You can find the full JSON-LD context here:
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/context.jsonld)
+
+## Sources
+
+* [ADA Metadata Schema v3](https://github.com/amds-ldeo/metadata)
+
+# For developers
+
+The source code for this Building Block can be found in the following repository:
+
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* Path: `_sources/adaProperties/dataCube`
+

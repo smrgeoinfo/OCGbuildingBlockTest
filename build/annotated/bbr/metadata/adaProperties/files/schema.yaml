@@ -1,0 +1,83 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Files Type
+description: Properties for any file in an ADA product. GeneralType provides info
+  based on broad categories of file format (tabular, image, dataCube, document).
+type: object
+properties:
+  '@id':
+    type: string
+  '@type':
+    const: schema:Dataset
+  schema:additionalType:
+    type: array
+    description: The dataComponentType or supDocType
+    items:
+      type: string
+  schema:name:
+    type: string
+    description: String name of file, must be unique within the containing package
+  schema:description:
+    type: string
+  spdx:checksum:
+    type: string
+  schema:size:
+    type: object
+    properties:
+      '@type':
+        const: schema:QuantitativeValue
+      schema:value:
+        type: integer
+      schema:unitText:
+        type: string
+        default: byte
+  schema:encodingFormat:
+    type: string
+    description: MIME type with extension; should indicate the serialization scheme
+      in sufficient detail that machine can know how to parse.
+  resultTarget:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
+  fileDetail:
+    anyOf:
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/image/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/collection/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml
+    - type: object
+      properties:
+        '@type':
+          const:
+          - Metadata
+      required:
+      - '@type'
+  schema:relatedLink:
+    type: array
+    description: 'Links between files in the product. Use schema:name for path to
+      target in product, or use #id JSON-LD links.'
+    items:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: schema:LinkRole
+        schema:linkRelationship:
+          type: string
+        schema:target:
+          type: object
+          properties:
+            '@type':
+              type: string
+              const: schema:EntryPoint
+            schema:encodingFormat:
+              type: string
+            schema:name:
+              type: string
+            schema:url:
+              type: string
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+  spdx: http://spdx.org/rdf/terms#

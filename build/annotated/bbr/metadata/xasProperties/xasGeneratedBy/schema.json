@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "definitions for roles used in XAS profile",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "const": "schema:Event"
+          },
+          "minContains": 1
+        },
+        {
+          "contains": {
+            "const": "xas:AnalysisEvent"
+          },
+          "minContains": 1
+        },
+        {
+          "contains": {
+            "const": "prov:Activity"
+          },
+          "minContains": 1
+        }
+      ]
+    },
+    "schema:identifier": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/Identifier"
+        }
+      ]
+    },
+    "schema:startDate": {
+      "type": "string"
+    },
+    "prov:used": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Instrument"
+      }
+    },
+    "schema:additionalProperty": {
+      "type": "array",
+      "description": "add additional property propertyIDs:xas:edge_energy, calibration method, Instrument configuration, xas:installedOptions",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/AdditionalProperty"
+          },
+          {
+            "properties": {
+              "schema:propertyID": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.json#/$defs/propertyID_item"
+                    },
+                    {
+                      "enum": [
+                        "xas:edge_energy",
+                        "calibration method",
+                        "Instrument configuration",
+                        "xas:installedOptions"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "schema:location": {
+      "$ref": "#/$defs/Facility"
+    },
+    "schema:mainEntity": {
+      "$ref": "#/$defs/Sample"
+    }
+  },
+  "$defs": {
+    "Identifier": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.json"
+    },
+    "Sample": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasSample/schema.json"
+    },
+    "AdditionalProperty": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.json"
+    },
+    "Facility": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasFacility/schema.json"
+    },
+    "Instrument": {
+      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.json"
+    }
+  },
+  "x-jsonld-extra-terms": {
+    "schema": "https://schema.org"
+  }
+}

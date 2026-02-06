@@ -1,0 +1,46 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.adaProperties.document",
+  "$schema": "metaschema.yaml",
+  "name": "Document Type",
+  "abstract": "Supplemental documents for calibration, methods, and analysis info",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-05T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "document"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "cdif.bbr.metadata.adaProperties.details"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/document/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/document/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/document/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "# Document Type\n\nDescribes supplemental documents in ADA metadata including calibration files, method descriptions, log files, processing descriptions, and other supplemental information. Typed as `ada:document` and `schema:DigitalDocument`.\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: Document Type\ndescription: Text or PDF/A documents providing supplemental information, typically\n  related to calibration, instrument metadata details, analysis methods, or data representation.\n  Typed as ada:document and schema:DigitalDocument.\ntype: object\nproperties:\n  '@type':\n    const:\n    - ada:document\n    - schema:DigitalDocument\n  componentType:\n    description: One of the supplemental document types if applicable\n    anyOf:\n    - type: object\n      properties:\n        '@type':\n          enum:\n          - ada:calibrationFile\n          - ada:contextVideo\n          - ada:logFile\n          - ada:methodDescription\n          - ada:peaks\n          - ada:processingDescription\n          - ada:QRISCalibrationFile\n          - ada:samplePreparation\n          - ada:shapefiles\n    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/argt_detail\n  schema:version:\n    type: string\n  schema:isBasedOn:\n    description: same as ada/samis '_originalName'\n    type: string\nrequired:\n- '@type'\n- componentType\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/adaProperties/document"
+}
