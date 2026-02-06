@@ -1,18 +1,25 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 title: Tabular Data Type
-description: Tabular/structured data files typed as cdi:PhysicalDataSet and ada:tabularData.
-  Includes DDI-CDI WideDataStructure for column layout description.
+description: Tabular data type aligned with CDIF 2026 schema using DDI-CDI and CSVW
+  properties. Typed as cdi:TabularTextDataSet and ada:tabularData.
 type: object
 properties:
   '@type':
-    const:
-    - cdi:PhysicalDataSet
-    - ada:tabularData
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        const: cdi:TabularTextDataSet
+    - contains:
+        const: ada:tabularData
   componentType:
     anyOf:
     - type: object
       properties:
         '@type':
+          type: string
           enum:
           - ada:AMSRawData
           - ada:AMSProcessedData
@@ -52,14 +59,74 @@ properties:
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/psfd_detail
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/vnmir_detail
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/xrd_detail
-  cdi:isStructuredBy:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml
+  cdi:arrayBase:
+    type: integer
+  csvw:commentPrefix:
+    type: string
+    description: An atomic property that sets the comment prefix flag to the single
+      provided value, which MUST be a string. The default is '#'.
+  csvw:delimiter:
+    type: string
+    description: Sets the delimiter flag to the single provided value, which MUST
+      be a string. The default is ','.
+  csvw:header:
+    type: boolean
+    description: If true, sets the header row count flag to 1, and if false to 0,
+      unless headerRowCount is provided, in which case the value provided for the
+      header property is ignored. The default is true.
+  csvw:headerRowCount:
+    type: integer
+    minimum: 0
+    default: 1
+    description: A numeric atomic property that sets the header row count flag to
+      the single provided value, which MUST be a non-negative integer.
+  cdi:isDelimited:
+    type: boolean
+    description: Schema constraint is that one of {'isDelimited','isFixedWidth'} must
+      be present with a True value; the other one may be present or omitted, but if
+      present must have a false value.
+  cdi:isFixedWidth:
+    type: boolean
+  csvw:lineTerminators:
+    enum:
+    - CRLF
+    - LF
+    - "\r\n"
+    - '
+
+      '
+  csvw:quoteChar:
+    type: string
+    default: '"'
+    description: Same as DDI-CDI quoteCharacter. The string that is used around escaped
+      cells.
+  csvw:skipBlankRows:
+    type: boolean
+    default: false
+  csvw:skipColumns:
+    type: integer
+    default: 0
+    description: The number of columns to skip at the beginning of each row.
+  csvw:skipInitialSpace:
+    type: boolean
+    default: true
+  csvw:skipRows:
+    type: integer
+    description: The number of rows to skip at the beginning of the file, before a
+      header row or tabular data.
+    default: 0
+  cdi:hasPhysicalMapping:
+    type: array
+    description: Links variables to their physical representation in this dataset.
+    items:
+      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml
   countRows:
     type: integer
   countColumns:
     type: integer
   xCoordCol:
-    description: Column name for X coordinates
+    description: The column names are redundant, they are lists in the hasPhysicalMapping
+      array. Include here for convenience.
     type: string
   yCoordCol:
     type: string
@@ -69,6 +136,21 @@ properties:
     type: string
   spatialRegistration:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
+oneOf:
+- properties:
+    cdi:isDelimited:
+      const: true
+    cdi:isFixedWidth:
+      const: false
+  required:
+  - cdi:isDelimited
+- properties:
+    cdi:isDelimited:
+      const: false
+    cdi:isFixedWidth:
+      const: true
+  required:
+  - cdi:isFixedWidth
 required:
 - '@type'
 - componentType

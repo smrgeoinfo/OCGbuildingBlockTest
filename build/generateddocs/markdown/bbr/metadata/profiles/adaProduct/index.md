@@ -26,12 +26,13 @@ The profile includes:
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://w3id.org/adaJSONLD/schema/1.0
+$id: https://w3id.org/adaJSONLD/schema/3.0
 title: Astromat Archive Product Metadata
-description: Schema for JSON metadata documenting products in Astromata Data Archive
+description: Schema for JSON metadata documenting products in Astromat Data Archive
   (ADA). Each project consists of one or more data files and 0 to many supplemental
   files. Each file MUST have an associated YAML metadata file, with the same name,
-  but '.yaml' as the file extension.
+  but '.yaml' as the file extension. Version 3.0 aligned with CDIF 2026 schema for
+  DDI-CDI variable types and CSVW tabular data properties.
 type: object
 properties:
   '@id':
@@ -76,7 +77,6 @@ properties:
               '@id':
                 type: string
                 description: Identifier for an agent defined in metadata or externally
-          - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
           - type: object
             properties:
               '@type':
@@ -127,59 +127,58 @@ properties:
           type: string
     - type: string
   schema:creator:
-    description: Author or originator of intellectual content of dataset
-    type: array
-    items:
-      type: object
-      properties:
-        '@list':
-          type: array
-          items:
-            anyOf:
-            - type: object
-              properties:
-                '@id':
+    description: Author or originator of intellectual content of dataset. Use the
+      JSON-LD @list construct to preserve author order.
+    type: object
+    properties:
+      '@list':
+        type: array
+        items:
+          anyOf:
+          - type: object
+            properties:
+              '@id':
+                type: string
+              '@type':
+                type: string
+                const: schema:Person
+                default: schema:Person
+              schema:name:
+                type: string
+              schema:alternateName:
+                type: string
+              schema:affiliation:
+                type: object
+              schema:description:
+                type: string
+              schema:identifier:
+                anyOf:
+                - type: object
+                - type: string
+              schema:sameAs:
+                type: array
+                items:
                   type: string
-                '@type':
-                  type: string
-                  const: schema:Person
-                  default: schema:Person
-                schema:name:
-                  type: string
-                schema:alternateName:
-                  type: string
-                schema:affiliation:
-                  type: object
-                schema:description:
-                  type: string
-                schema:identifier:
-                  anyOf:
-                  - type: object
-                  - type: string
-                schema:sameAs:
-                  type: array
-                  items:
-                    type: string
-              required:
-              - '@type'
-              - schema:name
-            - type: object
-              properties:
-                '@id':
-                  type: string
-                '@type':
-                  anyOf:
-                  - const:
-                    - schema:Organization
-                  - const:
-                    - schema:ResearchOrganization
-                  default:
+            required:
+            - '@type'
+            - schema:name
+          - type: object
+            properties:
+              '@id':
+                type: string
+              '@type':
+                anyOf:
+                - const:
                   - schema:Organization
-                schema:name:
-                  type: string
-              required:
-              - '@type'
-              - schema:name
+                - const:
+                  - schema:ResearchOrganization
+                default:
+                - schema:Organization
+              schema:name:
+                type: string
+            required:
+            - '@type'
+            - schema:name
   schema:contributor:
     description: Other parties who played a role in production of dataset
     type: array
@@ -206,18 +205,18 @@ properties:
             anyOf:
             - const:
               - schema:Organization
-        schema:name:
-          type: string
+          schema:name:
+            type: string
       - type: object
         description: Role-based contributor
         properties:
           '@type':
             type: string
-            default: Role
-            const: Role
-          roleName:
+            default: schema:Role
+            const: schema:Role
+          schema:roleName:
             type: string
-          contributor:
+          schema:contributor:
             type: object
   schema:license:
     description: Legal statement of conditions for use and access
@@ -267,100 +266,274 @@ properties:
       schema:identifier:
         type: string
   prov:wasGeneratedBy:
-    type: object
-    properties:
-      '@type':
-        description: Include 'schema:Event', 'xas:AnalysisEvent', 'prov:Activity'
-        type: array
-        items:
+    type: array
+    description: Analysis events that generated this product
+    items:
+      type: object
+      properties:
+        '@type':
+          description: Include 'prov:Activity' and 'schema:Event'
+          type: array
+          items:
+            type: string
+          allOf:
+          - contains:
+              const: prov:Activity
+          - contains:
+              const: schema:Event
+        prov:used:
+          type: array
+          description: Instruments used in the analysis
+          items:
+            $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
+        schema:location:
+          $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
+        schema:mainEntity:
+          type: array
+          description: Samples analyzed
+          items:
+            type: object
+            properties:
+              '@type':
+                const:
+                - schema:Thing
+                - https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample
+              schema:additionalType:
+                type: array
+                items:
+                  type: string
+              schema:identifier:
+                type: array
+                items:
+                  type: string
+        schema:identifier:
+          description: Identifier for the analysis event (sessionID)
           type: string
-      prov:used:
-        type: array
-        description: Instruments used in the analysis
-        items:
-          $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
-      schema:location:
-        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
-      schema:mainEntity:
-        type: array
-        description: Samples analyzed
-        items:
-          type: object
-          properties:
-            '@type':
-              const:
-              - schema:Thing
-              - https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample
-            schema:additionalType:
-              type: array
-              items:
-                type: string
-            schema:identifier:
-              type: string
-      schema:identifier:
-        description: Identifier for the analysis event (sessionID)
-        type: string
-      schema:startDate:
-        type: string
-    required:
-    - prov:used
+        schema:startDate:
+          type: string
+      required:
+      - prov:used
   schema:variableMeasured:
     description: What does the dataset measure? Define the variables here at the conceptual
-      level; the physical implementation details are in the data structure.
+      level; the physical implementation details are in the data structure. Requires
+      dual typing with schema:PropertyValue and cdi:InstanceVariable per CDIF 2026.
     type: array
     items:
       type: object
       properties:
         '@id':
           type: string
+          description: Identifier for this variable, used to link from physical mappings
+            in distributions.
         '@type':
-          const: schema:PropertyValue
+          type: array
+          items:
+            type: string
+          allOf:
+          - contains:
+              const: schema:PropertyValue
+          - contains:
+              const: cdi:InstanceVariable
+          minItems: 2
         schema:description:
           type: string
+          minLength: 10
         schema:name:
+          description: The name as it typically appears in a dataset
           type: string
+          minLength: 5
         schema:alternateName:
           type: array
           items:
             type: string
+            description: Human intelligible name for variable that conveys semantics
         schema:propertyID:
+          description: Ideally a resolvable URI for a property concept
           type: array
           items:
-            type: string
-        schema:maxValue:
-          type: number
+            anyOf:
+            - type: string
+            - type: object
+              properties:
+                '@id':
+                  type: string
+            - type: object
+              properties:
+                '@type':
+                  type: string
+                  const: schema:DefinedTerm
+                schema:name:
+                  type: string
+                schema:identifier:
+                  type: object
+                schema:inDefinedTermSet:
+                  type: string
+                schema:termCode:
+                  type: string
+              required:
+              - '@type'
+              - schema:name
+        schema:measurementTechnique:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - type: object
+            properties:
+              '@type':
+                type: string
+                const: schema:DefinedTerm
+              schema:name:
+                type: string
+            required:
+            - '@type'
+            - schema:name
+        schema:unitText:
+          type: string
+        schema:unitCode:
+          anyOf:
+          - type: string
+          - type: object
+            properties:
+              '@id':
+                type: string
+          - type: object
+            properties:
+              '@type':
+                type: string
+                const: schema:DefinedTerm
+              schema:name:
+                type: string
+            required:
+            - '@type'
+            - schema:name
         schema:minValue:
           type: number
-        cdi:unitOfMeasureKind:
+        schema:maxValue:
+          type: number
+        schema:url:
           type: string
+          format: uri
+        cdi:intendedDataType:
+          type: string
+        cdi:role:
+          type: string
+          description: 'The role of the variable: MeasureComponent, AttributeComponent,
+            DimensionComponent, IdentifierComponent.'
+        cdi:describedUnitOfMeasure:
+          type: object
+          properties:
+            '@type':
+              type: string
+              const: schema:DefinedTerm
+            schema:name:
+              type: string
+          required:
+          - '@type'
+          - schema:name
+        cdi:simpleUnitOfMeasure:
+          type: string
+        cdi:uses:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: object
+              properties:
+                '@id':
+                  type: string
+            - type: object
+              properties:
+                '@type':
+                  type: string
+                  const: schema:DefinedTerm
+                schema:name:
+                  type: string
+              required:
+              - '@type'
+              - schema:name
       required:
       - '@id'
+      - '@type'
       - schema:description
       - schema:name
   schema:distribution:
     type: array
-    description: Access options for the dataset
+    description: Access options for the dataset. Each distribution item is expected
+      to be a single file or an archive containing multiple files described in hasPart.
     items:
-      type: object
-      properties:
-        '@type':
-          type: array
-          items:
+      oneOf:
+      - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+      - type: object
+        description: The main download is an archive file with parts.
+        properties:
+          '@type':
+            type: array
+            items:
+              type: string
+            contains:
+              const: schema:DataDownload
+            minItems: 1
+          schema:name:
             type: string
-            const: schema:DataDownload
-        schema:encodingFormat:
-          type: string
-          default: application/zip
-        schema:description:
-          type: string
-        schema:contentURL:
-          type: string
-          format: anyURI
-        schema:hasPart:
-          type: array
-          description: Files in the zip archive
-          items:
-            $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          schema:contentURL:
+            type: string
+            format: anyURI
+          schema:description:
+            type: string
+          schema:encodingFormat:
+            type: array
+            description: For now, require that archives are zip archives
+            items:
+              type: string
+          spdx:checksum:
+            type: object
+            description: Checksum for the archive download, used to test if content
+              has been modified.
+            properties:
+              spdx:algorithm:
+                type: string
+              spdx:checksumValue:
+                type: string
+          schema:provider:
+            type: array
+            description: Party who maintains this particular distribution option.
+            items:
+              anyOf:
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    const: schema:Person
+                  schema:name:
+                    type: string
+                required:
+                - '@type'
+                - schema:name
+              - type: object
+                properties:
+                  '@type':
+                    anyOf:
+                    - const:
+                      - schema:Organization
+                  schema:name:
+                    type: string
+                required:
+                - schema:name
+          schema:additionalType:
+            type: array
+            description: Identify the package scheme, e.g. NASA PDS bundle, RO-CRATE,
+              Bagit
+            items:
+              type: string
+          schema:hasPart:
+            type: array
+            description: Array describing the files in the zip archive. Pattern based
+              on Croissant metadata spec.
+            items:
+              $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/hasPartFile/schema.yaml
   schema:subjectOf:
     type: object
     description: Metadata record about this dataset
@@ -381,8 +554,10 @@ properties:
         items:
           type: object
           properties:
-            $id:
+            '@id':
               type: string
+              description: URI for specifications that this metadata record conforms
+                to. Minimally should specify URI for CDIF discovery profile.
       schema:maintainer:
         anyOf:
         - type: object
@@ -443,6 +618,7 @@ x-jsonld-prefixes:
   spdx: http://spdx.org/rdf/terms#
   nxs: http://purl.org/nexusformat/definitions/
   dcterms: http://purl.org/dc/terms/
+  geosparql: http://www.opengis.net/ont/geosparql#
 
 ```
 
@@ -465,6 +641,7 @@ Links to the schema:
     "spdx": "http://spdx.org/rdf/terms#",
     "nxs": "http://purl.org/nexusformat/definitions/",
     "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
     "@version": 1.1
   }
 }

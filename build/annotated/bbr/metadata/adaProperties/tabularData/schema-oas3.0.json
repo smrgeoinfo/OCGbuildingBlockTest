@@ -2,7 +2,7 @@
   "x-defs": {
     "cdif.bbr.metadata.adaProperties.details": {
       "title": "Instrument Detail Types",
-      "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions.",
+      "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions. Includes 12 v3-aligned types plus 4 extended types (basemap, icpoes, qris, xctimage).",
       "type": "object",
       "anyOf": [
         {
@@ -57,7 +57,7 @@
       "$defs": {
         "basemap_detail": {
           "type": "object",
-          "description": "Basemap images with RGB channels and pixel scaling.",
+          "description": "Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "enum": [
@@ -102,9 +102,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:ARGTDocument"
-                ]
+                "ada:ARGTDocument"
               ]
             },
             "phaseAnalyzed": {
@@ -121,9 +119,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:DSCHeatTabular"
-                ]
+                "ada:DSCHeatTabular"
               ]
             },
             "analysisType": {
@@ -139,23 +135,17 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:EMPAImage"
-                    ]
+                    "ada:EMPAImage"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:EMPAQEATabular"
-                    ]
+                    "ada:EMPAQEATabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:EMPAImageCollection"
-                    ]
+                    "ada:EMPAImageCollection"
                   ]
                 }
               ]
@@ -175,9 +165,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:EAIRMSCollection"
-                ]
+                "ada:EAIRMSCollection"
               ]
             },
             "massConsumed": {
@@ -190,29 +178,23 @@
         },
         "icpoes_detail": {
           "type": "object",
-          "description": "Inductively Coupled Plasma Optical Emission Spectrometry",
+          "description": "Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESIntermediateTabular"
-                    ]
+                    "ada:ICPOESIntermediateTabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESProcessedTabular"
-                    ]
+                    "ada:ICPOESProcessedTabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESRawTabular"
-                    ]
+                    "ada:ICPOESRawTabular"
                   ]
                 }
               ]
@@ -231,9 +213,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:L2MSCube"
-                ]
+                "ada:L2MSCube"
               ]
             },
             "sampleName": {
@@ -267,16 +247,12 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:LAFProcessed"
-                    ]
+                    "ada:LAFProcessed"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:LAFRaw"
-                    ]
+                    "ada:LAFRaw"
                   ]
                 }
               ]
@@ -300,33 +276,13 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:NanoIRBackground"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoIRMapCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoIRPointCollection"
-                    ]
+                    "ada:NanoIRBackground"
                   ]
                 }
               ]
             },
             "phaseAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             }
           }
         },
@@ -335,50 +291,19 @@
           "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
           "properties": {
             "@type": {
-              "anyOf": [
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSImageCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSTabular"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSMap"
-                    ]
-                  ]
-                }
+              "type": "string",
+              "enum": [
+                "ada:NanoSIMSCollection",
+                "ada:NanoSIMSImageCollection",
+                "ada:NanoSIMSTabular",
+                "ada:NanoSIMSMap"
               ]
             },
             "phaseAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             },
             "isotopeAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             }
           }
         },
@@ -388,17 +313,11 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:PSFDTabular"
-                ]
+                "ada:PSFDTabular"
               ]
             },
             "imageName": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             },
             "imageViewingConditions": {
               "type": "string"
@@ -413,23 +332,17 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:VNMIRSpectralPoint"
-                    ]
+                    "ada:VNMIRSpectralPoint"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:VNMIROverviewImage"
-                    ]
+                    "ada:VNMIROverviewImage"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:VNMIRSpectralMap"
-                    ]
+                    "ada:VNMIRSpectralMap"
                   ]
                 }
               ]
@@ -510,22 +423,18 @@
         },
         "qris_detail": {
           "type": "object",
-          "description": "QRIS (Raman) with calibration and illumination parameters",
+          "description": "QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:QRISCalibrated"
-                    ]
+                    "ada:QRISCalibrated"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:QRISRaw"
-                    ]
+                    "ada:QRISRaw"
                   ]
                 }
               ]
@@ -565,16 +474,12 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:SLSShapeModel"
-                    ]
+                    "ada:SLSShapeModel"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:SLSPartialScan"
-                    ]
+                    "ada:SLSPartialScan"
                   ]
                 }
               ]
@@ -601,13 +506,11 @@
         },
         "xctimage_detail": {
           "type": "object",
-          "description": "X-ray Computed Tomography images with detailed scan parameters",
+          "description": "X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:XCTImageCollection"
-                ]
+                "ada:XCTImageCollection"
               ]
             },
             "beamFilterMaterial": {
@@ -714,9 +617,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:XRDTabular"
-                ]
+                "ada:XRDTabular"
               ]
             },
             "geometry": {
@@ -746,115 +647,67 @@
     },
     "cdif.bbr.metadata.adaProperties.physicalMapping": {
       "title": "Physical Mapping Type",
-      "description": "DDI-CDI data structure description for tabular data using WideDataStructure with DataStructureComponents including IdentifierComponent, MeasureComponent, and AttributeComponent with ValueMapping.",
+      "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
       "type": "object",
       "properties": {
-        "@type": {
-          "enum": [
-            "cdi:WideDataStructure"
-          ]
+        "cdi:index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Non-negative integer that orders the fields in the data structure (column number)."
         },
-        "cdi:has_DataStructureComponent": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string"
-              },
-              "@type": {
-                "oneOf": [
-                  {
-                    "enum": [
-                      "cdi:IdentifierComponent"
-                    ]
-                  },
-                  {
-                    "enum": [
-                      "cdi:MeasureComponent"
-                    ]
-                  },
-                  {
-                    "enum": [
-                      "cdi:AttributeComponent"
-                    ]
-                  }
-                ]
-              },
-              "schema:name": {
-                "type": "string",
-                "description": "Label for this component in the datafile; overrides name in associated InstanceVariable if specified."
-              },
-              "cdi:isDefinedBy_InstanceVariable": {
-                "type": "object",
-                "description": "Use @id to reference one of the variables defined in the measuredVariable section at the product level.",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              },
-              "cdi:qualifies": {
-                "type": "object",
-                "description": "Only for Attribute components, use @id to link to the component the attribute qualifies.",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              },
-              "cdi:has": {
-                "type": "object",
-                "description": "If isDelimited is false, cdi:length is required.",
-                "properties": {
-                  "@type": {
-                    "enum": [
-                      "cdi:ValueMapping"
-                    ]
-                  },
-                  "cdi:hasIndex": {
-                    "description": "Column number in the table layout",
-                    "type": "integer"
-                  },
-                  "cdi:length": {
-                    "description": "Number of characters in this column",
-                    "type": "integer"
-                  },
-                  "cdi:physicalDataType": {
-                    "type": "string"
-                  }
-                }
-              }
+        "cdi:format": {
+          "type": "string",
+          "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+        },
+        "cdi:physicalDataType": {
+          "type": "string"
+        },
+        "cdi:length": {
+          "type": "integer",
+          "description": "The column width if the tabular text is fixed width."
+        },
+        "cdi:nullSequence": {
+          "type": "string",
+          "description": "The value of this property becomes the null annotation for the described column."
+        },
+        "cdi:defaultValue": {
+          "type": "string",
+          "description": "A default string indicating the value to substitute for an empty string."
+        },
+        "cdi:scale": {
+          "type": "integer"
+        },
+        "cdi:decimalPositions": {
+          "type": "integer"
+        },
+        "cdi:minimumLength": {
+          "type": "integer"
+        },
+        "cdi:maximumLength": {
+          "type": "integer"
+        },
+        "cdi:isRequired": {
+          "type": "boolean",
+          "default": false
+        },
+        "cdi:formats_InstanceVariable": {
+          "type": "object",
+          "description": "Reference to a variable defined in schema:variableMeasured.",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
             }
           }
         },
-        "allowsDuplicates": {
-          "type": "boolean",
-          "description": "Can rows in the table have identical values",
-          "default": false
+        "cdi:defaultDecimalSeparator": {
+          "type": "string"
         },
-        "arrayBase": {
-          "type": "string",
-          "enum": [
-            "0",
-            "1"
-          ],
-          "description": "If 0, then left most column is column 0"
+        "cdi:defaultDigitalGroupSeparator": {
+          "type": "string"
         },
-        "commentPrefix": {
-          "type": "string",
-          "description": "Lines beginning with this string will be ignored"
-        },
-        "headerRowCount": {
-          "type": "integer",
-          "description": "Number of rows in the file to skip before data start"
-        },
-        "isDelimited": {
-          "type": "boolean"
-        },
-        "delimiter": {
-          "type": "string",
-          "description": "Required if isDelimited is true"
+        "cdi:displayLabel": {
+          "type": "string"
         }
       },
       "x-jsonld-prefixes": {
@@ -918,18 +771,44 @@
       },
       "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.stringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
   "title": "Tabular Data Type",
-  "description": "Tabular/structured data files typed as cdi:PhysicalDataSet and ada:tabularData. Includes DDI-CDI WideDataStructure for column layout description.",
+  "description": "Tabular data type aligned with CDIF 2026 schema using DDI-CDI and CSVW properties. Typed as cdi:TabularTextDataSet and ada:tabularData.",
   "type": "object",
   "properties": {
     "@type": {
-      "enum": [
-        [
-          "cdi:PhysicalDataSet",
-          "ada:tabularData"
-        ]
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "enum": [
+              "cdi:TabularTextDataSet"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "enum": [
+              "ada:tabularData"
+            ]
+          }
+        }
       ]
     },
     "componentType": {
@@ -938,6 +817,7 @@
           "type": "object",
           "properties": {
             "@type": {
+              "type": "string",
               "enum": [
                 "ada:AMSRawData",
                 "ada:AMSProcessedData",
@@ -1002,8 +882,71 @@
         }
       ]
     },
-    "cdi:isStructuredBy": {
-      "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.physicalMapping"
+    "cdi:arrayBase": {
+      "type": "integer"
+    },
+    "csvw:commentPrefix": {
+      "type": "string",
+      "description": "An atomic property that sets the comment prefix flag to the single provided value, which MUST be a string. The default is '#'."
+    },
+    "csvw:delimiter": {
+      "type": "string",
+      "description": "Sets the delimiter flag to the single provided value, which MUST be a string. The default is ','."
+    },
+    "csvw:header": {
+      "type": "boolean",
+      "description": "If true, sets the header row count flag to 1, and if false to 0, unless headerRowCount is provided, in which case the value provided for the header property is ignored. The default is true."
+    },
+    "csvw:headerRowCount": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 1,
+      "description": "A numeric atomic property that sets the header row count flag to the single provided value, which MUST be a non-negative integer."
+    },
+    "cdi:isDelimited": {
+      "type": "boolean",
+      "description": "Schema constraint is that one of {'isDelimited','isFixedWidth'} must be present with a True value; the other one may be present or omitted, but if present must have a false value."
+    },
+    "cdi:isFixedWidth": {
+      "type": "boolean"
+    },
+    "csvw:lineTerminators": {
+      "enum": [
+        "CRLF",
+        "LF",
+        "\r\n",
+        "\n"
+      ]
+    },
+    "csvw:quoteChar": {
+      "type": "string",
+      "default": "\"",
+      "description": "Same as DDI-CDI quoteCharacter. The string that is used around escaped cells."
+    },
+    "csvw:skipBlankRows": {
+      "type": "boolean",
+      "default": false
+    },
+    "csvw:skipColumns": {
+      "type": "integer",
+      "default": 0,
+      "description": "The number of columns to skip at the beginning of each row."
+    },
+    "csvw:skipInitialSpace": {
+      "type": "boolean",
+      "default": true
+    },
+    "csvw:skipRows": {
+      "type": "integer",
+      "description": "The number of rows to skip at the beginning of the file, before a header row or tabular data.",
+      "default": 0
+    },
+    "cdi:hasPhysicalMapping": {
+      "type": "array",
+      "description": "Links variables to their physical representation in this dataset.",
+      "items": {
+        "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.physicalMapping"
+      }
     },
     "countRows": {
       "type": "integer"
@@ -1012,7 +955,7 @@
       "type": "integer"
     },
     "xCoordCol": {
-      "description": "Column name for X coordinates",
+      "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
       "type": "string"
     },
     "yCoordCol": {
@@ -1028,6 +971,34 @@
       "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.spatialRegistration"
     }
   },
+  "oneOf": [
+    {
+      "properties": {
+        "cdi:isDelimited": {
+          "enum": [
+            true
+          ]
+        },
+        "cdi:isFixedWidth": {}
+      },
+      "required": [
+        "cdi:isDelimited"
+      ]
+    },
+    {
+      "properties": {
+        "cdi:isDelimited": {},
+        "cdi:isFixedWidth": {
+          "enum": [
+            true
+          ]
+        }
+      },
+      "required": [
+        "cdi:isFixedWidth"
+      ]
+    }
+  ],
   "required": [
     "@type",
     "componentType"

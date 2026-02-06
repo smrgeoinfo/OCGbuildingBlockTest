@@ -2,7 +2,7 @@
   "x-defs": {
     "cdif.bbr.metadata.adaProperties.details": {
       "title": "Instrument Detail Types",
-      "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions.",
+      "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions. Includes 12 v3-aligned types plus 4 extended types (basemap, icpoes, qris, xctimage).",
       "type": "object",
       "anyOf": [
         {
@@ -57,7 +57,7 @@
       "$defs": {
         "basemap_detail": {
           "type": "object",
-          "description": "Basemap images with RGB channels and pixel scaling.",
+          "description": "Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "enum": [
@@ -102,9 +102,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:ARGTDocument"
-                ]
+                "ada:ARGTDocument"
               ]
             },
             "phaseAnalyzed": {
@@ -121,9 +119,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:DSCHeatTabular"
-                ]
+                "ada:DSCHeatTabular"
               ]
             },
             "analysisType": {
@@ -139,23 +135,17 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:EMPAImage"
-                    ]
+                    "ada:EMPAImage"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:EMPAQEATabular"
-                    ]
+                    "ada:EMPAQEATabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:EMPAImageCollection"
-                    ]
+                    "ada:EMPAImageCollection"
                   ]
                 }
               ]
@@ -175,9 +165,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:EAIRMSCollection"
-                ]
+                "ada:EAIRMSCollection"
               ]
             },
             "massConsumed": {
@@ -190,29 +178,23 @@
         },
         "icpoes_detail": {
           "type": "object",
-          "description": "Inductively Coupled Plasma Optical Emission Spectrometry",
+          "description": "Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESIntermediateTabular"
-                    ]
+                    "ada:ICPOESIntermediateTabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESProcessedTabular"
-                    ]
+                    "ada:ICPOESProcessedTabular"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:ICPOESRawTabular"
-                    ]
+                    "ada:ICPOESRawTabular"
                   ]
                 }
               ]
@@ -231,9 +213,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:L2MSCube"
-                ]
+                "ada:L2MSCube"
               ]
             },
             "sampleName": {
@@ -267,16 +247,12 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:LAFProcessed"
-                    ]
+                    "ada:LAFProcessed"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:LAFRaw"
-                    ]
+                    "ada:LAFRaw"
                   ]
                 }
               ]
@@ -300,33 +276,13 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:NanoIRBackground"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoIRMapCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoIRPointCollection"
-                    ]
+                    "ada:NanoIRBackground"
                   ]
                 }
               ]
             },
             "phaseAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             }
           }
         },
@@ -335,50 +291,19 @@
           "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
           "properties": {
             "@type": {
-              "anyOf": [
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSImageCollection"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSTabular"
-                    ]
-                  ]
-                },
-                {
-                  "enum": [
-                    [
-                      "ada:NanoSIMSMap"
-                    ]
-                  ]
-                }
+              "type": "string",
+              "enum": [
+                "ada:NanoSIMSCollection",
+                "ada:NanoSIMSImageCollection",
+                "ada:NanoSIMSTabular",
+                "ada:NanoSIMSMap"
               ]
             },
             "phaseAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             },
             "isotopeAnalyzed": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             }
           }
         },
@@ -388,17 +313,11 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:PSFDTabular"
-                ]
+                "ada:PSFDTabular"
               ]
             },
             "imageName": {
-              "type": "array",
-              "minItems": 0,
-              "items": {
-                "type": "string"
-              }
+              "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.adaProperties.stringArray"
             },
             "imageViewingConditions": {
               "type": "string"
@@ -413,23 +332,17 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:VNMIRSpectralPoint"
-                    ]
+                    "ada:VNMIRSpectralPoint"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:VNMIROverviewImage"
-                    ]
+                    "ada:VNMIROverviewImage"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:VNMIRSpectralMap"
-                    ]
+                    "ada:VNMIRSpectralMap"
                   ]
                 }
               ]
@@ -510,22 +423,18 @@
         },
         "qris_detail": {
           "type": "object",
-          "description": "QRIS (Raman) with calibration and illumination parameters",
+          "description": "QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:QRISCalibrated"
-                    ]
+                    "ada:QRISCalibrated"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:QRISRaw"
-                    ]
+                    "ada:QRISRaw"
                   ]
                 }
               ]
@@ -565,16 +474,12 @@
               "anyOf": [
                 {
                   "enum": [
-                    [
-                      "ada:SLSShapeModel"
-                    ]
+                    "ada:SLSShapeModel"
                   ]
                 },
                 {
                   "enum": [
-                    [
-                      "ada:SLSPartialScan"
-                    ]
+                    "ada:SLSPartialScan"
                   ]
                 }
               ]
@@ -601,13 +506,11 @@
         },
         "xctimage_detail": {
           "type": "object",
-          "description": "X-ray Computed Tomography images with detailed scan parameters",
+          "description": "X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)",
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:XCTImageCollection"
-                ]
+                "ada:XCTImageCollection"
               ]
             },
             "beamFilterMaterial": {
@@ -714,9 +617,7 @@
           "properties": {
             "@type": {
               "enum": [
-                [
-                  "ada:XRDTabular"
-                ]
+                "ada:XRDTabular"
               ]
             },
             "geometry": {
@@ -797,6 +698,17 @@
       },
       "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
+    },
+    "cdif.bbr.metadata.adaProperties.stringArray": {
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      },
+      "x-schema-source": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml",
+      "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     }
   },
   "title": "Image Map Type",
@@ -824,24 +736,23 @@
           "properties": {
             "@type": {
               "enum": [
-                "basemap",
-                "supplementalBasemap",
-                "L2MSOverviewImage",
-                "NanoIRMap",
-                "LITImage",
-                "UVFMImage",
-                "VLMImage",
-                "SEMEBSDGrainImageMap",
-                "SEMEDSElementalMap",
-                "SEMHRCLMap",
-                "SEMImageMap",
-                "STEMImage",
-                "TEMImage",
-                "TEMPatternsImage",
-                "VLMImage",
-                "NanoSIMSMap",
-                "XANESimage",
-                "VNMIROverviewImage"
+                "ada:basemap",
+                "ada:supplementalBasemap",
+                "ada:L2MSOverviewImage",
+                "ada:NanoIRMap",
+                "ada:LITImage",
+                "ada:UVFMImage",
+                "ada:VLMImage",
+                "ada:SEMEBSDGrainImageMap",
+                "ada:SEMEDSElementalMap",
+                "ada:SEMHRCLMap",
+                "ada:SEMImageMap",
+                "ada:STEMImage",
+                "ada:TEMImage",
+                "ada:TEMPatternsImage",
+                "ada:NanoSIMSMap",
+                "ada:XANESimage",
+                "ada:VNMIROverviewImage"
               ]
             }
           },

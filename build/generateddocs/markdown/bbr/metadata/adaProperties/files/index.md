@@ -18,14 +18,20 @@ Describes properties for any file in an ADA product. Includes file metadata (nam
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
 title: Files Type
-description: Properties for any file in an ADA product. GeneralType provides info
-  based on broad categories of file format (tabular, image, dataCube, document).
+description: Properties for any file in an ADA product distribution. The @type must
+  include schema:DataDownload per CDIF 2026 patterns. GeneralType provides info based
+  on broad categories of file format (tabular, image, dataCube, document).
 type: object
 properties:
   '@id':
     type: string
   '@type':
-    const: schema:Dataset
+    type: array
+    items:
+      type: string
+    contains:
+      const: schema:DataDownload
+    minItems: 1
   schema:additionalType:
     type: array
     description: The dataComponentType or supDocType
@@ -37,7 +43,14 @@ properties:
   schema:description:
     type: string
   spdx:checksum:
-    type: string
+    type: object
+    description: A string value calculated from the content of the resource representation,
+      used to test if content has been modified.
+    properties:
+      spdx:algorithm:
+        type: string
+      spdx:checksumValue:
+        type: string
   schema:size:
     type: object
     properties:
@@ -49,7 +62,9 @@ properties:
         type: string
         default: byte
   schema:encodingFormat:
-    type: string
+    type: array
+    items:
+      type: string
     description: MIME type with extension; should indicate the serialization scheme
       in sufficient detail that machine can know how to parse.
   resultTarget:
@@ -117,6 +132,7 @@ Links to the schema:
     "ada": "https://ada.astromat.org/metadata/",
     "spdx": "http://spdx.org/rdf/terms#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
     "@version": 1.1
   }
 }

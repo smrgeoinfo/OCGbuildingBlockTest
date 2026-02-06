@@ -1,0 +1,72 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.profiles.adaXRD",
+  "$schema": "metaschema.yaml",
+  "name": "ADA XRD Profile",
+  "abstract": "Technique-specific profile for X-ray Diffraction (XRD) products",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-06T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "xrd",
+    "x-ray-diffraction",
+    "profile"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "cdif.bbr.metadata.profiles.adaProduct"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaXRD/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaXRD/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaXRD/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/metadata/profiles/adaXRD/",
+  "description": "# ADA XRD Profile\n\nTechnique-specific metadata profile for X-ray Diffraction (XRD) products in the Astromat Data Archive. XRD measures the diffraction pattern produced by X-rays interacting with crystalline materials to determine crystal structure, phase identification, and lattice parameters.\n\n## Product Types\n- **XRD Tabular** - Diffraction pattern data in tabular format (2-theta vs. intensity)\n\n## Valid Component Types\n- `ada:XRDTabular` - Tabular diffraction data with geometry and wavelength detail (xrd_detail)\n- `ada:XRDDiffractionPattern` - Diffraction pattern images\n- `ada:XRDIndexedImage` - Indexed diffraction pattern images\n- `ada:instrumentMetadata` - Instrument metadata documents\n- `ada:methodDescription` - Method description documents\n\n## Detail Type\n`xrd_detail` with properties: `geometry`, `sampleMount`, `stepSize`, `timePerStep`, `wavelength`\n",
+  "examples": [
+    {
+      "title": "XRD Product Example",
+      "comment": "Example XRD product metadata (placeholder)",
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"schema:Dataset\", \"schema:Product\"],\n  \"schema:additionalType\": [\"ada:XRDTabular\", \"ada:DataDeliveryPackage\"],\n  \"schema:name\": \"XRD Analysis of Mineral Sample\",\n  \"schema:description\": \"X-ray diffraction pattern data\"\n}\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaXRD/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/context.jsonld\",\n  \"@type\": [\n    \"schema:Dataset\",\n    \"schema:Product\"\n  ],\n  \"schema:additionalType\": [\n    \"ada:XRDTabular\",\n    \"ada:DataDeliveryPackage\"\n  ],\n  \"schema:name\": \"XRD Analysis of Mineral Sample\",\n  \"schema:description\": \"X-ray diffraction pattern data\"\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaXRD/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix schema1: <http://schema.org/> .\n\n[] a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"ada:DataDeliveryPackage\",\n        \"ada:XRDTabular\" ;\n    schema1:description \"X-ray diffraction pattern data\" ;\n    schema1:name \"XRD Analysis of Mineral Sample\" .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaXRD/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA XRD Product Profile\ndescription: Technique-specific profile for X-ray Diffraction (XRD) products. Extends\n  the base ADA product profile with constraints on valid XRD component types and xrd_detail\n  requirements.\nallOf:\n- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Must include an XRD product type identifier.\n      contains:\n        const: ada:XRDTabular\n    schema:distribution:\n      items:\n        properties:\n          schema:hasPart:\n            items:\n              properties:\n                schema:additionalType:\n                  items:\n                    enum:\n                    - ada:XRDTabular\n                    - ada:XRDDiffractionPattern\n                    - ada:XRDIndexedImage\n                    - ada:instrumentMetadata\n                    - ada:methodDescription\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n  prov: http://www.w3.org/ns/prov#\n  spdx: http://spdx.org/rdf/terms#\n  nxs: http://purl.org/nexusformat/definitions/\n  dcterms: http://purl.org/dc/terms/\n  geosparql: http://www.opengis.net/ont/geosparql#\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/profiles/adaXRD"
+}

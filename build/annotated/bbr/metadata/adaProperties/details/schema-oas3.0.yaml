@@ -1,7 +1,17 @@
-x-defs: {}
+x-defs:
+  cdif.bbr.metadata.adaProperties.stringArray:
+    title: String Array Type
+    description: Simple reusable array of strings
+    type: array
+    minItems: 0
+    items:
+      type: string
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
 title: Instrument Detail Types
 description: Collection of instrument-specific detail types for ADA analytical techniques.
-  These are tightly coupled types kept together as local definitions.
+  These are tightly coupled types kept together as local definitions. Includes 12
+  v3-aligned types plus 4 extended types (basemap, icpoes, qris, xctimage).
 type: object
 anyOf:
 - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/basemap_detail
@@ -23,7 +33,8 @@ anyOf:
 $defs:
   basemap_detail:
     type: object
-    description: Basemap images with RGB channels and pixel scaling.
+    description: Basemap images with RGB channels and pixel scaling. (Extension type,
+      not in v3 source schema.)
     properties:
       '@type':
         enum:
@@ -54,7 +65,7 @@ $defs:
     properties:
       '@type':
         enum:
-        - - ada:ARGTDocument
+        - ada:ARGTDocument
       phaseAnalyzed:
         type: string
       isotopeType:
@@ -65,7 +76,7 @@ $defs:
     properties:
       '@type':
         enum:
-        - - ada:DSCHeatTabular
+        - ada:DSCHeatTabular
       analysisType:
         type: string
   empa_detail:
@@ -75,11 +86,11 @@ $defs:
       '@type':
         anyOf:
         - enum:
-          - - ada:EMPAImage
+          - ada:EMPAImage
         - enum:
-          - - ada:EMPAQEATabular
+          - ada:EMPAQEATabular
         - enum:
-          - - ada:EMPAImageCollection
+          - ada:EMPAImageCollection
       spectrometersUsed:
         type: string
         description: Spectrometers used in analysis
@@ -91,23 +102,24 @@ $defs:
     properties:
       '@type':
         enum:
-        - - ada:EAIRMSCollection
+        - ada:EAIRMSCollection
       massConsumed:
         type: string
       elementType:
         type: string
   icpoes_detail:
     type: object
-    description: Inductively Coupled Plasma Optical Emission Spectrometry
+    description: Inductively Coupled Plasma Optical Emission Spectrometry. (Extension
+      type, not in v3 source schema.)
     properties:
       '@type':
         anyOf:
         - enum:
-          - - ada:ICPOESIntermediateTabular
+          - ada:ICPOESIntermediateTabular
         - enum:
-          - - ada:ICPOESProcessedTabular
+          - ada:ICPOESProcessedTabular
         - enum:
-          - - ada:ICPOESRawTabular
+          - ada:ICPOESRawTabular
       mass:
         type: string
       dissolutionFactor:
@@ -118,7 +130,7 @@ $defs:
     properties:
       '@type':
         enum:
-        - - ada:L2MSCube
+        - ada:L2MSCube
       sampleName:
         type: string
       ionizationTimeDelay:
@@ -141,9 +153,9 @@ $defs:
       '@type':
         anyOf:
         - enum:
-          - - ada:LAFProcessed
+          - ada:LAFProcessed
         - enum:
-          - - ada:LAFRaw
+          - ada:LAFRaw
       elementAnalyzed:
         type: string
       sampleMassConsumed:
@@ -157,52 +169,33 @@ $defs:
       '@type':
         anyOf:
         - enum:
-          - - ada:NanoIRBackground
-        - enum:
-          - - ada:NanoIRMapCollection
-        - enum:
-          - - ada:NanoIRPointCollection
+          - ada:NanoIRBackground
       phaseAnalyzed:
-        type: array
-        minItems: 0
-        items:
-          type: string
+        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
   nanosims_detail:
     type: object
     description: Nano Secondary Ion Mass Spectrometry with isotope tracking
     properties:
       '@type':
-        anyOf:
-        - enum:
-          - - ada:NanoSIMSCollection
-        - enum:
-          - - ada:NanoSIMSImageCollection
-        - enum:
-          - - ada:NanoSIMSTabular
-        - enum:
-          - - ada:NanoSIMSMap
+        type: string
+        enum:
+        - ada:NanoSIMSCollection
+        - ada:NanoSIMSImageCollection
+        - ada:NanoSIMSTabular
+        - ada:NanoSIMSMap
       phaseAnalyzed:
-        type: array
-        minItems: 0
-        items:
-          type: string
+        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
       isotopeAnalyzed:
-        type: array
-        minItems: 0
-        items:
-          type: string
+        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
   psfd_detail:
     type: object
     description: Point Spread Function Data with image names and conditions
     properties:
       '@type':
         enum:
-        - - ada:PSFDTabular
+        - ada:PSFDTabular
       imageName:
-        type: array
-        minItems: 0
-        items:
-          type: string
+        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
       imageViewingConditions:
         type: string
   vnmir_detail:
@@ -212,11 +205,11 @@ $defs:
       '@type':
         anyOf:
         - enum:
-          - - ada:VNMIRSpectralPoint
+          - ada:VNMIRSpectralPoint
         - enum:
-          - - ada:VNMIROverviewImage
+          - ada:VNMIROverviewImage
         - enum:
-          - - ada:VNMIRSpectralMap
+          - ada:VNMIRSpectralMap
       detector:
         type: string
       beamsplitter:
@@ -267,14 +260,15 @@ $defs:
         type: boolean
   qris_detail:
     type: object
-    description: QRIS (Raman) with calibration and illumination parameters
+    description: QRIS (Raman) with calibration and illumination parameters. (Extension
+      type, not in v3 source schema.)
     properties:
       '@type':
         anyOf:
         - enum:
-          - - ada:QRISCalibrated
+          - ada:QRISCalibrated
         - enum:
-          - - ada:QRISRaw
+          - ada:QRISRaw
       calibrationFile:
         type: string
       pipelineVersion:
@@ -299,9 +293,9 @@ $defs:
       '@type':
         anyOf:
         - enum:
-          - - ada:SLSShapeModel
+          - ada:SLSShapeModel
         - enum:
-          - - ada:SLSPartialScan
+          - ada:SLSPartialScan
       countScans:
         type: integer
       facets:
@@ -316,11 +310,12 @@ $defs:
         type: boolean
   xctimage_detail:
     type: object
-    description: X-ray Computed Tomography images with detailed scan parameters
+    description: X-ray Computed Tomography images with detailed scan parameters. (Extension
+      type, not in v3 source schema.)
     properties:
       '@type':
         enum:
-        - - ada:XCTImageCollection
+        - ada:XCTImageCollection
       beamFilterMaterial:
         type: string
       beamFilterThickness:
@@ -391,7 +386,7 @@ $defs:
     properties:
       '@type':
         enum:
-        - - ada:XRDTabular
+        - ada:XRDTabular
       geometry:
         type: string
       sampleMount:

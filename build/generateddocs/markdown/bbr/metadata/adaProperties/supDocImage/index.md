@@ -38,6 +38,7 @@ properties:
         - ada:areaOfInterest
         - ada:instrumentMetadata
         - ada:supplementalBasemap
+        - ada:other
         - ada:plot
         - ada:quickLook
         - ada:report

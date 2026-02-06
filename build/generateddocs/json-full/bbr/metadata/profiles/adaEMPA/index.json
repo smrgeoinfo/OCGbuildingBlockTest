@@ -1,0 +1,72 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.profiles.adaEMPA",
+  "$schema": "metaschema.yaml",
+  "name": "ADA EMPA Profile",
+  "abstract": "Technique-specific profile for Electron Microprobe Analysis (EMPA) products",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-06T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-06",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "ada",
+    "astromat",
+    "empa",
+    "electron-microprobe",
+    "profile"
+  ],
+  "sources": [
+    {
+      "title": "ADA Metadata Schema v3",
+      "link": "https://github.com/amds-ldeo/metadata"
+    }
+  ],
+  "shaclShapes": {},
+  "dependsOn": [
+    "cdif.bbr.metadata.profiles.adaProduct"
+  ],
+  "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaEMPA/context.jsonld",
+  "schema": {
+    "application/yaml": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaEMPA/schema.yaml",
+    "application/json": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaEMPA/schema.json"
+  },
+  "sourceSchema": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaEMPA/schema.yaml",
+  "sourceLdContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaEMPA/context.jsonld",
+  "sourceFiles": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaEMPA/",
+  "rdfData": [],
+  "validationPassed": true,
+  "testOutputs": "https://github.com/smrgeoinfo/OCGbuildingBlockTest/blob/master/build/tests/bbr/metadata/profiles/adaEMPA/",
+  "description": "# ADA EMPA Profile\n\nTechnique-specific metadata profile for Electron Microprobe Analysis (EMPA) products in the Astromat Data Archive. EMPA uses focused electron beams to determine chemical composition of small volumes of solid materials through characteristic X-ray emission.\n\n## Product Types\n- **EMPA Image** - Backscattered electron or secondary electron images\n- **EMPA Collection** - Sets of EMPA images or maps\n- **EMPA QEA** - Quantitative elemental analysis tabular data\n- **EMPA SPC** - Spectral data from electron microprobe\n\n## Valid Component Types\n- `ada:EMPAImageMap` - Image maps with spectrometer and signal detail (empa_detail)\n- `ada:EMPAImage` - Individual EMPA images\n- `ada:EMPAQEATabular` - Quantitative elemental analysis tables (empa_detail)\n- `ada:EMPAImageCollection` - Collections of EMPA images\n- `ada:analysisLocation` - Supplemental analysis location images\n- `ada:supplementaryImage` - Supplementary visual materials\n- `ada:calibrationFile` - Calibration documents\n- `ada:methodDescription` - Method description documents\n- `ada:instrumentMetadata` - Instrument metadata documents\n\n## Detail Type\n`empa_detail` with properties: `spectrometersUsed`, `signalUsed`\n",
+  "examples": [
+    {
+      "title": "EMPA Product Example",
+      "comment": "Example EMPA product metadata (placeholder)",
+      "snippets": [
+        {
+          "language": "json",
+          "code": "{\n  \"@type\": [\"schema:Dataset\", \"schema:Product\"],\n  \"schema:additionalType\": [\"ada:EMPAImage\", \"ada:DataDeliveryPackage\"],\n  \"schema:name\": \"EMPA Analysis of Meteorite Sample\",\n  \"schema:description\": \"Electron microprobe analysis data\"\n}\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaEMPA/example_1_1.json"
+        },
+        {
+          "language": "jsonld",
+          "code": "{\n  \"@context\": \"https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaEMPA/context.jsonld\",\n  \"@type\": [\n    \"schema:Dataset\",\n    \"schema:Product\"\n  ],\n  \"schema:additionalType\": [\n    \"ada:EMPAImage\",\n    \"ada:DataDeliveryPackage\"\n  ],\n  \"schema:name\": \"EMPA Analysis of Meteorite Sample\",\n  \"schema:description\": \"Electron microprobe analysis data\"\n}",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaEMPA/example_1_1.jsonld"
+        },
+        {
+          "language": "ttl",
+          "code": "@prefix schema1: <http://schema.org/> .\n\n[] a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"ada:DataDeliveryPackage\",\n        \"ada:EMPAImage\" ;\n    schema1:description \"Electron microprobe analysis data\" ;\n    schema1:name \"EMPA Analysis of Meteorite Sample\" .\n\n",
+          "url": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/tests/bbr/metadata/profiles/adaEMPA/example_1_1.ttl"
+        }
+      ]
+    }
+  ],
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA EMPA Product Profile\ndescription: Technique-specific profile for Electron Microprobe Analysis (EMPA) products.\n  Extends the base ADA product profile with constraints on valid EMPA component types\n  and empa_detail requirements.\nallOf:\n- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Must include an EMPA product type identifier.\n      contains:\n        enum:\n        - ada:EMPAImage\n        - ada:EMPACollection\n        - ada:EMPAQEA\n        - ada:EMPAESPC\n    schema:distribution:\n      items:\n        properties:\n          schema:hasPart:\n            items:\n              properties:\n                schema:additionalType:\n                  items:\n                    enum:\n                    - ada:EMPAImageMap\n                    - ada:EMPAImage\n                    - ada:EMPAQEATabular\n                    - ada:EMPAImageCollection\n                    - ada:analysisLocation\n                    - ada:supplementaryImage\n                    - ada:calibrationFile\n                    - ada:methodDescription\n                    - ada:instrumentMetadata\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n  prov: http://www.w3.org/ns/prov#\n  spdx: http://spdx.org/rdf/terms#\n  nxs: http://purl.org/nexusformat/definitions/\n  dcterms: http://purl.org/dc/terms/\n  geosparql: http://www.opengis.net/ont/geosparql#\n",
+  "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "gitPath": "_sources/profiles/adaEMPA"
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Instrument Detail Types",
-  "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions.",
+  "description": "Collection of instrument-specific detail types for ADA analytical techniques. These are tightly coupled types kept together as local definitions. Includes 12 v3-aligned types plus 4 extended types (basemap, icpoes, qris, xctimage).",
   "type": "object",
   "anyOf": [
     {
@@ -56,7 +56,7 @@
   "$defs": {
     "basemap_detail": {
       "type": "object",
-      "description": "Basemap images with RGB channels and pixel scaling.",
+      "description": "Basemap images with RGB channels and pixel scaling. (Extension type, not in v3 source schema.)",
       "properties": {
         "@type": {
           "const": [
@@ -98,9 +98,7 @@
       "description": "ARGT (Argon) document type with phase and isotope analysis",
       "properties": {
         "@type": {
-          "const": [
-            "ada:ARGTDocument"
-          ]
+          "const": "ada:ARGTDocument"
         },
         "phaseAnalyzed": {
           "type": "string"
@@ -115,9 +113,7 @@
       "description": "Differential Scanning Calorimetry heat tabular data",
       "properties": {
         "@type": {
-          "const": [
-            "ada:DSCHeatTabular"
-          ]
+          "const": "ada:DSCHeatTabular"
         },
         "analysisType": {
           "type": "string"
@@ -131,19 +127,13 @@
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:EMPAImage"
-              ]
+              "const": "ada:EMPAImage"
             },
             {
-              "const": [
-                "ada:EMPAQEATabular"
-              ]
+              "const": "ada:EMPAQEATabular"
             },
             {
-              "const": [
-                "ada:EMPAImageCollection"
-              ]
+              "const": "ada:EMPAImageCollection"
             }
           ]
         },
@@ -161,9 +151,7 @@
       "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
       "properties": {
         "@type": {
-          "const": [
-            "ada:EAIRMSCollection"
-          ]
+          "const": "ada:EAIRMSCollection"
         },
         "massConsumed": {
           "type": "string"
@@ -175,24 +163,18 @@
     },
     "icpoes_detail": {
       "type": "object",
-      "description": "Inductively Coupled Plasma Optical Emission Spectrometry",
+      "description": "Inductively Coupled Plasma Optical Emission Spectrometry. (Extension type, not in v3 source schema.)",
       "properties": {
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:ICPOESIntermediateTabular"
-              ]
+              "const": "ada:ICPOESIntermediateTabular"
             },
             {
-              "const": [
-                "ada:ICPOESProcessedTabular"
-              ]
+              "const": "ada:ICPOESProcessedTabular"
             },
             {
-              "const": [
-                "ada:ICPOESRawTabular"
-              ]
+              "const": "ada:ICPOESRawTabular"
             }
           ]
         },
@@ -209,9 +191,7 @@
       "description": "Laser-2 Mass Spectrometry cube data with ionization parameters",
       "properties": {
         "@type": {
-          "const": [
-            "ada:L2MSCube"
-          ]
+          "const": "ada:L2MSCube"
         },
         "sampleName": {
           "type": "string"
@@ -243,14 +223,10 @@
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:LAFProcessed"
-              ]
+              "const": "ada:LAFProcessed"
             },
             {
-              "const": [
-                "ada:LAFRaw"
-              ]
+              "const": "ada:LAFRaw"
             }
           ]
         },
@@ -272,28 +248,12 @@
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:NanoIRBackground"
-              ]
-            },
-            {
-              "const": [
-                "ada:NanoIRMapCollection"
-              ]
-            },
-            {
-              "const": [
-                "ada:NanoIRPointCollection"
-              ]
+              "const": "ada:NanoIRBackground"
             }
           ]
         },
         "phaseAnalyzed": {
-          "type": "array",
-          "minItems": 0,
-          "items": {
-            "type": "string"
-          }
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.json"
         }
       }
     },
@@ -302,42 +262,19 @@
       "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
       "properties": {
         "@type": {
-          "anyOf": [
-            {
-              "const": [
-                "ada:NanoSIMSCollection"
-              ]
-            },
-            {
-              "const": [
-                "ada:NanoSIMSImageCollection"
-              ]
-            },
-            {
-              "const": [
-                "ada:NanoSIMSTabular"
-              ]
-            },
-            {
-              "const": [
-                "ada:NanoSIMSMap"
-              ]
-            }
+          "type": "string",
+          "enum": [
+            "ada:NanoSIMSCollection",
+            "ada:NanoSIMSImageCollection",
+            "ada:NanoSIMSTabular",
+            "ada:NanoSIMSMap"
           ]
         },
         "phaseAnalyzed": {
-          "type": "array",
-          "minItems": 0,
-          "items": {
-            "type": "string"
-          }
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.json"
         },
         "isotopeAnalyzed": {
-          "type": "array",
-          "minItems": 0,
-          "items": {
-            "type": "string"
-          }
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.json"
         }
       }
     },
@@ -346,16 +283,10 @@
       "description": "Point Spread Function Data with image names and conditions",
       "properties": {
         "@type": {
-          "const": [
-            "ada:PSFDTabular"
-          ]
+          "const": "ada:PSFDTabular"
         },
         "imageName": {
-          "type": "array",
-          "minItems": 0,
-          "items": {
-            "type": "string"
-          }
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.json"
         },
         "imageViewingConditions": {
           "type": "string"
@@ -369,19 +300,13 @@
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:VNMIRSpectralPoint"
-              ]
+              "const": "ada:VNMIRSpectralPoint"
             },
             {
-              "const": [
-                "ada:VNMIROverviewImage"
-              ]
+              "const": "ada:VNMIROverviewImage"
             },
             {
-              "const": [
-                "ada:VNMIRSpectralMap"
-              ]
+              "const": "ada:VNMIRSpectralMap"
             }
           ]
         },
@@ -461,19 +386,15 @@
     },
     "qris_detail": {
       "type": "object",
-      "description": "QRIS (Raman) with calibration and illumination parameters",
+      "description": "QRIS (Raman) with calibration and illumination parameters. (Extension type, not in v3 source schema.)",
       "properties": {
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:QRISCalibrated"
-              ]
+              "const": "ada:QRISCalibrated"
             },
             {
-              "const": [
-                "ada:QRISRaw"
-              ]
+              "const": "ada:QRISRaw"
             }
           ]
         },
@@ -511,14 +432,10 @@
         "@type": {
           "anyOf": [
             {
-              "const": [
-                "ada:SLSShapeModel"
-              ]
+              "const": "ada:SLSShapeModel"
             },
             {
-              "const": [
-                "ada:SLSPartialScan"
-              ]
+              "const": "ada:SLSPartialScan"
             }
           ]
         },
@@ -544,12 +461,10 @@
     },
     "xctimage_detail": {
       "type": "object",
-      "description": "X-ray Computed Tomography images with detailed scan parameters",
+      "description": "X-ray Computed Tomography images with detailed scan parameters. (Extension type, not in v3 source schema.)",
       "properties": {
         "@type": {
-          "const": [
-            "ada:XCTImageCollection"
-          ]
+          "const": "ada:XCTImageCollection"
         },
         "beamFilterMaterial": {
           "type": "string"
@@ -654,9 +569,7 @@
       "description": "X-ray Diffraction tabular data with geometry and wavelength",
       "properties": {
         "@type": {
-          "const": [
-            "ada:XRDTabular"
-          ]
+          "const": "ada:XRDTabular"
         },
         "geometry": {
           "type": "string"
