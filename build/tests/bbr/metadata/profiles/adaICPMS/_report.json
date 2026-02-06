@@ -2,7 +2,7 @@
   "title": "Validation report for cdif.bbr.metadata.profiles.adaICPMS - ADA ICP-MS Profile",
   "bblockName": "ADA ICP-MS Profile",
   "bblockId": "cdif.bbr.metadata.profiles.adaICPMS",
-  "generated": "2026-02-06T23:31:37.297706+00:00",
+  "generated": "2026-02-06T23:57:18.638576+00:00",
   "result": false,
   "items": [
     {
@@ -66,69 +66,44 @@
           "entries": [
             {
               "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/cdifOptional/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/cdifOptional/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+              "shaclFile": "_sources/schemaorgProperties/cdifMandatory/rules.shacl",
+              "graph": "@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode _:Nda0a6dde78004265987801d6a222e3e6 ;\n            sh:resultMessage \"An identifier for the documented resource must be provided\" ;\n            sh:resultPath schema1:identifier ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:resourceIdentifierProperty ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:Nda0a6dde78004265987801d6a222e3e6 ;\n            sh:resultMessage \"To meet the requirements for FAIR data, information about licenses or other security, usage, or access limitations must be described\" ;\n            sh:resultPath [ sh:alternativePath ( schema1:license schema1:conditionsOfAccess ) ] ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:rightsProperty ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:Nda0a6dde78004265987801d6a222e3e6 ;\n            sh:resultMessage \"Date of most recent update to resource content is required, using ISO8601 format with at least a year and a month.\" ;\n            sh:resultPath schema1:dateModified ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:dateModifiedProperty ] .\n\n_:Nda0a6dde78004265987801d6a222e3e6 a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"ada:DataDeliveryPackage\",\n        \"ada:HRICPMSProcessed\" ;\n    schema1:description \"High-resolution ICP-MS elemental concentration data\" ;\n    schema1:name \"HR-ICP-MS Elemental Analysis\" .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/schemaorgProperties/cdifMandatory/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (3):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:resourceIdentifierProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: schema1:identifier\n  \tMessage: An identifier for the documented resource must be provided\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:rightsProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: [ sh:alternativePath ( schema1:license schema1:conditionsOfAccess ) ]\n  \tMessage: To meet the requirements for FAIR data, information about licenses or other security, usage, or access limitations must be described\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:dateModifiedProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: schema1:dateModified\n  \tMessage: Date of most recent update to resource content is required, using ISO8601 format with at least a year and a month.\n  "
             },
             {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/variableMeasured/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/variableMeasured/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/variableMeasured/rules.shacl",
+              "shaclFile": "_sources/schemaorgProperties/cdifMandatory/rules.shacl",
               "focusNodes": {
-                "cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first": {
+                "cdifd:CDIFDatasetMandatoryShape": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b9": {
+                "_:nf66c0da7a4524ea6a22d2adbc0ffdfb7b5": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b4": {
+                "cdifd:rightsProperty/sh:or/rdf:rest/rdf:first": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b11": {
+                "cdifd:resourceIdentifierProperty/sh:or/rdf:rest/rdf:first": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b38": {
+                "cdifd:CDIFMetaMetadataShape": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b30": {
+                "_:nf66c0da7a4524ea6a22d2adbc0ffdfb7b18": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b37": {
+                "cdifd:rightsProperty/sh:or/rdf:first": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b5": {
+                "_:nf66c0da7a4524ea6a22d2adbc0ffdfb7b7": {
                   "nodes": []
                 },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b8": {
-                  "nodes": []
-                },
-                "cdifd:CDIFVariableMeasuredShape": {
-                  "nodes": []
-                },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b7": {
-                  "nodes": []
-                },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b14": {
-                  "nodes": []
-                },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b29": {
-                  "nodes": []
-                },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b12": {
-                  "nodes": []
-                },
-                "_:nf529aaaa8f214e7f9e748f366b6dddf3b10": {
+                "cdifd:resourceIdentifierProperty/sh:or/rdf:first": {
                   "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/variableMeasured/rules.shacl:\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b9: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b4: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b11: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b38: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b30: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b37: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b5: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b8: *none*\n - Shape cdifd:CDIFVariableMeasuredShape: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b7: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b14: *none*\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b29: *none*\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b12: *none*\n - Shape _:nf529aaaa8f214e7f9e748f366b6dddf3b10: *none*\n"
+              "message": "Focus nodes for _sources/schemaorgProperties/cdifMandatory/rules.shacl:\n - Shape cdifd:CDIFDatasetMandatoryShape: *none*\n - Shape _:nf66c0da7a4524ea6a22d2adbc0ffdfb7b5: *none*\n - Shape cdifd:rightsProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:resourceIdentifierProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFMetaMetadataShape: *none*\n - Shape _:nf66c0da7a4524ea6a22d2adbc0ffdfb7b18: *none*\n - Shape cdifd:rightsProperty/sh:or/rdf:first: *none*\n - Shape _:nf66c0da7a4524ea6a22d2adbc0ffdfb7b7: *none*\n - Shape cdifd:resourceIdentifierProperty/sh:or/rdf:first: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -140,42 +115,42 @@
             {
               "shaclFile": "_sources/schemaorgProperties/definedTerm/rules.shacl",
               "focusNodes": {
-                "_:n9285a75f418142758f6ea8ee21641fe3b10": {
+                "_:n213e4942af4e419588550672b7aa4c42b7": {
                   "nodes": []
                 },
-                "_:n9285a75f418142758f6ea8ee21641fe3b23": {
+                "_:n213e4942af4e419588550672b7aa4c42b10": {
                   "nodes": []
                 },
-                "_:n9285a75f418142758f6ea8ee21641fe3b4": {
-                  "nodes": []
-                },
-                "_:n9285a75f418142758f6ea8ee21641fe3b6": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first": {
+                "_:n213e4942af4e419588550672b7aa4c42b8": {
                   "nodes": []
                 },
                 "cdifd:CDIFDefinedTermShape": {
                   "nodes": []
                 },
-                "_:n9285a75f418142758f6ea8ee21641fe3b5": {
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
                   "nodes": []
                 },
                 "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
                   "nodes": []
                 },
-                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                "cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first": {
                   "nodes": []
                 },
-                "_:n9285a75f418142758f6ea8ee21641fe3b7": {
+                "_:n213e4942af4e419588550672b7aa4c42b5": {
                   "nodes": []
                 },
-                "_:n9285a75f418142758f6ea8ee21641fe3b8": {
+                "_:n213e4942af4e419588550672b7aa4c42b4": {
+                  "nodes": []
+                },
+                "_:n213e4942af4e419588550672b7aa4c42b6": {
+                  "nodes": []
+                },
+                "_:n213e4942af4e419588550672b7aa4c42b23": {
                   "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b10: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b23: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b4: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b6: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b5: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b7: *none*\n - Shape _:n9285a75f418142758f6ea8ee21641fe3b8: *none*\n"
+              "message": "Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:\n - Shape _:n213e4942af4e419588550672b7aa4c42b7: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b10: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b8: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b5: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b4: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b6: *none*\n - Shape _:n213e4942af4e419588550672b7aa4c42b23: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -187,394 +162,48 @@
             {
               "shaclFile": "_sources/schemaorgProperties/identifier/rules.shacl",
               "focusNodes": {
+                "_:n2ecc2766a8984e6da323eaf555dade61b23": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierTypeTermShape": {
+                  "nodes": []
+                },
+                "_:n2ecc2766a8984e6da323eaf555dade61b11": {
+                  "nodes": []
+                },
                 "cdifd:CDIFIdentifierShape": {
+                  "nodes": []
+                },
+                "_:n2ecc2766a8984e6da323eaf555dade61b20": {
+                  "nodes": []
+                },
+                "_:n2ecc2766a8984e6da323eaf555dade61b25": {
                   "nodes": []
                 },
                 "cdifd:CDIFIdentifierShape/sh:or/rdf:first": {
                   "nodes": []
                 },
+                "_:n2ecc2766a8984e6da323eaf555dade61b10": {
+                  "nodes": []
+                },
                 "cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:n23c377b2c92640e788ddd9bd2de666bab25": {
-                  "nodes": []
-                },
-                "_:n23c377b2c92640e788ddd9bd2de666bab10": {
-                  "nodes": []
-                },
-                "_:n23c377b2c92640e788ddd9bd2de666bab21": {
-                  "nodes": []
-                },
-                "_:n23c377b2c92640e788ddd9bd2de666bab22": {
                   "nodes": []
                 },
                 "cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first": {
                   "nodes": []
                 },
-                "_:n23c377b2c92640e788ddd9bd2de666bab11": {
+                "_:n2ecc2766a8984e6da323eaf555dade61b22": {
                   "nodes": []
                 },
-                "_:n23c377b2c92640e788ddd9bd2de666bab23": {
+                "_:n2ecc2766a8984e6da323eaf555dade61b21": {
                   "nodes": []
                 },
                 "cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first": {
                   "nodes": []
-                },
-                "_:n23c377b2c92640e788ddd9bd2de666bab20": {
-                  "nodes": []
-                },
-                "cdifd:CDIFIdentifierTypeTermShape": {
-                  "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:\n - Shape cdifd:CDIFIdentifierShape: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab25: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab10: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab21: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab22: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab11: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab23: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n23c377b2c92640e788ddd9bd2de666bab20: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/agentInRole/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/agentInRole/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/agentInRole/rules.shacl",
-              "focusNodes": {
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b16": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b13": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b18": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b3": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:roleNameProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFRoleShape": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b14": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b12": {
-                  "nodes": []
-                },
-                "cdifd:roleNameProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape": {
-                  "nodes": []
-                },
-                "cdifd:CDIFRoleShape/sh:property/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:n7dc0963ca7e74c4491cc2ab12d293a74b15": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/agentInRole/rules.shacl:\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b16: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b13: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b18: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b3: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:roleNameProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFRoleShape: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b14: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b12: *none*\n - Shape cdifd:roleNameProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape cdifd:CDIFRoleShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n7dc0963ca7e74c4491cc2ab12d293a74b15: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/organization/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
-              "focusNodes": {
-                "cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFOrganizationShape/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFOrganizationShape": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/person/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
-              "focusNodes": {
-                "cdifd:contactPointProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:affiliationProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFContactPointShape": {
-                  "nodes": []
-                },
-                "cdifd:CDIFPersonShape/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFPersonShape": {
-                  "nodes": []
-                },
-                "cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/person/rules.shacl:\n - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFContactPointShape: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFPersonShape: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/spatialExtent/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/spatialExtent/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/spatialExtent/rules.shacl",
-              "focusNodes": {
-                "cdifd:spatialExtentProperty": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb34": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb32": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb10": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb35": {
-                  "nodes": []
-                },
-                "cdifd:geoShapeNode": {
-                  "nodes": []
-                },
-                "cdifd:spatialExtentProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb31": {
-                  "nodes": []
-                },
-                "cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:spatialExtentProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb17": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb3": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb9": {
-                  "nodes": []
-                },
-                "cdifd:geoCoordinatesNode": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb33": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb37": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb22": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:n663164c5a84041ce9015166b8bc4b19fb4": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/spatialExtent/rules.shacl:\n - Shape cdifd:spatialExtentProperty: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb34: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb32: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb10: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb35: *none*\n - Shape cdifd:geoShapeNode: *none*\n - Shape cdifd:spatialExtentProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb31: *none*\n - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:spatialExtentProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb17: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb3: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb9: *none*\n - Shape cdifd:geoCoordinatesNode: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb33: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb37: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb22: *none*\n - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape _:n663164c5a84041ce9015166b8bc4b19fb4: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/funder/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/funder/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/funder/rules.shacl",
-              "focusNodes": {
-                "cdifd:fundingShape": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb5": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb9": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb4": {
-                  "nodes": []
-                },
-                "cdifd:fundingShape/sh:property/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb6": {
-                  "nodes": []
-                },
-                "cdifd:fundingShape/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb7": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb22": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb23": {
-                  "nodes": []
-                },
-                "_:nfde3677eea7e439e8cd54ee13f2a968bb3": {
-                  "nodes": []
-                },
-                "cdifd:fundingShape/sh:or/rdf:first": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/funder/rules.shacl:\n - Shape cdifd:fundingShape: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb5: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb9: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb4: *none*\n - Shape cdifd:fundingShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb6: *none*\n - Shape cdifd:fundingShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb7: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb22: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb23: *none*\n - Shape _:nfde3677eea7e439e8cd54ee13f2a968bb3: *none*\n - Shape cdifd:fundingShape/sh:or/rdf:first: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
-              "focusNodes": {
-                "cdifd:timePositionNode/sh:property/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:timeIntervalNode": {
-                  "nodes": []
-                },
-                "cdifd:timePositionNode": {
-                  "nodes": []
-                },
-                "cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:n15620b15991748729ef1ea0ec837907cb4": {
-                  "nodes": []
-                },
-                "_:n15620b15991748729ef1ea0ec837907cb3": {
-                  "nodes": []
-                },
-                "_:n15620b15991748729ef1ea0ec837907cb5": {
-                  "nodes": []
-                },
-                "cdifd:temporalExtentProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:n15620b15991748729ef1ea0ec837907cb17": {
-                  "nodes": []
-                },
-                "cdifd:timeInstantNode": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:timeIntervalNode: *none*\n - Shape cdifd:timePositionNode: *none*\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n15620b15991748729ef1ea0ec837907cb4: *none*\n - Shape _:n15620b15991748729ef1ea0ec837907cb3: *none*\n - Shape _:n15620b15991748729ef1ea0ec837907cb5: *none*\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*\n - Shape _:n15620b15991748729ef1ea0ec837907cb17: *none*\n - Shape cdifd:timeInstantNode: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
-              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
-              "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
-              "focusNodes": {
-                "cdifd:CDIFLabeledLinkShape": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:\n - Shape cdifd:CDIFLabeledLinkShape: *none*\n"
-            },
-            {
-              "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/cdifMandatory/rules.shacl",
-              "graph": "@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode _:N47fd3cdb674c4ac88471221ad82e43a3 ;\n            sh:resultMessage \"An identifier for the documented resource must be provided\" ;\n            sh:resultPath schema1:identifier ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:resourceIdentifierProperty ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:N47fd3cdb674c4ac88471221ad82e43a3 ;\n            sh:resultMessage \"Date of most recent update to resource content is required, using ISO8601 format with at least a year and a month.\" ;\n            sh:resultPath schema1:dateModified ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:dateModifiedProperty ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:N47fd3cdb674c4ac88471221ad82e43a3 ;\n            sh:resultMessage \"To meet the requirements for FAIR data, information about licenses or other security, usage, or access limitations must be described\" ;\n            sh:resultPath [ sh:alternativePath ( schema1:license schema1:conditionsOfAccess ) ] ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape cdifd:rightsProperty ] .\n\n_:N47fd3cdb674c4ac88471221ad82e43a3 a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"ada:DataDeliveryPackage\",\n        \"ada:HRICPMSProcessed\" ;\n    schema1:description \"High-resolution ICP-MS elemental concentration data\" ;\n    schema1:name \"HR-ICP-MS Elemental Analysis\" .\n\n",
-              "isError": true,
-              "message": "Validation result for _sources/schemaorgProperties/cdifMandatory/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (3):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:resourceIdentifierProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: schema1:identifier\n  \tMessage: An identifier for the documented resource must be provided\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:rightsProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: [ sh:alternativePath ( schema1:license schema1:conditionsOfAccess ) ]\n  \tMessage: To meet the requirements for FAIR data, information about licenses or other security, usage, or access limitations must be described\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: cdifd:dateModifiedProperty\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"ada:DataDeliveryPackage\"), Literal(\"ada:HRICPMSProcessed\") ; schema1:description Literal(\"High-resolution ICP-MS elemental concentration data\") ; schema1:name Literal(\"HR-ICP-MS Elemental Analysis\") ]\n  \tResult Path: schema1:dateModified\n  \tMessage: Date of most recent update to resource content is required, using ISO8601 format with at least a year and a month.\n  "
-            },
-            {
-              "shaclFile": "_sources/schemaorgProperties/cdifMandatory/rules.shacl",
-              "focusNodes": {
-                "_:n3717c9a8b191488a97e2d0048bba3893b7": {
-                  "nodes": []
-                },
-                "cdifd:resourceIdentifierProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:rightsProperty/sh:or/rdf:rest/rdf:first": {
-                  "nodes": []
-                },
-                "_:n3717c9a8b191488a97e2d0048bba3893b5": {
-                  "nodes": []
-                },
-                "cdifd:rightsProperty/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "cdifd:CDIFMetaMetadataShape": {
-                  "nodes": []
-                },
-                "_:n3717c9a8b191488a97e2d0048bba3893b18": {
-                  "nodes": []
-                },
-                "cdifd:CDIFDatasetMandatoryShape": {
-                  "nodes": []
-                },
-                "cdifd:resourceIdentifierProperty/sh:or/rdf:first": {
-                  "nodes": []
-                }
-              },
-              "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/cdifMandatory/rules.shacl:\n - Shape _:n3717c9a8b191488a97e2d0048bba3893b7: *none*\n - Shape cdifd:resourceIdentifierProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:rightsProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n3717c9a8b191488a97e2d0048bba3893b5: *none*\n - Shape cdifd:rightsProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFMetaMetadataShape: *none*\n - Shape _:n3717c9a8b191488a97e2d0048bba3893b18: *none*\n - Shape cdifd:CDIFDatasetMandatoryShape: *none*\n - Shape cdifd:resourceIdentifierProperty/sh:or/rdf:first: *none*\n"
+              "message": "Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b23: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b11: *none*\n - Shape cdifd:CDIFIdentifierShape: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b20: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b25: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b10: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b22: *none*\n - Shape _:n2ecc2766a8984e6da323eaf555dade61b21: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -595,6 +224,84 @@
             },
             {
               "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/organization/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFOrganizationShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:\n - Shape cdifd:CDIFOrganizationShape: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/person/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFPersonShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFContactPointShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:affiliationProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFPersonShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:contactPointProperty/sh:or/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/person/rules.shacl:\n - Shape cdifd:CDIFPersonShape: *none*\n - Shape cdifd:CDIFContactPointShape: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDataDownloadShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:\n - Shape cdifd:CDIFDataDownloadShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
               "shaclFile": "_sources/schemaorgProperties/webAPI/rules.shacl",
               "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
               "isError": false,
@@ -603,24 +310,24 @@
             {
               "shaclFile": "_sources/schemaorgProperties/webAPI/rules.shacl",
               "focusNodes": {
-                "_:n5dc50b6e1221434c982b4f1bfcf7d750b9": {
+                "_:n7b0eb227bc9640ad8cc06bb2508df97bb8": {
                   "nodes": []
                 },
                 "cdifd:webAPINode": {
                   "nodes": []
                 },
+                "_:n7b0eb227bc9640ad8cc06bb2508df97bb9": {
+                  "nodes": []
+                },
+                "_:n7b0eb227bc9640ad8cc06bb2508df97bb3": {
+                  "nodes": []
+                },
                 "cdifd:webAPINode/sh:property/sh:or/rdf:first": {
-                  "nodes": []
-                },
-                "_:n5dc50b6e1221434c982b4f1bfcf7d750b3": {
-                  "nodes": []
-                },
-                "_:n5dc50b6e1221434c982b4f1bfcf7d750b8": {
                   "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/webAPI/rules.shacl:\n - Shape _:n5dc50b6e1221434c982b4f1bfcf7d750b9: *none*\n - Shape cdifd:webAPINode: *none*\n - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*\n - Shape _:n5dc50b6e1221434c982b4f1bfcf7d750b3: *none*\n - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*\n - Shape _:n5dc50b6e1221434c982b4f1bfcf7d750b8: *none*\n"
+              "message": "Focus nodes for _sources/schemaorgProperties/webAPI/rules.shacl:\n - Shape _:n7b0eb227bc9640ad8cc06bb2508df97bb8: *none*\n - Shape cdifd:webAPINode: *none*\n - Shape _:n7b0eb227bc9640ad8cc06bb2508df97bb9: *none*\n - Shape _:n7b0eb227bc9640ad8cc06bb2508df97bb3: *none*\n - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:webAPINode/sh:property/sh:or/rdf:first: *none*\n"
             },
             {
               "op": "shacl-report",
@@ -641,20 +348,313 @@
             },
             {
               "op": "shacl-report",
-              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "shaclFile": "_sources/schemaorgProperties/variableMeasured/rules.shacl",
               "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
               "isError": false,
-              "message": "Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+              "message": "Validation result for _sources/schemaorgProperties/variableMeasured/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
             },
             {
-              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "shaclFile": "_sources/schemaorgProperties/variableMeasured/rules.shacl",
               "focusNodes": {
-                "cdifd:CDIFDataDownloadShape": {
+                "_:n16d08df76d5e4991afc005a78cd222d6b7": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b10": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b14": {
+                  "nodes": []
+                },
+                "cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b9": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b5": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b30": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b8": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b38": {
+                  "nodes": []
+                },
+                "cdifd:CDIFVariableMeasuredShape": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b12": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b11": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b29": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b4": {
+                  "nodes": []
+                },
+                "_:n16d08df76d5e4991afc005a78cd222d6b37": {
                   "nodes": []
                 }
               },
               "isError": false,
-              "message": "Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:\n - Shape cdifd:CDIFDataDownloadShape: *none*\n"
+              "message": "Focus nodes for _sources/schemaorgProperties/variableMeasured/rules.shacl:\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b7: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b10: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b14: *none*\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b9: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b5: *none*\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b30: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b8: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b38: *none*\n - Shape cdifd:CDIFVariableMeasuredShape: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b12: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b11: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b29: *none*\n - Shape cdifd:CDIFVariableMeasuredShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b4: *none*\n - Shape _:n16d08df76d5e4991afc005a78cd222d6b37: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFLabeledLinkShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:\n - Shape cdifd:CDIFLabeledLinkShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/cdifOptional/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/cdifOptional/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
+              "focusNodes": {
+                "cdifd:temporalExtentProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:timePositionNode": {
+                  "nodes": []
+                },
+                "_:n647f297363d341aa8814007592851448b4": {
+                  "nodes": []
+                },
+                "cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "_:n647f297363d341aa8814007592851448b5": {
+                  "nodes": []
+                },
+                "cdifd:timeInstantNode": {
+                  "nodes": []
+                },
+                "cdifd:timePositionNode/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n647f297363d341aa8814007592851448b3": {
+                  "nodes": []
+                },
+                "_:n647f297363d341aa8814007592851448b17": {
+                  "nodes": []
+                },
+                "cdifd:timeIntervalNode": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*\n - Shape cdifd:timePositionNode: *none*\n - Shape _:n647f297363d341aa8814007592851448b4: *none*\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n647f297363d341aa8814007592851448b5: *none*\n - Shape cdifd:timeInstantNode: *none*\n - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*\n - Shape _:n647f297363d341aa8814007592851448b3: *none*\n - Shape _:n647f297363d341aa8814007592851448b17: *none*\n - Shape cdifd:timeIntervalNode: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/agentInRole/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/agentInRole/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/agentInRole/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b14": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b12": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b18": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b15": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b13": {
+                  "nodes": []
+                },
+                "cdifd:CDIFRoleShape": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b3": {
+                  "nodes": []
+                },
+                "cdifd:CDIFRoleShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:roleNameProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "_:n650771cab6c045129636aa9c2fa0b2a5b16": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:roleNameProperty/sh:or/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/agentInRole/rules.shacl:\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b14: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b12: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b18: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b15: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b13: *none*\n - Shape cdifd:CDIFRoleShape: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b3: *none*\n - Shape cdifd:CDIFRoleShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:roleNameProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n650771cab6c045129636aa9c2fa0b2a5b16: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:roleNameProperty/sh:or/rdf:first: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/funder/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/funder/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/funder/rules.shacl",
+              "focusNodes": {
+                "cdifd:fundingShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:fundingShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:fundingShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b5": {
+                  "nodes": []
+                },
+                "cdifd:fundingShape": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b9": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b7": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b6": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b4": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b23": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b22": {
+                  "nodes": []
+                },
+                "_:n37b981588502487ea6d564fe10142f10b3": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/funder/rules.shacl:\n - Shape cdifd:fundingShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:fundingShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:fundingShape/sh:or/rdf:first: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b5: *none*\n - Shape cdifd:fundingShape: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b9: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b7: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b6: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b4: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b23: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b22: *none*\n - Shape _:n37b981588502487ea6d564fe10142f10b3: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/spatialExtent/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/spatialExtent/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/spatialExtent/rules.shacl",
+              "focusNodes": {
+                "_:n233cc76d920b4315a10002e1046c0547b4": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b3": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b33": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b10": {
+                  "nodes": []
+                },
+                "cdifd:spatialExtentProperty": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b22": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b17": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b34": {
+                  "nodes": []
+                },
+                "cdifd:geoShapeNode": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:spatialExtentProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:spatialExtentProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b35": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b37": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b31": {
+                  "nodes": []
+                },
+                "cdifd:geoCoordinatesNode": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b9": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n233cc76d920b4315a10002e1046c0547b32": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/spatialExtent/rules.shacl:\n - Shape _:n233cc76d920b4315a10002e1046c0547b4: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b3: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b33: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b10: *none*\n - Shape cdifd:spatialExtentProperty: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b22: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b17: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b34: *none*\n - Shape cdifd:geoShapeNode: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:spatialExtentProperty/sh:or/rdf:first: *none*\n - Shape cdifd:spatialExtentProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b35: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b37: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b31: *none*\n - Shape cdifd:geoCoordinatesNode: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b9: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape cdifd:geoCoordinatesNode/sh:property/sh:or/rdf:first: *none*\n - Shape _:n233cc76d920b4315a10002e1046c0547b32: *none*\n"
             }
           ]
         }

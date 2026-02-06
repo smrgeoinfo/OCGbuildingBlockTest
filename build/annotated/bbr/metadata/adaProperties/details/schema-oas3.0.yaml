@@ -1,40 +1,9 @@
 x-defs:
-  cdif.bbr.metadata.adaProperties.stringArray:
-    title: String Array Type
-    description: Simple reusable array of strings
-    type: array
-    minItems: 0
-    items:
-      type: string
-    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
-title: Instrument Detail Types
-description: Collection of instrument-specific detail types for ADA analytical techniques.
-  These are tightly coupled types kept together as local definitions. Includes 12
-  v3-aligned types plus 4 extended types (basemap, icpoes, qris, xctimage).
-type: object
-anyOf:
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/basemap_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/argt_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/dsc_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/empa_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/eairms_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/icpoes_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/l2ms_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/laf_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/nanoir_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/nanosims_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/psfd_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/vnmir_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/qris_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/slsshapemodel_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/xctimage_detail
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/$defs/xrd_detail
-$defs:
-  basemap_detail:
-    type: object
+  cdif.bbr.metadata.adaProperties.detailBasemap:
+    title: Basemap Instrument Detail
     description: Basemap images with RGB channels and pixel scaling. (Extension type,
       not in v3 source schema.)
+    type: object
     properties:
       '@type':
         enum:
@@ -59,9 +28,15 @@ $defs:
     - pixelScaleX
     - pixelScaleY
     - pixelUnits
-  argt_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailBasemap/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailARGT:
+    title: ARGT Instrument Detail
     description: ARGT (Argon) document type with phase and isotope analysis
+    type: object
     properties:
       '@type':
         enum:
@@ -70,18 +45,30 @@ $defs:
         type: string
       isotopeType:
         type: string
-  dsc_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailARGT/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailDSC:
+    title: DSC Instrument Detail
     description: Differential Scanning Calorimetry heat tabular data
+    type: object
     properties:
       '@type':
         enum:
         - ada:DSCHeatTabular
       analysisType:
         type: string
-  empa_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailDSC/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailEMPA:
+    title: EMPA Instrument Detail
     description: Electron Microprobe Analysis with spectrometer and signal details.
+    type: object
     properties:
       '@type':
         anyOf:
@@ -96,9 +83,15 @@ $defs:
         description: Spectrometers used in analysis
       signalUsed:
         type: string
-  eairms_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailEAIRMS:
+    title: EA-IRMS Instrument Detail
     description: Elemental Analysis Isotope Ratio Mass Spectrometry collection
+    type: object
     properties:
       '@type':
         enum:
@@ -107,10 +100,16 @@ $defs:
         type: string
       elementType:
         type: string
-  icpoes_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailEAIRMS/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailICPOES:
+    title: ICP-OES Instrument Detail
     description: Inductively Coupled Plasma Optical Emission Spectrometry. (Extension
       type, not in v3 source schema.)
+    type: object
     properties:
       '@type':
         anyOf:
@@ -124,9 +123,15 @@ $defs:
         type: string
       dissolutionFactor:
         type: number
-  l2ms_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailICPOES/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailL2MS:
+    title: L2MS Instrument Detail
     description: Laser-2 Mass Spectrometry cube data with ionization parameters
+    type: object
     properties:
       '@type':
         enum:
@@ -145,10 +150,16 @@ $defs:
         type: string
       wavelengthUnits:
         type: string
-  laf_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailLAF:
+    title: LAF Instrument Detail
     description: Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes
       in resultTarget.
+    type: object
     properties:
       '@type':
         anyOf:
@@ -162,9 +173,15 @@ $defs:
         type: string
       sampleType:
         type: string
-  nanoir_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailLAF/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailNanoIR:
+    title: NanoIR Instrument Detail
     description: Nano-IR spectroscopy collections with phase analysis
+    type: object
     properties:
       '@type':
         anyOf:
@@ -172,9 +189,15 @@ $defs:
           - ada:NanoIRBackground
       phaseAnalyzed:
         $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
-  nanosims_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailNanoIR/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailNanoSIMS:
+    title: NanoSIMS Instrument Detail
     description: Nano Secondary Ion Mass Spectrometry with isotope tracking
+    type: object
     properties:
       '@type':
         type: string
@@ -187,9 +210,15 @@ $defs:
         $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
       isotopeAnalyzed:
         $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
-  psfd_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailNanoSIMS/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailPSFD:
+    title: PSFD Instrument Detail
     description: Point Spread Function Data with image names and conditions
+    type: object
     properties:
       '@type':
         enum:
@@ -198,9 +227,15 @@ $defs:
         $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.stringArray
       imageViewingConditions:
         type: string
-  vnmir_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailPSFD/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailVNMIR:
+    title: VNMIR Instrument Detail
     description: Very-Near Mid-IR spectroscopy with detailed measurement parameters
+    type: object
     properties:
       '@type':
         anyOf:
@@ -258,10 +293,16 @@ $defs:
         type: number
       vacuumExposedSample:
         type: boolean
-  qris_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailVNMIR/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailQRIS:
+    title: QRIS Instrument Detail
     description: QRIS (Raman) with calibration and illumination parameters. (Extension
       type, not in v3 source schema.)
+    type: object
     properties:
       '@type':
         anyOf:
@@ -286,9 +327,15 @@ $defs:
         type: integer
       target:
         type: string
-  slsshapemodel_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailQRIS/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailSLS:
+    title: SLS Instrument Detail
     description: Structured Light Scanning shape models and partial scans
+    type: object
     properties:
       '@type':
         anyOf:
@@ -308,10 +355,16 @@ $defs:
         type: integer
       watertight:
         type: boolean
-  xctimage_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailXCT:
+    title: XCT Instrument Detail
     description: X-ray Computed Tomography images with detailed scan parameters. (Extension
       type, not in v3 source schema.)
+    type: object
     properties:
       '@type':
         enum:
@@ -380,9 +433,15 @@ $defs:
         type: number
       xrayTubePower:
         type: number
-  xrd_detail:
-    type: object
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailXCT/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.detailXRD:
+    title: XRD Instrument Detail
     description: X-ray Diffraction tabular data with geometry and wavelength
+    type: object
     properties:
       '@type':
         enum:
@@ -397,6 +456,41 @@ $defs:
         type: number
       wavelength:
         type: number
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailXRD/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.adaProperties.stringArray:
+    title: String Array Type
+    description: Simple reusable array of strings
+    type: array
+    minItems: 0
+    items:
+      type: string
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/stringArray/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+title: Instrument Detail Types
+description: Umbrella schema referencing all instrument-specific detail type building
+  blocks. Individual detail types are now separate building blocks under adaProperties/detailXxx/.
+type: object
+anyOf:
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailBasemap
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailARGT
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailDSC
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailEMPA
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailEAIRMS
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailICPOES
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailL2MS
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailLAF
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailNanoIR
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailNanoSIMS
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailPSFD
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailVNMIR
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailQRIS
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailSLS
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailXCT
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailXRD
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

@@ -34,7 +34,7 @@ properties:
           - ada:other
       required:
       - '@type'
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/slsshapemodel_detail
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml
   schema:encodingFormat:
     description: One of the approved non-standard file formats
     enum:

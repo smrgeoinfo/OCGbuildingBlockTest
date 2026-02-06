@@ -43,7 +43,7 @@ properties:
           - ada:QRISCalibrationFile
           - ada:samplePreparation
           - ada:shapefiles
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/argt_detail
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailARGT/schema.yaml
   schema:version:
     type: string
   schema:isBasedOn:

@@ -30,7 +30,7 @@ properties:
     type: string
   componentType:
     anyOf:
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/details/schema.yaml#/$defs/empa_detail
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml
     - type: object
       properties:
         '@type':
