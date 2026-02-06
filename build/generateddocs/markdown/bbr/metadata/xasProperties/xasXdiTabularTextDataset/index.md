@@ -169,15 +169,15 @@ ex:xasXDIdownload_23463h a cdi:TabularTextDataset,
             cdi:label "it" ;
             cdi:length 12 ],
         [ a cdi:TextMapping ;
+            cdi:formats xas:incidentIntensityVariable ;
+            cdi:hasRole "Measure" ;
+            cdi:label "i0" ],
+        [ a cdi:TextMapping ;
             cdi:formats xas:monochromatorEnergyVariable ;
             cdi:hasRole "Dimension" ;
             cdi:index 1 ;
             cdi:label "energy" ;
-            cdi:length 12 ],
-        [ a cdi:TextMapping ;
-            cdi:formats xas:incidentIntensityVariable ;
-            cdi:hasRole "Measure" ;
-            cdi:label "i0" ] ;
+            cdi:length 12 ] ;
     schema1:contentSize "30 kb" ;
     schema1:contentUrl "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi" ;
     schema1:description "Distribution = PhysicalDataSet text file conformant with XDI specification" ;

@@ -152,6 +152,7 @@ Links to the schema:
     "nxs": "http://purl.org/nexusformat/definitions/",
     "dcterms": "http://purl.org/dc/terms/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
     "@version": 1.1
   }
 }
