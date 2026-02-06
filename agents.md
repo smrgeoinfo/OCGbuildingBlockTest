@@ -1,3 +1,240 @@
+# Agents Guide: OGC Building Blocks Repository
+
+This document explains how to work with this repository — the building block structure, authoring rules, validation workflow, and the schema resolver tool.
+
+## What This Repository Is
+
+This repository contains modular schema components following the [OGC Building Blocks](https://opengeospatial.github.io/bblocks/) pattern. Each building block is a self-contained directory with a JSON Schema, JSON-LD context, metadata, and description. Building blocks compose into profiles that define complete metadata schemas for specific use cases.
+
+The repository is included as a git submodule in the [IEDA Data Submission Portal](https://github.com/smrgeoinfo/IEDADataSubmission) monorepo.
+
+## Repository Structure
+
+```
+OCGbuildingBlockTest/
+├── _sources/                        # All building block sources
+│   ├── schemaorgProperties/         # Core schema.org property types
+│   │   ├── person/                  # schema:Person
+│   │   ├── organization/            # schema:Organization
+│   │   ├── identifier/              # schema:identifier (PropertyValue)
+│   │   ├── definedTerm/             # schema:DefinedTerm
+│   │   ├── additionalProperty/      # schema:PropertyValue for soft-typed properties
+│   │   ├── variableMeasured/        # schema:variableMeasured (PropertyValue)
+│   │   ├── spatialExtent/           # schema:Place (bounding box)
+│   │   ├── temporalExtent/          # schema:temporalCoverage
+│   │   ├── dataDownload/            # schema:DataDownload
+│   │   ├── labeledLink/             # schema:LinkRole
+│   │   ├── funder/                  # schema:funder / schema:Grant
+│   │   ├── webAPI/                  # schema:WebAPI
+│   │   ├── action/                  # schema:Action
+│   │   ├── agentInRole/             # schema:Role wrapping Person/Org
+│   │   ├── metaMetadata/            # dcterms:conformsTo metadata-about-metadata
+│   │   ├── cdifMandatory/           # CDIF mandatory property group
+│   │   └── cdifOptional/            # CDIF optional property group
+│   ├── adaProperties/               # ADA (Astromat Data Archive) property types
+│   │   ├── stringArray/             # Reusable string array utility type
+│   │   ├── creativeWork/            # schema:CreativeWork labeled links
+│   │   ├── spatialRegistration/     # Pixel coordinate system registration
+│   │   ├── instrument/              # NXinstrument + prov:Entity analytical instruments
+│   │   ├── laboratory/              # NXsource + schema:Place facilities
+│   │   ├── details/                 # 16 instrument-specific detail types ($defs)
+│   │   ├── physicalMapping/         # DDI-CDI WideDataStructure variable mapping
+│   │   ├── image/                   # ada:image with componentType classification
+│   │   ├── imageMap/                # Spatially registered image maps
+│   │   ├── supDocImage/             # Supplemental document images
+│   │   ├── tabularData/             # CDI PhysicalDataSet tabular data
+│   │   ├── collection/              # Sets of related files
+│   │   ├── dataCube/                # CDI DimensionalDataStructure multidimensional data
+│   │   ├── document/                # Supplemental documents (calibration, methods, logs)
+│   │   ├── otherFile/               # Non-standard file formats (EMSA, OBJ, STL, XLSX)
+│   │   ├── files/                   # File-level metadata (composes all file types above)
+│   │   └── hasPartFile/             # Files within archive distributions
+│   ├── provProperties/              # W3C PROV provenance types
+│   │   ├── generatedBy/             # prov:wasGeneratedBy (Activity)
+│   │   └── derivedFrom/             # prov:wasDerivedFrom
+│   ├── cdiProperties/               # DDI-CDI data description types
+│   │   └── cdiVariableMeasured/     # CDI variable measured extension
+│   ├── qualityProperties/           # Data quality types
+│   │   └── qualityMeasure/          # Quality measure definitions
+│   ├── xasProperties/               # X-ray Absorption Spectroscopy types
+│   │   ├── xasSample/               # XAS sample (extends schema:Product)
+│   │   ├── xasInstrument/           # XAS instrument (beamline, synchrotron)
+│   │   ├── xasFacility/             # XAS facility (synchrotron source)
+│   │   ├── xasGeneratedBy/          # XAS analysis event (extends prov:Activity)
+│   │   ├── xasHDF5DataStructure/    # HDF5 data structure for XAS
+│   │   ├── xasXdiTabularTextDataset/ # XDI tabular text dataset
+│   │   ├── xasRequired/             # XAS mandatory property group
+│   │   ├── xasOptional/             # XAS optional property group
+│   │   └── xasSubject/              # XAS subject classification
+│   └── profiles/                    # Top-level profiles that compose BBs
+│       ├── CDIFDiscovery/           # CDIF Discovery profile
+│       └── adaProduct/              # ADA product metadata profile
+├── resolve_schema.py                # Schema resolver tool (see below)
+└── .github/workflows/               # Validation workflow
+```
+
+## Building Block Structure
+
+Each building block directory contains:
+
+| File | Required | Purpose |
+|---|---|---|
+| `bblock.json` | Yes | Metadata: name, status, tags, version, links, sources |
+| `schema.yaml` | Yes | JSON Schema with `$ref` cross-references to other BBs |
+| `context.jsonld` | Yes | JSON-LD namespace prefix mappings |
+| `description.md` | Yes | Human-readable description |
+| `examples.yaml` | No | Example snippets with `ref:` pointing to example JSON files |
+
+### `bblock.json` Required Fields
+
+Every `bblock.json` must include all of these fields:
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/opengeospatial/bblocks-postprocess/refs/heads/master/ogc/bblocks/metadata-schema.yaml",
+  "name": "Human-readable name",
+  "abstract": "One-line description",
+  "status": "under-development",
+  "dateTimeAddition": "2026-01-01T00:00:00Z",
+  "itemClass": "schema",
+  "register": "ogc-building-block",
+  "version": "0.1",
+  "dateOfLastChange": "2026-01-01",
+  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "maturity": "development",
+  "scope": "unstable",
+  "tags": ["tag1", "tag2"],
+  "sources": []
+}
+```
+
+Missing `dateOfLastChange` or `link` will cause the validation workflow to fail.
+
+### `schema.yaml` Cross-Reference Rules
+
+Schemas reference other building blocks using relative `$ref` paths:
+
+```yaml
+$defs:
+  Person:
+    $ref: ../../schemaorgProperties/person/schema.yaml
+  Identifier:
+    $ref: ../../schemaorgProperties/identifier/schema.yaml
+```
+
+**Critical rules:**
+
+1. **Always reference `schema.yaml`, never standalone `.json` files.** The postprocess tool resolves `$ref` to GitHub Pages URLs. References to `.json` files cause 404 errors because only `schema.yaml` files are published to GitHub Pages.
+
+   ```yaml
+   # CORRECT
+   $ref: ../../schemaorgProperties/metaMetadata/schema.yaml
+
+   # WRONG — will cause 404 in validation
+   $ref: ../../schemaorgProperties/metaMetadata/metaMetadataSchema.json
+   ```
+
+2. **Use correct relative paths.** Paths are relative to the current `schema.yaml` file. Building blocks in `xasProperties/` that reference `schemaorgProperties/` need `../../schemaorgProperties/...`, not `../...`.
+
+3. **Reference `$defs` within another schema.yaml** using fragment syntax:
+   ```yaml
+   $ref: ../../schemaorgProperties/additionalProperty/schema.yaml#/$defs/propertyID_item
+   ```
+
+### `examples.yaml` Rules
+
+1. **`ref:` must match the actual filename** in the building block directory. Copy-paste errors referencing files from other BBs (e.g., `exampleWebAPI.json` in a non-webAPI BB) will cause validation failures.
+
+2. **Schema prefix must use `http`, not `https`**, with a trailing slash:
+   ```yaml
+   # CORRECT
+   prefixes:
+     schema: http://schema.org/
+
+   # WRONG
+   prefixes:
+     schema: https://schema.org
+   ```
+
+## Validation Workflow
+
+A GitHub Actions workflow (`Validate and process Building Blocks`) runs on every push. It uses the `ogc/bblocks/postprocess` Docker container to:
+
+1. Validate all `bblock.json` files have required fields
+2. Resolve all `$ref` paths in `schema.yaml` files
+3. Fetch resolved references from GitHub Pages URLs
+4. Validate examples against their schemas
+5. Generate annotated schemas and documentation
+
+If the workflow fails, check the error log for:
+- Missing `bblock.json` fields (especially `dateOfLastChange`, `link`)
+- 404 errors fetching resolved `$ref` URLs (usually means a `.json` reference instead of `schema.yaml`)
+- `FileNotFoundError` for example files (wrong `ref:` in `examples.yaml`)
+- Date format errors (must be `YYYY-MM-DD`, not e.g. `2025-11=04`)
+
+## Vocabulary Namespaces
+
+| Prefix | URI | Used In |
+|---|---|---|
+| `schema` | `http://schema.org/` | Core metadata (name, description, identifier) — all BBs |
+| `ada` | `https://ada.astromat.org/metadata/` | ADA-specific types and properties |
+| `cdi` | `http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/` | Data structure descriptions |
+| `prov` | `http://www.w3.org/ns/prov#` | Provenance (instruments, activities) |
+| `nxs` | `http://purl.org/nexusformat/definitions/` | NeXus instrument/source classes |
+| `csvw` | `http://www.w3.org/ns/csvw#` | Tabular data descriptions |
+| `spdx` | `http://spdx.org/rdf/terms#` | File checksums |
+| `dcterms` | `http://purl.org/dc/terms/` | Conformance declarations |
+
+## ADA Building Blocks
+
+The ADA (Astromat Data Archive) metadata schema (originally 37 `$defs` from `adaMetadata-SchemaOrgSchema-v2.json`) has been decomposed into 17 modular building blocks in `adaProperties/` plus a top-level profile in `profiles/adaProduct/`.
+
+### Composition Hierarchy
+
+```
+profiles/adaProduct/                    ← Top-level ADA product profile
+├── schema:creator → person, organization
+├── schema:contributor → agentInRole → person, organization
+├── schema:funding → funder
+├── schema:identifier → identifier
+├── schema:license → creativeWork
+├── schema:variableMeasured → variableMeasured, cdiVariableMeasured
+├── prov:wasGeneratedBy → generatedBy
+│   ├── prov:used → instrument
+│   ├── schema:location → laboratory
+│   └── schema:mainEntity → (sample inline)
+├── schema:distribution → dataDownload
+│   └── schema:hasPart → hasPartFile → files
+│       ├── ada:image → image → spatialRegistration
+│       ├── ada:imageMap → imageMap → spatialRegistration
+│       ├── ada:supDocImage → supDocImage
+│       ├── ada:tabularData → tabularData → physicalMapping
+│       ├── ada:collection → collection
+│       ├── ada:dataCube → dataCube
+│       ├── ada:document → document
+│       └── ada:otherFile → otherFile
+└── qualityMeasure (data quality)
+```
+
+### Detail Types
+
+The `details/` building block contains 16 instrument-specific detail type definitions as `$defs`, referenced from `files/schema.yaml`:
+
+```
+empa_detail, xrd_detail, sims_detail, nanosims_detail, ebsd_detail,
+ftir_detail, raman_detail, xrf_detail, libs_detail, laicpms_detail,
+sem_detail, tem_detail, fluorescence_detail, xas_detail,
+generic_spectral_detail, generic_imaging_detail
+```
+
+Referenced as: `../details/schema.yaml#/$defs/empa_detail`
+
+### Integration with CZ Net Portal
+
+The ADA building blocks define the JSON-LD schema structure. The CZ Net Data Submission Portal (`dspback`) has a JSON-LD translation endpoint (`POST /api/metadata/ada/jsonld`) that accepts JSON-LD conforming to the `adaProduct` profile and translates it to the flat format used by the portal's form schema (`schema.json`). See the [IEDADataSubmission agents.md](https://github.com/smrgeoinfo/IEDADataSubmission/blob/main/agents.md) for translation details.
+
+---
+
 # JSON Schema Reference Resolver
 
 ## Overview
@@ -337,3 +574,5 @@ When modifying the resolver:
 ## License
 
 This tool is part of the OGC Building Blocks repository. See the repository license for terms.
+
+This material is based upon work supported by the National Science Foundation (NSF) under awards 2012893, 2012748, and 2012593.
