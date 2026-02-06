@@ -1,0 +1,707 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ADA VNMIR Product Profile",
+  "description": "Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy products. Extends the base ADA product profile with constraints on valid VNMIR component types and vnmir_detail requirements.",
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string"
+    },
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "schema:Dataset",
+          "schema:Product"
+        ]
+      }
+    },
+    "schema:name": {
+      "type": "string"
+    },
+    "schema:description": {
+      "type": "string"
+    },
+    "schema:additionalType": {
+      "type": "array",
+      "description": "Must include a VNMIR product type identifier.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ada:VNMIRPoint",
+          "ada:VNMIROverviewImage",
+          "ada:VNMIRSpectralMap"
+        ]
+      }
+    },
+    "submissionType": {
+      "type": "string"
+    },
+    "schema:funding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:MonetaryGrant"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "String that identifies a particular grant"
+          },
+          "name": {
+            "type": "string",
+            "description": "Title of the grant"
+          },
+          "funder": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:Organization"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "schema:name"
+            ]
+          }
+        }
+      }
+    },
+    "schema:identifier": {
+      "type": "string",
+      "description": "Primary identifier for the dataset"
+    },
+    "schema:creator": {
+      "description": "Author or originator of intellectual content of dataset. Use the JSON-LD @list construct to preserve author order.",
+      "type": "object",
+      "properties": {
+        "@list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:Person",
+                "enum": [
+                  "schema:Person",
+                  "schema:Organization"
+                ]
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:alternateName": {
+                "type": "string"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "description": "ORCID or other identifier"
+              },
+              "schema:affiliation": {
+                "type": "object",
+                "properties": {
+                  "schema:name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "schema:description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@type",
+              "schema:name"
+            ]
+          }
+        }
+      }
+    },
+    "schema:contributor": {
+      "description": "Other parties who played a role in production of dataset",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:Person"
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:identifier": {
+            "type": "string",
+            "description": "ORCID or other identifier"
+          },
+          "schema:affiliation": {
+            "type": "object",
+            "properties": {
+              "schema:name": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:roleName": {
+            "type": "string",
+            "description": "Role of the contributor"
+          }
+        },
+        "required": [
+          "schema:name"
+        ]
+      }
+    },
+    "schema:license": {
+      "description": "Legal statement of conditions for use and access",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:CreativeWork"
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:description": {
+            "type": "string"
+          },
+          "schema:url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "schema:relatedLink": {
+      "type": "array",
+      "description": "Links to related resources at the product level",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:LinkRole"
+          },
+          "schema:linkRelationship": {
+            "type": "string"
+          },
+          "schema:target": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:EntryPoint"
+              },
+              "schema:encodingFormat": {
+                "type": "string"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "schema:dateModified": {
+      "type": "string"
+    },
+    "schema:datePublished": {
+      "type": "string"
+    },
+    "schema:creativeWorkStatus": {
+      "type": "string"
+    },
+    "schema:measurementTechnique": {
+      "type": "object",
+      "description": "Text description of the measurement method",
+      "properties": {
+        "@type": {
+          "default": "schema:DefinedTerm",
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "type": "string"
+        }
+      }
+    },
+    "prov:wasGeneratedBy": {
+      "type": "array",
+      "description": "Analysis events that generated this product",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "description": "Include 'prov:Activity' and 'schema:Event'",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prov:used": {
+            "type": "array",
+            "description": "Instruments used in the analysis",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "Analysis Instrument Type",
+              "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "default": [
+                    "schema:Thing",
+                    "prov:Entity",
+                    "nxs:BaseClass/NXinstrument"
+                  ],
+                  "type": "array"
+                },
+                "schema:additionalType": {
+                  "description": "Identifier for an instrument or component in the analytical instrumentation, e.g. GCMD instrument identifier.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:description": {
+                  "type": "string"
+                },
+                "schema:identifier": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "schema:location": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Analysis Laboratory Type",
+            "description": "Laboratory or facility definition combining NeXus NXsource with schema:Place. Used to identify the location where analysis was performed.",
+            "type": "object",
+            "properties": {
+              "@type": {
+                "default": [
+                  "schema:Place",
+                  "nxs:BaseClass/NXsource"
+                ],
+                "type": "array"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "format": "uri"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:alternateName": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:mainEntity": {
+            "type": "array",
+            "description": "Samples analyzed",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "default": [
+                    "schema:Thing",
+                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                  ],
+                  "type": "array"
+                },
+                "schema:additionalType": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:identifier": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "schema:identifier": {
+            "description": "Identifier for the analysis event (sessionID)",
+            "type": "string"
+          },
+          "schema:startDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "prov:used"
+        ]
+      }
+    },
+    "schema:variableMeasured": {
+      "description": "What does the dataset measure? Define the variables here at the conceptual level; the physical implementation details are in the data structure. Requires dual typing with schema:PropertyValue and cdi:InstanceVariable per CDIF 2026.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@id": {
+            "type": "string",
+            "description": "Identifier for this variable, used to link from physical mappings in distributions."
+          },
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema:description": {
+            "type": "string",
+            "minLength": 10
+          },
+          "schema:name": {
+            "description": "The name as it typically appears in a dataset",
+            "type": "string",
+            "minLength": 5
+          },
+          "schema:alternateName": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Human intelligible name for variable that conveys semantics"
+            }
+          },
+          "schema:propertyID": {
+            "description": "Ideally a resolvable URI for a property concept",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:DefinedTerm"
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:identifier": {
+                  "type": "string"
+                },
+                "schema:inDefinedTermSet": {
+                  "type": "string"
+                },
+                "schema:termCode": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "schema:measurementTechnique": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:DefinedTerm"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "schema:name"
+            ]
+          },
+          "schema:unitText": {
+            "type": "string"
+          },
+          "schema:unitCode": {
+            "type": "string"
+          },
+          "schema:minValue": {
+            "type": "number"
+          },
+          "schema:maxValue": {
+            "type": "number"
+          },
+          "schema:url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "cdi:intendedDataType": {
+            "type": "string"
+          },
+          "cdi:role": {
+            "type": "string",
+            "description": "The role of the variable: MeasureComponent, AttributeComponent, DimensionComponent, IdentifierComponent."
+          },
+          "cdi:describedUnitOfMeasure": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:DefinedTerm"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@type",
+              "schema:name"
+            ]
+          },
+          "cdi:simpleUnitOfMeasure": {
+            "type": "string"
+          },
+          "cdi:uses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:DefinedTerm"
+                },
+                "schema:name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "@id",
+          "@type",
+          "schema:description",
+          "schema:name"
+        ]
+      }
+    },
+    "schema:distribution": {
+      "type": "array",
+      "description": "Access options for the dataset. Each distribution item is expected to be a single file or an archive containing multiple files described in hasPart.",
+      "items": {
+        "type": "object",
+        "description": "Data file or archive distribution",
+        "properties": {
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "schema:DataDownload"
+            ]
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:description": {
+            "type": "string"
+          },
+          "schema:contentURL": {
+            "type": "string",
+            "description": "Download URL for the file"
+          },
+          "schema:encodingFormat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "MIME type(s)"
+          },
+          "schema:additionalType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "spdx:checksum": {
+            "type": "object",
+            "properties": {
+              "spdx:algorithm": {
+                "type": "string"
+              },
+              "spdx:checksumValue": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:hasPart": {
+            "type": "array",
+            "description": "Files within an archive package",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                },
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:additionalType": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:description": {
+                  "type": "string"
+                },
+                "schema:encodingFormat": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:size": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string",
+                      "default": "schema:QuantitativeValue"
+                    },
+                    "schema:value": {
+                      "type": "integer"
+                    },
+                    "schema:unitText": {
+                      "type": "string",
+                      "default": "byte"
+                    }
+                  }
+                },
+                "spdx:checksum": {
+                  "type": "object",
+                  "properties": {
+                    "spdx:algorithm": {
+                      "type": "string"
+                    },
+                    "spdx:checksumValue": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schema:subjectOf": {
+      "type": "object",
+      "description": "Metadata record about this dataset",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "default": "schema:Dataset"
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for the metadata record"
+        },
+        "schema:about": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            }
+          }
+        },
+        "dcterms:conformsTo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string",
+                "description": "URI for specifications that this metadata record conforms to. Minimally should specify URI for CDIF discovery profile."
+              }
+            }
+          }
+        },
+        "schema:maintainer": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "default": "schema:Person",
+              "enum": [
+                "schema:Person",
+                "schema:Organization"
+              ]
+            },
+            "schema:name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "schema:name"
+          ]
+        },
+        "schema:sdDatePublished": {
+          "description": "Date of most recent update to the metadata content",
+          "type": "string",
+          "format": "datetime"
+        },
+        "schema:includedInDataCatalog": {
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string"
+            },
+            "@type": {
+              "type": "string",
+              "default": "schema:DataCatalog"
+            },
+            "schema:name": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string"
+            },
+            "schema:identifier": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:PropertyValue"
+                },
+                "schema:propertyID": {
+                  "type": "string"
+                },
+                "schema:value": {
+                  "type": "string"
+                },
+                "schema:url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
