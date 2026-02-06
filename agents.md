@@ -38,17 +38,17 @@ OCGbuildingBlockTest/
 │   │   ├── instrument/              # NXinstrument + prov:Entity analytical instruments
 │   │   ├── laboratory/              # NXsource + schema:Place facilities
 │   │   ├── details/                 # 16 instrument-specific detail types ($defs)
-│   │   ├── physicalMapping/         # DDI-CDI WideDataStructure variable mapping
+│   │   ├── physicalMapping/         # DDI-CDI flat per-column variable mapping (CDIF 2026)
 │   │   ├── image/                   # ada:image with componentType classification
 │   │   ├── imageMap/                # Spatially registered image maps
 │   │   ├── supDocImage/             # Supplemental document images
-│   │   ├── tabularData/             # CDI PhysicalDataSet tabular data
+│   │   ├── tabularData/             # CDI TabularTextDataSet with CSVW properties (CDIF 2026)
 │   │   ├── collection/              # Sets of related files
-│   │   ├── dataCube/                # CDI DimensionalDataStructure multidimensional data
+│   │   ├── dataCube/                # CDI StructuredDataSet multidimensional data (CDIF 2026)
 │   │   ├── document/                # Supplemental documents (calibration, methods, logs)
 │   │   ├── otherFile/               # Non-standard file formats (EMSA, OBJ, STL, XLSX)
-│   │   ├── files/                   # File-level metadata (composes all file types above)
-│   │   └── hasPartFile/             # Files within archive distributions
+│   │   ├── files/                   # File-level metadata (requires DataDownload type, CDIF 2026)
+│   │   └── hasPartFile/             # Files within archives (NOT DataDownload, allOf pattern)
 │   ├── provProperties/              # W3C PROV provenance types
 │   │   ├── generatedBy/             # prov:wasGeneratedBy (Activity)
 │   │   └── derivedFrom/             # prov:wasDerivedFrom
@@ -68,7 +68,11 @@ OCGbuildingBlockTest/
 │   │   └── xasSubject/              # XAS subject classification
 │   └── profiles/                    # Top-level profiles that compose BBs
 │       ├── CDIFDiscovery/           # CDIF Discovery profile
-│       └── adaProduct/              # ADA product metadata profile
+│       ├── adaProduct/              # ADA product metadata profile (v3, CDIF 2026)
+│       ├── adaEMPA/                 # Electron Microprobe Analysis technique profile
+│       ├── adaXRD/                  # X-ray Diffraction technique profile
+│       ├── adaICPMS/                # ICP Mass Spectrometry technique profile
+│       └── adaVNMIR/                # Very-Near Mid-IR / FTIR spectroscopy profile
 ├── resolve_schema.py                # Schema resolver tool (see below)
 └── .github/workflows/               # Validation workflow
 ```
@@ -184,50 +188,101 @@ If the workflow fails, check the error log for:
 | `csvw` | `http://www.w3.org/ns/csvw#` | Tabular data descriptions |
 | `spdx` | `http://spdx.org/rdf/terms#` | File checksums |
 | `dcterms` | `http://purl.org/dc/terms/` | Conformance declarations |
+| `geosparql` | `http://www.opengis.net/ont/geosparql#` | Spatial geometry types |
 
 ## ADA Building Blocks
 
-The ADA (Astromat Data Archive) metadata schema (originally 37 `$defs` from `adaMetadata-SchemaOrgSchema-v2.json`) has been decomposed into 17 modular building blocks in `adaProperties/` plus a top-level profile in `profiles/adaProduct/`.
+The ADA (Astromat Data Archive) metadata schema (37 `$defs` from `adaMetadata-SchemaOrgSchema-v3.json`, aligned with CDIF 2026 / DDI-CDI / CSVW) has been decomposed into 18 modular building blocks in `adaProperties/` plus 5 profiles in `profiles/` (adaProduct + 4 technique-specific profiles).
 
 ### Composition Hierarchy
 
 ```
-profiles/adaProduct/                    ← Top-level ADA product profile
-├── schema:creator → person, organization
-├── schema:contributor → agentInRole → person, organization
-├── schema:funding → funder
-├── schema:identifier → identifier
+profiles/adaProduct/                    ← Top-level ADA product profile (v3, CDIF 2026)
+├── schema:creator → @list of person, organization
+├── schema:contributor → person, organization, schema:Role
+├── schema:funding → funder (organization, @id ref)
+├── schema:identifier → identifier (PropertyValue, string, array)
 ├── schema:license → creativeWork
-├── schema:variableMeasured → variableMeasured, cdiVariableMeasured
-├── prov:wasGeneratedBy → generatedBy
+├── schema:variableMeasured → variable_type (dual: PropertyValue + cdi:InstanceVariable)
+│   └── cdi:role, cdi:intendedDataType, cdi:uses, cdi:describedUnitOfMeasure, etc.
+├── prov:wasGeneratedBy → array of analysis events
+│   ├── @type: allOf [prov:Activity, schema:Event]
 │   ├── prov:used → instrument
 │   ├── schema:location → laboratory
-│   └── schema:mainEntity → (sample inline)
-├── schema:distribution → dataDownload
-│   └── schema:hasPart → hasPartFile → files
-│       ├── ada:image → image → spatialRegistration
-│       ├── ada:imageMap → imageMap → spatialRegistration
-│       ├── ada:supDocImage → supDocImage
-│       ├── ada:tabularData → tabularData → physicalMapping
-│       ├── ada:collection → collection
-│       ├── ada:dataCube → dataCube
-│       ├── ada:document → document
-│       └── ada:otherFile → otherFile
-└── qualityMeasure (data quality)
+│   └── schema:mainEntity → (sample inline, identifier as array)
+├── schema:distribution → oneOf:
+│   ├── files_type (single file, @type contains DataDownload)
+│   │   ├── spdx:checksum → {spdx:algorithm, spdx:checksumValue}
+│   │   ├── schema:encodingFormat → array of strings
+│   │   └── fileDetail → anyOf [image, imageMap, tabularData, ...]
+│   └── archive (DataDownload + schema:hasPart)
+│       └── schema:hasPart → hasPart_file_type (NOT DataDownload)
+│           └── allOf: [common file props] + anyOf [file type BBs]
+│               ├── image (componentType enum)
+│               ├── imageMap (componentType: empa_detail or enum)
+│               ├── supDocImage (componentType enum, incl. ada:other)
+│               ├── tabularData (TabularTextDataSet + CSVW + oneOf delimited/fixedWidth)
+│               │   └── cdi:hasPhysicalMapping → physicalMapping (flat per-column)
+│               ├── collection (componentType enum + filelist + nFiles)
+│               ├── dataCube (StructuredDataSet + hasPhysicalMapping + locator)
+│               ├── document (componentType enum + schema:version, schema:isBasedOn)
+│               └── otherFile (componentType + encodingFormat enum)
+└── schema:subjectOf → metadata record
+```
+
+### Technique Profiles
+
+Technique profiles extend `adaProduct` and constrain component types to those valid for the technique:
+
+```
+profiles/adaEMPA/    ← extends adaProduct
+├── schema:additionalType contains EMPA product type
+└── schema:distribution hasPart constrained to:
+    EMPAImageMap, EMPAImage, EMPAQEATabular, EMPAImageCollection,
+    analysisLocation, supplementaryImage, calibrationFile, methodDescription,
+    instrumentMetadata
+
+profiles/adaXRD/     ← extends adaProduct
+├── schema:additionalType contains XRD product type
+└── schema:distribution hasPart constrained to:
+    XRDTabular, XRDDiffractionPattern, XRDIndexedImage,
+    instrumentMetadata, methodDescription
+
+profiles/adaICPMS/   ← extends adaProduct
+├── schema:additionalType contains ICP-MS product type (HR/Q/MC variants)
+└── schema:distribution hasPart constrained to:
+    HRICPMSProcessed, HRICPMSRaw, QICPMSProcessedTabular, QICPMSRawTabular,
+    MCICPMSTabular, MCICPMSCollection, MCICPMSRaw, methodDescription,
+    instrumentMetadata, calibrationFile
+
+profiles/adaVNMIR/   ← extends adaProduct
+├── schema:additionalType contains VNMIR product type
+└── schema:distribution hasPart constrained to:
+    VNMIRSpectralPoint, VNMIROverviewImage, VNMIRSpectralMap,
+    VNMIRSpectraPlot, analysisLocation, instrumentMetadata, methodDescription
 ```
 
 ### Detail Types
 
-The `details/` building block contains 16 instrument-specific detail type definitions as `$defs`, referenced from `files/schema.yaml`:
+The `details/` building block contains 16 instrument-specific detail type definitions as `$defs`. 12 are aligned with v3 source schema; 4 are extensions (marked with *):
 
 ```
-empa_detail, xrd_detail, sims_detail, nanosims_detail, ebsd_detail,
-ftir_detail, raman_detail, xrf_detail, libs_detail, laicpms_detail,
-sem_detail, tem_detail, fluorescence_detail, xas_detail,
-generic_spectral_detail, generic_imaging_detail
+v3-aligned (12):
+  argt_detail, dsc_detail, empa_detail, eairms_detail, l2ms_detail,
+  laf_detail, nanoir_detail, nanosims_detail, psfd_detail, vnmir_detail,
+  slsshapemodel_detail, xrd_detail
+
+Extensions (4):
+  basemap_detail*, icpoes_detail*, qris_detail*, xctimage_detail*
 ```
 
 Referenced as: `../details/schema.yaml#/$defs/empa_detail`
+
+Key detail types used in technique profiles:
+- **empa_detail**: `spectrometersUsed`, `signalUsed` (used in adaEMPA)
+- **xrd_detail**: `geometry`, `sampleMount`, `stepSize`, `timePerStep`, `wavelength` (used in adaXRD)
+- **vnmir_detail**: 20+ properties including `detector`, `beamsplitter`, `spectralRangeMin/Max`, etc. (used in adaVNMIR)
+- ICP-MS has no detail type; component types are enum-only
 
 ### Integration with CZ Net Portal
 
