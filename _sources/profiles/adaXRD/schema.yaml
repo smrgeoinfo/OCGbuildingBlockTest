@@ -1,0 +1,29 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA XRD Product Profile
+description: >-
+  Technique-specific profile for X-ray Diffraction (XRD) products.
+  Extends the base ADA product profile with constraints on valid XRD component
+  types and xrd_detail requirements.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include an XRD product type identifier.
+        contains:
+          const: "ada:XRDTabular"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:XRDTabular"
+                        - "ada:XRDDiffractionPattern"
+                        - "ada:XRDIndexedImage"
+                        - "ada:instrumentMetadata"
+                        - "ada:methodDescription"

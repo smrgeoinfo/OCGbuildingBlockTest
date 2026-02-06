@@ -1,0 +1,41 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA ICP-MS Product Profile
+description: >-
+  Technique-specific profile for Inductively Coupled Plasma Mass Spectrometry
+  (ICP-MS) products. Covers HR-ICP-MS, Q-ICP-MS, and MC-ICP-MS variants.
+  Extends the base ADA product profile with constraints on valid ICP-MS
+  component types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include an ICP-MS product type identifier.
+        contains:
+          enum:
+            - "ada:HRICPMSProcessed"
+            - "ada:HRICPMSRaw"
+            - "ada:QICPMSProcessed"
+            - "ada:QICPMSRaw"
+            - "ada:MCICPMSRaw"
+            - "ada:MCICPMSProcessed"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:HRICPMSProcessed"
+                        - "ada:HRICPMSRaw"
+                        - "ada:QICPMSProcessedTabular"
+                        - "ada:QICPMSRawTabular"
+                        - "ada:MCICPMSTabular"
+                        - "ada:MCICPMSCollection"
+                        - "ada:MCICPMSRaw"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
