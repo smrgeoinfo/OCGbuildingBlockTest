@@ -699,6 +699,25 @@ def resolve_all_refs(schema: Any, definitions: dict) -> Any:
 # Technique profile merging
 # ---------------------------------------------------------------------------
 
+def merge_allof_entries(schema: dict) -> dict:
+    """
+    Flatten a schema that uses allOf to compose building blocks.
+    Copies all top-level keys except allOf, then deep-merges each non-$ref
+    allOf entry into the result. $ref entries are skipped because the OGC
+    postprocessor resolves them into the built schema.json already.
+    """
+    merged = {}
+    for k, v in schema.items():
+        if k != "allOf":
+            merged[k] = copy.deepcopy(v)
+    for part in schema.get("allOf", []):
+        if "$ref" in part:
+            continue
+        if isinstance(part, dict):
+            merged = deep_merge(merged, part)
+    return merged
+
+
 def deep_merge(base: dict, overlay: dict) -> dict:
     """
     Deep merge overlay into base. overlay values take precedence.
@@ -784,10 +803,17 @@ def convert_profile_schema(
 
     schema = load_json(schema_path)
 
+    # For adaProduct: flatten its own allOf (cdifMandatory + cdifOptional + ADA overrides)
+    if profile_name == "adaProduct" and "allOf" in schema:
+        schema = merge_allof_entries(schema)
+
     # For technique profiles, merge with base adaProduct
     if profile_name != "adaProduct" and "allOf" in schema:
         base_path = ANNOTATED_DIR / "profiles" / "adaProduct" / "schema.json"
         base_schema = load_json(base_path)
+        # Flatten the base if it also uses allOf (e.g., from cdifMandatory/cdifOptional)
+        if "allOf" in base_schema:
+            base_schema = merge_allof_entries(base_schema)
         schema = merge_technique_profile(schema, base_schema)
 
     # Pipeline: apply all transformations in order

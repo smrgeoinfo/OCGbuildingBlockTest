@@ -4,9 +4,6 @@
   "description": "Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy products. Extends the base ADA product profile with constraints on valid VNMIR component types and vnmir_detail requirements.",
   "type": "object",
   "properties": {
-    "@id": {
-      "type": "string"
-    },
     "@type": {
       "type": "array",
       "items": {
@@ -16,12 +13,6 @@
           "schema:Product"
         ]
       }
-    },
-    "schema:name": {
-      "type": "string"
-    },
-    "schema:description": {
-      "type": "string"
     },
     "schema:additionalType": {
       "type": "array",
@@ -215,12 +206,6 @@
         }
       }
     },
-    "schema:dateModified": {
-      "type": "string"
-    },
-    "schema:datePublished": {
-      "type": "string"
-    },
     "schema:creativeWorkStatus": {
       "type": "string"
     },
@@ -257,62 +242,11 @@
             "type": "array",
             "description": "Instruments used in the analysis",
             "items": {
-              "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "title": "Analysis Instrument Type",
-              "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "default": [
-                    "schema:Thing",
-                    "prov:Entity",
-                    "nxs:BaseClass/NXinstrument"
-                  ],
-                  "type": "array"
-                },
-                "schema:additionalType": {
-                  "description": "Identifier for an instrument or component in the analytical instrumentation, e.g. GCMD instrument identifier.",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "schema:name": {
-                  "type": "string"
-                },
-                "schema:description": {
-                  "type": "string"
-                },
-                "schema:identifier": {
-                  "type": "string"
-                }
-              }
+              "$ref": "http://localhost:9090/register/build-local/annotated/bbr/metadata/adaProperties/instrument/schema.json"
             }
           },
           "schema:location": {
-            "$schema": "https://json-schema.org/draft/2020-12/schema",
-            "title": "Analysis Laboratory Type",
-            "description": "Laboratory or facility definition combining NeXus NXsource with schema:Place. Used to identify the location where analysis was performed.",
-            "type": "object",
-            "properties": {
-              "@type": {
-                "default": [
-                  "schema:Place",
-                  "nxs:BaseClass/NXsource"
-                ],
-                "type": "array"
-              },
-              "schema:identifier": {
-                "type": "string",
-                "format": "uri"
-              },
-              "schema:name": {
-                "type": "string"
-              },
-              "schema:alternateName": {
-                "type": "string"
-              }
-            }
+            "$ref": "http://localhost:9090/register/build-local/annotated/bbr/metadata/adaProperties/laboratory/schema.json"
           },
           "schema:mainEntity": {
             "type": "array",
