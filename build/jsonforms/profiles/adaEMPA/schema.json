@@ -4,146 +4,53 @@
   "description": "Technique-specific profile for Electron Microprobe Analysis (EMPA) products. Extends the base ADA product profile with constraints on valid EMPA component types and empa_detail requirements.",
   "type": "object",
   "properties": {
+    "@id": {
+      "type": "string",
+      "description": "The URI for the resource should be the @id value for the root of the JSON instance document tree. Note that this identifier can be interpreted to identify the resource that is the subject of this metadata record, or the JSON-LD object that is the digital object containing the metadata information."
+    },
     "@type": {
+      "description": "a schema.org Class that specifies the expected information content for the metadata record. For CDIF, 'schema:Dataset' is required, but other possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI) are sometimes included to enable the schema.org properties used to describe the resource without schema.org validation errors.",
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "schema:Dataset",
-          "schema:Product"
-        ]
+        "default": "schema:Dataset"
       }
     },
-    "schema:additionalType": {
-      "type": "array",
-      "description": "Must include an EMPA product type identifier.",
-      "items": {
-        "type": "string",
-        "enum": [
-          "ada:EMPAImage",
-          "ada:EMPACollection",
-          "ada:EMPAQEA",
-          "ada:EMPAESPC"
-        ]
-      }
-    },
-    "submissionType": {
-      "type": "string"
-    },
-    "schema:funding": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "@type": {
-            "type": "string",
-            "default": "schema:MonetaryGrant"
-          },
-          "identifier": {
-            "type": "string",
-            "description": "String that identifies a particular grant"
-          },
-          "name": {
-            "type": "string",
-            "description": "Title of the grant"
-          },
-          "funder": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:Organization"
-              },
-              "schema:name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "schema:name"
-            ]
-          }
-        }
-      }
+    "schema:name": {
+      "type": "string",
+      "description": "A descriptive name of a dataset (e.g., 'Snow depth in Northern Hemisphere'). The name should uniquely identify the described resource for human use, in the scope of the metadata catalog containing this metadata record."
     },
     "schema:identifier": {
       "type": "string",
       "description": "Primary identifier for the dataset"
     },
-    "schema:creator": {
-      "description": "Author or originator of intellectual content of dataset. Use the JSON-LD @list construct to preserve author order.",
-      "type": "object",
-      "properties": {
-        "@list": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:Person",
-                "enum": [
-                  "schema:Person",
-                  "schema:Organization"
-                ]
-              },
-              "schema:name": {
-                "type": "string"
-              },
-              "schema:alternateName": {
-                "type": "string"
-              },
-              "schema:identifier": {
-                "type": "string",
-                "description": "ORCID or other identifier"
-              },
-              "schema:affiliation": {
-                "type": "object",
-                "properties": {
-                  "schema:name": {
-                    "type": "string"
-                  }
-                }
-              },
-              "schema:description": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "@type",
-              "schema:name"
-            ]
-          }
-        }
-      }
+    "schema:dateModified": {
+      "type": "string",
+      "description": "ISO8601 formatted date (and optional time if relevant) when Dataset was last updated"
     },
-    "schema:contributor": {
-      "description": "Other parties who played a role in production of dataset",
+    "schema:conditionsOfAccess": {
+      "description": "text statement of conditions for use and access; if an online resource documents the restrictions or a URI is used to identify the conditions, recommend using schema:CreativeWork to provide a label (name) and an identifier (URI or URL). ",
       "type": "array",
       "items": {
         "type": "object",
+        "description": "Access condition — provide a label and optional URL",
         "properties": {
           "@type": {
             "type": "string",
-            "default": "schema:Person"
+            "default": "schema:CreativeWork"
           },
           "schema:name": {
-            "type": "string"
-          },
-          "schema:identifier": {
             "type": "string",
-            "description": "ORCID or other identifier"
+            "description": "Short label for the access condition"
           },
-          "schema:affiliation": {
-            "type": "object",
-            "properties": {
-              "schema:name": {
-                "type": "string"
-              }
-            }
-          },
-          "schema:roleName": {
+          "schema:description": {
             "type": "string",
-            "description": "Role of the contributor"
+            "description": "Detailed description of the condition"
+          },
+          "schema:url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to a document describing the access condition"
           }
         },
         "required": [
@@ -173,315 +80,14 @@
         }
       }
     },
-    "schema:relatedLink": {
-      "type": "array",
-      "description": "Links to related resources at the product level",
-      "items": {
-        "type": "object",
-        "properties": {
-          "@type": {
-            "type": "string",
-            "default": "schema:LinkRole"
-          },
-          "schema:linkRelationship": {
-            "type": "string"
-          },
-          "schema:target": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:EntryPoint"
-              },
-              "schema:encodingFormat": {
-                "type": "string"
-              },
-              "schema:name": {
-                "type": "string"
-              },
-              "schema:url": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "schema:creativeWorkStatus": {
-      "type": "string"
-    },
-    "schema:measurementTechnique": {
-      "type": "object",
-      "description": "Text description of the measurement method",
-      "properties": {
-        "@type": {
-          "default": "schema:DefinedTerm",
-          "type": "string"
-        },
-        "schema:name": {
-          "type": "string"
-        },
-        "schema:identifier": {
-          "type": "string"
-        }
-      }
-    },
-    "prov:wasGeneratedBy": {
-      "type": "array",
-      "description": "Analysis events that generated this product",
-      "items": {
-        "type": "object",
-        "properties": {
-          "@type": {
-            "description": "Include 'prov:Activity' and 'schema:Event'",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "prov:used": {
-            "type": "array",
-            "description": "Instruments used in the analysis",
-            "items": {
-              "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "title": "Analysis Instrument Type",
-              "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "default": [
-                    "schema:Thing",
-                    "prov:Entity",
-                    "nxs:BaseClass/NXinstrument"
-                  ],
-                  "type": "array"
-                },
-                "schema:additionalType": {
-                  "description": "Identifier for an instrument or component in the analytical instrumentation, e.g. GCMD instrument identifier.",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "schema:name": {
-                  "type": "string"
-                },
-                "schema:description": {
-                  "type": "string"
-                },
-                "schema:identifier": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "schema:location": {
-            "$schema": "https://json-schema.org/draft/2020-12/schema",
-            "title": "Analysis Laboratory Type",
-            "description": "Laboratory or facility definition combining NeXus NXsource with schema:Place. Used to identify the location where analysis was performed.",
-            "type": "object",
-            "properties": {
-              "@type": {
-                "default": [
-                  "schema:Place",
-                  "nxs:BaseClass/NXsource"
-                ],
-                "type": "array"
-              },
-              "schema:identifier": {
-                "type": "string",
-                "format": "uri"
-              },
-              "schema:name": {
-                "type": "string"
-              },
-              "schema:alternateName": {
-                "type": "string"
-              }
-            }
-          },
-          "schema:mainEntity": {
-            "type": "array",
-            "description": "Samples analyzed",
-            "items": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "default": [
-                    "schema:Thing",
-                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
-                  ],
-                  "type": "array"
-                },
-                "schema:additionalType": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "schema:identifier": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "schema:identifier": {
-            "description": "Identifier for the analysis event (sessionID)",
-            "type": "string"
-          },
-          "schema:startDate": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "prov:used"
-        ]
-      }
-    },
-    "schema:variableMeasured": {
-      "description": "What does the dataset measure? Define the variables here at the conceptual level; the physical implementation details are in the data structure. Requires dual typing with schema:PropertyValue and cdi:InstanceVariable per CDIF 2026.",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "@id": {
-            "type": "string",
-            "description": "Identifier for this variable, used to link from physical mappings in distributions."
-          },
-          "@type": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "schema:description": {
-            "type": "string",
-            "minLength": 10
-          },
-          "schema:name": {
-            "description": "The name as it typically appears in a dataset",
-            "type": "string",
-            "minLength": 5
-          },
-          "schema:alternateName": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "description": "Human intelligible name for variable that conveys semantics"
-            }
-          },
-          "schema:propertyID": {
-            "description": "Ideally a resolvable URI for a property concept",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "default": "schema:DefinedTerm"
-                },
-                "schema:name": {
-                  "type": "string"
-                },
-                "schema:identifier": {
-                  "type": "string"
-                },
-                "schema:inDefinedTermSet": {
-                  "type": "string"
-                },
-                "schema:termCode": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "schema:measurementTechnique": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:DefinedTerm"
-              },
-              "schema:name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "schema:name"
-            ]
-          },
-          "schema:unitText": {
-            "type": "string"
-          },
-          "schema:unitCode": {
-            "type": "string"
-          },
-          "schema:minValue": {
-            "type": "number"
-          },
-          "schema:maxValue": {
-            "type": "number"
-          },
-          "schema:url": {
-            "type": "string",
-            "format": "uri"
-          },
-          "cdi:intendedDataType": {
-            "type": "string"
-          },
-          "cdi:role": {
-            "type": "string",
-            "description": "The role of the variable: MeasureComponent, AttributeComponent, DimensionComponent, IdentifierComponent."
-          },
-          "cdi:describedUnitOfMeasure": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:DefinedTerm"
-              },
-              "schema:name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "@type",
-              "schema:name"
-            ]
-          },
-          "cdi:simpleUnitOfMeasure": {
-            "type": "string"
-          },
-          "cdi:uses": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "default": "schema:DefinedTerm"
-                },
-                "schema:name": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "required": [
-          "@id",
-          "@type",
-          "schema:description",
-          "schema:name"
-        ]
-      }
+    "schema:url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Web Location of a page describing the dataset (landing page), typically providing links or instructions to get the actual resource content; analogous to dcat:accessURL. If a direct link is available to get the data, put in distribution/contentUrl"
     },
     "schema:distribution": {
-      "type": "array",
       "description": "Access options for the dataset. Each distribution item is expected to be a single file or an archive containing multiple files described in hasPart.",
+      "type": "array",
       "items": {
         "type": "object",
         "description": "Data file or archive distribution",
@@ -611,7 +217,8 @@
           "type": "object",
           "properties": {
             "@id": {
-              "type": "string"
+              "type": "string",
+              "description": "this must be the '@id' value of the node containing the resource description metadata"
             }
           }
         },
@@ -653,9 +260,11 @@
         },
         "schema:includedInDataCatalog": {
           "type": "object",
+          "description": "identify the data collection or repository that contains the described dataset. The value is expected to be a schema:DataCatalog",
           "properties": {
             "@id": {
-              "type": "string"
+              "type": "string",
+              "description": "identifier for the containing catalog or repository; example data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog puts identifier here"
             },
             "@type": {
               "type": "string",
@@ -665,9 +274,12 @@
               "type": "string"
             },
             "schema:url": {
-              "type": "string"
+              "type": "string",
+              "format": "uri",
+              "description": "locator to access a landing page for the collection or catalog"
             },
             "schema:identifier": {
+              "description": "identifier for the collection or catalog; use identifier_type to provide information on identifier scheme and context for identifier",
               "type": "object",
               "properties": {
                 "@type": {
@@ -675,19 +287,713 @@
                   "default": "schema:PropertyValue"
                 },
                 "schema:propertyID": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
                 },
                 "schema:value": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
                 },
                 "schema:url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "schema:about",
+        "dcterms:conformsTo",
+        "@id"
+      ]
+    },
+    "schema:description": {
+      "type": "string",
+      "description": "A short summary describing a dataset. This text will be indexed by search applications, so the more information here, the better."
+    },
+    "schema:additionalType": {
+      "description": "Must include an EMPA product type identifier.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Additional type URI or label",
+        "enum": [
+          "ada:EMPAImage",
+          "ada:EMPACollection",
+          "ada:EMPAQEA",
+          "ada:EMPAESPC"
+        ]
+      }
+    },
+    "schema:sameAs": {
+      "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Alternate identifier or URL"
+      }
+    },
+    "schema:version": {
+      "type": [
+        "string",
+        "number"
+      ],
+      "description": "The version number or identifier for this dataset (text or numeric). The values should sort from oldest to newest using an alphanumeric sort on version strings"
+    },
+    "schema:inLanguage": {
+      "type": "string",
+      "description": "the language of the dataset content"
+    },
+    "schema:datePublished": {
+      "type": "string",
+      "description": "ISO8601 formatted date (and optional time if relevant) when Dataset was made public."
+    },
+    "schema:relatedLink": {
+      "type": "array",
+      "description": "Links to related resources at the product level",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:LinkRole"
+          },
+          "schema:linkRelationship": {
+            "type": "string",
+            "description": "How the linked resource is related"
+          },
+          "target": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:EntryPoint"
+              },
+              "schema:encodingFormat": {
+                "type": "string",
+                "description": "registered MIME types are expected"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "schema:target": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:EntryPoint"
+              },
+              "schema:encodingFormat": {
+                "type": "string"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "schema:publishingPrinciples": {
+      "description": "FDOF digitalObjectMutability, RDA digitalObjectPolicy, FDOF PersistencyPolicy. Policies related to maintenance, update, expected time to live. If an online resource documents the policies or a URI is used to identify the conditions, recommend using schema:CreativeWork to provide a label (name) and an identifier (URI or URL).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Publishing principle statement or URL"
+      }
+    },
+    "schema:keywords": {
+      "description": "Keywords are an array of strings, an array of schema:DefinedTerms, or some combination of these. If you have information about a controlled vocabulary from which keywords come from, use schema:DefinedTerm to descibe that keyword. This allowed variability makes parsing metadata hard; recommend using DefinedTerm for all keywords if any of them are from a known vocabulary, otherwise an array of strings.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema:creator": {
+      "description": "Author or originator of intellectual content of dataset. Use the JSON-LD @list construct to preserve author order.",
+      "type": "object",
+      "properties": {
+        "@list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:Person",
+                "enum": [
+                  "schema:Person",
+                  "schema:Organization"
+                ]
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:alternateName": {
+                "type": "string"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "description": "ORCID or other identifier"
+              },
+              "schema:affiliation": {
+                "type": "object",
+                "properties": {
+                  "schema:name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "schema:description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@type",
+              "schema:name"
+            ]
+          }
+        }
+      }
+    },
+    "schema:contributor": {
+      "description": "Other parties who played a role in production of dataset",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:Person"
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:identifier": {
+            "type": "string",
+            "description": "ORCID or other identifier"
+          },
+          "schema:affiliation": {
+            "type": "object",
+            "properties": {
+              "schema:name": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:roleName": {
+            "type": "string",
+            "description": "Role of the contributor"
+          }
+        },
+        "required": [
+          "schema:name"
+        ]
+      }
+    },
+    "schema:publisher": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "default": "schema:Organization",
+          "enum": [
+            "schema:Person",
+            "schema:Organization"
+          ]
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "type": "string",
+          "description": "Identifier (e.g. ROR, ORCID)"
+        }
+      },
+      "required": [
+        "schema:name"
+      ]
+    },
+    "schema:provider": {
+      "description": "Party who maintains the distribution options for the dataset. If there are multiple distributions from different providers, use the provider property on distribution/DataDownload",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:Organization"
+          },
+          "schema:name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema:name"
+        ]
+      }
+    },
+    "schema:funding": {
+      "type": "array",
+      "items": {
+        "description": "Funding acknowledgement properties, profile of schema.org/MonetaryGrant",
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:MonetaryGrant"
+          },
+          "schema:identifier": {
+            "description": "identifier for a particular grant",
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:PropertyValue"
+              },
+              "schema:propertyID": {
+                "type": "string",
+                "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+              },
+              "schema:value": {
+                "type": "string",
+                "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+              },
+              "schema:url": {
+                "type": "string",
+                "format": "uri",
+                "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+              }
+            },
+            "required": [
+              "@type"
+            ]
+          },
+          "schema:name": {
+            "type": "string",
+            "description": "title of the grant"
+          },
+          "schema:funder": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:Organization"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "schema:name"
+            ]
+          },
+          "identifier": {
+            "type": "string",
+            "description": "String that identifies a particular grant"
+          },
+          "name": {
+            "type": "string",
+            "description": "Title of the grant"
+          },
+          "funder": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:Organization"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "schema:name"
+            ]
+          }
+        },
+        "required": [
+          "schema:funder"
+        ]
+      }
+    },
+    "schema:variableMeasured": {
+      "description": "What does the dataset measure? Define the variables here at the conceptual level; the physical implementation details are in the data structure. Requires dual typing with schema:PropertyValue and cdi:InstanceVariable per CDIF 2026.",
+      "type": "array",
+      "items": {
+        "description": "CDIF schema.org implemenation of PropertyValue to use as values for variableMeasured",
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "@id": {
+            "type": "string",
+            "description": "Identifier for this variable, used to link from physical mappings in distributions."
+          },
+          "schema:name": {
+            "type": "string",
+            "description": "The name as it typically appears in a dataset",
+            "minLength": 5
+          },
+          "schema:description": {
+            "type": "string",
+            "default": "missing",
+            "minLength": 10
+          },
+          "schema:propertyID": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:DefinedTerm"
+                },
+                "schema:name": {
                   "type": "string"
+                },
+                "schema:identifier": {
+                  "type": "string"
+                },
+                "schema:inDefinedTermSet": {
+                  "type": "string"
+                },
+                "schema:termCode": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Ideally a resolvable URI for a property concept"
+          },
+          "schema:measurementTechnique": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:DefinedTerm"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "schema:name"
+            ]
+          },
+          "schema:unitText": {
+            "type": "string",
+            "description": "A string that identifies a unit of measurement that applies to all values for this variable."
+          },
+          "schema:unitCode": {
+            "type": "string"
+          },
+          "schema:minValue": {
+            "type": "number",
+            "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
+          },
+          "schema:maxValue": {
+            "type": "number",
+            "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
+          },
+          "schema:url": {
+            "type": "string",
+            "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable.",
+            "format": "uri"
+          },
+          "schema:alternateName": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Human intelligible name for variable that conveys semantics"
+            }
+          },
+          "cdi:intendedDataType": {
+            "type": "string"
+          },
+          "cdi:role": {
+            "type": "string",
+            "description": "The role of the variable: MeasureComponent, AttributeComponent, DimensionComponent, IdentifierComponent."
+          },
+          "cdi:describedUnitOfMeasure": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:DefinedTerm"
+              },
+              "schema:name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@type",
+              "schema:name"
+            ]
+          },
+          "cdi:simpleUnitOfMeasure": {
+            "type": "string"
+          },
+          "cdi:uses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:DefinedTerm"
+                },
+                "schema:name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "@id",
+          "@type",
+          "schema:description",
+          "schema:name"
+        ]
+      }
+    },
+    "schema:spatialCoverage": {
+      "description": "To specify location that is the subject of resource content; use schema.org place names, bounding box, point or optional OGC WKT gemetry.",
+      "type": "array",
+      "items": {
+        "description": "Spatial Extent description for CDIF discovery profile.  Note required prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#)",
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "default": "schema:Place"
+          },
+          "schema:name": {
+            "description": "multiple place names or DefinedTerms that have a place name and URI for the location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema:geo": {
+            "type": "object",
+            "description": "Either a bounding box or a point location.",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:GeoShape"
+              },
+              "schema:box": {
+                "type": "string",
+                "description": "Bounding box as 'south west north east'"
+              }
+            }
+          },
+          "geosparql:hasGeometry": {
+            "type": "object",
+            "description": "Optional geographic extent using wkt geometry, see Ocean InfoHub (https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt). Other geometry schemes might be specified in a specific domain profile, e.g. for atmospheric, subsurface data, or local coordinate systems. NOTE that the location specified here should be the same as the schema.org point or contained within the specified bounding box.",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "description": "MUST be sf: (<http://www.opengis.net/ont/sf#>) SimpleFeature geometry type. See https://opengeospatial.github.io/ogc-geosparql/geosparql11/sf_geometries.ttl"
+              },
+              "geosparql:asWKT": {
+                "type": "object",
+                "properties": {
+                  "@type": {
+                    "type": "string",
+                    "default": "geosparql:wktLiteral"
+                  },
+                  "@value": {
+                    "type": "string",
+                    "description": "a WKT geometry description string, e.g. 'POINT(-76 -18)'"
+                  }
+                }
+              },
+              "geosparql:crs": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "identifier string for coordinate reference system, e.g., 'CRS84'"
+                  }
                 }
               }
             }
           }
         }
       }
+    },
+    "schema:temporalCoverage": {
+      "description": "The time interval during which data was collected or observations were made; or a time period that an activity or collection is linked to intellectually or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage). For documentation of Earth Science, Paleobiology or Paleontology datasets, we are interested in the second case-- the time period that data are linked to thematically..",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "ISO 8601 date, date range (e.g. 2020-01/2020-12), or text description"
+      }
+    },
+    "submissionType": {
+      "type": "string"
+    },
+    "schema:creativeWorkStatus": {
+      "type": "string"
+    },
+    "schema:measurementTechnique": {
+      "type": "object",
+      "description": "Text description of the measurement method",
+      "properties": {
+        "@type": {
+          "default": "schema:DefinedTerm",
+          "type": "string"
+        },
+        "schema:name": {
+          "type": "string"
+        },
+        "schema:identifier": {
+          "type": "string"
+        }
+      }
+    },
+    "prov:wasGeneratedBy": {
+      "type": "array",
+      "description": "Analysis events that generated this product",
+      "items": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "description": "Include 'prov:Activity' and 'schema:Event'",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prov:used": {
+            "type": "array",
+            "description": "Instruments used in the analysis",
+            "items": {
+              "title": "Analysis Instrument Type",
+              "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "default": [
+                    "schema:Thing",
+                    "prov:Entity",
+                    "nxs:BaseClass/NXinstrument"
+                  ],
+                  "type": "array"
+                },
+                "schema:additionalType": {
+                  "description": "Identifier for an instrument or component in the analytical instrumentation, e.g. GCMD instrument identifier.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:description": {
+                  "type": "string"
+                },
+                "schema:identifier": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "schema:location": {
+            "title": "Analysis Laboratory Type",
+            "description": "Laboratory or facility definition combining NeXus NXsource with schema:Place. Used to identify the location where analysis was performed.",
+            "type": "object",
+            "properties": {
+              "@type": {
+                "default": [
+                  "schema:Place",
+                  "nxs:BaseClass/NXsource"
+                ],
+                "type": "array"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "format": "uri"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:alternateName": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:mainEntity": {
+            "type": "array",
+            "description": "Samples analyzed",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "default": [
+                    "schema:Thing",
+                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                  ],
+                  "type": "array"
+                },
+                "schema:additionalType": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:identifier": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "schema:identifier": {
+            "description": "Identifier for the analysis event (sessionID)",
+            "type": "string"
+          },
+          "schema:startDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "prov:used"
+        ]
+      }
     }
-  }
+  },
+  "required": [
+    "@id",
+    "@type",
+    "@context",
+    "schema:name",
+    "schema:identifier",
+    "schema:dateModified",
+    "schema:subjectOf"
+  ]
 }
