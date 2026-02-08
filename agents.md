@@ -47,8 +47,7 @@ OCGbuildingBlockTest/
 │   │   ├── dataCube/                # CDI StructuredDataSet multidimensional data (CDIF 2026)
 │   │   ├── document/                # Supplemental documents (calibration, methods, logs)
 │   │   ├── otherFile/               # Non-standard file formats (EMSA, OBJ, STL, XLSX)
-│   │   ├── files/                   # File-level metadata (requires DataDownload type, CDIF 2026)
-│   │   └── hasPartFile/             # Files within archives (NOT DataDownload, allOf pattern)
+│   │   └── files/                   # File-level metadata (generic, type constraints at profile level)
 │   ├── provProperties/              # W3C PROV provenance types
 │   │   ├── generatedBy/             # prov:wasGeneratedBy (Activity)
 │   │   └── derivedFrom/             # prov:wasDerivedFrom
