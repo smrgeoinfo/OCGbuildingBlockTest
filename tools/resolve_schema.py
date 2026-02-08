@@ -1,0 +1,340 @@
+#!/usr/bin/env python3
+"""
+Resolve OGC Building Block schemas into a single complete JSON Schema.
+
+Recursively resolves ALL $ref references from the modular YAML/JSON source
+schemas into one fully-inlined schema — purely for validation and inspection,
+with no form simplifications.
+
+$ref patterns handled:
+  1. Relative path:       $ref: ../detailEMPA/schema.yaml
+  2. Fragment-only:       $ref: '#/$defs/Identifier'
+  3. Cross-file fragment: $ref: ../metaMetadata/schema.yaml#/$defs/conformsTo_item
+  4. Both YAML and JSON file extensions
+
+Usage:
+    python tools/resolve_schema.py adaEMPA
+    python tools/resolve_schema.py adaProduct
+    python tools/resolve_schema.py CDIFDiscovery
+    python tools/resolve_schema.py --file path/to/any/schema.yaml
+    python tools/resolve_schema.py adaEMPA -o resolved.json
+    python tools/resolve_schema.py adaEMPA --flatten-allof
+"""
+
+import argparse
+import copy
+import json
+import sys
+import yaml
+from pathlib import Path
+from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SOURCES_DIR = REPO_ROOT / "_sources"
+
+# Keys to strip from schemas (metadata, not useful for validation/inspection)
+STRIP_KEYS = {"$id", "x-jsonld-prefixes", "x-jsonld-context", "x-jsonld-extra-terms"}
+
+
+# ---------------------------------------------------------------------------
+# File loading
+# ---------------------------------------------------------------------------
+
+def load_schema_file(path: Path) -> dict:
+    """Load a schema file (YAML or JSON) based on extension."""
+    with open(path, "r", encoding="utf-8") as f:
+        if path.suffix in (".yaml", ".yml"):
+            return yaml.safe_load(f) or {}
+        else:
+            return json.load(f)
+
+
+# ---------------------------------------------------------------------------
+# JSON Pointer resolution
+# ---------------------------------------------------------------------------
+
+def resolve_fragment(schema: dict, pointer: str) -> Any:
+    """Resolve a JSON Pointer (e.g., '/$defs/Identifier') within a schema."""
+    parts = pointer.lstrip("/").split("/")
+    current = schema
+    for part in parts:
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        elif isinstance(current, list):
+            current = current[int(part)]
+        else:
+            raise KeyError(f"Cannot resolve pointer /{'/'.join(parts)} at part '{part}'")
+    return current
+
+
+# ---------------------------------------------------------------------------
+# Metadata stripping
+# ---------------------------------------------------------------------------
+
+def strip_metadata_keys(schema: Any, is_root: bool = True) -> Any:
+    """Recursively remove $id, x-jsonld-*, and nested $schema keys."""
+    if isinstance(schema, dict):
+        result = {}
+        for k, v in schema.items():
+            if k in STRIP_KEYS:
+                continue
+            if k.startswith("x-jsonld"):
+                continue
+            if k == "$schema" and not is_root:
+                continue
+            result[k] = strip_metadata_keys(v, is_root=False)
+        return result
+    elif isinstance(schema, list):
+        return [strip_metadata_keys(item, is_root=False) for item in schema]
+    return schema
+
+
+# ---------------------------------------------------------------------------
+# Deep merge (for allOf flattening)
+# ---------------------------------------------------------------------------
+
+def deep_merge(base: dict, overlay: dict) -> dict:
+    """
+    Deep merge overlay into base. Overlay values take precedence.
+    For dicts, merge recursively. For everything else, overlay replaces base.
+    """
+    result = copy.deepcopy(base)
+    for k, v in overlay.items():
+        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
+            result[k] = deep_merge(result[k], v)
+        else:
+            result[k] = copy.deepcopy(v)
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Core resolution
+# ---------------------------------------------------------------------------
+
+def resolve_file(path: Path, seen: set) -> dict:
+    """Load a YAML or JSON schema file and resolve all $ref within it."""
+    canonical = path.resolve()
+    if canonical in seen:
+        return {"$comment": f"circular ref to {canonical}"}
+    seen = seen | {canonical}  # Copy to avoid mutation across branches
+
+    schema = load_schema_file(canonical)
+    if not isinstance(schema, dict):
+        return schema
+
+    # Resolve $defs first so fragment-only refs can find them
+    defs = {}
+    if "$defs" in schema:
+        raw_defs = schema["$defs"]
+        for def_name, def_schema in raw_defs.items():
+            defs[def_name] = resolve_node(def_schema, canonical.parent, {}, seen)
+        # Now resolve any internal $defs refs within the resolved defs themselves
+        # (a def might reference another def in the same file)
+        for def_name in list(defs.keys()):
+            defs[def_name] = resolve_node(defs[def_name], canonical.parent, defs, seen)
+
+    # Walk and resolve the entire schema
+    resolved = resolve_node(schema, canonical.parent, defs, seen)
+
+    # Remove $defs from final output (they've been inlined)
+    if isinstance(resolved, dict):
+        resolved.pop("$defs", None)
+
+    return resolved
+
+
+def resolve_node(node: Any, base_dir: Path, defs: dict, seen: set) -> Any:
+    """Recursively resolve $ref in a schema node."""
+    if isinstance(node, dict):
+        if "$ref" in node:
+            ref = node["$ref"]
+            resolved = _resolve_ref(ref, base_dir, defs, seen)
+
+            # If $ref has sibling keys, merge resolved with siblings
+            siblings = {k: v for k, v in node.items() if k != "$ref"}
+            if siblings:
+                siblings = resolve_node(siblings, base_dir, defs, seen)
+                if isinstance(resolved, dict):
+                    resolved = deep_merge(resolved, siblings)
+                # If resolved is not a dict (unlikely), siblings are lost
+            return resolved
+
+        # Recurse into all dict values
+        result = {}
+        for k, v in node.items():
+            result[k] = resolve_node(v, base_dir, defs, seen)
+        return result
+
+    elif isinstance(node, list):
+        return [resolve_node(item, base_dir, defs, seen) for item in node]
+
+    return node
+
+
+def _resolve_ref(ref: str, base_dir: Path, defs: dict, seen: set) -> Any:
+    """Parse and resolve a $ref string."""
+    if ref.startswith("#/"):
+        # Fragment-only ref (e.g., #/$defs/Identifier)
+        pointer = ref[1:]  # Strip leading #
+        # Try the local defs dict first
+        parts = pointer.lstrip("/").split("/")
+        if len(parts) == 2 and parts[0] == "$defs" and parts[1] in defs:
+            return copy.deepcopy(defs[parts[1]])
+        # Fall through: shouldn't happen if $defs were resolved, but handle gracefully
+        return {"$comment": f"unresolved fragment ref: {ref}"}
+
+    # File ref, possibly with fragment
+    if "#" in ref:
+        file_part, fragment = ref.split("#", 1)
+    else:
+        file_part, fragment = ref, None
+
+    file_path = (base_dir / file_part).resolve()
+    if not file_path.exists():
+        return {"$comment": f"file not found: {file_path}"}
+
+    resolved = resolve_file(file_path, seen)
+
+    if fragment:
+        try:
+            resolved = resolve_fragment(resolved, fragment)
+        except KeyError as e:
+            return {"$comment": f"could not resolve fragment {fragment} in {file_path}: {e}"}
+        # The fragment result might itself contain refs — resolve them
+        resolved = resolve_node(resolved, file_path.parent, {}, seen)
+
+    return resolved
+
+
+# ---------------------------------------------------------------------------
+# allOf flattening (optional)
+# ---------------------------------------------------------------------------
+
+def flatten_allof(schema: Any) -> Any:
+    """
+    Recursively flatten allOf entries into a single object.
+    Merges properties, required, and other constraints from all allOf entries.
+    Preserves anyOf/oneOf as-is (they represent valid polymorphic choices).
+    """
+    if isinstance(schema, dict):
+        # Recurse first so nested allOf in properties/items are handled
+        result = {}
+        for k, v in schema.items():
+            result[k] = flatten_allof(v)
+
+        # Now flatten allOf in the current object
+        if "allOf" in result:
+            all_of = result.pop("allOf")
+            merged = {}
+            # Collect all non-allOf keys from the current object
+            for k, v in result.items():
+                merged[k] = v
+
+            for entry in all_of:
+                if isinstance(entry, dict):
+                    merged = deep_merge(merged, entry)
+
+            return merged
+
+        return result
+
+    elif isinstance(schema, list):
+        return [flatten_allof(item) for item in schema]
+
+    return schema
+
+
+# ---------------------------------------------------------------------------
+# Profile entry point resolution
+# ---------------------------------------------------------------------------
+
+def find_profile_schema(name: str) -> Path:
+    """Find the schema entry point for a profile name."""
+    # Try _sources/profiles/{name}/schema.yaml first
+    yaml_path = SOURCES_DIR / "profiles" / name / "schema.yaml"
+    if yaml_path.exists():
+        return yaml_path
+
+    # Fall back to any .json file in the profile directory (e.g., CDIFDiscoverySchema.json)
+    profile_dir = SOURCES_DIR / "profiles" / name
+    if profile_dir.is_dir():
+        json_files = sorted(profile_dir.glob("*Schema.json"))
+        if json_files:
+            return json_files[0]
+        # Try any .json that isn't bblock.json or example files
+        for jf in sorted(profile_dir.glob("*.json")):
+            if jf.name not in ("bblock.json",) and "example" not in jf.name.lower():
+                return jf
+
+    print(f"ERROR: Cannot find schema for profile '{name}'", file=sys.stderr)
+    print(f"  Looked in: {profile_dir}", file=sys.stderr)
+    sys.exit(1)
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Resolve OGC Building Block schemas into a single complete JSON Schema.",
+    )
+    parser.add_argument(
+        "profile",
+        nargs="?",
+        help="Profile name (e.g., adaEMPA, adaProduct, CDIFDiscovery)",
+    )
+    parser.add_argument(
+        "--file",
+        type=Path,
+        help="Resolve an arbitrary schema file instead of a profile",
+    )
+    parser.add_argument(
+        "-o", "--output",
+        type=Path,
+        help="Write output to file (default: stdout)",
+    )
+    parser.add_argument(
+        "--flatten-allof",
+        action="store_true",
+        help="Merge allOf entries into single objects",
+    )
+    args = parser.parse_args()
+
+    if not args.profile and not args.file:
+        parser.error("Specify a profile name or --file <path>")
+
+    if args.file:
+        schema_path = args.file.resolve()
+        if not schema_path.exists():
+            print(f"ERROR: File not found: {schema_path}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        schema_path = find_profile_schema(args.profile)
+
+    print(f"Resolving: {schema_path}", file=sys.stderr)
+
+    # Resolve all $ref recursively
+    resolved = resolve_file(schema_path, seen=set())
+
+    # Strip metadata keys
+    resolved = strip_metadata_keys(resolved, is_root=True)
+
+    # Optionally flatten allOf
+    if args.flatten_allof:
+        resolved = flatten_allof(resolved)
+
+    # Output
+    output_json = json.dumps(resolved, indent=2, ensure_ascii=False) + "\n"
+
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        with open(args.output, "w", encoding="utf-8") as f:
+            f.write(output_json)
+        print(f"Wrote: {args.output}", file=sys.stderr)
+    else:
+        sys.stdout.write(output_json)
+
+
+if __name__ == "__main__":
+    main()
