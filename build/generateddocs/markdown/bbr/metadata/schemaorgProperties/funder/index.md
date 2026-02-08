@@ -93,6 +93,9 @@ properties:
   schema:identifier:
     $ref: '#/$defs/Identifier'
     description: identifier for a particular grant
+  schema:description:
+    type: string
+    description: description of the funding or grant
   schema:name:
     type: string
     description: title of the grant
