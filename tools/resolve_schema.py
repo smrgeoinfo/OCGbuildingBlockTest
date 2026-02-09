@@ -93,15 +93,45 @@ def strip_metadata_keys(schema: Any, is_root: bool = True) -> Any:
 # Deep merge (for allOf flattening)
 # ---------------------------------------------------------------------------
 
+_SCHEMA_DEF_KEYS = frozenset({"type", "oneOf", "anyOf", "allOf", "$ref"})
+
+
+def _is_complete_schema(d: dict) -> bool:
+    """Return True if d looks like a complete schema definition (has type, composition, or $ref)."""
+    return bool(d.keys() & _SCHEMA_DEF_KEYS)
+
+
 def deep_merge(base: dict, overlay: dict) -> dict:
     """
     Deep merge overlay into base. Overlay values take precedence.
     For dicts, merge recursively. For everything else, overlay replaces base.
+
+    Special handling for ``properties`` dicts: when an overlay provides a
+    property definition that already exists in the base AND the overlay looks
+    like a complete schema definition (has ``type``, ``oneOf``, ``anyOf``,
+    ``allOf``, or ``$ref``), the overlay **replaces** the base definition
+    entirely.  This prevents invalid schemas where, e.g., cdifMandatory's
+    distribution (``anyOf``) and adaProduct's (``oneOf``) get combined.
+
+    When the overlay is a partial constraint patch (no ``type`` or composition
+    keywords at the property level — just nested ``items.properties…``), it is
+    deep-merged so that the base structure (``type``, ``description``, ``oneOf``,
+    etc.) is preserved alongside the new constraints.
     """
+    return _deep_merge_inner(base, overlay, in_properties=False)
+
+
+def _deep_merge_inner(base: dict, overlay: dict, in_properties: bool) -> dict:
     result = copy.deepcopy(base)
     for k, v in overlay.items():
         if k in result and isinstance(result[k], dict) and isinstance(v, dict):
-            result[k] = deep_merge(result[k], v)
+            if in_properties and _is_complete_schema(v):
+                # Complete property definition → replace entirely
+                result[k] = copy.deepcopy(v)
+            elif k == "properties":
+                result[k] = _deep_merge_inner(result[k], v, in_properties=True)
+            else:
+                result[k] = _deep_merge_inner(result[k], v, in_properties=False)
         else:
             result[k] = copy.deepcopy(v)
     return result
@@ -122,16 +152,23 @@ def resolve_file(path: Path, seen: set) -> dict:
     if not isinstance(schema, dict):
         return schema
 
-    # Resolve $defs first so fragment-only refs can find them
+    # Resolve $defs so fragment-only refs (#/$defs/X) can find them.
+    # Two-pass strategy:
+    #   Pass 1 — resolve every def with an empty local-defs dict.  This expands
+    #            all external file $refs but leaves cross-def fragment refs as
+    #            "$comment: unresolved …" placeholders.
+    #   Pass 2 — re-resolve every def, this time with the fully-populated defs
+    #            dict so that cross-def fragment refs can be found.
     defs = {}
     if "$defs" in schema:
         raw_defs = schema["$defs"]
         for def_name, def_schema in raw_defs.items():
             defs[def_name] = resolve_node(def_schema, canonical.parent, {}, seen)
-        # Now resolve any internal $defs refs within the resolved defs themselves
-        # (a def might reference another def in the same file)
+        # Pass 2: re-resolve with full defs.  Because pass 1 may have left
+        # "$comment" placeholders instead of the resolved content, we also
+        # inline those placeholders by re-walking the defs.
         for def_name in list(defs.keys()):
-            defs[def_name] = resolve_node(defs[def_name], canonical.parent, defs, seen)
+            defs[def_name] = _inline_unresolved_defs(defs[def_name], defs, canonical.parent, seen)
 
     # Walk and resolve the entire schema
     resolved = resolve_node(schema, canonical.parent, defs, seen)
@@ -168,6 +205,39 @@ def resolve_node(node: Any, base_dir: Path, defs: dict, seen: set) -> Any:
     elif isinstance(node, list):
         return [resolve_node(item, base_dir, defs, seen) for item in node]
 
+    return node
+
+
+def _inline_unresolved_defs(node: Any, defs: dict, base_dir: Path, seen: set) -> Any:
+    """
+    Walk *node* and replace ``{"$comment": "unresolved fragment ref: #/$defs/X"}``
+    placeholders with the actual resolved content from *defs*.
+    Also re-resolve any remaining $ref nodes with the full defs dict.
+    """
+    if isinstance(node, dict):
+        # Check for placeholder left by pass 1
+        if "$comment" in node and len(node) == 1:
+            comment = node["$comment"]
+            if comment.startswith("unresolved fragment ref: #/$defs/"):
+                def_name = comment.split("/")[-1]
+                if def_name in defs:
+                    return copy.deepcopy(defs[def_name])
+        # Also resolve any leftover $ref
+        if "$ref" in node:
+            ref = node["$ref"]
+            resolved = _resolve_ref(ref, base_dir, defs, seen)
+            siblings = {k: v for k, v in node.items() if k != "$ref"}
+            if siblings:
+                siblings = _inline_unresolved_defs(siblings, defs, base_dir, seen)
+                if isinstance(resolved, dict):
+                    resolved = deep_merge(resolved, siblings)
+            return resolved
+        result = {}
+        for k, v in node.items():
+            result[k] = _inline_unresolved_defs(v, defs, base_dir, seen)
+        return result
+    elif isinstance(node, list):
+        return [_inline_unresolved_defs(item, defs, base_dir, seen) for item in node]
     return node
 
 

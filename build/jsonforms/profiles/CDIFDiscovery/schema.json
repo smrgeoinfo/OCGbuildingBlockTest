@@ -216,30 +216,8 @@
               "description": "locator to access a landing page for the collection or catalog"
             },
             "schema:identifier": {
-              "description": "identifier for the collection or catalog; use identifier_type to provide information on identifier scheme and context for identifier",
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "default": "schema:PropertyValue"
-                },
-                "schema:propertyID": {
-                  "type": "string",
-                  "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-                },
-                "schema:value": {
-                  "type": "string",
-                  "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-                },
-                "schema:url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-                }
-              },
-              "required": [
-                "@type"
-              ]
+              "type": "string",
+              "description": "identifier for the collection or catalog; use identifier_type to provide information on identifier scheme and context for identifier"
             }
           }
         }
@@ -472,30 +450,8 @@
             "default": "schema:MonetaryGrant"
           },
           "schema:identifier": {
-            "description": "identifier for a particular grant",
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:PropertyValue"
-              },
-              "schema:propertyID": {
-                "type": "string",
-                "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-              },
-              "schema:value": {
-                "type": "string",
-                "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-              },
-              "schema:url": {
-                "type": "string",
-                "format": "uri",
-                "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-              }
-            },
-            "required": [
-              "@type"
-            ]
+            "type": "string",
+            "description": "identifier for a particular grant"
           },
           "schema:description": {
             "type": "string",
@@ -523,6 +479,18 @@
         },
         "required": [
           "schema:funder"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "schema:identifier"
+            ]
+          },
+          {
+            "required": [
+              "schema:name"
+            ]
+          }
         ]
       }
     },
@@ -536,7 +504,10 @@
           "@type": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "schema:PropertyValue"
+              ]
             }
           },
           "@id": {
@@ -701,5 +672,17 @@
     "schema:identifier",
     "schema:dateModified",
     "schema:subjectOf"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "schema:url"
+      ]
+    },
+    {
+      "required": [
+        "schema:distribution"
+      ]
+    }
   ]
 }

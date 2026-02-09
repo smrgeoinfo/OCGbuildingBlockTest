@@ -2,18 +2,20 @@
 """
 Convert resolved OGC Building Block schemas to JSON Forms-compatible Draft 7.
 
-Reads from:  build/annotated/bbr/metadata/profiles/{profile}/schema.json
+Reads from:  _sources/profiles/{profile}/resolvedSchema.json  (resolve_schema.py output)
 Writes to:   build/jsonforms/profiles/{profile}/schema.json
 
 Conversion rules:
-  1. $schema → Draft 7
-  2. $defs → definitions, update internal $ref paths
-  3. Strip $id, x-jsonld-* metadata keys
-  4. Simplify anyOf patterns for form rendering
-  5. const arrays → default values
-  6. contains constraints → enum on items (technique profiles)
-  7. allOf in technique profiles → merge base + constraints
-  8. Inline all $ref references (fully resolved output)
+  1. Strip $id, x-jsonld-* metadata keys
+  2. $schema → Draft 7
+  3. Simplify anyOf patterns for form rendering
+  4. const arrays → default values
+  5. contains constraints → enum on items
+  6. Remove 'not' constraints
+  7. Flatten leftover allOf entries
+  8. Remove minItems constraints
+
+The input schemas are already fully resolved (no $ref, no $defs).
 
 Usage:
     python tools/convert_for_jsonforms.py --all
@@ -24,14 +26,13 @@ Usage:
 import argparse
 import copy
 import json
-import os
 import shutil
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-ANNOTATED_DIR = REPO_ROOT / "build" / "annotated" / "bbr" / "metadata"
+RESOLVED_DIR = REPO_ROOT / "_sources" / "profiles"
 OUTPUT_DIR = REPO_ROOT / "build" / "jsonforms" / "profiles"
 SOURCES_DIR = REPO_ROOT / "_sources" / "jsonforms" / "profiles"
 
@@ -39,15 +40,8 @@ ADA_PROFILES = ["adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR"]
 CDIF_PROFILES = ["CDIFDiscovery"]
 ALL_PROFILES = ADA_PROFILES + CDIF_PROFILES
 
-# Profiles that compose BBs directly via allOf (need merge_allof_entries)
-BASE_PROFILES = {"adaProduct", "CDIFDiscovery"}
-
 # Keys to strip from schemas (metadata, not useful for forms)
 STRIP_KEYS = {"$id", "x-jsonld-prefixes", "x-jsonld-context", "x-jsonld-extra-terms"}
-
-# GitHub Pages URL prefix → local path mapping
-GHPAGES_PREFIX = "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/"
-LOCAL_ANNOTATED = REPO_ROOT / "build" / "annotated"
 
 
 def load_json(path: Path) -> dict:
@@ -65,68 +59,6 @@ def save_json(data: dict, path: Path) -> None:
 # ---------------------------------------------------------------------------
 # Core conversion helpers
 # ---------------------------------------------------------------------------
-
-def _resolve_json_pointer(schema: dict, pointer: str) -> Any:
-    """Resolve a JSON Pointer (e.g., '/$defs/empa_detail') within a schema."""
-    parts = pointer.lstrip("/").split("/")
-    current = schema
-    for part in parts:
-        if isinstance(current, dict) and part in current:
-            current = current[part]
-        elif isinstance(current, list):
-            current = current[int(part)]
-        else:
-            raise KeyError(f"Cannot resolve pointer /{'/'.join(parts)} at part '{part}'")
-    return current
-
-
-def resolve_external_refs(schema: Any) -> Any:
-    """
-    Resolve $ref URLs pointing to GitHub Pages into inline schemas
-    by loading from the local build/annotated directory.
-    Handles both plain file refs and refs with JSON Pointer fragments.
-    """
-    if isinstance(schema, dict):
-        if "$ref" in schema:
-            ref = schema["$ref"]
-            if isinstance(ref, str) and ref.startswith(GHPAGES_PREFIX):
-                # Split URL from fragment
-                if "#" in ref:
-                    url_part, fragment = ref.split("#", 1)
-                else:
-                    url_part, fragment = ref, None
-
-                # Map URL to local path
-                relative = url_part[len(GHPAGES_PREFIX):]
-                local_path = LOCAL_ANNOTATED / relative.replace("/", os.sep)
-
-                if local_path.exists():
-                    loaded = load_json(local_path)
-                    # Resolve fragment pointer if present
-                    if fragment:
-                        try:
-                            loaded = _resolve_json_pointer(loaded, fragment)
-                        except KeyError as e:
-                            print(f"WARNING: Could not resolve fragment {fragment} in {local_path}: {e}", file=sys.stderr)
-                            return schema
-                    # Recursively resolve any refs in the loaded schema
-                    loaded = resolve_external_refs(loaded)
-                    # Strip metadata from inlined schema
-                    loaded = strip_metadata_keys(loaded)
-                    return loaded
-                else:
-                    print(f"WARNING: Could not resolve $ref locally: {ref}", file=sys.stderr)
-                    print(f"  Expected at: {local_path}", file=sys.stderr)
-                    return schema
-
-        result = {}
-        for k, v in schema.items():
-            result[k] = resolve_external_refs(v)
-        return result
-    elif isinstance(schema, list):
-        return [resolve_external_refs(item) for item in schema]
-    return schema
-
 
 def strip_metadata_keys(schema: Any, is_root: bool = True) -> Any:
     """Recursively remove metadata keys like $id, x-jsonld-*. Also strip $schema from nested objects."""
@@ -151,21 +83,6 @@ def convert_draft_version(schema: dict) -> dict:
     """Change $schema to Draft 7."""
     if "$schema" in schema:
         schema["$schema"] = "http://json-schema.org/draft-07/schema#"
-    return schema
-
-
-def convert_defs_to_definitions(schema: Any) -> Any:
-    """Rename $defs → definitions and update all #/$defs/ refs to #/definitions/."""
-    if isinstance(schema, dict):
-        result = {}
-        for k, v in schema.items():
-            new_key = "definitions" if k == "$defs" else k
-            if k == "$ref" and isinstance(v, str):
-                v = v.replace("#/$defs/", "#/definitions/")
-            result[new_key] = convert_defs_to_definitions(v)
-        return result
-    elif isinstance(schema, list):
-        return [convert_defs_to_definitions(item) for item in schema]
     return schema
 
 
@@ -204,10 +121,10 @@ def simplify_contains_to_enum(schema: Any) -> Any:
     """
     Convert contains constraints to enum on items.
     {type: array, items: {type: string}, contains: {const: "X"}}
-    →  {type: array, items: {type: string, enum: ["X"]}}
+    ->  {type: array, items: {type: string, enum: ["X"]}}
 
     {type: array, items: {type: string}, contains: {enum: [...]}}
-    →  {type: array, items: {type: string, enum: [...]}}
+    ->  {type: array, items: {type: string, enum: [...]}}
 
     Also handles allOf with multiple contains.
     """
@@ -267,21 +184,12 @@ def simplify_contains_to_enum(schema: Any) -> Any:
     return schema
 
 
-def simplify_anyof_identifier(prop_schema: dict) -> dict:
-    """
-    Simplify schema:identifier anyOf to a single string field for forms.
-    The full anyOf with PropertyValue/array/string is too complex for form input.
-    """
-    return {
-        "type": "string",
-        "description": prop_schema.get("description", "Primary identifier for the dataset"),
-    }
-
+# ---------------------------------------------------------------------------
+# anyOf simplification helpers
+# ---------------------------------------------------------------------------
 
 def simplify_anyof_license_items(items_schema: dict) -> dict:
-    """
-    Simplify schema:license items anyOf to CreativeWork object.
-    """
+    """Simplify schema:license items anyOf to CreativeWork object."""
     return {
         "type": "object",
         "properties": {
@@ -297,9 +205,7 @@ def simplify_anyof_license_items(items_schema: dict) -> dict:
 
 
 def simplify_anyof_contributor_items(items_schema: dict) -> dict:
-    """
-    Simplify schema:contributor items anyOf to Person with optional role.
-    """
+    """Simplify schema:contributor items anyOf to Person with optional role."""
     return {
         "type": "object",
         "properties": {
@@ -328,9 +234,7 @@ def simplify_anyof_contributor_items(items_schema: dict) -> dict:
 
 
 def simplify_anyof_funder(funder_schema: dict) -> dict:
-    """
-    Simplify funder anyOf to inline Organization object.
-    """
+    """Simplify funder anyOf to inline Organization object."""
     return {
         "type": "object",
         "properties": {
@@ -345,10 +249,7 @@ def simplify_anyof_funder(funder_schema: dict) -> dict:
 
 
 def simplify_anyof_creator_items(items_schema: dict) -> dict:
-    """
-    Simplify schema:creator @list items anyOf Person/Org to Person
-    with a _creatorType selector.
-    """
+    """Simplify schema:creator @list items anyOf Person/Org to Person with selector."""
     return {
         "type": "object",
         "properties": {
@@ -427,7 +328,7 @@ def simplify_anyof_unit_code(schema: dict) -> dict:
 
 
 def simplify_anyof_property_id_items(schema: dict) -> dict:
-    """Simplify propertyID items anyOf to string or DefinedTerm."""
+    """Simplify propertyID items anyOf to DefinedTerm."""
     return {
         "type": "object",
         "properties": {
@@ -537,10 +438,7 @@ def simplify_anyof_spatial_coverage_items(schema: dict) -> dict:
 
 
 def simplify_anyof_temporal_coverage_items(schema: dict) -> dict:
-    """
-    Replace temporalCoverage items anyOf with a simple string.
-    For ISO 8601 dates/ranges or text descriptions.
-    """
+    """Replace temporalCoverage items anyOf with a simple string."""
     return {
         "type": "string",
         "description": "ISO 8601 date, date range (e.g. 2020-01/2020-12), or text description",
@@ -613,23 +511,104 @@ def simplify_anyof_same_as_items(schema: dict) -> dict:
     return {"type": "string", "description": "Alternate identifier or URL"}
 
 
+# ---------------------------------------------------------------------------
+# Distribution simplification — preserve oneOf structure
+# ---------------------------------------------------------------------------
+
+def simplify_distribution_items(items_schema: dict) -> dict:
+    """
+    Simplify distribution items while preserving the oneOf structure.
+    Each oneOf branch (single file, archive, WebAPI) is kept as a distinct
+    option so the form can render a distribution type selector.  Form-specific
+    simplifications (const->default, contains->enum, etc.) are applied within
+    each branch by the main pipeline — we just preserve the structure here.
+
+    For technique profiles the resolved schema may have a top-level
+    ``properties`` alongside ``oneOf`` (technique constraints that apply to all
+    branches).  These are merged into each applicable oneOf branch.
+    """
+    result = copy.deepcopy(items_schema)
+
+    # If technique-specific constraints sit alongside oneOf, merge them in
+    if "oneOf" in result and "properties" in result:
+        extra_props = result.pop("properties")
+        for branch in result["oneOf"]:
+            if isinstance(branch, dict) and "properties" in branch:
+                for pk, pv in extra_props.items():
+                    # Only merge into branches that have the relevant sub-property
+                    # e.g. schema:hasPart only goes into the archive branch
+                    if pk == "schema:hasPart" and pk in branch["properties"]:
+                        branch["properties"][pk] = _deep_merge_dict(
+                            branch["properties"][pk], pv
+                        )
+                    elif pk not in branch["properties"]:
+                        # New property — add to all branches
+                        branch["properties"][pk] = copy.deepcopy(pv)
+
+    return result
+
+
+def _deep_merge_dict(base: dict, overlay: dict) -> dict:
+    """Simple recursive dict merge (overlay wins on conflicts)."""
+    result = copy.deepcopy(base)
+    for k, v in overlay.items():
+        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
+            result[k] = _deep_merge_dict(result[k], v)
+        else:
+            result[k] = copy.deepcopy(v)
+    return result
+
+
+# ---------------------------------------------------------------------------
+# fileDetail simplification — preserve anyOf structure
+# ---------------------------------------------------------------------------
+
 def simplify_file_detail_anyof(schema: dict) -> dict:
     """
-    Simplify fileDetail anyOf (image/tabular/collection/etc) to a generic object.
-    For forms, we don't need the full discriminated union.
-    """
-    return {
-        "type": "object",
-        "description": "Type-specific file details",
-        "properties": {
-            "@type": {
-                "type": "array",
-                "items": {"type": "string"},
-                "description": "File detail type identifiers",
-            },
-        },
-    }
+    Preserve the fileDetail anyOf of file types.  Each file type keeps its
+    @type, componentType (with enums), and type-specific detail properties.
+    The form can use fileDetail.@type as a discriminator to show the right fields.
 
+    We strip internal complexity (nested anyOf in componentType detail refs)
+    but keep the overall structure.
+    """
+    if "anyOf" not in schema:
+        return schema
+
+    result = copy.deepcopy(schema)
+    simplified = []
+    for option in result["anyOf"]:
+        if isinstance(option, dict):
+            simplified.append(_simplify_file_type_option(option))
+        else:
+            simplified.append(option)
+    result["anyOf"] = simplified
+    return result
+
+
+def _simplify_file_type_option(option: dict) -> dict:
+    """
+    Simplify a single file type option within fileDetail anyOf.
+    Keeps @type, componentType (with enums + detail type refs), and
+    type-specific properties.  Strips overly nested structures.
+    """
+    result = copy.deepcopy(option)
+
+    # Simplify componentType if present — it may have nested anyOf for detail types
+    props = result.get("properties", {})
+    if "componentType" in props:
+        ct = props["componentType"]
+        if "anyOf" in ct:
+            # componentType has anyOf of {enum + optional detail ref}
+            # Keep the structure — each option has @type enum + detail properties
+            pass  # Already structured, let it through
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Main anyOf simplification walker
+# ---------------------------------------------------------------------------
 
 def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
     """
@@ -641,7 +620,7 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
         for k, v in schema.items():
             current_path = f"{path}/{k}" if path else k
 
-            # schema:identifier anyOf → simplify (anywhere in schema)
+            # schema:identifier anyOf -> simplify (anywhere in schema)
             if k == "schema:identifier" and isinstance(v, dict) and "anyOf" in v:
                 desc = v.get("description", "Identifier")
                 result[k] = {"type": "string", "description": desc}
@@ -702,15 +681,13 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 result[k] = {"type": "string", "description": "Variable identifier"}
                 continue
 
-            # fileDetail anyOf
+            # fileDetail anyOf — preserve structure with per-file-type simplification
             if k == "fileDetail" and isinstance(v, dict) and "anyOf" in v:
                 result[k] = simplify_file_detail_anyof(v)
                 continue
 
             # @type anyOf patterns (e.g., Organization types)
             if k == "@type" and isinstance(v, dict) and "anyOf" in v:
-                # These are typically discriminated unions like [{"const": ["schema:Organization"]}]
-                # Simplify to first const value as default
                 first_anyof = v["anyOf"][0] if v["anyOf"] else {}
                 if "const" in first_anyof:
                     result[k] = {
@@ -721,12 +698,14 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                     result[k] = apply_anyof_simplifications(v, current_path)
                 continue
 
-            # distribution items oneOf → simplified (ADA)
+            # distribution items oneOf -> preserve structure (ADA)
+            # After structural simplification, continue recursion into branches
             if k == "items" and path.endswith("schema:distribution") and isinstance(v, dict) and "oneOf" in v:
-                result[k] = simplify_distribution_items(v)
+                simplified = simplify_distribution_items(v)
+                result[k] = apply_anyof_simplifications(simplified, current_path)
                 continue
 
-            # distribution items anyOf → simplified (CDIF: DataDownload/WebAPI)
+            # distribution items anyOf -> simplified (CDIF: DataDownload/WebAPI)
             if k == "items" and path.endswith("schema:distribution") and isinstance(v, dict) and "anyOf" in v:
                 result[k] = simplify_anyof_distribution_items_cdif(v)
                 continue
@@ -741,7 +720,7 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 result[k] = simplify_anyof_publisher(v)
                 continue
 
-            # schema:spatialCoverage items (SpatialExtent $ref with anyOf patterns inside)
+            # schema:spatialCoverage items
             if k == "items" and path.endswith("schema:spatialCoverage") and isinstance(v, dict) and "anyOf" in v:
                 result[k] = simplify_anyof_spatial_coverage_items(v)
                 continue
@@ -771,7 +750,7 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 result[k] = simplify_anyof_same_as_items(v)
                 continue
 
-            # schema:geo anyOf (GeoShape vs GeoCoordinates) → simplify to GeoShape
+            # schema:geo anyOf (GeoShape vs GeoCoordinates) -> simplify to GeoShape
             if k == "schema:geo" and isinstance(v, dict) and "anyOf" in v:
                 result[k] = {
                     "type": "object",
@@ -786,7 +765,7 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 }
                 continue
 
-            # schema:linkRelationship anyOf (DefinedTerm or string) → simplify to string
+            # schema:linkRelationship anyOf (DefinedTerm or string) -> simplify to string
             if k == "schema:linkRelationship" and isinstance(v, dict) and "anyOf" in v:
                 result[k] = {"type": "string", "description": "How the linked resource is related"}
                 continue
@@ -794,6 +773,30 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
             # schema:name items anyOf in spatialCoverage (place names: DefinedTerm or string)
             if k == "items" and path.endswith("schema:name") and "schema:spatialCoverage" in path and isinstance(v, dict) and "anyOf" in v:
                 result[k] = {"type": "string"}
+                continue
+
+            # schema:serviceType anyOf (string or DefinedTerm) -> simplify to string
+            if k == "schema:serviceType" and isinstance(v, dict) and "anyOf" in v:
+                result[k] = {
+                    "type": "string",
+                    "description": v.get("description", "Type of service"),
+                }
+                continue
+
+            # schema:documentation oneOf (string or LabeledLink) -> simplify to string
+            if k == "schema:documentation" and isinstance(v, dict) and "oneOf" in v:
+                result[k] = {
+                    "type": "string",
+                    "description": v.get("description", "URL to API documentation"),
+                }
+                continue
+
+            # schema:termsOfService oneOf (string or LabeledLink) -> simplify to string
+            if k == "schema:termsOfService" and isinstance(v, dict) and "oneOf" in v:
+                result[k] = {
+                    "type": "string",
+                    "description": v.get("description", "Terms of service"),
+                }
                 continue
 
             result[k] = apply_anyof_simplifications(v, current_path)
@@ -804,90 +807,9 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
     return schema
 
 
-def simplify_distribution_items(items_schema: dict) -> dict:
-    """
-    Simplify distribution items oneOf (single file vs archive with hasPart)
-    to a single object that covers both cases.
-    """
-    return {
-        "type": "object",
-        "description": "Data file or archive distribution",
-        "properties": {
-            "@type": {
-                "type": "array",
-                "items": {"type": "string"},
-                "default": ["schema:DataDownload"],
-            },
-            "schema:name": {"type": "string"},
-            "schema:description": {"type": "string"},
-            "schema:contentURL": {
-                "type": "string",
-                "description": "Download URL for the file",
-            },
-            "schema:encodingFormat": {
-                "type": "array",
-                "items": {"type": "string"},
-                "description": "MIME type(s)",
-            },
-            "schema:additionalType": {
-                "type": "array",
-                "items": {"type": "string"},
-            },
-            "spdx:checksum": {
-                "type": "object",
-                "properties": {
-                    "spdx:algorithm": {"type": "string"},
-                    "spdx:checksumValue": {"type": "string"},
-                },
-            },
-            "schema:hasPart": {
-                "type": "array",
-                "description": "Files within an archive package",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "@id": {"type": "string"},
-                        "@type": {
-                            "type": "array",
-                            "items": {"type": "string"},
-                        },
-                        "schema:additionalType": {
-                            "type": "array",
-                            "items": {"type": "string"},
-                        },
-                        "schema:name": {"type": "string"},
-                        "schema:description": {"type": "string"},
-                        "schema:encodingFormat": {
-                            "type": "array",
-                            "items": {"type": "string"},
-                        },
-                        "schema:size": {
-                            "type": "object",
-                            "properties": {
-                                "@type": {
-                                    "type": "string",
-                                    "default": "schema:QuantitativeValue",
-                                },
-                                "schema:value": {"type": "integer"},
-                                "schema:unitText": {
-                                    "type": "string",
-                                    "default": "byte",
-                                },
-                            },
-                        },
-                        "spdx:checksum": {
-                            "type": "object",
-                            "properties": {
-                                "spdx:algorithm": {"type": "string"},
-                                "spdx:checksumValue": {"type": "string"},
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    }
-
+# ---------------------------------------------------------------------------
+# Remaining cleanup passes
+# ---------------------------------------------------------------------------
 
 def remove_not_constraints(schema: Any) -> Any:
     """Remove 'not' constraints (e.g., not contains) that confuse form renderers."""
@@ -900,201 +822,6 @@ def remove_not_constraints(schema: Any) -> Any:
         return result
     elif isinstance(schema, list):
         return [remove_not_constraints(item) for item in schema]
-    return schema
-
-
-def resolve_all_refs(schema: Any, definitions: dict) -> Any:
-    """
-    Inline all $ref references from definitions into the schema.
-    This produces a fully resolved schema with no $ref.
-    Handles both standalone $ref and $ref with sibling keys (merges them).
-    """
-    if isinstance(schema, dict):
-        if "$ref" in schema:
-            ref = schema["$ref"]
-            def_name = None
-            if ref.startswith("#/definitions/"):
-                def_name = ref[len("#/definitions/"):]
-            elif ref.startswith("#/$defs/"):
-                def_name = ref[len("#/$defs/"):]
-
-            if def_name and def_name in definitions:
-                resolved = copy.deepcopy(definitions[def_name])
-                resolved = resolve_all_refs(resolved, definitions)
-                if len(schema) == 1:
-                    return resolved
-                # $ref with sibling keys: merge resolved def with siblings
-                siblings = {k: v for k, v in schema.items() if k != "$ref"}
-                siblings = resolve_all_refs(siblings, definitions)
-                return deep_merge(resolved, siblings)
-            # Unresolvable ref — keep as-is but recurse siblings
-            if len(schema) == 1:
-                return schema
-
-        result = {}
-        for k, v in schema.items():
-            if k in ("definitions", "$defs"):
-                continue  # Don't recurse into definitions themselves
-            result[k] = resolve_all_refs(v, definitions)
-        return result
-    elif isinstance(schema, list):
-        return [resolve_all_refs(item, definitions) for item in schema]
-    return schema
-
-
-# ---------------------------------------------------------------------------
-# Technique profile merging
-# ---------------------------------------------------------------------------
-
-def merge_allof_entries(schema: dict) -> dict:
-    """
-    Flatten a schema that uses allOf to compose building blocks.
-    Copies all top-level keys except allOf, then deep-merges each non-$ref
-    allOf entry into the result. $ref entries are skipped because the OGC
-    postprocessor resolves them into the built schema.json already.
-    """
-    merged = {}
-    for k, v in schema.items():
-        if k != "allOf":
-            merged[k] = copy.deepcopy(v)
-    for part in schema.get("allOf", []):
-        if "$ref" in part:
-            continue
-        if isinstance(part, dict):
-            merged = deep_merge(merged, part)
-    return merged
-
-
-def deep_merge(base: dict, overlay: dict) -> dict:
-    """
-    Deep merge overlay into base. overlay values take precedence.
-    For arrays, overlay replaces base.
-    For dicts, merge recursively.
-    """
-    result = copy.deepcopy(base)
-    for k, v in overlay.items():
-        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
-            result[k] = deep_merge(result[k], v)
-        else:
-            result[k] = copy.deepcopy(v)
-    return result
-
-
-def merge_technique_profile(profile_schema: dict, base_schema: dict) -> dict:
-    """
-    Merge a technique profile (allOf[$ref base, constraints]) into a single schema.
-    The technique profile adds enum constraints on schema:additionalType and
-    schema:hasPart/schema:additionalType.
-    """
-    if "allOf" not in profile_schema:
-        return profile_schema
-
-    # Collect all non-$ref parts from the allOf
-    constraints = {}
-    for part in profile_schema.get("allOf", []):
-        if "$ref" in part:
-            continue  # Skip the base $ref
-        if isinstance(part, dict):
-            constraints = deep_merge(constraints, part)
-
-    # Start with a copy of the base schema
-    merged = copy.deepcopy(base_schema)
-
-    # Apply technique-specific property constraints
-    if "properties" in constraints:
-        for prop_name, constraint in constraints["properties"].items():
-            if prop_name in merged.get("properties", {}):
-                merged["properties"][prop_name] = deep_merge(
-                    merged["properties"][prop_name], constraint
-                )
-            else:
-                merged["properties"][prop_name] = constraint
-
-    # Copy over title and description from the technique profile
-    if "title" in profile_schema:
-        merged["title"] = profile_schema["title"]
-    if "description" in profile_schema:
-        merged["description"] = profile_schema["description"]
-
-    return merged
-
-
-# ---------------------------------------------------------------------------
-# Main conversion pipeline
-# ---------------------------------------------------------------------------
-
-def convert_profile_schema(
-    profile_name: str,
-    verbose: bool = False,
-) -> dict:
-    """
-    Convert a single profile schema to JSON Forms-compatible Draft 7.
-
-    For technique profiles (adaEMPA, etc.), this:
-      1. Loads the base adaProduct schema
-      2. Loads the technique profile
-      3. Merges them
-      4. Applies all simplifications
-
-    For adaProduct, it just applies simplifications directly.
-    """
-    profile_dir = ANNOTATED_DIR / "profiles" / profile_name
-    schema_path = profile_dir / "schema.json"
-
-    if not schema_path.exists():
-        print(f"ERROR: Schema not found: {schema_path}", file=sys.stderr)
-        sys.exit(1)
-
-    if verbose:
-        print(f"Converting {profile_name}...", file=sys.stderr)
-
-    schema = load_json(schema_path)
-
-    # For base profiles (adaProduct, CDIFDiscovery): resolve external refs first,
-    # then flatten allOf (cdifMandatory + cdifOptional + overrides)
-    if profile_name in BASE_PROFILES and "allOf" in schema:
-        schema = resolve_external_refs(schema)
-        schema = merge_allof_entries(schema)
-
-    # For technique profiles, merge with base adaProduct
-    # Do NOT resolve external refs on the technique profile first — merge_technique_profile
-    # expects the original allOf[$ref base, constraints] structure
-    if profile_name not in BASE_PROFILES and profile_name not in CDIF_PROFILES and "allOf" in schema:
-        base_path = ANNOTATED_DIR / "profiles" / "adaProduct" / "schema.json"
-        base_schema = load_json(base_path)
-        base_schema = resolve_external_refs(base_schema)
-        if "allOf" in base_schema:
-            base_schema = merge_allof_entries(base_schema)
-        schema = merge_technique_profile(schema, base_schema)
-
-    # Pipeline: apply all transformations in order
-    schema = resolve_external_refs(schema)
-    schema = strip_metadata_keys(schema)
-    schema = convert_draft_version(schema)
-
-    # Resolve definitions inline before simplification
-    definitions = schema.get("$defs", schema.get("definitions", {}))
-    if definitions:
-        schema = resolve_all_refs(schema, definitions)
-        schema.pop("$defs", None)
-        schema.pop("definitions", None)
-
-    schema = apply_anyof_simplifications(schema, "")
-    schema = simplify_const_to_default(schema)
-    schema = simplify_contains_to_enum(schema)
-    schema = remove_not_constraints(schema)
-    schema = flatten_remaining_allof(schema)
-
-    # Final cleanup: remove minItems constraints that are too restrictive for forms
-    schema = relax_min_items(schema)
-
-    # Strip enum from top-level @type items — the pick list values are provided
-    # via uischema suggestion option to avoid JSON Forms scope resolution issues
-    if "properties" in schema and "@type" in schema["properties"]:
-        at_type = schema["properties"]["@type"]
-        if "items" in at_type and isinstance(at_type["items"], dict):
-            at_type["items"].pop("enum", None)
-
     return schema
 
 
@@ -1160,9 +887,61 @@ def relax_min_items(schema: Any) -> Any:
     return schema
 
 
+# ---------------------------------------------------------------------------
+# Main conversion pipeline
+# ---------------------------------------------------------------------------
+
+def convert_profile_schema(
+    profile_name: str,
+    verbose: bool = False,
+) -> dict:
+    """
+    Convert a single profile's resolvedSchema.json to JSON Forms Draft 7.
+
+    Input:  _sources/profiles/{profile}/resolvedSchema.json
+    Output: Fully simplified schema with no $ref, no $defs, Draft 7 compatible.
+    """
+    schema_path = RESOLVED_DIR / profile_name / "resolvedSchema.json"
+
+    if not schema_path.exists():
+        print(f"ERROR: Schema not found: {schema_path}", file=sys.stderr)
+        sys.exit(1)
+
+    if verbose:
+        print(f"Converting {profile_name} from {schema_path}...", file=sys.stderr)
+
+    schema = load_json(schema_path)
+
+    # Pipeline: apply all transformations in order.
+    # Note: simplify_contains_to_enum must run BEFORE simplify_const_to_default,
+    # because const_to_default converts {const: X} -> {default: X}, which would
+    # prevent contains_to_enum from extracting the value.
+    schema = strip_metadata_keys(schema)
+    schema = convert_draft_version(schema)
+    schema = apply_anyof_simplifications(schema, "")
+    schema = simplify_contains_to_enum(schema)
+    schema = simplify_const_to_default(schema)
+    schema = remove_not_constraints(schema)
+    schema = flatten_remaining_allof(schema)
+    schema = relax_min_items(schema)
+
+    # Strip enum from top-level @type items — the pick list values are provided
+    # via uischema suggestion option to avoid JSON Forms scope resolution issues
+    if "properties" in schema and "@type" in schema["properties"]:
+        at_type = schema["properties"]["@type"]
+        if "items" in at_type and isinstance(at_type["items"], dict):
+            at_type["items"].pop("enum", None)
+
+    return schema
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Convert BB schemas to JSON Forms Draft 7 format",
+        description="Convert resolved schemas to JSON Forms Draft 7 format",
     )
     parser.add_argument(
         "--profile",
@@ -1190,7 +969,7 @@ def main():
         output_path = OUTPUT_DIR / profile / "schema.json"
         save_json(schema, output_path)
         if args.verbose:
-            print(f"  → {output_path}", file=sys.stderr)
+            print(f"  -> {output_path}", file=sys.stderr)
 
         # Copy uischema.json and defaults.json from _sources/ to build/
         for static_file in ("uischema.json", "defaults.json"):
@@ -1199,7 +978,7 @@ def main():
             if src.exists():
                 shutil.copy2(str(src), str(dst))
                 if args.verbose:
-                    print(f"  → {dst} (copied from _sources)", file=sys.stderr)
+                    print(f"  -> {dst} (copied from _sources)", file=sys.stderr)
             elif args.verbose:
                 print(f"  WARNING: {src} not found", file=sys.stderr)
 
