@@ -35,10 +35,26 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: Generate index.html with custom viewer
+      - name: Read repo title from bblocks-config.yaml
+        id: config
+        run: |
+          TITLE=$(grep '^name:' bblocks-config.yaml | sed 's/^name: *//')
+          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+
+      - name: Generate config.js and index.html
         run: |
           PAGES_URL="${{ steps.pages-url.outputs.url }}"
-          cat << EOF > index.html
+          TITLE="${{ steps.config.outputs.title }}"
+          BASE_PATH=$(echo "$PAGES_URL" | sed 's|https\?://[^/]*||')
+          cat > config.js << EOF
+          window.bblocksRegister = '${PAGES_URL}build/register.json';
+          window.bblocksViewer = {
+            title: "${TITLE}",
+            showImported: 0,
+            baseUrl: '${BASE_PATH}',
+          };
+          EOF
+          cat > index.html << EOF
           <!DOCTYPE html>
           <html lang="en">
           <head>
