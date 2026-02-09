@@ -41,6 +41,14 @@ jobs:
           TITLE=$(grep '^name:' bblocks-config.yaml | sed 's/^name: *//')
           echo "title=$TITLE" >> "$GITHUB_OUTPUT"
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Augment register.json with resolvedSchema URLs
+        run: python tools/augment_register.py
+
       - name: Generate config.js and index.html
         run: |
           PAGES_URL="${{ steps.pages-url.outputs.url }}"
