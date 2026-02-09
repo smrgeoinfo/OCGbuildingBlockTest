@@ -77,7 +77,7 @@ OCGbuildingBlockTest/
 │   ├── convert_for_jsonforms.py     # JSON Forms converter (see below)
 │   ├── augment_register.py          # Adds resolvedSchema URLs to register.json
 │   └── cors_server.py               # CORS dev server for local testing
-└── .github/workflows/               # Validation + JSON Forms generation
+└── .github/workflows/               # Validation + JSON Forms generation + custom Pages deploy
 ```
 
 ## Building Block Structure
@@ -377,7 +377,30 @@ python tools/augment_register.py
 
 **Why:** The bblocks-viewer fork has a "Resolved (JSON)" button in the JSON Schema tab that fetches the resolved schema from this URL. The OGC postprocessor doesn't know about `resolvedSchema.json`, so this script injects the URLs after the postprocessor generates `register.json`.
 
-**Workflow integration:** The `generate-jsonforms` workflow runs this after `convert_for_jsonforms.py` and stages `build/register.json` alongside `build/jsonforms/`.
+**Workflow integration:** The `generate-jsonforms` workflow runs this after `convert_for_jsonforms.py` and stages `build/register.json` alongside `build/jsonforms/`. It is also run by `deploy-viewer.yml` before the Pages upload (see below).
+
+## deploy-viewer.yml Workflow
+
+The OGC postprocessor's reusable workflow deploys GitHub Pages with the upstream `ogcincubator/bblocks-viewer` and generates `config.js` in-memory (never committed). This means the deployed site uses the upstream viewer (which lacks the "Resolved (JSON)" button) and `register.json` without `resolvedSchema` URLs.
+
+`deploy-viewer.yml` re-deploys Pages after the postprocessor, fixing both issues:
+
+1. **Runs `augment_register.py`** — injects `resolvedSchema` URLs into `build/register.json`
+2. **Generates `config.js`** — points `window.bblocksRegister` to the local register and sets `baseUrl` for SPA routing
+3. **Generates `index.html`** — loads JS/CSS assets from `smrgeoinfo.github.io/bblocks-viewer/` (the fork) instead of the upstream viewer
+
+**Trigger:** Runs after "Validate and process Building Blocks" completes successfully, or via `workflow_dispatch`.
+
+**Workflow chain on push:**
+```
+push → "Validate and process Building Blocks" (OGC postprocessor)
+         ├──→ "Generate JSON Forms schemas" (convert + augment + commit)
+         └──→ "Deploy custom bblocks-viewer" (augment + config.js + index.html → Pages)
+```
+
+**Key detail:** Both `generate-jsonforms` and `deploy-viewer` run `augment_register.py` independently. `generate-jsonforms` commits the augmented `register.json` to the repo (for future runs). `deploy-viewer` augments the checked-out copy before uploading to Pages (because it can't wait for the other workflow's commit).
+
+**bblocks-viewer fork:** `smrgeoinfo/bblocks-viewer` (forked from `ogcincubator/bblocks-viewer`). The fork's `gh-deploy.yml` workflow builds the Vue app and deploys to `smrgeoinfo.github.io/bblocks-viewer/`. The fork adds the "Resolved (JSON)" button to `JsonSchemaViewer.vue` and `resolvedSchema` to `COPY_PROPERTIES` in `bblock.service.js`.
 
 ## Verification
 
