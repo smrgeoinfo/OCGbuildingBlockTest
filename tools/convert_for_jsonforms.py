@@ -517,35 +517,53 @@ def simplify_anyof_same_as_items(schema: dict) -> dict:
 
 def simplify_distribution_items(items_schema: dict) -> dict:
     """
-    Simplify distribution items while preserving the oneOf structure.
-    Each oneOf branch (single file, archive, WebAPI) is kept as a distinct
-    option so the form can render a distribution type selector.  Form-specific
-    simplifications (const->default, contains->enum, etc.) are applied within
-    each branch by the main pipeline — we just preserve the structure here.
+    Flatten distribution items oneOf into a single merged object.
 
-    For technique profiles the resolved schema may have a top-level
-    ``properties`` alongside ``oneOf`` (technique constraints that apply to all
-    branches).  These are merged into each applicable oneOf branch.
+    The resolved schema has oneOf with 3 branches (single file, archive,
+    WebAPI).  JSON Forms cannot add new array items when items uses oneOf,
+    because it cannot determine which variant to instantiate.  Since the
+    UISchema already handles switching between Data Download and WebAPI via
+    the ``_distributionType`` virtual field (injected at serve time), we
+    merge all branches into a single flat object with all properties.
+
+    For technique profiles the resolved schema may also have top-level
+    ``properties`` alongside ``oneOf`` (technique constraints).  These are
+    merged in as well.
     """
     result = copy.deepcopy(items_schema)
 
-    # If technique-specific constraints sit alongside oneOf, merge them in
-    if "oneOf" in result and "properties" in result:
-        extra_props = result.pop("properties")
-        for branch in result["oneOf"]:
-            if isinstance(branch, dict) and "properties" in branch:
-                for pk, pv in extra_props.items():
-                    # Only merge into branches that have the relevant sub-property
-                    # e.g. schema:hasPart only goes into the archive branch
-                    if pk == "schema:hasPart" and pk in branch["properties"]:
-                        branch["properties"][pk] = _deep_merge_dict(
-                            branch["properties"][pk], pv
-                        )
-                    elif pk not in branch["properties"]:
-                        # New property — add to all branches
-                        branch["properties"][pk] = copy.deepcopy(pv)
+    if "oneOf" not in result:
+        return result
 
-    return result
+    branches = result.pop("oneOf")
+    extra_props = result.pop("properties", {})
+
+    # Start with an empty merged object
+    merged = {"type": "object", "properties": {}}
+
+    # Merge each oneOf branch's properties
+    for branch in branches:
+        if not isinstance(branch, dict):
+            continue
+        for pk, pv in branch.get("properties", {}).items():
+            if pk in merged["properties"]:
+                # Deep merge if both exist (e.g. @type from multiple branches)
+                merged["properties"][pk] = _deep_merge_dict(
+                    merged["properties"][pk], pv
+                )
+            else:
+                merged["properties"][pk] = copy.deepcopy(pv)
+
+    # Merge technique-specific extra properties
+    for pk, pv in extra_props.items():
+        if pk in merged["properties"]:
+            merged["properties"][pk] = _deep_merge_dict(
+                merged["properties"][pk], pv
+            )
+        else:
+            merged["properties"][pk] = copy.deepcopy(pv)
+
+    return merged
 
 
 def _deep_merge_dict(base: dict, overlay: dict) -> dict:
@@ -565,45 +583,86 @@ def _deep_merge_dict(base: dict, overlay: dict) -> dict:
 
 def simplify_file_detail_anyof(schema: dict) -> dict:
     """
-    Preserve the fileDetail anyOf of file types.  Each file type keeps its
-    @type, componentType (with enums), and type-specific detail properties.
-    The form can use fileDetail.@type as a discriminator to show the right fields.
+    Flatten fileDetail anyOf into a single merged object.
 
-    We strip internal complexity (nested anyOf in componentType detail refs)
-    but keep the overall structure.
+    JSON Forms cannot render anyOf discriminators, so we merge all file type
+    branches into one flat object.  The UISchema uses MIME-type-based SHOW
+    rules to display only the relevant fields for the selected file type.
+
+    - All properties across all branches are merged (skip @type — inferred
+      from MIME type at save time)
+    - componentType enums are collected from all branches and merged into a
+      single flat enum list
     """
     if "anyOf" not in schema:
         return schema
 
-    result = copy.deepcopy(schema)
-    simplified = []
-    for option in result["anyOf"]:
-        if isinstance(option, dict):
-            simplified.append(_simplify_file_type_option(option))
-        else:
-            simplified.append(option)
-    result["anyOf"] = simplified
-    return result
+    merged_props: dict = {}
+    all_ct_enums: list = []
+
+    for option in schema.get("anyOf", []):
+        if not isinstance(option, dict):
+            continue
+        for pk, pv in option.get("properties", {}).items():
+            if pk == "@type":
+                # Skip — fileDetail @type is inferred from MIME type on save
+                continue
+            if pk == "componentType":
+                _collect_component_type_enums(pv, all_ct_enums)
+                continue
+            if pk not in merged_props:
+                merged_props[pk] = copy.deepcopy(pv)
+            else:
+                # Deep merge if both exist
+                merged_props[pk] = _deep_merge_dict(merged_props[pk], pv)
+
+    # Build merged componentType with flat enum
+    if all_ct_enums:
+        # Deduplicate while preserving order
+        seen = set()
+        unique_enums = []
+        for e in all_ct_enums:
+            if e not in seen:
+                seen.add(e)
+                unique_enums.append(e)
+        merged_props["componentType"] = {
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "enum": unique_enums,
+                },
+            },
+        }
+
+    return {"type": "object", "properties": merged_props}
 
 
-def _simplify_file_type_option(option: dict) -> dict:
-    """
-    Simplify a single file type option within fileDetail anyOf.
-    Keeps @type, componentType (with enums + detail type refs), and
-    type-specific properties.  Strips overly nested structures.
-    """
-    result = copy.deepcopy(option)
+def _collect_component_type_enums(ct_schema: dict, enums: list) -> None:
+    """Recursively collect all @type enum values from a componentType schema."""
+    if not isinstance(ct_schema, dict):
+        return
 
-    # Simplify componentType if present — it may have nested anyOf for detail types
-    props = result.get("properties", {})
-    if "componentType" in props:
-        ct = props["componentType"]
-        if "anyOf" in ct:
-            # componentType has anyOf of {enum + optional detail ref}
-            # Keep the structure — each option has @type enum + detail properties
-            pass  # Already structured, let it through
+    # Direct object with properties.@type.enum
+    props = ct_schema.get("properties", {})
+    at_type = props.get("@type", {})
+    if isinstance(at_type, dict):
+        if "enum" in at_type:
+            enums.extend(at_type["enum"])
+        if "default" in at_type and isinstance(at_type["default"], str):
+            enums.append(at_type["default"])
 
-    return result
+    # Recurse into anyOf branches
+    for branch in ct_schema.get("anyOf", []):
+        _collect_component_type_enums(branch, enums)
+
+    # Recurse into @type.anyOf (deeply nested EMPA pattern)
+    if isinstance(at_type, dict) and "anyOf" in at_type:
+        for sub in at_type["anyOf"]:
+            if isinstance(sub, dict) and "default" in sub:
+                enums.append(sub["default"])
+            if isinstance(sub, dict) and "enum" in sub:
+                enums.extend(sub["enum"])
 
 
 # ---------------------------------------------------------------------------
