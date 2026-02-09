@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-02-08",
+  "dateOfLastChange": "2026-02-09",
   "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
   "maturity": "draft",
   "scope": "unstable",
@@ -32,14 +32,23 @@
     "cdif.bbr.metadata.schemaorgProperties.cdifMandatory": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/cdifMandatory/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.webAPI": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/webAPI/rules.shacl"
+    "cdif.bbr.metadata.schemaorgProperties.dataDownload": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/dataDownload/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/person/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.identifier": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.organization": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/organization/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/definedTerm/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.identifier": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/identifier/rules.shacl"
+    "cdif.bbr.metadata.schemaorgProperties.webAPI": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/webAPI/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.action": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/action/rules.shacl"
@@ -50,20 +59,14 @@
     "cdif.bbr.metadata.schemaorgProperties.labeledLink": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/labeledLink/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.dataDownload": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/dataDownload/rules.shacl"
-    ],
-    "cdif.bbr.metadata.schemaorgProperties.person": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/person/rules.shacl"
-    ],
-    "cdif.bbr.metadata.schemaorgProperties.organization": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/organization/rules.shacl"
-    ],
     "cdif.bbr.metadata.schemaorgProperties.metaMetadata": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/metaMetadata/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.cdifOptional": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/cdifOptional/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.spatialExtent": [
+      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/spatialExtent/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.agentInRole": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/agentInRole/rules.shacl"
@@ -73,12 +76,14 @@
     ],
     "cdif.bbr.metadata.schemaorgProperties.temporalExtent": [
       "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/temporalExtent/rules.shacl"
-    ],
-    "cdif.bbr.metadata.schemaorgProperties.spatialExtent": [
-      "https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/spatialExtent/rules.shacl"
     ]
   },
   "dependsOn": [
+    "cdif.bbr.metadata.adaProperties.supDocImage",
+    "cdif.bbr.metadata.adaProperties.imageMap",
+    "cdif.bbr.metadata.adaProperties.tabularData",
+    "cdif.bbr.metadata.adaProperties.dataCube",
+    "cdif.bbr.metadata.adaProperties.document",
     "cdif.bbr.metadata.profiles.adaProduct"
   ],
   "ldContext": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaVNMIR/context.jsonld",
@@ -116,7 +121,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA VNMIR Product Profile\ndescription: Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy\n  products. Extends the base ADA product profile with constraints on valid VNMIR component\n  types and vnmir_detail requirements.\nallOf:\n- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Must include a VNMIR product type identifier.\n      contains:\n        enum:\n        - ada:VNMIRPoint\n        - ada:VNMIROverviewImage\n        - ada:VNMIRSpectralMap\n    schema:distribution:\n      items:\n        properties:\n          schema:hasPart:\n            items:\n              properties:\n                schema:additionalType:\n                  items:\n                    enum:\n                    - ada:VNMIRSpectralPoint\n                    - ada:VNMIROverviewImage\n                    - ada:VNMIRSpectralMap\n                    - ada:VNMIRSpectraPlot\n                    - ada:analysisLocation\n                    - ada:instrumentMetadata\n                    - ada:methodDescription\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n  prov: http://www.w3.org/ns/prov#\n  spdx: http://spdx.org/rdf/terms#\n  nxs: http://purl.org/nexusformat/definitions/\n  dcterms: http://purl.org/dc/terms/\n  geosparql: http://www.opengis.net/ont/geosparql#\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: ADA VNMIR Product Profile\ndescription: Technique-specific profile for Very-Near Mid-Infrared (VNMIR/FTIR) spectroscopy\n  products. Extends the base ADA product profile with constraints on valid VNMIR component\n  types and vnmir_detail requirements.\nallOf:\n- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml\n- type: object\n  properties:\n    schema:additionalType:\n      description: Must include a VNMIR product type identifier.\n      contains:\n        enum:\n        - ada:VNMIRPoint\n        - ada:VNMIROverviewImage\n        - ada:VNMIRSpectralMap\n    schema:distribution:\n      items:\n        properties:\n          schema:hasPart:\n            items:\n              properties:\n                schema:additionalType:\n                  items:\n                    enum:\n                    - ada:VNMIRSpectralPoint\n                    - ada:VNMIROverviewImage\n                    - ada:VNMIRSpectralMap\n                    - ada:VNMIRSpectraPlot\n                    - ada:analysisLocation\n                    - ada:instrumentMetadata\n                    - ada:methodDescription\n                fileDetail:\n                  anyOf:\n                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml\n                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml\n                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml\n                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml\n                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/document/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  ada: https://ada.astromat.org/metadata/\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n  prov: http://www.w3.org/ns/prov#\n  spdx: http://spdx.org/rdf/terms#\n  nxs: http://purl.org/nexusformat/definitions/\n  dcterms: http://purl.org/dc/terms/\n  geosparql: http://www.opengis.net/ont/geosparql#\n",
   "gitRepository": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
   "gitPath": "_sources/profiles/adaVNMIR"
 }

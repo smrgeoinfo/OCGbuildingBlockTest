@@ -503,6 +503,99 @@ allOf:
                         not:
                           contains:
                             const: schema:DataDownload
+        - type: object
+          description: Web API distribution with file result. The API provides access
+            to data that can also be described as DataDownload file(s).
+          properties:
+            '@type':
+              type: array
+              items:
+                type: string
+              contains:
+                const: schema:WebAPI
+              minItems: 1
+            schema:name:
+              type: string
+            schema:description:
+              type: string
+            schema:serviceType:
+              anyOf:
+              - type: string
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    const: schema:DefinedTerm
+                  schema:name:
+                    type: string
+                required:
+                - '@type'
+                - schema:name
+            schema:documentation:
+              oneOf:
+              - type: string
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    const: schema:CreativeWork
+                  schema:name:
+                    type: string
+                  schema:url:
+                    type: string
+                    format: uri
+            schema:potentialAction:
+              type: array
+              description: Actions that can be invoked via the API.
+              items:
+                $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
+            schema:result:
+              description: The file(s) that result from invoking this API. Reuses
+                the same single-file or archive-with-hasPart structure.
+              oneOf:
+              - allOf:
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - type: object
+                  description: Single file result.
+                  properties:
+                    '@type':
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: schema:DataDownload
+                      minItems: 1
+              - allOf:
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - type: object
+                  description: Archive file result with parts.
+                  properties:
+                    '@type':
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        const: schema:DataDownload
+                      minItems: 1
+                    schema:hasPart:
+                      type: array
+                      description: Files within the archive result.
+                      items:
+                        allOf:
+                        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                        - type: object
+                          properties:
+                            '@type':
+                              type: array
+                              items:
+                                type: string
+                              not:
+                                contains:
+                                  const: schema:DataDownload
+          required:
+          - '@type'
+          - schema:serviceType
+          - schema:potentialAction
     schema:subjectOf:
       type: object
       description: Metadata record about this dataset

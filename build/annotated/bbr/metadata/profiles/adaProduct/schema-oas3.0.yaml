@@ -538,6 +538,167 @@ x-defs:
       spdx: http://spdx.org/rdf/terms#
     x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.schemaorgProperties.action:
+    title: 'Action '
+    type: object
+    description: 'this element defines an action (operation) that can be invoked via
+      messages using the protocol defined. In most cases this will be an http request
+      via TCP/IP, but in desktop or LAN environments, other protocols might be used.
+      The target property defines the endpoint and syntax for invoking the action.
+      Result specifies the encoding format for the (possible) response(s) when the
+      action is invoked. Object specifies the information model for the resource that
+      is the object of the action. This approach is an adoptation of the Action Blog
+      Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) '
+    properties:
+      '@type':
+        type: string
+        description: TBD, recognize other actions, e.g. SearchAction, UpdateAction...,
+          others?
+        default: schema:Action
+        enum:
+        - schema:Action
+      schema:name:
+        type: string
+        description: text label for the action
+      schema:target:
+        description: specifies the request target location and request syntax
+        allOf:
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/target_type
+      schema:result:
+        description: specifies the serialization scheme (encoding format, information
+          model) for expected representation of the data
+        allOf:
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/result_type
+      schema:object:
+        description: specification of information model/schema for target resource.
+          Only necessary if the request allow specifying the fields to include in
+          the response
+        allOf:
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/object_type
+      schema:query-input:
+        description: set of explanations of the parameters in the URL template for
+          the target.
+        allOf:
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/query-input_type
+    required:
+    - schema:name
+    - schema:target
+    $defs:
+      target_type:
+        type: object
+        description: documentation of the URL end point and syntax to invoke the service.
+          This schema doesn't handle post requests
+        properties:
+          '@type':
+            type: string
+            default: schema:EntryPoint
+            enum:
+            - schema:EntryPoint
+          schema:description:
+            type: string
+          schema:urlTemplate:
+            type: string
+            description: 'a templated URL; parameters are enclosed in curly braces
+              ({..}); parameters are not required. If included, parameters MUST be
+              documented in the query-input element. Template should be consitent
+              with URI Template (https://datatracker.ietf.org/doc/html/rfc6570) examples:
+              - http://portal.chordsrt.com/api/v1/data.{encoding}; single parameter
+              - http://portal.chordsrt.com/api/v1/data.{encoding}?instruments={instruments}&start={start}&end={end}
+              ; multiple parameters - {endpoint}{encoding}; endpoint URL path is a
+              parameter,should only appear in potential actions for API specification
+              descriptions, which are generic-not specific to a particular endpoint.'
+          schema:httpMethod:
+            title: HTTP Method
+            description: only applicable if protocol is http or a protocol that tunnels
+              on http
+            type: array
+            items:
+              type: string
+              default: GET
+              enum:
+              - GET
+              - PUT
+              - POST
+              - PATCH
+              - DELETE
+              - COPY
+              - HEAD
+              - OPTIONS
+              - PROPFIND
+          schema:contentType:
+            type: array
+            description: The supported content type(s) for an EntryPoint response.
+              a MIME type (https://www.iana.org/assignments/media-types/media-types.xhtml)
+              that specifies the content type for messages in resonses from the service
+              endpoint. This is a schema.org property, and is redundant with encodingFormat
+              in the result property for the Action.
+            items:
+              type: string
+        required:
+        - schema:urlTemplate
+      result_type:
+        type: object
+        description: documentation of the serialization format for the API response,
+          i.e. an implementation of the structure specified in the object type field
+        properties:
+          '@type':
+            type: string
+            default: schema:DataDownload
+          schema:encodingFormat:
+            type: array
+            items:
+              type: string
+          schema:description:
+            type: string
+      query-input_type:
+        type: array
+        description: object that maps the parameters (in braces {  } in the url template
+          to specifications for the kind of value expected. parameters must all be
+          strings in the URL
+        minItems: 0
+        items:
+          type: object
+          properties:
+            '@id':
+              type: string
+            '@type':
+              type: string
+              default: schema:PropertyValueSpecification
+              enum:
+              - schema:PropertyValueSpecification
+            schema:valueName:
+              type: string
+            schema:description:
+              type: string
+            schema:valueRequired:
+              type: boolean
+              default: true
+            schema:valuePattern:
+              type: string
+          required:
+          - schema:valueName
+          - schema:description
+      object_type:
+        type: object
+        description: description of the data structure of the return object
+        properties:
+          '@type':
+            type: string
+            default: schema:DataFeed
+            enum:
+            - schema:DataFeed
+          schema:description:
+            type: string
+          schema:variableMeasured:
+            type: array
+            items:
+              $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/VariableMeasured
+      VariableMeasured:
+        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.schemaorgProperties.labeledLink:
     description: schema for a labeled link, a profile of schema.org/CreativeWork
     type: object
@@ -1897,167 +2058,6 @@ x-defs:
       ada: https://ada.astromat.org/metadata/
     x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  cdif.bbr.metadata.schemaorgProperties.action:
-    title: 'Action '
-    type: object
-    description: 'this element defines an action (operation) that can be invoked via
-      messages using the protocol defined. In most cases this will be an http request
-      via TCP/IP, but in desktop or LAN environments, other protocols might be used.
-      The target property defines the endpoint and syntax for invoking the action.
-      Result specifies the encoding format for the (possible) response(s) when the
-      action is invoked. Object specifies the information model for the resource that
-      is the object of the action. This approach is an adoptation of the Action Blog
-      Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) '
-    properties:
-      '@type':
-        type: string
-        description: TBD, recognize other actions, e.g. SearchAction, UpdateAction...,
-          others?
-        default: schema:Action
-        enum:
-        - schema:Action
-      schema:name:
-        type: string
-        description: text label for the action
-      schema:target:
-        description: specifies the request target location and request syntax
-        allOf:
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/target_type
-      schema:result:
-        description: specifies the serialization scheme (encoding format, information
-          model) for expected representation of the data
-        allOf:
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/result_type
-      schema:object:
-        description: specification of information model/schema for target resource.
-          Only necessary if the request allow specifying the fields to include in
-          the response
-        allOf:
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/object_type
-      schema:query-input:
-        description: set of explanations of the parameters in the URL template for
-          the target.
-        allOf:
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/query-input_type
-    required:
-    - schema:name
-    - schema:target
-    $defs:
-      target_type:
-        type: object
-        description: documentation of the URL end point and syntax to invoke the service.
-          This schema doesn't handle post requests
-        properties:
-          '@type':
-            type: string
-            default: schema:EntryPoint
-            enum:
-            - schema:EntryPoint
-          schema:description:
-            type: string
-          schema:urlTemplate:
-            type: string
-            description: 'a templated URL; parameters are enclosed in curly braces
-              ({..}); parameters are not required. If included, parameters MUST be
-              documented in the query-input element. Template should be consitent
-              with URI Template (https://datatracker.ietf.org/doc/html/rfc6570) examples:
-              - http://portal.chordsrt.com/api/v1/data.{encoding}; single parameter
-              - http://portal.chordsrt.com/api/v1/data.{encoding}?instruments={instruments}&start={start}&end={end}
-              ; multiple parameters - {endpoint}{encoding}; endpoint URL path is a
-              parameter,should only appear in potential actions for API specification
-              descriptions, which are generic-not specific to a particular endpoint.'
-          schema:httpMethod:
-            title: HTTP Method
-            description: only applicable if protocol is http or a protocol that tunnels
-              on http
-            type: array
-            items:
-              type: string
-              default: GET
-              enum:
-              - GET
-              - PUT
-              - POST
-              - PATCH
-              - DELETE
-              - COPY
-              - HEAD
-              - OPTIONS
-              - PROPFIND
-          schema:contentType:
-            type: array
-            description: The supported content type(s) for an EntryPoint response.
-              a MIME type (https://www.iana.org/assignments/media-types/media-types.xhtml)
-              that specifies the content type for messages in resonses from the service
-              endpoint. This is a schema.org property, and is redundant with encodingFormat
-              in the result property for the Action.
-            items:
-              type: string
-        required:
-        - schema:urlTemplate
-      result_type:
-        type: object
-        description: documentation of the serialization format for the API response,
-          i.e. an implementation of the structure specified in the object type field
-        properties:
-          '@type':
-            type: string
-            default: schema:DataDownload
-          schema:encodingFormat:
-            type: array
-            items:
-              type: string
-          schema:description:
-            type: string
-      query-input_type:
-        type: array
-        description: object that maps the parameters (in braces {  } in the url template
-          to specifications for the kind of value expected. parameters must all be
-          strings in the URL
-        minItems: 0
-        items:
-          type: object
-          properties:
-            '@id':
-              type: string
-            '@type':
-              type: string
-              default: schema:PropertyValueSpecification
-              enum:
-              - schema:PropertyValueSpecification
-            schema:valueName:
-              type: string
-            schema:description:
-              type: string
-            schema:valueRequired:
-              type: boolean
-              default: true
-            schema:valuePattern:
-              type: string
-          required:
-          - schema:valueName
-          - schema:description
-      object_type:
-        type: object
-        description: description of the data structure of the return object
-        properties:
-          '@type':
-            type: string
-            default: schema:DataFeed
-            enum:
-            - schema:DataFeed
-          schema:description:
-            type: string
-          schema:variableMeasured:
-            type: array
-            items:
-              $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action/$defs/VariableMeasured
-      VariableMeasured:
-        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.variableMeasured
-    x-jsonld-prefixes:
-      schema: http://schema.org/
-    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.adaProperties.detailEMPA:
     title: EMPA Instrument Detail
     description: Electron Microprobe Analysis with spectrometer and signal details.
@@ -2980,6 +2980,105 @@ allOf:
                           contains:
                             enum:
                             - schema:DataDownload
+        - type: object
+          description: Web API distribution with file result. The API provides access
+            to data that can also be described as DataDownload file(s).
+          properties:
+            '@type':
+              type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - schema:WebAPI
+              minItems: 1
+            schema:name:
+              type: string
+            schema:description:
+              type: string
+            schema:serviceType:
+              anyOf:
+              - type: string
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    enum:
+                    - schema:DefinedTerm
+                  schema:name:
+                    type: string
+                required:
+                - '@type'
+                - schema:name
+            schema:documentation:
+              oneOf:
+              - type: string
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    enum:
+                    - schema:CreativeWork
+                  schema:name:
+                    type: string
+                  schema:url:
+                    type: string
+                    format: uri
+            schema:potentialAction:
+              type: array
+              description: Actions that can be invoked via the API.
+              items:
+                $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.action
+            schema:result:
+              description: The file(s) that result from invoking this API. Reuses
+                the same single-file or archive-with-hasPart structure.
+              oneOf:
+              - allOf:
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.files
+                - type: object
+                  description: Single file result.
+                  properties:
+                    '@type':
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        enum:
+                        - schema:DataDownload
+                      minItems: 1
+              - allOf:
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.files
+                - type: object
+                  description: Archive file result with parts.
+                  properties:
+                    '@type':
+                      type: array
+                      items:
+                        type: string
+                      contains:
+                        enum:
+                        - schema:DataDownload
+                      minItems: 1
+                    schema:hasPart:
+                      type: array
+                      description: Files within the archive result.
+                      items:
+                        allOf:
+                        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.files
+                        - type: object
+                          properties:
+                            '@type':
+                              type: array
+                              items:
+                                type: string
+                              not:
+                                contains:
+                                  enum:
+                                  - schema:DataDownload
+          required:
+          - '@type'
+          - schema:serviceType
+          - schema:potentialAction
     schema:subjectOf:
       type: object
       description: Metadata record about this dataset
