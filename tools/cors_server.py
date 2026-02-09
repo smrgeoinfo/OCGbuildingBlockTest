@@ -19,6 +19,12 @@ class CORSHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8090
-    server = http.server.HTTPServer(("127.0.0.1", port), CORSHandler)
-    print(f"CORS-enabled server on http://localhost:{port}")
+    directory = sys.argv[2] if len(sys.argv) > 2 else "."
+
+    class Handler(CORSHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=directory, **kwargs)
+
+    server = http.server.HTTPServer(("127.0.0.1", port), Handler)
+    print(f"CORS-enabled server on http://localhost:{port} (serving {directory})")
     server.serve_forever()

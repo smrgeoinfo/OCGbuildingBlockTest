@@ -72,8 +72,12 @@ OCGbuildingBlockTest/
 │       ├── adaXRD/                  # X-ray Diffraction technique profile
 │       ├── adaICPMS/                # ICP Mass Spectrometry technique profile
 │       └── adaVNMIR/                # Very-Near Mid-IR / FTIR spectroscopy profile
-├── resolve_schema.py                # Schema resolver tool (see below)
-└── .github/workflows/               # Validation workflow
+├── tools/
+│   ├── resolve_schema.py            # Schema resolver (see below)
+│   ├── convert_for_jsonforms.py     # JSON Forms converter (see below)
+│   ├── augment_register.py          # Adds resolvedSchema URLs to register.json
+│   └── cors_server.py               # CORS dev server for local testing
+└── .github/workflows/               # Validation + JSON Forms generation
 ```
 
 ## Building Block Structure
@@ -210,55 +214,63 @@ profiles/adaProduct/                    ← Top-level ADA product profile (v3, C
 │   ├── schema:location → laboratory
 │   └── schema:mainEntity → (sample inline, identifier as array)
 ├── schema:distribution → oneOf:
-│   ├── files_type (single file, @type contains DataDownload)
+│   ├── Branch 1: single file (files + @type contains DataDownload)
 │   │   ├── spdx:checksum → {spdx:algorithm, spdx:checksumValue}
 │   │   ├── schema:encodingFormat → array of strings
 │   │   └── fileDetail → anyOf [image, imageMap, tabularData, ...]
-│   └── archive (DataDownload + schema:hasPart)
-│       └── schema:hasPart → hasPart_file_type (NOT DataDownload)
-│           └── allOf: [common file props] + anyOf [file type BBs]
-│               ├── image (componentType enum)
-│               ├── imageMap (componentType: empa_detail or enum)
-│               ├── supDocImage (componentType enum, incl. ada:other)
-│               ├── tabularData (TabularTextDataSet + CSVW + oneOf delimited/fixedWidth)
-│               │   └── cdi:hasPhysicalMapping → physicalMapping (flat per-column)
-│               ├── collection (componentType enum + filelist + nFiles)
-│               ├── dataCube (StructuredDataSet + hasPhysicalMapping + locator)
-│               ├── document (componentType enum + schema:version, schema:isBasedOn)
-│               └── otherFile (componentType + encodingFormat enum)
+│   ├── Branch 2: archive (files + DataDownload + schema:hasPart)
+│   │   └── schema:hasPart → items (files + NOT DataDownload)
+│   │       └── allOf: [common file props] + anyOf [file type BBs]
+│   │           ├── image (componentType enum)
+│   │           ├── imageMap (componentType: empa_detail or enum)
+│   │           ├── supDocImage (componentType enum, incl. ada:other)
+│   │           ├── tabularData (TabularTextDataSet + CSVW + oneOf delimited/fixedWidth)
+│   │           │   └── cdi:hasPhysicalMapping → physicalMapping (flat per-column)
+│   │           ├── collection (componentType enum + filelist + nFiles)
+│   │           ├── dataCube (StructuredDataSet + hasPhysicalMapping + locator)
+│   │           ├── document (componentType enum + schema:version, schema:isBasedOn)
+│   │           └── otherFile (componentType + encodingFormat enum)
+│   └── Branch 3: WebAPI (schema:WebAPI)
+│       ├── schema:serviceType, schema:documentation, schema:termsOfService
+│       └── schema:potentialAction → action (schema:Action)
+│           └── schema:result → oneOf [single file, archive] (reuses Branches 1 & 2)
 └── schema:subjectOf → metadata record
 ```
 
 ### Technique Profiles
 
-Technique profiles extend `adaProduct` and constrain component types to those valid for the technique:
+Technique profiles extend `adaProduct` via `allOf` and constrain both component types (`schema:additionalType`) and file types (`fileDetail`) to those valid for the technique:
 
 ```
 profiles/adaEMPA/    ← extends adaProduct
 ├── schema:additionalType contains EMPA product type
-└── schema:distribution hasPart constrained to:
-    EMPAImageMap, EMPAImage, EMPAQEATabular, EMPAImageCollection,
-    analysisLocation, supplementaryImage, calibrationFile, methodDescription,
-    instrumentMetadata
+├── schema:distribution hasPart additionalType constrained to:
+│   EMPAImageMap, EMPAImage, EMPAQEATabular, EMPAImageCollection,
+│   analysisLocation, supplementaryImage, calibrationFile, methodDescription,
+│   instrumentMetadata
+└── fileDetail anyOf: imageMap, image, tabularData, collection, supDocImage, document
 
 profiles/adaXRD/     ← extends adaProduct
 ├── schema:additionalType contains XRD product type
-└── schema:distribution hasPart constrained to:
-    XRDTabular, XRDDiffractionPattern, XRDIndexedImage,
-    instrumentMetadata, methodDescription
+├── schema:distribution hasPart additionalType constrained to:
+│   XRDTabular, XRDDiffractionPattern, XRDIndexedImage,
+│   instrumentMetadata, methodDescription
+└── fileDetail anyOf: tabularData, image, document
 
 profiles/adaICPMS/   ← extends adaProduct
 ├── schema:additionalType contains ICP-MS product type (HR/Q/MC variants)
-└── schema:distribution hasPart constrained to:
-    HRICPMSProcessed, HRICPMSRaw, QICPMSProcessedTabular, QICPMSRawTabular,
-    MCICPMSTabular, MCICPMSCollection, MCICPMSRaw, methodDescription,
-    instrumentMetadata, calibrationFile
+├── schema:distribution hasPart additionalType constrained to:
+│   HRICPMSProcessed, HRICPMSRaw, QICPMSProcessedTabular, QICPMSRawTabular,
+│   MCICPMSTabular, MCICPMSCollection, MCICPMSRaw, methodDescription,
+│   instrumentMetadata, calibrationFile
+└── fileDetail anyOf: tabularData, collection, document
 
 profiles/adaVNMIR/   ← extends adaProduct
 ├── schema:additionalType contains VNMIR product type
-└── schema:distribution hasPart constrained to:
-    VNMIRSpectralPoint, VNMIROverviewImage, VNMIRSpectralMap,
-    VNMIRSpectraPlot, analysisLocation, instrumentMetadata, methodDescription
+├── schema:distribution hasPart additionalType constrained to:
+│   VNMIRSpectralPoint, VNMIROverviewImage, VNMIRSpectralMap,
+│   VNMIRSpectraPlot, analysisLocation, instrumentMetadata, methodDescription
+└── fileDetail anyOf: tabularData, imageMap, dataCube, supDocImage, document
 ```
 
 ### Detail Types
@@ -289,344 +301,99 @@ The ADA building blocks define the JSON-LD schema structure. The CZ Net Data Sub
 
 ---
 
-# JSON Schema Reference Resolver
+# Schema Tools
 
-## Overview
+## Schema Pipeline
 
-The `resolve_schema.py` script is a Python utility that transforms modular OGC Building Block JSON schemas into standalone, self-contained schemas. It recursively resolves all external `$ref` references and flattens definitions into a single `$defs` section.
+Three tools transform modular YAML source schemas into JSON Forms-compatible Draft 7 schemas and augment the bblocks-viewer register:
 
-## Purpose
-
-OGC Building Blocks use a modular architecture where schemas reference each other using JSON Schema's `$ref` keyword. While this modularity is excellent for maintenance and reusability, some tools and validators require fully resolved, standalone schemas. This tool bridges that gap.
-
-### Before (Modular)
-```json
-{
-  "$defs": {
-    "Person": {"$ref": "../person/personSchema.json"},
-    "Organization": {"$ref": "../organization/organizationSchema.json"}
-  }
-}
+```
+schema.yaml → resolve_schema.py → resolvedSchema.json → convert_for_jsonforms.py → schema.json
+                                                       → augment_register.py → register.json (adds resolvedSchema URLs)
 ```
 
-### After (Standalone)
-```json
-{
-  "$defs": {
-    "Person": { /* full person schema inlined */ },
-    "Organization": { /* full organization schema inlined */ }
-  }
-}
+## resolve_schema.py
+
+Recursively resolves ALL `$ref` references from modular YAML/JSON source schemas into one fully-inlined JSON Schema. No external references remain in the output — all `$defs` are inlined and removed.
+
+**$ref patterns handled:**
+1. Relative path: `$ref: ../detailEMPA/schema.yaml`
+2. Fragment-only: `$ref: '#/$defs/Identifier'`
+3. Cross-file fragment: `$ref: ../metaMetadata/schema.yaml#/$defs/conformsTo_item`
+4. Both YAML and JSON file extensions
+
+**Usage:**
+```bash
+# Resolve a profile by name (looks in _sources/profiles/{name}/schema.yaml)
+python tools/resolve_schema.py adaProduct
+python tools/resolve_schema.py adaEMPA --flatten-allof -o _sources/profiles/adaEMPA/resolvedSchema.json
+
+# Resolve an arbitrary schema file
+python tools/resolve_schema.py --file path/to/any/schema.yaml
+
+# Resolve all profiles
+for p in adaProduct adaEMPA adaICPMS adaVNMIR adaXRD CDIFDiscovery; do
+  python tools/resolve_schema.py $p --flatten-allof -o _sources/profiles/$p/resolvedSchema.json
+done
 ```
 
-## Installation
+**CLI options:** `profile` (positional, profile name), `--file` (arbitrary schema path), `-o`/`--output` (output file, default: stdout), `--flatten-allof` (merge allOf entries into single objects).
 
-No external dependencies required. The script uses only Python standard library modules:
-- `json` - JSON parsing and serialization
-- `pathlib` - Cross-platform path handling
-- `argparse` - Command-line argument parsing
-- `copy` - Deep copying of schema objects
-- `urllib.parse` - URL fragment parsing
+**Requirements:** Python 3.6+ with `pyyaml`
 
-**Requirements:** Python 3.6+
+**Key implementation details:**
+- `deep_merge` with `_is_complete_schema` heuristic: when merging `properties` dicts, overlay properties with `type`/`oneOf`/`anyOf`/`allOf`/`$ref` **replace** the base entirely; partial constraint patches (no composition keywords) are deep-merged
+- Two-pass `$defs` resolution: pass 1 resolves external file refs with empty defs dict, pass 2 uses `_inline_unresolved_defs` to replace `$comment` placeholders left by forward cross-def fragment refs
+- Circular reference detection via `seen` set (returns `$comment` placeholder)
+- Strips metadata keys (`$id`, `x-jsonld-*`) from output
 
-## Usage
+## convert_for_jsonforms.py
 
-### Basic Usage
+Reads `resolvedSchema.json` (from `_sources/profiles/{name}/`) and converts to JSON Forms-compatible Draft 7:
+- Converts `$schema` from Draft 2020-12 to Draft 7
+- Simplifies `anyOf` patterns for form rendering (single-item anyOf unwrapped, duplicate removal)
+- Converts `contains` → `enum`, `const` → `default`
+- Merges technique profile constraints into distribution `oneOf` branches
+- Preserves `oneOf` in distribution (3 branches: single file, archive, WebAPI)
+- Preserves `anyOf` in fileDetail (technique-specific file type subsets)
+- Removes `not` constraints and relaxes `minItems`
+
+**Usage:**
+```bash
+python tools/convert_for_jsonforms.py adaProduct -v
+python tools/convert_for_jsonforms.py --all -v
+```
+
+**Output:** `build/jsonforms/profiles/{name}/schema.json`
+
+## augment_register.py
+
+Adds `resolvedSchema` URLs to `build/register.json` for each profile building block. Scans bblock identifiers for `.profiles.{name}` patterns and checks whether `_sources/profiles/{name}/resolvedSchema.json` exists. If so, adds the GitHub Pages URL as `bblock.resolvedSchema`.
+
+**Usage:**
+```bash
+python tools/augment_register.py
+```
+
+**Why:** The bblocks-viewer fork has a "Resolved (JSON)" button in the JSON Schema tab that fetches the resolved schema from this URL. The OGC postprocessor doesn't know about `resolvedSchema.json`, so this script injects the URLs after the postprocessor generates `register.json`.
+
+**Workflow integration:** The `generate-jsonforms` workflow runs this after `convert_for_jsonforms.py` and stages `build/register.json` alongside `build/jsonforms/`.
+
+## Verification
 
 ```bash
-# Print resolved schema to stdout
-python resolve_schema.py <input_schema_path>
-
-# Save to file
-python resolve_schema.py <input_schema_path> -o <output_path>
-```
-
-### Examples
-
-```bash
-# Resolve the main CDIF Discovery profile
-python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json
-
-# Save resolved schema to a file
-python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json -o resolved_cdif.json
-
-# Verbose mode - shows which files are being loaded
-python resolve_schema.py _sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json -v
-
-# Custom JSON indentation (default is 2)
-python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json --indent 4
-```
-
-### Command-Line Options
-
-| Option | Description |
-|--------|-------------|
-| `input_schema` | Path to the input JSON schema file (required) |
-| `-o, --output` | Output file path (default: prints to stdout) |
-| `-v, --verbose` | Print progress information to stderr |
-| `--indent` | JSON indentation level (default: 2) |
-| `--inline-single-use` | Inline definitions that are only referenced once |
-
-## How It Works
-
-### Architecture
-
-The resolver uses a single-pass recursive algorithm with the following components:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     SchemaResolver                          │
-├─────────────────────────────────────────────────────────────┤
-│  schema_cache      Dict[str, dict]   Loaded file cache      │
-│  global_defs       Dict[str, dict]   Flattened definitions  │
-│  processing_stack  Set[str]          Cycle detection        │
-│  file_to_def_name  Dict[str, str]    Path → def name map    │
-│  warnings          List[str]         Collected warnings     │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Processing Flow
-
-```
-1. Load root schema
-       │
-       ▼
-2. Process schema recursively
-       │
-       ├──► Find $ref → External? ──► Load & process referenced file
-       │                    │              │
-       │                    │              ▼
-       │                    │         Add to global_defs
-       │                    │              │
-       │                    │              ▼
-       │                    └──────► Replace with #/$defs/Name
-       │
-       ├──► Find $defs → Process each definition
-       │                    │
-       │                    ▼
-       │              Add to global_defs (flattened)
-       │
-       └──► Process nested objects/arrays recursively
-       │
-       ▼
-3. Merge global_defs into result
-       │
-       ▼
-4. Output standalone schema
-```
-
-### Reference Types Handled
-
-The resolver handles all common JSON Schema reference patterns:
-
-| Pattern | Example | Description |
-|---------|---------|-------------|
-| Relative file | `"$ref": "../person/personSchema.json"` | Reference to another schema file |
-| Fragment | `"$ref": "#/$defs/Identifier"` | Internal reference (preserved as-is) |
-| File + Fragment | `"$ref": "../file.json#/$defs/Name"` | Reference to specific definition in another file |
-| allOf composition | `"allOf": [{"$ref": "..."}]` | Schema composition |
-
-### Key Methods
-
-#### `resolve(schema_path: str) -> dict`
-Main entry point. Loads the root schema and initiates processing.
-
-```python
-resolver = SchemaResolver(verbose=True)
-result = resolver.resolve("path/to/schema.json")
-```
-
-#### `process_schema(schema: Any, current_dir: Path) -> Any`
-Recursively processes a schema node, handling:
-- `$ref` references (external → resolved, internal → preserved)
-- `$defs` sections (extracted and flattened)
-- Nested objects and arrays
-
-#### `get_or_create_def_for_file(schema_path: Path, fragment: Optional[str]) -> str`
-Ensures each external schema is processed only once:
-1. Checks cache for existing definition
-2. Generates unique name if needed
-3. Loads and processes the schema
-4. Stores in `global_defs`
-5. Returns the definition name
-
-#### `parse_ref(ref: str) -> Tuple[str, Optional[str]]`
-Splits a `$ref` value into file path and fragment:
-```python
-parse_ref("../person/personSchema.json#/$defs/Name")
-# Returns: ("../person/personSchema.json", "/$defs/Name")
-```
-
-## Features
-
-### Caching
-Schemas are loaded once and cached. If multiple schemas reference the same file, it's only read from disk once.
-
-### Cycle Detection
-The `processing_stack` tracks schemas currently being processed. If a cycle is detected, the resolver returns a reference to the existing definition instead of infinite recursion.
-
-### Unique Name Generation
-When multiple schemas define types with the same name, the resolver generates unique names:
-```
-Person, Person_2, Person_3, ...
-```
-
-### Typo Detection
-The resolver detects common typos like using `"$defs"` instead of `"$ref"`:
-```json
-// This typo is detected and handled:
-{"$defs": "../variableMeasured/variableMeasuredSchema.json"}
-// Should be:
-{"$ref": "../variableMeasured/variableMeasuredSchema.json"}
-```
-
-A warning is emitted but processing continues.
-
-### Property Preservation
-When a `$ref` has sibling properties (uncommon but valid), they are preserved:
-```json
-// Input
-{"$ref": "../identifier/identifierSchema.json", "description": "Custom desc"}
-
-// Output
-{"$ref": "#/$defs/Identifier", "description": "Custom desc"}
-```
-
-### Inline Single-Use Definitions
-
-With the `--inline-single-use` flag, the resolver produces a more compact schema by:
-1. Keeping definitions in `$defs` only if they are referenced multiple times
-2. Inlining definitions that are referenced only once directly where they are used
-
-This produces output similar to hand-authored schemas like `CDIF-JSONLD-schema-schemaprefix.json`.
-
-```bash
-python resolve_schema.py schema.json -o output.json --inline-single-use -v
-```
-
-Example output (verbose mode):
-```
-Single-use definitions to inline: {'DataDownload', 'MetaMetadata', 'WebAPI', ...}
-Multi-use definitions to keep: {'Person', 'Organization', 'Identifier', 'DefinedTerm', ...}
-```
-
-The optimization considers:
-- References in the main schema properties
-- References within other definitions (if A references B multiple times, B is kept in `$defs`)
-- Unreferenced definitions are also inlined (they may be dead code)
-
-## Output Format
-
-The resolved schema has all definitions in a single top-level `$defs` section:
-
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "creator": {"$ref": "#/$defs/Person"}
-  },
-  "$defs": {
-    "Person": { /* ... */ },
-    "Organization": { /* ... */ },
-    "Identifier": { /* ... */ }
-  }
-}
-```
-
-All external references are converted to internal references:
-- Before: `{"$ref": "../person/personSchema.json"}`
-- After: `{"$ref": "#/$defs/Person"}`
-
-## Error Handling
-
-| Error | Cause | Resolution |
-|-------|-------|------------|
-| `Input file not found` | Schema path doesn't exist | Check the path |
-| `Referenced file not found` | A `$ref` points to non-existent file | Fix the reference path |
-| `Invalid JSON` | Malformed JSON in a schema file | Fix the JSON syntax |
-| `Missing key` | Fragment references non-existent path | Fix the fragment pointer |
-
-Use `-v` (verbose) mode to see the full stack trace for debugging.
-
-## Limitations
-
-1. **HTTP/HTTPS references**: Only local file references are supported. Remote URLs in `$ref` are not fetched.
-
-2. **JSON Schema keywords**: The resolver doesn't validate JSON Schema semantics; it only resolves references.
-
-3. **Circular references**: While detected, complex circular dependencies may result in incomplete definitions.
-
-## Example: Building Block Structure
-
-The resolver is designed for the OGC Building Blocks directory structure:
-
-```
-_sources/
-├── profiles/
-│   └── CDIFDiscovery/
-│       └── CDIFDiscoverySchema.json    ← Profile (uses allOf)
-├── schemaorgProperties/
-│   ├── person/
-│   │   └── personSchema.json           ← Component
-│   ├── organization/
-│   │   └── organizationSchema.json     ← Component
-│   └── identifier/
-│       └── identifierSchema.json       ← Component
-└── provProperties/
-    └── generatedBy/
-        └── generatedBySchema.json      ← Component
-```
-
-Running on the profile:
-```bash
-python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json -v
-```
-
-Output shows the dependency resolution:
-```
-Loading: .../CDIFDiscoverySchema.json
-Loading: .../cdifMandatorySchema.json
-Loading: .../personSchema.json
-Loading: .../organizationSchema.json
-Loading: .../identifierSchema.json
-...
-```
-
-## Programmatic Usage
-
-The resolver can be used as a library:
-
-```python
-from resolve_schema import SchemaResolver
-
-# Create resolver
-resolver = SchemaResolver(verbose=False)
-
-# Resolve schema
-standalone_schema = resolver.resolve("path/to/schema.json")
-
-# Check for warnings
-if resolver.warnings:
-    print("Warnings:", resolver.warnings)
-
-# Use the resolved schema
+# Verify distribution has oneOf only (no conflicting anyOf)
+python -c "
 import json
-print(json.dumps(standalone_schema, indent=2))
+with open('_sources/profiles/adaProduct/resolvedSchema.json') as f:
+    s = json.load(f)
+items = s['properties']['schema:distribution']['items']
+assert 'oneOf' in items, 'Missing oneOf'
+assert 'anyOf' not in items, 'Conflicting anyOf still present'
+print(f'Distribution OK: {len(items[\"oneOf\"])} branches')
+"
 ```
-
-## Contributing
-
-When modifying the resolver:
-
-1. Test with simple schemas first (e.g., `identifierSchema.json`)
-2. Test with complex profiles (e.g., `CDIFDiscoverySchema.json`)
-3. Verify no external references remain: `grep '"$ref"' output.json | grep -v '#/$defs/'`
-4. Validate the output is valid JSON
 
 ## License
-
-This tool is part of the OGC Building Blocks repository. See the repository license for terms.
 
 This material is based upon work supported by the National Science Foundation (NSF) under awards 2012893, 2012748, and 2012593.

@@ -26,11 +26,14 @@ jobs:
       - name: Generate JSON Forms schemas
         run: python tools/convert_for_jsonforms.py --all --verbose
 
+      - name: Add resolvedSchema URLs to register.json
+        run: python tools/augment_register.py
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add build/jsonforms/
+          git add build/jsonforms/ build/register.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
