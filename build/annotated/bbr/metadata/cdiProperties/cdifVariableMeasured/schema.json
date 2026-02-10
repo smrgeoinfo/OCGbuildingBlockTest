@@ -7,20 +7,13 @@
       "type": "array",
       "description": "require additional type besided schema:PropertyValue required by CDIF variableMeasured, so min items should add up to 2 (we'll see if this works....)",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "schema:PropertyValue",
+          "cdi:InstanceVariable"
+        ]
       },
-      "allOf": [
-        {
-          "contains": {
-            "const": "cdi:InstanceVariable"
-          }
-        },
-        {
-          "contains": {
-            "const": "schema:PropertyValue"
-          }
-        }
-      ]
+      "minItems": 2
     },
     "cdi:identifier": {
       "type": "string"

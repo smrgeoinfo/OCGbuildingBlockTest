@@ -1,7 +1,7 @@
 
 # VariableMeasured with DDI-CDI extensions (Schema)
 
-`cdif.bbr.metadata.cdiProperties.cdiVariableMeasured` *v0.1*
+`cdif.bbr.metadata.cdiProperties.cdifVariableMeasured` *v0.1*
 
 Schema defining properties for schema.org variableMeasured with some DDI-CDI properties, for implementation of CDIF discovery XAS profile. Implemented as schema.org/PropertyValue
 
@@ -55,7 +55,7 @@ Implementation of Schema.org PropertyValue as value for variableMeasured propert
       "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
       "xas": "https://xas.org/dictionary/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdiVariableMeasured/context.jsonld",
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdifVariableMeasured/context.jsonld",
     {
       "schema": "http://schema.org/",
       "ex": "https://example.org/",
@@ -124,11 +124,10 @@ properties:
       CDIF variableMeasured, so min items should add up to 2 (we'll see if this works....)
     items:
       type: string
-    allOf:
-    - contains:
-        const: cdi:InstanceVariable
-    - contains:
-        const: schema:PropertyValue
+      enum:
+      - schema:PropertyValue
+      - cdi:InstanceVariable
+    minItems: 2
   cdi:identifier:
     type: string
   cdi:physicalDataType:
@@ -180,8 +179,8 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdiVariableMeasured/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdiVariableMeasured/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdifVariableMeasured/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdifVariableMeasured/schema.yaml)
 
 
 # JSON-LD Context
@@ -202,7 +201,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdiVariableMeasured/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/cdiProperties/cdifVariableMeasured/context.jsonld)
 
 ## Sources
 
@@ -213,5 +212,5 @@ You can find the full JSON-LD context here:
 The source code for this Building Block can be found in the following repository:
 
 * URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
-* Path: `_sources/cdiProperties/cdiVariableMeasured`
+* Path: `_sources/cdiProperties/cdifVariableMeasured`
 
