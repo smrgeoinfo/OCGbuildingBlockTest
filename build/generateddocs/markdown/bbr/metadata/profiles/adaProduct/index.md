@@ -62,13 +62,13 @@ allOf:
             type: string
             default: schema:MonetaryGrant
             const: schema:MonetaryGrant
-          identifier:
+          schema:identifier:
             type: string
             description: String that identifies a particular grant
-          name:
+          schema:name:
             type: string
             description: Title of the grant
-          funder:
+          schema:funder:
             anyOf:
             - type: object
               properties:
@@ -78,13 +78,14 @@ allOf:
             - type: object
               properties:
                 '@type':
-                  anyOf:
-                  - const:
-                    - schema:Organization
-                  - const:
+                  type: string
+                  const: schema:Organization
+                  default: schema:Organization
+                schema:additionalType:
+                  type: array
+                  items:
+                    enum:
                     - schema:FundingAgency
-                  default:
-                  - schema:Organization
                 schema:name:
                   type: string
               required:
@@ -93,24 +94,6 @@ allOf:
     schema:identifier:
       description: Primary identifier for the dataset
       anyOf:
-      - type: array
-        minItems: 1
-        items:
-          anyOf:
-          - type: object
-            properties:
-              '@type':
-                type: string
-                const: schema:PropertyValue
-                default: schema:PropertyValue
-              schema:propertyID:
-                type: string
-                default: https://registry.identifiers.org/registry/doi
-              schema:value:
-                type: string
-              schema:url:
-                type: string
-          - type: string
       - type: object
         properties:
           '@type':
@@ -119,6 +102,7 @@ allOf:
             default: schema:PropertyValue
           schema:propertyID:
             type: string
+            default: https://registry.identifiers.org/registry/doi
           schema:value:
             type: string
           schema:url:
@@ -157,21 +141,27 @@ allOf:
                   type: array
                   items:
                     type: string
-              required:
-              - '@type'
-              - schema:name
+              allOf:
+              - required:
+                - '@type'
+              - anyOf:
+                - required:
+                  - schema:name
+                - required:
+                  - schema:identifier
             - type: object
               properties:
                 '@id':
                   type: string
                 '@type':
-                  anyOf:
-                  - const:
-                    - schema:Organization
-                  - const:
+                  type: string
+                  const: schema:Organization
+                  default: schema:Organization
+                schema:additionalType:
+                  type: array
+                  items:
+                    enum:
                     - schema:ResearchOrganization
-                  default:
-                  - schema:Organization
                 schema:name:
                   type: string
               required:
@@ -200,11 +190,14 @@ allOf:
         - type: object
           properties:
             '@type':
-              anyOf:
-              - const:
-                - schema:Organization
+              type: string
+              const: schema:Organization
+              default: schema:Organization
             schema:name:
               type: string
+          required:
+          - '@type'
+          - schema:name
         - type: object
           description: Role-based contributor
           properties:
@@ -215,7 +208,34 @@ allOf:
             schema:roleName:
               type: string
             schema:contributor:
-              type: object
+              oneOf:
+              - type: string
+              - type: object
+                properties:
+                  '@id':
+                    type: string
+                    description: a identifier for an agent defined in this metadata,
+                      or externally; must be dereferenceable
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    const: schema:Person
+                  schema:name:
+                    type: string
+                required:
+                - '@type'
+                - schema:name
+              - type: object
+                properties:
+                  '@type':
+                    type: string
+                    const: schema:Organization
+                  schema:name:
+                    type: string
+                required:
+                - '@type'
+                - schema:name
     schema:license:
       description: Legal statement of conditions for use and access
       type: array
@@ -324,11 +344,9 @@ allOf:
             type: array
             items:
               type: string
-            allOf:
-            - contains:
-                const: schema:PropertyValue
-            - contains:
-                const: cdi:InstanceVariable
+              enum:
+              - schema:PropertyValue
+              - cdi:InstanceVariable
             minItems: 2
           schema:description:
             type: string
@@ -459,7 +477,7 @@ allOf:
       description: Access options for the dataset. Each distribution item is expected
         to be a single file or an archive containing multiple files described in hasPart.
       items:
-        oneOf:
+        anyOf:
         - allOf:
           - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
           - type: object
@@ -469,8 +487,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                contains:
-                  const: schema:DataDownload
+                  enum:
+                  - schema:DataDownload
                 minItems: 1
         - allOf:
           - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
@@ -481,8 +499,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                contains:
-                  const: schema:DataDownload
+                  enum:
+                  - schema:DataDownload
                 minItems: 1
               schema:provider:
                 type: array
@@ -502,12 +520,13 @@ allOf:
                   - type: object
                     properties:
                       '@type':
-                        anyOf:
-                        - const:
-                          - schema:Organization
+                        type: string
+                        const: schema:Organization
+                        default: schema:Organization
                       schema:name:
                         type: string
                     required:
+                    - '@type'
                     - schema:name
               schema:additionalType:
                 type: array
@@ -538,8 +557,8 @@ allOf:
               type: array
               items:
                 type: string
-              contains:
-                const: schema:WebAPI
+                enum:
+                - schema:WebAPI
               minItems: 1
             schema:name:
               type: string
@@ -662,17 +681,18 @@ allOf:
           - type: object
             properties:
               '@type':
-                anyOf:
-                - const:
-                  - schema:Organization
+                type: string
+                const: schema:Organization
+                default: schema:Organization
               schema:name:
                 type: string
             required:
+            - '@type'
             - schema:name
         schema:sdDatePublished:
           description: Date of most recent update to the metadata content
           type: string
-          format: datetime
+          format: date-time
         schema:includedInDataCatalog:
           type: object
           properties:
@@ -698,6 +718,11 @@ allOf:
                   type: string
                 schema:url:
                   type: string
+      required:
+      - schema:about
+      - dcterms:conformsTo
+      - '@type'
+      - '@id'
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

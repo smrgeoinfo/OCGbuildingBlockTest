@@ -134,8 +134,8 @@ properties:
     type: array
     items:
       type: string
-    contains:
-      const: schema:PropertyValue
+      enum:
+      - schema:PropertyValue
     minItems: 1
   '@id':
     type: string

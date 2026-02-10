@@ -259,7 +259,6 @@ x-defs:
         type: array
         items:
           type: string
-        contains:
           enum:
           - schema:PropertyValue
         minItems: 1
@@ -352,9 +351,12 @@ description: use schema.org Action to document url or url template and parameter
 type: object
 properties:
   '@type':
-    type: string
-    enum:
-    - schema:WebAPI
+    type: array
+    items:
+      type: string
+      enum:
+      - schema:WebAPI
+    minItems: 1
   schema:serviceType:
     anyOf:
     - type: string
