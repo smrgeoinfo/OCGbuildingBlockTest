@@ -29,6 +29,8 @@ from pathlib import Path
 from urllib.parse import urldefrag
 from typing import Any, Dict, Set, Optional, Tuple
 
+import yaml
+
 
 class SchemaResolver:
     """Resolves all $ref references in a JSON Schema to produce a standalone schema."""
@@ -75,7 +77,11 @@ class SchemaResolver:
         if path_str not in self.schema_cache:
             self.log(f"Loading: {schema_path}")
             with open(schema_path, 'r', encoding='utf-8') as f:
-                self.schema_cache[path_str] = json.load(f)
+                suffix = schema_path.suffix.lower()
+                if suffix in ('.yaml', '.yml'):
+                    self.schema_cache[path_str] = yaml.safe_load(f)
+                else:
+                    self.schema_cache[path_str] = json.load(f)
         return copy.deepcopy(self.schema_cache[path_str])
 
     def resolve_path(self, ref_path: str, current_dir: Path) -> Path:
@@ -136,15 +142,22 @@ class SchemaResolver:
         """
         Extract base name from schema path.
 
+        Uses the parent directory name when the filename is generic (e.g.,
+        "schema.yaml"), since building blocks all use that convention.
+
         Args:
             schema_path: Path to schema file
 
         Returns:
-            Base name (e.g., "Person" from "personSchema.json")
+            Base name (e.g., "Person" from "personSchema.json",
+            "VariableMeasured" from "variableMeasured/schema.yaml")
         """
         filename = schema_path.stem
         if filename.endswith('Schema'):
             name = filename[:-6]
+        elif filename.lower() == 'schema':
+            # Generic filename — use parent directory name instead
+            name = schema_path.parent.name
         else:
             name = filename
         # Capitalize first letter for consistency
@@ -545,6 +558,9 @@ Examples:
         sys.exit(1)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in schema file: {e}", file=sys.stderr)
+        sys.exit(1)
+    except yaml.YAMLError as e:
+        print(f"Error: Invalid YAML in schema file: {e}", file=sys.stderr)
         sys.exit(1)
     except KeyError as e:
         print(f"Error: Missing key in schema: {e}", file=sys.stderr)

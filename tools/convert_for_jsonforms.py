@@ -57,6 +57,114 @@ def save_json(data: dict, path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Inline $ref and merge allOf
+# ---------------------------------------------------------------------------
+
+def inline_refs_and_merge_allof(schema: dict) -> dict:
+    """
+    Resolve all $ref pointers (to local $defs) and merge top-level allOf
+    entries into a single flat schema.  This produces a structure identical
+    to the old fully-inlined resolved schemas, so downstream simplification
+    passes work correctly without allOf/enum conflicts.
+    """
+    defs = schema.get("$defs", {})
+
+    def _resolve(node: Any) -> Any:
+        """Recursively inline $ref → $defs pointers."""
+        if isinstance(node, dict):
+            if "$ref" in node and len(node) == 1:
+                ref = node["$ref"]
+                if ref.startswith("#/$defs/"):
+                    def_name = ref[len("#/$defs/"):]
+                    if def_name in defs:
+                        return _resolve(copy.deepcopy(defs[def_name]))
+                return node
+            return {k: _resolve(v) for k, v in node.items()}
+        elif isinstance(node, list):
+            return [_resolve(item) for item in node]
+        return node
+
+    resolved = _resolve(schema)
+    resolved.pop("$defs", None)
+
+    # Merge top-level allOf entries into a single flat object
+    if "allOf" in resolved:
+        resolved = _merge_allof_entries(resolved)
+
+    return resolved
+
+
+def _merge_allof_entries(schema: dict) -> dict:
+    """
+    Merge allOf entries by combining their properties, required lists,
+    and other keywords into the parent object.  For conflicting property
+    definitions (e.g. @type with different items.enum), merge enum lists.
+    """
+    if "allOf" not in schema:
+        return schema
+
+    entries = schema.pop("allOf")
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        # Merge properties
+        for pk, pv in entry.get("properties", {}).items():
+            existing = schema.get("properties", {}).get(pk)
+            if existing is not None:
+                schema["properties"][pk] = _deep_merge_with_enum_union(existing, pv)
+            else:
+                schema.setdefault("properties", {})[pk] = pv
+        # Merge required
+        for req in entry.get("required", []):
+            schema.setdefault("required", [])
+            if req not in schema["required"]:
+                schema["required"].append(req)
+        # Merge other keys (type, description, etc.) — entry wins only if
+        # the parent doesn't already have a value
+        for k, v in entry.items():
+            if k in ("properties", "required", "allOf"):
+                continue
+            if k not in schema:
+                schema[k] = v
+        # Recurse into nested allOf
+        if "allOf" in entry:
+            nested = copy.deepcopy(entry)
+            nested = _merge_allof_entries(nested)
+            for pk, pv in nested.get("properties", {}).items():
+                existing = schema.get("properties", {}).get(pk)
+                if existing is not None:
+                    schema["properties"][pk] = _deep_merge_with_enum_union(existing, pv)
+                else:
+                    schema.setdefault("properties", {})[pk] = pv
+
+    return schema
+
+
+def _deep_merge_with_enum_union(base: Any, overlay: Any) -> Any:
+    """
+    Recursive dict merge that takes the *union* of enum lists instead
+    of letting overlay overwrite.
+    """
+    if not isinstance(base, dict) or not isinstance(overlay, dict):
+        return copy.deepcopy(overlay)
+
+    result = copy.deepcopy(base)
+    for k, v in overlay.items():
+        if k == "enum" and k in result:
+            # Union of enum lists, preserving order
+            combined = list(result[k])
+            for val in v:
+                if val not in combined:
+                    combined.append(val)
+            result[k] = combined
+        elif k in result and isinstance(result[k], dict) and isinstance(v, dict):
+            result[k] = _deep_merge_with_enum_union(result[k], v)
+        else:
+            result[k] = copy.deepcopy(v)
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Core conversion helpers
 # ---------------------------------------------------------------------------
 
@@ -172,6 +280,8 @@ def simplify_contains_to_enum(schema: Any) -> Any:
                     result["default"] = collected_enums
                 if "items" not in result:
                     result["items"] = {"type": "string"}
+                if isinstance(result["items"], dict):
+                    result["items"]["enum"] = collected_enums
 
             if new_allof:
                 result["allOf"] = new_allof
@@ -470,9 +580,9 @@ def simplify_anyof_distribution_items_cdif(schema: dict) -> dict:
         "description": "Distribution — Data Download or Web API",
         "properties": {
             "@type": {
-                "type": "string",
-                "default": "schema:DataDownload",
-                "description": "schema:DataDownload for files, schema:WebAPI for APIs",
+                "type": "array",
+                "items": {"type": "string", "enum": ["schema:DataDownload", "schema:WebAPI"]},
+                "default": ["schema:DataDownload"],
             },
             "schema:name": {"type": "string", "description": "Name of this distribution"},
             "schema:description": {"type": "string"},
@@ -547,10 +657,16 @@ def simplify_distribution_items(items_schema: dict) -> dict:
             continue
         for pk, pv in branch.get("properties", {}).items():
             if pk in merged["properties"]:
-                # Deep merge if both exist (e.g. @type from multiple branches)
-                merged["properties"][pk] = _deep_merge_dict(
-                    merged["properties"][pk], pv
-                )
+                if pk == "@type":
+                    # Special handling: combine enum values from all branches
+                    merged["properties"][pk] = _merge_type_enums(
+                        merged["properties"][pk], pv
+                    )
+                else:
+                    # Deep merge if both exist
+                    merged["properties"][pk] = _deep_merge_dict(
+                        merged["properties"][pk], pv
+                    )
             else:
                 merged["properties"][pk] = copy.deepcopy(pv)
 
@@ -574,6 +690,35 @@ def _deep_merge_dict(base: dict, overlay: dict) -> dict:
             result[k] = _deep_merge_dict(result[k], v)
         else:
             result[k] = copy.deepcopy(v)
+    return result
+
+
+def _merge_type_enums(existing: dict, new: dict) -> dict:
+    """Merge @type schemas by combining their items.enum lists."""
+    result = copy.deepcopy(existing)
+    new = copy.deepcopy(new)
+
+    # Collect enum values from both sides
+    existing_enums = []
+    new_enums = []
+
+    if isinstance(result.get("items"), dict) and "enum" in result["items"]:
+        existing_enums = result["items"]["enum"]
+    if isinstance(new.get("items"), dict) and "enum" in new["items"]:
+        new_enums = new["items"]["enum"]
+
+    # Combine and deduplicate while preserving order
+    combined = list(existing_enums)
+    for val in new_enums:
+        if val not in combined:
+            combined.append(val)
+
+    if combined:
+        if "items" not in result:
+            result["items"] = {"type": "string"}
+        if isinstance(result["items"], dict):
+            result["items"]["enum"] = combined
+
     return result
 
 
@@ -972,6 +1117,11 @@ def convert_profile_schema(
     schema = load_json(schema_path)
 
     # Pipeline: apply all transformations in order.
+    # First, inline all $ref pointers and merge allOf entries into a flat
+    # schema.  This must happen before other passes so that enum values from
+    # base building blocks and profile overrides are unioned correctly.
+    schema = inline_refs_and_merge_allof(schema)
+
     # Note: simplify_contains_to_enum must run BEFORE simplify_const_to_default,
     # because const_to_default converts {const: X} -> {default: X}, which would
     # prevent contains_to_enum from extracting the value.

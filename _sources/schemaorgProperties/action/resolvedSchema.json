@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Action ",
+  "type": "object",
+  "description": "this element defines an action (operation) that can be invoked via messages using the protocol defined. In most cases this will be an http request via TCP/IP, but in desktop or LAN environments, other protocols might be used. The target property defines the endpoint and syntax for invoking the action. Result specifies the encoding format for the (possible) response(s) when the action is invoked. Object specifies the information model for the resource that is the object of the action. This approach is an adoptation of the Action Blog Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) ",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "TBD, recognize other actions, e.g. SearchAction, UpdateAction..., others?",
+      "default": "schema:Action",
+      "const": "schema:Action"
+    },
+    "schema:name": {
+      "type": "string",
+      "description": "text label for the action"
+    },
+    "schema:target": {
+      "$ref": "#/$defs/target_type",
+      "description": "specifies the request target location and request syntax"
+    },
+    "schema:result": {
+      "$ref": "#/$defs/result_type",
+      "description": "specifies the serialization scheme (encoding format, information model) for expected representation of the data"
+    },
+    "schema:object": {
+      "$ref": "#/$defs/object_type",
+      "description": "specification of information model/schema for target resource. Only necessary if the request allow specifying the fields to include in the response"
+    },
+    "schema:query-input": {
+      "$ref": "#/$defs/query-input_type",
+      "description": "set of explanations of the parameters in the URL template for the target."
+    }
+  },
+  "required": [
+    "schema:name",
+    "schema:target"
+  ],
+  "$defs": {
+    "DefinedTerm": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "description": "schema.org Defined Term schema",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "const": "schema:DefinedTerm"
+        },
+        "schema:name": {
+          "type": "string",
+          "description": "text label for the term that is useful to human user"
+        },
+        "schema:identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "description": "Properties for a schema.org identifier",
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "const": "schema:PropertyValue"
+                },
+                "schema:propertyID": {
+                  "type": "string",
+                  "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                },
+                "schema:value": {
+                  "type": "string",
+                  "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                },
+                "schema:url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                }
+              },
+              "allOf": [
+                {
+                  "required": [
+                    "@type"
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "schema:value"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "schema:url"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "schema:inDefinedTermSet": {
+          "type": "string",
+          "description": "Identifier for the controlled vocabulary responsible for this keyword."
+        },
+        "schema:termCode": {
+          "type": "string",
+          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+        }
+      },
+      "allOf": [
+        {
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

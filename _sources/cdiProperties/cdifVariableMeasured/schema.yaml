@@ -1,0 +1,53 @@
+---
+$schema: https://json-schema.org/draft/2020-12/schema
+description: Extends cdif variableMeasured with properties for DDI-CDI InstanceVariable
+type: object
+properties:
+  '@type':
+    type: array
+    description: require additional type besided schema:PropertyValue required by CDIF variableMeasured,
+      so min items should add up to 2 (we'll see if this works....)
+    items:
+      type: string
+      enum:
+        - schema:PropertyValue
+        - cdi:InstanceVariable
+    minItems: 2
+  'cdi:identifier':
+    type: string
+  'cdi:physicalDataType':
+    type: array
+    items:
+      anyOf:
+      - type: string
+      - type: object
+        properties:
+          '@id':
+            type: string
+            description: reference to a skos concept for the data type
+      - $ref: '#/$defs/DefinedTerm'
+    description: identifier or name for the data type concept.
+  'cdi:simpleUnitOfMeasure':
+    anyOf:
+    - type: string
+    - type: object
+      properties:
+        '@id':
+          type: string
+          description: reference to a skos concept for the data type
+    - $ref: '#/$defs/DefinedTerm'
+  'cdi:uses':
+    type: string
+    description: reference to a skos concept for the data type
+  'cdi:name':
+    type: string
+  'cdi:displayLabel':
+    type: string
+$defs:
+  DefinedTerm:
+    $ref: ../../schemaorgProperties/definedTerm/schema.yaml
+allOf:
+- required:
+  - '@type'
+  - cdi:physicalDataType
+- $ref: ../../schemaorgProperties/variableMeasured/schema.yaml
