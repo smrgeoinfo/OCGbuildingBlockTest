@@ -37,7 +37,7 @@ OUTPUT_DIR = REPO_ROOT / "build" / "jsonforms" / "profiles"
 SOURCES_DIR = REPO_ROOT / "_sources" / "jsonforms" / "profiles"
 
 ADA_PROFILES = ["adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR"]
-CDIF_PROFILES = ["CDIFDiscovery"]
+CDIF_PROFILES = ["CDIFDiscovery", "CDIFxas"]
 ALL_PROFILES = ADA_PROFILES + CDIF_PROFILES
 
 # Keys to strip from schemas (metadata, not useful for forms)

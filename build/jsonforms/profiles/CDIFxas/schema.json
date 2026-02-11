@@ -1,19 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "Optional properties for CDIF discovery metadata schema, with schema: prefixes",
-  "description": "Building block specifies properties for CDIF schama.org discovery record",
+  "title": "Optional properties for CDIF Discovery metadata schema, with schema: prefixes",
+  "description": "Building block specifies properties for minimal CDIF schama.org discovery record",
   "properties": {
     "@id": {
       "type": "string",
       "description": "The URI for the resource should be the @id value for the root of the JSON instance document tree. Note that this identifier can be interpreted to identify the resource that is the subject of this metadata record, or the JSON-LD object that is the digital object containing the metadata information."
     },
     "@type": {
-      "description": "a schema.org Class that specifies the expected information content for the metadata record. For CDIF, 'schema:Dataset' is required, but other possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI) are sometimes included to enable the schema.org properties used to describe the resource without schema.org validation errors.",
       "type": "array",
       "items": {
-        "type": "string",
-        "default": "schema:Dataset"
+        "type": "string"
       }
     },
     "schema:name": {
@@ -86,46 +84,40 @@
       "description": "Web Location of a page describing the dataset (landing page), typically providing links or instructions to get the actual resource content; analogous to dcat:accessURL. If a direct link is available to get the data, put in distribution/contentUrl"
     },
     "schema:distribution": {
-      "description": "Distribution with dual typing for structured or tabular data; extends the CDIFMandatory distribution by requiring a CDI dataset type alongside schema:DataDownload.",
       "type": "array",
       "items": {
+        "description": "schema to document file-based access to a resoruce via URL, based on schema.org/DataDownload",
         "type": "object",
-        "description": "Distribution — Data Download or Web API",
         "properties": {
+          "@id": {
+            "type": "string"
+          },
           "@type": {
             "type": "array",
+            "description": "implement as array because extensions might need to add additional types",
             "items": {
               "type": "string",
               "enum": [
-                "schema:DataDownload",
-                "schema:WebAPI"
+                "schema:DataDownload"
               ]
-            },
-            "default": [
-              "schema:DataDownload"
-            ]
+            }
           },
           "schema:name": {
-            "type": "string",
-            "description": "Name of this distribution"
-          },
-          "schema:description": {
             "type": "string"
           },
           "schema:contentUrl": {
             "type": "string",
-            "format": "uri",
-            "description": "Download URL for the file (DataDownload)"
+            "format": "uri"
           },
           "schema:encodingFormat": {
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "description": "MIME type(s) (DataDownload)"
+            }
           },
           "spdx:checksum": {
             "type": "object",
+            "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
             "properties": {
               "spdx:algorithm": {
                 "type": "string"
@@ -133,20 +125,7 @@
               "spdx:checksumValue": {
                 "type": "string"
               }
-            },
-            "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload."
-          },
-          "schema:serviceType": {
-            "type": "string",
-            "description": "Type of service, e.g. OGC:WMS, OPeNDAP (WebAPI)"
-          },
-          "schema:documentation": {
-            "type": "string",
-            "format": "uri",
-            "description": "URL to API documentation (WebAPI)"
-          },
-          "@id": {
-            "type": "string"
+            }
           },
           "schema:provider": {
             "type": "array",
@@ -167,7 +146,11 @@
               ]
             }
           }
-        }
+        },
+        "required": [
+          "schema:contentUrl",
+          "@type"
+        ]
       }
     },
     "schema:subjectOf": {
@@ -194,15 +177,9 @@
         "dcterms:conformsTo": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string",
-                "description": "uri for specifications that this metadata record conforms to"
-              }
-            }
+            "$comment": "could not resolve fragment /$defs/conformsTo_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\schemaorgProperties\\metaMetadata\\metaMetadataSchema.json: \"Cannot resolve pointer /$defs/conformsTo_item at part '$defs'\""
           },
-          "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile.  Implement as $def to facilitate extension for profiles that need to add conformance statements"
+          "minContains": 1
         },
         "schema:maintainer": {
           "type": "object",
@@ -343,10 +320,32 @@
       }
     },
     "schema:keywords": {
-      "description": "Keywords are an array of strings, an array of schema:DefinedTerms, or some combination of these. If you have information about a controlled vocabulary from which keywords come from, use schema:DefinedTerm to descibe that keyword. This allowed variability makes parsing metadata hard; recommend using DefinedTerm for all keywords if any of them are from a known vocabulary, otherwise an array of strings.",
       "type": "array",
+      "description": "extends base CDIF keyword schema to require defined terms for the absorption edge and the target element for the analysis",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "@type": {
+            "default": "schema:DefinedTerm",
+            "type": "string"
+          },
+          "schema:name": {
+            "type": "string"
+          },
+          "schema:identifier": {
+            "type": "string"
+          },
+          "schema:inDefinedTermSet": {
+            "type": "string",
+            "description": "need to include this to tag what the keyword is about; we're using the keywords as soft-typed properties"
+          }
+        },
+        "required": [
+          "@type",
+          "schema:name",
+          "schema:inDefinedTermSet"
+        ],
+        "additionalProperties": true
       }
     },
     "schema:creator": {
@@ -618,8 +617,8 @@
             "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
           },
           "schema:url": {
-            "type": "string",
             "format": "uri",
+            "type": "string",
             "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
           }
         },
@@ -706,39 +705,200 @@
       }
     },
     "prov:wasGeneratedBy": {
-      "description": "Brief information about instruments, software or experimental protocols used",
       "type": "array",
       "items": {
-        "title": "very simple links or names of software or instruments used to generate a resource.",
         "type": "object",
         "properties": {
-          "@type": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "prov:Activity"
-              ]
-            }
-          },
           "prov:used": {
             "type": "array",
+            "description": "array of instrument or instrument system components. The x-ray source type and probe,  and monochromator properties type, d-spacing and reflection plane are required ",
             "items": {
-              "anyOf": [
-                {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema:additionalType": {
                   "type": "string"
                 },
-                {
-                  "type": "object",
-                  "properties": {
-                    "@id": {
-                      "type": "string",
-                      "description": "a resolvable reference to a representation of the software or instrument used"
-                    }
+                "schema:additionalProperty": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "additionalProperty PropertyValue",
+                    "description": "PropertyValue values required to define a soft-typed property with a value. ",
+                    "properties": {
+                      "@type": {
+                        "type": "string",
+                        "default": "schema:PropertyValue"
+                      },
+                      "schema:propertyID": {
+                        "type": "array",
+                        "items": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "@id": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            {
+                              "description": "schema.org Defined Term schema",
+                              "type": "object",
+                              "properties": {
+                                "@type": {
+                                  "default": "schema:DefinedTerm",
+                                  "type": "string"
+                                },
+                                "schema:name": {
+                                  "type": "string",
+                                  "description": "text label for the term that is useful to human user"
+                                },
+                                "schema:identifier": {
+                                  "type": "string",
+                                  "description": "Identifier"
+                                },
+                                "schema:inDefinedTermSet": {
+                                  "type": "string",
+                                  "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                                },
+                                "schema:termCode": {
+                                  "type": "string",
+                                  "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+                                }
+                              },
+                              "required": [
+                                "@type"
+                              ],
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "schema:name"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "schema:identifier"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+                      },
+                      "schema:name": {
+                        "type": "string"
+                      },
+                      "schema:value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "schema:name",
+                      "schema:value"
+                    ]
                   }
                 }
-              ]
+              }
             }
+          },
+          "schema:mainEntity": {
+            "title": "definitions for roles used in XAS profile",
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "schema:Thing"
+                  ]
+                },
+                "uniqueItems": true,
+                "minContains": 1
+              },
+              "schema:additionalType": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                  ]
+                },
+                "uniqueItems": true,
+                "minContains": 1
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:identifier": {
+                "type": "string",
+                "description": "Identifier"
+              },
+              "schema:description": {
+                "type": "string"
+              },
+              "schema:additionalProperty": {
+                "type": "array",
+                "description": "extend base definition (AdditionalProperty) with some expected propertyID values from NEXUS and XDI specs added in the enum",
+                "items": {
+                  "type": "object",
+                  "title": "additionalProperty PropertyValue",
+                  "description": "PropertyValue values required to define a soft-typed property with a value. ",
+                  "properties": {
+                    "@type": {
+                      "type": "string",
+                      "default": "schema:PropertyValue"
+                    },
+                    "schema:propertyID": {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "$comment": "could not resolve fragment /$defs/propertyID_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\schemaorgProperties\\additionalProperty\\additionalPropertySchema.json: \"Cannot resolve pointer /$defs/propertyID_item at part '$defs'\""
+                          },
+                          {
+                            "enum": [
+                              "xas:stoichiometry",
+                              "xas:samplePreparation",
+                              "nxs:Field/NXsample/mass",
+                              "nxs:Field/NXsample/point_group",
+                              "nxs:Field/NXsample/unit_cell",
+                              "xas:parentSample",
+                              "xas:materialState"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    },
+                    "schema:value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "schema:name",
+                    "schema:value"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "schema:additionalType",
+              "schema:name"
+            ]
           }
         }
       }
@@ -918,6 +1078,51 @@
         "required": [
           "dqv:isMeasurementOf",
           "dqv:value"
+        ]
+      }
+    },
+    "schema:measurementTechnique": {
+      "type": "array",
+      "description": "Require DefinedTerms for both: absorption edge (XDI dict) and target element (SWEET).",
+      "items": {
+        "description": "schema.org Defined Term schema",
+        "type": "object",
+        "properties": {
+          "@type": {
+            "default": "schema:DefinedTerm",
+            "type": "string"
+          },
+          "schema:name": {
+            "type": "string",
+            "description": "text label for the term that is useful to human user"
+          },
+          "schema:identifier": {
+            "type": "string",
+            "description": "Identifier"
+          },
+          "schema:inDefinedTermSet": {
+            "type": "string",
+            "description": "Identifier for the controlled vocabulary responsible for this keyword."
+          },
+          "schema:termCode": {
+            "type": "string",
+            "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+          }
+        },
+        "required": [
+          "@type"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "schema:name"
+            ]
+          },
+          {
+            "required": [
+              "schema:identifier"
+            ]
+          }
         ]
       }
     }
