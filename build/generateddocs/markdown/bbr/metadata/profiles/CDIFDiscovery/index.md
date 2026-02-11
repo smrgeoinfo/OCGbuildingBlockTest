@@ -1051,6 +1051,13 @@ ex:YOPx a schema1:Dataset ;
             spdx:checksum [ spdx:algorithm "MD5" ;
                     spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
+            schema1:funder <https://ror.org/3572wjht> ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                    schema1:value "lieopgXuumP" ] ;
+            schema1:name "fhhbzh" ],
+        [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/sejer4w6u8> ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "HmJzdEZIaqUSLLte" ;
@@ -1063,14 +1070,7 @@ ex:YOPx a schema1:Dataset ;
                     schema1:propertyID "Grant identifier" ;
                     schema1:url "http://example.com/resource?foo=bar#fragment" ;
                     schema1:value "fMuiBjneudpV" ] ;
-            schema1:name "MWoPQAqRYHobey" ],
-        [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/3572wjht> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "lieopgXuumP" ] ;
-            schema1:name "fhhbzh" ] ;
+            schema1:name "MWoPQAqRYHobey" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
@@ -2355,14 +2355,14 @@ xas:487y54 a schema1:Dataset,
                     cdi:name "name of the proposal" ;
                     cdi:url "https://example.org/locatorForProposalText" ] ] ;
     schema1:contributor [ a schema1:Role ;
+            schema1:contributor <https://ror.org/aps> ;
+            schema1:roleName "Facility" ],
+        [ a schema1:Role ;
             schema1:contributor <https://orcid.org/35735ul> ;
             schema1:roleName "principleInvestigator" ],
         [ a schema1:Role ;
             schema1:contributor <https://orcid.org/3547ulkj> ;
-            schema1:roleName "dataCollector" ],
-        [ a schema1:Role ;
-            schema1:contributor <https://ror.org/aps> ;
-            schema1:roleName "Facility" ] ;
+            schema1:roleName "dataCollector" ] ;
     schema1:dateModified "2025-06-22" ;
     schema1:description "Example metadata including all properties in the CDIF XAS profile" ;
     schema1:distribution [ a cdi:PhysicalDataSet,
@@ -2373,12 +2373,7 @@ xas:487y54 a schema1:Dataset,
                     cdi:arrayBase 1 ;
                     cdi:commentPrefix "#" ;
                     cdi:hasHeader true ;
-                    cdi:has_DataStructureComponent [ a cdi:IdentifierComponent ;
-                            cdi:has [ a cdi:ValueMapping ;
-                                    cdi:hasIndex 1 ;
-                                    cdi:length 12 ] ;
-                            cdi:isDefinedBy_InstanceVariable xas:monochromatorEnergy ],
-                        [ a cdi:MeasureComponent ;
+                    cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
                             cdi:has [ a cdi:ValueMapping ;
                                     cdi:hasIndex 2 ;
                                     cdi:length 12 ] ;
@@ -2387,7 +2382,12 @@ xas:487y54 a schema1:Dataset,
                             cdi:has [ a cdi:ValueMapping ;
                                     cdi:hasIndex 3 ;
                                     cdi:length 13 ] ;
-                            cdi:isDefinedBy_InstanceVariable xas:incidentIntensity ] ;
+                            cdi:isDefinedBy_InstanceVariable xas:incidentIntensity ],
+                        [ a cdi:IdentifierComponent ;
+                            cdi:has [ a cdi:ValueMapping ;
+                                    cdi:hasIndex 1 ;
+                                    cdi:length 12 ] ;
+                            cdi:isDefinedBy_InstanceVariable xas:monochromatorEnergy ] ;
                     cdi:headerRowCount 27 ;
                     cdi:isDelimited false ;
                     cdi:isFixedWidth true ;
@@ -2410,14 +2410,14 @@ xas:487y54 a schema1:Dataset,
             schema1:termCode "Se" ] ;
     schema1:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     schema1:measurementTechnique [ a schema1:DefinedTerm ;
-            schema1:identifier "missing" ;
-            schema1:inDefinedTermSet "nxs:Field/NXxas/ENTRY/DATA/mode" ;
-            schema1:name "Transmission" ],
-        [ a schema1:DefinedTerm ;
             schema1:identifier "http://purl.org/pan-science/PaNET/PaNET01196" ;
             schema1:inDefinedTermSet "http://purl.org/pan-science/PaNET/PaNET.owl" ;
             schema1:name "X-Ray Absorption Spectroscopy" ;
-            schema1:termCode "XAS" ] ;
+            schema1:termCode "XAS" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier "missing" ;
+            schema1:inDefinedTermSet "nxs:Field/NXxas/ENTRY/DATA/mode" ;
+            schema1:name "Transmission" ] ;
     schema1:name "X-ray absorption spectra for K edge, Iron metal, XDI CDIF example" ;
     schema1:subjectOf xas:ja51-pz63 ;
     schema1:variableMeasured xas:incidentIntensity,
@@ -2427,46 +2427,43 @@ xas:487y54 a schema1:Dataset,
                 prov:Activity,
                 xas:AnalysisEvent ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:name "Absorption edge" ;
-                    schema1:propertyID "xas:edge_energy" ;
-                    schema1:unitText "eV" ;
-                    schema1:value "12658.0" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "Installed Options" ;
-                    schema1:propertyID "xas:installedOptions" ;
-                    schema1:value "Description of extra equipment installed on the base instrument(?)" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "Instrument configuration" ;
-                    schema1:propertyID "nxs:Group/NXentry/experiment_documentation" ;
-                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
-                    schema1:value "description of instrument configuration" ],
-                [ a schema1:PropertyValue ;
                     schema1:description "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential" ;
                     schema1:name "experiment environment-pressure" ;
                     schema1:propertyID "xas:pressure" ;
                     schema1:unitText "KPa" ;
                     schema1:value 3567 ],
                 [ a schema1:PropertyValue ;
+                    schema1:name "Instrument configuration" ;
+                    schema1:propertyID "nxs:Group/NXentry/experiment_documentation" ;
+                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
+                    schema1:value "description of instrument configuration" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Installed Options" ;
+                    schema1:propertyID "xas:installedOptions" ;
+                    schema1:value "Description of extra equipment installed on the base instrument(?)" ],
+                [ a schema1:PropertyValue ;
                     schema1:name "calibration method" ;
                     schema1:propertyID "nxs:Group/NXdetector/calibration_method" ;
                     schema1:url "http://protocols.io/link/to/calibrationMethod" ;
-                    schema1:value "description of calibration procedure" ] ;
+                    schema1:value "description of calibration procedure" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Absorption edge" ;
+                    schema1:propertyID "xas:edge_energy" ;
+                    schema1:unitText "eV" ;
+                    schema1:value "12658.0" ] ;
             schema1:identifier "20241111_DSC_NU_OREX-803224-0_1" ;
             schema1:location <ex:xasfacility_37yht> ;
             schema1:mainEntity [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Stoichiometry" ;
-                            schema1:propertyID "xas:stoichiometry" ;
-                            schema1:value "Na2SeO4" ],
-                        [ a schema1:PropertyValue ;
                             schema1:name "Crystal unit cell dimensions" ;
                             schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
                             schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
                         [ a schema1:PropertyValue ;
-                            schema1:propertyID "xas:parentSample" ;
-                            schema1:value "igsn:10.3476/342573" ;
-                            ns1:name "parent sample identifier" ],
+                            schema1:name "Porosity" ;
+                            schema1:propertyID "xas:porosity" ;
+                            schema1:unitText "percent" ;
+                            schema1:value 27 ],
                         [ a schema1:PropertyValue ;
                             schema1:name "samaple preparation method" ;
                             schema1:propertyID "xas:samplePreparation" ;
@@ -2476,10 +2473,13 @@ xas:487y54 a schema1:Dataset,
                             schema1:propertyID "xas:materialState" ;
                             schema1:value "solid metal foil" ],
                         [ a schema1:PropertyValue ;
-                            schema1:name "Porosity" ;
-                            schema1:propertyID "xas:porosity" ;
-                            schema1:unitText "percent" ;
-                            schema1:value 27 ],
+                            schema1:propertyID "xas:parentSample" ;
+                            schema1:value "igsn:10.3476/342573" ;
+                            ns1:name "parent sample identifier" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "Stoichiometry" ;
+                            schema1:propertyID "xas:stoichiometry" ;
+                            schema1:value "Na2SeO4" ],
                         [ a schema1:PropertyValue ;
                             schema1:name "sample mass" ;
                             schema1:propertyID "nxs:Field/NXsample/mass" ;
@@ -2515,27 +2515,6 @@ xas:487y54 a schema1:Dataset,
                 [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "monitor mode" ;
-                            schema1:propertyID "nxs:Field/NXmonitor/mode" ;
-                            schema1:value "monitor" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:alternateName "transmitted flux measurement method" ;
-                            schema1:name "detector mode it" ;
-                            schema1:propertyID "xas:detector.it" ;
-                            schema1:value "10cm  N2" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:alternateName "incident flux measurement method" ;
-                            schema1:name "detector mode i0" ;
-                            schema1:propertyID "xas:detector.i0" ;
-                            schema1:value "10cm  N2" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "monitor preset" ;
-                            schema1:propertyID "nxs:Field/NXmonitor/preset" ;
-                            schema1:value "N.A." ] ;
-                    schema1:additionalType "nxs:BaseClass/NXmonitor" ],
-                [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
                             schema1:name "Probe" ;
                             schema1:propertyID "nxs:Field/NXsource/probe" ;
                             schema1:value "x-ray" ],
@@ -2549,6 +2528,31 @@ xas:487y54 a schema1:Dataset,
                 [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "monitor mode" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/mode" ;
+                            schema1:value "monitor" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:alternateName "incident flux measurement method" ;
+                            schema1:name "detector mode i0" ;
+                            schema1:propertyID "xas:detector.i0" ;
+                            schema1:value "10cm  N2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:alternateName "transmitted flux measurement method" ;
+                            schema1:name "detector mode it" ;
+                            schema1:propertyID "xas:detector.it" ;
+                            schema1:value "10cm  N2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "monitor preset" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/preset" ;
+                            schema1:value "N.A." ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonitor" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "reflection plane (hkl)" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                            schema1:value "1,1,1" ],
+                        [ a schema1:PropertyValue ;
                             schema1:name "crystal type" ;
                             schema1:propertyID "nxs:Field/NXcrystal/type" ;
                             schema1:value "missing" ],
@@ -2558,10 +2562,6 @@ xas:487y54 a schema1:Dataset,
                             schema1:unitText "Angstrom" ;
                             schema1:value "3.13550" ],
                         [ a schema1:PropertyValue ;
-                            schema1:name "reflection plane (hkl)" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
-                            schema1:value "1,1,1" ],
-                        [ a schema1:PropertyValue ;
                             schema1:name "chemical formula" ;
                             schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
                             schema1:value "Si" ] ;
@@ -2570,14 +2570,14 @@ xas:487y54 a schema1:Dataset,
 
 <ex:xasfacility_37yht> a schema1:Place ;
     schema1:additionalProperty [ a schema1:PropertyValue ;
-            schema1:name "X-ray Source" ;
-            schema1:propertyID "xas:xray_source" ;
-            schema1:value "APS bending magnet" ],
-        [ a schema1:PropertyValue ;
             schema1:name "Facility current" ;
             schema1:propertyID "xas:current" ;
             schema1:unitText "Amps" ;
             schema1:value "120" ],
+        [ a schema1:PropertyValue ;
+            schema1:name "X-ray Source" ;
+            schema1:propertyID "xas:xray_source" ;
+            schema1:value "APS bending magnet" ],
         [ a schema1:PropertyValue ;
             schema1:name "Facility energy" ;
             schema1:propertyID "xas:energy" ;
@@ -2712,7 +2712,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "http://schema.org/",
+    "schema": "https://schema.org",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "dcterms": "http://purl.org/dc/terms/",
     "geosparql": "http://www.opengis.net/ont/geosparql#",

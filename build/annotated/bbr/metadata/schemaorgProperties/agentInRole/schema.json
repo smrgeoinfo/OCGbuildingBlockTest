@@ -5,13 +5,20 @@
   "properties": {
     "@type": {
       "type": "string",
+      "default": "schema:Role",
       "const": "schema:Role"
     },
     "schema:roleName": {
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.json"
+        }
+      ]
     },
     "schema:contributor": {
-      "type": "object",
       "oneOf": [
         {
           "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/person/schema.json"
@@ -22,6 +29,10 @@
       ]
     }
   },
+  "required": [
+    "schema:roleName",
+    "schema:contributor"
+  ],
   "x-jsonld-prefixes": {
     "schema": "http://schema.org/"
   }

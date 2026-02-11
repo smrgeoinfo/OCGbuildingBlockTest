@@ -227,8 +227,9 @@ x-defs:
         - schema:PropertyValue
       schema:propertyID:
         type: string
-        description: identifier for the identifier schema, e.g. DOI, ARK.  Get values
-          from https://registry.identifiers.org/registry/ for interoperability
+        description: In this context for the schema:PropertyValue, this field is an
+          identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/
+          for interoperability
       schema:value:
         type: string
         description: the identifier string. E.g. 10.5066/F7VX0DMQ
@@ -259,6 +260,7 @@ x-defs:
         type: array
         items:
           type: string
+        contains:
           enum:
           - schema:PropertyValue
         minItems: 1
@@ -271,6 +273,11 @@ x-defs:
       schema:description:
         type: string
         default: missing
+      schema:alternateName:
+        type: array
+        items:
+          type: string
+          description: human intelligible name for variable that conveys semantics
       schema:propertyID:
         type: array
         items:
@@ -325,6 +332,7 @@ x-defs:
           value that occurs in the dataset. Not useful for other value types.'
       schema:url:
         type: string
+        format: uri
         description: Any schema:Thing can have a URL property, but because the value
           is simply a url the relationship of the linked resource can not be expressed.
           Usage is optional. The recommendation is that schema:url should link to
@@ -354,6 +362,7 @@ properties:
     type: array
     items:
       type: string
+    contains:
       enum:
       - schema:WebAPI
     minItems: 1

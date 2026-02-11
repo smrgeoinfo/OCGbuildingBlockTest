@@ -71,7 +71,7 @@
         },
         "schema:propertyID": {
           "type": "string",
-          "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
         },
         "schema:value": {
           "type": "string",
@@ -117,7 +117,9 @@
     "@type": {
       "type": "array",
       "items": {
-        "type": "string",
+        "type": "string"
+      },
+      "contains": {
         "enum": [
           "schema:PropertyValue"
         ]
@@ -134,6 +136,13 @@
     "schema:description": {
       "type": "string",
       "default": "missing"
+    },
+    "schema:alternateName": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "human intelligible name for variable that conveys semantics"
+      }
     },
     "schema:propertyID": {
       "type": "array",
@@ -212,6 +221,7 @@
     },
     "schema:url": {
       "type": "string",
+      "format": "uri",
       "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
     }
   },

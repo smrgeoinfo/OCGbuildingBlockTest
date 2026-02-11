@@ -19,21 +19,17 @@
           "properties": {
             "@id": {
               "type": "string",
-              "description": "this must be the '@id' value of the node containing the resource description metadata"
+              "description": "this must be the @id value of the node containing the resource description metadata"
             }
           }
         },
         "dcterms:conformsTo": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string",
-                "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile"
-              }
-            }
-          }
+            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasSubject/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.metaMetadata/$defs/conformsTo_item"
+          },
+          "minItems": 1,
+          "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile.  Implement as $def to facilitate extension for profiles that need to add conformance statements"
         },
         "schema:maintainer": {
           "description": "iSamples Registrant. identification of the agent that registered the sample, with contact information. Should include person name and affiliation, or position name and affiliation, or just organization name. e-mail address is preferred contact information.",
@@ -48,7 +44,8 @@
         },
         "schema:sdDatePublished": {
           "description": "date of most recent update to the metadata content, extends iSamples schema",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "schema:includedInDataCatalog": {
           "type": "object",
@@ -87,6 +84,7 @@
       "required": [
         "schema:about",
         "dcterms:conformsTo",
+        "@type",
         "@id"
       ],
       "$defs": {
@@ -130,7 +128,7 @@
         },
         "schema:propertyID": {
           "type": "string",
-          "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
         },
         "schema:value": {
           "type": "string",
@@ -170,7 +168,7 @@
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
     },
     "cdif.bbr.metadata.schemaorgProperties.person": {
-      "description": "My example schema",
+      "description": "schema for cdif profile of schema.org/Person",
       "type": "object",
       "properties": {
         "@id": {
@@ -190,7 +188,7 @@
           "type": "string"
         },
         "schema:identifier": {
-          "description": "identifier for person",
+          "description": "identifier for person, recommend ORCID",
           "anyOf": [
             {
               "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasSubject/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier"
@@ -216,6 +214,8 @@
           "type": "object",
           "properties": {
             "@type": {
+              "type": "string",
+              "default": "schema:ContactPoint",
               "enum": [
                 "schema:ContactPoint"
               ]

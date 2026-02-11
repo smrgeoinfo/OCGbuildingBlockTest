@@ -63,14 +63,14 @@ Technique-specific metadata profile for Very-Near Mid-Infrared (VNMIR) and FTIR 
 
 #### ttl
 ```ttl
-@prefix schema1: <http://schema.org/> .
+@prefix ns1: <schema:> .
 
-[] a schema1:Dataset,
-        schema1:Product ;
-    schema1:additionalType "ada:DataDeliveryPackage",
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
         "ada:VNMIRPoint" ;
-    schema1:description "Very-near mid-infrared spectroscopy data" ;
-    schema1:name "VNMIR Spectral Analysis of Mineral" .
+    ns1:description "Very-near mid-infrared spectroscopy data" ;
+    ns1:name "VNMIR Spectral Analysis of Mineral" .
 
 
 ```
@@ -141,7 +141,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "http://schema.org/",
+    "schema": "https://schema.org",
     "ada": "https://ada.astromat.org/metadata/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "csvw": "http://www.w3.org/ns/csvw#",

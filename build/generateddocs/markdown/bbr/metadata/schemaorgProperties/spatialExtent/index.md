@@ -188,9 +188,9 @@ ex:SpatialExtentPlaceName_45hwe6 a schema1:Place ;
     schema1:name [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "http uri" ;
-                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573" ] ;
+                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520" ] ;
             schema1:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
-            schema1:name "Harquahala Mountains" ],
+            schema1:name "Socorro Peak" ],
         [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "http uri" ;
@@ -200,9 +200,9 @@ ex:SpatialExtentPlaceName_45hwe6 a schema1:Place ;
         [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "http uri" ;
-                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/11520" ] ;
+                    schema1:url "https://edits.nationalmap.gov/apps/gaz-domestic/public/gaz-record/5573" ] ;
             schema1:inDefinedTermSet "https://www.usgs.gov/us-board-on-geographic-names/domestic-names" ;
-            schema1:name "Socorro Peak" ] .
+            schema1:name "Harquahala Mountains" ] .
 
 
 ```
@@ -329,8 +329,9 @@ ex:SpatialExtentBox_my8 a schema1:Place ;
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-description: Spatial Extent description for CDIF discovery profile.  Note required
-  prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#)
+description: 'Spatial Extent description for CDIF discovery profile.  Note required
+  prefix declaration for geoSparql ( http://www.opengis.net/ont/geosparql#) and OGC
+  simple features (sf: http://www.opengis.net/ont/sf#)'
 type: object
 properties:
   '@type':

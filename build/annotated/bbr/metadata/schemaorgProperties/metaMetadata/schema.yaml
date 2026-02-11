@@ -15,17 +15,16 @@ properties:
     properties:
       '@id':
         type: string
-        description: this must be the '@id' value of the node containing the resource
+        description: this must be the @id value of the node containing the resource
           description metadata
   dcterms:conformsTo:
     type: array
     items:
-      type: object
-      properties:
-        '@id':
-          type: string
-          description: uri for specifications that this metadata record conforms to.
-            Minimimally should specify uri for CDIF discovery profile
+      $ref: '#/$defs/conformsTo_item'
+    minItems: 1
+    description: uri for specifications that this metadata record conforms to. Minimimally
+      should specify uri for CDIF discovery profile.  Implement as $def to facilitate
+      extension for profiles that need to add conformance statements
   schema:maintainer:
     description: iSamples Registrant. identification of the agent that registered
       the sample, with contact information. Should include person name and affiliation,
@@ -38,6 +37,7 @@ properties:
     description: date of most recent update to the metadata content, extends iSamples
       schema
     type: string
+    format: date-time
   schema:includedInDataCatalog:
     type: object
     description: identify the data collection or repository that contains the described
@@ -65,6 +65,7 @@ properties:
 required:
 - schema:about
 - dcterms:conformsTo
+- '@type'
 - '@id'
 $defs:
   Identifier:

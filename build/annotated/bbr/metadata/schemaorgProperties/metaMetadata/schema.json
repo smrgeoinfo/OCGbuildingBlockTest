@@ -16,21 +16,17 @@
       "properties": {
         "@id": {
           "type": "string",
-          "description": "this must be the '@id' value of the node containing the resource description metadata"
+          "description": "this must be the @id value of the node containing the resource description metadata"
         }
       }
     },
     "dcterms:conformsTo": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "@id": {
-            "type": "string",
-            "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile"
-          }
-        }
-      }
+        "$ref": "#/$defs/conformsTo_item"
+      },
+      "minItems": 1,
+      "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile.  Implement as $def to facilitate extension for profiles that need to add conformance statements"
     },
     "schema:maintainer": {
       "description": "iSamples Registrant. identification of the agent that registered the sample, with contact information. Should include person name and affiliation, or position name and affiliation, or just organization name. e-mail address is preferred contact information.",
@@ -45,7 +41,8 @@
     },
     "schema:sdDatePublished": {
       "description": "date of most recent update to the metadata content, extends iSamples schema",
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "schema:includedInDataCatalog": {
       "type": "object",
@@ -78,6 +75,7 @@
   "required": [
     "schema:about",
     "dcterms:conformsTo",
+    "@type",
     "@id"
   ],
   "$defs": {

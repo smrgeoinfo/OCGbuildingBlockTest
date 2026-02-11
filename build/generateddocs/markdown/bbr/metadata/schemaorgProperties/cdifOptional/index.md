@@ -331,10 +331,48 @@ properties:
       or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage).
       For documentation of Earth Science, Paleobiology or Paleontology datasets, we
       are interested in the second case-- the time period that data are linked to
-      thematically..
+      thematically.
     type: array
     items:
       $ref: '#/$defs/TemporalExtent'
+  prov:wasGeneratedBy:
+    description: Brief information about instruments, software or experimental protocols
+      used
+    type: array
+    items:
+      $ref: '#/$defs/GeneratedBy'
+  prov:wasDerivedFrom:
+    description: Brief information about sources of data used in aggregate datasets
+    type: array
+    items:
+      $ref: '#/$defs/DerivedFrom'
+  dqv:hasQualityMeasurement:
+    description: Brief information quality measurements reported to assess the resource
+    type: array
+    items:
+      $ref: '#/$defs/QualityMeasure'
+  schema:distribution:
+    description: Distribution with dual typing for structured or tabular data; extends
+      the CDIFMandatory distribution by requiring a CDI dataset type alongside schema:DataDownload.
+    type: array
+    items:
+      anyOf:
+      - $ref: '#/$defs/DataDownload'
+      - description: Distribution with CDIF dual typing for structured or tabular
+          data
+        allOf:
+        - $ref: '#/$defs/DataDownload'
+        - type: object
+          properties:
+            '@type':
+              type: array
+              items:
+                type: string
+              contains:
+                enum:
+                - cdi:StructuredDataSet
+                - cdi:TabularTextDataSet
+              minItems: 2
 $defs:
   LabeledLink:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/labeledLink/schema.yaml
@@ -356,6 +394,14 @@ $defs:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/spatialExtent/schema.yaml
   TemporalExtent:
     $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/temporalExtent/schema.yaml
+  GeneratedBy:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/provProperties/generatedBy/schema.yaml
+  DerivedFrom:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/provProperties/derivedFrom/schema.yaml
+  QualityMeasure:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.yaml
+  DataDownload:
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.yaml
 x-jsonld-prefixes:
   schema: http://schema.org/
 
@@ -372,8 +418,9 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "http://schema.org/",
+    "schema": "https://schema.org",
     "time": "http://www.w3.org/2006/time#",
+    "prov": "http://www.w3.org/ns/prov#",
     "@version": 1.1
   }
 }

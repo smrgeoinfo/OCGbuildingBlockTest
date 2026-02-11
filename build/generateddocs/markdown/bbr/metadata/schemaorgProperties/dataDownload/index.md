@@ -199,6 +199,8 @@ properties:
         properties:
           '@id':
             type: string
+            description: a identifier for an agent defined in this metadata, or externally;
+              must be dereferenceable
       - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/person/schema.yaml
       - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/organization/schema.yaml
 required:

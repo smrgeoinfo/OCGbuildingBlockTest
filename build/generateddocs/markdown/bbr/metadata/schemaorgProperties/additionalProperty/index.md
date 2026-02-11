@@ -122,14 +122,8 @@ properties:
   schema:propertyID:
     type: array
     items:
-      anyOf:
-      - type: string
-      - type: object
-        properties:
-          '@id':
-            type: string
-            description: reference to a skos concept for the property
-      - $ref: '#/$defs/DefinedTerm'
+      $ref: '#/$defs/propertyID_item'
+    minItems: 1
     description: identifier or name for the property concept quantified by the values
       in this variable slot. Multiple values can specify the property at different
       levels of granularity.

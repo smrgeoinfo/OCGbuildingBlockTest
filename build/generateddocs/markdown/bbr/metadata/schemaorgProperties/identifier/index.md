@@ -76,8 +76,9 @@ properties:
     const: schema:PropertyValue
   schema:propertyID:
     type: string
-    description: identifier for the identifier schema, e.g. DOI, ARK.  Get values
-      from https://registry.identifiers.org/registry/ for interoperability
+    description: In this context for the schema:PropertyValue, this field is an identifier
+      for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/
+      for interoperability
   schema:value:
     type: string
     description: the identifier string. E.g. 10.5066/F7VX0DMQ

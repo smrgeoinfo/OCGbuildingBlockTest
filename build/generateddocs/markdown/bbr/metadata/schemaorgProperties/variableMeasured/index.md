@@ -134,8 +134,8 @@ properties:
     type: array
     items:
       type: string
-      enum:
-      - schema:PropertyValue
+    contains:
+      const: schema:PropertyValue
     minItems: 1
   '@id':
     type: string
@@ -146,6 +146,11 @@ properties:
   schema:description:
     type: string
     default: missing
+  schema:alternateName:
+    type: array
+    items:
+      type: string
+      description: human intelligible name for variable that conveys semantics
   schema:propertyID:
     type: array
     items:
@@ -200,6 +205,7 @@ properties:
       that occurs in the dataset. Not useful for other value types.'
   schema:url:
     type: string
+    format: uri
     description: Any schema:Thing can have a URL property, but because the value is
       simply a url the relationship of the linked resource can not be expressed. Usage
       is optional. The recommendation is that schema:url should link to a web page

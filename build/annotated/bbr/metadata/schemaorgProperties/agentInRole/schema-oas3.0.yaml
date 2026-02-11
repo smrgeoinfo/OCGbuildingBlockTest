@@ -1,6 +1,40 @@
 x-defs:
+  cdif.bbr.metadata.schemaorgProperties.definedTerm:
+    description: schema.org Defined Term schema
+    type: object
+    properties:
+      '@type':
+        enum:
+        - schema:DefinedTerm
+      schema:name:
+        type: string
+        description: text label for the term that is useful to human user
+      schema:identifier:
+        anyOf:
+        - type: string
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
+      schema:inDefinedTermSet:
+        type: string
+        description: Identifier for the controlled vocabulary responsible for this
+          keyword.
+      schema:termCode:
+        type: string
+        description: A representative code for this keyword in the controlled vocabulary
+          (Optional).  Analogous to skos:Notation
+    allOf:
+    - required:
+      - '@type'
+    - anyOf:
+      - required:
+        - schema:name
+      - required:
+        - schema:identifier
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.schemaorgProperties.person:
-    description: My example schema
+    description: schema for cdif profile of schema.org/Person
     type: object
     properties:
       '@id':
@@ -15,7 +49,7 @@ x-defs:
       schema:description:
         type: string
       schema:identifier:
-        description: identifier for person
+        description: identifier for person, recommend ORCID
         anyOf:
         - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
         - type: string
@@ -30,6 +64,8 @@ x-defs:
         type: object
         properties:
           '@type':
+            type: string
+            default: schema:ContactPoint
             enum:
             - schema:ContactPoint
           schema:email:
@@ -120,8 +156,9 @@ x-defs:
         - schema:PropertyValue
       schema:propertyID:
         type: string
-        description: identifier for the identifier schema, e.g. DOI, ARK.  Get values
-          from https://registry.identifiers.org/registry/ for interoperability
+        description: In this context for the schema:PropertyValue, this field is an
+          identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/
+          for interoperability
       schema:value:
         type: string
         description: the identifier string. E.g. 10.5066/F7VX0DMQ
@@ -143,40 +180,6 @@ x-defs:
       schema: http://schema.org/
     x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  cdif.bbr.metadata.schemaorgProperties.definedTerm:
-    description: schema.org Defined Term schema
-    type: object
-    properties:
-      '@type':
-        enum:
-        - schema:DefinedTerm
-      schema:name:
-        type: string
-        description: text label for the term that is useful to human user
-      schema:identifier:
-        anyOf:
-        - type: string
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
-      schema:inDefinedTermSet:
-        type: string
-        description: Identifier for the controlled vocabulary responsible for this
-          keyword.
-      schema:termCode:
-        type: string
-        description: A representative code for this keyword in the controlled vocabulary
-          (Optional).  Analogous to skos:Notation
-    allOf:
-    - required:
-      - '@type'
-    - anyOf:
-      - required:
-        - schema:name
-      - required:
-        - schema:identifier
-    x-jsonld-prefixes:
-      schema: http://schema.org/
-    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
-    x-schema-version: https://json-schema.org/draft/2020-12/schema
 description: For more granularity on how a person contributed to a Dataset, use schema:Role.
   The schema.org documentation does not state that the Role type is an expected data
   type of author, creator and contributor, but that is addressed in this blog post
@@ -185,15 +188,20 @@ type: object
 properties:
   '@type':
     type: string
+    default: schema:Role
     enum:
     - schema:Role
   schema:roleName:
-    type: string
+    anyOf:
+    - type: string
+    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
   schema:contributor:
-    type: object
     oneOf:
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/agentInRole/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.organization
+required:
+- schema:roleName
+- schema:contributor
 x-jsonld-prefixes:
   schema: http://schema.org/
 x-schema-version: https://json-schema.org/draft/2020-12/schema

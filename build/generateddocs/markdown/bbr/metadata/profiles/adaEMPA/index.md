@@ -66,14 +66,14 @@ Technique-specific metadata profile for Electron Microprobe Analysis (EMPA) prod
 
 #### ttl
 ```ttl
-@prefix schema1: <http://schema.org/> .
+@prefix ns1: <schema:> .
 
-[] a schema1:Dataset,
-        schema1:Product ;
-    schema1:additionalType "ada:DataDeliveryPackage",
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
         "ada:EMPAImage" ;
-    schema1:description "Electron microprobe analysis data" ;
-    schema1:name "EMPA Analysis of Meteorite Sample" .
+    ns1:description "Electron microprobe analysis data" ;
+    ns1:name "EMPA Analysis of Meteorite Sample" .
 
 
 ```
@@ -148,7 +148,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "http://schema.org/",
+    "schema": "https://schema.org",
     "ada": "https://ada.astromat.org/metadata/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "csvw": "http://www.w3.org/ns/csvw#",

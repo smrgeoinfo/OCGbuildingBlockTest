@@ -71,7 +71,7 @@
         },
         "schema:propertyID": {
           "type": "string",
-          "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
         },
         "schema:value": {
           "type": "string",
@@ -124,24 +124,9 @@
     "schema:propertyID": {
       "type": "array",
       "items": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string",
-                "description": "reference to a skos concept for the property"
-              }
-            }
-          },
-          {
-            "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema-oas3.0.json#/$defs/DefinedTerm"
-          }
-        ]
+        "$ref": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema-oas3.0.json#/$defs/propertyID_item"
       },
+      "minItems": 1,
       "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
     },
     "schema:name": {

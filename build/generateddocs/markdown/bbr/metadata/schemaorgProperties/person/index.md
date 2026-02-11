@@ -117,7 +117,7 @@ ex:PersonExample_zZc a schema1:Person ;
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-description: My example schema
+description: schema for cdif profile of schema.org/Person
 type: object
 properties:
   '@id':
@@ -131,7 +131,7 @@ properties:
   schema:description:
     type: string
   schema:identifier:
-    description: identifier for person
+    description: identifier for person, recommend ORCID
     anyOf:
     - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
     - type: string
@@ -145,7 +145,9 @@ properties:
     type: object
     properties:
       '@type':
+        type: string
         const: schema:ContactPoint
+        default: schema:ContactPoint
       schema:email:
         type: string
     description: restrict to email only. Schema.org allows telephone and postal contacts

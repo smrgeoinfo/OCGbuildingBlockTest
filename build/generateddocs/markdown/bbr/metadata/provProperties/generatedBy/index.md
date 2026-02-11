@@ -81,8 +81,12 @@ title: very simple links or names of software or instruments used to generate a 
 type: object
 properties:
   '@type':
-    type: string
-    const: prov:Activity
+    type: array
+    items:
+      type: string
+    minItems: 1
+    contains:
+      const: prov:Activity
   prov:used:
     type: array
     items:

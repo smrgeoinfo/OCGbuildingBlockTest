@@ -9,8 +9,9 @@ x-defs:
         - schema:PropertyValue
       schema:propertyID:
         type: string
-        description: identifier for the identifier schema, e.g. DOI, ARK.  Get values
-          from https://registry.identifiers.org/registry/ for interoperability
+        description: In this context for the schema:PropertyValue, this field is an
+          identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/
+          for interoperability
       schema:value:
         type: string
         description: the identifier string. E.g. 10.5066/F7VX0DMQ
@@ -33,7 +34,7 @@ x-defs:
     x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.schemaorgProperties.person:
-    description: My example schema
+    description: schema for cdif profile of schema.org/Person
     type: object
     properties:
       '@id':
@@ -48,7 +49,7 @@ x-defs:
       schema:description:
         type: string
       schema:identifier:
-        description: identifier for person
+        description: identifier for person, recommend ORCID
         anyOf:
         - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.identifier
         - type: string
@@ -63,6 +64,8 @@ x-defs:
         type: object
         properties:
           '@type':
+            type: string
+            default: schema:ContactPoint
             enum:
             - schema:ContactPoint
           schema:email:
@@ -194,17 +197,16 @@ properties:
     properties:
       '@id':
         type: string
-        description: this must be the '@id' value of the node containing the resource
+        description: this must be the @id value of the node containing the resource
           description metadata
   dcterms:conformsTo:
     type: array
     items:
-      type: object
-      properties:
-        '@id':
-          type: string
-          description: uri for specifications that this metadata record conforms to.
-            Minimimally should specify uri for CDIF discovery profile
+      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema-oas3.0.yaml#/$defs/conformsTo_item
+    minItems: 1
+    description: uri for specifications that this metadata record conforms to. Minimimally
+      should specify uri for CDIF discovery profile.  Implement as $def to facilitate
+      extension for profiles that need to add conformance statements
   schema:maintainer:
     description: iSamples Registrant. identification of the agent that registered
       the sample, with contact information. Should include person name and affiliation,
@@ -217,6 +219,7 @@ properties:
     description: date of most recent update to the metadata content, extends iSamples
       schema
     type: string
+    format: date-time
   schema:includedInDataCatalog:
     type: object
     description: identify the data collection or repository that contains the described
@@ -246,6 +249,7 @@ properties:
 required:
 - schema:about
 - dcterms:conformsTo
+- '@type'
 - '@id'
 $defs:
   Identifier:
