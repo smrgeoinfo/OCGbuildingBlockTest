@@ -72,13 +72,21 @@ def inline_refs_and_merge_allof(schema: dict) -> dict:
     def _resolve(node: Any) -> Any:
         """Recursively inline $ref → $defs pointers."""
         if isinstance(node, dict):
-            if "$ref" in node and len(node) == 1:
+            if "$ref" in node:
                 ref = node["$ref"]
                 if ref.startswith("#/$defs/"):
                     def_name = ref[len("#/$defs/"):]
                     if def_name in defs:
-                        return _resolve(copy.deepcopy(defs[def_name]))
-                return node
+                        resolved_def = _resolve(copy.deepcopy(defs[def_name]))
+                        if len(node) == 1:
+                            return resolved_def
+                        # Merge sibling keys into the resolved def
+                        if isinstance(resolved_def, dict):
+                            extra = {k: _resolve(v) for k, v in node.items() if k != "$ref"}
+                            merged = {**resolved_def, **extra}
+                            return merged
+                        return resolved_def
+                return {k: _resolve(v) for k, v in node.items() if k != "$ref"} if len(node) > 1 else node
             return {k: _resolve(v) for k, v in node.items()}
         elif isinstance(node, list):
             return [_resolve(item) for item in node]
@@ -573,46 +581,67 @@ def simplify_anyof_additional_type_items(schema: dict) -> dict:
 def simplify_anyof_distribution_items_cdif(schema: dict) -> dict:
     """
     Replace CDIF distribution items anyOf with a single flat object containing
-    all fields from DataDownload and WebAPI. The @type field indicates which type.
+    all fields from DataDownload and WebAPI, plus any additional properties
+    from the anyOf branches (e.g. fileDetail, schema:hasPart from Files).
+    The @type field indicates which type.
     """
+    merged_props = {
+        "@type": {
+            "type": "array",
+            "items": {"type": "string", "enum": ["schema:DataDownload", "schema:WebAPI"]},
+            "default": ["schema:DataDownload"],
+        },
+        "schema:name": {"type": "string", "description": "Name of this distribution"},
+        "schema:description": {"type": "string"},
+        "schema:contentUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Download URL for the file (DataDownload)",
+        },
+        "schema:encodingFormat": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "MIME type(s) (DataDownload)",
+        },
+        "spdx:checksum": {
+            "type": "object",
+            "properties": {
+                "spdx:algorithm": {"type": "string"},
+                "spdx:checksumValue": {"type": "string"},
+            },
+        },
+        "schema:serviceType": {
+            "type": "string",
+            "description": "Type of service, e.g. OGC:WMS, OPeNDAP (WebAPI)",
+        },
+        "schema:documentation": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to API documentation (WebAPI)",
+        },
+    }
+
+    # Merge properties from anyOf branches (e.g. fileDetail, schema:hasPart
+    # from the inlined Files schema in technique profile distributions).
+    # Branches may contain allOf (e.g. allOf: [Files, {@type override}])
+    # that hasn't been flattened yet — flatten each branch first.
+    for branch in schema.get("anyOf", []):
+        if not isinstance(branch, dict):
+            continue
+        flat = _merge_allof_entries(copy.deepcopy(branch)) if "allOf" in branch else branch
+        for pk, pv in flat.get("properties", {}).items():
+            if pk in merged_props:
+                if pk == "@type":
+                    merged_props[pk] = _merge_type_enums(merged_props[pk], pv)
+                else:
+                    merged_props[pk] = _deep_merge_dict(merged_props[pk], pv)
+            else:
+                merged_props[pk] = copy.deepcopy(pv)
+
     return {
         "type": "object",
         "description": "Distribution — Data Download or Web API",
-        "properties": {
-            "@type": {
-                "type": "array",
-                "items": {"type": "string", "enum": ["schema:DataDownload", "schema:WebAPI"]},
-                "default": ["schema:DataDownload"],
-            },
-            "schema:name": {"type": "string", "description": "Name of this distribution"},
-            "schema:description": {"type": "string"},
-            "schema:contentUrl": {
-                "type": "string",
-                "format": "uri",
-                "description": "Download URL for the file (DataDownload)",
-            },
-            "schema:encodingFormat": {
-                "type": "array",
-                "items": {"type": "string"},
-                "description": "MIME type(s) (DataDownload)",
-            },
-            "spdx:checksum": {
-                "type": "object",
-                "properties": {
-                    "spdx:algorithm": {"type": "string"},
-                    "spdx:checksumValue": {"type": "string"},
-                },
-            },
-            "schema:serviceType": {
-                "type": "string",
-                "description": "Type of service, e.g. OGC:WMS, OPeNDAP (WebAPI)",
-            },
-            "schema:documentation": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL to API documentation (WebAPI)",
-            },
-        },
+        "properties": merged_props,
     }
 
 
@@ -651,11 +680,12 @@ def simplify_distribution_items(items_schema: dict) -> dict:
     # Start with an empty merged object
     merged = {"type": "object", "properties": {}}
 
-    # Merge each oneOf branch's properties
+    # Merge each oneOf branch's properties (flatten allOf within branches first)
     for branch in branches:
         if not isinstance(branch, dict):
             continue
-        for pk, pv in branch.get("properties", {}).items():
+        flat = _merge_allof_entries(copy.deepcopy(branch)) if "allOf" in branch else branch
+        for pk, pv in flat.get("properties", {}).items():
             if pk in merged["properties"]:
                 if pk == "@type":
                     # Special handling: combine enum values from all branches
@@ -910,8 +940,16 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 continue
 
             # distribution items anyOf -> simplified (CDIF: DataDownload/WebAPI)
+            # Preserve extra properties from technique overlays (e.g. fileDetail)
             if k == "items" and path.endswith("schema:distribution") and isinstance(v, dict) and "anyOf" in v:
-                result[k] = simplify_anyof_distribution_items_cdif(v)
+                simplified = simplify_anyof_distribution_items_cdif(v)
+                extra_props = v.get("properties", {})
+                if extra_props:
+                    simplified.setdefault("properties", {})
+                    for pk, pv in extra_props.items():
+                        if pk not in simplified["properties"]:
+                            simplified["properties"][pk] = copy.deepcopy(pv)
+                result[k] = apply_anyof_simplifications(simplified, current_path)
                 continue
 
             # schema:conditionsOfAccess items anyOf
@@ -1032,6 +1070,7 @@ def remove_not_constraints(schema: Any) -> Any:
 def flatten_remaining_allof(schema: Any) -> Any:
     """
     Flatten leftover allOf entries that remain after merging.
+    - Entries with 'properties' are merged into the parent (deep merge).
     - Simple entries with only 'required' are merged into the parent.
     - Entries with 'anyOf' containing conditional-required rules are dropped
       (JSON Forms doesn't support conditional required).
@@ -1045,32 +1084,34 @@ def flatten_remaining_allof(schema: Any) -> Any:
 
         # Now flatten allOf in the current object
         if "allOf" in result:
-            all_of = result["allOf"]
-            keep = []
+            all_of = result.pop("allOf")
             for entry in all_of:
                 if not isinstance(entry, dict):
-                    keep.append(entry)
                     continue
                 keys = set(entry.keys())
                 if not keys:
-                    # Empty entry — drop
                     continue
-                if keys == {"required"}:
-                    # Merge required into parent
-                    existing = result.get("required", [])
-                    merged = list(existing) + [
-                        r for r in entry["required"] if r not in existing
-                    ]
-                    result["required"] = merged
-                elif keys == {"anyOf"}:
+                if keys == {"anyOf"}:
                     # Conditional required — drop for form friendliness
                     continue
-                else:
-                    keep.append(entry)
-            if not keep:
-                del result["allOf"]
-            else:
-                result["allOf"] = keep
+                # Merge properties from the allOf entry into the parent
+                for pk, pv in entry.get("properties", {}).items():
+                    existing = result.get("properties", {}).get(pk)
+                    if existing is not None:
+                        result["properties"][pk] = _deep_merge_dict(existing, pv)
+                    else:
+                        result.setdefault("properties", {})[pk] = copy.deepcopy(pv)
+                # Merge required
+                for req in entry.get("required", []):
+                    result.setdefault("required", [])
+                    if req not in result["required"]:
+                        result["required"].append(req)
+                # Merge other scalar keys (type, description, title, etc.)
+                for ek, ev in entry.items():
+                    if ek in ("properties", "required", "allOf"):
+                        continue
+                    if ek not in result:
+                        result[ek] = ev
         return result
     elif isinstance(schema, list):
         return [flatten_remaining_allof(item) for item in schema]
