@@ -7,11 +7,16 @@ type: object
 properties:
   '@type':
     type: string
+    default: schema:Role
     const: schema:Role
   'schema:roleName':
-    type: string
+    anyOf:
+      - type: string
+      - $ref: ../definedTerm/schema.yaml
   'schema:contributor':
-    type: object
     oneOf:
       - $ref: ../person/schema.yaml
       - $ref: ../organization/schema.yaml
+required:
+  - schema:roleName
+  - schema:contributor

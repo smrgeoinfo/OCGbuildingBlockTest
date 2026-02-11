@@ -11,9 +11,8 @@
         "@type": {
             "description": "a schema.org Class that specifies the expected information content for the metadata record. For CDIF, 'schema:Dataset' is required, but other possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI) are sometimes included to enable the schema.org properties used to describe the resource without schema.org validation errors.",
             "type": "array",
-            "items": {"type": "string"},
-            "minItems": 1,
-            "contains": {
+            "items": {
+                "type": "string",
                 "enum": [
                     "schema:CreativeWork",
                     "schema:SoftwareApplication",
@@ -26,7 +25,12 @@
                     "schema:ImageObject",
                     "schema:DataCatalog",
                     "schema:DefinedTermSet"
-                ]
+                ],
+                "default": "schema:Dataset"
+            },
+            "minItems": 1,
+            "contains": {
+                "const": "schema:Dataset"
             }
         },
         "schema:name": {
