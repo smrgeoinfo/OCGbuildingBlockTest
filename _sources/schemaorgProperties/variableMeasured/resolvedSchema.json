@@ -6,10 +6,10 @@
     "@type": {
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": [
-          "schema:PropertyValue"
-        ]
+        "type": "string"
+      },
+      "contains": {
+        "const": "schema:PropertyValue"
       },
       "minItems": 1
     },
@@ -23,6 +23,13 @@
     "schema:description": {
       "type": "string",
       "default": "missing"
+    },
+    "schema:alternateName": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "human intelligible name for variable that conveys semantics"
+      }
     },
     "schema:propertyID": {
       "type": "array",
@@ -41,7 +48,85 @@
             }
           },
           {
-            "$ref": "#/$defs/DefinedTerm"
+            "description": "schema.org Defined Term schema",
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "schema:DefinedTerm"
+              },
+              "schema:name": {
+                "type": "string",
+                "description": "text label for the term that is useful to human user"
+              },
+              "schema:identifier": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "description": "Properties for a schema.org identifier",
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "type": "string",
+                        "const": "schema:PropertyValue"
+                      },
+                      "schema:propertyID": {
+                        "type": "string",
+                        "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                      },
+                      "schema:value": {
+                        "type": "string",
+                        "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                      },
+                      "schema:url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                      }
+                    },
+                    "required": [
+                      "@type"
+                    ],
+                    "anyOf": [
+                      {
+                        "required": [
+                          "schema:value"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "schema:url"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "schema:inDefinedTermSet": {
+                "type": "string",
+                "description": "Identifier for the controlled vocabulary responsible for this keyword."
+              },
+              "schema:termCode": {
+                "type": "string",
+                "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+              }
+            },
+            "required": [
+              "@type"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "schema:name"
+                ]
+              },
+              {
+                "required": [
+                  "schema:identifier"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -62,7 +147,85 @@
           }
         },
         {
-          "$ref": "#/$defs/DefinedTerm"
+          "description": "schema.org Defined Term schema",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "schema:DefinedTerm"
+            },
+            "schema:name": {
+              "type": "string",
+              "description": "text label for the term that is useful to human user"
+            },
+            "schema:identifier": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "description": "Properties for a schema.org identifier",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string",
+                      "const": "schema:PropertyValue"
+                    },
+                    "schema:propertyID": {
+                      "type": "string",
+                      "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                    },
+                    "schema:value": {
+                      "type": "string",
+                      "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                    },
+                    "schema:url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                    }
+                  },
+                  "required": [
+                    "@type"
+                  ],
+                  "anyOf": [
+                    {
+                      "required": [
+                        "schema:value"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "schema:url"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "schema:inDefinedTermSet": {
+              "type": "string",
+              "description": "Identifier for the controlled vocabulary responsible for this keyword."
+            },
+            "schema:termCode": {
+              "type": "string",
+              "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+            }
+          },
+          "required": [
+            "@type"
+          ],
+          "anyOf": [
+            {
+              "required": [
+                "schema:name"
+              ]
+            },
+            {
+              "required": [
+                "schema:identifier"
+              ]
+            }
+          ]
         }
       ],
       "description": "A text description of the measurement method used to determine values for this variable. If standard measurement protocols are defined and registered, these can be identified via http URI's."
@@ -86,81 +249,46 @@
           }
         },
         {
-          "$ref": "#/$defs/DefinedTerm"
-        }
-      ],
-      "description": "Value is expected to be TEXT or URL. We recommend providing an HTTP URI that identifies a unit of measure from a vocabulary accessible on the web. The QUDT unit vocabulary provides and extensive set of registered units of measure that can be used to populate the schema:unitCode property to specify the units of measure used to report datavalues when that is appropriate."
-    },
-    "schema:minValue": {
-      "type": "number",
-      "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
-    },
-    "schema:maxValue": {
-      "type": "number",
-      "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
-    },
-    "schema:url": {
-      "type": "string",
-      "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
-    }
-  },
-  "allOf": [
-    {
-      "required": [
-        "@type",
-        "schema:name",
-        "schema:description"
-      ]
-    }
-  ],
-  "$defs": {
-    "DefinedTerm": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "description": "schema.org Defined Term schema",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "const": "schema:DefinedTerm"
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "text label for the term that is useful to human user"
-        },
-        "schema:identifier": {
-          "anyOf": [
-            {
-              "type": "string"
+          "description": "schema.org Defined Term schema",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "schema:DefinedTerm"
             },
-            {
-              "$schema": "https://json-schema.org/draft/2020-12/schema",
-              "description": "Properties for a schema.org identifier",
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "const": "schema:PropertyValue"
-                },
-                "schema:propertyID": {
-                  "type": "string",
-                  "description": "identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-                },
-                "schema:value": {
-                  "type": "string",
-                  "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-                },
-                "schema:url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-                }
-              },
-              "allOf": [
+            "schema:name": {
+              "type": "string",
+              "description": "text label for the term that is useful to human user"
+            },
+            "schema:identifier": {
+              "anyOf": [
                 {
+                  "type": "string"
+                },
+                {
+                  "description": "Properties for a schema.org identifier",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string",
+                      "const": "schema:PropertyValue"
+                    },
+                    "schema:propertyID": {
+                      "type": "string",
+                      "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                    },
+                    "schema:value": {
+                      "type": "string",
+                      "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                    },
+                    "schema:url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                    }
+                  },
                   "required": [
                     "@type"
-                  ]
-                },
-                {
+                  ],
                   "anyOf": [
                     {
                       "required": [
@@ -175,25 +303,19 @@
                   ]
                 }
               ]
+            },
+            "schema:inDefinedTermSet": {
+              "type": "string",
+              "description": "Identifier for the controlled vocabulary responsible for this keyword."
+            },
+            "schema:termCode": {
+              "type": "string",
+              "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
             }
-          ]
-        },
-        "schema:inDefinedTermSet": {
-          "type": "string",
-          "description": "Identifier for the controlled vocabulary responsible for this keyword."
-        },
-        "schema:termCode": {
-          "type": "string",
-          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
-        }
-      },
-      "allOf": [
-        {
+          },
           "required": [
             "@type"
-          ]
-        },
-        {
+          ],
           "anyOf": [
             {
               "required": [
@@ -207,7 +329,26 @@
             }
           ]
         }
-      ]
+      ],
+      "description": "Value is expected to be TEXT or URL. We recommend providing an HTTP URI that identifies a unit of measure from a vocabulary accessible on the web. The QUDT unit vocabulary provides and extensive set of registered units of measure that can be used to populate the schema:unitCode property to specify the units of measure used to report datavalues when that is appropriate."
+    },
+    "schema:minValue": {
+      "type": "number",
+      "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
+    },
+    "schema:maxValue": {
+      "type": "number",
+      "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
+    },
+    "schema:url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
     }
-  }
+  },
+  "required": [
+    "@type",
+    "schema:name",
+    "schema:description"
+  ]
 }

@@ -10,18 +10,9 @@
         "type": "string"
       },
       "minItems": 2,
-      "allOf": [
-        {
-          "contains": {
-            "const": "cdi:TabularTextDataSet"
-          }
-        },
-        {
-          "contains": {
-            "const": "ada:tabularData"
-          }
-        }
-      ]
+      "contains": {
+        "const": "ada:tabularData"
+      }
     },
     "componentType": {
       "anyOf": [
@@ -66,7 +57,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "DSC Instrument Detail",
           "description": "Differential Scanning Calorimetry heat tabular data",
           "type": "object",
@@ -80,7 +70,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "EA-IRMS Instrument Detail",
           "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
           "type": "object",
@@ -97,7 +86,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "EMPA Instrument Detail",
           "description": "Electron Microprobe Analysis with spectrometer and signal details.",
           "type": "object",
@@ -125,7 +113,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "LAF Instrument Detail",
           "description": "Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.",
           "type": "object",
@@ -152,7 +139,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "NanoSIMS Instrument Detail",
           "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
           "type": "object",
@@ -167,15 +153,26 @@
               ]
             },
             "phaseAnalyzed": {
-              "$ref": "#/$defs/StringArray"
+              "title": "String Array Type",
+              "description": "Simple reusable array of strings",
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
             },
             "isotopeAnalyzed": {
-              "$ref": "#/$defs/StringArray"
+              "title": "String Array Type",
+              "description": "Simple reusable array of strings",
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
             }
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "NanoIR Instrument Detail",
           "description": "Nano-IR spectroscopy collections with phase analysis",
           "type": "object",
@@ -188,12 +185,17 @@
               ]
             },
             "phaseAnalyzed": {
-              "$ref": "#/$defs/StringArray"
+              "title": "String Array Type",
+              "description": "Simple reusable array of strings",
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
             }
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "PSFD Instrument Detail",
           "description": "Point Spread Function Data with image names and conditions",
           "type": "object",
@@ -202,7 +204,13 @@
               "const": "ada:PSFDTabular"
             },
             "imageName": {
-              "$ref": "#/$defs/StringArray"
+              "title": "String Array Type",
+              "description": "Simple reusable array of strings",
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
             },
             "imageViewingConditions": {
               "type": "string"
@@ -210,7 +218,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "VNMIR Instrument Detail",
           "description": "Very-Near Mid-IR spectroscopy with detailed measurement parameters",
           "type": "object",
@@ -303,7 +310,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "XRD Instrument Detail",
           "description": "X-ray Diffraction tabular data with geometry and wavelength",
           "type": "object",
@@ -359,6 +365,7 @@
       "type": "boolean"
     },
     "csvw:lineTerminators": {
+      "type": "string",
       "enum": [
         "CRLF",
         "LF",
@@ -393,7 +400,6 @@
       "type": "array",
       "description": "Links variables to their physical representation in this dataset.",
       "items": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
         "title": "Physical Mapping Type",
         "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
         "type": "object",
@@ -480,7 +486,6 @@
       "type": "string"
     },
     "spatialRegistration": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
       "title": "Spatial Registration Type",
       "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
       "type": "object",
@@ -561,17 +566,5 @@
   "required": [
     "@type",
     "componentType"
-  ],
-  "$defs": {
-    "StringArray": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "String Array Type",
-      "description": "Simple reusable array of strings",
-      "type": "array",
-      "minItems": 0,
-      "items": {
-        "type": "string"
-      }
-    }
-  }
+  ]
 }

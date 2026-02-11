@@ -62,12 +62,17 @@
       "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
     },
     "resultTarget": {
-      "$ref": "#/$defs/StringArray"
+      "title": "String Array Type",
+      "description": "Simple reusable array of strings",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "string"
+      }
     },
     "fileDetail": {
       "anyOf": [
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Image Type",
           "description": "Image objects with acquisition details and component type classification. Typed as ada:image and schema:ImageObject.",
           "type": "object",
@@ -139,7 +144,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Image Map Type",
           "description": "Spatially registered image maps with pixel coordinates, component type classification, and spatial registration metadata.",
           "type": "object",
@@ -156,7 +160,31 @@
             "componentType": {
               "anyOf": [
                 {
-                  "$ref": "#/$defs/DetailEMPA"
+                  "title": "EMPA Instrument Detail",
+                  "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "anyOf": [
+                        {
+                          "const": "ada:EMPAImage"
+                        },
+                        {
+                          "const": "ada:EMPAQEATabular"
+                        },
+                        {
+                          "const": "ada:EMPAImageCollection"
+                        }
+                      ]
+                    },
+                    "spectrometersUsed": {
+                      "type": "string",
+                      "description": "Spectrometers used in analysis"
+                    },
+                    "signalUsed": {
+                      "type": "string"
+                    }
+                  }
                 },
                 {
                   "type": "object",
@@ -213,7 +241,53 @@
               "type": "integer"
             },
             "spatialRegistration": {
-              "$ref": "#/$defs/SpatialRegistration"
+              "title": "Spatial Registration Type",
+              "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+              "type": "object",
+              "properties": {
+                "basemap": {
+                  "type": "string",
+                  "description": "link to appropriate basemap image map"
+                },
+                "originX": {
+                  "type": "number"
+                },
+                "originY": {
+                  "type": "number"
+                },
+                "originZ": {
+                  "type": "number"
+                },
+                "coordDef": {
+                  "type": "string",
+                  "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                },
+                "coordUnits": {
+                  "type": "string"
+                },
+                "pixelUnits": {
+                  "type": "string"
+                },
+                "pixelScaleX": {
+                  "type": "number"
+                },
+                "pixelScaleY": {
+                  "type": "number"
+                },
+                "originLocation": {
+                  "type": "string",
+                  "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                }
+              },
+              "required": [
+                "originX",
+                "originY",
+                "pixelScaleX",
+                "pixelScaleY",
+                "pixelUnits",
+                "originLocation",
+                "coordDef"
+              ]
             }
           },
           "required": [
@@ -222,7 +296,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Tabular Data Type",
           "description": "Tabular data type aligned with CDIF 2026 schema using DDI-CDI and CSVW properties. Typed as cdi:TabularTextDataSet and ada:tabularData.",
           "type": "object",
@@ -233,18 +306,9 @@
                 "type": "string"
               },
               "minItems": 2,
-              "allOf": [
-                {
-                  "contains": {
-                    "const": "cdi:TabularTextDataSet"
-                  }
-                },
-                {
-                  "contains": {
-                    "const": "ada:tabularData"
-                  }
-                }
-              ]
+              "contains": {
+                "const": "ada:tabularData"
+              }
             },
             "componentType": {
               "anyOf": [
@@ -289,7 +353,6 @@
                   ]
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "DSC Instrument Detail",
                   "description": "Differential Scanning Calorimetry heat tabular data",
                   "type": "object",
@@ -303,7 +366,6 @@
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "EA-IRMS Instrument Detail",
                   "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
                   "type": "object",
@@ -320,10 +382,33 @@
                   }
                 },
                 {
-                  "$ref": "#/$defs/DetailEMPA"
+                  "title": "EMPA Instrument Detail",
+                  "description": "Electron Microprobe Analysis with spectrometer and signal details.",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "anyOf": [
+                        {
+                          "const": "ada:EMPAImage"
+                        },
+                        {
+                          "const": "ada:EMPAQEATabular"
+                        },
+                        {
+                          "const": "ada:EMPAImageCollection"
+                        }
+                      ]
+                    },
+                    "spectrometersUsed": {
+                      "type": "string",
+                      "description": "Spectrometers used in analysis"
+                    },
+                    "signalUsed": {
+                      "type": "string"
+                    }
+                  }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "LAF Instrument Detail",
                   "description": "Laser Ablation Fluorescence processed/raw data. elementAnalyzed goes in resultTarget.",
                   "type": "object",
@@ -350,7 +435,6 @@
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "NanoSIMS Instrument Detail",
                   "description": "Nano Secondary Ion Mass Spectrometry with isotope tracking",
                   "type": "object",
@@ -365,15 +449,26 @@
                       ]
                     },
                     "phaseAnalyzed": {
-                      "$ref": "#/$defs/StringArray"
+                      "title": "String Array Type",
+                      "description": "Simple reusable array of strings",
+                      "type": "array",
+                      "minItems": 0,
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "isotopeAnalyzed": {
-                      "$ref": "#/$defs/StringArray"
+                      "title": "String Array Type",
+                      "description": "Simple reusable array of strings",
+                      "type": "array",
+                      "minItems": 0,
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "NanoIR Instrument Detail",
                   "description": "Nano-IR spectroscopy collections with phase analysis",
                   "type": "object",
@@ -386,12 +481,17 @@
                       ]
                     },
                     "phaseAnalyzed": {
-                      "$ref": "#/$defs/StringArray"
+                      "title": "String Array Type",
+                      "description": "Simple reusable array of strings",
+                      "type": "array",
+                      "minItems": 0,
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "PSFD Instrument Detail",
                   "description": "Point Spread Function Data with image names and conditions",
                   "type": "object",
@@ -400,7 +500,13 @@
                       "const": "ada:PSFDTabular"
                     },
                     "imageName": {
-                      "$ref": "#/$defs/StringArray"
+                      "title": "String Array Type",
+                      "description": "Simple reusable array of strings",
+                      "type": "array",
+                      "minItems": 0,
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "imageViewingConditions": {
                       "type": "string"
@@ -408,7 +514,6 @@
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "VNMIR Instrument Detail",
                   "description": "Very-Near Mid-IR spectroscopy with detailed measurement parameters",
                   "type": "object",
@@ -501,7 +606,6 @@
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "XRD Instrument Detail",
                   "description": "X-ray Diffraction tabular data with geometry and wavelength",
                   "type": "object",
@@ -557,6 +661,7 @@
               "type": "boolean"
             },
             "csvw:lineTerminators": {
+              "type": "string",
               "enum": [
                 "CRLF",
                 "LF",
@@ -591,7 +696,70 @@
               "type": "array",
               "description": "Links variables to their physical representation in this dataset.",
               "items": {
-                "$ref": "#/$defs/PhysicalMapping"
+                "title": "Physical Mapping Type",
+                "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                "type": "object",
+                "properties": {
+                  "cdi:index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                  },
+                  "cdi:format": {
+                    "type": "string",
+                    "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                  },
+                  "cdi:physicalDataType": {
+                    "type": "string"
+                  },
+                  "cdi:length": {
+                    "type": "integer",
+                    "description": "The column width if the tabular text is fixed width."
+                  },
+                  "cdi:nullSequence": {
+                    "type": "string",
+                    "description": "The value of this property becomes the null annotation for the described column."
+                  },
+                  "cdi:defaultValue": {
+                    "type": "string",
+                    "description": "A default string indicating the value to substitute for an empty string."
+                  },
+                  "cdi:scale": {
+                    "type": "integer"
+                  },
+                  "cdi:decimalPositions": {
+                    "type": "integer"
+                  },
+                  "cdi:minimumLength": {
+                    "type": "integer"
+                  },
+                  "cdi:maximumLength": {
+                    "type": "integer"
+                  },
+                  "cdi:isRequired": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cdi:formats_InstanceVariable": {
+                    "type": "object",
+                    "description": "Reference to a variable defined in schema:variableMeasured.",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                      }
+                    }
+                  },
+                  "cdi:defaultDecimalSeparator": {
+                    "type": "string"
+                  },
+                  "cdi:defaultDigitalGroupSeparator": {
+                    "type": "string"
+                  },
+                  "cdi:displayLabel": {
+                    "type": "string"
+                  }
+                }
               }
             },
             "countRows": {
@@ -614,7 +782,53 @@
               "type": "string"
             },
             "spatialRegistration": {
-              "$ref": "#/$defs/SpatialRegistration"
+              "title": "Spatial Registration Type",
+              "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+              "type": "object",
+              "properties": {
+                "basemap": {
+                  "type": "string",
+                  "description": "link to appropriate basemap image map"
+                },
+                "originX": {
+                  "type": "number"
+                },
+                "originY": {
+                  "type": "number"
+                },
+                "originZ": {
+                  "type": "number"
+                },
+                "coordDef": {
+                  "type": "string",
+                  "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                },
+                "coordUnits": {
+                  "type": "string"
+                },
+                "pixelUnits": {
+                  "type": "string"
+                },
+                "pixelScaleX": {
+                  "type": "number"
+                },
+                "pixelScaleY": {
+                  "type": "number"
+                },
+                "originLocation": {
+                  "type": "string",
+                  "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                }
+              },
+              "required": [
+                "originX",
+                "originY",
+                "pixelScaleX",
+                "pixelScaleY",
+                "pixelUnits",
+                "originLocation",
+                "coordDef"
+              ]
             }
           },
           "oneOf": [
@@ -651,7 +865,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Collection Type",
           "description": "A collection can be a set of files with identical information model and serialization/formatting, or a heterogeneous set of files that together constitute a dataset (a composite dataset).",
           "type": "object",
@@ -702,8 +915,13 @@
               }
             },
             "memberTypes": {
+              "title": "String Array Type",
               "description": "List of the component types in the collection",
-              "$ref": "#/$defs/StringArray"
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "string"
+              }
             },
             "nFiles": {
               "type": "integer",
@@ -748,7 +966,6 @@
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Data Cube Type",
           "description": "Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube and cdi:StructuredDataSet per CDIF 2026 alignment.",
           "type": "object",
@@ -759,18 +976,9 @@
                 "type": "string"
               },
               "minItems": 2,
-              "allOf": [
-                {
-                  "contains": {
-                    "const": "ada:dataCube"
-                  }
-                },
-                {
-                  "contains": {
-                    "const": "cdi:StructuredDataSet"
-                  }
-                }
-              ]
+              "contains": {
+                "const": "cdi:StructuredDataSet"
+              }
             },
             "componentType": {
               "anyOf": [
@@ -799,7 +1007,6 @@
                   ]
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "L2MS Instrument Detail",
                   "description": "Laser-2 Mass Spectrometry cube data with ionization parameters",
                   "type": "object",
@@ -839,26 +1046,79 @@
               "type": "array",
               "description": "Links variables to their physical representation in this dataset.",
               "items": {
-                "allOf": [
-                  {
-                    "$ref": "#/$defs/PhysicalMapping"
+                "title": "Physical Mapping Type",
+                "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                "type": "object",
+                "properties": {
+                  "cdi:index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Non-negative integer that orders the fields in the data structure (column number)."
                   },
-                  {
+                  "cdi:format": {
+                    "type": "string",
+                    "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                  },
+                  "cdi:physicalDataType": {
+                    "type": "string"
+                  },
+                  "cdi:length": {
+                    "type": "integer",
+                    "description": "The column width if the tabular text is fixed width."
+                  },
+                  "cdi:nullSequence": {
+                    "type": "string",
+                    "description": "The value of this property becomes the null annotation for the described column."
+                  },
+                  "cdi:defaultValue": {
+                    "type": "string",
+                    "description": "A default string indicating the value to substitute for an empty string."
+                  },
+                  "cdi:scale": {
+                    "type": "integer"
+                  },
+                  "cdi:decimalPositions": {
+                    "type": "integer"
+                  },
+                  "cdi:minimumLength": {
+                    "type": "integer"
+                  },
+                  "cdi:maximumLength": {
+                    "type": "integer"
+                  },
+                  "cdi:isRequired": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cdi:formats_InstanceVariable": {
                     "type": "object",
+                    "description": "Reference to a variable defined in schema:variableMeasured.",
                     "properties": {
-                      "cdi:locator": {
+                      "@id": {
                         "type": "string",
-                        "description": "String that can be used by software to locate values of the variable in this physical dataset."
+                        "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                       }
                     }
+                  },
+                  "cdi:defaultDecimalSeparator": {
+                    "type": "string"
+                  },
+                  "cdi:defaultDigitalGroupSeparator": {
+                    "type": "string"
+                  },
+                  "cdi:displayLabel": {
+                    "type": "string"
+                  },
+                  "cdi:locator": {
+                    "type": "string",
+                    "description": "String that can be used by software to locate values of the variable in this physical dataset."
                   }
-                ]
+                }
               }
             }
           }
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Document Type",
           "description": "Text or PDF/A documents providing supplemental information, typically related to calibration, instrument metadata details, analysis methods, or data representation. Typed as ada:document and schema:DigitalDocument.",
           "type": "object",
@@ -891,7 +1151,6 @@
                   }
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "ARGT Instrument Detail",
                   "description": "ARGT (Argon) document type with phase and isotope analysis",
                   "type": "object",
@@ -923,7 +1182,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Supplemental Document Image Type",
           "description": "Supplemental document images including analysis location images, annotated products, context photography, and other supplemental visual materials.",
           "type": "object",
@@ -974,7 +1232,6 @@
           ]
         },
         {
-          "$schema": "https://json-schema.org/draft/2020-12/schema",
           "title": "Other File Type",
           "description": "Files in other widely-used formats approved for submission to the Astromat Archive. Includes EMSA, OBJ, STL, XLSX, and Neptune Plus export formats.",
           "type": "object",
@@ -1000,7 +1257,6 @@
                   ]
                 },
                 {
-                  "$schema": "https://json-schema.org/draft/2020-12/schema",
                   "title": "SLS Instrument Detail",
                   "description": "Structured Light Scanning shape models and partial scans",
                   "type": "object",
@@ -1103,163 +1359,6 @@
               }
             }
           }
-        }
-      }
-    }
-  },
-  "$defs": {
-    "StringArray": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "String Array Type",
-      "description": "Simple reusable array of strings",
-      "type": "array",
-      "minItems": 0,
-      "items": {
-        "type": "string"
-      }
-    },
-    "DetailEMPA": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "EMPA Instrument Detail",
-      "description": "Electron Microprobe Analysis with spectrometer and signal details.",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "anyOf": [
-            {
-              "const": "ada:EMPAImage"
-            },
-            {
-              "const": "ada:EMPAQEATabular"
-            },
-            {
-              "const": "ada:EMPAImageCollection"
-            }
-          ]
-        },
-        "spectrometersUsed": {
-          "type": "string",
-          "description": "Spectrometers used in analysis"
-        },
-        "signalUsed": {
-          "type": "string"
-        }
-      }
-    },
-    "SpatialRegistration": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "Spatial Registration Type",
-      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-      "type": "object",
-      "properties": {
-        "basemap": {
-          "type": "string",
-          "description": "link to appropriate basemap image map"
-        },
-        "originX": {
-          "type": "number"
-        },
-        "originY": {
-          "type": "number"
-        },
-        "originZ": {
-          "type": "number"
-        },
-        "coordDef": {
-          "type": "string",
-          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-        },
-        "coordUnits": {
-          "type": "string"
-        },
-        "pixelUnits": {
-          "type": "string"
-        },
-        "pixelScaleX": {
-          "type": "number"
-        },
-        "pixelScaleY": {
-          "type": "number"
-        },
-        "originLocation": {
-          "type": "string",
-          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-        }
-      },
-      "required": [
-        "originX",
-        "originY",
-        "pixelScaleX",
-        "pixelScaleY",
-        "pixelUnits",
-        "originLocation",
-        "coordDef"
-      ]
-    },
-    "PhysicalMapping": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "Physical Mapping Type",
-      "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
-      "type": "object",
-      "properties": {
-        "cdi:index": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Non-negative integer that orders the fields in the data structure (column number)."
-        },
-        "cdi:format": {
-          "type": "string",
-          "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
-        },
-        "cdi:physicalDataType": {
-          "type": "string"
-        },
-        "cdi:length": {
-          "type": "integer",
-          "description": "The column width if the tabular text is fixed width."
-        },
-        "cdi:nullSequence": {
-          "type": "string",
-          "description": "The value of this property becomes the null annotation for the described column."
-        },
-        "cdi:defaultValue": {
-          "type": "string",
-          "description": "A default string indicating the value to substitute for an empty string."
-        },
-        "cdi:scale": {
-          "type": "integer"
-        },
-        "cdi:decimalPositions": {
-          "type": "integer"
-        },
-        "cdi:minimumLength": {
-          "type": "integer"
-        },
-        "cdi:maximumLength": {
-          "type": "integer"
-        },
-        "cdi:isRequired": {
-          "type": "boolean",
-          "default": false
-        },
-        "cdi:formats_InstanceVariable": {
-          "type": "object",
-          "description": "Reference to a variable defined in schema:variableMeasured.",
-          "properties": {
-            "@id": {
-              "type": "string",
-              "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
-            }
-          }
-        },
-        "cdi:defaultDecimalSeparator": {
-          "type": "string"
-        },
-        "cdi:defaultDigitalGroupSeparator": {
-          "type": "string"
-        },
-        "cdi:displayLabel": {
-          "type": "string"
         }
       }
     }
