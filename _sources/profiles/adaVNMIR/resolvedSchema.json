@@ -458,7 +458,7 @@
                         },
                         "minItems": 2,
                         "contains": {
-                          "const": "ada:tabularData"
+                          "const": "cdi:TabularTextDataSet"
                         }
                       },
                       "componentType": {
@@ -783,6 +783,68 @@
                           }
                         ]
                       },
+                      "xCoordCol": {
+                        "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                        "type": "string"
+                      },
+                      "yCoordCol": {
+                        "type": "string"
+                      },
+                      "zCoordCol": {
+                        "type": "string"
+                      },
+                      "coordUnits": {
+                        "type": "string"
+                      },
+                      "spatialRegistration": {
+                        "title": "Spatial Registration Type",
+                        "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                        "type": "object",
+                        "properties": {
+                          "basemap": {
+                            "type": "string",
+                            "description": "link to appropriate basemap image map"
+                          },
+                          "originX": {
+                            "type": "number"
+                          },
+                          "originY": {
+                            "type": "number"
+                          },
+                          "originZ": {
+                            "type": "number"
+                          },
+                          "coordDef": {
+                            "type": "string",
+                            "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                          },
+                          "coordUnits": {
+                            "type": "string"
+                          },
+                          "pixelUnits": {
+                            "type": "string"
+                          },
+                          "pixelScaleX": {
+                            "type": "number"
+                          },
+                          "pixelScaleY": {
+                            "type": "number"
+                          },
+                          "originLocation": {
+                            "type": "string",
+                            "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                          }
+                        },
+                        "required": [
+                          "originX",
+                          "originY",
+                          "pixelScaleX",
+                          "pixelScaleY",
+                          "pixelUnits",
+                          "originLocation",
+                          "coordDef"
+                        ]
+                      },
                       "cdi:arrayBase": {
                         "type": "integer"
                       },
@@ -900,15 +962,6 @@
                                   "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                 }
                               }
-                            },
-                            "cdi:defaultDecimalSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:defaultDigitalGroupSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:displayLabel": {
-                              "type": "string"
                             }
                           }
                         }
@@ -918,70 +971,11 @@
                       },
                       "countColumns": {
                         "type": "integer"
-                      },
-                      "xCoordCol": {
-                        "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                        "type": "string"
-                      },
-                      "yCoordCol": {
-                        "type": "string"
-                      },
-                      "zCoordCol": {
-                        "type": "string"
-                      },
-                      "coordUnits": {
-                        "type": "string"
-                      },
-                      "spatialRegistration": {
-                        "title": "Spatial Registration Type",
-                        "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                        "type": "object",
-                        "properties": {
-                          "basemap": {
-                            "type": "string",
-                            "description": "link to appropriate basemap image map"
-                          },
-                          "originX": {
-                            "type": "number"
-                          },
-                          "originY": {
-                            "type": "number"
-                          },
-                          "originZ": {
-                            "type": "number"
-                          },
-                          "coordDef": {
-                            "type": "string",
-                            "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                          },
-                          "coordUnits": {
-                            "type": "string"
-                          },
-                          "pixelUnits": {
-                            "type": "string"
-                          },
-                          "pixelScaleX": {
-                            "type": "number"
-                          },
-                          "pixelScaleY": {
-                            "type": "number"
-                          },
-                          "originLocation": {
-                            "type": "string",
-                            "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                          }
-                        },
-                        "required": [
-                          "originX",
-                          "originY",
-                          "pixelScaleX",
-                          "pixelScaleY",
-                          "pixelUnits",
-                          "originLocation",
-                          "coordDef"
-                        ]
                       }
                     },
+                    "required": [
+                      "@type"
+                    ],
                     "oneOf": [
                       {
                         "properties": {
@@ -1009,10 +1003,6 @@
                           "cdi:isFixedWidth"
                         ]
                       }
-                    ],
-                    "required": [
-                      "@type",
-                      "componentType"
                     ]
                   },
                   {
@@ -1126,7 +1116,6 @@
                         "items": {
                           "type": "string"
                         },
-                        "minItems": 2,
                         "contains": {
                           "const": "cdi:StructuredDataSet"
                         }
@@ -1250,15 +1239,6 @@
                                   "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                 }
                               }
-                            },
-                            "cdi:defaultDecimalSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:defaultDigitalGroupSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:displayLabel": {
-                              "type": "string"
                             },
                             "cdi:locator": {
                               "type": "string",
@@ -1827,7 +1807,7 @@
                         },
                         "minItems": 2,
                         "contains": {
-                          "const": "ada:tabularData"
+                          "const": "cdi:TabularTextDataSet"
                         }
                       },
                       "componentType": {
@@ -2152,6 +2132,68 @@
                           }
                         ]
                       },
+                      "xCoordCol": {
+                        "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                        "type": "string"
+                      },
+                      "yCoordCol": {
+                        "type": "string"
+                      },
+                      "zCoordCol": {
+                        "type": "string"
+                      },
+                      "coordUnits": {
+                        "type": "string"
+                      },
+                      "spatialRegistration": {
+                        "title": "Spatial Registration Type",
+                        "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                        "type": "object",
+                        "properties": {
+                          "basemap": {
+                            "type": "string",
+                            "description": "link to appropriate basemap image map"
+                          },
+                          "originX": {
+                            "type": "number"
+                          },
+                          "originY": {
+                            "type": "number"
+                          },
+                          "originZ": {
+                            "type": "number"
+                          },
+                          "coordDef": {
+                            "type": "string",
+                            "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                          },
+                          "coordUnits": {
+                            "type": "string"
+                          },
+                          "pixelUnits": {
+                            "type": "string"
+                          },
+                          "pixelScaleX": {
+                            "type": "number"
+                          },
+                          "pixelScaleY": {
+                            "type": "number"
+                          },
+                          "originLocation": {
+                            "type": "string",
+                            "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                          }
+                        },
+                        "required": [
+                          "originX",
+                          "originY",
+                          "pixelScaleX",
+                          "pixelScaleY",
+                          "pixelUnits",
+                          "originLocation",
+                          "coordDef"
+                        ]
+                      },
                       "cdi:arrayBase": {
                         "type": "integer"
                       },
@@ -2269,15 +2311,6 @@
                                   "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                 }
                               }
-                            },
-                            "cdi:defaultDecimalSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:defaultDigitalGroupSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:displayLabel": {
-                              "type": "string"
                             }
                           }
                         }
@@ -2287,70 +2320,11 @@
                       },
                       "countColumns": {
                         "type": "integer"
-                      },
-                      "xCoordCol": {
-                        "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                        "type": "string"
-                      },
-                      "yCoordCol": {
-                        "type": "string"
-                      },
-                      "zCoordCol": {
-                        "type": "string"
-                      },
-                      "coordUnits": {
-                        "type": "string"
-                      },
-                      "spatialRegistration": {
-                        "title": "Spatial Registration Type",
-                        "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                        "type": "object",
-                        "properties": {
-                          "basemap": {
-                            "type": "string",
-                            "description": "link to appropriate basemap image map"
-                          },
-                          "originX": {
-                            "type": "number"
-                          },
-                          "originY": {
-                            "type": "number"
-                          },
-                          "originZ": {
-                            "type": "number"
-                          },
-                          "coordDef": {
-                            "type": "string",
-                            "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                          },
-                          "coordUnits": {
-                            "type": "string"
-                          },
-                          "pixelUnits": {
-                            "type": "string"
-                          },
-                          "pixelScaleX": {
-                            "type": "number"
-                          },
-                          "pixelScaleY": {
-                            "type": "number"
-                          },
-                          "originLocation": {
-                            "type": "string",
-                            "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                          }
-                        },
-                        "required": [
-                          "originX",
-                          "originY",
-                          "pixelScaleX",
-                          "pixelScaleY",
-                          "pixelUnits",
-                          "originLocation",
-                          "coordDef"
-                        ]
                       }
                     },
+                    "required": [
+                      "@type"
+                    ],
                     "oneOf": [
                       {
                         "properties": {
@@ -2378,10 +2352,6 @@
                           "cdi:isFixedWidth"
                         ]
                       }
-                    ],
-                    "required": [
-                      "@type",
-                      "componentType"
                     ]
                   },
                   {
@@ -2495,7 +2465,6 @@
                         "items": {
                           "type": "string"
                         },
-                        "minItems": 2,
                         "contains": {
                           "const": "cdi:StructuredDataSet"
                         }
@@ -2619,15 +2588,6 @@
                                   "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                 }
                               }
-                            },
-                            "cdi:defaultDecimalSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:defaultDigitalGroupSeparator": {
-                              "type": "string"
-                            },
-                            "cdi:displayLabel": {
-                              "type": "string"
                             },
                             "cdi:locator": {
                               "type": "string",
@@ -3239,7 +3199,7 @@
                               },
                               "minItems": 2,
                               "contains": {
-                                "const": "ada:tabularData"
+                                "const": "cdi:TabularTextDataSet"
                               }
                             },
                             "componentType": {
@@ -3564,6 +3524,68 @@
                                 }
                               ]
                             },
+                            "xCoordCol": {
+                              "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                              "type": "string"
+                            },
+                            "yCoordCol": {
+                              "type": "string"
+                            },
+                            "zCoordCol": {
+                              "type": "string"
+                            },
+                            "coordUnits": {
+                              "type": "string"
+                            },
+                            "spatialRegistration": {
+                              "title": "Spatial Registration Type",
+                              "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                              "type": "object",
+                              "properties": {
+                                "basemap": {
+                                  "type": "string",
+                                  "description": "link to appropriate basemap image map"
+                                },
+                                "originX": {
+                                  "type": "number"
+                                },
+                                "originY": {
+                                  "type": "number"
+                                },
+                                "originZ": {
+                                  "type": "number"
+                                },
+                                "coordDef": {
+                                  "type": "string",
+                                  "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                                },
+                                "coordUnits": {
+                                  "type": "string"
+                                },
+                                "pixelUnits": {
+                                  "type": "string"
+                                },
+                                "pixelScaleX": {
+                                  "type": "number"
+                                },
+                                "pixelScaleY": {
+                                  "type": "number"
+                                },
+                                "originLocation": {
+                                  "type": "string",
+                                  "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                                }
+                              },
+                              "required": [
+                                "originX",
+                                "originY",
+                                "pixelScaleX",
+                                "pixelScaleY",
+                                "pixelUnits",
+                                "originLocation",
+                                "coordDef"
+                              ]
+                            },
                             "cdi:arrayBase": {
                               "type": "integer"
                             },
@@ -3681,15 +3703,6 @@
                                         "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                       }
                                     }
-                                  },
-                                  "cdi:defaultDecimalSeparator": {
-                                    "type": "string"
-                                  },
-                                  "cdi:defaultDigitalGroupSeparator": {
-                                    "type": "string"
-                                  },
-                                  "cdi:displayLabel": {
-                                    "type": "string"
                                   }
                                 }
                               }
@@ -3699,70 +3712,11 @@
                             },
                             "countColumns": {
                               "type": "integer"
-                            },
-                            "xCoordCol": {
-                              "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                              "type": "string"
-                            },
-                            "yCoordCol": {
-                              "type": "string"
-                            },
-                            "zCoordCol": {
-                              "type": "string"
-                            },
-                            "coordUnits": {
-                              "type": "string"
-                            },
-                            "spatialRegistration": {
-                              "title": "Spatial Registration Type",
-                              "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                              "type": "object",
-                              "properties": {
-                                "basemap": {
-                                  "type": "string",
-                                  "description": "link to appropriate basemap image map"
-                                },
-                                "originX": {
-                                  "type": "number"
-                                },
-                                "originY": {
-                                  "type": "number"
-                                },
-                                "originZ": {
-                                  "type": "number"
-                                },
-                                "coordDef": {
-                                  "type": "string",
-                                  "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                                },
-                                "coordUnits": {
-                                  "type": "string"
-                                },
-                                "pixelUnits": {
-                                  "type": "string"
-                                },
-                                "pixelScaleX": {
-                                  "type": "number"
-                                },
-                                "pixelScaleY": {
-                                  "type": "number"
-                                },
-                                "originLocation": {
-                                  "type": "string",
-                                  "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                                }
-                              },
-                              "required": [
-                                "originX",
-                                "originY",
-                                "pixelScaleX",
-                                "pixelScaleY",
-                                "pixelUnits",
-                                "originLocation",
-                                "coordDef"
-                              ]
                             }
                           },
+                          "required": [
+                            "@type"
+                          ],
                           "oneOf": [
                             {
                               "properties": {
@@ -3790,10 +3744,6 @@
                                 "cdi:isFixedWidth"
                               ]
                             }
-                          ],
-                          "required": [
-                            "@type",
-                            "componentType"
                           ]
                         },
                         {
@@ -3907,7 +3857,6 @@
                               "items": {
                                 "type": "string"
                               },
-                              "minItems": 2,
                               "contains": {
                                 "const": "cdi:StructuredDataSet"
                               }
@@ -4031,15 +3980,6 @@
                                         "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                       }
                                     }
-                                  },
-                                  "cdi:defaultDecimalSeparator": {
-                                    "type": "string"
-                                  },
-                                  "cdi:defaultDigitalGroupSeparator": {
-                                    "type": "string"
-                                  },
-                                  "cdi:displayLabel": {
-                                    "type": "string"
                                   },
                                   "cdi:locator": {
                                     "type": "string",
@@ -5177,7 +5117,7 @@
                                 },
                                 "minItems": 2,
                                 "contains": {
-                                  "const": "ada:tabularData"
+                                  "const": "cdi:TabularTextDataSet"
                                 }
                               },
                               "componentType": {
@@ -5502,6 +5442,68 @@
                                   }
                                 ]
                               },
+                              "xCoordCol": {
+                                "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                                "type": "string"
+                              },
+                              "yCoordCol": {
+                                "type": "string"
+                              },
+                              "zCoordCol": {
+                                "type": "string"
+                              },
+                              "coordUnits": {
+                                "type": "string"
+                              },
+                              "spatialRegistration": {
+                                "title": "Spatial Registration Type",
+                                "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                                "type": "object",
+                                "properties": {
+                                  "basemap": {
+                                    "type": "string",
+                                    "description": "link to appropriate basemap image map"
+                                  },
+                                  "originX": {
+                                    "type": "number"
+                                  },
+                                  "originY": {
+                                    "type": "number"
+                                  },
+                                  "originZ": {
+                                    "type": "number"
+                                  },
+                                  "coordDef": {
+                                    "type": "string",
+                                    "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                                  },
+                                  "coordUnits": {
+                                    "type": "string"
+                                  },
+                                  "pixelUnits": {
+                                    "type": "string"
+                                  },
+                                  "pixelScaleX": {
+                                    "type": "number"
+                                  },
+                                  "pixelScaleY": {
+                                    "type": "number"
+                                  },
+                                  "originLocation": {
+                                    "type": "string",
+                                    "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                                  }
+                                },
+                                "required": [
+                                  "originX",
+                                  "originY",
+                                  "pixelScaleX",
+                                  "pixelScaleY",
+                                  "pixelUnits",
+                                  "originLocation",
+                                  "coordDef"
+                                ]
+                              },
                               "cdi:arrayBase": {
                                 "type": "integer"
                               },
@@ -5619,15 +5621,6 @@
                                           "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                         }
                                       }
-                                    },
-                                    "cdi:defaultDecimalSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:defaultDigitalGroupSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:displayLabel": {
-                                      "type": "string"
                                     }
                                   }
                                 }
@@ -5637,70 +5630,11 @@
                               },
                               "countColumns": {
                                 "type": "integer"
-                              },
-                              "xCoordCol": {
-                                "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                                "type": "string"
-                              },
-                              "yCoordCol": {
-                                "type": "string"
-                              },
-                              "zCoordCol": {
-                                "type": "string"
-                              },
-                              "coordUnits": {
-                                "type": "string"
-                              },
-                              "spatialRegistration": {
-                                "title": "Spatial Registration Type",
-                                "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                                "type": "object",
-                                "properties": {
-                                  "basemap": {
-                                    "type": "string",
-                                    "description": "link to appropriate basemap image map"
-                                  },
-                                  "originX": {
-                                    "type": "number"
-                                  },
-                                  "originY": {
-                                    "type": "number"
-                                  },
-                                  "originZ": {
-                                    "type": "number"
-                                  },
-                                  "coordDef": {
-                                    "type": "string",
-                                    "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                                  },
-                                  "coordUnits": {
-                                    "type": "string"
-                                  },
-                                  "pixelUnits": {
-                                    "type": "string"
-                                  },
-                                  "pixelScaleX": {
-                                    "type": "number"
-                                  },
-                                  "pixelScaleY": {
-                                    "type": "number"
-                                  },
-                                  "originLocation": {
-                                    "type": "string",
-                                    "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                                  }
-                                },
-                                "required": [
-                                  "originX",
-                                  "originY",
-                                  "pixelScaleX",
-                                  "pixelScaleY",
-                                  "pixelUnits",
-                                  "originLocation",
-                                  "coordDef"
-                                ]
                               }
                             },
+                            "required": [
+                              "@type"
+                            ],
                             "oneOf": [
                               {
                                 "properties": {
@@ -5728,10 +5662,6 @@
                                   "cdi:isFixedWidth"
                                 ]
                               }
-                            ],
-                            "required": [
-                              "@type",
-                              "componentType"
                             ]
                           },
                           {
@@ -5845,7 +5775,6 @@
                                 "items": {
                                   "type": "string"
                                 },
-                                "minItems": 2,
                                 "contains": {
                                   "const": "cdi:StructuredDataSet"
                                 }
@@ -5969,15 +5898,6 @@
                                           "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                         }
                                       }
-                                    },
-                                    "cdi:defaultDecimalSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:defaultDigitalGroupSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:displayLabel": {
-                                      "type": "string"
                                     },
                                     "cdi:locator": {
                                       "type": "string",
@@ -6546,7 +6466,7 @@
                                 },
                                 "minItems": 2,
                                 "contains": {
-                                  "const": "ada:tabularData"
+                                  "const": "cdi:TabularTextDataSet"
                                 }
                               },
                               "componentType": {
@@ -6871,6 +6791,68 @@
                                   }
                                 ]
                               },
+                              "xCoordCol": {
+                                "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                                "type": "string"
+                              },
+                              "yCoordCol": {
+                                "type": "string"
+                              },
+                              "zCoordCol": {
+                                "type": "string"
+                              },
+                              "coordUnits": {
+                                "type": "string"
+                              },
+                              "spatialRegistration": {
+                                "title": "Spatial Registration Type",
+                                "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                                "type": "object",
+                                "properties": {
+                                  "basemap": {
+                                    "type": "string",
+                                    "description": "link to appropriate basemap image map"
+                                  },
+                                  "originX": {
+                                    "type": "number"
+                                  },
+                                  "originY": {
+                                    "type": "number"
+                                  },
+                                  "originZ": {
+                                    "type": "number"
+                                  },
+                                  "coordDef": {
+                                    "type": "string",
+                                    "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                                  },
+                                  "coordUnits": {
+                                    "type": "string"
+                                  },
+                                  "pixelUnits": {
+                                    "type": "string"
+                                  },
+                                  "pixelScaleX": {
+                                    "type": "number"
+                                  },
+                                  "pixelScaleY": {
+                                    "type": "number"
+                                  },
+                                  "originLocation": {
+                                    "type": "string",
+                                    "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                                  }
+                                },
+                                "required": [
+                                  "originX",
+                                  "originY",
+                                  "pixelScaleX",
+                                  "pixelScaleY",
+                                  "pixelUnits",
+                                  "originLocation",
+                                  "coordDef"
+                                ]
+                              },
                               "cdi:arrayBase": {
                                 "type": "integer"
                               },
@@ -6988,15 +6970,6 @@
                                           "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                         }
                                       }
-                                    },
-                                    "cdi:defaultDecimalSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:defaultDigitalGroupSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:displayLabel": {
-                                      "type": "string"
                                     }
                                   }
                                 }
@@ -7006,70 +6979,11 @@
                               },
                               "countColumns": {
                                 "type": "integer"
-                              },
-                              "xCoordCol": {
-                                "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                                "type": "string"
-                              },
-                              "yCoordCol": {
-                                "type": "string"
-                              },
-                              "zCoordCol": {
-                                "type": "string"
-                              },
-                              "coordUnits": {
-                                "type": "string"
-                              },
-                              "spatialRegistration": {
-                                "title": "Spatial Registration Type",
-                                "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                                "type": "object",
-                                "properties": {
-                                  "basemap": {
-                                    "type": "string",
-                                    "description": "link to appropriate basemap image map"
-                                  },
-                                  "originX": {
-                                    "type": "number"
-                                  },
-                                  "originY": {
-                                    "type": "number"
-                                  },
-                                  "originZ": {
-                                    "type": "number"
-                                  },
-                                  "coordDef": {
-                                    "type": "string",
-                                    "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                                  },
-                                  "coordUnits": {
-                                    "type": "string"
-                                  },
-                                  "pixelUnits": {
-                                    "type": "string"
-                                  },
-                                  "pixelScaleX": {
-                                    "type": "number"
-                                  },
-                                  "pixelScaleY": {
-                                    "type": "number"
-                                  },
-                                  "originLocation": {
-                                    "type": "string",
-                                    "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                                  }
-                                },
-                                "required": [
-                                  "originX",
-                                  "originY",
-                                  "pixelScaleX",
-                                  "pixelScaleY",
-                                  "pixelUnits",
-                                  "originLocation",
-                                  "coordDef"
-                                ]
                               }
                             },
+                            "required": [
+                              "@type"
+                            ],
                             "oneOf": [
                               {
                                 "properties": {
@@ -7097,10 +7011,6 @@
                                   "cdi:isFixedWidth"
                                 ]
                               }
-                            ],
-                            "required": [
-                              "@type",
-                              "componentType"
                             ]
                           },
                           {
@@ -7214,7 +7124,6 @@
                                 "items": {
                                   "type": "string"
                                 },
-                                "minItems": 2,
                                 "contains": {
                                   "const": "cdi:StructuredDataSet"
                                 }
@@ -7338,15 +7247,6 @@
                                           "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                         }
                                       }
-                                    },
-                                    "cdi:defaultDecimalSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:defaultDigitalGroupSeparator": {
-                                      "type": "string"
-                                    },
-                                    "cdi:displayLabel": {
-                                      "type": "string"
                                     },
                                     "cdi:locator": {
                                       "type": "string",
@@ -7917,7 +7817,7 @@
                                       },
                                       "minItems": 2,
                                       "contains": {
-                                        "const": "ada:tabularData"
+                                        "const": "cdi:TabularTextDataSet"
                                       }
                                     },
                                     "componentType": {
@@ -8242,6 +8142,68 @@
                                         }
                                       ]
                                     },
+                                    "xCoordCol": {
+                                      "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                                      "type": "string"
+                                    },
+                                    "yCoordCol": {
+                                      "type": "string"
+                                    },
+                                    "zCoordCol": {
+                                      "type": "string"
+                                    },
+                                    "coordUnits": {
+                                      "type": "string"
+                                    },
+                                    "spatialRegistration": {
+                                      "title": "Spatial Registration Type",
+                                      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                                      "type": "object",
+                                      "properties": {
+                                        "basemap": {
+                                          "type": "string",
+                                          "description": "link to appropriate basemap image map"
+                                        },
+                                        "originX": {
+                                          "type": "number"
+                                        },
+                                        "originY": {
+                                          "type": "number"
+                                        },
+                                        "originZ": {
+                                          "type": "number"
+                                        },
+                                        "coordDef": {
+                                          "type": "string",
+                                          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                                        },
+                                        "coordUnits": {
+                                          "type": "string"
+                                        },
+                                        "pixelUnits": {
+                                          "type": "string"
+                                        },
+                                        "pixelScaleX": {
+                                          "type": "number"
+                                        },
+                                        "pixelScaleY": {
+                                          "type": "number"
+                                        },
+                                        "originLocation": {
+                                          "type": "string",
+                                          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                                        }
+                                      },
+                                      "required": [
+                                        "originX",
+                                        "originY",
+                                        "pixelScaleX",
+                                        "pixelScaleY",
+                                        "pixelUnits",
+                                        "originLocation",
+                                        "coordDef"
+                                      ]
+                                    },
                                     "cdi:arrayBase": {
                                       "type": "integer"
                                     },
@@ -8359,15 +8321,6 @@
                                                 "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                               }
                                             }
-                                          },
-                                          "cdi:defaultDecimalSeparator": {
-                                            "type": "string"
-                                          },
-                                          "cdi:defaultDigitalGroupSeparator": {
-                                            "type": "string"
-                                          },
-                                          "cdi:displayLabel": {
-                                            "type": "string"
                                           }
                                         }
                                       }
@@ -8377,70 +8330,11 @@
                                     },
                                     "countColumns": {
                                       "type": "integer"
-                                    },
-                                    "xCoordCol": {
-                                      "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                                      "type": "string"
-                                    },
-                                    "yCoordCol": {
-                                      "type": "string"
-                                    },
-                                    "zCoordCol": {
-                                      "type": "string"
-                                    },
-                                    "coordUnits": {
-                                      "type": "string"
-                                    },
-                                    "spatialRegistration": {
-                                      "title": "Spatial Registration Type",
-                                      "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                                      "type": "object",
-                                      "properties": {
-                                        "basemap": {
-                                          "type": "string",
-                                          "description": "link to appropriate basemap image map"
-                                        },
-                                        "originX": {
-                                          "type": "number"
-                                        },
-                                        "originY": {
-                                          "type": "number"
-                                        },
-                                        "originZ": {
-                                          "type": "number"
-                                        },
-                                        "coordDef": {
-                                          "type": "string",
-                                          "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                                        },
-                                        "coordUnits": {
-                                          "type": "string"
-                                        },
-                                        "pixelUnits": {
-                                          "type": "string"
-                                        },
-                                        "pixelScaleX": {
-                                          "type": "number"
-                                        },
-                                        "pixelScaleY": {
-                                          "type": "number"
-                                        },
-                                        "originLocation": {
-                                          "type": "string",
-                                          "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                                        }
-                                      },
-                                      "required": [
-                                        "originX",
-                                        "originY",
-                                        "pixelScaleX",
-                                        "pixelScaleY",
-                                        "pixelUnits",
-                                        "originLocation",
-                                        "coordDef"
-                                      ]
                                     }
                                   },
+                                  "required": [
+                                    "@type"
+                                  ],
                                   "oneOf": [
                                     {
                                       "properties": {
@@ -8468,10 +8362,6 @@
                                         "cdi:isFixedWidth"
                                       ]
                                     }
-                                  ],
-                                  "required": [
-                                    "@type",
-                                    "componentType"
                                   ]
                                 },
                                 {
@@ -8585,7 +8475,6 @@
                                       "items": {
                                         "type": "string"
                                       },
-                                      "minItems": 2,
                                       "contains": {
                                         "const": "cdi:StructuredDataSet"
                                       }
@@ -8709,15 +8598,6 @@
                                                 "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                               }
                                             }
-                                          },
-                                          "cdi:defaultDecimalSeparator": {
-                                            "type": "string"
-                                          },
-                                          "cdi:defaultDigitalGroupSeparator": {
-                                            "type": "string"
-                                          },
-                                          "cdi:displayLabel": {
-                                            "type": "string"
                                           },
                                           "cdi:locator": {
                                             "type": "string",
@@ -9018,7 +8898,7 @@
                           },
                           "minItems": 2,
                           "contains": {
-                            "const": "ada:tabularData"
+                            "const": "cdi:TabularTextDataSet"
                           }
                         },
                         "componentType": {
@@ -9343,6 +9223,68 @@
                             }
                           ]
                         },
+                        "xCoordCol": {
+                          "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
+                          "type": "string"
+                        },
+                        "yCoordCol": {
+                          "type": "string"
+                        },
+                        "zCoordCol": {
+                          "type": "string"
+                        },
+                        "coordUnits": {
+                          "type": "string"
+                        },
+                        "spatialRegistration": {
+                          "title": "Spatial Registration Type",
+                          "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
+                          "type": "object",
+                          "properties": {
+                            "basemap": {
+                              "type": "string",
+                              "description": "link to appropriate basemap image map"
+                            },
+                            "originX": {
+                              "type": "number"
+                            },
+                            "originY": {
+                              "type": "number"
+                            },
+                            "originZ": {
+                              "type": "number"
+                            },
+                            "coordDef": {
+                              "type": "string",
+                              "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
+                            },
+                            "coordUnits": {
+                              "type": "string"
+                            },
+                            "pixelUnits": {
+                              "type": "string"
+                            },
+                            "pixelScaleX": {
+                              "type": "number"
+                            },
+                            "pixelScaleY": {
+                              "type": "number"
+                            },
+                            "originLocation": {
+                              "type": "string",
+                              "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
+                            }
+                          },
+                          "required": [
+                            "originX",
+                            "originY",
+                            "pixelScaleX",
+                            "pixelScaleY",
+                            "pixelUnits",
+                            "originLocation",
+                            "coordDef"
+                          ]
+                        },
                         "cdi:arrayBase": {
                           "type": "integer"
                         },
@@ -9460,15 +9402,6 @@
                                     "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                   }
                                 }
-                              },
-                              "cdi:defaultDecimalSeparator": {
-                                "type": "string"
-                              },
-                              "cdi:defaultDigitalGroupSeparator": {
-                                "type": "string"
-                              },
-                              "cdi:displayLabel": {
-                                "type": "string"
                               }
                             }
                           }
@@ -9478,70 +9411,11 @@
                         },
                         "countColumns": {
                           "type": "integer"
-                        },
-                        "xCoordCol": {
-                          "description": "The column names are redundant, they are lists in the hasPhysicalMapping array. Include here for convenience.",
-                          "type": "string"
-                        },
-                        "yCoordCol": {
-                          "type": "string"
-                        },
-                        "zCoordCol": {
-                          "type": "string"
-                        },
-                        "coordUnits": {
-                          "type": "string"
-                        },
-                        "spatialRegistration": {
-                          "title": "Spatial Registration Type",
-                          "description": "Defines pixel coordinate system registration including origin coordinates, pixel scales, and coordinate definition type for spatially registered images and maps.",
-                          "type": "object",
-                          "properties": {
-                            "basemap": {
-                              "type": "string",
-                              "description": "link to appropriate basemap image map"
-                            },
-                            "originX": {
-                              "type": "number"
-                            },
-                            "originY": {
-                              "type": "number"
-                            },
-                            "originZ": {
-                              "type": "number"
-                            },
-                            "coordDef": {
-                              "type": "string",
-                              "description": "Whether coordinates are stage-defined or pixel-defined. If pixel-defined, are coordinates from stage, upperleftPixel, or centerPixel."
-                            },
-                            "coordUnits": {
-                              "type": "string"
-                            },
-                            "pixelUnits": {
-                              "type": "string"
-                            },
-                            "pixelScaleX": {
-                              "type": "number"
-                            },
-                            "pixelScaleY": {
-                              "type": "number"
-                            },
-                            "originLocation": {
-                              "type": "string",
-                              "description": "The location of the origin pixel of an image. Range: upperLeft, upperRight, lowerLeft, lowerRight, center"
-                            }
-                          },
-                          "required": [
-                            "originX",
-                            "originY",
-                            "pixelScaleX",
-                            "pixelScaleY",
-                            "pixelUnits",
-                            "originLocation",
-                            "coordDef"
-                          ]
                         }
                       },
+                      "required": [
+                        "@type"
+                      ],
                       "oneOf": [
                         {
                           "properties": {
@@ -9569,10 +9443,6 @@
                             "cdi:isFixedWidth"
                           ]
                         }
-                      ],
-                      "required": [
-                        "@type",
-                        "componentType"
                       ]
                     },
                     {
@@ -9737,7 +9607,6 @@
                           "items": {
                             "type": "string"
                           },
-                          "minItems": 2,
                           "contains": {
                             "const": "cdi:StructuredDataSet"
                           }
@@ -9861,15 +9730,6 @@
                                     "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
                                   }
                                 }
-                              },
-                              "cdi:defaultDecimalSeparator": {
-                                "type": "string"
-                              },
-                              "cdi:defaultDigitalGroupSeparator": {
-                                "type": "string"
-                              },
-                              "cdi:displayLabel": {
-                                "type": "string"
                               },
                               "cdi:locator": {
                                 "type": "string",
@@ -11705,8 +11565,7 @@
           },
           "schema:name": {
             "description": "The name as it typically appears in a dataset",
-            "type": "string",
-            "minLength": 5
+            "type": "string"
           },
           "schema:alternateName": {
             "type": "array",
