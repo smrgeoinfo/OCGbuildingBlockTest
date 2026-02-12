@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Astromat Archive Product Metadata",
-  "description": "Schema for JSON metadata documenting products in Astromat Data Archive (ADA). Each project consists of one or more data files and 0 to many supplemental files. Each file MUST have an associated YAML metadata file, with the same name, but '.yaml' as the file extension. Version 3.0 aligned with CDIF 2026 schema for DDI-CDI variable types and CSVW tabular data properties.",
+  "title": "Optional properties for CDIF discovery metadata schema, with schema: prefixes",
+  "description": "Building block specifies properties for CDIF schama.org discovery record",
   "type": "object",
   "properties": {
     "@id": {
@@ -9,11 +9,9 @@
       "description": "The URI for the resource should be the @id value for the root of the JSON instance document tree. Note that this identifier can be interpreted to identify the resource that is the subject of this metadata record, or the JSON-LD object that is the digital object containing the metadata information."
     },
     "@type": {
-      "description": "a schema.org Class that specifies the expected information content for the metadata record. For CDIF, 'schema:Dataset' is required, but other possible values (e.g. CreativeWork, SoftwareApplication, Product, WebAPI) are sometimes included to enable the schema.org properties used to describe the resource without schema.org validation errors.",
       "type": "array",
       "items": {
-        "type": "string",
-        "default": "schema:Dataset"
+        "type": "string"
       }
     },
     "schema:name": {
@@ -86,8 +84,8 @@
       "description": "Web Location of a page describing the dataset (landing page), typically providing links or instructions to get the actual resource content; analogous to dcat:accessURL. If a direct link is available to get the data, put in distribution/contentUrl"
     },
     "schema:distribution": {
-      "description": "Access options for the dataset. Each distribution item is expected to be a single file or an archive containing multiple files described in hasPart.",
       "type": "array",
+      "description": "Access options for the dataset. Each distribution item is expected to be a single file or an archive containing multiple files described in hasPart.",
       "items": {
         "type": "object",
         "description": "Distribution — Data Download or Web API",
@@ -666,6 +664,9 @@
             "type": "array",
             "description": "Array describing the files in the zip archive.",
             "items": {
+              "title": "Files Type",
+              "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+              "type": "object",
               "properties": {
                 "@id": {
                   "type": "string"
@@ -1198,10 +1199,7 @@
                     }
                   }
                 }
-              },
-              "title": "Files Type",
-              "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-              "type": "object"
+              }
             }
           },
           "schema:potentialAction": {
@@ -1445,6 +1443,9 @@
             "description": "The file(s) that result from invoking this API. Reuses the same single-file or archive-with-hasPart structure.",
             "oneOf": [
               {
+                "title": "Files Type",
+                "description": "Single file result.",
+                "type": "object",
                 "properties": {
                   "@id": {
                     "type": "string"
@@ -1980,12 +1981,12 @@
                       }
                     }
                   }
-                },
-                "title": "Files Type",
-                "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                "type": "object"
+                }
               },
               {
+                "title": "Files Type",
+                "description": "Archive file result with parts.",
+                "type": "object",
                 "properties": {
                   "@id": {
                     "type": "string"
@@ -2525,6 +2526,9 @@
                     "type": "array",
                     "description": "Files within the archive result.",
                     "items": {
+                      "title": "Files Type",
+                      "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+                      "type": "object",
                       "properties": {
                         "@id": {
                           "type": "string"
@@ -3057,16 +3061,10 @@
                             }
                           }
                         }
-                      },
-                      "title": "Files Type",
-                      "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                      "type": "object"
+                      }
                     }
                   }
-                },
-                "title": "Files Type",
-                "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                "type": "object"
+                }
               }
             ]
           }
@@ -3089,8 +3087,7 @@
           "type": "object",
           "properties": {
             "@id": {
-              "type": "string",
-              "description": "this must be the @id value of the node containing the resource description metadata"
+              "type": "string"
             }
           }
         },
@@ -3104,8 +3101,7 @@
                 "description": "URI for specifications that this metadata record conforms to. Minimally should specify URI for CDIF discovery profile."
               }
             }
-          },
-          "description": "uri for specifications that this metadata record conforms to. Minimimally should specify uri for CDIF discovery profile.  Implement as $def to facilitate extension for profiles that need to add conformance statements"
+          }
         },
         "schema:maintainer": {
           "type": "object",
@@ -3133,11 +3129,9 @@
         },
         "schema:includedInDataCatalog": {
           "type": "object",
-          "description": "identify the data collection or repository that contains the described dataset. The value is expected to be a schema:DataCatalog",
           "properties": {
             "@id": {
-              "type": "string",
-              "description": "identifier for the containing catalog or repository; example data at https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#catalog puts identifier here"
+              "type": "string"
             },
             "@type": {
               "type": "string",
@@ -3147,12 +3141,9 @@
               "type": "string"
             },
             "schema:url": {
-              "type": "string",
-              "format": "uri",
-              "description": "locator to access a landing page for the collection or catalog"
+              "type": "string"
             },
             "schema:identifier": {
-              "description": "identifier for the collection or catalog; use identifier_type to provide information on identifier scheme and context for identifier",
               "type": "object",
               "properties": {
                 "@type": {
@@ -3160,22 +3151,15 @@
                   "default": "schema:PropertyValue"
                 },
                 "schema:propertyID": {
-                  "type": "string",
-                  "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                  "type": "string"
                 },
                 "schema:value": {
-                  "type": "string",
-                  "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                  "type": "string"
                 },
                 "schema:url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                  "type": "string"
                 }
-              },
-              "required": [
-                "@type"
-              ]
+              }
             }
           }
         }
@@ -3192,11 +3176,10 @@
       "description": "A short summary describing a dataset. This text will be indexed by search applications, so the more information here, the better."
     },
     "schema:additionalType": {
-      "description": "Should have the ada product type and 'ada:DataDeliveryPackage'",
       "type": "array",
+      "description": "Should have the ada product type and 'ada:DataDeliveryPackage'",
       "items": {
-        "type": "string",
-        "description": "Additional type URI or label"
+        "type": "string"
       }
     },
     "schema:sameAs": {
@@ -3233,28 +3216,7 @@
             "default": "schema:LinkRole"
           },
           "schema:linkRelationship": {
-            "type": "string",
-            "description": "How the linked resource is related"
-          },
-          "target": {
-            "type": "object",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:EntryPoint"
-              },
-              "schema:encodingFormat": {
-                "type": "string",
-                "description": "registered MIME types are expected"
-              },
-              "schema:name": {
-                "type": "string"
-              },
-              "schema:url": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
+            "type": "string"
           },
           "schema:target": {
             "type": "object",
@@ -3419,7 +3381,6 @@
     "schema:funding": {
       "type": "array",
       "items": {
-        "description": "Funding acknowledgement properties, profile of schema.org/MonetaryGrant",
         "type": "object",
         "properties": {
           "@type": {
@@ -3427,34 +3388,8 @@
             "default": "schema:MonetaryGrant"
           },
           "schema:identifier": {
-            "description": "String that identifies a particular grant",
             "type": "string",
-            "properties": {
-              "@type": {
-                "type": "string",
-                "default": "schema:PropertyValue"
-              },
-              "schema:propertyID": {
-                "type": "string",
-                "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-              },
-              "schema:value": {
-                "type": "string",
-                "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-              },
-              "schema:url": {
-                "type": "string",
-                "format": "uri",
-                "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-              }
-            },
-            "required": [
-              "@type"
-            ]
-          },
-          "schema:description": {
-            "type": "string",
-            "description": "description of the funding or grant"
+            "description": "String that identifies a particular grant"
           },
           "schema:name": {
             "type": "string",
@@ -3475,41 +3410,36 @@
               "schema:name"
             ]
           }
-        },
-        "required": [
-          "schema:funder"
-        ]
+        }
       }
     },
     "schema:variableMeasured": {
       "description": "What does the dataset measure? Define the variables here at the conceptual level; the physical implementation details are in the data structure. Requires dual typing with schema:PropertyValue and cdi:InstanceVariable per CDIF 2026.",
       "type": "array",
       "items": {
-        "description": "CDIF schema.org implemenation of PropertyValue to use as values for variableMeasured",
         "type": "object",
         "properties": {
+          "@id": {
+            "type": "string",
+            "description": "Identifier for this variable, used to link from physical mappings in distributions."
+          },
           "@type": {
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
-                "schema:PropertyValue"
+                "schema:PropertyValue",
+                "cdi:InstanceVariable"
               ]
             }
           },
-          "@id": {
-            "type": "string",
-            "description": "Identifier for this variable, used to link from physical mappings in distributions."
-          },
-          "schema:name": {
-            "type": "string",
-            "description": "The name as it typically appears in a dataset",
-            "minLength": 5
-          },
           "schema:description": {
             "type": "string",
-            "default": "missing",
             "minLength": 10
+          },
+          "schema:name": {
+            "description": "The name as it typically appears in a dataset",
+            "type": "string"
           },
           "schema:alternateName": {
             "type": "array",
@@ -3519,6 +3449,7 @@
             }
           },
           "schema:propertyID": {
+            "description": "Ideally a resolvable URI for a property concept",
             "type": "array",
             "items": {
               "type": "object",
@@ -3540,8 +3471,7 @@
                   "type": "string"
                 }
               }
-            },
-            "description": "Ideally a resolvable URI for a property concept"
+            }
           },
           "schema:measurementTechnique": {
             "type": "object",
@@ -3559,24 +3489,20 @@
             ]
           },
           "schema:unitText": {
-            "type": "string",
-            "description": "A string that identifies a unit of measurement that applies to all values for this variable."
+            "type": "string"
           },
           "schema:unitCode": {
             "type": "string"
           },
           "schema:minValue": {
-            "type": "number",
-            "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
+            "type": "number"
           },
           "schema:maxValue": {
-            "type": "number",
-            "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
+            "type": "number"
           },
           "schema:url": {
             "type": "string",
-            "format": "uri",
-            "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
+            "format": "uri"
           },
           "cdi:intendedDataType": {
             "type": "string"
@@ -3704,39 +3630,25 @@
       }
     },
     "prov:wasGeneratedBy": {
-      "description": "Analysis events that generated this product",
       "type": "array",
+      "description": "Analysis events that generated this product",
       "items": {
-        "title": "very simple links or names of software or instruments used to generate a resource.",
         "type": "object",
         "properties": {
           "@type": {
+            "description": "Include 'prov:Activity' and 'schema:Event'",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
-                "prov:Activity"
+                "schema:Event"
               ]
-            },
-            "description": "Include 'prov:Activity' and 'schema:Event'"
+            }
           },
           "prov:used": {
             "type": "array",
+            "description": "Instruments used in the analysis",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "@id": {
-                      "type": "string",
-                      "description": "a resolvable reference to a representation of the software or instrument used"
-                    }
-                  }
-                }
-              ],
               "title": "Analysis Instrument Type",
               "description": "Analytical instrument definition combining NeXus NXinstrument base class with PROV-O Entity. Used to describe instruments involved in analysis events.",
               "type": "object",
@@ -3766,8 +3678,7 @@
                   "type": "string"
                 }
               }
-            },
-            "description": "Instruments used in the analysis"
+            }
           },
           "schema:location": {
             "title": "Analysis Laboratory Type",
@@ -3940,6 +3851,18 @@
                 },
                 "required": [
                   "@type"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "schema:name"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "schema:identifier"
+                    ]
+                  }
                 ]
               }
             ]
@@ -3977,6 +3900,18 @@
                 },
                 "required": [
                   "@type"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "schema:name"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "schema:identifier"
+                    ]
+                  }
                 ]
               }
             ]
@@ -4010,5 +3945,26 @@
         }
       }
     }
-  }
+  },
+  "required": [
+    "@id",
+    "@type",
+    "@context",
+    "schema:name",
+    "schema:identifier",
+    "schema:dateModified",
+    "schema:subjectOf"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "schema:url"
+      ]
+    },
+    {
+      "required": [
+        "schema:distribution"
+      ]
+    }
+  ]
 }

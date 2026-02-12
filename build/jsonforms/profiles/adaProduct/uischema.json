@@ -483,12 +483,61 @@
       "elements": [
         {
           "type": "Group",
+          "label": "Archive",
+          "elements": [
+            {
+              "type": "HorizontalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/schema:distribution/properties/schema:name",
+                  "label": "Archive Name"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/schema:distribution/properties/schema:encodingFormat",
+                  "label": "Encoding Format"
+                }
+              ]
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/schema:distribution/properties/schema:description",
+              "label": "Description",
+              "options": {
+                "multi": true
+              }
+            },
+            {
+              "type": "HorizontalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/schema:distribution/properties/schema:contentUrl",
+                  "label": "Download URL"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/schema:distribution/properties/schema:size/properties/schema:value",
+                  "label": "Size (bytes)"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/schema:distribution/properties/schema:size/properties/schema:unitText",
+                  "label": "Unit"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Group",
           "label": "Distribution (Files)",
           "elements": [
             {
               "type": "Control",
-              "scope": "#/properties/schema:distribution",
-              "label": "Distributions",
+              "scope": "#/properties/schema:distribution/properties/schema:hasPart",
+              "label": "Files in Archive",
               "options": {
                 "elementLabelProp": "schema:name",
                 "detail": {
@@ -504,58 +553,25 @@
                         },
                         {
                           "type": "Control",
-                          "scope": "#/properties/schema:contentURL",
-                          "label": "Download URL"
+                          "scope": "#/properties/schema:additionalType",
+                          "label": "Component Type"
                         }
                       ]
                     },
                     {
-                      "type": "Control",
-                      "scope": "#/properties/schema:description",
-                      "label": "Description"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/schema:encodingFormat",
-                      "label": "MIME Types"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/schema:hasPart",
-                      "label": "Archive Contents",
-                      "options": {
-                        "elementLabelProp": "schema:name",
-                        "detail": {
-                          "type": "VerticalLayout",
-                          "elements": [
-                            {
-                              "type": "HorizontalLayout",
-                              "elements": [
-                                {
-                                  "type": "Control",
-                                  "scope": "#/properties/schema:name",
-                                  "label": "File Name"
-                                },
-                                {
-                                  "type": "Control",
-                                  "scope": "#/properties/schema:additionalType",
-                                  "label": "Component Type"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "HorizontalLayout",
-                              "elements": [
-                                {
-                                  "type": "Control",
-                                  "scope": "#/properties/schema:encodingFormat",
-                                  "label": "MIME Type"
-                                }
-                              ]
-                            }
-                          ]
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/schema:encodingFormat",
+                          "label": "MIME Type"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/schema:size/properties/schema:value",
+                          "label": "Size (bytes)"
                         }
-                      }
+                      ]
                     }
                   ]
                 }
