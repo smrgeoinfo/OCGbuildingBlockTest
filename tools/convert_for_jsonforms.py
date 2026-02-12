@@ -26,6 +26,7 @@ Usage:
 import argparse
 import copy
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -39,6 +40,51 @@ SOURCES_DIR = REPO_ROOT / "_sources" / "jsonforms" / "profiles"
 ADA_PROFILES = ["adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR"]
 CDIF_PROFILES = ["CDIFDiscovery", "CDIFxas"]
 ALL_PROFILES = ADA_PROFILES + CDIF_PROFILES
+
+# Human-readable labels for ada: IDs used in schema:additionalType dropdowns.
+# Labels come from ADA-AnalyticalMethodsAndAttributes.xlsx.
+ADA_ADDITIONAL_TYPE_LABELS = {
+    # Product types (root-level)
+    "ada:DataDeliveryPackage": "Data Delivery Package",
+    # EMPA
+    "ada:EMPAImage": "Electron Microprobe Analysis (EMPA) Image",
+    "ada:EMPACollection": "Electron Microprobe Analysis (EMPA) Collection",
+    "ada:EMPAQEA": "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)",
+    "ada:EMPAESPC": "Electron Microprobe Analysis Energy-Dispersive Spectra Processing Code (EMPAESPC)",
+    # XRD
+    "ada:XRDTabular": "X-ray Diffraction (XRD) Tabular",
+    # ICPMS
+    "ada:HRICPMSProcessed": "High-Resolution Inductively Coupled Plasma Mass Spectrometry (HRICPMS) Processed",
+    "ada:HRICPMSRaw": "High-Resolution Inductively Coupled Plasma Mass Spectrometry (HRICPMS) Raw",
+    "ada:QICPMSProcessed": "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed",
+    "ada:QICPMSRaw": "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw",
+    "ada:MCICPMSRaw": "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw",
+    "ada:MCICPMSProcessed": "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Processed",
+    # VNMIR
+    "ada:VNMIRPoint": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point",
+    "ada:VNMIROverviewImage": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Overview Image",
+    "ada:VNMIRSpectralMap": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Spectral Map",
+    # Component types (hasPart-level)
+    "ada:EMPAImageMap": "EMPA Image Map",
+    "ada:EMPAQEATabular": "EMPA QEA Tabular",
+    "ada:EMPAImageCollection": "EMPA Image Collection",
+    "ada:EMPAESPCTabular": "EMPA ESPC Tabular",
+    "ada:EMPAESPCPlot": "EMPA ESPC Plot",
+    "ada:XRDDiffractionPattern": "XRD Diffraction Pattern",
+    "ada:XRDIndexedImage": "XRD Indexed Image",
+    "ada:QICPMSProcessedTabular": "QICPMS Processed Tabular",
+    "ada:QICPMSRawTabular": "QICPMS Raw Tabular",
+    "ada:MCICPMSTabular": "MCICPMS Tabular",
+    "ada:MCICPMSCollection": "MCICPMS Collection",
+    "ada:VNMIRSpectralPoint": "VNMIR Spectral Point",
+    "ada:VNMIRSpectraPlot": "VNMIR Spectra Plot",
+    # Common supporting types
+    "ada:analysisLocation": "Analysis Location",
+    "ada:instrumentMetadata": "Instrument Metadata",
+    "ada:methodDescription": "Method Description",
+    "ada:supplementaryImage": "Supplementary Image",
+    "ada:calibrationFile": "Calibration File",
+}
 
 # Keys to strip from schemas (metadata, not useful for forms)
 STRIP_KEYS = {"$id", "x-jsonld-prefixes", "x-jsonld-context", "x-jsonld-extra-terms"}
@@ -1133,6 +1179,63 @@ def relax_min_items(schema: Any) -> Any:
 
 
 # ---------------------------------------------------------------------------
+# additionalType enum → oneOf (human-readable dropdown labels)
+# ---------------------------------------------------------------------------
+
+def _ada_id_to_label(val: str) -> str:
+    """Fallback label: strip 'ada:' prefix and split camelCase into words."""
+    name = val.split(":", 1)[1] if ":" in val else val
+    # Insert space before each uppercase letter that follows a lowercase letter
+    return re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name)
+
+
+def _convert_at_enum_to_oneof(at_schema: dict) -> None:
+    """Flatten additionalType from array to string with oneOf labels.
+
+    CzForm's oneOf dropdown renderer requires ``oneOf`` at the schema level
+    (not nested inside ``items``).  So we promote the enum values to top-level
+    ``oneOf`` with ``const``+``title`` pairs, change ``type`` to ``"string"``,
+    and drop ``items``.  The frontend unwraps/wraps the array ↔ string value.
+    """
+    items = at_schema.get("items")
+    if not isinstance(items, dict):
+        return
+    enum_vals = items.get("enum")
+    if not enum_vals or not isinstance(enum_vals, list):
+        return
+
+    one_of = []
+    for val in enum_vals:
+        label = ADA_ADDITIONAL_TYPE_LABELS.get(val, _ada_id_to_label(val))
+        one_of.append({"const": val, "title": label})
+
+    # Flatten: array with items → string with oneOf
+    at_schema["type"] = "string"
+    at_schema["oneOf"] = one_of
+    at_schema.pop("items", None)
+    at_schema.pop("default", None)
+
+
+def convert_additional_type_to_oneof(schema: Any) -> Any:
+    """Recursively find schema:additionalType properties and convert
+    items.enum to items.oneOf with human-readable labels."""
+    if isinstance(schema, dict):
+        props = schema.get("properties")
+        if isinstance(props, dict) and "schema:additionalType" in props:
+            at = props["schema:additionalType"]
+            if isinstance(at, dict):
+                _convert_at_enum_to_oneof(at)
+
+        # Recurse into all dict values
+        for v in schema.values():
+            convert_additional_type_to_oneof(v)
+    elif isinstance(schema, list):
+        for item in schema:
+            convert_additional_type_to_oneof(item)
+    return schema
+
+
+# ---------------------------------------------------------------------------
 # Main conversion pipeline
 # ---------------------------------------------------------------------------
 
@@ -1174,6 +1277,7 @@ def convert_profile_schema(
     schema = remove_not_constraints(schema)
     schema = flatten_remaining_allof(schema)
     schema = relax_min_items(schema)
+    schema = convert_additional_type_to_oneof(schema)
 
     # Strip enum from top-level @type items — the pick list values are provided
     # via uischema suggestion option to avoid JSON Forms scope resolution issues

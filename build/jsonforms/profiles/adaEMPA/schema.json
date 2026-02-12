@@ -3193,17 +3193,25 @@
     },
     "schema:additionalType": {
       "description": "Must include an EMPA product type identifier.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "description": "Additional type URI or label",
-        "enum": [
-          "ada:EMPAImage",
-          "ada:EMPACollection",
-          "ada:EMPAQEA",
-          "ada:EMPAESPC"
-        ]
-      }
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "ada:EMPAImage",
+          "title": "Electron Microprobe Analysis (EMPA) Image"
+        },
+        {
+          "const": "ada:EMPACollection",
+          "title": "Electron Microprobe Analysis (EMPA) Collection"
+        },
+        {
+          "const": "ada:EMPAQEA",
+          "title": "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)"
+        },
+        {
+          "const": "ada:EMPAESPC",
+          "title": "Electron Microprobe Analysis Energy-Dispersive Spectra Processing Code (EMPAESPC)"
+        }
+      ]
     },
     "schema:sameAs": {
       "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",

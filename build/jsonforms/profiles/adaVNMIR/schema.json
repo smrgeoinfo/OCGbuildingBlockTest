@@ -3176,16 +3176,22 @@
       "description": "A short summary describing a dataset. This text will be indexed by search applications, so the more information here, the better."
     },
     "schema:additionalType": {
-      "type": "array",
+      "type": "string",
       "description": "Must include a VNMIR product type identifier.",
-      "items": {
-        "type": "string",
-        "enum": [
-          "ada:VNMIRPoint",
-          "ada:VNMIROverviewImage",
-          "ada:VNMIRSpectralMap"
-        ]
-      }
+      "oneOf": [
+        {
+          "const": "ada:VNMIRPoint",
+          "title": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point"
+        },
+        {
+          "const": "ada:VNMIROverviewImage",
+          "title": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Overview Image"
+        },
+        {
+          "const": "ada:VNMIRSpectralMap",
+          "title": "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Spectral Map"
+        }
+      ]
     },
     "schema:sameAs": {
       "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",

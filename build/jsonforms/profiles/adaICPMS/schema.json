@@ -3176,19 +3176,34 @@
       "description": "A short summary describing a dataset. This text will be indexed by search applications, so the more information here, the better."
     },
     "schema:additionalType": {
-      "type": "array",
+      "type": "string",
       "description": "Must include an ICP-MS product type identifier.",
-      "items": {
-        "type": "string",
-        "enum": [
-          "ada:HRICPMSProcessed",
-          "ada:HRICPMSRaw",
-          "ada:QICPMSProcessed",
-          "ada:QICPMSRaw",
-          "ada:MCICPMSRaw",
-          "ada:MCICPMSProcessed"
-        ]
-      }
+      "oneOf": [
+        {
+          "const": "ada:HRICPMSProcessed",
+          "title": "High-Resolution Inductively Coupled Plasma Mass Spectrometry (HRICPMS) Processed"
+        },
+        {
+          "const": "ada:HRICPMSRaw",
+          "title": "High-Resolution Inductively Coupled Plasma Mass Spectrometry (HRICPMS) Raw"
+        },
+        {
+          "const": "ada:QICPMSProcessed",
+          "title": "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed"
+        },
+        {
+          "const": "ada:QICPMSRaw",
+          "title": "Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw"
+        },
+        {
+          "const": "ada:MCICPMSRaw",
+          "title": "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw"
+        },
+        {
+          "const": "ada:MCICPMSProcessed",
+          "title": "Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Processed"
+        }
+      ]
     },
     "schema:sameAs": {
       "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",
