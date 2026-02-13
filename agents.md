@@ -221,7 +221,7 @@ profiles/adaProduct/                    ← Top-level ADA product profile (v3, C
 │   ├── Branch 1: single file (files + @type contains DataDownload)
 │   │   ├── spdx:checksum → {spdx:algorithm, spdx:checksumValue}
 │   │   ├── schema:encodingFormat → array of strings
-│   │   └── fileDetail → anyOf [image, imageMap, tabularData, ...]
+│   │   └── anyOf [image, imageMap, tabularData, ...] (file-type props at file level)
 │   ├── Branch 2: archive (files + DataDownload + schema:hasPart)
 │   │   └── schema:hasPart → items (files + NOT DataDownload)
 │   │       └── allOf: [common file props] + anyOf [file type BBs]
@@ -243,7 +243,7 @@ profiles/adaProduct/                    ← Top-level ADA product profile (v3, C
 
 ### Technique Profiles
 
-There are 35 technique profiles extending `adaProduct` via `allOf`. Each constrains `schema:additionalType` (accepts both `ada:` product type URIs and human-readable technique labels) and `schema:hasPart` component types, with auto-detected `fileDetail` refs.
+There are 35 technique profiles extending `adaProduct` via `allOf`. Each constrains `schema:additionalType` (accepts both `ada:` product type URIs and human-readable technique labels) and `schema:hasPart` component types. File-type constraints come from the shared `files/schema.yaml` building block via `allOf` composition.
 
 **Original 4** (hand-authored): adaEMPA, adaXRD, adaICPMS, adaVNMIR
 
@@ -261,7 +261,7 @@ profiles/adaEMPA/    ← extends adaProduct
 │   EMPAImageMap, EMPAImage, EMPAQEATabular, EMPAImageCollection,
 │   analysisLocation, supplementaryImage, calibrationFile, methodDescription,
 │   instrumentMetadata
-└── fileDetail anyOf: imageMap, image, tabularData, collection, supDocImage, document
+└── (file-type props from files/schema.yaml: componentType, cdi:isStructuredBy, etc.)
 ```
 
 TermCode sub-variant mappings: `FIB-SEM` → adaSEM, `VLMBasemap` → adaVLM, `HR-ICP-MS`/`Q-ICP-MS`/`MC-ICP-MS` → adaICPMS.
@@ -349,7 +349,7 @@ Reads `resolvedSchema.json` (from `_sources/profiles/{name}/`) and converts to J
 - Converts `contains` → `enum`, `const` → `default`
 - Merges technique profile constraints into distribution `oneOf` branches
 - Preserves `oneOf` in distribution (3 branches: single file, archive, WebAPI)
-- Preserves `anyOf` in fileDetail (technique-specific file type subsets)
+- Merges file-type `anyOf` (from `files/schema.yaml`) into flat hasPart item properties
 - Removes `not` constraints and relaxes `minItems`
 
 **Usage:**

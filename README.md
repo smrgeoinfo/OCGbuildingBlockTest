@@ -41,7 +41,7 @@ Reads `resolvedSchema.json` and converts to JSON Forms-compatible Draft 7:
 - Converts `contains` → `enum`, `const` → `default`
 - Merges technique profile constraints into distribution branches
 - Preserves `oneOf` in distribution (3 branches: single file, archive, WebAPI)
-- Preserves `anyOf` in fileDetail (technique-specific file type subsets)
+- Merges file-type `anyOf` (from `files/schema.yaml`) into flat hasPart item properties
 - Removes `not` constraints and relaxes `minItems`
 
 ```bash
@@ -67,7 +67,7 @@ The `generate-jsonforms` workflow runs this automatically after schema conversio
 | Profile | Description |
 |---|---|
 | `adaProduct` | Base ADA product metadata — distribution has 3 `oneOf` branches (single file, archive, WebAPI) |
-| `adaEMPA` | Electron Microprobe Analysis — constrains component types and fileDetail to EMPA-valid file types |
+| `adaEMPA` | Electron Microprobe Analysis — constrains component types to EMPA-valid file types |
 | `adaXRD` | X-ray Diffraction — constrains to XRD-valid component and file types |
 | `adaICPMS` | ICP Mass Spectrometry — constrains to ICP-MS-valid component and file types (HR/Q/MC) |
 | `adaVNMIR` | Very-Near Mid-IR / FTIR — constrains to VNMIR-valid component and file types |
