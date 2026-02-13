@@ -1,96 +1,92 @@
+---
 $schema: https://json-schema.org/draft/2020-12/schema
 title: Files Type
-description: >-
-  Properties for any file in an ADA product distribution. GeneralType provides
-  info based on broad categories of file format (tabular, image, dataCube,
-  document). Type constraints (e.g. DataDownload) are applied at the composition
-  level in profiles.
-type: object
-properties:
-  "@id":
-    type: string
-  "@type":
-    type: array
-    items:
+description: Properties for any file in an ADA product distribution. GeneralType provides info based on
+  broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload)
+  are applied at the composition level in profiles.
+allOf:
+- type: object
+  properties:
+    '@id':
       type: string
-  "schema:additionalType":
-    type: array
-    description: The dataComponentType or supDocType
-    items:
+    '@type':
+      type: array
+      items:
+        type: string
+    schema:additionalType:
+      type: array
+      description: The dataComponentType or supDocType
+      items:
+        type: string
+    schema:name:
       type: string
-  "schema:name":
-    type: string
-    description: String name of file, must be unique within the containing package
-  "schema:description":
-    type: string
-  "spdx:checksum":
-    type: object
-    description: >-
-      A string value calculated from the content of the resource representation,
-      used to test if content has been modified.
-    properties:
-      "spdx:algorithm":
-        type: string
-      "spdx:checksumValue":
-        type: string
-  "schema:size":
-    type: object
-    properties:
-      "@type":
-        const: "schema:QuantitativeValue"
-      "schema:value":
-        type: integer
-      "schema:unitText":
-        type: string
-        default: byte
-  "schema:encodingFormat":
-    type: array
-    items:
+      description: String name of file, must be unique within the containing package
+    schema:description:
       type: string
-    description: >-
-      MIME type with extension; should indicate the serialization scheme in
-      sufficient detail that machine can know how to parse.
-  resultTarget:
-    $ref: ../stringArray/schema.yaml
-  fileDetail:
-    anyOf:
-      - $ref: ../image/schema.yaml
-      - $ref: ../imageMap/schema.yaml
-      - $ref: ../tabularData/schema.yaml
-      - $ref: ../collection/schema.yaml
-      - $ref: ../dataCube/schema.yaml
-      - $ref: ../document/schema.yaml
-      - $ref: ../supDocImage/schema.yaml
-      - $ref: ../otherFile/schema.yaml
-      - type: object
-        properties:
-          "@type":
-            const:
-              - "Metadata"
-        required:
-          - "@type"
-  "schema:relatedLink":
-    type: array
-    description: >-
-      Links between files in the product. Use schema:name for path to target
-      in product, or use #id JSON-LD links.
-    items:
+    spdx:checksum:
+      type: object
+      description: A string value calculated from the content of the resource representation, used to
+        test if content has been modified.
+      properties:
+        spdx:algorithm:
+          type: string
+        spdx:checksumValue:
+          type: string
+    schema:size:
       type: object
       properties:
-        "@type":
+        '@type':
+          const: schema:QuantitativeValue
+        schema:value:
+          type: integer
+        schema:unitText:
           type: string
-          const: "schema:LinkRole"
-        "schema:linkRelationship":
-          type: string
-        "schema:target":
-          type: object
-          properties:
-            "@type":
-              type: string
-              const: "schema:EntryPoint"
-            "schema:encodingFormat":
-              type: string
-            "schema:name":
-              type: string
-            "schema:url":
-              type: string
+          default: byte
+    schema:encodingFormat:
+      type: array
+      items:
+        type: string
+      description: MIME type with extension; should indicate the serialization scheme in sufficient detail
+        that machine can know how to parse.
+    resultTarget:
+      $ref: ../stringArray/stringArraySchema.json
+    schema:relatedLink:
+      type: array
+      description: 'Links between files in the product. Use schema:name for path to target in product,
+        or use #id JSON-LD links.'
+      items:
+        type: object
+        properties:
+          '@type':
+            type: string
+            const: schema:LinkRole
+          schema:linkRelationship:
+            type: string
+          schema:target:
+            type: object
+            properties:
+              '@type':
+                type: string
+                const: schema:EntryPoint
+              schema:encodingFormat:
+                type: string
+              schema:name:
+                type: string
+              schema:url:
+                type: string
+- anyOf:
+  - $ref: ../image/imageSchema.json
+  - $ref: ../imageMap/imageMapSchema.json
+  - $ref: ../tabularData/tabularDataSchema.json
+  - $ref: ../collection/collectionSchema.json
+  - $ref: ../dataCube/dataCubeSchema.json
+  - $ref: ../document/documentSchema.json
+  - $ref: ../supDocImage/supDocImageSchema.json
+  - $ref: ../otherFile/otherFileSchema.json
+  - type: object
+    properties:
+      '@type':
+        const:
+        - Metadata
+    required:
+    - '@type'
