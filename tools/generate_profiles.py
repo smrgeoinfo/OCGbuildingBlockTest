@@ -14,77 +14,6 @@ import sys
 import textwrap
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# File-type component type enums (from adaProperties/*/schema.yaml)
-# Used to determine which fileDetail $refs a profile needs.
-# ---------------------------------------------------------------------------
-
-IMAGE_TYPES = {
-    "AIVAImage", "EMPAImage", "LITImage", "STEMImage", "TEMImage",
-    "TEMPatternsImage", "UVFMImage", "VLMImage", "SEMEBSDGrainImage",
-    "SEMEDSElementalMap", "SEMHRCLImage", "SEMImageCollection",
-    "TEMEDSImageCollection", "NanoSIMSImage", "XANESImageStack",
-    "XANESStackOverviewImage", "XRDDiffractionPattern", "ShapeModelImage",
-}
-
-IMAGEMAP_TYPES = {
-    "basemap", "supplementalBasemap", "L2MSOverviewImage", "NanoIRMap",
-    "LITImage", "UVFMImage", "VLMImage", "SEMEBSDGrainImageMap",
-    "SEMEDSElementalMap", "SEMHRCLMap", "SEMImageMap", "STEMImage",
-    "TEMImage", "TEMPatternsImage", "NanoSIMSMap", "XANESimage",
-    "VNMIROverviewImage", "EMPAImage",  # via detailEMPA ref
-}
-
-TABULAR_TYPES = {
-    "AMSRawData", "AMSProcessedData", "DSCResultsTabular", "FTICRMSTabular",
-    "GPYCProcessedTabular", "GPYCRawTabular", "HRICPMSProcessed",
-    "HRICPMSRaw", "ICPOESIntermediateTabular", "ICPOESProcessedTabular",
-    "ICPOESRawTabular", "ICTabular", "MCICPMSTabular", "NGNSMSRaw",
-    "NGNSMSProcessed", "QICPMSProcessedTabular", "QICPMSRawTabular",
-    "RAMANRawTabular", "RITOFNGMSTabular", "RITOFNGMSCollection",
-    "SEMEDSPointData", "SIMSTabular", "STEMEDSTabular", "STEMEELSTabular",
-    "SVRUECTabular", "XANESRawTabular", "XANESProcessedTabular",
-    # types reachable via detail schema refs:
-    "DSCHeatTabular", "EMPAQEATabular", "EAIRMSCollection",
-    "LAFProcessed", "LAFRaw", "NanoSIMSTabular", "NanoIRBackground",
-    "PSFDTabular", "XRDTabular", "VNMIRSpectralPoint",
-}
-
-DATACUBE_TYPES = {
-    "GCMSCollection", "GCMSCube", "FTICRMSCube", "LCMSCollection",
-    "SEMEBSDGrainImageMapCube", "SEMEDSElementalMapsCube",
-    "SEMEDSPointDataCube", "SEMHRCLCube", "STEMEDSCube", "STEMEDSTomo",
-    "STEMEELSCube", "VNMIRSpectralMap",
-    # via detailL2MS ref:
-    "L2MSCube",
-}
-
-COLLECTION_TYPES = {
-    "AIVAImageCollection", "ARGTCollection", "EAIRMSCollection",
-    "EMPAImageCollection", "GCMSCollection", "GCGCMSCollection",
-    "LCMSCollection", "LCMSMSCollection", "LIT2DDataCollection",
-    "LITPolarDataCollection", "MCICPMSCollection", "NanoIRMapCollection",
-    "NanoIRPointCollection", "NanoSIMSCollection", "NanoSIMSImageCollection",
-    "QRISCalibratedCollection", "QRISRawCollection", "RITOFNGMSCollection",
-    "SEMEDSElementalMaps", "SEMEDSPointDataCollection", "SEMImageCollection",
-    "SIMSCollection", "TEMEDSImageCollection", "TOFSIMSCollection",
-    "UVFMImageCollection", "VLMImageCollection", "XANESCollection",
-    "XCTImageCollection",
-}
-
-DOCUMENT_TYPES = {
-    "calibrationFile", "contextVideo", "logFile", "methodDescription",
-    "peaks", "processingDescription", "QRISCalibrationFile",
-    "samplePreparation", "shapefiles",
-    # via detailARGT ref:
-    "ARGTDocument",
-}
-
-OTHERFILE_TYPES = {
-    "other",
-    # via detailSLS ref:
-    "SLSShapeModel", "SLSPartialScan",
-}
 
 # Standard supporting component types included in every profile's hasPart enum
 STANDARD_SUPPORTING_TYPES = [
@@ -642,34 +571,6 @@ PROFILES = {
     },
 }
 
-# ---------------------------------------------------------------------------
-# Determine file type refs for a profile based on its component types
-# ---------------------------------------------------------------------------
-
-def _get_file_type_refs(component_types: list[str]) -> list[str]:
-    """Return the list of fileDetail $ref paths needed for a profile."""
-    refs = []
-    ct_set = set(component_types)
-
-    if ct_set & IMAGE_TYPES:
-        refs.append("image")
-    if ct_set & IMAGEMAP_TYPES:
-        refs.append("imageMap")
-    if ct_set & TABULAR_TYPES:
-        refs.append("tabularData")
-    if ct_set & COLLECTION_TYPES:
-        refs.append("collection")
-    if ct_set & DATACUBE_TYPES:
-        refs.append("dataCube")
-    if ct_set & OTHERFILE_TYPES:
-        refs.append("otherFile")
-
-    # Always include supDocImage and document (supporting files for all)
-    refs.append("supDocImage")
-    refs.append("document")
-
-    return refs
-
 
 # ---------------------------------------------------------------------------
 # Template generators
@@ -698,13 +599,6 @@ def _generate_schema_yaml(cfg: dict) -> str:
         all_component_types.append("calibrationFile")
     ct_lines = "\n".join(
         f'                        - "ada:{ct}"' for ct in all_component_types
-    )
-
-    # Build fileDetail anyOf refs
-    file_type_refs = _get_file_type_refs(cfg["component_types"])
-    ref_lines = "\n".join(
-        f"                      - $ref: ../../adaProperties/{ft}/schema.yaml"
-        for ft in file_type_refs
     )
 
     detail_note = ""
@@ -736,9 +630,6 @@ allOf:
                     items:
                       enum:
 {ct_lines}
-                  fileDetail:
-                    anyOf:
-{ref_lines}
 """
 
 

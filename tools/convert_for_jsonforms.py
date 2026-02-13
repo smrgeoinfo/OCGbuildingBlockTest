@@ -807,16 +807,36 @@ def _merge_type_enums(existing: dict, new: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# fileDetail simplification — preserve anyOf structure
+# File-type anyOf simplification (hasPart item level)
 # ---------------------------------------------------------------------------
+
+def _is_file_type_anyof(anyof: list) -> bool:
+    """Return True if the anyOf list contains file-type branches (image, tabular, etc.).
+
+    Detected by checking whether any branch defines a ``componentType`` property,
+    which is the hallmark of ADA file-type schemas.
+    """
+    if not isinstance(anyof, list) or len(anyof) < 2:
+        return False
+    return any(
+        isinstance(branch, dict)
+        and "componentType" in branch.get("properties", {})
+        for branch in anyof
+    )
+
 
 def simplify_file_detail_anyof(schema: dict) -> dict:
     """
-    Flatten fileDetail anyOf into a single merged object.
+    Flatten file-type anyOf into a single merged object.
 
-    JSON Forms cannot render anyOf discriminators, so we merge all file type
-    branches into one flat object.  The UISchema uses MIME-type-based SHOW
-    rules to display only the relevant fields for the selected file type.
+    JSON Forms cannot render anyOf discriminators, so we merge all file-type
+    branches (image, tabular, dataCube, etc.) into one flat object.  The
+    UISchema uses MIME-type-based SHOW rules to display only the relevant
+    fields for the selected file type.
+
+    The anyOf appears at the hasPart item level (merged from files/schema.yaml).
+    The caller extracts it and merges the result's properties back into the
+    parent object.
 
     - All properties across all branches are merged (skip @type — inferred
       from MIME type at save time)
@@ -982,11 +1002,6 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 result[k] = {"type": "string", "description": "Variable identifier"}
                 continue
 
-            # fileDetail anyOf — preserve structure with per-file-type simplification
-            if k == "fileDetail" and isinstance(v, dict) and "anyOf" in v:
-                result[k] = simplify_file_detail_anyof(v)
-                continue
-
             # @type anyOf patterns (e.g., Organization types)
             if k == "@type" and isinstance(v, dict) and "anyOf" in v:
                 first_anyof = v["anyOf"][0] if v["anyOf"] else {}
@@ -1109,6 +1124,18 @@ def apply_anyof_simplifications(schema: Any, path: str = "") -> Any:
                 continue
 
             result[k] = apply_anyof_simplifications(v, current_path)
+
+        # Post-processing: merge file-type anyOf into properties.
+        # After files/schema.yaml restructuring, file-type branches (image,
+        # tabular, etc.) appear as a root-level anyOf on hasPart items instead
+        # of under a "fileDetail" property.  Detect this pattern and merge.
+        if "anyOf" in result and "properties" in result and _is_file_type_anyof(result["anyOf"]):
+            simplified = simplify_file_detail_anyof({"anyOf": result.pop("anyOf")})
+            for pk, pv in simplified.get("properties", {}).items():
+                if pk in result["properties"]:
+                    result["properties"][pk] = _deep_merge_dict(result["properties"][pk], pv)
+                else:
+                    result["properties"][pk] = pv
 
         return result
     elif isinstance(schema, list):
