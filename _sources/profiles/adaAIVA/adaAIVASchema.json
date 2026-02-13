@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ADA AIVA Product Profile",
+    "description": "Technique-specific profile for AI-driven Visual Analysis (AIVA) products. Extends the base ADA product profile with constraints on valid AIVA component types.",
+    "allOf": [
+        {
+            "$ref": "../adaProduct/adaProductSchema.json"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "schema:additionalType": {
+                    "description": "Must include a AIVA product type identifier.",
+                    "contains": {
+                        "enum": [
+                            "ada:AIVAImage",
+                            "ada:AIVAImageCollection",
+                            "Advanced Imaging & Visualization of Astromaterials",
+                            "Advanced Imaging &amp; Visualization of Astromaterials"
+                        ]
+                    }
+                },
+                "schema:distribution": {
+                    "items": {
+                        "properties": {
+                            "schema:hasPart": {
+                                "items": {
+                                    "properties": {
+                                        "schema:additionalType": {
+                                            "items": {
+                                                "enum": [
+                                                    "ada:AIVAImage",
+                                                    "ada:AIVAImageCollection",
+                                                    "ada:analysisLocation",
+                                                    "ada:methodDescription",
+                                                    "ada:instrumentMetadata",
+                                                    "ada:calibrationFile"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

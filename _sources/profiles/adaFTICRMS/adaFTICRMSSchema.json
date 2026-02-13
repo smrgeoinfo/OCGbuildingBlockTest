@@ -1,0 +1,49 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ADA FTICR-MS Product Profile",
+    "description": "Technique-specific profile for Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICR-MS) products. Extends the base ADA product profile with constraints on valid FTICR-MS component types.",
+    "allOf": [
+        {
+            "$ref": "../adaProduct/adaProductSchema.json"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "schema:additionalType": {
+                    "description": "Must include a FTICR-MS product type identifier.",
+                    "contains": {
+                        "enum": [
+                            "ada:FTICRMSTabular",
+                            "ada:FTICRMSCube",
+                            "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry"
+                        ]
+                    }
+                },
+                "schema:distribution": {
+                    "items": {
+                        "properties": {
+                            "schema:hasPart": {
+                                "items": {
+                                    "properties": {
+                                        "schema:additionalType": {
+                                            "items": {
+                                                "enum": [
+                                                    "ada:FTICRMSTabular",
+                                                    "ada:FTICRMSCube",
+                                                    "ada:analysisLocation",
+                                                    "ada:methodDescription",
+                                                    "ada:instrumentMetadata",
+                                                    "ada:calibrationFile"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

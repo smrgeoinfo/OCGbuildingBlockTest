@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ADA IC Product Profile",
+    "description": "Technique-specific profile for Ion Chromatography (IC) products. Extends the base ADA product profile with constraints on valid IC component types.",
+    "allOf": [
+        {
+            "$ref": "../adaProduct/adaProductSchema.json"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "schema:additionalType": {
+                    "description": "Must include a IC product type identifier.",
+                    "contains": {
+                        "enum": [
+                            "ada:ICTabular",
+                            "Ion Chromatography"
+                        ]
+                    }
+                },
+                "schema:distribution": {
+                    "items": {
+                        "properties": {
+                            "schema:hasPart": {
+                                "items": {
+                                    "properties": {
+                                        "schema:additionalType": {
+                                            "items": {
+                                                "enum": [
+                                                    "ada:ICTabular",
+                                                    "ada:analysisLocation",
+                                                    "ada:methodDescription",
+                                                    "ada:instrumentMetadata",
+                                                    "ada:calibrationFile"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
