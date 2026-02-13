@@ -1,0 +1,41 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA GC-MS Product Profile
+description: >-
+  Technique-specific profile for Gas Chromatography Mass Spectrometry (GC-MS) products.
+  Extends the base ADA product profile with constraints on valid GC-MS component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a GC-MS product type identifier.
+        contains:
+          enum:
+            - "ada:GCMSCollection"
+            - "ada:GCMSCube"
+            - "ada:GCGCMSCollection"
+            - "Gas Chromatography-Mass Spectrometry"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:GCMSCollection"
+                        - "ada:GCMSCube"
+                        - "ada:GCGCMSCollection"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/dataCube/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

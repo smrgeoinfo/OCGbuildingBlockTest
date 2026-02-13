@@ -37,7 +37,15 @@ RESOLVED_DIR = REPO_ROOT / "_sources" / "profiles"
 OUTPUT_DIR = REPO_ROOT / "build" / "jsonforms" / "profiles"
 SOURCES_DIR = REPO_ROOT / "_sources" / "jsonforms" / "profiles"
 
-ADA_PROFILES = ["adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR"]
+ADA_PROFILES = [
+    "adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR",
+    "adaAIVA", "adaAMS", "adaARGT", "adaDSC", "adaEAIRMS",
+    "adaFTICRMS", "adaGCMS", "adaGPYC", "adaIC", "adaICPOES",
+    "adaL2MS", "adaLAF", "adaLCMS", "adaLIT", "adaNGNSMS",
+    "adaNanoIR", "adaNanoSIMS", "adaPSFD", "adaQRIS", "adaRAMAN",
+    "adaRITOFNGMS", "adaSEM", "adaSIMS", "adaSLS", "adaSVRUEC",
+    "adaTEM", "adaToFSIMS", "adaUVFM", "adaVLM", "adaXANES", "adaXCT",
+]
 CDIF_PROFILES = ["CDIFDiscovery", "CDIFxas"]
 ALL_PROFILES = ADA_PROFILES + CDIF_PROFILES
 

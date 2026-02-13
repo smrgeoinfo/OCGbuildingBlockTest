@@ -1,0 +1,39 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA SIMS Product Profile
+description: >-
+  Technique-specific profile for Secondary Ion Mass Spectrometry (SIMS) products.
+  Extends the base ADA product profile with constraints on valid SIMS component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a SIMS product type identifier.
+        contains:
+          enum:
+            - "ada:SIMSTabular"
+            - "ada:SIMSCollection"
+            - "Secondary ion mass spectrometry"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:SIMSTabular"
+                        - "ada:SIMSCollection"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/tabularData/schema.yaml
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

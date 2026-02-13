@@ -1,0 +1,38 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA AMS Product Profile
+description: >-
+  Technique-specific profile for Accelerator Mass Spectrometry (AMS) products.
+  Extends the base ADA product profile with constraints on valid AMS component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a AMS product type identifier.
+        contains:
+          enum:
+            - "ada:AMSRawData"
+            - "ada:AMSProcessedData"
+            - "Accelerator Mass Spectrometry"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:AMSRawData"
+                        - "ada:AMSProcessedData"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/tabularData/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

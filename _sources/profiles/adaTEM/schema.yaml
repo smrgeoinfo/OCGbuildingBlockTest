@@ -1,0 +1,56 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA TEM Product Profile
+description: >-
+  Technique-specific profile for Transmission Electron Microscopy (TEM) products.
+  Extends the base ADA product profile with constraints on valid TEM component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a TEM product type identifier.
+        contains:
+          enum:
+            - "ada:TEMImage"
+            - "ada:TEMPatternsImage"
+            - "ada:TEMEDSImageCollection"
+            - "ada:STEMImage"
+            - "ada:STEMEDSTabular"
+            - "ada:STEMEDSCube"
+            - "ada:STEMEDSTomo"
+            - "ada:STEMEELSTabular"
+            - "ada:STEMEELSCube"
+            - "Transmission Electron Microscopy"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:TEMImage"
+                        - "ada:TEMPatternsImage"
+                        - "ada:TEMEDSImageCollection"
+                        - "ada:STEMImage"
+                        - "ada:STEMEDSTabular"
+                        - "ada:STEMEDSCube"
+                        - "ada:STEMEDSTomo"
+                        - "ada:STEMEELSTabular"
+                        - "ada:STEMEELSCube"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/image/schema.yaml
+                      - $ref: ../../adaProperties/imageMap/schema.yaml
+                      - $ref: ../../adaProperties/tabularData/schema.yaml
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/dataCube/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

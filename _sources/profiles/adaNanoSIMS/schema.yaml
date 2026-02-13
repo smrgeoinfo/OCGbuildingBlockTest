@@ -1,0 +1,47 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA NanoSIMS Product Profile
+description: >-
+  Technique-specific profile for Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) products.
+  Extends the base ADA product profile with constraints on valid NanoSIMS component
+  types and detailNanoSIMS requirements.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a NanoSIMS product type identifier.
+        contains:
+          enum:
+            - "ada:NanoSIMSCollection"
+            - "ada:NanoSIMSImageCollection"
+            - "ada:NanoSIMSTabular"
+            - "ada:NanoSIMSMap"
+            - "ada:NanoSIMSImage"
+            - "Nanoscale secondary ion mass spectrometry"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:NanoSIMSCollection"
+                        - "ada:NanoSIMSImageCollection"
+                        - "ada:NanoSIMSTabular"
+                        - "ada:NanoSIMSMap"
+                        - "ada:NanoSIMSImage"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/image/schema.yaml
+                      - $ref: ../../adaProperties/imageMap/schema.yaml
+                      - $ref: ../../adaProperties/tabularData/schema.yaml
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

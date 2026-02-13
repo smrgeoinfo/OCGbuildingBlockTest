@@ -1,0 +1,36 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA ToF-SIMS Product Profile
+description: >-
+  Technique-specific profile for Time-of-Flight Secondary Ion Mass Spectrometry (ToF-SIMS) products.
+  Extends the base ADA product profile with constraints on valid ToF-SIMS component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a ToF-SIMS product type identifier.
+        contains:
+          enum:
+            - "ada:TOFSIMSCollection"
+            - "Time-of-Flight Secondary Ion Mass Spectrometer"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:TOFSIMSCollection"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

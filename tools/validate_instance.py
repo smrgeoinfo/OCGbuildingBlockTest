@@ -47,6 +47,12 @@ PROFILES_DIR = REPO_ROOT / "_sources" / "profiles"
 # All known profiles and their resolved schema locations
 KNOWN_PROFILES = [
     "adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR",
+    "adaAIVA", "adaAMS", "adaARGT", "adaDSC", "adaEAIRMS",
+    "adaFTICRMS", "adaGCMS", "adaGPYC", "adaIC", "adaICPOES",
+    "adaL2MS", "adaLAF", "adaLCMS", "adaLIT", "adaNGNSMS",
+    "adaNanoIR", "adaNanoSIMS", "adaPSFD", "adaQRIS", "adaRAMAN",
+    "adaRITOFNGMS", "adaSEM", "adaSIMS", "adaSLS", "adaSVRUEC",
+    "adaTEM", "adaToFSIMS", "adaUVFM", "adaVLM", "adaXANES", "adaXCT",
     "CDIFDiscovery", "CDIFxas",
 ]
 
@@ -66,12 +72,45 @@ PROFILE_URI_MAP["https://w3id.org/cdif/profiles/discovery"] = "CDIFDiscovery"
 
 # termCode → profile mapping (for --termcode-fallback)
 TERMCODE_TO_PROFILE = {
+    "AIVA": "adaAIVA",
+    "AMS": "adaAMS",
+    "ARGT": "adaARGT",
+    "DSC": "adaDSC",
+    "EA-IRMS": "adaEAIRMS",
     "EMPA": "adaEMPA",
-    "XRD": "adaXRD",
-    "VNMIR": "adaVNMIR",
+    "FIB-SEM": "adaSEM",
+    "FTICR-MS": "adaFTICRMS",
+    "GC-MS": "adaGCMS",
+    "GPYC": "adaGPYC",
     "HR-ICP-MS": "adaICPMS",
-    "Q-ICP-MS": "adaICPMS",
+    "IC": "adaIC",
+    "ICP-OES": "adaICPOES",
+    "LAF": "adaLAF",
+    "LC-MS": "adaLCMS",
+    "LIT": "adaLIT",
     "MC-ICP-MS": "adaICPMS",
+    "NanoIR": "adaNanoIR",
+    "NanoSIMS": "adaNanoSIMS",
+    "NG-NS-MS": "adaNGNSMS",
+    "PSFD": "adaPSFD",
+    "Q-ICP-MS": "adaICPMS",
+    "QRIS": "adaQRIS",
+    "RAMAN": "adaRAMAN",
+    "RI-TOF-NGMS": "adaRITOFNGMS",
+    "SEM": "adaSEM",
+    "SIMS": "adaSIMS",
+    "SLS": "adaSLS",
+    "SV-RUEC": "adaSVRUEC",
+    "TEM": "adaTEM",
+    "ToF-SIMS": "adaToFSIMS",
+    "uL2MS": "adaL2MS",
+    "UVFM": "adaUVFM",
+    "VLM": "adaVLM",
+    "VLMBasemap": "adaVLM",
+    "VNMIR": "adaVNMIR",
+    "XANES": "adaXANES",
+    "XCT": "adaXCT",
+    "XRD": "adaXRD",
 }
 DEFAULT_PROFILE = "adaProduct"
 

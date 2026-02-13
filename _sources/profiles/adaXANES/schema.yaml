@@ -1,0 +1,49 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA XANES Product Profile
+description: >-
+  Technique-specific profile for X-ray Absorption Near Edge Structure (XANES) products.
+  Extends the base ADA product profile with constraints on valid XANES component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a XANES product type identifier.
+        contains:
+          enum:
+            - "ada:XANESImageStack"
+            - "ada:XANESStackOverviewImage"
+            - "ada:XANESRawTabular"
+            - "ada:XANESProcessedTabular"
+            - "ada:XANESimage"
+            - "ada:XANESCollection"
+            - "X-ray absorption near edge structure (XANES) spectroscopy"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:XANESImageStack"
+                        - "ada:XANESStackOverviewImage"
+                        - "ada:XANESRawTabular"
+                        - "ada:XANESProcessedTabular"
+                        - "ada:XANESimage"
+                        - "ada:XANESCollection"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/image/schema.yaml
+                      - $ref: ../../adaProperties/imageMap/schema.yaml
+                      - $ref: ../../adaProperties/tabularData/schema.yaml
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml

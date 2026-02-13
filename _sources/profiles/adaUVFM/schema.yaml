@@ -1,0 +1,40 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA UVFM Product Profile
+description: >-
+  Technique-specific profile for Ultraviolet Fluorescence Microscopy (UVFM) products.
+  Extends the base ADA product profile with constraints on valid UVFM component
+  types.
+allOf:
+  - $ref: ../adaProduct/schema.yaml
+  - type: object
+    properties:
+      "schema:additionalType":
+        description: >-
+          Must include a UVFM product type identifier.
+        contains:
+          enum:
+            - "ada:UVFMImage"
+            - "ada:UVFMImageCollection"
+            - "UV Fluorescence Microscopy"
+      "schema:distribution":
+        items:
+          properties:
+            "schema:hasPart":
+              items:
+                properties:
+                  "schema:additionalType":
+                    items:
+                      enum:
+                        - "ada:UVFMImage"
+                        - "ada:UVFMImageCollection"
+                        - "ada:analysisLocation"
+                        - "ada:methodDescription"
+                        - "ada:instrumentMetadata"
+                        - "ada:calibrationFile"
+                  fileDetail:
+                    anyOf:
+                      - $ref: ../../adaProperties/image/schema.yaml
+                      - $ref: ../../adaProperties/imageMap/schema.yaml
+                      - $ref: ../../adaProperties/collection/schema.yaml
+                      - $ref: ../../adaProperties/supDocImage/schema.yaml
+                      - $ref: ../../adaProperties/document/schema.yaml
