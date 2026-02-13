@@ -820,6 +820,7 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
 
     merged_props: dict = {}
     all_ct_enums: list = []
+    all_ct_detail_props: dict = {}
 
     for option in schema.get("anyOf", []):
         if not isinstance(option, dict):
@@ -829,7 +830,7 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
                 # Skip — fileDetail @type is inferred from MIME type on save
                 continue
             if pk == "componentType":
-                _collect_component_type_enums(pv, all_ct_enums)
+                _collect_component_type_info(pv, all_ct_enums, all_ct_detail_props)
                 continue
             if pk not in merged_props:
                 merged_props[pk] = copy.deepcopy(pv)
@@ -837,7 +838,7 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
                 # Deep merge if both exist
                 merged_props[pk] = _deep_merge_dict(merged_props[pk], pv)
 
-    # Build merged componentType with flat enum
+    # Build merged componentType with flat enum + detail properties
     if all_ct_enums:
         # Deduplicate while preserving order
         seen = set()
@@ -846,21 +847,28 @@ def simplify_file_detail_anyof(schema: dict) -> dict:
             if e not in seen:
                 seen.add(e)
                 unique_enums.append(e)
+        ct_props = {
+            "@type": {
+                "type": "string",
+                "enum": unique_enums,
+            },
+        }
+        ct_props.update(all_ct_detail_props)
         merged_props["componentType"] = {
             "type": "object",
-            "properties": {
-                "@type": {
-                    "type": "string",
-                    "enum": unique_enums,
-                },
-            },
+            "properties": ct_props,
         }
 
     return {"type": "object", "properties": merged_props}
 
 
-def _collect_component_type_enums(ct_schema: dict, enums: list) -> None:
-    """Recursively collect all @type enum values from a componentType schema."""
+def _collect_component_type_info(ct_schema: dict, enums: list, detail_props: dict) -> None:
+    """Recursively collect @type enum values AND detail properties from componentType.
+
+    In addition to gathering enum values for the flat componentType dropdown,
+    this collects all non-@type properties from each anyOf branch (these are
+    technique-specific detail properties like detector, beamsplitter, etc.).
+    """
     if not isinstance(ct_schema, dict):
         return
 
@@ -873,9 +881,14 @@ def _collect_component_type_enums(ct_schema: dict, enums: list) -> None:
         if "default" in at_type and isinstance(at_type["default"], str):
             enums.append(at_type["default"])
 
+    # Collect non-@type properties from detail schemas
+    for pk, pv in props.items():
+        if pk != "@type" and pk not in detail_props:
+            detail_props[pk] = copy.deepcopy(pv)
+
     # Recurse into anyOf branches
     for branch in ct_schema.get("anyOf", []):
-        _collect_component_type_enums(branch, enums)
+        _collect_component_type_info(branch, enums, detail_props)
 
     # Recurse into @type.anyOf (deeply nested EMPA pattern)
     if isinstance(at_type, dict) and "anyOf" in at_type:
