@@ -11,7 +11,7 @@ The repository is included as a git submodule in the [IEDA Data Submission Porta
 ## Repository Structure
 
 ```
-OCGbuildingBlockTest/
+metadataBuildingBlocks/
 ├── _sources/                        # All building block sources
 │   ├── schemaorgProperties/         # Core schema.org property types
 │   │   ├── person/                  # schema:Person
@@ -111,7 +111,7 @@ Every `bblock.json` must include all of these fields:
   "register": "ogc-building-block",
   "version": "0.1",
   "dateOfLastChange": "2026-01-01",
-  "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+  "link": "https://github.com/usgin/metadataBuildingBlocks",
   "maturity": "development",
   "scope": "unstable",
   "tags": ["tag1", "tag2"],

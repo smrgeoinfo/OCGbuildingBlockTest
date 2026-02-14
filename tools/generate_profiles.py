@@ -646,7 +646,7 @@ def _generate_bblock_json(cfg: dict) -> str:
         "register": "cdif-building-block-register",
         "version": "0.1",
         "dateOfLastChange": "2026-02-12",
-        "link": "https://github.com/smrgeoinfo/OCGbuildingBlockTest",
+        "link": "https://github.com/usgin/metadataBuildingBlocks",
         "maturity": "draft",
         "scope": "unstable",
         "tags": tags,
