@@ -577,11 +577,25 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "time": "http://www.w3.org/2006/time#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xas": "https://xas.org/dictionary/",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/profiles/CDIFxas/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/CDIFxas/context.jsonld)
 
 ## Sources
 
