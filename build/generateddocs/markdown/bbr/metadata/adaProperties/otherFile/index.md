@@ -34,15 +34,18 @@ properties:
           - ada:other
       required:
       - '@type'
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml
+    - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailSLS/schema.yaml
   schema:encodingFormat:
-    description: One of the approved non-standard file formats
+    description: 'One of the approved non-standard file formats: ''Spectral Data Exchange
+      File (.emsa)''-->text/plain; ''3D model file (.obj)''-->model/obj; ''Standard
+      Triangle Language (.stl)''-->model/stl; ''Open XML workbook (.xlsx)''-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+      ''Neptune Plus export (.exp)''-->application/octet-stream'
     enum:
-    - Spectral Data Exchange File (.emsa)
-    - 3D model file (.obj)
-    - Standard Triangle Language (.stl)
-    - Open XML workbook (.xlsx)
-    - Neptune Plus export (.exp)
+    - text/plain
+    - model/obj
+    - model/stl
+    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    - application/octet-stream
   formatDescription:
     type: string
     description: Free text explanation of file format, or a link to a publicly accessible
@@ -58,8 +61,8 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml)
 
 
 # JSON-LD Context
@@ -75,7 +78,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/context.jsonld)
 
 ## Sources
 
@@ -85,6 +88,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/adaProperties/otherFile`
 

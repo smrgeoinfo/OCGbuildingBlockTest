@@ -20,158 +20,80 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Tabular Data Type
 description: Tabular data type aligned with CDIF 2026 schema using DDI-CDI and CSVW
   properties. Typed as cdi:TabularTextDataSet and ada:tabularData.
-type: object
-properties:
-  '@type':
-    type: array
-    items:
+allOf:
+- type: object
+  properties:
+    '@type':
+      type: array
+      items:
+        type: string
+      minItems: 2
+      allOf:
+      - contains:
+          const: cdi:TabularTextDataSet
+      - contains:
+          const: ada:tabularData
+    componentType:
+      anyOf:
+      - type: object
+        properties:
+          '@type':
+            type: string
+            enum:
+            - ada:AMSRawData
+            - ada:AMSProcessedData
+            - ada:DSCResultsTabular
+            - ada:FTICRMSTabular
+            - ada:GPYCProcessedTabular
+            - ada:GPYCRawTabular
+            - ada:HRICPMSProcessed
+            - ada:HRICPMSRaw
+            - ada:ICPOESIntermediateTabular
+            - ada:ICPOESProcessedTabular
+            - ada:ICPOESRawTabular
+            - ada:ICTabular
+            - ada:MCICPMSTabular
+            - ada:NGNSMSRaw
+            - ada:NGNSMSProcessed
+            - ada:QICPMSProcessedTabular
+            - ada:QICPMSRawTabular
+            - ada:RAMANRawTabular
+            - ada:RITOFNGMSTabular
+            - ada:RITOFNGMSCollection
+            - ada:SEMEDSPointData
+            - ada:SIMSTabular
+            - ada:STEMEDSTabular
+            - ada:STEMEELSTabular
+            - ada:SVRUECTabular
+            - ada:XANESRawTabular
+            - ada:XANESProcessedTabular
+        required:
+        - '@type'
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailDSC/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEAIRMS/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailLAF/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoSIMS/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailNanoIR/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailPSFD/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailVNMIR/schema.yaml
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailXRD/schema.yaml
+    xCoordCol:
+      description: The column names are redundant, they are lists in the hasPhysicalMapping
+        array. Include here for convenience.
       type: string
-    minItems: 2
-    allOf:
-    - contains:
-        const: cdi:TabularTextDataSet
-    - contains:
-        const: ada:tabularData
-  componentType:
-    anyOf:
-    - type: object
-      properties:
-        '@type':
-          type: string
-          enum:
-          - ada:AMSRawData
-          - ada:AMSProcessedData
-          - ada:DSCResultsTabular
-          - ada:FTICRMSTabular
-          - ada:GPYCProcessedTabular
-          - ada:GPYCRawTabular
-          - ada:HRICPMSProcessed
-          - ada:HRICPMSRaw
-          - ada:ICPOESIntermediateTabular
-          - ada:ICPOESProcessedTabular
-          - ada:ICPOESRawTabular
-          - ada:ICTabular
-          - ada:MCICPMSTabular
-          - ada:NGNSMSRaw
-          - ada:NGNSMSProcessed
-          - ada:QICPMSProcessedTabular
-          - ada:QICPMSRawTabular
-          - ada:RAMANRawTabular
-          - ada:RITOFNGMSTabular
-          - ada:RITOFNGMSCollection
-          - ada:SEMEDSPointData
-          - ada:SIMSTabular
-          - ada:STEMEDSTabular
-          - ada:STEMEELSTabular
-          - ada:SVRUECTabular
-          - ada:XANESRawTabular
-          - ada:XANESProcessedTabular
-      required:
-      - '@type'
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailDSC/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailEAIRMS/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailEMPA/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailLAF/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailNanoSIMS/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailNanoIR/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailPSFD/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailVNMIR/schema.yaml
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailXRD/schema.yaml
-  cdi:arrayBase:
-    type: integer
-  csvw:commentPrefix:
-    type: string
-    description: An atomic property that sets the comment prefix flag to the single
-      provided value, which MUST be a string. The default is '#'.
-  csvw:delimiter:
-    type: string
-    description: Sets the delimiter flag to the single provided value, which MUST
-      be a string. The default is ','.
-  csvw:header:
-    type: boolean
-    description: If true, sets the header row count flag to 1, and if false to 0,
-      unless headerRowCount is provided, in which case the value provided for the
-      header property is ignored. The default is true.
-  csvw:headerRowCount:
-    type: integer
-    minimum: 0
-    default: 1
-    description: A numeric atomic property that sets the header row count flag to
-      the single provided value, which MUST be a non-negative integer.
-  cdi:isDelimited:
-    type: boolean
-    description: Schema constraint is that one of {'isDelimited','isFixedWidth'} must
-      be present with a True value; the other one may be present or omitted, but if
-      present must have a false value.
-  cdi:isFixedWidth:
-    type: boolean
-  csvw:lineTerminators:
-    enum:
-    - CRLF
-    - LF
-    - "\r\n"
-    - '
-
-      '
-  csvw:quoteChar:
-    type: string
-    default: '"'
-    description: Same as DDI-CDI quoteCharacter. The string that is used around escaped
-      cells.
-  csvw:skipBlankRows:
-    type: boolean
-    default: false
-  csvw:skipColumns:
-    type: integer
-    default: 0
-    description: The number of columns to skip at the beginning of each row.
-  csvw:skipInitialSpace:
-    type: boolean
-    default: true
-  csvw:skipRows:
-    type: integer
-    description: The number of rows to skip at the beginning of the file, before a
-      header row or tabular data.
-    default: 0
-  cdi:hasPhysicalMapping:
-    type: array
-    description: Links variables to their physical representation in this dataset.
-    items:
-      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml
-  countRows:
-    type: integer
-  countColumns:
-    type: integer
-  xCoordCol:
-    description: The column names are redundant, they are lists in the hasPhysicalMapping
-      array. Include here for convenience.
-    type: string
-  yCoordCol:
-    type: string
-  zCoordCol:
-    type: string
-  coordUnits:
-    type: string
-  spatialRegistration:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
-oneOf:
-- properties:
-    cdi:isDelimited:
-      const: true
-    cdi:isFixedWidth:
-      const: false
+    yCoordCol:
+      type: string
+    zCoordCol:
+      type: string
+    coordUnits:
+      type: string
+    spatialRegistration:
+      $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/spatialRegistration/schema.yaml
   required:
-  - cdi:isDelimited
-- properties:
-    cdi:isDelimited:
-      const: false
-    cdi:isFixedWidth:
-      const: true
-  required:
-  - cdi:isFixedWidth
-required:
-- '@type'
-- componentType
+  - '@type'
+  - componentType
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.yaml
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/
@@ -181,8 +103,8 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml)
 
 
 # JSON-LD Context
@@ -193,14 +115,13 @@ Links to the schema:
     "schema": "http://schema.org/",
     "ada": "https://ada.astromat.org/metadata/",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
     "@version": 1.1
   }
 }
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/tabularData/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/context.jsonld)
 
 ## Sources
 
@@ -210,6 +131,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/adaProperties/tabularData`
 

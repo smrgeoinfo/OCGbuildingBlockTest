@@ -35,8 +35,8 @@ description: Schema for JSON metadata documenting products in Astromat Data Arch
   DDI-CDI variable types and CSVW tabular data properties.
 type: object
 allOf:
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/cdifMandatory/schema.yaml
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/cdifOptional/schema.yaml
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/cdifMandatory/schema.yaml
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/cdifOptional/schema.yaml
 - type: object
   properties:
     '@type':
@@ -51,6 +51,87 @@ allOf:
       description: Should have the ada product type and 'ada:DataDeliveryPackage'
       items:
         type: string
+        enum:
+        - ada:DataDeliveryPackage
+        - "\u2074\u2070Ar/\xB3\u2079Ar Geochronology and Thermochronology (ARGT)"
+        - Accelerator Mass Spectrometry (AMS)
+        - Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)
+        - Basemap
+        - Differential Scanning Calorimetry (DSC)
+        - Electron Microprobe Analysis (EMPA) Collection
+        - Electron Microprobe Analysis Image (EMPA)
+        - Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)
+        - Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)
+        - Fluorescence Microscopy (UVFM) Image
+        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube
+        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular
+        - Gas Chromatography-Mass Spectrometry (GCMS)
+        - Gas Pycnometry (GPYC) Processed
+        - Gas Pycnometry (GPYC) Raw
+        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed
+        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed
+        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw
+        - Ion Chromatography (IC)
+        - Laser Assisted Fluorination (LAF) Processed
+        - Laser Assisted Fluorination (LAF) Raw
+        - Liquid Chromatography - Mass Spectrometry (LCMS) Collection
+        - Lock-In Thermography (LIT) Collection
+        - Lock-In Thermography (LIT) image
+        - Microprobe Two-Step Laser Mass Spectrometry (L2MS)
+        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed
+        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw
+        - Nanoscale Infrared Mapping (NanoIR) Background
+        - Nanoscale Infrared Mapping (NanoIR) MapCollection
+        - Nanoscale Infrared Mapping (NanoIR) Point Data
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw
+        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular
+        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw
+        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed
+        - Particle Size Frequency Distribution (PSFD)
+        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed
+        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw
+        - Quantitative Reflective Imaging System (QRIS) Calibrated
+        - Quantitative Reflective Imaging System (QRIS) Raw
+        - RAMAN Raw
+        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
+          Processed
+        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
+          Spectra
+        - Scanning Electron Microscopy (SEM) Image
+        - Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD)
+          Grain Image
+        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
+          Point Data
+        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
+          image
+        - Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL)
+          image
+        - Scanning Transmission Electron Microscopy (STEM) Image
+        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
+          Cube
+        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
+          Tabular
+        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
+          (STEMEDS) Cube
+        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
+          (STEMEDS) Tabular
+        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
+          (STEMEDS) Tomography
+        - Secondary Ion Mass Spectrometry (SIMS) Tabular
+        - Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)
+        - SLSIndividualScanCollection
+        - Structured Light Scanning (SLS) Shape Model
+        - Time-of-flight secondary ion mass spectrometry (TOFSIMS)
+        - Transmission Electron Microscopy (TEM) Image
+        - Transmission Electron Microscopy (TEM) Patterns Image
+        - Visible Light Microscopy (VLM) Image
+        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point
+        - X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)
+        - X-ray Computed Tomography (XCT) Image Collection
+        - X-ray Diffraction (XRD) Tabular
     submissionType:
       type: string
     schema:funding:
@@ -243,7 +324,7 @@ allOf:
       items:
         anyOf:
         - type: string
-        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.yaml
+        - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.yaml
     schema:relatedLink:
       type: array
       description: Links to related resources at the product level
@@ -299,9 +380,9 @@ allOf:
             type: array
             description: Instruments used in the analysis
             items:
-              $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
+              $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
           schema:location:
-            $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
+            $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
           schema:mainEntity:
             type: array
             description: Samples analyzed
@@ -354,7 +435,6 @@ allOf:
           schema:name:
             description: The name as it typically appears in a dataset
             type: string
-            minLength: 5
           schema:alternateName:
             type: array
             items:
@@ -479,7 +559,7 @@ allOf:
       items:
         anyOf:
         - allOf:
-          - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
           - type: object
             description: Single file distribution.
             properties:
@@ -491,7 +571,7 @@ allOf:
                   - schema:DataDownload
                 minItems: 1
         - allOf:
-          - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
           - type: object
             description: Archive file with parts.
             properties:
@@ -539,7 +619,7 @@ allOf:
                 description: Array describing the files in the zip archive.
                 items:
                   allOf:
-                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                   - type: object
                     properties:
                       '@type':
@@ -594,13 +674,13 @@ allOf:
               type: array
               description: Actions that can be invoked via the API.
               items:
-                $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
+                $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
             schema:result:
               description: The file(s) that result from invoking this API. Reuses
                 the same single-file or archive-with-hasPart structure.
               oneOf:
               - allOf:
-                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                 - type: object
                   description: Single file result.
                   properties:
@@ -612,7 +692,7 @@ allOf:
                         const: schema:DataDownload
                       minItems: 1
               - allOf:
-                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                 - type: object
                   description: Archive file result with parts.
                   properties:
@@ -628,7 +708,7 @@ allOf:
                       description: Files within the archive result.
                       items:
                         allOf:
-                        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                        - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                         - type: object
                           properties:
                             '@type':
@@ -738,32 +818,18 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "ada": "https://ada.astromat.org/metadata/",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "time": "http://www.w3.org/2006/time#",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/profiles/adaProduct/context.jsonld)
 
 ## Sources
 
@@ -773,6 +839,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/profiles/adaProduct`
 

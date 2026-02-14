@@ -24,9 +24,41 @@ x-defs:
     x-jsonld-prefixes:
       schema: http://schema.org/
       ada: https://ada.astromat.org/metadata/
-    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/detailL2MS/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
-  cdif.bbr.metadata.adaProperties.physicalMapping:
+  cdif.bbr.metadata.cdifProperties.cdifDataCube:
+    title: Data Cube Type
+    description: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube
+      and cdi:StructuredDataSet per CDIF 2026 alignment.
+    type: object
+    properties:
+      '@type':
+        type: array
+        items:
+          type: string
+        allOf:
+        - contains:
+            enum:
+            - cdi:StructuredDataSet
+      cdi:hasPhysicalMapping:
+        type: array
+        description: Links variables to their physical representation in this dataset.
+        items:
+          allOf:
+          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping
+          - type: object
+            properties:
+              cdi:locator:
+                type: string
+                description: String that can be used by software to locate values
+                  of the variable in this physical dataset.
+    x-jsonld-prefixes:
+      schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
+      cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml
+    x-schema-version: https://json-schema.org/draft/2020-12/schema
+  cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping:
     title: Physical Mapping Type
     description: Defines implementation-specific properties for the representation
       of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat
@@ -74,70 +106,54 @@ x-defs:
             type: string
             description: This should be a reference to a variable defined in the schema:variableMeasured
               section.
-      cdi:defaultDecimalSeparator:
-        type: string
-      cdi:defaultDigitalGroupSeparator:
-        type: string
-      cdi:displayLabel:
-        type: string
     x-jsonld-prefixes:
       schema: http://schema.org/
+      ada: https://ada.astromat.org/metadata/
       cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
-      csvw: http://www.w3.org/ns/csvw#
-    x-schema-source: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/physicalMapping/schema.yaml
+    x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifPhysicalMapping/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
 title: Data Cube Type
 description: Multi-dimensional data cube structure using DDI-CDI. Typed as ada:dataCube
   and cdi:StructuredDataSet per CDIF 2026 alignment.
-type: object
-properties:
-  '@type':
-    type: array
-    items:
-      type: string
-    minItems: 2
-    allOf:
-    - contains:
-        enum:
-        - ada:dataCube
-    - contains:
-        enum:
-        - cdi:StructuredDataSet
-  componentType:
-    anyOf:
-    - type: object
-      properties:
-        '@type':
-          enum:
-          - ada:GCMSCollection
-          - ada:GCMSCube
-          - ada:FTICRMSCube
-          - ada:LCMSCollection
-          - ada:SEMEBSDGrainImageMapCube
-          - ada:SEMEDSElementalMapsCube
-          - ada:SEMEDSPointDataCube
-          - ada:SEMHRCLCube
-          - ada:STEMEDSCube
-          - ada:STEMEDSTomo
-          - ada:STEMEELSCube
-          - ada:VNMIRSpectralMap
-      required:
-      - '@type'
-    - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailL2MS
-  dataComponentResource:
-    type: string
-  cdi:hasPhysicalMapping:
-    type: array
-    description: Links variables to their physical representation in this dataset.
-    items:
+allOf:
+- type: object
+  properties:
+    '@type':
+      type: array
+      items:
+        type: string
+      minItems: 2
       allOf:
-      - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/dataCube/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.physicalMapping
+      - contains:
+          enum:
+          - ada:dataCube
+      - contains:
+          enum:
+          - cdi:StructuredDataSet
+    componentType:
+      anyOf:
       - type: object
         properties:
-          cdi:locator:
-            type: string
-            description: String that can be used by software to locate values of the
-              variable in this physical dataset.
+          '@type':
+            enum:
+            - ada:GCMSCollection
+            - ada:GCMSCube
+            - ada:FTICRMSCube
+            - ada:LCMSCollection
+            - ada:SEMEBSDGrainImageMapCube
+            - ada:SEMEDSElementalMapsCube
+            - ada:SEMEDSPointDataCube
+            - ada:SEMHRCLCube
+            - ada:STEMEDSCube
+            - ada:STEMEDSTomo
+            - ada:STEMEELSCube
+            - ada:VNMIRSpectralMap
+        required:
+        - '@type'
+      - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.adaProperties.detailL2MS
+    dataComponentResource:
+      type: string
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.cdifProperties.cdifDataCube
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

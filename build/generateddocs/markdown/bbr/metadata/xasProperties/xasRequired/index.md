@@ -14,110 +14,193 @@ XAS profile files that extend requirements of CDIF discovery. Field content: x-r
 XAS profile files that extend requirements of CDIF discovery. Field content: x-ray source,definition, Data/mode, element/symbol, edge,Instrument/source/type, Instrument/source/name, Instrument/source/probe, Instrument/monochromator/type, Instrument/monochromator/d_spacing, Instrument/monochromator/reflection, Sample/name
 ## Examples
 
-### Example XAS metadata conforms to extension.
-Import base schema.org SubjectOf, add requiremnet that dcterms:conformsTo has XAS profile URI.
+### Example XAS metadata conforms to required items for extension.
+bring together all required properties.
 #### json
 ```json
 {
     "@context": {
         "schema": "http://schema.org/",
+        "dcterms": "http://purl.org/dc/terms/",
+        "geosparql": "http://www.opengis.net/ont/geosparql#",
+        "spdx": "http://spdx.org/rdf/terms#",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "xas": "https://xas.org/dictionary/",
-        "nxs": "http://purl.org/nexusformat/definitions/"
+        "nxs": "http://purl.org/nexusformat/definitions/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "prov": "http://www.w3.org/ns/prov#"
     },
-    "@id": "ex:subject-pz63",
-    "@type": "schema:Dataset",
-    "schema:dateModified": "2025-08-26",
-    "schema:creator": [
+    "@id": "NVohEbchV",
+    "@type": ["schema:Dataset", "schema:Product"],
+    "schema:name": "tniDmCXDxVRXfzMZpjE",
+    "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "BcWkKNjOEqQKZNG",
+        "schema:value": "MgxVV",
+        "schema:url": "http://example.com/resource?foo=bar#fragment"
+    },
+    "schema:dateModified": "hTGGhUVjEPFRl",
+    "schema:conditionsOfAccess": ["eiSzBJBNrAKINEAkjBAz"],
+    "schema:license": ["lWbw", "ZoTXfsfevzu", "ogAgtO", "wVK"],
+    "schema:url": "http://example.com/resource?foo=bar#fragment",
+    "schema:distribution": [
         {
-            "@id": "https://ada.org/person/3479",
-            "@type": "schema:Person",
-            "schema:name": "Richard, Stephen M.",
-            "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
-            "schema:contactPoint": {
-                "@type": "schema:ContactPoint",
-                "schema:email": "smrTucson@email.org"
-            }
+            "@id": "lMtIx",
+            "@type": ["schema:DataDownload", "cdi:PhysicalDataset"],
+            "schema:name": "XharpxX",
+            "schema:contentUrl": "http://example.com/resource/35uj46j",
+            "schema:encodingFormat": ["QmTID"],
+            "dcterms:conformsTo": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md",
+            "spdx:checksum": {
+                "spdx:algorithm": "nLnPEstvn",
+                "spdx:checksumValue": "F"
+            },
+            "schema:provider": [
+                {"@id": "plTqxpHjBTESztfaDyI"}
+            ]
+        },
+        {
+            "@id": "RNdlTIf",
+            "@type": ["schema:DataDownload"],
+            "schema:name": "LbbtxfqozvkLlsOZFsXC",
+            "schema:contentUrl": "http://example.com/resource/34h5ykl",
+            "schema:encodingFormat": ["VMhnXhYenfn", "aVcNGczw"],
+            "spdx:checksum": {
+                "spdx:algorithm": "CvUDClEiiWFCzNWNoM",
+                "spdx:checksumValue": "pObdEeJAdzYLwA"
+            },
+            "schema:provider": [
+                {"@id": "EwHwOWWPjkVxr"}
+            ]
         }
     ],
-    "schema:about": {"@id": "xas:485749"},
-    "schema:description": "metadata about documentation for se_na2so4",
-    "dcterms:conformsTo": [
-        {"@id": "cdif:profile_basic_1.0"},
-        {"@id": "cdif:profile_xasCDIF"}
+    "schema:subjectOf": {
+        "@type": "schema:Dataset",
+        "@id": "RUUvGtoRqzVlQELZ",
+        "schema:about": {"@id": "NVohEbchV"},
+        "dcterms:conformsTo": [
+            {"@id": "https://www.opengis.net/def/profile/cdif/discovery"},
+            {"@id": "cdif:profile_xasCDIF"}
+        ],
+        "schema:maintainer": {
+            "@id": "nKwywfsuBh",
+            "@type": "schema:Person",
+            "schema:name": "GyadRNhaueALkWVhXdP"
+        },
+        "schema:sdDatePublished": "2025-08-15T06:45:40Z",
+        "schema:includedInDataCatalog": {
+            "@id": "nbUunSyw",
+            "@type": "schema:DataCatalog",
+            "schema:name": "hFcgszRnAnrDNlkluJ",
+            "schema:url": "http://example.com/resource?foo=bar#fragment"
+        }
+    },
+    "prov:wasGeneratedBy": [{
+        "prov:used": [
+            {
+                "@type": ["schema:Thing", "schema:Product"],
+                "schema:additionalType": "nxs:BaseClass/NXsource",
+                "schema:name": "kVLmQxSource",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": ["nxs:Field/NXsource/type"],
+                        "schema:name": "x-ray source",
+                        "schema:value": "Synchrotron X-ray Source"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": ["nxs:Field/NXsource/probe"],
+                        "schema:name": "Probe",
+                        "schema:value": "x-ray"
+                    }
+                ]
+            },
+            {
+                "@type": ["schema:Thing", "schema:Product"],
+                "schema:additionalType": "nxs:BaseClass/NXmonochromator",
+                "schema:name": "Si 111",
+                "schema:additionalProperty": [
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": ["nxs:Field/NXcrystal/d_spacing"],
+                        "schema:name": "d-spacing",
+                        "schema:value": "3.13550",
+                        "schema:unitText": "Angstrom"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": ["nxs:Field/NXcrystal/type"],
+                        "schema:name": "crystal type",
+                        "schema:value": "mRqWz"
+                    },
+                    {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": ["nxs:Field/NXcrystal/reflection"],
+                        "schema:name": "reflection plane (hkl)",
+                        "schema:value": "1,1,1"
+                    }
+                ]
+            }
+        ],
+        "schema:mainEntity": {
+            "@type": ["schema:Product", "schema:Thing"],
+            "schema:additionalType": [
+                "MaterialSample",
+                "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+            ],
+            "schema:name": "tJSgGfhzZ",
+            "schema:identifier": "gGDA",
+            "schema:description": "ahjWwyayQYhnB",
+            "schema:additionalProperty": [
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": ["crl"],
+                    "schema:name": "nNp",
+                    "schema:value": "uUUTOmBQ"
+                },
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": ["EiAnJhZyLsQAxKd"],
+                    "schema:name": "qqcHFymGZzaJLKGN",
+                    "schema:value": "rljVqQklQEuNZF"
+                }
+            ]
+        }
+    }],
+    "schema:measurementTechnique": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "X-Ray Absorption Spectroscopy",
+            "schema:termCode": "XAS",
+            "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
+            "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl"
+        },
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "Transmission",
+            "schema:identifier": "bRqVxNm",
+            "schema:inDefinedTermSet": "nxs:Field/NXxas/ENTRY/DATA/mode"
+        }
+    ],
+    "schema:keywords": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "K-edge",
+            "schema:identifier": "hYtRv",
+            "schema:termCode": "K",
+            "schema:inDefinedTermSet": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md"
+        },
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "Selenium",
+            "schema:identifier": "http://sweetontology.net/matrElement/Selenium",
+            "schema:termCode": "Se",
+            "schema:inDefinedTermSet": "http://sweetontology.net/matrElement"
+        }
     ]
 }
-
-```
-
-#### jsonld
-```jsonld
-{
-  "@context": [
-    {
-      "schema": "http://schema.org/"
-    },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld",
-    {
-      "schema": "http://schema.org/",
-      "ex": "https://example.org/",
-      "xsd": "http://www.w3.org/2001/XMLSchema#",
-      "xas": "https://xas.org/dictionary/",
-      "nxs": "http://purl.org/nexusformat/definitions/"
-    }
-  ],
-  "@id": "ex:subject-pz63",
-  "@type": "schema:Dataset",
-  "schema:dateModified": "2025-08-26",
-  "schema:creator": [
-    {
-      "@id": "https://ada.org/person/3479",
-      "@type": "schema:Person",
-      "schema:name": "Richard, Stephen M.",
-      "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
-      "schema:contactPoint": {
-        "@type": "schema:ContactPoint",
-        "schema:email": "smrTucson@email.org"
-      }
-    }
-  ],
-  "schema:about": {
-    "@id": "xas:485749"
-  },
-  "schema:description": "metadata about documentation for se_na2so4",
-  "dcterms:conformsTo": [
-    {
-      "@id": "cdif:profile_basic_1.0"
-    },
-    {
-      "@id": "cdif:profile_xasCDIF"
-    }
-  ]
-}
-```
-
-#### ttl
-```ttl
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix ex: <https://example.org/> .
-@prefix schema1: <http://schema.org/> .
-@prefix xas: <https://xas.org/dictionary/> .
-
-ex:subject-pz63 a schema1:Dataset ;
-    dcterms:conformsTo <cdif:profile_basic_1.0>,
-        <cdif:profile_xasCDIF> ;
-    schema1:about xas:485749 ;
-    schema1:creator <https://ada.org/person/3479> ;
-    schema1:dateModified "2025-08-26" ;
-    schema1:description "metadata about documentation for se_na2so4" .
-
-<https://ada.org/person/3479> a schema1:Person ;
-    schema1:contactPoint [ a schema1:ContactPoint ;
-            schema1:email "smrTucson@email.org" ] ;
-    schema1:identifier "https://orcid.org/0000-0002-7933-2154" ;
-    schema1:name "Richard, Stephen M." .
-
 
 ```
 
@@ -125,23 +208,273 @@ ex:subject-pz63 a schema1:Dataset ;
 
 ```yaml
 $schema: https://json-schema.org/draft/2020-12/schema
-type: object
 allOf:
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.yaml
-- properties:
-    dcterms:conformsTo:
+- $ref: '#/$defs/CdifMandatory'
+- type: object
+  properties:
+    '@type':
       type: array
       items:
-        $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/metaMetadata/schema.yaml#/$defs/conformsTo_item
-      minItems: 2
+        type: string
+        enum:
+        - schema:Dataset
+        - schema:Product
+    schema:subjectOf:
+      $ref: '#/$defs/XasSubject'
+    prov:wasGeneratedBy:
+      type: array
+      items:
+        type: object
+        properties:
+          prov:used:
+            type: array
+            description: 'array of instrument or instrument system components. The
+              x-ray source type and probe,  and monochromator properties type, d-spacing
+              and reflection plane are required '
+            items:
+              type: object
+              properties:
+                '@type':
+                  type: array
+                  items:
+                    type: string
+                schema:additionalType:
+                  type: string
+                schema:additionalProperty:
+                  type: array
+                  items:
+                    $ref: '#/$defs/AdditionalProperty'
+            minItems: 2
+            allOf:
+            - contains:
+                type: object
+                properties:
+                  '@type':
+                    type: array
+                    items:
+                      type: string
+                    minItems: 2
+                    allOf:
+                    - contains:
+                        const: schema:Thing
+                    - contains:
+                        const: schema:Product
+                  schema:additionalType:
+                    const: nxs:BaseClass/NXsource
+                  schema:additionalProperty:
+                    type: array
+                    minItems: 2
+                    items:
+                      $ref: '#/$defs/AdditionalProperty'
+                    allOf:
+                    - contains:
+                        type: object
+                        properties:
+                          schema:propertyID:
+                            type: array
+                            contains:
+                              const: nxs:Field/NXsource/type
+                          schema:value:
+                            type: string
+                        required:
+                        - schema:propertyID
+                        - schema:value
+                    - contains:
+                        type: object
+                        properties:
+                          schema:propertyID:
+                            type: array
+                            contains:
+                              const: nxs:Field/NXsource/probe
+                          schema:name:
+                            const: Probe
+                          schema:value:
+                            type: string
+                        required:
+                        - schema:name
+                        - schema:propertyID
+                        - schema:value
+                required:
+                - '@type'
+                - schema:additionalType
+                - schema:additionalProperty
+            - contains:
+                type: object
+                properties:
+                  '@type':
+                    type: array
+                    items:
+                      type: string
+                    minItems: 2
+                    allOf:
+                    - contains:
+                        const: schema:Thing
+                    - contains:
+                        const: schema:Product
+                  schema:additionalType:
+                    const: nxs:BaseClass/NXmonochromator
+                  schema:name:
+                    type: string
+                  schema:additionalProperty:
+                    description: Require additional properties for monochromator,
+                      requires d-space, crystal type, reflection plane.
+                    type: array
+                    minItems: 3
+                    items:
+                      $ref: '#/$defs/AdditionalProperty'
+                    contains:
+                      type: object
+                      properties:
+                        schema:propertyID:
+                          type: array
+                          contains:
+                            const: nxs:Field/NXcrystal/type
+                        schema:value:
+                          type: string
+                      required:
+                      - schema:value
+                      - schema:propertyID
+                    allOf:
+                    - contains:
+                        type: object
+                        properties:
+                          schema:propertyID:
+                            type: array
+                            contains:
+                              const: nxs:Field/NXcrystal/d_spacing
+                          schema:value:
+                            type: string
+                          schema:unitText:
+                            type: string
+                        required:
+                        - schema:propertyID
+                        - schema:value
+                        - schema:unitText
+                    - contains:
+                        type: object
+                        properties:
+                          schema:propertyID:
+                            type: array
+                            contains:
+                              const: nxs:Field/NXcrystal/reflection
+                          schema:value:
+                            type: string
+                        required:
+                        - schema:value
+                        - schema:propertyID
+                required:
+                - '@type'
+                - schema:additionalType
+                - schema:additionalProperty
+          schema:mainEntity:
+            $ref: '#/$defs/XasSample'
+    schema:distribution:
+      type: array
+      items:
+        $ref: '#/$defs/DataDownload'
       contains:
         type: object
         properties:
-          '@id':
-            const: cdif:profile_xasCDIF
+          '@type':
+            type: array
+            items:
+              type: string
+            minItems: 2
+            allOf:
+            - contains:
+                const: schema:DataDownload
+            - contains:
+                const: cdi:PhysicalDataset
+          dcterms:conformsTo:
+            const: https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md
         required:
-        - '@id'
-      minContains: 1
+        - '@type'
+        - dcterms:conformsTo
+    schema:measurementTechnique:
+      type: array
+      description: 'Require DefinedTerms for both: absorption edge (XDI dict) and
+        target element (SWEET).'
+      minItems: 2
+      items:
+        $ref: '#/$defs/DefinedTerm'
+      contains:
+        type: object
+        properties:
+          schema:name:
+            const: X-Ray Absorption Spectroscopy
+          schema:termCode:
+            const: XAS
+          schema:identifier:
+            const: http://purl.org/pan-science/PaNET/PaNET01196
+          schema:inDefinedTermSet:
+            const: http://purl.org/pan-science/PaNET/PaNET.owl
+        required:
+        - schema:name
+        - schema:termCode
+        - schema:identifier
+        - schema:inDefinedTermSet
+      allOf:
+      - contains:
+          type: object
+          properties:
+            schema:name:
+              type: string
+            schema:inDefinedTermSet:
+              const: nxs:Field/NXxas/ENTRY/DATA/mode
+          required:
+          - schema:name
+          - schema:inDefinedTermSet
+    schema:keywords:
+      type: array
+      description: extends base CDIF keyword schema to require defined terms for the
+        absorption edge and the target element for the analysis
+      minItems: 2
+      items:
+        type: object
+        properties:
+          '@type':
+            const: schema:DefinedTerm
+          schema:name:
+            type: string
+          schema:identifier:
+            type: string
+          schema:inDefinedTermSet:
+            type: string
+            description: need to include this to tag what the keyword is about; we're
+              using the keywords as soft-typed properties
+        required:
+        - '@type'
+        - schema:name
+        - schema:inDefinedTermSet
+        additionalProperties: true
+      contains:
+        type: object
+        properties:
+          schema:inDefinedTermSet:
+            const: https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md
+        required:
+        - schema:inDefinedTermSet
+      allOf:
+      - contains:
+          type: object
+          properties:
+            schema:inDefinedTermSet:
+              const: http://sweetontology.net/matrElement
+          required:
+          - schema:inDefinedTermSet
+$defs:
+  CdifMandatory:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
+  DefinedTerm:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
+  AdditionalProperty:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/additionalPropertySchema.json
+  DataDownload:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/dataDownloadSchema.json
+  XasSample:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSample/xasSampleSchema.json
+  XasSubject:
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSubject/xasSubjectSchema.json
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -149,26 +482,18 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "ex": "https://example.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "dcterms": "http://purl.org/dc/terms/",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasRequired/context.jsonld)
 
 ## Sources
 
@@ -178,6 +503,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/xasProperties/xasRequired`
 

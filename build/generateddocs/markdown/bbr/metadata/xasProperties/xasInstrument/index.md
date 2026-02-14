@@ -214,7 +214,7 @@ Example use wikidata id for additionalType scientific equipment , schema.org Pro
       "nxs": "http://purl.org/nexusformat/definitions/",
       "wd": "https://www.wikidata.org/entity/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/context.jsonld",
+    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasInstrument/context.jsonld",
     {
       "schema": "http://schema.org/",
       "dcterms": "http://purl.org/dc/terms/",
@@ -395,59 +395,24 @@ xas:487y54 a schema1:Product,
     schema1:hasPart [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:name "monitor preset" ;
-                    schema1:propertyID "nxs:Field/NXmonitor/preset" ;
-                    schema1:value "N.A." ],
+                    schema1:alternateName "incident flux measurement method" ;
+                    schema1:name "detector mode i0" ;
+                    schema1:propertyID "xas:detector.i0" ;
+                    schema1:value "10cm  N2" ],
                 [ a schema1:PropertyValue ;
                     schema1:alternateName "transmitted flux measurement method" ;
                     schema1:name "detector mode it" ;
                     schema1:propertyID "xas:detector.it" ;
                     schema1:value "10cm  N2" ],
                 [ a schema1:PropertyValue ;
-                    schema1:alternateName "incident flux measurement method" ;
-                    schema1:name "detector mode i0" ;
-                    schema1:propertyID "xas:detector.i0" ;
-                    schema1:value "10cm  N2" ],
+                    schema1:name "monitor preset" ;
+                    schema1:propertyID "nxs:Field/NXmonitor/preset" ;
+                    schema1:value "N.A." ],
                 [ a schema1:PropertyValue ;
                     schema1:name "monitor mode" ;
                     schema1:propertyID "nxs:Field/NXmonitor/mode" ;
                     schema1:value "monitor" ] ;
             schema1:additionalType "nxs:BaseClass/NXmonitor" ],
-        [ a schema1:Product,
-                schema1:Thing ;
-            schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:propertyID "xas:collimation" ;
-                    schema1:value "none" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "harmonic_rejection" ;
-                    schema1:propertyID "xas:harmonic_rejection" ;
-                    schema1:value "Rh-coated mirror, detuned" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "focusing" ;
-                    schema1:propertyID "xas:focusing" ;
-                    schema1:value "???" ] ;
-            schema1:additionalType "wd:Q3099911",
-                "xas:Beamline" ;
-            schema1:identifier "should have a registry with URIs" ;
-            schema1:name "13-BM-D" ],
-        [ a schema1:Product,
-                schema1:Thing ;
-            schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
-                    schema1:value "1,1,1" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXcrystal/type" ;
-                    schema1:value "crystal type" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
-                    schema1:value "Si" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
-                    schema1:unitText "Angstrom" ;
-                    schema1:value "3.13550" ] ;
-            schema1:additionalType "nxs:BaseClass/NXmonochromator",
-                "wd:Q3099911" ;
-            schema1:name "Si 111" ],
         [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
@@ -461,7 +426,42 @@ xas:487y54 a schema1:Product,
             schema1:additionalType "nxs:BaseClass/NXsource",
                 "wd:Q3099911" ;
             schema1:identifier "should have a registry with URIs" ;
-            schema1:name "source of x-ray excitation for analysis. Made up for this example" ] ;
+            schema1:name "source of x-ray excitation for analysis. Made up for this example" ],
+        [ a schema1:Product,
+                schema1:Thing ;
+            schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                    schema1:value "crystal type" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
+                    schema1:unitText "Angstrom" ;
+                    schema1:value "3.13550" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
+                    schema1:value "Si" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                    schema1:value "1,1,1" ] ;
+            schema1:additionalType "nxs:BaseClass/NXmonochromator",
+                "wd:Q3099911" ;
+            schema1:name "Si 111" ],
+        [ a schema1:Product,
+                schema1:Thing ;
+            schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:name "focusing" ;
+                    schema1:propertyID "xas:focusing" ;
+                    schema1:value "???" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "xas:collimation" ;
+                    schema1:value "none" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "harmonic_rejection" ;
+                    schema1:propertyID "xas:harmonic_rejection" ;
+                    schema1:value "Rh-coated mirror, detuned" ] ;
+            schema1:additionalType "wd:Q3099911",
+                "xas:Beamline" ;
+            schema1:identifier "should have a registry with URIs" ;
+            schema1:name "13-BM-D" ] ;
     schema1:name "x-ray absorption analysis system" .
 
 
@@ -521,9 +521,9 @@ required:
 - schema:name
 $defs:
   Identifier:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
   AdditionalProperty:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -531,8 +531,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.yaml)
 
 
 # JSON-LD Context
@@ -548,7 +548,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasInstrument/context.jsonld)
 
 ## Sources
 
@@ -558,6 +558,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/xasProperties/xasInstrument`
 

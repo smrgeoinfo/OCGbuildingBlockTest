@@ -293,7 +293,7 @@ Example XAS GeneratedBy provenance activity
     {
       "schema": "http://schema.org/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/context.jsonld",
+    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/context.jsonld",
     {
       "schema": "http://schema.org/",
       "ex": "https://example.org/",
@@ -630,6 +630,15 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
         xas:AnalysisEvent,
         ns1:Activity ;
     schema1:additionalProperty [ a schema1:PropertyValue ;
+            schema1:name "calibration method" ;
+            schema1:propertyID "nxs:Group/NXdetector/calibration_method" ;
+            schema1:url "http://protocols.io/link/to/calibrationMethod" ;
+            schema1:value "description of calibration procedure" ],
+        [ a schema1:PropertyValue ;
+            schema1:name "Installed Options" ;
+            schema1:propertyID "xas:installedOptions" ;
+            schema1:value "Description of extra equipment installed on the base instrument(?)" ],
+        [ a schema1:PropertyValue ;
             schema1:name "Edge energy" ;
             schema1:propertyID "xas:edge_energy" ;
             schema1:unitText "eV" ;
@@ -644,21 +653,25 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
             schema1:name "Environment Pressure" ;
             schema1:propertyID "xas:pressure" ;
             schema1:unitText "KPa" ;
-            schema1:value "3567" ],
-        [ a schema1:PropertyValue ;
-            schema1:name "Installed Options" ;
-            schema1:propertyID "xas:installedOptions" ;
-            schema1:value "Description of extra equipment installed on the base instrument(?)" ],
-        [ a schema1:PropertyValue ;
-            schema1:name "calibration method" ;
-            schema1:propertyID "nxs:Group/NXdetector/calibration_method" ;
-            schema1:url "http://protocols.io/link/to/calibrationMethod" ;
-            schema1:value "description of calibration procedure" ] ;
+            schema1:value "3567" ] ;
     schema1:identifier "20241111_DSC_NU_OREX-803224-0_1" ;
     schema1:location ex:xasfacility_37yht ;
     schema1:mainEntity [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
+                    schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "xas:materialState" ;
+                    schema1:value "solid metal foil" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "xas:samplePreparation" ;
+                    schema1:value "powder on tape, 6 layers" ],
+                [ a schema1:PropertyValue ;
+                    schema1:propertyID "nxs:Field/NXsample/mass" ;
+                    schema1:unitText "mg" ;
+                    schema1:value "10" ],
+                [ a schema1:PropertyValue ;
                     schema1:propertyID "xas:porosity" ;
                     schema1:unitText "percent" ;
                     schema1:value 27 ],
@@ -666,24 +679,11 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
                     schema1:propertyID "nxs:Field/NXsample/point_group" ;
                     schema1:value "mm2" ],
                 [ a schema1:PropertyValue ;
-                    schema1:propertyID "xas:samplePreparation" ;
-                    schema1:value "powder on tape, 6 layers" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "xas:materialState" ;
-                    schema1:value "solid metal foil" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
-                    schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
-                [ a schema1:PropertyValue ;
                     schema1:propertyID "xas:stoichiometry" ;
                     schema1:value "Na2SeO4" ],
                 [ a schema1:PropertyValue ;
                     schema1:propertyID "xas:parentSample" ;
-                    schema1:value "igsn:10.3476/342573" ],
-                [ a schema1:PropertyValue ;
-                    schema1:propertyID "nxs:Field/NXsample/mass" ;
-                    schema1:unitText "mg" ;
-                    schema1:value "10" ] ;
+                    schema1:value "igsn:10.3476/342573" ] ;
             schema1:additionalType "MaterialSample",
                 "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample" ;
             schema1:description "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list..." ;
@@ -693,6 +693,10 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
     ns1:used [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:name "monitor preset" ;
+                    schema1:propertyID "nxs:Field/NXmonitor/preset" ;
+                    schema1:value "N.A." ],
+                [ a schema1:PropertyValue ;
                     schema1:name "monitor mode" ;
                     schema1:propertyID "nxs:Field/NXmonitor/mode" ;
                     schema1:value "monitor" ],
@@ -701,10 +705,6 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
                     schema1:name "detector mode i0" ;
                     schema1:propertyID "xas:detector.i0" ;
                     schema1:value "10cm  N2" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "monitor preset" ;
-                    schema1:propertyID "nxs:Field/NXmonitor/preset" ;
-                    schema1:value "N.A." ],
                 [ a schema1:PropertyValue ;
                     schema1:alternateName "transmitted flux measurement method" ;
                     schema1:name "detector mode it" ;
@@ -716,13 +716,13 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
         [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:name "X-ray source" ;
-                    schema1:propertyID "nxs:Field/NXsource/type" ;
-                    schema1:value "Synchrotron X-ray Source" ],
-                [ a schema1:PropertyValue ;
                     schema1:name "Probe" ;
                     schema1:propertyID "nxs:Field/NXsource/probe" ;
-                    schema1:value "x-ray" ] ;
+                    schema1:value "x-ray" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "X-ray source" ;
+                    schema1:propertyID "nxs:Field/NXsource/type" ;
+                    schema1:value "Synchrotron X-ray Source" ] ;
             schema1:additionalType "nxs:BaseClass/NXsource",
                 "wd:Q3099911" ;
             schema1:identifier "should have a registry with URIs" ;
@@ -730,17 +730,17 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
         [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:name "beamline collimation" ;
+                    schema1:propertyID "xas:collimation" ;
+                    schema1:value "none" ],
+                [ a schema1:PropertyValue ;
                     schema1:name "harmonic_rejection" ;
                     schema1:propertyID "xas:harmonic_rejection" ;
                     schema1:value "Rh-coated mirror, detuned" ],
                 [ a schema1:PropertyValue ;
                     schema1:name "focusing" ;
                     schema1:propertyID "xas:focusing" ;
-                    schema1:value "unknown" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "beamline collimation" ;
-                    schema1:propertyID "xas:collimation" ;
-                    schema1:value "none" ] ;
+                    schema1:value "unknown" ] ;
             schema1:additionalType "wd:Q3099911",
                 "xas:Beamline" ;
             schema1:identifier "should have a registry with URIs" ;
@@ -748,13 +748,13 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
         [ a schema1:Product,
                 schema1:Thing ;
             schema1:additionalProperty [ a schema1:PropertyValue ;
-                    schema1:name "Monochromator crystal type" ;
-                    schema1:propertyID "nxs:Field/NXcrystal/type" ;
-                    schema1:value "crystal type" ],
-                [ a schema1:PropertyValue ;
                     schema1:name "Reflecting plane" ;
                     schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
                     schema1:value "1,1,1" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Monochromator crystal type" ;
+                    schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                    schema1:value "crystal type" ],
                 [ a schema1:PropertyValue ;
                     schema1:name "Monochromator d-spacing" ;
                     schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
@@ -770,19 +770,19 @@ ex:exampleGeneratedBy_w46j6j a schema1:Event,
 
 ex:xasfacility_37yht a schema1:Place ;
     schema1:additionalProperty [ a schema1:PropertyValue ;
-            schema1:name "X-ray Source" ;
-            schema1:propertyID "xas:xray_source" ;
-            schema1:value "APS bending magnet" ],
+            schema1:name "Facility energy" ;
+            schema1:propertyID "xas:energy" ;
+            schema1:unitText "GeV" ;
+            schema1:value "7.00" ],
         [ a schema1:PropertyValue ;
             schema1:name "Facility current" ;
             schema1:propertyID "xas:current" ;
             schema1:unitText "Amps" ;
             schema1:value "120" ],
         [ a schema1:PropertyValue ;
-            schema1:name "Facility energy" ;
-            schema1:propertyID "xas:energy" ;
-            schema1:unitText "GeV" ;
-            schema1:value "7.00" ] ;
+            schema1:name "X-ray Source" ;
+            schema1:propertyID "xas:xray_source" ;
+            schema1:value "APS bending magnet" ] ;
     schema1:additionalType "xas:Facility" ;
     schema1:identifier "https://ror.org/aps" ;
     schema1:name "APS" .
@@ -836,7 +836,7 @@ properties:
             minItems: 1
             items:
               anyOf:
-              - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml#/$defs/propertyID_item
+              - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml#/$defs/propertyID_item
               - enum:
                 - xas:edge_energy
                 - calibration method
@@ -848,15 +848,15 @@ properties:
     $ref: '#/$defs/Sample'
 $defs:
   Identifier:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
   Sample:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasSample/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasSample/schema.yaml
   AdditionalProperty:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
   Facility:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasFacility/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasFacility/schema.yaml
   Instrument:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasInstrument/schema.yaml
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -864,8 +864,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/schema.yaml)
 
 
 # JSON-LD Context
@@ -881,7 +881,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasGeneratedBy/context.jsonld)
 
 ## Sources
 
@@ -891,6 +891,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/xasProperties/xasGeneratedBy`
 

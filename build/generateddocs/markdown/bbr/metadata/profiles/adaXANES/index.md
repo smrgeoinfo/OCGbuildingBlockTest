@@ -1,0 +1,130 @@
+
+# ADA XANES Profile (Schema)
+
+`cdif.bbr.metadata.profiles.adaXANES` *v0.1*
+
+Technique-specific profile for X-ray Absorption Near Edge Structure (XANES) products
+
+[*Status*](http://www.opengis.net/def/status): Under development
+
+## Description
+
+# ADA XANES Profile
+
+Technique-specific metadata profile for X-ray Absorption Near Edge Structure (XANES) products in the Astromat Data Archive. X-ray absorption near edge structure spectroscopy.
+
+## Product Types
+- `ada:XANESImageStack`
+- `ada:XANESStackOverviewImage`
+- `ada:XANESRawTabular`
+- `ada:XANESProcessedTabular`
+- `ada:XANESimage`
+- `ada:XANESCollection`
+
+## Valid Component Types
+- `ada:XANESImageStack`
+- `ada:XANESStackOverviewImage`
+- `ada:XANESRawTabular`
+- `ada:XANESProcessedTabular`
+- `ada:XANESimage`
+- `ada:XANESCollection`
+- `ada:analysisLocation`
+- `ada:methodDescription`
+- `ada:instrumentMetadata`
+- `ada:calibrationFile`
+
+## Examples
+
+### XANES Product Example
+#### json
+```json
+{
+  "@type": ["schema:Dataset", "schema:Product"],
+  "schema:additionalType": ["ada:XANESImageStack", "ada:DataDeliveryPackage"],
+  "schema:name": "XANES Analysis of Sample",
+  "schema:description": "X-ray Absorption Near Edge Structure (XANES) data"
+}
+
+```
+
+## Schema
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+title: ADA XANES Product Profile
+description: Technique-specific profile for X-ray Absorption Near Edge Structure (XANES)
+  products. Extends the base ADA product profile with constraints on valid XANES component
+  types.
+allOf:
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
+- type: object
+  properties:
+    schema:additionalType:
+      description: Must include a XANES product type identifier.
+      contains:
+        enum:
+        - ada:XANESImageStack
+        - ada:XANESStackOverviewImage
+        - ada:XANESRawTabular
+        - ada:XANESProcessedTabular
+        - ada:XANESimage
+        - ada:XANESCollection
+        - X-ray absorption near edge structure (XANES) spectroscopy
+    schema:distribution:
+      items:
+        properties:
+          schema:hasPart:
+            items:
+              properties:
+                schema:additionalType:
+                  items:
+                    enum:
+                    - ada:XANESImageStack
+                    - ada:XANESStackOverviewImage
+                    - ada:XANESRawTabular
+                    - ada:XANESProcessedTabular
+                    - ada:XANESimage
+                    - ada:XANESCollection
+                    - ada:analysisLocation
+                    - ada:methodDescription
+                    - ada:instrumentMetadata
+                    - ada:calibrationFile
+x-jsonld-prefixes:
+  schema: http://schema.org/
+  ada: https://ada.astromat.org/metadata/
+  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+  csvw: http://www.w3.org/ns/csvw#
+  prov: http://www.w3.org/ns/prov#
+  spdx: http://spdx.org/rdf/terms#
+  nxs: http://purl.org/nexusformat/definitions/
+  dcterms: http://purl.org/dc/terms/
+  geosparql: http://www.opengis.net/ont/geosparql#
+
+```
+
+Links to the schema:
+
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXANES/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXANES/schema.yaml)
+
+
+# JSON-LD Context
+
+```jsonld
+None
+```
+
+You can find the full JSON-LD context here:
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/profiles/adaXANES/context.jsonld)
+
+## Sources
+
+* [ADA Metadata Schema v3](https://github.com/amds-ldeo/metadata)
+
+# For developers
+
+The source code for this Building Block can be found in the following repository:
+
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* Path: `_sources/profiles/adaXANES`
+
