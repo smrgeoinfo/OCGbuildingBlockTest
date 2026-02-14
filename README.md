@@ -1,5 +1,9 @@
 # OGC Building Blocks Repository
 
+> **This repository is a prototype for testing and development.**
+> It has been superseded by [usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks).
+> All active development continues there.
+
 Modular schema components following the [OGC Building Blocks](https://opengeospatial.github.io/bblocks/) pattern for the [IEDA Data Submission Portal](https://github.com/smrgeoinfo/IEDADataSubmission). Each building block is a self-contained directory with a JSON Schema, JSON-LD context, metadata, and description. Building blocks compose into profiles that define complete metadata schemas for specific use cases.
 
 For more info see [the OGC Documentation](https://ogcincubator.github.io/bblocks-docs/).
