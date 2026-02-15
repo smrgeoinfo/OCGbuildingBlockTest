@@ -47,6 +47,37 @@ Technique-specific metadata profile for Electron Microprobe Analysis (EMPA) prod
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaEMPA/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:EMPAImage",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "EMPA Analysis of Meteorite Sample",
+  "schema:description": "Electron microprobe analysis data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
+        "ada:EMPAImage" ;
+    ns1:description "Electron microprobe analysis data" ;
+    ns1:name "EMPA Analysis of Meteorite Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -107,11 +138,25 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/profiles/adaEMPA/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaEMPA/context.jsonld)
 
 ## Sources
 

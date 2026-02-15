@@ -471,15 +471,15 @@ bring together all required properties.
             schema1:url "http://example.com/resource?foo=bar#fragment" ;
             schema1:value "MgxVV" ] ;
     schema1:keywords [ a schema1:DefinedTerm ;
-            schema1:identifier "http://sweetontology.net/matrElement/Selenium" ;
-            schema1:inDefinedTermSet "http://sweetontology.net/matrElement" ;
-            schema1:name "Selenium" ;
-            schema1:termCode "Se" ],
-        [ a schema1:DefinedTerm ;
             schema1:identifier "hYtRv" ;
             schema1:inDefinedTermSet "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md" ;
             schema1:name "K-edge" ;
-            schema1:termCode "K" ] ;
+            schema1:termCode "K" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier "http://sweetontology.net/matrElement/Selenium" ;
+            schema1:inDefinedTermSet "http://sweetontology.net/matrElement" ;
+            schema1:name "Selenium" ;
+            schema1:termCode "Se" ] ;
     schema1:license "ZoTXfsfevzu",
         "lWbw",
         "ogAgtO",
@@ -499,36 +499,19 @@ bring together all required properties.
     prov:wasGeneratedBy [ schema1:mainEntity [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "nNp" ;
-                            schema1:propertyID "crl" ;
-                            schema1:value "uUUTOmBQ" ],
-                        [ a schema1:PropertyValue ;
                             schema1:name "qqcHFymGZzaJLKGN" ;
                             schema1:propertyID "EiAnJhZyLsQAxKd" ;
-                            schema1:value "rljVqQklQEuNZF" ] ;
+                            schema1:value "rljVqQklQEuNZF" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "nNp" ;
+                            schema1:propertyID "crl" ;
+                            schema1:value "uUUTOmBQ" ] ;
                     schema1:additionalType "MaterialSample",
                         "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample" ;
                     schema1:description "ahjWwyayQYhnB" ;
                     schema1:identifier "gGDA" ;
                     schema1:name "tJSgGfhzZ" ] ;
             prov:used [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "reflection plane (hkl)" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
-                            schema1:value "1,1,1" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "d-spacing" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
-                            schema1:unitText "Angstrom" ;
-                            schema1:value "3.13550" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "crystal type" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
-                            schema1:value "mRqWz" ] ;
-                    schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
-                    schema1:name "Si 111" ],
-                [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
                             schema1:name "x-ray source" ;
@@ -539,7 +522,24 @@ bring together all required properties.
                             schema1:propertyID "nxs:Field/NXsource/probe" ;
                             schema1:value "x-ray" ] ;
                     schema1:additionalType "nxs:BaseClass/NXsource" ;
-                    schema1:name "kVLmQxSource" ] ] .
+                    schema1:name "kVLmQxSource" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "crystal type" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                            schema1:value "mRqWz" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "reflection plane (hkl)" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                            schema1:value "1,1,1" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "d-spacing" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
+                            schema1:unitText "Angstrom" ;
+                            schema1:value "3.13550" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
+                    schema1:name "Si 111" ] ] .
 
 <file:///github/workspace/RNdlTIf> a schema1:DataDownload ;
     schema1:contentUrl "http://example.com/resource/34h5ykl" ;

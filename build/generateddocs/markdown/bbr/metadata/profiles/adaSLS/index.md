@@ -44,6 +44,37 @@ Technique-specific metadata profile for Structured Light Scanning (SLS) products
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaSLS/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:SLSShapeModel",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "SLS Analysis of Sample",
+  "schema:description": "Structured Light Scanning (SLS) data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
+        "ada:SLSShapeModel" ;
+    ns1:description "Structured Light Scanning (SLS) data" ;
+    ns1:name "SLS Analysis of Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -102,11 +133,25 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/profiles/adaSLS/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaSLS/context.jsonld)
 
 ## Sources
 

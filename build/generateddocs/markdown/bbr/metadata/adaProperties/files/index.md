@@ -123,11 +123,18 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/files/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/context.jsonld)
 
 ## Sources
 
