@@ -39,37 +39,6 @@ Technique-specific metadata profile for Accelerator Mass Spectrometry (AMS) prod
 
 ```
 
-#### jsonld
-```jsonld
-{
-  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAMS/context.jsonld",
-  "@type": [
-    "schema:Dataset",
-    "schema:Product"
-  ],
-  "schema:additionalType": [
-    "ada:AMSRawData",
-    "ada:DataDeliveryPackage"
-  ],
-  "schema:name": "AMS Analysis of Sample",
-  "schema:description": "Accelerator Mass Spectrometry (AMS) data"
-}
-```
-
-#### ttl
-```ttl
-@prefix ns1: <schema:> .
-
-[] a ns1:Dataset,
-        ns1:Product ;
-    ns1:additionalType "ada:AMSRawData",
-        "ada:DataDeliveryPackage" ;
-    ns1:description "Accelerator Mass Spectrometry (AMS) data" ;
-    ns1:name "AMS Analysis of Sample" .
-
-
-```
-
 ## Schema
 
 ```yaml
@@ -78,7 +47,7 @@ title: ADA AMS Product Profile
 description: Technique-specific profile for Accelerator Mass Spectrometry (AMS) products.
   Extends the base ADA product profile with constraints on valid AMS component types.
 allOf:
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
 - type: object
   properties:
     schema:additionalType:
@@ -118,32 +87,18 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAMS/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAMS/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaAMS/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaAMS/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "ada": "https://ada.astromat.org/metadata/",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "time": "http://www.w3.org/2006/time#",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAMS/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaAMS/context.jsonld)
 
 ## Sources
 
@@ -153,6 +108,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/profiles/adaAMS`
 

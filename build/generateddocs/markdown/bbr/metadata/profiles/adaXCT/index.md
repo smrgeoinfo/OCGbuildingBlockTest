@@ -40,37 +40,6 @@ Technique-specific metadata profile for X-ray Computed Tomography (XCT) products
 
 ```
 
-#### jsonld
-```jsonld
-{
-  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXCT/context.jsonld",
-  "@type": [
-    "schema:Dataset",
-    "schema:Product"
-  ],
-  "schema:additionalType": [
-    "ada:XCTImageCollection",
-    "ada:DataDeliveryPackage"
-  ],
-  "schema:name": "XCT Analysis of Sample",
-  "schema:description": "X-ray Computed Tomography (XCT) data"
-}
-```
-
-#### ttl
-```ttl
-@prefix ns1: <schema:> .
-
-[] a ns1:Dataset,
-        ns1:Product ;
-    ns1:additionalType "ada:DataDeliveryPackage",
-        "ada:XCTImageCollection" ;
-    ns1:description "X-ray Computed Tomography (XCT) data" ;
-    ns1:name "XCT Analysis of Sample" .
-
-
-```
-
 ## Schema
 
 ```yaml
@@ -80,7 +49,7 @@ description: Technique-specific profile for X-ray Computed Tomography (XCT) prod
   Extends the base ADA product profile with constraints on valid XCT component types
   and detailXCT requirements.
 allOf:
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
 - type: object
   properties:
     schema:additionalType:
@@ -118,32 +87,18 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXCT/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXCT/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXCT/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXCT/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "ada": "https://ada.astromat.org/metadata/",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "time": "http://www.w3.org/2006/time#",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaXCT/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaXCT/context.jsonld)
 
 ## Sources
 
@@ -153,6 +108,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/profiles/adaXCT`
 

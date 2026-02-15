@@ -82,7 +82,7 @@ Defintion of properties to describe structure of tabular data formatted followin
     {
       "schema": "http://schema.org"
     },
-    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/context.jsonld",
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/context.jsonld",
     {
       "schema": "http://schema.org/",
       "ex": "https://example.org/",
@@ -169,15 +169,15 @@ ex:xasXDIdownload_23463h a cdi:TabularTextDataset,
             cdi:label "energy" ;
             cdi:length 12 ],
         [ a cdi:TextMapping ;
+            cdi:formats xas:incidentIntensityVariable ;
+            cdi:hasRole "Measure" ;
+            cdi:label "i0" ],
+        [ a cdi:TextMapping ;
             cdi:formats xas:transmittedIntensityVariable ;
             cdi:hasRole "Measure" ;
             cdi:index 2 ;
             cdi:label "it" ;
-            cdi:length 12 ],
-        [ a cdi:TextMapping ;
-            cdi:formats xas:incidentIntensityVariable ;
-            cdi:hasRole "Measure" ;
-            cdi:label "i0" ] ;
+            cdi:length 12 ] ;
     schema1:contentSize "30 kb" ;
     schema1:contentUrl "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi" ;
     schema1:description "Distribution = PhysicalDataSet text file conformant with XDI specification" ;
@@ -259,8 +259,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/schema.yaml)
 
 
 # JSON-LD Context
@@ -275,7 +275,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasXdiTabularTextDataset/context.jsonld)
 
 ## Sources
 
@@ -285,6 +285,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/xasProperties/xasXdiTabularTextDataset`
 

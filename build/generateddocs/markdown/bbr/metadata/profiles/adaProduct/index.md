@@ -35,8 +35,8 @@ description: Schema for JSON metadata documenting products in Astromat Data Arch
   DDI-CDI variable types and CSVW tabular data properties.
 type: object
 allOf:
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/cdifMandatory/schema.yaml
-- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/cdifOptional/schema.yaml
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/cdifMandatory/schema.yaml
+- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/cdifOptional/schema.yaml
 - type: object
   properties:
     '@type':
@@ -324,7 +324,7 @@ allOf:
       items:
         anyOf:
         - type: string
-        - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.yaml
+        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/creativeWork/schema.yaml
     schema:relatedLink:
       type: array
       description: Links to related resources at the product level
@@ -380,9 +380,9 @@ allOf:
             type: array
             description: Instruments used in the analysis
             items:
-              $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
+              $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/instrument/schema.yaml
           schema:location:
-            $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
+            $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/laboratory/schema.yaml
           schema:mainEntity:
             type: array
             description: Samples analyzed
@@ -559,7 +559,7 @@ allOf:
       items:
         anyOf:
         - allOf:
-          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
           - type: object
             description: Single file distribution.
             properties:
@@ -571,7 +571,7 @@ allOf:
                   - schema:DataDownload
                 minItems: 1
         - allOf:
-          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+          - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
           - type: object
             description: Archive file with parts.
             properties:
@@ -619,7 +619,7 @@ allOf:
                 description: Array describing the files in the zip archive.
                 items:
                   allOf:
-                  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                   - type: object
                     properties:
                       '@type':
@@ -674,13 +674,13 @@ allOf:
               type: array
               description: Actions that can be invoked via the API.
               items:
-                $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
+                $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/action/schema.yaml
             schema:result:
               description: The file(s) that result from invoking this API. Reuses
                 the same single-file or archive-with-hasPart structure.
               oneOf:
               - allOf:
-                - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                 - type: object
                   description: Single file result.
                   properties:
@@ -692,7 +692,7 @@ allOf:
                         const: schema:DataDownload
                       minItems: 1
               - allOf:
-                - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                 - type: object
                   description: Archive file result with parts.
                   properties:
@@ -708,7 +708,7 @@ allOf:
                       description: Files within the archive result.
                       items:
                         allOf:
-                        - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
+                        - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
                         - type: object
                           properties:
                             '@type':
@@ -818,32 +818,18 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "ada": "https://ada.astromat.org/metadata/",
-    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
-    "csvw": "http://www.w3.org/ns/csvw#",
-    "prov": "http://www.w3.org/ns/prov#",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "nxs": "http://purl.org/nexusformat/definitions/",
-    "dcterms": "http://purl.org/dc/terms/",
-    "geosparql": "http://www.opengis.net/ont/geosparql#",
-    "time": "http://www.w3.org/2006/time#",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaProduct/context.jsonld)
 
 ## Sources
 
@@ -853,6 +839,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/profiles/adaProduct`
 

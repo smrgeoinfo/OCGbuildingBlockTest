@@ -66,7 +66,7 @@ allOf:
       description: MIME type with extension; should indicate the serialization scheme
         in sufficient detail that machine can know how to parse.
     resultTarget:
-      $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/stringArray/stringArraySchema.json
+      $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/stringArray/stringArraySchema.json
     schema:relatedLink:
       type: array
       description: 'Links between files in the product. Use schema:name for path to
@@ -92,14 +92,14 @@ allOf:
               schema:url:
                 type: string
 - anyOf:
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/image/imageSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/imageMap/imageMapSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/tabularData/tabularDataSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/collection/collectionSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/dataCube/dataCubeSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/document/documentSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/supDocImage/supDocImageSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/otherFile/otherFileSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/image/imageSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/imageMap/imageMapSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/tabularData/tabularDataSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/collection/collectionSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/dataCube/dataCubeSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/document/documentSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/supDocImage/supDocImageSchema.json
+  - $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/otherFile/otherFileSchema.json
   - type: object
     properties:
       '@type':
@@ -116,25 +116,18 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/adaProperties/files/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "http://schema.org/",
-    "ada": "https://ada.astromat.org/metadata/",
-    "spdx": "http://spdx.org/rdf/terms#",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/adaProperties/files/context.jsonld)
 
 ## Sources
 
@@ -144,6 +137,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/adaProperties/files`
 

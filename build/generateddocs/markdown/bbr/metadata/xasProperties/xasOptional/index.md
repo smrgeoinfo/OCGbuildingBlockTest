@@ -255,17 +255,17 @@ allOf:
           - schema:inDefinedTermSet
 $defs:
   CdifMandatory:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
   DefinedTerm:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
   AdditionalProperty:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/additionalPropertySchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/additionalProperty/additionalPropertySchema.json
   DataDownload:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/dataDownloadSchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/dataDownload/dataDownloadSchema.json
   XasSample:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSample/xasSampleSchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasSample/xasSampleSchema.json
   XasSubject:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSubject/xasSubjectSchema.json
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasSubject/xasSubjectSchema.json
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -273,8 +273,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/schema.yaml)
 
 
 # JSON-LD Context
@@ -289,7 +289,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasOptional/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasOptional/context.jsonld)
 
 ## Sources
 
@@ -299,6 +299,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/xasProperties/xasOptional`
 

@@ -49,7 +49,7 @@ Example quality measure
     {
       "schema": "http://schema.org/"
     },
-    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/context.jsonld"
+    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/context.jsonld"
   ],
   "@type": "dqv:QualityMeasurement",
   "dqv:isMeasurementOf": {
@@ -76,23 +76,23 @@ Example quality measure
 
 #### ttl
 ```ttl
-@prefix ns1: <dqv:> .
-@prefix ns2: <schema:> .
+@prefix ns1: <schema:> .
+@prefix ns2: <dqv:> .
 
-[] a ns1:QualityMeasurement ;
-    ns1:isMeasurementOf [ a ns2:DefinedTerm ;
-            ns2:identifier "qMsuTaeO" ;
-            ns2:inDefinedTermSet "GCjNHSplcIDSd" ;
-            ns2:name "LBp" ;
-            ns2:termCode "kVavhujDLioBbZc" ] ;
-    ns1:value [ a ns2:DefinedTerm ;
-            ns2:identifier [ a ns2:PropertyValue ;
-                    ns2:propertyID "bOQUqI" ;
-                    ns2:url "http://example.com/resource?foo=bar#fragment" ;
-                    ns2:value "dzkwRNhKqfDVhOu" ] ;
-            ns2:inDefinedTermSet "YYdmhomhxBnNBic" ;
-            ns2:name "aZrfr" ;
-            ns2:termCode "OgZwkLzhtqNSCcvMYKT" ] .
+[] a ns2:QualityMeasurement ;
+    ns2:isMeasurementOf [ a ns1:DefinedTerm ;
+            ns1:identifier "qMsuTaeO" ;
+            ns1:inDefinedTermSet "GCjNHSplcIDSd" ;
+            ns1:name "LBp" ;
+            ns1:termCode "kVavhujDLioBbZc" ] ;
+    ns2:value [ a ns1:DefinedTerm ;
+            ns1:identifier [ a ns1:PropertyValue ;
+                    ns1:propertyID "bOQUqI" ;
+                    ns1:url "http://example.com/resource?foo=bar#fragment" ;
+                    ns1:value "dzkwRNhKqfDVhOu" ] ;
+            ns1:inDefinedTermSet "YYdmhomhxBnNBic" ;
+            ns1:name "aZrfr" ;
+            ns1:termCode "OgZwkLzhtqNSCcvMYKT" ] .
 
 
 ```
@@ -128,7 +128,7 @@ required:
 - dqv:value
 $defs:
   DefinedTerm:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
+    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -136,8 +136,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.json)
-* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.yaml)
+* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.json)
+* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.yaml)
 
 
 # JSON-LD Context
@@ -152,7 +152,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/context.jsonld)
 
 ## Sources
 
@@ -162,6 +162,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
+* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
 * Path: `_sources/qualityProperties/qualityMeasure`
 
