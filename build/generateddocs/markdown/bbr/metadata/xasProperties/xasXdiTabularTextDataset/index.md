@@ -163,15 +163,15 @@ ex:xasXDIdownload_23463h a cdi:TabularTextDataset,
     ns1:conformsTo "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md" ;
     cdi:allowsDuplicates false ;
     cdi:has_TextMapping [ a cdi:TextMapping ;
-            cdi:formats xas:incidentIntensityVariable ;
-            cdi:hasRole "Measure" ;
-            cdi:label "i0" ],
-        [ a cdi:TextMapping ;
             cdi:formats xas:transmittedIntensityVariable ;
             cdi:hasRole "Measure" ;
             cdi:index 2 ;
             cdi:label "it" ;
             cdi:length 12 ],
+        [ a cdi:TextMapping ;
+            cdi:formats xas:incidentIntensityVariable ;
+            cdi:hasRole "Measure" ;
+            cdi:label "i0" ],
         [ a cdi:TextMapping ;
             cdi:formats xas:monochromatorEnergyVariable ;
             cdi:hasRole "Dimension" ;
