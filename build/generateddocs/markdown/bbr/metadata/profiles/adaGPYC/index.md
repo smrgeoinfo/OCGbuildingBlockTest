@@ -39,6 +39,37 @@ Technique-specific metadata profile for Gas Pycnometry (GPYC) products in the As
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaGPYC/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:GPYCProcessedTabular",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "GPYC Analysis of Sample",
+  "schema:description": "Gas Pycnometry (GPYC) data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
+        "ada:GPYCProcessedTabular" ;
+    ns1:description "Gas Pycnometry (GPYC) data" ;
+    ns1:name "GPYC Analysis of Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -94,11 +125,25 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaGPYC/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaGPYC/context.jsonld)
 
 ## Sources
 

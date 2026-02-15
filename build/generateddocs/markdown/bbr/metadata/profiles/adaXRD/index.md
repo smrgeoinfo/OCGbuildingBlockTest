@@ -40,6 +40,37 @@ Technique-specific metadata profile for X-ray Diffraction (XRD) products in the 
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:XRDTabular",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "XRD Analysis of Mineral Sample",
+  "schema:description": "X-ray diffraction pattern data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
+        "ada:XRDTabular" ;
+    ns1:description "X-ray diffraction pattern data" ;
+    ns1:name "XRD Analysis of Mineral Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -92,11 +123,25 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaXRD/context.jsonld)
+[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaXRD/context.jsonld)
 
 ## Sources
 

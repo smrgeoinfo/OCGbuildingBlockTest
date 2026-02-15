@@ -2,7 +2,7 @@
   "title": "Validation report for cdif.bbr.metadata.profiles.adaXANES - ADA XANES Profile",
   "bblockName": "ADA XANES Profile",
   "bblockId": "cdif.bbr.metadata.profiles.adaXANES",
-  "generated": "2026-02-15T02:06:23.915184+00:00",
+  "generated": "2026-02-15T02:08:29.321475+00:00",
   "result": false,
   "items": [
     {
@@ -24,6 +24,25 @@
             {
               "isError": false,
               "message": "Using example_1_1.json from examples"
+            },
+            {
+              "op": "jsonld-uplift",
+              "isError": false,
+              "message": "JSON-LD context is present - uplifting"
+            },
+            {
+              "op": "jsonld-create",
+              "filename": "example_1_1.jsonld",
+              "isError": false,
+              "message": "Output JSON-LD example_1_1.jsonld created"
+            },
+            {
+              "op": "ttl-create",
+              "empty": false,
+              "filename": "example_1_1.ttl",
+              "size": 6,
+              "isError": false,
+              "message": "Output Turtle example_1_1.ttl created"
             }
           ]
         },
@@ -40,11 +59,21 @@
               "message": "ValidationError: '@id' is a required property\n\nFailed validating 'required' in schema['allOf'][0]['allOf'][0]['allOf'][0]:\n    {'required': ['@id',\n                  '@type',\n                  '@context',\n                  'schema:name',\n                  'schema:identifier',\n                  'schema:dateModified',\n                  'schema:subjectOf']}\n\nOn instance:\n    {'@type': ['schema:Dataset', 'schema:Product'],\n     'schema:additionalType': ['ada:XANESImageStack',\n                               'ada:DataDeliveryPackage'],\n     'schema:description': 'X-ray Absorption Near Edge Structure (XANES) '\n                           'data',\n     'schema:name': 'XANES Analysis of Sample'}"
             }
           ]
+        },
+        {
+          "name": "SHACL",
+          "title": "SHACL",
+          "entries": []
         }
       ]
     }
   ],
-  "globalErrors": {},
+  "globalErrors": {
+    "SHACL": {
+      "isError": true,
+      "message": "Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:\nBad syntax (Prefix \"dqv:\" not bound) at ^ in:\n\"...b'fd:qualityMeasurementNode\\n\\ta sh:NodeShape; \\n\\tsh:targetClass '^b'dqv:QualityMeasurement ;\\n\\t\\n\\tsh:target [\\n\\t  a sh:SPARQLTarget'...\""
+    }
+  },
   "counts": {
     "total": 1,
     "passed": 0,
