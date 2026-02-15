@@ -39,6 +39,37 @@ Technique-specific metadata profile for AI-driven Visual Analysis (AIVA) product
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAIVA/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:AIVAImage",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "AIVA Analysis of Sample",
+  "schema:description": "AI-driven Visual Analysis (AIVA) data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:AIVAImage",
+        "ada:DataDeliveryPackage" ;
+    ns1:description "AI-driven Visual Analysis (AIVA) data" ;
+    ns1:name "AIVA Analysis of Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -47,7 +78,7 @@ title: ADA AIVA Product Profile
 description: Technique-specific profile for AI-driven Visual Analysis (AIVA) products.
   Extends the base ADA product profile with constraints on valid AIVA component types.
 allOf:
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
 - type: object
   properties:
     schema:additionalType:
@@ -88,18 +119,32 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaAIVA/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaAIVA/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAIVA/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAIVA/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaAIVA/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaAIVA/context.jsonld)
 
 ## Sources
 
@@ -109,6 +154,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/profiles/adaAIVA`
 

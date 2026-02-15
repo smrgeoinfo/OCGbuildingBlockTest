@@ -211,7 +211,7 @@ bring together all required properties.
     {
       "schema": "http://schema.org/"
     },
-    "https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld",
+    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld",
     {
       "schema": "http://schema.org/",
       "dcterms": "http://purl.org/dc/terms/",
@@ -514,18 +514,6 @@ bring together all required properties.
             prov:used [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Probe" ;
-                            schema1:propertyID "nxs:Field/NXsource/probe" ;
-                            schema1:value "x-ray" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "x-ray source" ;
-                            schema1:propertyID "nxs:Field/NXsource/type" ;
-                            schema1:value "Synchrotron X-ray Source" ] ;
-                    schema1:additionalType "nxs:BaseClass/NXsource" ;
-                    schema1:name "kVLmQxSource" ],
-                [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
                             schema1:name "crystal type" ;
                             schema1:propertyID "nxs:Field/NXcrystal/type" ;
                             schema1:value "mRqWz" ],
@@ -539,7 +527,19 @@ bring together all required properties.
                             schema1:unitText "Angstrom" ;
                             schema1:value "3.13550" ] ;
                     schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
-                    schema1:name "Si 111" ] ] .
+                    schema1:name "Si 111" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "Probe" ;
+                            schema1:propertyID "nxs:Field/NXsource/probe" ;
+                            schema1:value "x-ray" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "x-ray source" ;
+                            schema1:propertyID "nxs:Field/NXsource/type" ;
+                            schema1:value "Synchrotron X-ray Source" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
+                    schema1:name "kVLmQxSource" ] ] .
 
 <file:///github/workspace/RNdlTIf> a schema1:DataDownload ;
     schema1:contentUrl "http://example.com/resource/34h5ykl" ;
@@ -838,17 +838,17 @@ allOf:
           - schema:inDefinedTermSet
 $defs:
   CdifMandatory:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
   DefinedTerm:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
   AdditionalProperty:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/additionalProperty/additionalPropertySchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/additionalProperty/additionalPropertySchema.json
   DataDownload:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/schemaorgProperties/dataDownload/dataDownloadSchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/dataDownloadSchema.json
   XasSample:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasSample/xasSampleSchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSample/xasSampleSchema.json
   XasSubject:
-    $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/xasProperties/xasSubject/xasSubjectSchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasSubject/xasSubjectSchema.json
 x-jsonld-extra-terms:
   schema: https://schema.org
 
@@ -856,8 +856,8 @@ x-jsonld-extra-terms:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/schema.yaml)
 
 
 # JSON-LD Context
@@ -872,7 +872,7 @@ Links to the schema:
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasRequired/context.jsonld)
 
 ## Sources
 
@@ -882,6 +882,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/xasProperties/xasRequired`
 

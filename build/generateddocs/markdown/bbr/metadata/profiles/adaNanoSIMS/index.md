@@ -48,6 +48,37 @@ Technique-specific metadata profile for Nanoscale Secondary Ion Mass Spectrometr
 
 ```
 
+#### jsonld
+```jsonld
+{
+  "@context": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaNanoSIMS/context.jsonld",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:additionalType": [
+    "ada:NanoSIMSCollection",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:name": "NanoSIMS Analysis of Sample",
+  "schema:description": "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) data"
+}
+```
+
+#### ttl
+```ttl
+@prefix ns1: <schema:> .
+
+[] a ns1:Dataset,
+        ns1:Product ;
+    ns1:additionalType "ada:DataDeliveryPackage",
+        "ada:NanoSIMSCollection" ;
+    ns1:description "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) data" ;
+    ns1:name "NanoSIMS Analysis of Sample" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -57,7 +88,7 @@ description: Technique-specific profile for Nanoscale Secondary Ion Mass Spectro
   (NanoSIMS) products. Extends the base ADA product profile with constraints on valid
   NanoSIMS component types and detailNanoSIMS requirements.
 allOf:
-- $ref: https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/schema.yaml
 - type: object
   properties:
     schema:additionalType:
@@ -103,18 +134,32 @@ x-jsonld-prefixes:
 
 Links to the schema:
 
-* YAML version: [schema.yaml](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaNanoSIMS/schema.json)
-* JSON version: [schema.json](https://smrgeoinfo.github.io/OCGbuildingBlockTest/build/annotated/bbr/metadata/profiles/adaNanoSIMS/schema.yaml)
+* YAML version: [schema.yaml](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaNanoSIMS/schema.json)
+* JSON version: [schema.json](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaNanoSIMS/schema.yaml)
 
 
 # JSON-LD Context
 
 ```jsonld
-None
+{
+  "@context": {
+    "schema": "https://schema.org",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "time": "http://www.w3.org/2006/time#",
+    "@version": 1.1
+  }
+}
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://smrgeoinfo.github.io/OCGbuildingBlockTest/_sources/profiles/adaNanoSIMS/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaNanoSIMS/context.jsonld)
 
 ## Sources
 
@@ -124,6 +169,6 @@ You can find the full JSON-LD context here:
 
 The source code for this Building Block can be found in the following repository:
 
-* URL: [https://github.com/smrgeoinfo/OCGbuildingBlockTest](https://github.com/smrgeoinfo/OCGbuildingBlockTest)
+* URL: [https://github.com/usgin/metadataBuildingBlocks](https://github.com/usgin/metadataBuildingBlocks)
 * Path: `_sources/profiles/adaNanoSIMS`
 
