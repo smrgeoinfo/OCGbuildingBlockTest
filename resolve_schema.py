@@ -16,7 +16,7 @@ Usage:
 
 Examples:
     python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json
-    python resolve_schema.py _sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json output.json
+    python resolve_schema.py _sources/cdifProperties/cdifMandatory/cdifMandatorySchema.json output.json
     python resolve_schema.py schema.json -o output.json --inline-single-use
 """
 
@@ -488,8 +488,8 @@ def main():
         epilog="""
 Examples:
     python resolve_schema.py _sources/profiles/CDIFDiscovery/CDIFDiscoverySchema.json
-    python resolve_schema.py _sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json -o output.json
-    python resolve_schema.py _sources/schemaorgProperties/cdifOptional/cdifOptionalSchema.json -v
+    python resolve_schema.py _sources/cdifProperties/cdifMandatory/cdifMandatorySchema.json -o output.json
+    python resolve_schema.py _sources/cdifProperties/cdifOptional/cdifOptionalSchema.json -v
         """
     )
 
