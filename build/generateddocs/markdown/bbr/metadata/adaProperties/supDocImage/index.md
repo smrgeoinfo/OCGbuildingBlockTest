@@ -23,9 +23,15 @@ description: Supplemental document images including analysis location images, an
 type: object
 properties:
   '@type':
-    const:
-    - ada:image
-    - schema:DigitalDocument
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        const: ada:image
+    - contains:
+        const: schema:DigitalDocument
     description: GeneralType for supplemental document images
   componentType:
     type: object

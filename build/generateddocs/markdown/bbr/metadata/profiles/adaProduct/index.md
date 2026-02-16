@@ -37,6 +37,7 @@ Mock data for validation and testing.
         "csvw": "http://www.w3.org/ns/csvw#",
         "prov": "http://www.w3.org/ns/prov#",
         "spdx": "http://spdx.org/rdf/terms#",
+        "nxs": "http://purl.org/nexusformat/definitions/",
         "dcterms": "http://purl.org/dc/terms/",
         "geosparql": "http://www.opengis.net/ont/geosparql#",
         "ex": "https://example.org/"
@@ -49,7 +50,7 @@ Mock data for validation and testing.
     "schema:name": "ADA Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example Astromat Data Archive (ADA) product metadata demonstrating all properties defined by the adaProduct profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "ada:EMPAImage",
+        "Electron Microprobe Analysis Image (EMPA)",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -122,7 +123,11 @@ Mock data for validation and testing.
     "schema:funding": [
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": "NNX17AE48G",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "award number",
+                "schema:value": "NNX17AE48G"
+            },
             "schema:name": "Astromaterials Curation and Analysis",
             "schema:funder": {
                 "@type": "schema:Organization",
@@ -150,37 +155,23 @@ Mock data for validation and testing.
                 {
                     "@type": [
                         "schema:Thing",
-                        "schema:Product"
+                        "prov:Entity",
+                        "nxs:BaseClass/NXinstrument"
                     ],
-                    "schema:additionalType": "ada:ADAInstrument",
+                    "schema:additionalType": [
+                        "ada:ADAInstrument"
+                    ],
                     "schema:name": "Example ADA Instrument",
-                    "schema:identifier": "ex:instrument-ada-001",
-                    "schema:additionalProperty": [
-                        {
-                            "@type": "schema:PropertyValue",
-                            "schema:propertyID": [
-                                "ada:adaSetting"
-                            ],
-                            "schema:name": "Instrument setting",
-                            "schema:value": "Standard operating parameters"
-                        }
-                    ]
+                    "schema:identifier": "ex:instrument-ada-001"
                 }
             ],
             "schema:location": {
-                "@type": "schema:Place",
+                "@type": [
+                    "schema:Place",
+                    "nxs:BaseClass/NXsource"
+                ],
                 "schema:name": "Analytical Sciences Laboratory",
-                "schema:identifier": "https://ror.org/00hx57361",
-                "schema:additionalProperty": [
-                    {
-                        "@type": "schema:PropertyValue",
-                        "schema:propertyID": [
-                            "ada:laboratoryConditions"
-                        ],
-                        "schema:name": "Laboratory conditions",
-                        "schema:value": "Controlled environment, 22C, 45% RH"
-                    }
-                ]
+                "schema:identifier": "https://ror.org/00hx57361"
             },
             "schema:mainEntity": [
                 {
@@ -292,13 +283,16 @@ Mock data for validation and testing.
                     "spdx:checksum": {
                         "spdx:algorithm": "MD5",
                         "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    "componentType": {
+                        "@type": "ada:EMPAImage"
                     }
                 },
                 {
                     "@id": "ex:adaProduct-file-002",
                     "@type": [
                         "ada:document",
-                        "schema:CreativeWork"
+                        "schema:DigitalDocument"
                     ],
                     "schema:name": "ALH84001_ADA_methods.pdf",
                     "schema:description": "Method description document for this analysis",
@@ -312,6 +306,9 @@ Mock data for validation and testing.
                         "@type": "schema:QuantitativeValue",
                         "schema:value": 524288,
                         "schema:unitText": "byte"
+                    },
+                    "componentType": {
+                        "@type": "ada:methodDescription"
                     }
                 }
             ]
@@ -366,6 +363,7 @@ Mock data for validation and testing.
       "csvw": "http://www.w3.org/ns/csvw#",
       "prov": "http://www.w3.org/ns/prov#",
       "spdx": "http://spdx.org/rdf/terms#",
+      "nxs": "http://purl.org/nexusformat/definitions/",
       "dcterms": "http://purl.org/dc/terms/",
       "geosparql": "http://www.opengis.net/ont/geosparql#",
       "ex": "https://example.org/"
@@ -379,7 +377,7 @@ Mock data for validation and testing.
   "schema:name": "ADA Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example Astromat Data Archive (ADA) product metadata demonstrating all properties defined by the adaProduct profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "ada:EMPAImage",
+    "Electron Microprobe Analysis Image (EMPA)",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -452,7 +450,11 @@ Mock data for validation and testing.
   "schema:funding": [
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": "NNX17AE48G",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "award number",
+        "schema:value": "NNX17AE48G"
+      },
       "schema:name": "Astromaterials Curation and Analysis",
       "schema:funder": {
         "@type": "schema:Organization",
@@ -480,37 +482,23 @@ Mock data for validation and testing.
         {
           "@type": [
             "schema:Thing",
-            "schema:Product"
+            "prov:Entity",
+            "nxs:BaseClass/NXinstrument"
           ],
-          "schema:additionalType": "ada:ADAInstrument",
+          "schema:additionalType": [
+            "ada:ADAInstrument"
+          ],
           "schema:name": "Example ADA Instrument",
-          "schema:identifier": "ex:instrument-ada-001",
-          "schema:additionalProperty": [
-            {
-              "@type": "schema:PropertyValue",
-              "schema:propertyID": [
-                "ada:adaSetting"
-              ],
-              "schema:name": "Instrument setting",
-              "schema:value": "Standard operating parameters"
-            }
-          ]
+          "schema:identifier": "ex:instrument-ada-001"
         }
       ],
       "schema:location": {
-        "@type": "schema:Place",
+        "@type": [
+          "schema:Place",
+          "nxs:BaseClass/NXsource"
+        ],
         "schema:name": "Analytical Sciences Laboratory",
-        "schema:identifier": "https://ror.org/00hx57361",
-        "schema:additionalProperty": [
-          {
-            "@type": "schema:PropertyValue",
-            "schema:propertyID": [
-              "ada:laboratoryConditions"
-            ],
-            "schema:name": "Laboratory conditions",
-            "schema:value": "Controlled environment, 22C, 45% RH"
-          }
-        ]
+        "schema:identifier": "https://ror.org/00hx57361"
       },
       "schema:mainEntity": [
         {
@@ -622,13 +610,16 @@ Mock data for validation and testing.
           "spdx:checksum": {
             "spdx:algorithm": "MD5",
             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "componentType": {
+            "@type": "ada:EMPAImage"
           }
         },
         {
           "@id": "ex:adaProduct-file-002",
           "@type": [
             "ada:document",
-            "schema:CreativeWork"
+            "schema:DigitalDocument"
           ],
           "schema:name": "ALH84001_ADA_methods.pdf",
           "schema:description": "Method description document for this analysis",
@@ -642,6 +633,9 @@ Mock data for validation and testing.
             "@type": "schema:QuantitativeValue",
             "schema:value": 524288,
             "schema:unitText": "byte"
+          },
+          "componentType": {
+            "@type": "ada:methodDescription"
           }
         }
       ]
@@ -690,8 +684,8 @@ Mock data for validation and testing.
 
 ex:adaProduct-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "ada:DataDeliveryPackage",
-        "ada:EMPAImage" ;
+    schema1:additionalType "Electron Microprobe Analysis Image (EMPA)",
+        "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
             schema1:contributor [ a schema1:Person ;
@@ -733,7 +727,9 @@ ex:adaProduct-example-001 a schema1:Dataset,
             schema1:funder [ a schema1:Organization ;
                     schema1:additionalType "schema:FundingAgency" ;
                     schema1:name "NASA" ] ;
-            schema1:identifier "NNX17AE48G" ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "award number" ;
+                    schema1:value "NNX17AE48G" ] ;
             schema1:name "Astromaterials Curation and Analysis" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "https://registry.identifiers.org/registry/doi" ;
@@ -758,11 +754,8 @@ ex:adaProduct-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Event,
                 prov:Activity ;
             schema1:identifier "session-ada-20260110-001" ;
-            schema1:location [ a schema1:Place ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Laboratory conditions" ;
-                            schema1:propertyID "ada:laboratoryConditions" ;
-                            schema1:value "Controlled environment, 22C, 45% RH" ] ;
+            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
+                        schema1:Place ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -772,12 +765,9 @@ ex:adaProduct-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Instrument setting" ;
-                            schema1:propertyID "ada:adaSetting" ;
-                            schema1:value "Standard operating parameters" ] ;
+            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
+                        schema1:Thing,
+                        prov:Entity ;
                     schema1:additionalType "ada:ADAInstrument" ;
                     schema1:identifier "ex:instrument-ada-001" ;
                     schema1:name "Example ADA Instrument" ] ] .
@@ -794,7 +784,7 @@ ex:adaProduct-file-001 a schema1:ImageObject,
     spdx:checksum [ spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] .
 
-ex:adaProduct-file-002 a schema1:CreativeWork,
+ex:adaProduct-file-002 a schema1:DigitalDocument,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;
@@ -862,95 +852,17 @@ allOf:
       type: array
       items:
         type: string
-        enum:
-        - schema:Dataset
-        - schema:Product
+      allOf:
+      - contains:
+          const: schema:Dataset
+      - contains:
+          const: schema:Product
     schema:additionalType:
       type: array
       description: Should have the ada product type and 'ada:DataDeliveryPackage'
       items:
         type: string
-        enum:
-        - ada:DataDeliveryPackage
-        - "\u2074\u2070Ar/\xB3\u2079Ar Geochronology and Thermochronology (ARGT)"
-        - Accelerator Mass Spectrometry (AMS)
-        - Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)
-        - Basemap
-        - Differential Scanning Calorimetry (DSC)
-        - Electron Microprobe Analysis (EMPA) Collection
-        - Electron Microprobe Analysis Image (EMPA)
-        - Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)
-        - Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)
-        - Fluorescence Microscopy (UVFM) Image
-        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube
-        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular
-        - Gas Chromatography-Mass Spectrometry (GCMS)
-        - Gas Pycnometry (GPYC) Processed
-        - Gas Pycnometry (GPYC) Raw
-        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed
-        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw
-        - Ion Chromatography (IC)
-        - Laser Assisted Fluorination (LAF) Processed
-        - Laser Assisted Fluorination (LAF) Raw
-        - Liquid Chromatography - Mass Spectrometry (LCMS) Collection
-        - Lock-In Thermography (LIT) Collection
-        - Lock-In Thermography (LIT) image
-        - Microprobe Two-Step Laser Mass Spectrometry (L2MS)
-        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed
-        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw
-        - Nanoscale Infrared Mapping (NanoIR) Background
-        - Nanoscale Infrared Mapping (NanoIR) MapCollection
-        - Nanoscale Infrared Mapping (NanoIR) Point Data
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular
-        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw
-        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed
-        - Particle Size Frequency Distribution (PSFD)
-        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed
-        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw
-        - Quantitative Reflective Imaging System (QRIS) Calibrated
-        - Quantitative Reflective Imaging System (QRIS) Raw
-        - RAMAN Raw
-        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
-          Processed
-        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
-          Spectra
-        - Scanning Electron Microscopy (SEM) Image
-        - Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD)
-          Grain Image
-        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
-          Point Data
-        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
-          image
-        - Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL)
-          image
-        - Scanning Transmission Electron Microscopy (STEM) Image
-        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
-          Cube
-        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
-          Tabular
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Cube
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Tabular
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Tomography
-        - Secondary Ion Mass Spectrometry (SIMS) Tabular
-        - Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)
-        - SLSIndividualScanCollection
-        - Structured Light Scanning (SLS) Shape Model
-        - Time-of-flight secondary ion mass spectrometry (TOFSIMS)
-        - Transmission Electron Microscopy (TEM) Image
-        - Transmission Electron Microscopy (TEM) Patterns Image
-        - Visible Light Microscopy (VLM) Image
-        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point
-        - X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)
-        - X-ray Computed Tomography (XCT) Image Collection
-        - X-ray Diffraction (XRD) Tabular
+      minItems: 1
     submissionType:
       type: string
     schema:funding:
@@ -963,8 +875,7 @@ allOf:
             default: schema:MonetaryGrant
             const: schema:MonetaryGrant
           schema:identifier:
-            type: string
-            description: String that identifies a particular grant
+            description: Identifier for a particular grant
           schema:name:
             type: string
             description: Title of the grant
@@ -1386,8 +1297,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                  enum:
-                  - schema:DataDownload
+                contains:
+                  const: schema:DataDownload
                 minItems: 1
         - allOf:
           - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
@@ -1398,8 +1309,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                  enum:
-                  - schema:DataDownload
+                contains:
+                  const: schema:DataDownload
                 minItems: 1
               schema:provider:
                 type: array

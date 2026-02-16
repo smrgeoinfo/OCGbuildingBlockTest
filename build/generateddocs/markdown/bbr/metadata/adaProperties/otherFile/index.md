@@ -23,8 +23,12 @@ description: Files in other widely-used formats approved for submission to the A
 type: object
 properties:
   '@type':
-    const:
-    - ada:otherFileType
+    type: array
+    items:
+      type: string
+    minItems: 1
+    contains:
+      const: ada:otherFileType
   componentType:
     anyOf:
     - type: object

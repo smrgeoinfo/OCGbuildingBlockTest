@@ -25,7 +25,7 @@ very simple implementation for discovery-level representation of instruments or 
         "nerc": "https://vocab.nerc.ac.uk/"
     },
     "@id": "ex:generatedBy_345y254h",
-    "@type": "prov:Activity",
+    "@type": ["prov:Activity"],
     "schema:name":"example generatedBy",
     "prov:used": [
         "nerc:collection/L05/current/134",
@@ -51,7 +51,9 @@ very simple implementation for discovery-level representation of instruments or 
     }
   ],
   "@id": "ex:generatedBy_345y254h",
-  "@type": "prov:Activity",
+  "@type": [
+    "prov:Activity"
+  ],
   "schema:name": "example generatedBy",
   "prov:used": [
     "nerc:collection/L05/current/134",

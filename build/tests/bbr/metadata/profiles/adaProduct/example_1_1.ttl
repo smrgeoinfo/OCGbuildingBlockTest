@@ -10,8 +10,8 @@
 
 ex:adaProduct-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "ada:DataDeliveryPackage",
-        "ada:EMPAImage" ;
+    schema1:additionalType "Electron Microprobe Analysis Image (EMPA)",
+        "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
             schema1:contributor [ a schema1:Person ;
@@ -53,7 +53,9 @@ ex:adaProduct-example-001 a schema1:Dataset,
             schema1:funder [ a schema1:Organization ;
                     schema1:additionalType "schema:FundingAgency" ;
                     schema1:name "NASA" ] ;
-            schema1:identifier "NNX17AE48G" ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "award number" ;
+                    schema1:value "NNX17AE48G" ] ;
             schema1:name "Astromaterials Curation and Analysis" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "https://registry.identifiers.org/registry/doi" ;
@@ -78,11 +80,8 @@ ex:adaProduct-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Event,
                 prov:Activity ;
             schema1:identifier "session-ada-20260110-001" ;
-            schema1:location [ a schema1:Place ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Laboratory conditions" ;
-                            schema1:propertyID "ada:laboratoryConditions" ;
-                            schema1:value "Controlled environment, 22C, 45% RH" ] ;
+            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
+                        schema1:Place ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -92,12 +91,9 @@ ex:adaProduct-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Instrument setting" ;
-                            schema1:propertyID "ada:adaSetting" ;
-                            schema1:value "Standard operating parameters" ] ;
+            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
+                        schema1:Thing,
+                        prov:Entity ;
                     schema1:additionalType "ada:ADAInstrument" ;
                     schema1:identifier "ex:instrument-ada-001" ;
                     schema1:name "Example ADA Instrument" ] ] .
@@ -114,7 +110,7 @@ ex:adaProduct-file-001 a schema1:ImageObject,
     spdx:checksum [ spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] .
 
-ex:adaProduct-file-002 a schema1:CreativeWork,
+ex:adaProduct-file-002 a schema1:DigitalDocument,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;

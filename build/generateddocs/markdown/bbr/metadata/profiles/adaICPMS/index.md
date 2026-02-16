@@ -48,6 +48,7 @@ Mock data for validation and testing.
         "csvw": "http://www.w3.org/ns/csvw#",
         "prov": "http://www.w3.org/ns/prov#",
         "spdx": "http://spdx.org/rdf/terms#",
+        "nxs": "http://purl.org/nexusformat/definitions/",
         "dcterms": "http://purl.org/dc/terms/",
         "geosparql": "http://www.opengis.net/ont/geosparql#",
         "ex": "https://example.org/"
@@ -133,7 +134,11 @@ Mock data for validation and testing.
     "schema:funding": [
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": "NNX17AE48G",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "award number",
+                "schema:value": "NNX17AE48G"
+            },
             "schema:name": "Astromaterials Curation and Analysis",
             "schema:funder": {
                 "@type": "schema:Organization",
@@ -161,37 +166,23 @@ Mock data for validation and testing.
                 {
                     "@type": [
                         "schema:Thing",
-                        "schema:Product"
+                        "prov:Entity",
+                        "nxs:BaseClass/NXinstrument"
                     ],
-                    "schema:additionalType": "ada:ICPMSInstrument",
+                    "schema:additionalType": [
+                        "ada:ICPMSInstrument"
+                    ],
                     "schema:name": "Example ICPMS Instrument",
-                    "schema:identifier": "ex:instrument-icpms-001",
-                    "schema:additionalProperty": [
-                        {
-                            "@type": "schema:PropertyValue",
-                            "schema:propertyID": [
-                                "ada:icpmsSetting"
-                            ],
-                            "schema:name": "Instrument setting",
-                            "schema:value": "Standard operating parameters"
-                        }
-                    ]
+                    "schema:identifier": "ex:instrument-icpms-001"
                 }
             ],
             "schema:location": {
-                "@type": "schema:Place",
+                "@type": [
+                    "schema:Place",
+                    "nxs:BaseClass/NXsource"
+                ],
                 "schema:name": "Analytical Sciences Laboratory",
-                "schema:identifier": "https://ror.org/00hx57361",
-                "schema:additionalProperty": [
-                    {
-                        "@type": "schema:PropertyValue",
-                        "schema:propertyID": [
-                            "ada:laboratoryConditions"
-                        ],
-                        "schema:name": "Laboratory conditions",
-                        "schema:value": "Controlled environment, 22C, 45% RH"
-                    }
-                ]
+                "schema:identifier": "https://ror.org/00hx57361"
             },
             "schema:mainEntity": [
                 {
@@ -303,13 +294,16 @@ Mock data for validation and testing.
                     "spdx:checksum": {
                         "spdx:algorithm": "MD5",
                         "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    "componentType": {
+                        "@type": "ada:HRICPMSProcessed"
                     }
                 },
                 {
                     "@id": "ex:adaICPMS-file-002",
                     "@type": [
                         "ada:document",
-                        "schema:CreativeWork"
+                        "schema:DigitalDocument"
                     ],
                     "schema:name": "ALH84001_ICPMS_methods.pdf",
                     "schema:description": "Method description document for this analysis",
@@ -323,6 +317,9 @@ Mock data for validation and testing.
                         "@type": "schema:QuantitativeValue",
                         "schema:value": 524288,
                         "schema:unitText": "byte"
+                    },
+                    "componentType": {
+                        "@type": "ada:methodDescription"
                     }
                 }
             ]
@@ -377,6 +374,7 @@ Mock data for validation and testing.
       "csvw": "http://www.w3.org/ns/csvw#",
       "prov": "http://www.w3.org/ns/prov#",
       "spdx": "http://spdx.org/rdf/terms#",
+      "nxs": "http://purl.org/nexusformat/definitions/",
       "dcterms": "http://purl.org/dc/terms/",
       "geosparql": "http://www.opengis.net/ont/geosparql#",
       "ex": "https://example.org/"
@@ -463,7 +461,11 @@ Mock data for validation and testing.
   "schema:funding": [
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": "NNX17AE48G",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "award number",
+        "schema:value": "NNX17AE48G"
+      },
       "schema:name": "Astromaterials Curation and Analysis",
       "schema:funder": {
         "@type": "schema:Organization",
@@ -491,37 +493,23 @@ Mock data for validation and testing.
         {
           "@type": [
             "schema:Thing",
-            "schema:Product"
+            "prov:Entity",
+            "nxs:BaseClass/NXinstrument"
           ],
-          "schema:additionalType": "ada:ICPMSInstrument",
+          "schema:additionalType": [
+            "ada:ICPMSInstrument"
+          ],
           "schema:name": "Example ICPMS Instrument",
-          "schema:identifier": "ex:instrument-icpms-001",
-          "schema:additionalProperty": [
-            {
-              "@type": "schema:PropertyValue",
-              "schema:propertyID": [
-                "ada:icpmsSetting"
-              ],
-              "schema:name": "Instrument setting",
-              "schema:value": "Standard operating parameters"
-            }
-          ]
+          "schema:identifier": "ex:instrument-icpms-001"
         }
       ],
       "schema:location": {
-        "@type": "schema:Place",
+        "@type": [
+          "schema:Place",
+          "nxs:BaseClass/NXsource"
+        ],
         "schema:name": "Analytical Sciences Laboratory",
-        "schema:identifier": "https://ror.org/00hx57361",
-        "schema:additionalProperty": [
-          {
-            "@type": "schema:PropertyValue",
-            "schema:propertyID": [
-              "ada:laboratoryConditions"
-            ],
-            "schema:name": "Laboratory conditions",
-            "schema:value": "Controlled environment, 22C, 45% RH"
-          }
-        ]
+        "schema:identifier": "https://ror.org/00hx57361"
       },
       "schema:mainEntity": [
         {
@@ -633,13 +621,16 @@ Mock data for validation and testing.
           "spdx:checksum": {
             "spdx:algorithm": "MD5",
             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "componentType": {
+            "@type": "ada:HRICPMSProcessed"
           }
         },
         {
           "@id": "ex:adaICPMS-file-002",
           "@type": [
             "ada:document",
-            "schema:CreativeWork"
+            "schema:DigitalDocument"
           ],
           "schema:name": "ALH84001_ICPMS_methods.pdf",
           "schema:description": "Method description document for this analysis",
@@ -653,6 +644,9 @@ Mock data for validation and testing.
             "@type": "schema:QuantitativeValue",
             "schema:value": 524288,
             "schema:unitText": "byte"
+          },
+          "componentType": {
+            "@type": "ada:methodDescription"
           }
         }
       ]
@@ -744,7 +738,9 @@ ex:adaICPMS-example-001 a schema1:Dataset,
             schema1:funder [ a schema1:Organization ;
                     schema1:additionalType "schema:FundingAgency" ;
                     schema1:name "NASA" ] ;
-            schema1:identifier "NNX17AE48G" ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "award number" ;
+                    schema1:value "NNX17AE48G" ] ;
             schema1:name "Astromaterials Curation and Analysis" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "https://registry.identifiers.org/registry/doi" ;
@@ -769,11 +765,8 @@ ex:adaICPMS-example-001 a schema1:Dataset,
     prov:wasGeneratedBy [ a schema1:Event,
                 prov:Activity ;
             schema1:identifier "session-icpms-20260110-001" ;
-            schema1:location [ a schema1:Place ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Laboratory conditions" ;
-                            schema1:propertyID "ada:laboratoryConditions" ;
-                            schema1:value "Controlled environment, 22C, 45% RH" ] ;
+            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
+                        schema1:Place ;
                     schema1:identifier "https://ror.org/00hx57361" ;
                     schema1:name "Analytical Sciences Laboratory" ] ;
             schema1:mainEntity [ a schema1:Thing,
@@ -783,12 +776,9 @@ ex:adaICPMS-example-001 a schema1:Dataset,
                     schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
                     schema1:name "ALH 84001,123" ] ;
             schema1:startDate "2026-01-10T09:30:00" ;
-            prov:used [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Instrument setting" ;
-                            schema1:propertyID "ada:icpmsSetting" ;
-                            schema1:value "Standard operating parameters" ] ;
+            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
+                        schema1:Thing,
+                        prov:Entity ;
                     schema1:additionalType "ada:ICPMSInstrument" ;
                     schema1:identifier "ex:instrument-icpms-001" ;
                     schema1:name "Example ICPMS Instrument" ] ] .
@@ -805,7 +795,7 @@ ex:adaICPMS-file-001 a schema1:ImageObject,
     spdx:checksum [ spdx:algorithm "MD5" ;
             spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] .
 
-ex:adaICPMS-file-002 a schema1:CreativeWork,
+ex:adaICPMS-file-002 a schema1:DigitalDocument,
         ada:document ;
     schema1:additionalType "ada:methodDescription" ;
     schema1:description "Method description document for this analysis" ;
@@ -880,19 +870,21 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:HRICPMSProcessed
-                    - ada:HRICPMSRaw
-                    - ada:QICPMSProcessedTabular
-                    - ada:QICPMSRawTabular
-                    - ada:MCICPMSTabular
-                    - ada:MCICPMSCollection
-                    - ada:MCICPMSRaw
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
-                    - ada:calibrationFile
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:HRICPMSProcessed
+                      - ada:HRICPMSRaw
+                      - ada:QICPMSProcessedTabular
+                      - ada:QICPMSRawTabular
+                      - ada:MCICPMSTabular
+                      - ada:MCICPMSCollection
+                      - ada:MCICPMSRaw
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
+                      - ada:calibrationFile
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

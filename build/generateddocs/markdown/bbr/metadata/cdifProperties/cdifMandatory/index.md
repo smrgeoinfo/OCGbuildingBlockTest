@@ -211,8 +211,6 @@ properties:
       - schema:DefinedTermSet
       default: schema:Dataset
     minItems: 1
-    contains:
-      const: schema:Dataset
   schema:name:
     type: string
     description: A descriptive name of a dataset (e.g., 'Snow depth in Northern Hemisphere').

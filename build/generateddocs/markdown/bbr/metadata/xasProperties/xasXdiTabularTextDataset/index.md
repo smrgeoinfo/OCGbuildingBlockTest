@@ -27,50 +27,44 @@ Defintion of properties to describe structure of tabular data formatted followin
         "xas": "https://xas.org/dictionary/"
     },
     "@id": "ex:xasXDIdownload_23463h",
-    "@type": [
-        "schema:DataDownload",
-        "cdi:TabularTextDataset"
-    ],
-    "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
-    "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
-    "schema:contentSize": "30 kb",
-    "schema:encodingFormat": ["text/plain"],
-    "dcterms:conformsTo": ["https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"],
-    "cdi:allowsDuplicates": false,
-    "cdi:has_TextMapping": [
+    "@type": "cdi:WideDataStructure",
+    "cdi:has_DataStructureComponent": [
         {
-            "@type": "cdi:TextMapping",
-            "cdi:formats": {"@id": "xas:monochromatorEnergyVariable"},
-            "cdi:label": "energy",
-            "cdi:hasRole": "Dimension",
-            "cdi:index": 1,
-            "cdi:length": 12
+            "@type": "cdi:IdentifierComponent",
+            "cdi:isDefinedBy_InstanceVariable": {"@id": "xas:monochromatorEnergyVariable"},
+            "cdi:has": {
+                "@type": "cdi:ValueMapping",
+                "cdi:hasIndex": 1,
+                "cdi:haslength": 12
+            }
         },
         {
-            "@type": "cdi:TextMapping",
-            "cdi:formats": {"@id": "xas:incidentIntensityVariable"},
-            "cdi:label": "i0",
-            "cdi:hasRole": "Measure",
-            "index": 3,
-            "length": 13
+            "@type": "cdi:MeasureComponent",
+            "cdi:isDefinedBy_InstanceVariable": {"@id": "xas:incidentIntensityVariable"},
+            "cdi:has": {
+                "@type": "cdi:ValueMapping",
+                "cdi:hasIndex": 3,
+                "cdi:haslength": 13
+            }
         },
         {
-            "@type": "cdi:TextMapping",
-            "cdi:formats": {"@id": "xas:transmittedIntensityVariable"},
-            "cdi:label": "it",
-            "cdi:hasRole": "Measure",
-            "cdi:index": 2,
-            "cdi:length": 12
+            "@type": "cdi:MeasureComponent",
+            "cdi:isDefinedBy_InstanceVariable": {"@id": "xas:transmittedIntensityVariable"},
+            "cdi:has": {
+                "@type": "cdi:ValueMapping",
+                "cdi:hasIndex": 2,
+                "cdi:haslength": 12
+            }
         }
     ],
-    "allowsDuplicates": false,
-    "arrayBase": 1,
-    "commentPrefix": "#",
-    "hasHeader": true,
-    "headerRowCount": 27,
-    "skipInitialSpace": true,
-    "isDelimited": false,
-    "isFixedWidth": true
+    "cdi:allowsDuplicates": false,
+    "cdi:arrayBase": 1,
+    "cdi:commentPrefix": "#",
+    "cdi:hasHeader": true,
+    "cdi:headerRowCount": 27,
+    "cdi:skipInitialSpace": true,
+    "cdi:isDelimited": false,
+    "cdi:isFixedWidth": true
 }
 
 ```
@@ -92,60 +86,50 @@ Defintion of properties to describe structure of tabular data formatted followin
     }
   ],
   "@id": "ex:xasXDIdownload_23463h",
-  "@type": [
-    "schema:DataDownload",
-    "cdi:TabularTextDataset"
-  ],
-  "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
-  "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
-  "schema:contentSize": "30 kb",
-  "schema:encodingFormat": [
-    "text/plain"
-  ],
-  "dcterms:conformsTo": [
-    "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"
-  ],
-  "cdi:allowsDuplicates": false,
-  "cdi:has_TextMapping": [
+  "@type": "cdi:WideDataStructure",
+  "cdi:has_DataStructureComponent": [
     {
-      "@type": "cdi:TextMapping",
-      "cdi:formats": {
+      "@type": "cdi:IdentifierComponent",
+      "cdi:isDefinedBy_InstanceVariable": {
         "@id": "xas:monochromatorEnergyVariable"
       },
-      "cdi:label": "energy",
-      "cdi:hasRole": "Dimension",
-      "cdi:index": 1,
-      "cdi:length": 12
+      "cdi:has": {
+        "@type": "cdi:ValueMapping",
+        "cdi:hasIndex": 1,
+        "cdi:haslength": 12
+      }
     },
     {
-      "@type": "cdi:TextMapping",
-      "cdi:formats": {
+      "@type": "cdi:MeasureComponent",
+      "cdi:isDefinedBy_InstanceVariable": {
         "@id": "xas:incidentIntensityVariable"
       },
-      "cdi:label": "i0",
-      "cdi:hasRole": "Measure",
-      "index": 3,
-      "length": 13
+      "cdi:has": {
+        "@type": "cdi:ValueMapping",
+        "cdi:hasIndex": 3,
+        "cdi:haslength": 13
+      }
     },
     {
-      "@type": "cdi:TextMapping",
-      "cdi:formats": {
+      "@type": "cdi:MeasureComponent",
+      "cdi:isDefinedBy_InstanceVariable": {
         "@id": "xas:transmittedIntensityVariable"
       },
-      "cdi:label": "it",
-      "cdi:hasRole": "Measure",
-      "cdi:index": 2,
-      "cdi:length": 12
+      "cdi:has": {
+        "@type": "cdi:ValueMapping",
+        "cdi:hasIndex": 2,
+        "cdi:haslength": 12
+      }
     }
   ],
-  "allowsDuplicates": false,
-  "arrayBase": 1,
-  "commentPrefix": "#",
-  "hasHeader": true,
-  "headerRowCount": 27,
-  "skipInitialSpace": true,
-  "isDelimited": false,
-  "isFixedWidth": true
+  "cdi:allowsDuplicates": false,
+  "cdi:arrayBase": 1,
+  "cdi:commentPrefix": "#",
+  "cdi:hasHeader": true,
+  "cdi:headerRowCount": 27,
+  "cdi:skipInitialSpace": true,
+  "cdi:isDelimited": false,
+  "cdi:isFixedWidth": true
 }
 ```
 
@@ -153,35 +137,33 @@ Defintion of properties to describe structure of tabular data formatted followin
 ```ttl
 @prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
 @prefix ex: <https://example.org/> .
-@prefix ns1: <dcterms:> .
-@prefix schema1: <http://schema.org/> .
 @prefix xas: <https://xas.org/dictionary/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:xasXDIdownload_23463h a cdi:TabularTextDataset,
-        schema1:DataDownload ;
-    ns1:conformsTo "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md" ;
+ex:xasXDIdownload_23463h a cdi:WideDataStructure ;
     cdi:allowsDuplicates false ;
-    cdi:has_TextMapping [ a cdi:TextMapping ;
-            cdi:formats xas:incidentIntensityVariable ;
-            cdi:hasRole "Measure" ;
-            cdi:label "i0" ],
-        [ a cdi:TextMapping ;
-            cdi:formats xas:transmittedIntensityVariable ;
-            cdi:hasRole "Measure" ;
-            cdi:index 2 ;
-            cdi:label "it" ;
-            cdi:length 12 ],
-        [ a cdi:TextMapping ;
-            cdi:formats xas:monochromatorEnergyVariable ;
-            cdi:hasRole "Dimension" ;
-            cdi:index 1 ;
-            cdi:label "energy" ;
-            cdi:length 12 ] ;
-    schema1:contentSize "30 kb" ;
-    schema1:contentUrl "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi" ;
-    schema1:description "Distribution = PhysicalDataSet text file conformant with XDI specification" ;
-    schema1:encodingFormat "text/plain" .
+    cdi:arrayBase 1 ;
+    cdi:commentPrefix "#" ;
+    cdi:hasHeader true ;
+    cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
+            cdi:has [ a cdi:ValueMapping ;
+                    cdi:hasIndex 2 ;
+                    cdi:haslength 12 ] ;
+            cdi:isDefinedBy_InstanceVariable xas:transmittedIntensityVariable ],
+        [ a cdi:IdentifierComponent ;
+            cdi:has [ a cdi:ValueMapping ;
+                    cdi:hasIndex 1 ;
+                    cdi:haslength 12 ] ;
+            cdi:isDefinedBy_InstanceVariable xas:monochromatorEnergyVariable ],
+        [ a cdi:MeasureComponent ;
+            cdi:has [ a cdi:ValueMapping ;
+                    cdi:hasIndex 3 ;
+                    cdi:haslength 13 ] ;
+            cdi:isDefinedBy_InstanceVariable xas:incidentIntensityVariable ] ;
+    cdi:headerRowCount 27 ;
+    cdi:isDelimited false ;
+    cdi:isFixedWidth true ;
+    cdi:skipInitialSpace true .
 
 
 ```
@@ -222,10 +204,10 @@ properties:
             cdi:haslength:
               type: integer
           required:
-          - cdi:ValueMapping
+          - '@type'
       required:
       - cdi:isDefinedBy_InstanceVariable
-      - di:has
+      - cdi:has
   cdi:allowsDuplicates:
     type: boolean
     default: false

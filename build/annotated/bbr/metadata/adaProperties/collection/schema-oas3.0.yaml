@@ -15,10 +15,18 @@ description: A collection can be a set of files with identical information model
 type: object
 properties:
   '@type':
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        enum:
+        - ada:collection
+    - contains:
+        enum:
+        - https://schema.org/Collection
     description: GeneralType for collections
-    enum:
-    - - ada:collection
-      - https://schema.org/Collection
   componentType:
     type: object
     properties:

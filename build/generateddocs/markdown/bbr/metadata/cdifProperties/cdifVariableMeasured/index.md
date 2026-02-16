@@ -33,7 +33,7 @@ Implementation of Schema.org PropertyValue as value for variableMeasured propert
         "schema:PropertyValue"
     ],
     "schema:name": "energy",
-    "schema:alternateName": "Monochromator energy",
+    "schema:alternateName": ["Monochromator energy"],
     "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
     "schema:propertyID": ["xas:monochromatorEnergyConcept"],
     "schema:unitText": "eV",
@@ -71,7 +71,9 @@ Implementation of Schema.org PropertyValue as value for variableMeasured propert
     "schema:PropertyValue"
   ],
   "schema:name": "energy",
-  "schema:alternateName": "Monochromator energy",
+  "schema:alternateName": [
+    "Monochromator energy"
+  ],
   "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
   "schema:propertyID": [
     "xas:monochromatorEnergyConcept"
