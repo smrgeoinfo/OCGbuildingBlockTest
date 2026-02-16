@@ -255,7 +255,7 @@ allOf:
           - schema:inDefinedTermSet
 $defs:
   CdifMandatory:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/cdifMandatory/cdifMandatorySchema.json
+    $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifMandatory/cdifMandatorySchema.json
   DefinedTerm:
     $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/definedTermSchema.json
   AdditionalProperty:
@@ -280,16 +280,11 @@ Links to the schema:
 # JSON-LD Context
 
 ```jsonld
-{
-  "@context": {
-    "schema": "https://schema.org",
-    "@version": 1.1
-  }
-}
+None
 ```
 
 You can find the full JSON-LD context here:
-[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/xasProperties/xasOptional/context.jsonld)
+[context.jsonld](https://usgin.github.io/metadataBuildingBlocks/_sources/xasProperties/xasOptional/context.jsonld)
 
 ## Sources
 
