@@ -19,6 +19,7 @@ Usage:
     python tools/resolve_schema.py --file path/to/any/schema.yaml
     python tools/resolve_schema.py adaEMPA -o resolved.json
     python tools/resolve_schema.py adaEMPA --flatten-allof
+    python tools/resolve_schema.py --all
 """
 
 import argparse
@@ -342,6 +343,43 @@ def find_profile_schema(name: str) -> Path:
 
 
 # ---------------------------------------------------------------------------
+# Scan for building blocks with external $refs
+# ---------------------------------------------------------------------------
+
+def _has_external_refs(node: Any) -> bool:
+    """Return True if *node* contains any $ref pointing to an external file."""
+    if isinstance(node, dict):
+        if "$ref" in node and not node["$ref"].startswith("#"):
+            return True
+        return any(_has_external_refs(v) for v in node.values())
+    if isinstance(node, list):
+        return any(_has_external_refs(item) for item in node)
+    return False
+
+
+def find_all_schemas_with_external_refs() -> list[Path]:
+    """Find every schema.yaml under _sources/ that contains external $refs."""
+    results = []
+    for schema_path in sorted(SOURCES_DIR.rglob("schema.yaml")):
+        schema = load_schema_file(schema_path)
+        if isinstance(schema, dict) and _has_external_refs(schema):
+            results.append(schema_path)
+    return results
+
+
+def resolve_and_write(schema_path: Path, flatten: bool) -> Path:
+    """Resolve a schema and write resolvedSchema.json next to it. Returns output path."""
+    resolved = resolve_file(schema_path, seen=set())
+    resolved = strip_metadata_keys(resolved, is_root=True)
+    if flatten:
+        resolved = flatten_allof(resolved)
+    out_path = schema_path.parent / "resolvedSchema.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(json.dumps(resolved, indent=2, ensure_ascii=False) + "\n")
+    return out_path
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -360,9 +398,14 @@ def main():
         help="Resolve an arbitrary schema file instead of a profile",
     )
     parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Find and resolve all building blocks with external $refs",
+    )
+    parser.add_argument(
         "-o", "--output",
         type=Path,
-        help="Write output to file (default: stdout)",
+        help="Write output to file (default: stdout). Ignored with --all.",
     )
     parser.add_argument(
         "--flatten-allof",
@@ -371,8 +414,18 @@ def main():
     )
     args = parser.parse_args()
 
+    if args.all:
+        schemas = find_all_schemas_with_external_refs()
+        print(f"Found {len(schemas)} building blocks with external $refs", file=sys.stderr)
+        for schema_path in schemas:
+            rel = schema_path.relative_to(REPO_ROOT)
+            out_path = resolve_and_write(schema_path, args.flatten_allof)
+            print(f"  {rel} -> {out_path.name}", file=sys.stderr)
+        print(f"Resolved {len(schemas)} schemas", file=sys.stderr)
+        return
+
     if not args.profile and not args.file:
-        parser.error("Specify a profile name or --file <path>")
+        parser.error("Specify a profile name, --file <path>, or --all")
 
     if args.file:
         schema_path = args.file.resolve()
