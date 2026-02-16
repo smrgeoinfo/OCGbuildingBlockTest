@@ -7,9 +7,15 @@ description: >-
 type: object
 properties:
   "@type":
-    const:
-      - "ada:document"
-      - "schema:DigitalDocument"
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+      - contains:
+          const: "ada:document"
+      - contains:
+          const: "schema:DigitalDocument"
   componentType:
     description: One of the supplemental document types if applicable
     anyOf:

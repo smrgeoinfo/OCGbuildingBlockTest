@@ -592,13 +592,12 @@ def _generate_schema_yaml(cfg: dict) -> str:
         lines = [f'            - "{v}"' for v in all_values]
         contains_block = "          enum:\n" + "\n".join(lines)
 
-    # Build component types list with standard supporting types
+    # Build componentType/@type enum for hasPart-level constraint
     all_component_types = list(cfg["component_types"]) + STANDARD_SUPPORTING_TYPES
-    # Add calibrationFile if not already present via component_types
     if "calibrationFile" not in all_component_types:
         all_component_types.append("calibrationFile")
     ct_lines = "\n".join(
-        f'                        - "ada:{ct}"' for ct in all_component_types
+        f'                          - "ada:{ct}"' for ct in all_component_types
     )
 
     detail_note = ""
@@ -626,9 +625,10 @@ allOf:
             "schema:hasPart":
               items:
                 properties:
-                  "schema:additionalType":
-                    items:
-                      enum:
+                  componentType:
+                    properties:
+                      "@type":
+                        enum:
 {ct_lines}
 """
 
