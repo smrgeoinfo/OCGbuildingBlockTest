@@ -6,6 +6,7 @@
         "csvw": "http://www.w3.org/ns/csvw#",
         "prov": "http://www.w3.org/ns/prov#",
         "spdx": "http://spdx.org/rdf/terms#",
+        "nxs": "http://purl.org/nexusformat/definitions/",
         "dcterms": "http://purl.org/dc/terms/",
         "geosparql": "http://www.opengis.net/ont/geosparql#",
         "ex": "https://example.org/"
@@ -119,37 +120,23 @@
                 {
                     "@type": [
                         "schema:Thing",
-                        "schema:Product"
+                        "prov:Entity",
+                        "nxs:BaseClass/NXinstrument"
                     ],
-                    "schema:additionalType": "ada:TEMInstrument",
+                    "schema:additionalType": [
+                        "ada:TEMInstrument"
+                    ],
                     "schema:name": "Example TEM Instrument",
-                    "schema:identifier": "ex:instrument-tem-001",
-                    "schema:additionalProperty": [
-                        {
-                            "@type": "schema:PropertyValue",
-                            "schema:propertyID": [
-                                "ada:temSetting"
-                            ],
-                            "schema:name": "Instrument setting",
-                            "schema:value": "Standard operating parameters"
-                        }
-                    ]
+                    "schema:identifier": "ex:instrument-tem-001"
                 }
             ],
             "schema:location": {
-                "@type": "schema:Place",
+                "@type": [
+                    "schema:Place",
+                    "nxs:BaseClass/NXsource"
+                ],
                 "schema:name": "Analytical Sciences Laboratory",
-                "schema:identifier": "https://ror.org/00hx57361",
-                "schema:additionalProperty": [
-                    {
-                        "@type": "schema:PropertyValue",
-                        "schema:propertyID": [
-                            "ada:laboratoryConditions"
-                        ],
-                        "schema:name": "Laboratory conditions",
-                        "schema:value": "Controlled environment, 22C, 45% RH"
-                    }
-                ]
+                "schema:identifier": "https://ror.org/00hx57361"
             },
             "schema:mainEntity": [
                 {
@@ -261,13 +248,16 @@
                     "spdx:checksum": {
                         "spdx:algorithm": "MD5",
                         "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    "componentType": {
+                        "@type": "ada:TEMImage"
                     }
                 },
                 {
                     "@id": "ex:adaTEM-file-002",
                     "@type": [
                         "ada:document",
-                        "schema:CreativeWork"
+                        "schema:DigitalDocument"
                     ],
                     "schema:name": "ALH84001_TEM_methods.pdf",
                     "schema:description": "Method description document for this analysis",
@@ -281,6 +271,9 @@
                         "@type": "schema:QuantitativeValue",
                         "schema:value": 524288,
                         "schema:unitText": "byte"
+                    },
+                    "componentType": {
+                        "@type": "ada:methodDescription"
                     }
                 }
             ]

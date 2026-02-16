@@ -106,6 +106,21 @@ def get_all_ada_profiles() -> dict:
 # Example JSON-LD template builder
 # ---------------------------------------------------------------------------
 
+def _get_additional_type(profile_name: str, cfg: dict) -> list:
+    """Build the schema:additionalType array for an example.
+
+    adaProduct uses human-readable labels from its enum;
+    technique profiles use ada:-prefixed product types from their contains enum.
+    """
+    first_pt = cfg["product_types"][0]
+    if profile_name == "adaProduct":
+        # adaProduct's resolved schema has items.enum with human-readable labels
+        label = cfg["additional_type_labels"][0] if cfg.get("additional_type_labels") else first_pt
+        return [label, "ada:DataDeliveryPackage"]
+    # Technique profiles have contains enum with ada: prefixed types
+    return [f"ada:{first_pt}", "ada:DataDeliveryPackage"]
+
+
 def build_example(profile_name: str, cfg: dict) -> dict:
     """Build a complete example JSON-LD instance for an ADA profile."""
     short = cfg["short_name"]
@@ -124,6 +139,7 @@ def build_example(profile_name: str, cfg: dict) -> dict:
             "csvw": "http://www.w3.org/ns/csvw#",
             "prov": "http://www.w3.org/ns/prov#",
             "spdx": "http://spdx.org/rdf/terms#",
+            "nxs": "http://purl.org/nexusformat/definitions/",
             "dcterms": "http://purl.org/dc/terms/",
             "geosparql": "http://www.opengis.net/ont/geosparql#",
             "ex": "https://example.org/",
@@ -136,10 +152,7 @@ def build_example(profile_name: str, cfg: dict) -> dict:
             f"defined by the {profile_name} profile. Contains mock data for "
             f"testing and validation."
         ),
-        "schema:additionalType": [
-            f"ada:{first_pt}",
-            "ada:DataDeliveryPackage",
-        ],
+        "schema:additionalType": _get_additional_type(profile_name, cfg),
         "schema:identifier": {
             "@type": "schema:PropertyValue",
             "schema:propertyID": "https://registry.identifiers.org/registry/doi",
@@ -231,32 +244,20 @@ def build_example(profile_name: str, cfg: dict) -> dict:
                 "schema:startDate": "2026-01-10T09:30:00",
                 "prov:used": [
                     {
-                        "@type": ["schema:Thing", "schema:Product"],
-                        "schema:additionalType": f"ada:{short}Instrument",
+                        "@type": [
+                            "schema:Thing",
+                            "prov:Entity",
+                            "nxs:BaseClass/NXinstrument",
+                        ],
+                        "schema:additionalType": [f"ada:{short}Instrument"],
                         "schema:name": f"Example {short} Instrument",
                         "schema:identifier": f"ex:instrument-{short.lower()}-001",
-                        "schema:additionalProperty": [
-                            {
-                                "@type": "schema:PropertyValue",
-                                "schema:propertyID": [f"ada:{short.lower()}Setting"],
-                                "schema:name": "Instrument setting",
-                                "schema:value": "Standard operating parameters",
-                            },
-                        ],
                     },
                 ],
                 "schema:location": {
-                    "@type": "schema:Place",
+                    "@type": ["schema:Place", "nxs:BaseClass/NXsource"],
                     "schema:name": "Analytical Sciences Laboratory",
                     "schema:identifier": "https://ror.org/00hx57361",
-                    "schema:additionalProperty": [
-                        {
-                            "@type": "schema:PropertyValue",
-                            "schema:propertyID": ["ada:laboratoryConditions"],
-                            "schema:name": "Laboratory conditions",
-                            "schema:value": "Controlled environment, 22C, 45% RH",
-                        },
-                    ],
                 },
                 "schema:mainEntity": [
                     {
@@ -335,7 +336,7 @@ def build_example(profile_name: str, cfg: dict) -> dict:
                 "schema:hasPart": [
                     {
                         "@id": f"ex:{profile_name}-file-001",
-                        "@type": [f"ada:image", "schema:ImageObject"],
+                        "@type": ["ada:image", "schema:ImageObject"],
                         "schema:name": f"ALH84001_{short}_001.tif",
                         "schema:description": f"{short} data file for ALH 84001 thin section",
                         "schema:additionalType": [f"ada:{first_ct}"],
@@ -349,10 +350,13 @@ def build_example(profile_name: str, cfg: dict) -> dict:
                             "spdx:algorithm": "MD5",
                             "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e",
                         },
+                        "componentType": {
+                            "@type": f"ada:{first_ct}",
+                        },
                     },
                     {
                         "@id": f"ex:{profile_name}-file-002",
-                        "@type": ["ada:document", "schema:CreativeWork"],
+                        "@type": ["ada:document", "schema:DigitalDocument"],
                         "schema:name": f"ALH84001_{short}_methods.pdf",
                         "schema:description": "Method description document for this analysis",
                         "schema:additionalType": [f"ada:{supporting_ct}"],
@@ -361,6 +365,9 @@ def build_example(profile_name: str, cfg: dict) -> dict:
                             "@type": "schema:QuantitativeValue",
                             "schema:value": 524288,
                             "schema:unitText": "byte",
+                        },
+                        "componentType": {
+                            "@type": f"ada:{supporting_ct}",
                         },
                     },
                 ],
