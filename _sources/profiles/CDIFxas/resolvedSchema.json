@@ -746,9 +746,18 @@
               "type": "string"
             },
             "minItems": 2,
-            "contains": {
-              "const": "cdi:PhysicalDataset"
-            }
+            "allOf": [
+              {
+                "contains": {
+                  "const": "schema:DataDownload"
+                }
+              },
+              {
+                "contains": {
+                  "const": "cdi:PhysicalDataset"
+                }
+              }
+            ]
           },
           "dcterms:conformsTo": {
             "const": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"
@@ -784,7 +793,7 @@
         "dcterms:conformsTo": {
           "type": "array",
           "items": {
-            "$comment": "could not resolve fragment /$defs/conformsTo_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\schemaorgProperties\\metaMetadata\\metaMetadataSchema.json: \"Cannot resolve pointer /$defs/conformsTo_item at part '$defs'\""
+            "$comment": "could not resolve fragment /$defs/conformsTo_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\schemaorgProperties\\metaMetadata\\metaMetadataSchema.json: \"Cannot resolve pointer /$defs/conformsTo_item at part '$defs'\""
           },
           "minItems": 2,
           "contains": {
@@ -1736,17 +1745,34 @@
         ],
         "additionalProperties": true
       },
-      "contains": {
-        "type": "object",
-        "properties": {
-          "schema:inDefinedTermSet": {
-            "const": "http://sweetontology.net/matrElement"
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "schema:inDefinedTermSet": {
+                "const": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md"
+              }
+            },
+            "required": [
+              "schema:inDefinedTermSet"
+            ]
           }
         },
-        "required": [
-          "schema:inDefinedTermSet"
-        ]
-      }
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "schema:inDefinedTermSet": {
+                "const": "http://sweetontology.net/matrElement"
+              }
+            },
+            "required": [
+              "schema:inDefinedTermSet"
+            ]
+          }
+        }
+      ]
     },
     "schema:creator": {
       "description": "author or orginator of intellectual content of dataset. Uset the JSON-LD @list construct to preserve author order. Use contributor with the Role property to specify other roles related to creation or stewardship of the resource.",
@@ -5848,180 +5874,444 @@
               }
             },
             "minItems": 2,
-            "contains": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "minItems": 2,
-                  "contains": {
-                    "const": "schema:Product"
-                  }
-                },
-                "schema:additionalType": {
-                  "const": "nxs:BaseClass/NXmonochromator"
-                },
-                "schema:additionalProperty": {
-                  "description": "Require additional properties for monochromator, requires d-space, crystal type, reflection plane.",
-                  "type": "array",
-                  "minItems": 3,
-                  "items": {
-                    "type": "object",
-                    "title": "additionalProperty PropertyValue",
-                    "description": "PropertyValue values required to define a soft-typed property with a value. ",
-                    "properties": {
-                      "@type": {
-                        "type": "string",
-                        "const": "schema:PropertyValue"
+            "allOf": [
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
                       },
-                      "schema:propertyID": {
-                        "type": "array",
-                        "items": {
-                          "anyOf": [
-                            {
-                              "type": "string"
-                            },
-                            {
-                              "type": "object",
-                              "properties": {
-                                "@id": {
+                      "minItems": 2,
+                      "allOf": [
+                        {
+                          "contains": {
+                            "const": "schema:Thing"
+                          }
+                        },
+                        {
+                          "contains": {
+                            "const": "schema:Product"
+                          }
+                        }
+                      ]
+                    },
+                    "schema:additionalType": {
+                      "const": "nxs:BaseClass/NXsource"
+                    },
+                    "schema:additionalProperty": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "object",
+                        "title": "additionalProperty PropertyValue",
+                        "description": "PropertyValue values required to define a soft-typed property with a value. ",
+                        "properties": {
+                          "@type": {
+                            "type": "string",
+                            "const": "schema:PropertyValue"
+                          },
+                          "schema:propertyID": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
                                   "type": "string"
-                                }
-                              }
-                            },
-                            {
-                              "description": "schema.org Defined Term schema",
-                              "type": "object",
-                              "properties": {
-                                "@type": {
-                                  "const": "schema:DefinedTerm"
                                 },
-                                "schema:name": {
-                                  "type": "string",
-                                  "description": "text label for the term that is useful to human user"
-                                },
-                                "schema:identifier": {
-                                  "anyOf": [
-                                    {
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "@id": {
                                       "type": "string"
+                                    }
+                                  }
+                                },
+                                {
+                                  "description": "schema.org Defined Term schema",
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "const": "schema:DefinedTerm"
                                     },
-                                    {
-                                      "description": "Properties for a schema.org identifier",
-                                      "type": "object",
-                                      "properties": {
-                                        "@type": {
-                                          "type": "string",
-                                          "const": "schema:PropertyValue"
-                                        },
-                                        "schema:propertyID": {
-                                          "type": "string",
-                                          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-                                        },
-                                        "schema:value": {
-                                          "type": "string",
-                                          "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-                                        },
-                                        "schema:url": {
-                                          "format": "uri",
-                                          "type": "string",
-                                          "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-                                        }
-                                      },
-                                      "required": [
-                                        "@type"
-                                      ],
+                                    "schema:name": {
+                                      "type": "string",
+                                      "description": "text label for the term that is useful to human user"
+                                    },
+                                    "schema:identifier": {
                                       "anyOf": [
                                         {
-                                          "required": [
-                                            "schema:value"
-                                          ]
+                                          "type": "string"
                                         },
                                         {
+                                          "description": "Properties for a schema.org identifier",
+                                          "type": "object",
+                                          "properties": {
+                                            "@type": {
+                                              "type": "string",
+                                              "const": "schema:PropertyValue"
+                                            },
+                                            "schema:propertyID": {
+                                              "type": "string",
+                                              "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                                            },
+                                            "schema:value": {
+                                              "type": "string",
+                                              "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                                            },
+                                            "schema:url": {
+                                              "format": "uri",
+                                              "type": "string",
+                                              "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                                            }
+                                          },
                                           "required": [
-                                            "schema:url"
+                                            "@type"
+                                          ],
+                                          "anyOf": [
+                                            {
+                                              "required": [
+                                                "schema:value"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "schema:url"
+                                              ]
+                                            }
                                           ]
                                         }
                                       ]
+                                    },
+                                    "schema:inDefinedTermSet": {
+                                      "type": "string",
+                                      "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                                    },
+                                    "schema:termCode": {
+                                      "type": "string",
+                                      "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
                                     }
-                                  ]
-                                },
-                                "schema:inDefinedTermSet": {
-                                  "type": "string",
-                                  "description": "Identifier for the controlled vocabulary responsible for this keyword."
-                                },
-                                "schema:termCode": {
-                                  "type": "string",
-                                  "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
-                                }
-                              },
-                              "required": [
-                                "@type"
-                              ],
-                              "anyOf": [
-                                {
+                                  },
                                   "required": [
-                                    "schema:name"
-                                  ]
-                                },
-                                {
-                                  "required": [
-                                    "schema:identifier"
+                                    "@type"
+                                  ],
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "schema:name"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "schema:identifier"
+                                      ]
+                                    }
                                   ]
                                 }
                               ]
-                            }
-                          ]
+                            },
+                            "minItems": 1,
+                            "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+                          },
+                          "schema:name": {
+                            "type": "string"
+                          },
+                          "schema:value": {
+                            "type": "string"
+                          }
                         },
-                        "minItems": 1,
-                        "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+                        "required": [
+                          "schema:name",
+                          "schema:value"
+                        ]
                       },
-                      "schema:name": {
-                        "type": "string"
-                      },
-                      "schema:value": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "schema:name",
-                      "schema:value"
-                    ]
-                  },
-                  "contains": {
-                    "type": "object",
-                    "properties": {
-                      "schema:propertyID": {
-                        "type": "array",
-                        "contains": {
-                          "const": "nxs:Field/NXcrystal/reflection"
+                      "allOf": [
+                        {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "schema:propertyID": {
+                                "type": "array",
+                                "contains": {
+                                  "const": "nxs:Field/NXsource/type"
+                                }
+                              },
+                              "schema:value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:propertyID",
+                              "schema:value"
+                            ]
+                          }
+                        },
+                        {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "schema:propertyID": {
+                                "type": "array",
+                                "contains": {
+                                  "const": "nxs:Field/NXsource/probe"
+                                }
+                              },
+                              "schema:name": {
+                                "const": "Probe"
+                              },
+                              "schema:value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:name",
+                              "schema:propertyID",
+                              "schema:value"
+                            ]
+                          }
                         }
-                      },
-                      "schema:value": {
-                        "type": "string"
-                      },
-                      "schema:unitText": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "schema:value",
-                      "schema:propertyID"
-                    ]
-                  }
-                },
-                "schema:name": {
-                  "type": "string"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "@type",
+                    "schema:additionalType",
+                    "schema:additionalProperty"
+                  ]
                 }
               },
-              "required": [
-                "@type",
-                "schema:additionalType",
-                "schema:additionalProperty"
-              ]
-            }
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 2,
+                      "allOf": [
+                        {
+                          "contains": {
+                            "const": "schema:Thing"
+                          }
+                        },
+                        {
+                          "contains": {
+                            "const": "schema:Product"
+                          }
+                        }
+                      ]
+                    },
+                    "schema:additionalType": {
+                      "const": "nxs:BaseClass/NXmonochromator"
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    },
+                    "schema:additionalProperty": {
+                      "description": "Require additional properties for monochromator, requires d-space, crystal type, reflection plane.",
+                      "type": "array",
+                      "minItems": 3,
+                      "items": {
+                        "type": "object",
+                        "title": "additionalProperty PropertyValue",
+                        "description": "PropertyValue values required to define a soft-typed property with a value. ",
+                        "properties": {
+                          "@type": {
+                            "type": "string",
+                            "const": "schema:PropertyValue"
+                          },
+                          "schema:propertyID": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "@id": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                {
+                                  "description": "schema.org Defined Term schema",
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "const": "schema:DefinedTerm"
+                                    },
+                                    "schema:name": {
+                                      "type": "string",
+                                      "description": "text label for the term that is useful to human user"
+                                    },
+                                    "schema:identifier": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "description": "Properties for a schema.org identifier",
+                                          "type": "object",
+                                          "properties": {
+                                            "@type": {
+                                              "type": "string",
+                                              "const": "schema:PropertyValue"
+                                            },
+                                            "schema:propertyID": {
+                                              "type": "string",
+                                              "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                                            },
+                                            "schema:value": {
+                                              "type": "string",
+                                              "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                                            },
+                                            "schema:url": {
+                                              "format": "uri",
+                                              "type": "string",
+                                              "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                                            }
+                                          },
+                                          "required": [
+                                            "@type"
+                                          ],
+                                          "anyOf": [
+                                            {
+                                              "required": [
+                                                "schema:value"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "schema:url"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "schema:inDefinedTermSet": {
+                                      "type": "string",
+                                      "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                                    },
+                                    "schema:termCode": {
+                                      "type": "string",
+                                      "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+                                    }
+                                  },
+                                  "required": [
+                                    "@type"
+                                  ],
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "schema:name"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "schema:identifier"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "minItems": 1,
+                            "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+                          },
+                          "schema:name": {
+                            "type": "string"
+                          },
+                          "schema:value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "schema:name",
+                          "schema:value"
+                        ]
+                      },
+                      "allOf": [
+                        {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "schema:propertyID": {
+                                "type": "array",
+                                "contains": {
+                                  "const": "nxs:Field/NXcrystal/type"
+                                }
+                              },
+                              "schema:value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:value",
+                              "schema:propertyID"
+                            ]
+                          }
+                        },
+                        {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "schema:propertyID": {
+                                "type": "array",
+                                "contains": {
+                                  "const": "nxs:Field/NXcrystal/d_spacing"
+                                }
+                              },
+                              "schema:value": {
+                                "type": "string"
+                              },
+                              "schema:unitText": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:propertyID",
+                              "schema:value",
+                              "schema:unitText"
+                            ]
+                          }
+                        },
+                        {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "schema:propertyID": {
+                                "type": "array",
+                                "contains": {
+                                  "const": "nxs:Field/NXcrystal/reflection"
+                                }
+                              },
+                              "schema:value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:value",
+                              "schema:propertyID"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "@type",
+                    "schema:additionalType",
+                    "schema:additionalProperty"
+                  ]
+                }
+              }
+            ]
           },
           "schema:mainEntity": {
             "title": "definitions for roles used in XAS profile",
@@ -6034,10 +6324,19 @@
                 },
                 "minItems": 2,
                 "uniqueItems": true,
-                "contains": {
-                  "const": "schema:Thing"
-                },
-                "minContains": 1
+                "minContains": 1,
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "schema:Product"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "schema:Thing"
+                    }
+                  }
+                ]
               },
               "schema:additionalType": {
                 "type": "array",
@@ -6046,10 +6345,19 @@
                 },
                 "minItems": 2,
                 "uniqueItems": true,
-                "contains": {
-                  "const": "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
-                },
-                "minContains": 1
+                "minContains": 1,
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "MaterialSample"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    }
+                  }
+                ]
               },
               "schema:name": {
                 "type": "string"
@@ -6120,7 +6428,7 @@
                       "items": {
                         "anyOf": [
                           {
-                            "$comment": "could not resolve fragment /$defs/propertyID_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\schemaorgProperties\\additionalProperty\\additionalPropertySchema.json: \"Cannot resolve pointer /$defs/propertyID_item at part '$defs'\""
+                            "$comment": "could not resolve fragment /$defs/propertyID_item in C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\schemaorgProperties\\additionalProperty\\additionalPropertySchema.json: \"Cannot resolve pointer /$defs/propertyID_item at part '$defs'\""
                           },
                           {
                             "enum": [
@@ -6502,27 +6810,50 @@
           }
         ]
       },
-      "contains": {
-        "type": "object",
-        "properties": {
-          "schema:name": {
-            "type": "string"
-          },
-          "schema:termCode": {
-            "const": "XAS"
-          },
-          "schema:identifier": {
-            "const": "http://purl.org/pan-science/PaNET/PaNET01196"
-          },
-          "schema:inDefinedTermSet": {
-            "const": "nxs:Field/NXxas/ENTRY/DATA/mode"
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "schema:name": {
+                "const": "X-Ray Absorption Spectroscopy"
+              },
+              "schema:termCode": {
+                "const": "XAS"
+              },
+              "schema:identifier": {
+                "const": "http://purl.org/pan-science/PaNET/PaNET01196"
+              },
+              "schema:inDefinedTermSet": {
+                "const": "http://purl.org/pan-science/PaNET/PaNET.owl"
+              }
+            },
+            "required": [
+              "schema:name",
+              "schema:termCode",
+              "schema:identifier",
+              "schema:inDefinedTermSet"
+            ]
           }
         },
-        "required": [
-          "schema:name",
-          "schema:inDefinedTermSet"
-        ]
-      }
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "schema:name": {
+                "type": "string"
+              },
+              "schema:inDefinedTermSet": {
+                "const": "nxs:Field/NXxas/ENTRY/DATA/mode"
+              }
+            },
+            "required": [
+              "schema:name",
+              "schema:inDefinedTermSet"
+            ]
+          }
+        }
+      ]
     }
   },
   "required": [

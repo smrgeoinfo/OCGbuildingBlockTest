@@ -5,11 +5,24 @@
   "type": "object",
   "properties": {
     "@type": {
-      "const": [
-        "ada:collection",
-        "https://schema.org/Collection"
-      ],
-      "description": "GeneralType for collections"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "description": "GeneralType for collections",
+      "allOf": [
+        {
+          "contains": {
+            "const": "ada:collection"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://schema.org/Collection"
+          }
+        }
+      ]
     },
     "componentType": {
       "type": "object",

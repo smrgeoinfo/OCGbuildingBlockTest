@@ -1246,9 +1246,13 @@ def _convert_at_enum_to_oneof(at_schema: dict) -> None:
     and drop ``items``.  The frontend unwraps/wraps the array ↔ string value.
     """
     items = at_schema.get("items")
-    if not isinstance(items, dict):
-        return
-    enum_vals = items.get("enum")
+    # Try items.enum first (legacy behavior)
+    enum_vals = items.get("enum") if isinstance(items, dict) else None
+    # Fallback: contains.enum (new adaProduct structure)
+    if not enum_vals:
+        contains = at_schema.get("contains")
+        if isinstance(contains, dict):
+            enum_vals = contains.get("enum")
     if not enum_vals or not isinstance(enum_vals, list):
         return
 
@@ -1261,6 +1265,7 @@ def _convert_at_enum_to_oneof(at_schema: dict) -> None:
     at_schema["type"] = "string"
     at_schema["oneOf"] = one_of
     at_schema.pop("items", None)
+    at_schema.pop("contains", None)
     at_schema.pop("default", None)
 
 

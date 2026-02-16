@@ -131,6 +131,9 @@ def _deep_merge_inner(base: dict, overlay: dict, in_properties: bool) -> dict:
                 result[k] = copy.deepcopy(v)
             elif k == "properties":
                 result[k] = _deep_merge_inner(result[k], v, in_properties=True)
+            elif k == "contains":
+                # contains is a complete sub-schema constraint; overlay replaces
+                result[k] = copy.deepcopy(v)
             else:
                 result[k] = _deep_merge_inner(result[k], v, in_properties=False)
         else:
@@ -286,6 +289,11 @@ def flatten_allof(schema: Any) -> Any:
     Recursively flatten allOf entries into a single object.
     Merges properties, required, and other constraints from all allOf entries.
     Preserves anyOf/oneOf as-is (they represent valid polymorphic choices).
+
+    Special handling for ``contains``: when multiple allOf entries (or the
+    parent object) each define a ``contains`` constraint, they are preserved
+    as separate ``allOf`` entries with ``{"contains": ...}`` rather than
+    deep-merged (which would overwrite one constraint with another).
     """
     if isinstance(schema, dict):
         # Recurse first so nested allOf in properties/items are handled
@@ -301,9 +309,27 @@ def flatten_allof(schema: Any) -> Any:
             for k, v in result.items():
                 merged[k] = v
 
+            # Collect contains constraints separately to avoid overwrite
+            contains_list = []
+            if "contains" in merged:
+                contains_list.append(merged.pop("contains"))
+
             for entry in all_of:
                 if isinstance(entry, dict):
-                    merged = deep_merge(merged, entry)
+                    entry_copy = copy.deepcopy(entry)
+                    if "contains" in entry_copy:
+                        contains_list.append(entry_copy.pop("contains"))
+                    if entry_copy:  # remaining keys after extracting contains
+                        merged = deep_merge(merged, entry_copy)
+
+            # Re-attach contains constraints
+            if len(contains_list) == 1:
+                merged["contains"] = contains_list[0]
+            elif len(contains_list) > 1:
+                residual = merged.get("allOf", [])
+                for c in contains_list:
+                    residual.append({"contains": c})
+                merged["allOf"] = residual
 
             return merged
 

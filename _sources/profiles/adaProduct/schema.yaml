@@ -26,6 +26,7 @@ allOf:
           Should have the ada product type and 'ada:DataDeliveryPackage'
         items:
           type: string
+        contains:
           enum:
             - "ada:DataDeliveryPackage"
             - "\u2074\u2070Ar/\u00B3\u2079Ar Geochronology and Thermochronology (ARGT)"
@@ -96,6 +97,7 @@ allOf:
             - "X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)"
             - "X-ray Computed Tomography (XCT) Image Collection"
             - "X-ray Diffraction (XRD) Tabular"
+        minItems: 2
       submissionType:
         type: string
       "schema:funding":
@@ -538,8 +540,8 @@ allOf:
                       type: array
                       items:
                         type: string
-                        enum:
-                          - "schema:DataDownload"
+                      contains:
+                        const: "schema:DataDownload"
                       minItems: 1
             - allOf:
                 - $ref: ../../adaProperties/files/schema.yaml
@@ -550,8 +552,8 @@ allOf:
                       type: array
                       items:
                         type: string
-                        enum:
-                          - "schema:DataDownload"
+                      contains:
+                        const: "schema:DataDownload"
                       minItems: 1
                     "schema:provider":
                       type: array

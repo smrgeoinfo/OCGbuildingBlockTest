@@ -157,10 +157,10 @@
               "@type": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "enum": [
-                    "schema:DataDownload"
-                  ]
+                  "type": "string"
+                },
+                "contains": {
+                  "const": "schema:DataDownload"
                 },
                 "minItems": 1
               },
@@ -263,11 +263,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:image",
-                      "schema:ImageObject"
-                    ],
-                    "description": "GeneralType for images"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for images",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:image"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:ImageObject"
+                        }
+                      }
+                    ]
                   },
                   "acquisitionTime": {
                     "type": "string"
@@ -334,9 +347,22 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:imageMap",
-                      "schema:ImageObject"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:imageMap"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:ImageObject"
+                        }
+                      }
                     ]
                   },
                   "acquisitionTime": {
@@ -551,7 +577,20 @@
                         }
                       },
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                        "title": "EA-IRMS Instrument Detail",
+                        "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "ada:EAIRMSCollection"
+                          },
+                          "massConsumed": {
+                            "type": "string"
+                          },
+                          "elementType": {
+                            "type": "string"
+                          }
+                        }
                       },
                       {
                         "title": "EMPA Instrument Detail",
@@ -930,7 +969,61 @@
                     "type": "array",
                     "description": "Links variables to their physical representation in this dataset.",
                     "items": {
-                      "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                      "title": "Physical Mapping Type",
+                      "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                      "type": "object",
+                      "properties": {
+                        "cdi:index": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                        },
+                        "cdi:format": {
+                          "type": "string",
+                          "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                        },
+                        "cdi:physicalDataType": {
+                          "type": "string"
+                        },
+                        "cdi:length": {
+                          "type": "integer",
+                          "description": "The column width if the tabular text is fixed width."
+                        },
+                        "cdi:nullSequence": {
+                          "type": "string",
+                          "description": "The value of this property becomes the null annotation for the described column."
+                        },
+                        "cdi:defaultValue": {
+                          "type": "string",
+                          "description": "A default string indicating the value to substitute for an empty string."
+                        },
+                        "cdi:scale": {
+                          "type": "integer"
+                        },
+                        "cdi:decimalPositions": {
+                          "type": "integer"
+                        },
+                        "cdi:minimumLength": {
+                          "type": "integer"
+                        },
+                        "cdi:maximumLength": {
+                          "type": "integer"
+                        },
+                        "cdi:isRequired": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "cdi:formats_InstanceVariable": {
+                          "type": "object",
+                          "description": "Reference to a variable defined in schema:variableMeasured.",
+                          "properties": {
+                            "@id": {
+                              "type": "string",
+                              "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "countRows": {
@@ -978,11 +1071,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:collection",
-                      "https://schema.org/Collection"
-                    ],
-                    "description": "GeneralType for collections"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for collections",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:collection"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "https://schema.org/Collection"
+                        }
+                      }
+                    ]
                   },
                   "componentType": {
                     "type": "object",
@@ -1222,9 +1328,22 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:document",
-                      "schema:DigitalDocument"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:document"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:DigitalDocument"
+                        }
+                      }
                     ]
                   },
                   "componentType": {
@@ -1285,11 +1404,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:image",
-                      "schema:DigitalDocument"
-                    ],
-                    "description": "GeneralType for supplemental document images"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for supplemental document images",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:image"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:DigitalDocument"
+                        }
+                      }
+                    ]
                   },
                   "componentType": {
                     "type": "object",
@@ -1335,9 +1467,14 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:otherFileType"
-                    ]
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "contains": {
+                      "const": "ada:otherFileType"
+                    }
                   },
                   "componentType": {
                     "anyOf": [
@@ -1392,7 +1529,7 @@
                     ]
                   },
                   "schema:encodingFormat": {
-                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                     "enum": [
                       "text/plain",
                       "model/obj",
@@ -1423,6 +1560,21 @@
                 "required": [
                   "@type"
                 ]
+              },
+              {
+                "type": "object",
+                "description": "DataDownload distribution (archive or direct download without specific file type)",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "contains": {
+                      "const": "schema:DataDownload"
+                    }
+                  }
+                },
+                "required": [
+                  "@type"
+                ]
               }
             ]
           },
@@ -1437,10 +1589,10 @@
               "@type": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "enum": [
-                    "schema:DataDownload"
-                  ]
+                  "type": "string"
+                },
+                "contains": {
+                  "const": "schema:DataDownload"
                 },
                 "minItems": 1
               },
@@ -1697,11 +1849,24 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:image",
-                            "schema:ImageObject"
-                          ],
-                          "description": "GeneralType for images"
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 2,
+                          "description": "GeneralType for images",
+                          "allOf": [
+                            {
+                              "contains": {
+                                "const": "ada:image"
+                              }
+                            },
+                            {
+                              "contains": {
+                                "const": "schema:ImageObject"
+                              }
+                            }
+                          ]
                         },
                         "acquisitionTime": {
                           "type": "string"
@@ -1768,9 +1933,22 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:imageMap",
-                            "schema:ImageObject"
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 2,
+                          "allOf": [
+                            {
+                              "contains": {
+                                "const": "ada:imageMap"
+                              }
+                            },
+                            {
+                              "contains": {
+                                "const": "schema:ImageObject"
+                              }
+                            }
                           ]
                         },
                         "acquisitionTime": {
@@ -1985,7 +2163,20 @@
                               }
                             },
                             {
-                              "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                              "title": "EA-IRMS Instrument Detail",
+                              "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                              "type": "object",
+                              "properties": {
+                                "@type": {
+                                  "const": "ada:EAIRMSCollection"
+                                },
+                                "massConsumed": {
+                                  "type": "string"
+                                },
+                                "elementType": {
+                                  "type": "string"
+                                }
+                              }
                             },
                             {
                               "title": "EMPA Instrument Detail",
@@ -2364,7 +2555,61 @@
                           "type": "array",
                           "description": "Links variables to their physical representation in this dataset.",
                           "items": {
-                            "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                            "title": "Physical Mapping Type",
+                            "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                            "type": "object",
+                            "properties": {
+                              "cdi:index": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                              },
+                              "cdi:format": {
+                                "type": "string",
+                                "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                              },
+                              "cdi:physicalDataType": {
+                                "type": "string"
+                              },
+                              "cdi:length": {
+                                "type": "integer",
+                                "description": "The column width if the tabular text is fixed width."
+                              },
+                              "cdi:nullSequence": {
+                                "type": "string",
+                                "description": "The value of this property becomes the null annotation for the described column."
+                              },
+                              "cdi:defaultValue": {
+                                "type": "string",
+                                "description": "A default string indicating the value to substitute for an empty string."
+                              },
+                              "cdi:scale": {
+                                "type": "integer"
+                              },
+                              "cdi:decimalPositions": {
+                                "type": "integer"
+                              },
+                              "cdi:minimumLength": {
+                                "type": "integer"
+                              },
+                              "cdi:maximumLength": {
+                                "type": "integer"
+                              },
+                              "cdi:isRequired": {
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "cdi:formats_InstanceVariable": {
+                                "type": "object",
+                                "description": "Reference to a variable defined in schema:variableMeasured.",
+                                "properties": {
+                                  "@id": {
+                                    "type": "string",
+                                    "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                  }
+                                }
+                              }
+                            }
                           }
                         },
                         "countRows": {
@@ -2412,11 +2657,24 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:collection",
-                            "https://schema.org/Collection"
-                          ],
-                          "description": "GeneralType for collections"
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 2,
+                          "description": "GeneralType for collections",
+                          "allOf": [
+                            {
+                              "contains": {
+                                "const": "ada:collection"
+                              }
+                            },
+                            {
+                              "contains": {
+                                "const": "https://schema.org/Collection"
+                              }
+                            }
+                          ]
                         },
                         "componentType": {
                           "type": "object",
@@ -2656,9 +2914,22 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:document",
-                            "schema:DigitalDocument"
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 2,
+                          "allOf": [
+                            {
+                              "contains": {
+                                "const": "ada:document"
+                              }
+                            },
+                            {
+                              "contains": {
+                                "const": "schema:DigitalDocument"
+                              }
+                            }
                           ]
                         },
                         "componentType": {
@@ -2719,11 +2990,24 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:image",
-                            "schema:DigitalDocument"
-                          ],
-                          "description": "GeneralType for supplemental document images"
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 2,
+                          "description": "GeneralType for supplemental document images",
+                          "allOf": [
+                            {
+                              "contains": {
+                                "const": "ada:image"
+                              }
+                            },
+                            {
+                              "contains": {
+                                "const": "schema:DigitalDocument"
+                              }
+                            }
+                          ]
                         },
                         "componentType": {
                           "type": "object",
@@ -2769,9 +3053,14 @@
                       "type": "object",
                       "properties": {
                         "@type": {
-                          "const": [
-                            "ada:otherFileType"
-                          ]
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "contains": {
+                            "const": "ada:otherFileType"
+                          }
                         },
                         "componentType": {
                           "anyOf": [
@@ -2826,7 +3115,7 @@
                           ]
                         },
                         "schema:encodingFormat": {
-                          "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                          "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                           "enum": [
                             "text/plain",
                             "model/obj",
@@ -2857,6 +3146,21 @@
                       "required": [
                         "@type"
                       ]
+                    },
+                    {
+                      "type": "object",
+                      "description": "DataDownload distribution (archive or direct download without specific file type)",
+                      "properties": {
+                        "@type": {
+                          "type": "array",
+                          "contains": {
+                            "const": "schema:DataDownload"
+                          }
+                        }
+                      },
+                      "required": [
+                        "@type"
+                      ]
                     }
                   ]
                 }
@@ -2869,11 +3173,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:image",
-                      "schema:ImageObject"
-                    ],
-                    "description": "GeneralType for images"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for images",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:image"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:ImageObject"
+                        }
+                      }
+                    ]
                   },
                   "acquisitionTime": {
                     "type": "string"
@@ -2940,9 +3257,22 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:imageMap",
-                      "schema:ImageObject"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:imageMap"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:ImageObject"
+                        }
+                      }
                     ]
                   },
                   "acquisitionTime": {
@@ -3157,7 +3487,20 @@
                         }
                       },
                       {
-                        "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                        "title": "EA-IRMS Instrument Detail",
+                        "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "ada:EAIRMSCollection"
+                          },
+                          "massConsumed": {
+                            "type": "string"
+                          },
+                          "elementType": {
+                            "type": "string"
+                          }
+                        }
                       },
                       {
                         "title": "EMPA Instrument Detail",
@@ -3536,7 +3879,61 @@
                     "type": "array",
                     "description": "Links variables to their physical representation in this dataset.",
                     "items": {
-                      "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                      "title": "Physical Mapping Type",
+                      "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                      "type": "object",
+                      "properties": {
+                        "cdi:index": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                        },
+                        "cdi:format": {
+                          "type": "string",
+                          "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                        },
+                        "cdi:physicalDataType": {
+                          "type": "string"
+                        },
+                        "cdi:length": {
+                          "type": "integer",
+                          "description": "The column width if the tabular text is fixed width."
+                        },
+                        "cdi:nullSequence": {
+                          "type": "string",
+                          "description": "The value of this property becomes the null annotation for the described column."
+                        },
+                        "cdi:defaultValue": {
+                          "type": "string",
+                          "description": "A default string indicating the value to substitute for an empty string."
+                        },
+                        "cdi:scale": {
+                          "type": "integer"
+                        },
+                        "cdi:decimalPositions": {
+                          "type": "integer"
+                        },
+                        "cdi:minimumLength": {
+                          "type": "integer"
+                        },
+                        "cdi:maximumLength": {
+                          "type": "integer"
+                        },
+                        "cdi:isRequired": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "cdi:formats_InstanceVariable": {
+                          "type": "object",
+                          "description": "Reference to a variable defined in schema:variableMeasured.",
+                          "properties": {
+                            "@id": {
+                              "type": "string",
+                              "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "countRows": {
@@ -3584,11 +3981,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:collection",
-                      "https://schema.org/Collection"
-                    ],
-                    "description": "GeneralType for collections"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for collections",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:collection"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "https://schema.org/Collection"
+                        }
+                      }
+                    ]
                   },
                   "componentType": {
                     "type": "object",
@@ -3828,9 +4238,22 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:document",
-                      "schema:DigitalDocument"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:document"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:DigitalDocument"
+                        }
+                      }
                     ]
                   },
                   "componentType": {
@@ -3891,11 +4314,24 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:image",
-                      "schema:DigitalDocument"
-                    ],
-                    "description": "GeneralType for supplemental document images"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "description": "GeneralType for supplemental document images",
+                    "allOf": [
+                      {
+                        "contains": {
+                          "const": "ada:image"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "const": "schema:DigitalDocument"
+                        }
+                      }
+                    ]
                   },
                   "componentType": {
                     "type": "object",
@@ -3941,9 +4377,14 @@
                 "type": "object",
                 "properties": {
                   "@type": {
-                    "const": [
-                      "ada:otherFileType"
-                    ]
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "contains": {
+                      "const": "ada:otherFileType"
+                    }
                   },
                   "componentType": {
                     "anyOf": [
@@ -3998,7 +4439,7 @@
                     ]
                   },
                   "schema:encodingFormat": {
-                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                     "enum": [
                       "text/plain",
                       "model/obj",
@@ -4024,6 +4465,21 @@
                     "const": [
                       "Metadata"
                     ]
+                  }
+                },
+                "required": [
+                  "@type"
+                ]
+              },
+              {
+                "type": "object",
+                "description": "DataDownload distribution (archive or direct download without specific file type)",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "contains": {
+                      "const": "schema:DataDownload"
+                    }
                   }
                 },
                 "required": [
@@ -4715,11 +5171,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:image",
-                              "schema:ImageObject"
-                            ],
-                            "description": "GeneralType for images"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for images",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:image"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:ImageObject"
+                                }
+                              }
+                            ]
                           },
                           "acquisitionTime": {
                             "type": "string"
@@ -4786,9 +5255,22 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:imageMap",
-                              "schema:ImageObject"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:imageMap"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:ImageObject"
+                                }
+                              }
                             ]
                           },
                           "acquisitionTime": {
@@ -5003,7 +5485,20 @@
                                 }
                               },
                               {
-                                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                                "title": "EA-IRMS Instrument Detail",
+                                "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "ada:EAIRMSCollection"
+                                  },
+                                  "massConsumed": {
+                                    "type": "string"
+                                  },
+                                  "elementType": {
+                                    "type": "string"
+                                  }
+                                }
                               },
                               {
                                 "title": "EMPA Instrument Detail",
@@ -5382,7 +5877,61 @@
                             "type": "array",
                             "description": "Links variables to their physical representation in this dataset.",
                             "items": {
-                              "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                              "title": "Physical Mapping Type",
+                              "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                              "type": "object",
+                              "properties": {
+                                "cdi:index": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                                },
+                                "cdi:format": {
+                                  "type": "string",
+                                  "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                                },
+                                "cdi:physicalDataType": {
+                                  "type": "string"
+                                },
+                                "cdi:length": {
+                                  "type": "integer",
+                                  "description": "The column width if the tabular text is fixed width."
+                                },
+                                "cdi:nullSequence": {
+                                  "type": "string",
+                                  "description": "The value of this property becomes the null annotation for the described column."
+                                },
+                                "cdi:defaultValue": {
+                                  "type": "string",
+                                  "description": "A default string indicating the value to substitute for an empty string."
+                                },
+                                "cdi:scale": {
+                                  "type": "integer"
+                                },
+                                "cdi:decimalPositions": {
+                                  "type": "integer"
+                                },
+                                "cdi:minimumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:maximumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:isRequired": {
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "cdi:formats_InstanceVariable": {
+                                  "type": "object",
+                                  "description": "Reference to a variable defined in schema:variableMeasured.",
+                                  "properties": {
+                                    "@id": {
+                                      "type": "string",
+                                      "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                    }
+                                  }
+                                }
+                              }
                             }
                           },
                           "countRows": {
@@ -5430,11 +5979,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:collection",
-                              "https://schema.org/Collection"
-                            ],
-                            "description": "GeneralType for collections"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for collections",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:collection"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "https://schema.org/Collection"
+                                }
+                              }
+                            ]
                           },
                           "componentType": {
                             "type": "object",
@@ -5674,9 +6236,22 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:document",
-                              "schema:DigitalDocument"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:document"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:DigitalDocument"
+                                }
+                              }
                             ]
                           },
                           "componentType": {
@@ -5737,11 +6312,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:image",
-                              "schema:DigitalDocument"
-                            ],
-                            "description": "GeneralType for supplemental document images"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for supplemental document images",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:image"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:DigitalDocument"
+                                }
+                              }
+                            ]
                           },
                           "componentType": {
                             "type": "object",
@@ -5787,9 +6375,14 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:otherFileType"
-                            ]
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 1,
+                            "contains": {
+                              "const": "ada:otherFileType"
+                            }
                           },
                           "componentType": {
                             "anyOf": [
@@ -5844,7 +6437,7 @@
                             ]
                           },
                           "schema:encodingFormat": {
-                            "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                            "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                             "enum": [
                               "text/plain",
                               "model/obj",
@@ -5870,6 +6463,21 @@
                             "const": [
                               "Metadata"
                             ]
+                          }
+                        },
+                        "required": [
+                          "@type"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "description": "DataDownload distribution (archive or direct download without specific file type)",
+                        "properties": {
+                          "@type": {
+                            "type": "array",
+                            "contains": {
+                              "const": "schema:DataDownload"
+                            }
                           }
                         },
                         "required": [
@@ -6108,11 +6716,24 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:image",
-                                    "schema:ImageObject"
-                                  ],
-                                  "description": "GeneralType for images"
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 2,
+                                  "description": "GeneralType for images",
+                                  "allOf": [
+                                    {
+                                      "contains": {
+                                        "const": "ada:image"
+                                      }
+                                    },
+                                    {
+                                      "contains": {
+                                        "const": "schema:ImageObject"
+                                      }
+                                    }
+                                  ]
                                 },
                                 "acquisitionTime": {
                                   "type": "string"
@@ -6179,9 +6800,22 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:imageMap",
-                                    "schema:ImageObject"
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 2,
+                                  "allOf": [
+                                    {
+                                      "contains": {
+                                        "const": "ada:imageMap"
+                                      }
+                                    },
+                                    {
+                                      "contains": {
+                                        "const": "schema:ImageObject"
+                                      }
+                                    }
                                   ]
                                 },
                                 "acquisitionTime": {
@@ -6396,7 +7030,20 @@
                                       }
                                     },
                                     {
-                                      "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                                      "title": "EA-IRMS Instrument Detail",
+                                      "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                                      "type": "object",
+                                      "properties": {
+                                        "@type": {
+                                          "const": "ada:EAIRMSCollection"
+                                        },
+                                        "massConsumed": {
+                                          "type": "string"
+                                        },
+                                        "elementType": {
+                                          "type": "string"
+                                        }
+                                      }
                                     },
                                     {
                                       "title": "EMPA Instrument Detail",
@@ -6775,7 +7422,61 @@
                                   "type": "array",
                                   "description": "Links variables to their physical representation in this dataset.",
                                   "items": {
-                                    "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                                    "title": "Physical Mapping Type",
+                                    "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                                    "type": "object",
+                                    "properties": {
+                                      "cdi:index": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                                      },
+                                      "cdi:format": {
+                                        "type": "string",
+                                        "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                                      },
+                                      "cdi:physicalDataType": {
+                                        "type": "string"
+                                      },
+                                      "cdi:length": {
+                                        "type": "integer",
+                                        "description": "The column width if the tabular text is fixed width."
+                                      },
+                                      "cdi:nullSequence": {
+                                        "type": "string",
+                                        "description": "The value of this property becomes the null annotation for the described column."
+                                      },
+                                      "cdi:defaultValue": {
+                                        "type": "string",
+                                        "description": "A default string indicating the value to substitute for an empty string."
+                                      },
+                                      "cdi:scale": {
+                                        "type": "integer"
+                                      },
+                                      "cdi:decimalPositions": {
+                                        "type": "integer"
+                                      },
+                                      "cdi:minimumLength": {
+                                        "type": "integer"
+                                      },
+                                      "cdi:maximumLength": {
+                                        "type": "integer"
+                                      },
+                                      "cdi:isRequired": {
+                                        "type": "boolean",
+                                        "default": false
+                                      },
+                                      "cdi:formats_InstanceVariable": {
+                                        "type": "object",
+                                        "description": "Reference to a variable defined in schema:variableMeasured.",
+                                        "properties": {
+                                          "@id": {
+                                            "type": "string",
+                                            "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 },
                                 "countRows": {
@@ -6823,11 +7524,24 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:collection",
-                                    "https://schema.org/Collection"
-                                  ],
-                                  "description": "GeneralType for collections"
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 2,
+                                  "description": "GeneralType for collections",
+                                  "allOf": [
+                                    {
+                                      "contains": {
+                                        "const": "ada:collection"
+                                      }
+                                    },
+                                    {
+                                      "contains": {
+                                        "const": "https://schema.org/Collection"
+                                      }
+                                    }
+                                  ]
                                 },
                                 "componentType": {
                                   "type": "object",
@@ -7067,9 +7781,22 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:document",
-                                    "schema:DigitalDocument"
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 2,
+                                  "allOf": [
+                                    {
+                                      "contains": {
+                                        "const": "ada:document"
+                                      }
+                                    },
+                                    {
+                                      "contains": {
+                                        "const": "schema:DigitalDocument"
+                                      }
+                                    }
                                   ]
                                 },
                                 "componentType": {
@@ -7130,11 +7857,24 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:image",
-                                    "schema:DigitalDocument"
-                                  ],
-                                  "description": "GeneralType for supplemental document images"
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 2,
+                                  "description": "GeneralType for supplemental document images",
+                                  "allOf": [
+                                    {
+                                      "contains": {
+                                        "const": "ada:image"
+                                      }
+                                    },
+                                    {
+                                      "contains": {
+                                        "const": "schema:DigitalDocument"
+                                      }
+                                    }
+                                  ]
                                 },
                                 "componentType": {
                                   "type": "object",
@@ -7180,9 +7920,14 @@
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": [
-                                    "ada:otherFileType"
-                                  ]
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "minItems": 1,
+                                  "contains": {
+                                    "const": "ada:otherFileType"
+                                  }
                                 },
                                 "componentType": {
                                   "anyOf": [
@@ -7237,7 +7982,7 @@
                                   ]
                                 },
                                 "schema:encodingFormat": {
-                                  "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                                  "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                                   "enum": [
                                     "text/plain",
                                     "model/obj",
@@ -7268,6 +8013,21 @@
                               "required": [
                                 "@type"
                               ]
+                            },
+                            {
+                              "type": "object",
+                              "description": "DataDownload distribution (archive or direct download without specific file type)",
+                              "properties": {
+                                "@type": {
+                                  "type": "array",
+                                  "contains": {
+                                    "const": "schema:DataDownload"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "@type"
+                              ]
                             }
                           ]
                         }
@@ -7280,11 +8040,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:image",
-                              "schema:ImageObject"
-                            ],
-                            "description": "GeneralType for images"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for images",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:image"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:ImageObject"
+                                }
+                              }
+                            ]
                           },
                           "acquisitionTime": {
                             "type": "string"
@@ -7351,9 +8124,22 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:imageMap",
-                              "schema:ImageObject"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:imageMap"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:ImageObject"
+                                }
+                              }
                             ]
                           },
                           "acquisitionTime": {
@@ -7568,7 +8354,20 @@
                                 }
                               },
                               {
-                                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\detailEAIRMS\\detialEAIRMSSchema.json"
+                                "title": "EA-IRMS Instrument Detail",
+                                "description": "Elemental Analysis Isotope Ratio Mass Spectrometry collection",
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "ada:EAIRMSCollection"
+                                  },
+                                  "massConsumed": {
+                                    "type": "string"
+                                  },
+                                  "elementType": {
+                                    "type": "string"
+                                  }
+                                }
                               },
                               {
                                 "title": "EMPA Instrument Detail",
@@ -7947,7 +8746,61 @@
                             "type": "array",
                             "description": "Links variables to their physical representation in this dataset.",
                             "items": {
-                              "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\OCGbuildingBlockTest\\_sources\\adaProperties\\physicalMapping\\physicalMappingSchema.json"
+                              "title": "Physical Mapping Type",
+                              "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                              "type": "object",
+                              "properties": {
+                                "cdi:index": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                                },
+                                "cdi:format": {
+                                  "type": "string",
+                                  "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                                },
+                                "cdi:physicalDataType": {
+                                  "type": "string"
+                                },
+                                "cdi:length": {
+                                  "type": "integer",
+                                  "description": "The column width if the tabular text is fixed width."
+                                },
+                                "cdi:nullSequence": {
+                                  "type": "string",
+                                  "description": "The value of this property becomes the null annotation for the described column."
+                                },
+                                "cdi:defaultValue": {
+                                  "type": "string",
+                                  "description": "A default string indicating the value to substitute for an empty string."
+                                },
+                                "cdi:scale": {
+                                  "type": "integer"
+                                },
+                                "cdi:decimalPositions": {
+                                  "type": "integer"
+                                },
+                                "cdi:minimumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:maximumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:isRequired": {
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "cdi:formats_InstanceVariable": {
+                                  "type": "object",
+                                  "description": "Reference to a variable defined in schema:variableMeasured.",
+                                  "properties": {
+                                    "@id": {
+                                      "type": "string",
+                                      "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                    }
+                                  }
+                                }
+                              }
                             }
                           },
                           "countRows": {
@@ -7995,11 +8848,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:collection",
-                              "https://schema.org/Collection"
-                            ],
-                            "description": "GeneralType for collections"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for collections",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:collection"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "https://schema.org/Collection"
+                                }
+                              }
+                            ]
                           },
                           "componentType": {
                             "type": "object",
@@ -8239,9 +9105,22 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:document",
-                              "schema:DigitalDocument"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:document"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:DigitalDocument"
+                                }
+                              }
                             ]
                           },
                           "componentType": {
@@ -8302,11 +9181,24 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:image",
-                              "schema:DigitalDocument"
-                            ],
-                            "description": "GeneralType for supplemental document images"
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 2,
+                            "description": "GeneralType for supplemental document images",
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "ada:image"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "schema:DigitalDocument"
+                                }
+                              }
+                            ]
                           },
                           "componentType": {
                             "type": "object",
@@ -8352,9 +9244,14 @@
                         "type": "object",
                         "properties": {
                           "@type": {
-                            "const": [
-                              "ada:otherFileType"
-                            ]
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "minItems": 1,
+                            "contains": {
+                              "const": "ada:otherFileType"
+                            }
                           },
                           "componentType": {
                             "anyOf": [
@@ -8409,7 +9306,7 @@
                             ]
                           },
                           "schema:encodingFormat": {
-                            "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->textplain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream\n",
+                            "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
                             "enum": [
                               "text/plain",
                               "model/obj",
@@ -8435,6 +9332,21 @@
                             "const": [
                               "Metadata"
                             ]
+                          }
+                        },
+                        "required": [
+                          "@type"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "description": "DataDownload distribution (archive or direct download without specific file type)",
+                        "properties": {
+                          "@type": {
+                            "type": "array",
+                            "contains": {
+                              "const": "schema:DataDownload"
+                            }
                           }
                         },
                         "required": [
@@ -8610,7 +9522,8 @@
           "ada:LCMSMSCollection",
           "Liquid chromatography-mass spectrometry"
         ]
-      }
+      },
+      "minItems": 2
     },
     "schema:sameAs": {
       "description": "The other identifiers for the dataset. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.",
@@ -10718,9 +11631,18 @@
             "items": {
               "type": "string"
             },
-            "contains": {
-              "const": "schema:Event"
-            }
+            "allOf": [
+              {
+                "contains": {
+                  "const": "prov:Activity"
+                }
+              },
+              {
+                "contains": {
+                  "const": "schema:Event"
+                }
+              }
+            ]
           },
           "prov:used": {
             "type": "array",
