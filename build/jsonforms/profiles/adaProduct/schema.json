@@ -22,7 +22,7 @@
     },
     "schema:identifier": {
       "type": "string",
-      "description": "Primary identifier for the dataset"
+      "description": "The primary identifier for the dataset; other identifiers should be listed in the sameAs field. Schema.org has three ways of encoding identifiers-- a text description, a URL, or by using the schema:PropertyValue field. The Science on Schema.org guidance strongly recommends using the PropertyValue approach. see https://github.com/ESIPFed/science-on-schema.org   .... Dataset.md#identifier.  Ideally, for any given data provided they would provide identifiers either all as strings or all as identifier_type."
     },
     "schema:dateModified": {
       "type": "string",
@@ -107,7 +107,7 @@
           },
           "schema:name": {
             "type": "string",
-            "description": "String name of file, must be unique within the containing package"
+            "description": "Name of this distribution"
           },
           "schema:description": {
             "type": "string"
@@ -122,7 +122,7 @@
             "items": {
               "type": "string"
             },
-            "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
+            "description": "MIME type(s) (DataDownload)"
           },
           "spdx:checksum": {
             "type": "object",
@@ -133,23 +133,19 @@
               "spdx:checksumValue": {
                 "type": "string"
               }
-            },
-            "description": "A string value calculated from the content of the resource representation, used to test if content has been modified."
+            }
           },
           "schema:serviceType": {
             "type": "string",
-            "description": "Type of service, e.g. OGC:WMS, OPeNDAP (WebAPI)"
+            "description": "specify the kind of service. Ideally this should be a resolvable identifier. Currently there is no widely adopted registry for serviceType identifiers, in large part because services might be defined at different levels of granularity, and classifications might focus on function, data formats, thematic content, security, or other aspects of the service definition. For interoperability, there must be an external arrangement between data providers and consumers on the strings that will be used to specify service types."
           },
           "schema:documentation": {
             "type": "string",
-            "description": "URL to API documentation (WebAPI)"
-          },
-          "@id": {
-            "type": "string"
+            "description": "a document that provides a machine-actionable description of a service instance. Examples include OpenAPI documents, OGC Capabilities documents. Software designed to utilise a particular service type will typically include functionality to parse such a description document and engage with the service endpoint. If such a document is available for the service instance providing the resource distribution, it should be included in the distribution metadata."
           },
           "schema:additionalType": {
             "type": "array",
-            "description": "Identify the package scheme, e.g. NASA PDS bundle, RO-CRATE, Bagit",
+            "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
             "items": {
               "type": "string"
             }
@@ -170,17 +166,9 @@
               }
             }
           },
-          "resultTarget": {
-            "title": "String Array Type",
-            "description": "Simple reusable array of strings",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "schema:relatedLink": {
             "type": "array",
-            "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+            "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.",
             "items": {
               "type": "object",
               "properties": {
@@ -212,64 +200,20 @@
               }
             }
           },
-          "schema:provider": {
-            "type": "array",
-            "description": "Party who maintains this particular distribution option.",
-            "items": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "default": "schema:Organization"
-                },
-                "schema:name": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "schema:name"
-              ]
-            }
-          },
           "schema:hasPart": {
             "type": "array",
             "description": "Array describing the files in the zip archive.",
             "items": {
               "properties": {
-                "@id": {
-                  "type": "string"
-                },
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "schema:additionalType": {
                   "type": "array",
-                  "description": "The dataComponentType or supDocType",
+                  "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
                   "items": {
                     "type": "string"
                   }
-                },
-                "schema:name": {
-                  "type": "string",
-                  "description": "String name of file, must be unique within the containing package"
                 },
                 "schema:description": {
                   "type": "string"
-                },
-                "spdx:checksum": {
-                  "type": "object",
-                  "description": "A string value calculated from the content of the resource representation, used to test if content has been modified.",
-                  "properties": {
-                    "spdx:algorithm": {
-                      "type": "string"
-                    },
-                    "spdx:checksumValue": {
-                      "type": "string"
-                    }
-                  }
                 },
                 "schema:size": {
                   "type": "object",
@@ -287,24 +231,9 @@
                     }
                   }
                 },
-                "schema:encodingFormat": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
-                },
-                "resultTarget": {
-                  "title": "String Array Type",
-                  "description": "Simple reusable array of strings",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "schema:relatedLink": {
                   "type": "array",
-                  "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+                  "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -335,16 +264,25 @@
                       }
                     }
                   }
+                },
+                "schema:contentURL": false,
+                "@type": {
+                  "description": "add MediaObject as type for ROCrate compatibility; this file is part of an archive, not independently accessible"
                 }
               },
               "title": "Files Type",
               "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+              "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
               "type": "object"
             }
           },
+          "schema:termsOfService": {
+            "type": "string",
+            "description": "Description of access privileges required to use the API, e.g. registration, licensing, payments. Note that access constraints applying to all distributions of the resource should be specified in the access constraints for the resource description as a whole."
+          },
           "schema:potentialAction": {
             "type": "array",
-            "description": "Actions that can be invoked via the API.",
+            "description": "actions that can be invoked via the API",
             "items": {
               "title": "Action ",
               "type": "object",
@@ -583,44 +521,19 @@
             "description": "The file(s) that result from invoking this API. Reuses the same single-file or archive-with-hasPart structure.",
             "oneOf": [
               {
+                "title": "Files Type",
+                "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                 "properties": {
-                  "@id": {
-                    "type": "string"
-                  },
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "schema:DataDownload"
-                      ]
-                    }
-                  },
                   "schema:additionalType": {
                     "type": "array",
-                    "description": "The dataComponentType or supDocType",
+                    "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
                     "items": {
                       "type": "string"
                     }
                   },
-                  "schema:name": {
-                    "type": "string",
-                    "description": "String name of file, must be unique within the containing package"
-                  },
                   "schema:description": {
                     "type": "string"
-                  },
-                  "spdx:checksum": {
-                    "type": "object",
-                    "description": "A string value calculated from the content of the resource representation, used to test if content has been modified.",
-                    "properties": {
-                      "spdx:algorithm": {
-                        "type": "string"
-                      },
-                      "spdx:checksumValue": {
-                        "type": "string"
-                      }
-                    }
                   },
                   "schema:size": {
                     "type": "object",
@@ -638,24 +551,9 @@
                       }
                     }
                   },
-                  "schema:encodingFormat": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
-                  },
-                  "resultTarget": {
-                    "title": "String Array Type",
-                    "description": "Simple reusable array of strings",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
                   "schema:relatedLink": {
                     "type": "array",
-                    "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+                    "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -688,49 +586,19 @@
                     }
                   }
                 },
-                "title": "Files Type",
-                "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
                 "type": "object"
               },
               {
                 "properties": {
-                  "@id": {
-                    "type": "string"
-                  },
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "schema:DataDownload"
-                      ]
-                    }
-                  },
                   "schema:additionalType": {
                     "type": "array",
-                    "description": "The dataComponentType or supDocType",
+                    "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
                     "items": {
                       "type": "string"
                     }
                   },
-                  "schema:name": {
-                    "type": "string",
-                    "description": "String name of file, must be unique within the containing package"
-                  },
                   "schema:description": {
                     "type": "string"
-                  },
-                  "spdx:checksum": {
-                    "type": "object",
-                    "description": "A string value calculated from the content of the resource representation, used to test if content has been modified.",
-                    "properties": {
-                      "spdx:algorithm": {
-                        "type": "string"
-                      },
-                      "spdx:checksumValue": {
-                        "type": "string"
-                      }
-                    }
                   },
                   "schema:size": {
                     "type": "object",
@@ -748,24 +616,9 @@
                       }
                     }
                   },
-                  "schema:encodingFormat": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
-                  },
-                  "resultTarget": {
-                    "title": "String Array Type",
-                    "description": "Simple reusable array of strings",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
                   "schema:relatedLink": {
                     "type": "array",
-                    "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+                    "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -802,40 +655,15 @@
                     "description": "Files within the archive result.",
                     "items": {
                       "properties": {
-                        "@id": {
-                          "type": "string"
-                        },
-                        "@type": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
                         "schema:additionalType": {
                           "type": "array",
-                          "description": "The dataComponentType or supDocType",
+                          "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
                           "items": {
                             "type": "string"
                           }
-                        },
-                        "schema:name": {
-                          "type": "string",
-                          "description": "String name of file, must be unique within the containing package"
                         },
                         "schema:description": {
                           "type": "string"
-                        },
-                        "spdx:checksum": {
-                          "type": "object",
-                          "description": "A string value calculated from the content of the resource representation, used to test if content has been modified.",
-                          "properties": {
-                            "spdx:algorithm": {
-                              "type": "string"
-                            },
-                            "spdx:checksumValue": {
-                              "type": "string"
-                            }
-                          }
                         },
                         "schema:size": {
                           "type": "object",
@@ -853,24 +681,9 @@
                             }
                           }
                         },
-                        "schema:encodingFormat": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
-                        },
-                        "resultTarget": {
-                          "title": "String Array Type",
-                          "description": "Simple reusable array of strings",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
                         "schema:relatedLink": {
                           "type": "array",
-                          "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links.",
+                          "description": "Links between files in the product. Use schema:name for path to target in product, or use #id JSON-LD links. Used to link metadata files in bundle to the data or supplementary files they document.",
                           "items": {
                             "type": "object",
                             "properties": {
@@ -901,16 +714,22 @@
                               }
                             }
                           }
+                        },
+                        "schema:contentURL": false,
+                        "@type": {
+                          "description": "add MediaObject as type for ROCrate compatibility; this file is part of an archive, not independently accessible"
                         }
                       },
                       "title": "Files Type",
                       "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+                      "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                       "type": "object"
                     }
                   }
                 },
                 "title": "Files Type",
                 "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
+                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                 "type": "object"
               }
             ]
@@ -920,7 +739,7 @@
     },
     "schema:subjectOf": {
       "type": "object",
-      "description": "Metadata record about this dataset",
+      "description": "see https://github.com/Cross-Domain-Interoperability-Framework/Discovery/issues/13 for discussion on how to make assertion about the sample registration and metadata distinct from statements about the physical object",
       "properties": {
         "@type": {
           "type": "string",
@@ -928,7 +747,7 @@
         },
         "@id": {
           "type": "string",
-          "description": "Identifier for the metadata record"
+          "description": "identifier for the metadata record"
         },
         "schema:about": {
           "type": "object",
@@ -946,7 +765,7 @@
             "properties": {
               "@id": {
                 "type": "string",
-                "description": "URI for specifications that this metadata record conforms to. Minimally should specify URI for CDIF discovery profile."
+                "description": "uri for specifications that this metadata record conforms to"
               }
             }
           },
@@ -972,7 +791,7 @@
           ]
         },
         "schema:sdDatePublished": {
-          "description": "Date of most recent update to the metadata content",
+          "description": "date of most recent update to the metadata content, extends iSamples schema",
           "type": "string",
           "format": "date-time"
         },
@@ -1138,7 +957,7 @@
       }
     },
     "schema:creator": {
-      "description": "Author or originator of intellectual content of dataset. Use the JSON-LD @list construct to preserve author order.",
+      "description": "author or orginator of intellectual content of dataset. Uset the JSON-LD @list construct to preserve author order. Use contributor with the Role property to specify other roles related to creation or stewardship of the resource.",
       "type": "object",
       "properties": {
         "@list": {
@@ -1185,7 +1004,7 @@
       }
     },
     "schema:contributor": {
-      "description": "Other parties who played a role in production of dataset",
+      "description": "other parties who played a role in production of dataset",
       "type": "array",
       "items": {
         "type": "object",
@@ -1272,7 +1091,7 @@
             "default": "schema:MonetaryGrant"
           },
           "schema:identifier": {
-            "description": "Identifier for a particular grant",
+            "description": "identifier for a particular grant",
             "type": "object",
             "properties": {
               "@type": {
@@ -1303,7 +1122,7 @@
           },
           "schema:name": {
             "type": "string",
-            "description": "Title of the grant"
+            "description": "title of the grant"
           },
           "schema:funder": {
             "type": "object",
@@ -1321,8 +1140,27 @@
             ]
           }
         },
-        "required": [
-          "schema:funder"
+        "anyOf": [
+          {
+            "required": [
+              "schema:funder"
+            ]
+          },
+          {
+            "required": [
+              "schema:identifier"
+            ]
+          },
+          {
+            "required": [
+              "schema:name"
+            ]
+          },
+          {
+            "required": [
+              "schema:description"
+            ]
+          }
         ]
       }
     },

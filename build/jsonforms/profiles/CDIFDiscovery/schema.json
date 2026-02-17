@@ -122,7 +122,7 @@
             "items": {
               "type": "string"
             },
-            "description": "MIME type(s) (DataDownload)"
+            "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
           },
           "spdx:checksum": {
             "type": "object",
@@ -555,8 +555,27 @@
             ]
           }
         },
-        "required": [
-          "schema:funder"
+        "anyOf": [
+          {
+            "required": [
+              "schema:funder"
+            ]
+          },
+          {
+            "required": [
+              "schema:identifier"
+            ]
+          },
+          {
+            "required": [
+              "schema:name"
+            ]
+          },
+          {
+            "required": [
+              "schema:description"
+            ]
+          }
         ]
       }
     },
