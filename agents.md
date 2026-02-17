@@ -243,7 +243,7 @@ profiles/adaProduct/                    ← Top-level ADA product profile (v3, C
 
 ### Technique Profiles
 
-There are 35 technique profiles extending `adaProduct` via `allOf`. Each constrains `schema:additionalType` (accepts both `ada:` product type URIs and human-readable technique labels) and `schema:hasPart` component types. File-type constraints come from the shared `files/schema.yaml` building block via `allOf` composition.
+There are 35 technique profiles extending `adaProduct` via `allOf`. Each constrains `schema:additionalType` (human-readable product-type labels only, no `ada:` URIs) and `schema:hasPart` component types. File-type constraints come from the shared `files/schema.yaml` building block via `allOf` composition.
 
 **Original 4** (hand-authored): adaEMPA, adaXRD, adaICPMS, adaVNMIR
 
@@ -259,8 +259,9 @@ profiles/adaEMPA/    ← extends adaProduct
 ├── schema:additionalType contains EMPA product type or "Electron microprobe analysis"
 ├── schema:distribution hasPart additionalType constrained to:
 │   EMPAImageMap, EMPAImage, EMPAQEATabular, EMPAImageCollection,
-│   analysisLocation, supplementaryImage, calibrationFile, methodDescription,
-│   instrumentMetadata
+│   + 22 standard supplement/supporting types (analysisLocation, calibrationFile,
+│   methodDescription, instrumentMetadata, contextPhotography, plot, quickLook,
+│   supplementaryImage, supplementaryTabular, supplementaryData, etc.)
 └── (file-type props from files/schema.yaml: componentType, cdi:isStructuredBy, etc.)
 ```
 
@@ -390,9 +391,9 @@ python tools/validate_instance.py --dir /path/to/testJSONMetadata --termcode-fal
 ```
 
 **Key design decisions:**
-- `additional_type_labels` — each profile's `contains` enum includes both `ada:` URIs and human-readable technique name strings, so metadata with either format passes validation
+- `additional_type_labels` — each profile's `contains` enum includes human-readable product-type names (from the Products worksheet) and the technique label without abbreviation; no `ada:` URIs
 - File type refs are auto-detected from component types using sets that mirror the `adaProperties/*/schema.yaml` componentType enums
-- Standard supporting types (`analysisLocation`, `methodDescription`, `instrumentMetadata`, `calibrationFile`) are added to every profile's hasPart enum
+- 22 standard supplement/supporting types (analysisLocation, contextPhotography, calibrationFile, instrumentMetadata, methodDescription, plot, quickLook, supplementaryImage, supplementaryTabular, supplementaryData, supplementaryDocument, supplementaryPresentation, supplementarySpreadsheet, supplementaryVideo, supplementaryAudio, supplementaryArchive, supplementaryCode, supplementaryNotebook, supplementaryModel, supplementaryDatabase, supplementaryOther, supplementaryCollection) are added to every profile's hasPart enum
 
 ## augment_register.py
 
