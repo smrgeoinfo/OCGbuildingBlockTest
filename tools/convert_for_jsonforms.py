@@ -1203,7 +1203,22 @@ def flatten_remaining_allof(schema: Any) -> Any:
                 if not keys:
                     continue
                 if keys == {"anyOf"}:
-                    # Conditional required — drop for form friendliness
+                    # Distinguish file-type anyOf (branches have properties
+                    # including componentType — image/tabular/dataCube/document
+                    # file-type branches) from conditional-required patterns
+                    # (branches only have required).
+                    branches = entry["anyOf"]
+                    if _is_file_type_anyof(branches):
+                        # File-type anyOf — flatten into parent properties
+                        # now, since apply_anyof_simplifications already ran.
+                        simplified = simplify_file_detail_anyof({"anyOf": branches})
+                        for pk, pv in simplified.get("properties", {}).items():
+                            existing = result.get("properties", {}).get(pk)
+                            if existing is not None:
+                                result["properties"][pk] = _deep_merge_dict(existing, pv)
+                            else:
+                                result.setdefault("properties", {})[pk] = copy.deepcopy(pv)
+                    # else: conditional required — drop for form friendliness
                     continue
                 # Merge properties from the allOf entry into the parent
                 for pk, pv in entry.get("properties", {}).items():
