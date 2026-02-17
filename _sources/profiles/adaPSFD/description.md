@@ -10,6 +10,7 @@ Technique-specific metadata profile for Particle Size-Frequency Distribution (PS
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

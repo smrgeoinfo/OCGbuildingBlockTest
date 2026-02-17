@@ -12,4 +12,5 @@ Technique-specific metadata profile for Fourier Transform Ion Cyclotron Resonanc
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

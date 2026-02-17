@@ -12,4 +12,5 @@ Technique-specific metadata profile for Accelerator Mass Spectrometry (AMS) prod
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

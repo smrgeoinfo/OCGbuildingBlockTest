@@ -26,4 +26,5 @@ Technique-specific metadata profile for Transmission Electron Microscopy (TEM) p
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

@@ -14,4 +14,5 @@ Technique-specific metadata profile for Gas Chromatography Mass Spectrometry (GC
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

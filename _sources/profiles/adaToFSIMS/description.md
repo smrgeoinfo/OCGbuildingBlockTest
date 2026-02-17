@@ -10,4 +10,5 @@ Technique-specific metadata profile for Time-of-Flight Secondary Ion Mass Spectr
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

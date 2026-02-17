@@ -12,6 +12,7 @@ Technique-specific metadata profile for Laser-Assisted Fluorination (LAF) produc
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

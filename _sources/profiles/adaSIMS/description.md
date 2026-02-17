@@ -12,4 +12,5 @@ Technique-specific metadata profile for Secondary Ion Mass Spectrometry (SIMS) p
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

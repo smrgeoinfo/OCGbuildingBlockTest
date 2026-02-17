@@ -14,6 +14,7 @@ Technique-specific metadata profile for Inductively Coupled Plasma Optical Emiss
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

@@ -16,6 +16,7 @@ Technique-specific metadata profile for Nano-Infrared Spectroscopy (NanoIR) prod
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

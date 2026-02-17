@@ -10,4 +10,5 @@ Technique-specific metadata profile for Seismic Velocities and Rock Ultrasonic E
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

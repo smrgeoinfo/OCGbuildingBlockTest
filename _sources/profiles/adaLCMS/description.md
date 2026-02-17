@@ -12,4 +12,5 @@ Technique-specific metadata profile for Liquid Chromatography Mass Spectrometry 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

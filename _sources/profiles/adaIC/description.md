@@ -10,4 +10,5 @@ Technique-specific metadata profile for Ion Chromatography (IC) products in the 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

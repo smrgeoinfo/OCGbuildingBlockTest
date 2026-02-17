@@ -10,6 +10,7 @@ Technique-specific metadata profile for X-ray Computed Tomography (XCT) products
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

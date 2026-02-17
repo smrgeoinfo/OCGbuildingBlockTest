@@ -12,4 +12,5 @@ Technique-specific metadata profile for Ultraviolet Fluorescence Microscopy (UVF
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

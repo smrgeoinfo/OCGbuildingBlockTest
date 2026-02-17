@@ -10,6 +10,7 @@ Technique-specific metadata profile for Elemental Analysis - Isotope Ratio Mass 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

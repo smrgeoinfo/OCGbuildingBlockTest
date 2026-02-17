@@ -10,4 +10,5 @@ Technique-specific metadata profile for Raman Spectroscopy (RAMAN) products in t
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

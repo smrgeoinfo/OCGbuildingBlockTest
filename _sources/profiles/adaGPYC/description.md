@@ -12,4 +12,5 @@ Technique-specific metadata profile for Gas Pycnometry (GPYC) products in the As
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

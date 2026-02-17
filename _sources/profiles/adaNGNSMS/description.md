@@ -12,4 +12,5 @@ Technique-specific metadata profile for Noble Gas and Nitrogen Static Mass Spect
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

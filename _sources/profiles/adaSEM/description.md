@@ -36,4 +36,5 @@ Technique-specific metadata profile for Scanning Electron Microscopy (SEM) produ
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

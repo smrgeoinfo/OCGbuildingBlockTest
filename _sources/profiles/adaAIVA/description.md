@@ -12,4 +12,5 @@ Technique-specific metadata profile for AI-driven Visual Analysis (AIVA) product
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

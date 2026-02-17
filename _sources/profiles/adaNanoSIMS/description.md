@@ -18,6 +18,7 @@ Technique-specific metadata profile for Nanoscale Secondary Ion Mass Spectrometr
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

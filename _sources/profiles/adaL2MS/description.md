@@ -12,6 +12,7 @@ Technique-specific metadata profile for Two-Step Laser Mass Spectrometry (L2MS) 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

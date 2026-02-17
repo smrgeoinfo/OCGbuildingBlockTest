@@ -12,4 +12,5 @@ Technique-specific metadata profile for Visible Light Microscopy (VLM) products 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

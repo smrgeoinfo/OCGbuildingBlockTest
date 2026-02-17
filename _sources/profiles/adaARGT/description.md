@@ -13,6 +13,7 @@ Technique-specific metadata profile for Argon Geochronology and Thermochronology
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 
 ## Detail Type
 `detailARGT`

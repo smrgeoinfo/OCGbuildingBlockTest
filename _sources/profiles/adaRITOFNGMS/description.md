@@ -12,4 +12,5 @@ Technique-specific metadata profile for Resonance Ionization Time-of-Flight Nobl
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

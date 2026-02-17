@@ -12,6 +12,7 @@ Technique-specific metadata profile for Differential Scanning Calorimetry (DSC) 
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

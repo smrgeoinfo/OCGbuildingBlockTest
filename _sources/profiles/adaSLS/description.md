@@ -14,6 +14,7 @@ Technique-specific metadata profile for Structured Light Scanning (SLS) products
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

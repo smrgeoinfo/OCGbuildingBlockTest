@@ -14,6 +14,7 @@ Technique-specific metadata profile for Quantitative Reflectance Imaging Spectro
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
 
 ## Detail Type

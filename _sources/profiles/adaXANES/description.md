@@ -20,4 +20,5 @@ Technique-specific metadata profile for X-ray Absorption Near Edge Structure (XA
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`

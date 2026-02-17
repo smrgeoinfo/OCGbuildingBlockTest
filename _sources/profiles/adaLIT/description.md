@@ -14,4 +14,5 @@ Technique-specific metadata profile for Lock-In Thermography (LIT) products in t
 - `ada:analysisLocation`
 - `ada:methodDescription`
 - `ada:instrumentMetadata`
+- `ada:other`
 - `ada:calibrationFile`
