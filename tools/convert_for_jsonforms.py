@@ -86,12 +86,29 @@ ADA_ADDITIONAL_TYPE_LABELS = {
     "ada:MCICPMSCollection": "MCICPMS Collection",
     "ada:VNMIRSpectralPoint": "VNMIR Spectral Point",
     "ada:VNMIRSpectraPlot": "VNMIR Spectra Plot",
-    # Common supporting types
+    # Common supporting/supplement types
     "ada:analysisLocation": "Analysis Location",
-    "ada:instrumentMetadata": "Instrument Metadata",
-    "ada:methodDescription": "Method Description",
-    "ada:supplementaryImage": "Supplementary Image",
+    "ada:annotatedImage": "Annotated Image",
+    "ada:areaOfInterest": "Area of Interest",
+    "ada:basemap": "Basemap",
     "ada:calibrationFile": "Calibration File",
+    "ada:code": "Code",
+    "ada:contextPhotography": "Context Photography",
+    "ada:contextVideo": "Context Video",
+    "ada:inputFile": "Input File",
+    "ada:instrumentMetadata": "Instrument Metadata",
+    "ada:logFile": "Log File",
+    "ada:methodDescription": "Method Description",
+    "ada:other": "Other",
+    "ada:plot": "Plot",
+    "ada:processingMethod": "Processing Method",
+    "ada:quickLook": "Quick Look",
+    "ada:report": "Report",
+    "ada:samplePreparation": "Sample Preparation",
+    "ada:shapefile": "Shapefile",
+    "ada:supplementalBasemap": "Supplemental Basemap",
+    "ada:supplementaryImage": "Supplementary Image",
+    "ada:worldFile": "World File",
 }
 
 # Keys to strip from schemas (metadata, not useful for forms)
