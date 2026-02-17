@@ -15,9 +15,17 @@ import textwrap
 from pathlib import Path
 
 
-# Standard supporting component types included in every profile's hasPart enum
+# Standard supporting component types included in every profile's hasPart enum.
+# These are the supplement types from the Components worksheet of
+# ADA-AnalyticalMethodsAndAttributes.xlsx (isSupplement = 'supplement'),
+# plus "other" as a catch-all.
 STANDARD_SUPPORTING_TYPES = [
-    "analysisLocation", "methodDescription", "instrumentMetadata", "other",
+    "analysisLocation", "annotatedImage", "areaOfInterest", "basemap",
+    "calibrationFile", "code", "contextPhotography", "contextVideo",
+    "inputFile", "instrumentMetadata", "logFile", "methodDescription",
+    "other", "plot", "processingMethod", "quickLook", "report",
+    "samplePreparation", "shapefile", "supplementalBasemap",
+    "supplementaryImage", "worldFile",
 ]
 
 # ---------------------------------------------------------------------------
@@ -38,7 +46,6 @@ PROFILES = {
         ],
         "component_types": [
             "ARGTDocument", "ARGTCollection",
-            "calibrationFile",
         ],
         "detail": "detailARGT",
         "tags": ["argt", "argon-geochronology"],
@@ -649,8 +656,6 @@ def _generate_schema_yaml(cfg: dict) -> str:
 
     # Build componentType/@type enum for hasPart-level constraint
     all_component_types = list(cfg["component_types"]) + STANDARD_SUPPORTING_TYPES
-    if "calibrationFile" not in all_component_types:
-        all_component_types.append("calibrationFile")
     ct_lines = "\n".join(
         f'                          - "ada:{ct}"' for ct in all_component_types
     )
@@ -740,8 +745,6 @@ def _generate_description_md(cfg: dict) -> str:
         f"- `ada:{pt}`" for pt in cfg["product_types"]
     )
     ct_all = list(cfg["component_types"]) + STANDARD_SUPPORTING_TYPES
-    if "calibrationFile" not in ct_all:
-        ct_all.append("calibrationFile")
     ct_lines = "\n".join(f"- `ada:{ct}`" for ct in ct_all)
 
     detail_section = ""
