@@ -86,12 +86,29 @@ ADA_ADDITIONAL_TYPE_LABELS = {
     "ada:MCICPMSCollection": "MCICPMS Collection",
     "ada:VNMIRSpectralPoint": "VNMIR Spectral Point",
     "ada:VNMIRSpectraPlot": "VNMIR Spectra Plot",
-    # Common supporting types
+    # Common supporting/supplement types
     "ada:analysisLocation": "Analysis Location",
-    "ada:instrumentMetadata": "Instrument Metadata",
-    "ada:methodDescription": "Method Description",
-    "ada:supplementaryImage": "Supplementary Image",
+    "ada:annotatedImage": "Annotated Image",
+    "ada:areaOfInterest": "Area of Interest",
+    "ada:basemap": "Basemap",
     "ada:calibrationFile": "Calibration File",
+    "ada:code": "Code",
+    "ada:contextPhotography": "Context Photography",
+    "ada:contextVideo": "Context Video",
+    "ada:inputFile": "Input File",
+    "ada:instrumentMetadata": "Instrument Metadata",
+    "ada:logFile": "Log File",
+    "ada:methodDescription": "Method Description",
+    "ada:other": "Other",
+    "ada:plot": "Plot",
+    "ada:processingMethod": "Processing Method",
+    "ada:quickLook": "Quick Look",
+    "ada:report": "Report",
+    "ada:samplePreparation": "Sample Preparation",
+    "ada:shapefile": "Shapefile",
+    "ada:supplementalBasemap": "Supplemental Basemap",
+    "ada:supplementaryImage": "Supplementary Image",
+    "ada:worldFile": "World File",
 }
 
 # Keys to strip from schemas (metadata, not useful for forms)
@@ -1186,7 +1203,22 @@ def flatten_remaining_allof(schema: Any) -> Any:
                 if not keys:
                     continue
                 if keys == {"anyOf"}:
-                    # Conditional required — drop for form friendliness
+                    # Distinguish file-type anyOf (branches have properties
+                    # including componentType — image/tabular/dataCube/document
+                    # file-type branches) from conditional-required patterns
+                    # (branches only have required).
+                    branches = entry["anyOf"]
+                    if _is_file_type_anyof(branches):
+                        # File-type anyOf — flatten into parent properties
+                        # now, since apply_anyof_simplifications already ran.
+                        simplified = simplify_file_detail_anyof({"anyOf": branches})
+                        for pk, pv in simplified.get("properties", {}).items():
+                            existing = result.get("properties", {}).get(pk)
+                            if existing is not None:
+                                result["properties"][pk] = _deep_merge_dict(existing, pv)
+                            else:
+                                result.setdefault("properties", {})[pk] = copy.deepcopy(pv)
+                    # else: conditional required — drop for form friendliness
                     continue
                 # Merge properties from the allOf entry into the parent
                 for pk, pv in entry.get("properties", {}).items():
@@ -1246,9 +1278,13 @@ def _convert_at_enum_to_oneof(at_schema: dict) -> None:
     and drop ``items``.  The frontend unwraps/wraps the array ↔ string value.
     """
     items = at_schema.get("items")
-    if not isinstance(items, dict):
-        return
-    enum_vals = items.get("enum")
+    # Try items.enum first (legacy behavior)
+    enum_vals = items.get("enum") if isinstance(items, dict) else None
+    # Fallback: contains.enum (new adaProduct structure)
+    if not enum_vals:
+        contains = at_schema.get("contains")
+        if isinstance(contains, dict):
+            enum_vals = contains.get("enum")
     if not enum_vals or not isinstance(enum_vals, list):
         return
 
@@ -1261,6 +1297,7 @@ def _convert_at_enum_to_oneof(at_schema: dict) -> None:
     at_schema["type"] = "string"
     at_schema["oneOf"] = one_of
     at_schema.pop("items", None)
+    at_schema.pop("contains", None)
     at_schema.pop("default", None)
 
 

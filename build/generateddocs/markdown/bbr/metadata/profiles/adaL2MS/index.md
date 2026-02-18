@@ -98,15 +98,16 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:L2MSCube
-                    - ada:L2MSOverviewImage
-                    - ada:analysisLocation
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
-                    - ada:calibrationFile
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:L2MSCube
+                      - ada:L2MSOverviewImage
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
+                      - ada:calibrationFile
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

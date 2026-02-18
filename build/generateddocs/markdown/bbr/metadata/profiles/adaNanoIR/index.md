@@ -104,17 +104,18 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:NanoIRBackground
-                    - ada:NanoIRMap
-                    - ada:NanoIRMapCollection
-                    - ada:NanoIRPointCollection
-                    - ada:analysisLocation
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
-                    - ada:calibrationFile
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:NanoIRBackground
+                      - ada:NanoIRMap
+                      - ada:NanoIRMapCollection
+                      - ada:NanoIRPointCollection
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
+                      - ada:calibrationFile
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

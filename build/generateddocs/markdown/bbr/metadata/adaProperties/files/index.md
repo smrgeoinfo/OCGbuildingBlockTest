@@ -107,6 +107,16 @@ allOf:
         - Metadata
     required:
     - '@type'
+  - type: object
+    description: DataDownload distribution (archive or direct download without specific
+      file type)
+    properties:
+      '@type':
+        type: array
+        contains:
+          const: schema:DataDownload
+    required:
+    - '@type'
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

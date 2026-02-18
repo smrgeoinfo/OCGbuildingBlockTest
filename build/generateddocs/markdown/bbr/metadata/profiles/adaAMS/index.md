@@ -94,15 +94,16 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:AMSRawData
-                    - ada:AMSProcessedData
-                    - ada:analysisLocation
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
-                    - ada:calibrationFile
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:AMSRawData
+                      - ada:AMSProcessedData
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
+                      - ada:calibrationFile
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

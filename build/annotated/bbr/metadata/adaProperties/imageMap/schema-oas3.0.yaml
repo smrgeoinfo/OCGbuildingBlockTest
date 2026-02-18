@@ -72,9 +72,17 @@ description: Spatially registered image maps with pixel coordinates, component t
 type: object
 properties:
   '@type':
-    enum:
-    - - ada:imageMap
-      - schema:ImageObject
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        enum:
+        - ada:imageMap
+    - contains:
+        enum:
+        - schema:ImageObject
   acquisitionTime:
     type: string
   componentType:

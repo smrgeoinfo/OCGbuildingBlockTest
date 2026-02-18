@@ -98,15 +98,16 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:ARGTDocument
-                    - ada:ARGTCollection
-                    - ada:calibrationFile
-                    - ada:analysisLocation
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:ARGTDocument
+                      - ada:ARGTCollection
+                      - ada:calibrationFile
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

@@ -23,9 +23,15 @@ description: Image objects with acquisition details and component type classific
 type: object
 properties:
   '@type':
-    const:
-    - ada:image
-    - schema:ImageObject
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        const: ada:image
+    - contains:
+        const: schema:ImageObject
     description: GeneralType for images
   acquisitionTime:
     type: string

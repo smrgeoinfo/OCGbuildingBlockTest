@@ -23,9 +23,15 @@ description: Spatially registered image maps with pixel coordinates, component t
 type: object
 properties:
   '@type':
-    const:
-    - ada:imageMap
-    - schema:ImageObject
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+    - contains:
+        const: ada:imageMap
+    - contains:
+        const: schema:ImageObject
   acquisitionTime:
     type: string
   componentType:

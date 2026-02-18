@@ -15,9 +15,17 @@ import textwrap
 from pathlib import Path
 
 
-# Standard supporting component types included in every profile's hasPart enum
+# Standard supporting component types included in every profile's hasPart enum.
+# These are the supplement types from the Components worksheet of
+# ADA-AnalyticalMethodsAndAttributes.xlsx (isSupplement = 'supplement'),
+# plus "other" as a catch-all.
 STANDARD_SUPPORTING_TYPES = [
-    "analysisLocation", "methodDescription", "instrumentMetadata",
+    "analysisLocation", "annotatedImage", "areaOfInterest", "basemap",
+    "calibrationFile", "code", "contextPhotography", "contextVideo",
+    "inputFile", "instrumentMetadata", "logFile", "methodDescription",
+    "other", "plot", "processingMethod", "quickLook", "report",
+    "samplePreparation", "shapefile", "supplementalBasemap",
+    "supplementaryImage", "worldFile",
 ]
 
 # ---------------------------------------------------------------------------
@@ -33,11 +41,11 @@ PROFILES = {
         "termcodes": ["ARGT"],
         "product_types": ["ARGTDocument", "ARGTCollection"],
         "additional_type_labels": [
+            "\u2074\u2070Ar/\u00b3\u2079Ar Geochronology and Thermochronology (ARGT)",
             "40Ar/39Ar geochronology and thermochronology",
         ],
         "component_types": [
             "ARGTDocument", "ARGTCollection",
-            "calibrationFile",
         ],
         "detail": "detailARGT",
         "tags": ["argt", "argon-geochronology"],
@@ -50,6 +58,7 @@ PROFILES = {
         "termcodes": ["DSC"],
         "product_types": ["DSCHeatTabular", "DSCResultsTabular"],
         "additional_type_labels": [
+            "Differential Scanning Calorimetry (DSC)",
             "Differential Scanning Calorimetry",
         ],
         "component_types": [
@@ -66,6 +75,7 @@ PROFILES = {
         "termcodes": ["EA-IRMS"],
         "product_types": ["EAIRMSCollection"],
         "additional_type_labels": [
+            "Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)",
             "Elemental analysis - isotope ratio mass spectrometry",
         ],
         "component_types": [
@@ -85,6 +95,9 @@ PROFILES = {
             "ICPOESRawTabular",
         ],
         "additional_type_labels": [
+            "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw",
+            "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate",
+            "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed",
             "Inductively coupled plasma - optical emission spectrometry",
         ],
         "component_types": [
@@ -102,6 +115,7 @@ PROFILES = {
         "termcodes": ["uL2MS"],
         "product_types": ["L2MSCube", "L2MSOverviewImage"],
         "additional_type_labels": [
+            "Microprobe Two-Step Laser Mass Spectrometry (L2MS)",
             "Microprobe Two-Step Laser Mass Spectrometry",
         ],
         "component_types": [
@@ -118,7 +132,9 @@ PROFILES = {
         "termcodes": ["LAF"],
         "product_types": ["LAFProcessed", "LAFRaw"],
         "additional_type_labels": [
-            "Laser Assisted Fluorination for Bulk Oxygen Isotope Ratio Measurements",
+            "Laser Assisted Fluorination (LAF) Processed",
+            "Laser Assisted Fluorination (LAF) Raw",
+            "Laser Assisted Fluorination",
         ],
         "component_types": [
             "LAFProcessed", "LAFRaw",
@@ -137,6 +153,9 @@ PROFILES = {
             "NanoIRMapCollection", "NanoIRPointCollection",
         ],
         "additional_type_labels": [
+            "Nanoscale Infrared Mapping (NanoIR) Background",
+            "Nanoscale Infrared Mapping (NanoIR) MapCollection",
+            "Nanoscale Infrared Mapping (NanoIR) Point Data",
             "Nanoscale Infrared Mapping",
         ],
         "component_types": [
@@ -157,6 +176,9 @@ PROFILES = {
             "NanoSIMSTabular", "NanoSIMSMap", "NanoSIMSImage",
         ],
         "additional_type_labels": [
+            "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw",
+            "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image",
+            "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular",
             "Nanoscale secondary ion mass spectrometry",
         ],
         "component_types": [
@@ -174,6 +196,7 @@ PROFILES = {
         "termcodes": ["PSFD"],
         "product_types": ["PSFDTabular"],
         "additional_type_labels": [
+            "Particle Size Frequency Distribution (PSFD)",
             "Particle Size Frequency Distribution",
         ],
         "component_types": [
@@ -193,7 +216,9 @@ PROFILES = {
             "QRISCalibrationFile",
         ],
         "additional_type_labels": [
-            "Quantitative Reflectance Imaging System",
+            "Quantitative Reflective Imaging System (QRIS) Calibrated",
+            "Quantitative Reflective Imaging System (QRIS) Raw",
+            "Quantitative Reflective Imaging System",
         ],
         "component_types": [
             "QRISCalibratedCollection", "QRISRawCollection",
@@ -210,6 +235,8 @@ PROFILES = {
         "termcodes": ["SLS"],
         "product_types": ["SLSShapeModel", "SLSPartialScan", "ShapeModelImage"],
         "additional_type_labels": [
+            "SLSIndividualScanCollection",
+            "Structured Light Scanning (SLS) Shape Model",
             "Structured Light Scanning",
         ],
         "component_types": [
@@ -226,6 +253,7 @@ PROFILES = {
         "termcodes": ["XCT"],
         "product_types": ["XCTImageCollection"],
         "additional_type_labels": [
+            "X-ray Computed Tomography (XCT) Image Collection",
             "X-ray computed tomography",
         ],
         "component_types": [
@@ -243,8 +271,8 @@ PROFILES = {
         "termcodes": ["AIVA"],
         "product_types": ["AIVAImage", "AIVAImageCollection"],
         "additional_type_labels": [
-            "Advanced Imaging & Visualization of Astromaterials",
-            "Advanced Imaging &amp; Visualization of Astromaterials",
+            "Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)",
+            "Advanced Imaging and Visualization of Astromaterials",
         ],
         "component_types": [
             "AIVAImage", "AIVAImageCollection",
@@ -260,6 +288,7 @@ PROFILES = {
         "termcodes": ["AMS"],
         "product_types": ["AMSRawData", "AMSProcessedData"],
         "additional_type_labels": [
+            "Accelerator Mass Spectrometry (AMS)",
             "Accelerator Mass Spectrometry",
         ],
         "component_types": [
@@ -276,6 +305,8 @@ PROFILES = {
         "termcodes": ["FTICR-MS"],
         "product_types": ["FTICRMSTabular", "FTICRMSCube"],
         "additional_type_labels": [
+            "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube",
+            "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular",
             "Fourier Transform Ion Cyclotron Resonance Mass Spectrometry",
         ],
         "component_types": [
@@ -292,6 +323,7 @@ PROFILES = {
         "termcodes": ["GC-MS"],
         "product_types": ["GCMSCollection", "GCMSCube", "GCGCMSCollection"],
         "additional_type_labels": [
+            "Gas Chromatography-Mass Spectrometry (GCMS)",
             "Gas Chromatography-Mass Spectrometry",
         ],
         "component_types": [
@@ -308,6 +340,8 @@ PROFILES = {
         "termcodes": ["GPYC"],
         "product_types": ["GPYCProcessedTabular", "GPYCRawTabular"],
         "additional_type_labels": [
+            "Gas Pycnometry (GPYC) Processed",
+            "Gas Pycnometry (GPYC) Raw",
             "Gas pycnometry",
         ],
         "component_types": [
@@ -324,6 +358,7 @@ PROFILES = {
         "termcodes": ["IC"],
         "product_types": ["ICTabular"],
         "additional_type_labels": [
+            "Ion Chromatography (IC)",
             "Ion Chromatography",
         ],
         "component_types": [
@@ -340,6 +375,7 @@ PROFILES = {
         "termcodes": ["LC-MS"],
         "product_types": ["LCMSCollection", "LCMSMSCollection"],
         "additional_type_labels": [
+            "Liquid Chromatography - Mass Spectrometry (LCMS) Collection",
             "Liquid chromatography-mass spectrometry",
         ],
         "component_types": [
@@ -356,6 +392,8 @@ PROFILES = {
         "termcodes": ["LIT"],
         "product_types": ["LITImage", "LIT2DDataCollection", "LITPolarDataCollection"],
         "additional_type_labels": [
+            "Lock-In Thermography (LIT) image",
+            "Lock-In Thermography (LIT) Collection",
             "Lock-In Thermography",
         ],
         "component_types": [
@@ -372,6 +410,8 @@ PROFILES = {
         "termcodes": ["NG-NS-MS"],
         "product_types": ["NGNSMSRaw", "NGNSMSProcessed"],
         "additional_type_labels": [
+            "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed",
+            "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw",
             "Noble gas and Nitrogen Static Mass Spectrometry",
         ],
         "component_types": [
@@ -388,6 +428,7 @@ PROFILES = {
         "termcodes": ["RAMAN"],
         "product_types": ["RAMANRawTabular"],
         "additional_type_labels": [
+            "RAMAN Raw",
             "Raman vibrational spectroscopy",
         ],
         "component_types": [
@@ -404,6 +445,8 @@ PROFILES = {
         "termcodes": ["RI-TOF-NGMS"],
         "product_types": ["RITOFNGMSTabular", "RITOFNGMSCollection"],
         "additional_type_labels": [
+            "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Spectra",
+            "Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS) Processed",
             "Resonance ionization time of flight noble gas mass spectrometry",
         ],
         "component_types": [
@@ -429,6 +472,11 @@ PROFILES = {
             "SEMHRCLImage", "SEMHRCLMap", "SEMHRCLCube",
         ],
         "additional_type_labels": [
+            "Scanning Electron Microscopy (SEM) Image",
+            "Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD) Grain Image",
+            "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) image",
+            "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) Point Data",
+            "Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL) image",
             "Scanning electron microscopy",
         ],
         "component_types": [
@@ -452,6 +500,7 @@ PROFILES = {
         "termcodes": ["SIMS"],
         "product_types": ["SIMSTabular", "SIMSCollection"],
         "additional_type_labels": [
+            "Secondary Ion Mass Spectrometry (SIMS) Tabular",
             "Secondary ion mass spectrometry",
         ],
         "component_types": [
@@ -468,6 +517,7 @@ PROFILES = {
         "termcodes": ["SV-RUEC"],
         "product_types": ["SVRUECTabular"],
         "additional_type_labels": [
+            "Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)",
             "Seismic Velocities and Rock Ultrasonic Elastic Constants",
         ],
         "component_types": [
@@ -488,6 +538,14 @@ PROFILES = {
             "STEMEDSTomo", "STEMEELSTabular", "STEMEELSCube",
         ],
         "additional_type_labels": [
+            "Transmission Electron Microscopy (TEM) Image",
+            "Transmission Electron Microscopy (TEM) Patterns Image",
+            "Scanning Transmission Electron Microscopy (STEM) Image",
+            "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Cube",
+            "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tabular",
+            "Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tomography",
+            "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Cube",
+            "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Tabular",
             "Transmission Electron Microscopy",
         ],
         "component_types": [
@@ -506,7 +564,8 @@ PROFILES = {
         "termcodes": ["ToF-SIMS"],
         "product_types": ["TOFSIMSCollection"],
         "additional_type_labels": [
-            "Time-of-Flight Secondary Ion Mass Spectrometer",
+            "Time-of-flight secondary ion mass spectrometry (TOFSIMS)",
+            "Time-of-Flight Secondary Ion Mass Spectrometry",
         ],
         "component_types": [
             "TOFSIMSCollection",
@@ -522,6 +581,7 @@ PROFILES = {
         "termcodes": ["UVFM"],
         "product_types": ["UVFMImage", "UVFMImageCollection"],
         "additional_type_labels": [
+            "Fluorescence Microscopy (UVFM) Image",
             "UV Fluorescence Microscopy",
         ],
         "component_types": [
@@ -538,8 +598,9 @@ PROFILES = {
         "termcodes": ["VLM", "VLMBasemap"],
         "product_types": ["VLMImage", "VLMImageCollection"],
         "additional_type_labels": [
+            "Visible Light Microscopy (VLM) Image",
+            "Basemap",
             "Visible Light Microscopy",
-            "Visible Light Microscopy Basemap",
         ],
         "component_types": [
             "VLMImage", "VLMImageCollection",
@@ -559,6 +620,7 @@ PROFILES = {
             "XANESimage", "XANESCollection",
         ],
         "additional_type_labels": [
+            "X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)",
             "X-ray absorption near edge structure (XANES) spectroscopy",
         ],
         "component_types": [
@@ -582,8 +644,8 @@ def _generate_schema_yaml(cfg: dict) -> str:
     labels = cfg.get("additional_type_labels", [])
 
     # Build the full list of accepted additionalType values:
-    # ada: product type URIs + human-readable technique labels
-    all_values = [f"ada:{pt}" for pt in product_types] + labels
+    # human-readable product type names + technique labels (no ada: prefixes)
+    all_values = labels
 
     # additionalType constraint: const for single, enum for multiple
     if len(all_values) == 1:
@@ -592,13 +654,10 @@ def _generate_schema_yaml(cfg: dict) -> str:
         lines = [f'            - "{v}"' for v in all_values]
         contains_block = "          enum:\n" + "\n".join(lines)
 
-    # Build component types list with standard supporting types
+    # Build componentType/@type enum for hasPart-level constraint
     all_component_types = list(cfg["component_types"]) + STANDARD_SUPPORTING_TYPES
-    # Add calibrationFile if not already present via component_types
-    if "calibrationFile" not in all_component_types:
-        all_component_types.append("calibrationFile")
     ct_lines = "\n".join(
-        f'                        - "ada:{ct}"' for ct in all_component_types
+        f'                          - "ada:{ct}"' for ct in all_component_types
     )
 
     detail_note = ""
@@ -626,9 +685,10 @@ allOf:
             "schema:hasPart":
               items:
                 properties:
-                  "schema:additionalType":
-                    items:
-                      enum:
+                  componentType:
+                    properties:
+                      "@type":
+                        enum:
 {ct_lines}
 """
 
@@ -685,8 +745,6 @@ def _generate_description_md(cfg: dict) -> str:
         f"- `ada:{pt}`" for pt in cfg["product_types"]
     )
     ct_all = list(cfg["component_types"]) + STANDARD_SUPPORTING_TYPES
-    if "calibrationFile" not in ct_all:
-        ct_all.append("calibrationFile")
     ct_lines = "\n".join(f"- `ada:{ct}`" for ct in ct_all)
 
     detail_section = ""
@@ -705,9 +763,75 @@ Technique-specific metadata profile for {cfg['full_name']} products in the Astro
 {detail_section}"""
 
 
+def _generate_rules_shacl(cfg: dict) -> str:
+    """Generate rules.shacl content for a technique profile.
+
+    Produces a SHACL shapes graph that:
+    - Inherits all base validation from adaProduct rules.shacl
+    - Constrains schema:additionalType to the technique's allowed values
+    """
+    short = cfg["short_name"]
+    # Shape name: lowercase short name with hyphens removed
+    short_lower = short.replace("-", "").replace(" ", "").lower()
+    labels = cfg.get("additional_type_labels", [])
+    all_values = labels
+
+    # Build sh:or list for additionalType hasValue alternatives
+    or_entries = []
+    for val in all_values:
+        or_entries.append(f'        [sh:hasValue "{val}"]')
+
+    or_block = "\n".join(or_entries)
+
+    return f"""@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:      <http://schema.org/> .
+@prefix ada:         <https://ada.astromat.org/metadata/> .
+@prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
+@base <https://www.ogc.org/rules/template/> .
+
+# {short} technique profile SHACL rules.
+# Base product validation (creator, distribution, wasGeneratedBy, etc.)
+# is inherited from adaProduct rules.shacl.
+# This shape constrains schema:additionalType to valid {short} values.
+
+cdifd:{short_lower}ProductShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select \"\"\"
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {{
+                ?this a schema:Dataset .
+                ?this a schema:Product .
+                MINUS {{
+                    ?parent a schema:Dataset .
+                    ?parent ?p ?this .
+                    FILTER (?parent != ?this)
+                    FILTER (?p != schema:about)
+                }}
+            }}
+        \"\"\" ;
+    ] ;
+    sh:property [
+        sh:path schema:additionalType ;
+        sh:minCount 1 ;
+        sh:or (
+{or_block}
+        ) ;
+        sh:message "{short} products must have a schema:additionalType matching a valid {short} type." ;
+    ] ;
+    sh:message "{short} technique profile: additionalType must identify a valid {short} product type." ;
+    .
+"""
+
+
 def _generate_examples_yaml(cfg: dict) -> str:
     """Generate examples.yaml content for a profile."""
-    first_pt = cfg["product_types"][0]
+    first_label = cfg["additional_type_labels"][0]
     short = cfg["short_name"]
     return f"""- title: {short} Product Example
   comment: Example {short} product metadata (placeholder)
@@ -716,7 +840,7 @@ def _generate_examples_yaml(cfg: dict) -> str:
       code: |
         {{
           "@type": ["schema:Dataset", "schema:Product"],
-          "schema:additionalType": ["ada:{first_pt}", "ada:DataDeliveryPackage"],
+          "schema:additionalType": ["{first_label}", "ada:DataDeliveryPackage"],
           "schema:name": "{short} Analysis of Sample",
           "schema:description": "{cfg['full_name']} data"
         }}
@@ -738,6 +862,7 @@ def generate_profile(name: str, cfg: dict, base_dir: Path) -> None:
         "context.jsonld": _generate_context_jsonld(),
         "description.md": _generate_description_md(cfg),
         "examples.yaml": _generate_examples_yaml(cfg),
+        "rules.shacl": _generate_rules_shacl(cfg),
     }
 
     for filename, content in files.items():

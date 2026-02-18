@@ -7,9 +7,15 @@ description: >-
 type: object
 properties:
   "@type":
-    const:
-      - "ada:document"
-      - "schema:DigitalDocument"
+    type: array
+    items:
+      type: string
+    minItems: 2
+    allOf:
+      - contains:
+          const: "ada:document"
+      - contains:
+          const: "schema:DigitalDocument"
   componentType:
     description: One of the supplemental document types if applicable
     anyOf:
@@ -19,13 +25,17 @@ properties:
             enum:
               - "ada:calibrationFile"
               - "ada:contextVideo"
+              - "ada:instrumentMetadata"
               - "ada:logFile"
               - "ada:methodDescription"
               - "ada:peaks"
-              - "ada:processingDescription"
+              - "ada:plot"
+              - "ada:processingMethod"
               - "ada:QRISCalibrationFile"
+              - "ada:report"
               - "ada:samplePreparation"
-              - "ada:shapefiles"
+              - "ada:shapefile"
+              - "ada:worldFile"
       - $ref: ../detailARGT/schema.yaml
   "schema:version":
     type: string

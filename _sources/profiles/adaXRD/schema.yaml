@@ -12,18 +12,41 @@ allOf:
         description: >-
           Must include an XRD product type identifier.
         contains:
-          const: "ada:XRDTabular"
+          enum:
+            - "X-ray Diffraction (XRD) Tabular"
+            - "X-ray diffraction"
       "schema:distribution":
         items:
           properties:
             "schema:hasPart":
               items:
                 properties:
-                  "schema:additionalType":
-                    items:
-                      enum:
-                        - "ada:XRDTabular"
-                        - "ada:XRDDiffractionPattern"
-                        - "ada:XRDIndexedImage"
-                        - "ada:instrumentMetadata"
-                        - "ada:methodDescription"
+                  componentType:
+                    properties:
+                      "@type":
+                        enum:
+                          - "ada:XRDTabular"
+                          - "ada:XRDDiffractionPattern"
+                          - "ada:XRDIndexedImage"
+                          - "ada:analysisLocation"
+                          - "ada:annotatedImage"
+                          - "ada:areaOfInterest"
+                          - "ada:basemap"
+                          - "ada:calibrationFile"
+                          - "ada:code"
+                          - "ada:contextPhotography"
+                          - "ada:contextVideo"
+                          - "ada:inputFile"
+                          - "ada:instrumentMetadata"
+                          - "ada:logFile"
+                          - "ada:methodDescription"
+                          - "ada:other"
+                          - "ada:plot"
+                          - "ada:processingMethod"
+                          - "ada:quickLook"
+                          - "ada:report"
+                          - "ada:samplePreparation"
+                          - "ada:shapefile"
+                          - "ada:supplementalBasemap"
+                          - "ada:supplementaryImage"
+                          - "ada:worldFile"

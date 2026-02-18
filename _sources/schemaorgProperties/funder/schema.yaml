@@ -24,14 +24,15 @@ properties:
           description: a identifier for an agent defined in this metadata, or externally; must be dereferenceable
     - $ref: '#/$defs/Person'
     - $ref: '#/$defs/Organization'
-allOf:
+anyOf:
 - required:
   - schema:funder
-- anyOf:
-  - required:
-    - schema:identifier
-  - required:
-    - schema:name
+- required:
+  - schema:identifier
+- required:
+  - schema:name
+- required:
+  - schema:description
 $defs:
   Person:
     $ref: ../person/schema.yaml

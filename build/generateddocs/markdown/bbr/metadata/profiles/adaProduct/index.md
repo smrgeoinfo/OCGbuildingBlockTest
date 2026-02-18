@@ -22,6 +22,815 @@ The profile includes:
 - Distribution with file-level metadata
 - Metadata record information (subjectOf)
 
+## Examples
+
+### ADA Product Example
+Example Astromat Data Archive (ADA) product metadata with all properties populated.
+Mock data for validation and testing.
+#### json
+```json
+{
+    "@context": {
+        "schema": "http://schema.org/",
+        "ada": "https://ada.astromat.org/metadata/",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "csvw": "http://www.w3.org/ns/csvw#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "nxs": "http://purl.org/nexusformat/definitions/",
+        "dcterms": "http://purl.org/dc/terms/",
+        "geosparql": "http://www.opengis.net/ont/geosparql#",
+        "ex": "https://example.org/"
+    },
+    "@id": "ex:adaProduct-example-001",
+    "@type": [
+        "schema:Dataset",
+        "schema:Product"
+    ],
+    "schema:name": "ADA Analysis of Meteorite ALH 84001 Fragment",
+    "schema:description": "Example Astromat Data Archive (ADA) product metadata demonstrating all properties defined by the adaProduct profile. Contains mock data for testing and validation.",
+    "schema:additionalType": [
+        "Electron Microprobe Analysis Image (EMPA)",
+        "ada:DataDeliveryPackage"
+    ],
+    "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "https://registry.identifiers.org/registry/doi",
+        "schema:value": "10.99999/adaproduct-example-001",
+        "schema:url": "https://doi.org/10.99999/adaproduct-example-001"
+    },
+    "schema:url": "https://astromat.org/products/adaproduct-example-001",
+    "schema:dateModified": "2026-01-15",
+    "schema:version": "1.0",
+    "schema:conditionsOfAccess": [
+        "Unrestricted access for research purposes"
+    ],
+    "schema:license": [
+        "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "schema:creativeWorkStatus": "Published",
+    "schema:keywords": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "ADA",
+            "schema:termCode": "ADA",
+            "schema:inDefinedTermSet": "https://ada.astromat.org/vocabulary/techniques"
+        },
+        "meteorite",
+        "astromaterials"
+    ],
+    "schema:creator": {
+        "@list": [
+            {
+                "@type": "schema:Person",
+                "schema:name": "Analytica, Maria",
+                "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
+                "schema:affiliation": {
+                    "@type": "schema:Organization",
+                    "schema:name": "Lunar and Planetary Institute"
+                },
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "analytica@example.org"
+                }
+            },
+            {
+                "@type": "schema:Person",
+                "schema:name": "Researcher, John Q.",
+                "schema:identifier": "https://orcid.org/0000-0002-9876-5432",
+                "schema:affiliation": {
+                    "@type": "schema:Organization",
+                    "schema:name": "NASA Johnson Space Center"
+                }
+            }
+        ]
+    },
+    "schema:contributor": [
+        {
+            "@type": "schema:Role",
+            "schema:roleName": "principalInvestigator",
+            "schema:contributor": {
+                "@type": "schema:Person",
+                "schema:name": "Leadscientist, Patricia",
+                "schema:identifier": "https://orcid.org/0000-0003-1111-2222",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "leadscientist@example.org"
+                }
+            }
+        }
+    ],
+    "schema:funding": [
+        {
+            "@type": "schema:MonetaryGrant",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "award number",
+                "schema:value": "NNX17AE48G"
+            },
+            "schema:name": "Astromaterials Curation and Analysis",
+            "schema:funder": {
+                "@type": "schema:Organization",
+                "schema:additionalType": [
+                    "schema:FundingAgency"
+                ],
+                "schema:name": "NASA"
+            }
+        }
+    ],
+    "schema:measurementTechnique": {
+        "@type": "schema:DefinedTerm",
+        "schema:name": "Astromat Data Archive (ADA)",
+        "schema:identifier": "https://ada.astromat.org/vocabulary/techniques/ADA"
+    },
+    "prov:wasGeneratedBy": [
+        {
+            "@type": [
+                "prov:Activity",
+                "schema:Event"
+            ],
+            "schema:identifier": "session-ada-20260110-001",
+            "schema:startDate": "2026-01-10T09:30:00",
+            "prov:used": [
+                {
+                    "@type": [
+                        "schema:Thing",
+                        "prov:Entity",
+                        "nxs:BaseClass/NXinstrument"
+                    ],
+                    "schema:additionalType": [
+                        "ada:ADAInstrument"
+                    ],
+                    "schema:name": "Example ADA Instrument",
+                    "schema:identifier": "ex:instrument-ada-001"
+                }
+            ],
+            "schema:location": {
+                "@type": [
+                    "schema:Place",
+                    "nxs:BaseClass/NXsource"
+                ],
+                "schema:name": "Analytical Sciences Laboratory",
+                "schema:identifier": "https://ror.org/00hx57361"
+            },
+            "schema:mainEntity": [
+                {
+                    "@type": [
+                        "schema:Thing",
+                        "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+                    ],
+                    "schema:additionalType": [
+                        "MaterialSample"
+                    ],
+                    "schema:name": "ALH 84001,123",
+                    "schema:identifier": [
+                        "igsn:10.60471/GSEEXAMPLE001"
+                    ],
+                    "schema:description": "Thin section of Allan Hills 84001 martian meteorite"
+                }
+            ]
+        }
+    ],
+    "schema:variableMeasured": [
+        {
+            "@id": "ex:adaProduct-var-001",
+            "@type": [
+                "schema:PropertyValue",
+                "cdi:InstanceVariable"
+            ],
+            "schema:name": "measurement_value",
+            "schema:alternateName": [
+                "ADA primary measurement"
+            ],
+            "schema:description": "Primary measured quantity from Astromat Data Archive (ADA) analysis. This is example mock data for testing.",
+            "schema:propertyID": [
+                "https://ada.astromat.org/vocabulary/variables/ada_primary"
+            ],
+            "schema:unitText": "counts",
+            "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "cdi:role": "MeasureComponent",
+            "cdi:simpleUnitOfMeasure": "counts"
+        },
+        {
+            "@id": "ex:adaProduct-var-002",
+            "@type": [
+                "schema:PropertyValue",
+                "cdi:InstanceVariable"
+            ],
+            "schema:name": "position_x",
+            "schema:alternateName": [
+                "X coordinate"
+            ],
+            "schema:description": "Horizontal position coordinate on sample surface.",
+            "schema:propertyID": [
+                "https://ada.astromat.org/vocabulary/variables/position_x"
+            ],
+            "schema:unitText": "micrometer",
+            "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+            "cdi:role": "DimensionComponent",
+            "cdi:simpleUnitOfMeasure": "um"
+        }
+    ],
+    "schema:distribution": [
+        {
+            "@type": [
+                "schema:DataDownload"
+            ],
+            "schema:name": "adaProduct-ALH84001-archive.zip",
+            "schema:description": "Archive containing ADA data files and supplementary materials",
+            "schema:contentUrl": "https://astromat.org/downloads/adaproduct-example-001.zip",
+            "schema:encodingFormat": [
+                "application/zip"
+            ],
+            "schema:additionalType": [
+                "RO-CRATE"
+            ],
+            "spdx:checksum": {
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+            },
+            "schema:size": {
+                "@type": "schema:QuantitativeValue",
+                "schema:value": 15728640,
+                "schema:unitText": "byte"
+            },
+            "schema:provider": [
+                {
+                    "@type": "schema:Organization",
+                    "schema:name": "Astromat Data Archive"
+                }
+            ],
+            "schema:hasPart": [
+                {
+                    "@id": "ex:adaProduct-file-001",
+                    "@type": [
+                        "ada:image",
+                        "schema:ImageObject"
+                    ],
+                    "schema:name": "ALH84001_ADA_001.tif",
+                    "schema:description": "ADA data file for ALH 84001 thin section",
+                    "schema:additionalType": [
+                        "ada:EMPAImage"
+                    ],
+                    "schema:encodingFormat": [
+                        "image/tiff"
+                    ],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 10485760,
+                        "schema:unitText": "byte"
+                    },
+                    "spdx:checksum": {
+                        "spdx:algorithm": "MD5",
+                        "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+                    },
+                    "componentType": {
+                        "@type": "ada:EMPAImage"
+                    }
+                },
+                {
+                    "@id": "ex:adaProduct-file-002",
+                    "@type": [
+                        "ada:document",
+                        "schema:DigitalDocument"
+                    ],
+                    "schema:name": "ALH84001_ADA_methods.pdf",
+                    "schema:description": "Method description document for this analysis",
+                    "schema:additionalType": [
+                        "ada:methodDescription"
+                    ],
+                    "schema:encodingFormat": [
+                        "application/pdf"
+                    ],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 524288,
+                        "schema:unitText": "byte"
+                    },
+                    "componentType": {
+                        "@type": "ada:methodDescription"
+                    }
+                }
+            ]
+        }
+    ],
+    "schema:subjectOf": {
+        "@type": "schema:Dataset",
+        "@id": "ex:adaProduct-metadata-001",
+        "schema:about": {
+            "@id": "ex:adaProduct-example-001"
+        },
+        "schema:dateModified": "2026-01-15",
+        "dcterms:conformsTo": [
+            {
+                "@id": "https://w3id.org/cdif/profiles/discovery"
+            },
+            {
+                "@id": "https://ada.astromat.org/profiles/adaProduct"
+            }
+        ],
+        "schema:maintainer": {
+            "@type": "schema:Organization",
+            "schema:name": "Astromat Data Archive"
+        },
+        "schema:sdDatePublished": "2026-01-15T12:00:00Z",
+        "schema:includedInDataCatalog": {
+            "@type": "schema:DataCatalog",
+            "schema:name": "Astromat Data Archive",
+            "schema:url": "https://astromat.org"
+        }
+    }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/",
+      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "dcterms": "http://purl.org/dc/terms/"
+    },
+    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProduct/context.jsonld",
+    {
+      "schema": "http://schema.org/",
+      "ada": "https://ada.astromat.org/metadata/",
+      "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+      "csvw": "http://www.w3.org/ns/csvw#",
+      "prov": "http://www.w3.org/ns/prov#",
+      "spdx": "http://spdx.org/rdf/terms#",
+      "nxs": "http://purl.org/nexusformat/definitions/",
+      "dcterms": "http://purl.org/dc/terms/",
+      "geosparql": "http://www.opengis.net/ont/geosparql#",
+      "ex": "https://example.org/"
+    }
+  ],
+  "@id": "ex:adaProduct-example-001",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:name": "ADA Analysis of Meteorite ALH 84001 Fragment",
+  "schema:description": "Example Astromat Data Archive (ADA) product metadata demonstrating all properties defined by the adaProduct profile. Contains mock data for testing and validation.",
+  "schema:additionalType": [
+    "Electron Microprobe Analysis Image (EMPA)",
+    "ada:DataDeliveryPackage"
+  ],
+  "schema:identifier": {
+    "@type": "schema:PropertyValue",
+    "schema:propertyID": "https://registry.identifiers.org/registry/doi",
+    "schema:value": "10.99999/adaproduct-example-001",
+    "schema:url": "https://doi.org/10.99999/adaproduct-example-001"
+  },
+  "schema:url": "https://astromat.org/products/adaproduct-example-001",
+  "schema:dateModified": "2026-01-15",
+  "schema:version": "1.0",
+  "schema:conditionsOfAccess": [
+    "Unrestricted access for research purposes"
+  ],
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:creativeWorkStatus": "Published",
+  "schema:keywords": [
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "ADA",
+      "schema:termCode": "ADA",
+      "schema:inDefinedTermSet": "https://ada.astromat.org/vocabulary/techniques"
+    },
+    "meteorite",
+    "astromaterials"
+  ],
+  "schema:creator": {
+    "@list": [
+      {
+        "@type": "schema:Person",
+        "schema:name": "Analytica, Maria",
+        "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
+        "schema:affiliation": {
+          "@type": "schema:Organization",
+          "schema:name": "Lunar and Planetary Institute"
+        },
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "analytica@example.org"
+        }
+      },
+      {
+        "@type": "schema:Person",
+        "schema:name": "Researcher, John Q.",
+        "schema:identifier": "https://orcid.org/0000-0002-9876-5432",
+        "schema:affiliation": {
+          "@type": "schema:Organization",
+          "schema:name": "NASA Johnson Space Center"
+        }
+      }
+    ]
+  },
+  "schema:contributor": [
+    {
+      "@type": "schema:Role",
+      "schema:roleName": "principalInvestigator",
+      "schema:contributor": {
+        "@type": "schema:Person",
+        "schema:name": "Leadscientist, Patricia",
+        "schema:identifier": "https://orcid.org/0000-0003-1111-2222",
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "leadscientist@example.org"
+        }
+      }
+    }
+  ],
+  "schema:funding": [
+    {
+      "@type": "schema:MonetaryGrant",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "award number",
+        "schema:value": "NNX17AE48G"
+      },
+      "schema:name": "Astromaterials Curation and Analysis",
+      "schema:funder": {
+        "@type": "schema:Organization",
+        "schema:additionalType": [
+          "schema:FundingAgency"
+        ],
+        "schema:name": "NASA"
+      }
+    }
+  ],
+  "schema:measurementTechnique": {
+    "@type": "schema:DefinedTerm",
+    "schema:name": "Astromat Data Archive (ADA)",
+    "schema:identifier": "https://ada.astromat.org/vocabulary/techniques/ADA"
+  },
+  "prov:wasGeneratedBy": [
+    {
+      "@type": [
+        "prov:Activity",
+        "schema:Event"
+      ],
+      "schema:identifier": "session-ada-20260110-001",
+      "schema:startDate": "2026-01-10T09:30:00",
+      "prov:used": [
+        {
+          "@type": [
+            "schema:Thing",
+            "prov:Entity",
+            "nxs:BaseClass/NXinstrument"
+          ],
+          "schema:additionalType": [
+            "ada:ADAInstrument"
+          ],
+          "schema:name": "Example ADA Instrument",
+          "schema:identifier": "ex:instrument-ada-001"
+        }
+      ],
+      "schema:location": {
+        "@type": [
+          "schema:Place",
+          "nxs:BaseClass/NXsource"
+        ],
+        "schema:name": "Analytical Sciences Laboratory",
+        "schema:identifier": "https://ror.org/00hx57361"
+      },
+      "schema:mainEntity": [
+        {
+          "@type": [
+            "schema:Thing",
+            "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+          ],
+          "schema:additionalType": [
+            "MaterialSample"
+          ],
+          "schema:name": "ALH 84001,123",
+          "schema:identifier": [
+            "igsn:10.60471/GSEEXAMPLE001"
+          ],
+          "schema:description": "Thin section of Allan Hills 84001 martian meteorite"
+        }
+      ]
+    }
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:adaProduct-var-001",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "measurement_value",
+      "schema:alternateName": [
+        "ADA primary measurement"
+      ],
+      "schema:description": "Primary measured quantity from Astromat Data Archive (ADA) analysis. This is example mock data for testing.",
+      "schema:propertyID": [
+        "https://ada.astromat.org/vocabulary/variables/ada_primary"
+      ],
+      "schema:unitText": "counts",
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:role": "MeasureComponent",
+      "cdi:simpleUnitOfMeasure": "counts"
+    },
+    {
+      "@id": "ex:adaProduct-var-002",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "position_x",
+      "schema:alternateName": [
+        "X coordinate"
+      ],
+      "schema:description": "Horizontal position coordinate on sample surface.",
+      "schema:propertyID": [
+        "https://ada.astromat.org/vocabulary/variables/position_x"
+      ],
+      "schema:unitText": "micrometer",
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdi:role": "DimensionComponent",
+      "cdi:simpleUnitOfMeasure": "um"
+    }
+  ],
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload"
+      ],
+      "schema:name": "adaProduct-ALH84001-archive.zip",
+      "schema:description": "Archive containing ADA data files and supplementary materials",
+      "schema:contentUrl": "https://astromat.org/downloads/adaproduct-example-001.zip",
+      "schema:encodingFormat": [
+        "application/zip"
+      ],
+      "schema:additionalType": [
+        "RO-CRATE"
+      ],
+      "spdx:checksum": {
+        "spdx:algorithm": "SHA256",
+        "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+      },
+      "schema:size": {
+        "@type": "schema:QuantitativeValue",
+        "schema:value": 15728640,
+        "schema:unitText": "byte"
+      },
+      "schema:provider": [
+        {
+          "@type": "schema:Organization",
+          "schema:name": "Astromat Data Archive"
+        }
+      ],
+      "schema:hasPart": [
+        {
+          "@id": "ex:adaProduct-file-001",
+          "@type": [
+            "ada:image",
+            "schema:ImageObject"
+          ],
+          "schema:name": "ALH84001_ADA_001.tif",
+          "schema:description": "ADA data file for ALH 84001 thin section",
+          "schema:additionalType": [
+            "ada:EMPAImage"
+          ],
+          "schema:encodingFormat": [
+            "image/tiff"
+          ],
+          "schema:size": {
+            "@type": "schema:QuantitativeValue",
+            "schema:value": 10485760,
+            "schema:unitText": "byte"
+          },
+          "spdx:checksum": {
+            "spdx:algorithm": "MD5",
+            "spdx:checksumValue": "d41d8cd98f00b204e9800998ecf8427e"
+          },
+          "componentType": {
+            "@type": "ada:EMPAImage"
+          }
+        },
+        {
+          "@id": "ex:adaProduct-file-002",
+          "@type": [
+            "ada:document",
+            "schema:DigitalDocument"
+          ],
+          "schema:name": "ALH84001_ADA_methods.pdf",
+          "schema:description": "Method description document for this analysis",
+          "schema:additionalType": [
+            "ada:methodDescription"
+          ],
+          "schema:encodingFormat": [
+            "application/pdf"
+          ],
+          "schema:size": {
+            "@type": "schema:QuantitativeValue",
+            "schema:value": 524288,
+            "schema:unitText": "byte"
+          },
+          "componentType": {
+            "@type": "ada:methodDescription"
+          }
+        }
+      ]
+    }
+  ],
+  "schema:subjectOf": {
+    "@type": "schema:Dataset",
+    "@id": "ex:adaProduct-metadata-001",
+    "schema:about": {
+      "@id": "ex:adaProduct-example-001"
+    },
+    "schema:dateModified": "2026-01-15",
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/profiles/discovery"
+      },
+      {
+        "@id": "https://ada.astromat.org/profiles/adaProduct"
+      }
+    ],
+    "schema:maintainer": {
+      "@type": "schema:Organization",
+      "schema:name": "Astromat Data Archive"
+    },
+    "schema:sdDatePublished": "2026-01-15T12:00:00Z",
+    "schema:includedInDataCatalog": {
+      "@type": "schema:DataCatalog",
+      "schema:name": "Astromat Data Archive",
+      "schema:url": "https://astromat.org"
+    }
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix ada: <https://ada.astromat.org/metadata/> .
+@prefix cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <https://example.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema1: <http://schema.org/> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:adaProduct-example-001 a schema1:Dataset,
+        schema1:Product ;
+    schema1:additionalType "Electron Microprobe Analysis Image (EMPA)",
+        "ada:DataDeliveryPackage" ;
+    schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
+    schema1:contributor [ a schema1:Role ;
+            schema1:contributor [ a schema1:Person ;
+                    schema1:contactPoint [ a schema1:ContactPoint ;
+                            schema1:email "leadscientist@example.org" ] ;
+                    schema1:identifier "https://orcid.org/0000-0003-1111-2222" ;
+                    schema1:name "Leadscientist, Patricia" ] ;
+            schema1:roleName "principalInvestigator" ] ;
+    schema1:creativeWorkStatus "Published" ;
+    schema1:creator ( [ a schema1:Person ;
+                schema1:affiliation [ a schema1:Organization ;
+                        schema1:name "Lunar and Planetary Institute" ] ;
+                schema1:contactPoint [ a schema1:ContactPoint ;
+                        schema1:email "analytica@example.org" ] ;
+                schema1:identifier "https://orcid.org/0000-0001-2345-6789" ;
+                schema1:name "Analytica, Maria" ] [ a schema1:Person ;
+                schema1:affiliation [ a schema1:Organization ;
+                        schema1:name "NASA Johnson Space Center" ] ;
+                schema1:identifier "https://orcid.org/0000-0002-9876-5432" ;
+                schema1:name "Researcher, John Q." ] ) ;
+    schema1:dateModified "2026-01-15" ;
+    schema1:description "Example Astromat Data Archive (ADA) product metadata demonstrating all properties defined by the adaProduct profile. Contains mock data for testing and validation." ;
+    schema1:distribution [ a schema1:DataDownload ;
+            schema1:additionalType "RO-CRATE" ;
+            schema1:contentUrl "https://astromat.org/downloads/adaproduct-example-001.zip" ;
+            schema1:description "Archive containing ADA data files and supplementary materials" ;
+            schema1:encodingFormat "application/zip" ;
+            schema1:hasPart ex:adaProduct-file-001,
+                ex:adaProduct-file-002 ;
+            schema1:name "adaProduct-ALH84001-archive.zip" ;
+            schema1:provider [ a schema1:Organization ;
+                    schema1:name "Astromat Data Archive" ] ;
+            schema1:size [ a schema1:QuantitativeValue ;
+                    schema1:unitText "byte" ;
+                    schema1:value 15728640 ] ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ] ;
+    schema1:funding [ a schema1:MonetaryGrant ;
+            schema1:funder [ a schema1:Organization ;
+                    schema1:additionalType "schema:FundingAgency" ;
+                    schema1:name "NASA" ] ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "award number" ;
+                    schema1:value "NNX17AE48G" ] ;
+            schema1:name "Astromaterials Curation and Analysis" ] ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://registry.identifiers.org/registry/doi" ;
+            schema1:url "https://doi.org/10.99999/adaproduct-example-001" ;
+            schema1:value "10.99999/adaproduct-example-001" ] ;
+    schema1:keywords [ a schema1:DefinedTerm ;
+            schema1:inDefinedTermSet "https://ada.astromat.org/vocabulary/techniques" ;
+            schema1:name "ADA" ;
+            schema1:termCode "ADA" ],
+        "astromaterials",
+        "meteorite" ;
+    schema1:license "https://creativecommons.org/licenses/by/4.0/" ;
+    schema1:measurementTechnique [ a schema1:DefinedTerm ;
+            schema1:identifier "https://ada.astromat.org/vocabulary/techniques/ADA" ;
+            schema1:name "Astromat Data Archive (ADA)" ] ;
+    schema1:name "ADA Analysis of Meteorite ALH 84001 Fragment" ;
+    schema1:subjectOf ex:adaProduct-metadata-001 ;
+    schema1:url "https://astromat.org/products/adaproduct-example-001" ;
+    schema1:variableMeasured ex:adaProduct-var-001,
+        ex:adaProduct-var-002 ;
+    schema1:version "1.0" ;
+    prov:wasGeneratedBy [ a schema1:Event,
+                prov:Activity ;
+            schema1:identifier "session-ada-20260110-001" ;
+            schema1:location [ a <http://purl.org/nexusformat/definitions/BaseClass/NXsource>,
+                        schema1:Place ;
+                    schema1:identifier "https://ror.org/00hx57361" ;
+                    schema1:name "Analytical Sciences Laboratory" ] ;
+            schema1:mainEntity [ a schema1:Thing,
+                        <https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample> ;
+                    schema1:additionalType "MaterialSample" ;
+                    schema1:description "Thin section of Allan Hills 84001 martian meteorite" ;
+                    schema1:identifier "igsn:10.60471/GSEEXAMPLE001" ;
+                    schema1:name "ALH 84001,123" ] ;
+            schema1:startDate "2026-01-10T09:30:00" ;
+            prov:used [ a <http://purl.org/nexusformat/definitions/BaseClass/NXinstrument>,
+                        schema1:Thing,
+                        prov:Entity ;
+                    schema1:additionalType "ada:ADAInstrument" ;
+                    schema1:identifier "ex:instrument-ada-001" ;
+                    schema1:name "Example ADA Instrument" ] ] .
+
+ex:adaProduct-file-001 a schema1:ImageObject,
+        ada:image ;
+    schema1:additionalType "ada:EMPAImage" ;
+    schema1:description "ADA data file for ALH 84001 thin section" ;
+    schema1:encodingFormat "image/tiff" ;
+    schema1:name "ALH84001_ADA_001.tif" ;
+    schema1:size [ a schema1:QuantitativeValue ;
+            schema1:unitText "byte" ;
+            schema1:value 10485760 ] ;
+    spdx:checksum [ spdx:algorithm "MD5" ;
+            spdx:checksumValue "d41d8cd98f00b204e9800998ecf8427e" ] .
+
+ex:adaProduct-file-002 a schema1:DigitalDocument,
+        ada:document ;
+    schema1:additionalType "ada:methodDescription" ;
+    schema1:description "Method description document for this analysis" ;
+    schema1:encodingFormat "application/pdf" ;
+    schema1:name "ALH84001_ADA_methods.pdf" ;
+    schema1:size [ a schema1:QuantitativeValue ;
+            schema1:unitText "byte" ;
+            schema1:value 524288 ] .
+
+ex:adaProduct-metadata-001 a schema1:Dataset ;
+    dcterms:conformsTo <https://ada.astromat.org/profiles/adaProduct>,
+        <https://w3id.org/cdif/profiles/discovery> ;
+    schema1:about ex:adaProduct-example-001 ;
+    schema1:dateModified "2026-01-15" ;
+    schema1:includedInDataCatalog [ a schema1:DataCatalog ;
+            schema1:name "Astromat Data Archive" ;
+            schema1:url "https://astromat.org" ] ;
+    schema1:maintainer [ a schema1:Organization ;
+            schema1:name "Astromat Data Archive" ] ;
+    schema1:sdDatePublished "2026-01-15T12:00:00Z" .
+
+ex:adaProduct-var-001 a cdi:InstanceVariable,
+        schema1:PropertyValue ;
+    cdi:intendedDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:role "MeasureComponent" ;
+    cdi:simpleUnitOfMeasure "counts" ;
+    schema1:alternateName "ADA primary measurement" ;
+    schema1:description "Primary measured quantity from Astromat Data Archive (ADA) analysis. This is example mock data for testing." ;
+    schema1:name "measurement_value" ;
+    schema1:propertyID "https://ada.astromat.org/vocabulary/variables/ada_primary" ;
+    schema1:unitText "counts" .
+
+ex:adaProduct-var-002 a cdi:InstanceVariable,
+        schema1:PropertyValue ;
+    cdi:intendedDataType "https://www.w3.org/TR/xmlschema-2/#decimal" ;
+    cdi:role "DimensionComponent" ;
+    cdi:simpleUnitOfMeasure "um" ;
+    schema1:alternateName "X coordinate" ;
+    schema1:description "Horizontal position coordinate on sample surface." ;
+    schema1:name "position_x" ;
+    schema1:propertyID "https://ada.astromat.org/vocabulary/variables/position_x" ;
+    schema1:unitText "micrometer" .
+
+
+```
+
 ## Schema
 
 ```yaml
@@ -43,95 +852,17 @@ allOf:
       type: array
       items:
         type: string
-        enum:
-        - schema:Dataset
-        - schema:Product
+      allOf:
+      - contains:
+          const: schema:Dataset
+      - contains:
+          const: schema:Product
     schema:additionalType:
       type: array
       description: Should have the ada product type and 'ada:DataDeliveryPackage'
       items:
         type: string
-        enum:
-        - ada:DataDeliveryPackage
-        - "\u2074\u2070Ar/\xB3\u2079Ar Geochronology and Thermochronology (ARGT)"
-        - Accelerator Mass Spectrometry (AMS)
-        - Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)
-        - Basemap
-        - Differential Scanning Calorimetry (DSC)
-        - Electron Microprobe Analysis (EMPA) Collection
-        - Electron Microprobe Analysis Image (EMPA)
-        - Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)
-        - Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)
-        - Fluorescence Microscopy (UVFM) Image
-        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Cube
-        - Fourier Transform Ion Cyclotron Resonance Mass Spectrometry (FTICRMS) Tabular
-        - Gas Chromatography-Mass Spectrometry (GCMS)
-        - Gas Pycnometry (GPYC) Processed
-        - Gas Pycnometry (GPYC) Raw
-        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Processed
-        - High-resolution Inductively Coupled Plasma Mass Spectroscopy (HRICPMS) Raw
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed
-        - Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw
-        - Ion Chromatography (IC)
-        - Laser Assisted Fluorination (LAF) Processed
-        - Laser Assisted Fluorination (LAF) Raw
-        - Liquid Chromatography - Mass Spectrometry (LCMS) Collection
-        - Lock-In Thermography (LIT) Collection
-        - Lock-In Thermography (LIT) image
-        - Microprobe Two-Step Laser Mass Spectrometry (L2MS)
-        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) processed
-        - Multi-Collector Inductively Coupled Plasma Mass Spectrometry (MCICPMS) Raw
-        - Nanoscale Infrared Mapping (NanoIR) Background
-        - Nanoscale Infrared Mapping (NanoIR) MapCollection
-        - Nanoscale Infrared Mapping (NanoIR) Point Data
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw
-        - Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular
-        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw
-        - Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed
-        - Particle Size Frequency Distribution (PSFD)
-        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Processed
-        - Quadrupole Inductively Coupled Plasma Mass Spectrometry (QICPMS) Raw
-        - Quantitative Reflective Imaging System (QRIS) Calibrated
-        - Quantitative Reflective Imaging System (QRIS) Raw
-        - RAMAN Raw
-        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
-          Processed
-        - Resonance ionization time of flight noble gas mass spectrometry (RITOFNGMS)
-          Spectra
-        - Scanning Electron Microscopy (SEM) Image
-        - Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD)
-          Grain Image
-        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
-          Point Data
-        - Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS)
-          image
-        - Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL)
-          image
-        - Scanning Transmission Electron Microscopy (STEM) Image
-        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
-          Cube
-        - Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS)
-          Tabular
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Cube
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Tabular
-        - Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy
-          (STEMEDS) Tomography
-        - Secondary Ion Mass Spectrometry (SIMS) Tabular
-        - Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)
-        - SLSIndividualScanCollection
-        - Structured Light Scanning (SLS) Shape Model
-        - Time-of-flight secondary ion mass spectrometry (TOFSIMS)
-        - Transmission Electron Microscopy (TEM) Image
-        - Transmission Electron Microscopy (TEM) Patterns Image
-        - Visible Light Microscopy (VLM) Image
-        - Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point
-        - X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)
-        - X-ray Computed Tomography (XCT) Image Collection
-        - X-ray Diffraction (XRD) Tabular
+      minItems: 1
     submissionType:
       type: string
     schema:funding:
@@ -144,8 +875,7 @@ allOf:
             default: schema:MonetaryGrant
             const: schema:MonetaryGrant
           schema:identifier:
-            type: string
-            description: String that identifies a particular grant
+            description: Identifier for a particular grant
           schema:name:
             type: string
             description: Title of the grant
@@ -567,8 +1297,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                  enum:
-                  - schema:DataDownload
+                contains:
+                  const: schema:DataDownload
                 minItems: 1
         - allOf:
           - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/files/schema.yaml
@@ -579,8 +1309,8 @@ allOf:
                 type: array
                 items:
                   type: string
-                  enum:
-                  - schema:DataDownload
+                contains:
+                  const: schema:DataDownload
                 minItems: 1
               schema:provider:
                 type: array

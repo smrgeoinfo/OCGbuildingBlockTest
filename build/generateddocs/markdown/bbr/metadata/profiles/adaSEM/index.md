@@ -130,27 +130,28 @@ allOf:
           schema:hasPart:
             items:
               properties:
-                schema:additionalType:
-                  items:
-                    enum:
-                    - ada:SEMImageCollection
-                    - ada:SEMImageMap
-                    - ada:SEMEBSDGrainImage
-                    - ada:SEMEBSDGrainImageMap
-                    - ada:SEMEBSDGrainImageMapCube
-                    - ada:SEMEDSElementalMap
-                    - ada:SEMEDSElementalMaps
-                    - ada:SEMEDSElementalMapsCube
-                    - ada:SEMEDSPointData
-                    - ada:SEMEDSPointDataCollection
-                    - ada:SEMEDSPointDataCube
-                    - ada:SEMHRCLImage
-                    - ada:SEMHRCLMap
-                    - ada:SEMHRCLCube
-                    - ada:analysisLocation
-                    - ada:methodDescription
-                    - ada:instrumentMetadata
-                    - ada:calibrationFile
+                componentType:
+                  properties:
+                    '@type':
+                      enum:
+                      - ada:SEMImageCollection
+                      - ada:SEMImageMap
+                      - ada:SEMEBSDGrainImage
+                      - ada:SEMEBSDGrainImageMap
+                      - ada:SEMEBSDGrainImageMapCube
+                      - ada:SEMEDSElementalMap
+                      - ada:SEMEDSElementalMaps
+                      - ada:SEMEDSElementalMapsCube
+                      - ada:SEMEDSPointData
+                      - ada:SEMEDSPointDataCollection
+                      - ada:SEMEDSPointDataCube
+                      - ada:SEMHRCLImage
+                      - ada:SEMHRCLMap
+                      - ada:SEMHRCLCube
+                      - ada:analysisLocation
+                      - ada:methodDescription
+                      - ada:instrumentMetadata
+                      - ada:calibrationFile
 x-jsonld-prefixes:
   schema: http://schema.org/
   ada: https://ada.astromat.org/metadata/

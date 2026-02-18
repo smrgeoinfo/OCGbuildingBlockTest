@@ -7,5 +7,46 @@
 @prefix cdifd: <https://cdif.org/validation/0.1/shacl#> .
 @base <https://www.ogc.org/rules/template/> .
 
-
-
+# Recommended (optional) properties for CDIF discovery metadata.
+# These are warnings, not violations — datasets should have these but are
+# valid without them per cdifMandatory.
+cdifd:CDIFDatasetOptionalShape
+    a sh:NodeShape ;
+    sh:target [
+        a sh:SPARQLTarget ;
+        sh:select """
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {
+              ?this a schema:Dataset .
+              MINUS {
+                ?parent a schema:Dataset .
+                ?parent ?p ?this .
+                FILTER (?parent != ?this)
+                FILTER (?p != schema:about)
+              }
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path schema:description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 10 ;
+        sh:severity sh:Warning ;
+        sh:message "A dataset should have a description (schema:description) of at least 10 characters." ;
+    ] ;
+    sh:property [
+        sh:path schema:creator ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "A dataset should identify its creator(s) (schema:creator)." ;
+    ] ;
+    sh:property [
+        sh:path schema:keywords ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "A dataset should have keywords (schema:keywords) for discoverability." ;
+    ] ;
+    sh:message "CDIF optional properties: datasets should have a description, creator, and keywords." ;
+    .
