@@ -11,11 +11,39 @@ description: 'JSON schema for JSON-LD documents that describe science datasets f
   "geosparql": "http://www.opengis.net/ont/geosparql#", "spdx": "http://spdx.org/rdf/terms#" }'' 2024-07-24,
   SMR change handling of registration information to align with current proposal for cross-domain interoperability
   (CDIF). Created by Stephen Richard 2024-07-30 based on NSF GeoCODES dataset and iSamples draft2 schema.org
-  JSON schema. 2025-07-24. NOTE-- assumes that schema:http://schema.org is declared in context, so schema: namespace
-  prefix is required as prefix for all schema.org elements.  SMR 2025-10-23 update schema version
+  JSON schema. 2025-07-24. NOTE-- assumes that schema:http://schema.org is declared in context, so schema:
+  namespace prefix is required as prefix for all schema.org elements.  SMR 2025-10-23 update schema version
   to https://json-schema.org/draft/2020-12/schema; add additionalType on organization with the alt schema.org
   types as one option, additional required constraints in various places; update constraint on @type to
   require schema:Dataset. Implement using OGC building blocks approach. '
 allOf:
-- $ref: ../../cdifProperties/cdifMandatory/schema.yaml
-- $ref: ../../cdifProperties/cdifOptional/schema.yaml
+- $ref: ../../cdifProperties/cdifMandatory/cdifMandatorySchema.json
+- $ref: ../../cdifProperties/cdifOptional/cdifOptionalSchema.json
+- type: object
+  properties:
+    schema:distribution:
+      type: array
+      items:
+        anyOf:
+        - allOf:
+          - $ref: ../../schemaorgProperties/dataDownload/dataDownloadSchema.json
+          - anyOf:
+            - $ref: ../../cdifProperties/cdifDataCube/cdifDataCubeSchema.json
+            - $ref: ../../cdifProperties/cdifTabularData/cdifTabularDataSchema.json
+            - {}
+        - allOf:
+          - $ref: ../../schemaorgProperties/webAPI/webAPISchema.json
+          - type: object
+            properties:
+              schema:potentialAction:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    schema:result:
+                      allOf:
+                      - $ref: ../../schemaorgProperties/dataDownload/dataDownloadSchema.json
+                      - anyOf:
+                        - $ref: ../../cdifProperties/cdifDataCube/cdifDataCubeSchema.json
+                        - $ref: ../../cdifProperties/cdifTabularData/cdifTabularDataSchema.json
+                        - {}
