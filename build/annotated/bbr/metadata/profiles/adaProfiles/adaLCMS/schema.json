@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ADA LC-MS Product Profile",
+  "description": "Technique-specific profile for Liquid Chromatography Mass Spectrometry (LC-MS) products. Extends the base ADA product profile with constraints on valid LC-MS component types.",
+  "allOf": [
+    {
+      "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/adaProfiles/adaProduct/schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema:additionalType": {
+          "description": "Must include a LC-MS product type identifier.",
+          "contains": {
+            "enum": [
+              "Liquid Chromatography - Mass Spectrometry (LCMS) Collection",
+              "Liquid chromatography-mass spectrometry"
+            ]
+          }
+        },
+        "schema:distribution": {
+          "items": {
+            "properties": {
+              "schema:hasPart": {
+                "items": {
+                  "properties": {
+                    "componentType": {
+                      "properties": {
+                        "@type": {
+                          "enum": [
+                            "ada:LCMSCollection",
+                            "ada:LCMSMSCollection",
+                            "ada:analysisLocation",
+                            "ada:annotatedImage",
+                            "ada:areaOfInterest",
+                            "ada:basemap",
+                            "ada:calibrationFile",
+                            "ada:code",
+                            "ada:contextPhotography",
+                            "ada:contextVideo",
+                            "ada:inputFile",
+                            "ada:instrumentMetadata",
+                            "ada:logFile",
+                            "ada:methodDescription",
+                            "ada:other",
+                            "ada:plot",
+                            "ada:processingMethod",
+                            "ada:quickLook",
+                            "ada:report",
+                            "ada:samplePreparation",
+                            "ada:shapefile",
+                            "ada:supplementalBasemap",
+                            "ada:supplementaryImage",
+                            "ada:worldFile"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "ada": "https://ada.astromat.org/metadata/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#"
+  }
+}

@@ -76,23 +76,23 @@ Example quality measure
 
 #### ttl
 ```ttl
-@prefix ns1: <schema:> .
-@prefix ns2: <dqv:> .
+@prefix ns1: <dqv:> .
+@prefix schema1: <http://schema.org/> .
 
-[] a ns2:QualityMeasurement ;
-    ns2:isMeasurementOf [ a ns1:DefinedTerm ;
-            ns1:identifier "qMsuTaeO" ;
-            ns1:inDefinedTermSet "GCjNHSplcIDSd" ;
-            ns1:name "LBp" ;
-            ns1:termCode "kVavhujDLioBbZc" ] ;
-    ns2:value [ a ns1:DefinedTerm ;
-            ns1:identifier [ a ns1:PropertyValue ;
-                    ns1:propertyID "bOQUqI" ;
-                    ns1:url "http://example.com/resource?foo=bar#fragment" ;
-                    ns1:value "dzkwRNhKqfDVhOu" ] ;
-            ns1:inDefinedTermSet "YYdmhomhxBnNBic" ;
-            ns1:name "aZrfr" ;
-            ns1:termCode "OgZwkLzhtqNSCcvMYKT" ] .
+[] a ns1:QualityMeasurement ;
+    ns1:isMeasurementOf [ a schema1:DefinedTerm ;
+            schema1:identifier "qMsuTaeO" ;
+            schema1:inDefinedTermSet "GCjNHSplcIDSd" ;
+            schema1:name "LBp" ;
+            schema1:termCode "kVavhujDLioBbZc" ] ;
+    ns1:value [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "bOQUqI" ;
+                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
+                    schema1:value "dzkwRNhKqfDVhOu" ] ;
+            schema1:inDefinedTermSet "YYdmhomhxBnNBic" ;
+            schema1:name "aZrfr" ;
+            schema1:termCode "OgZwkLzhtqNSCcvMYKT" ] .
 
 
 ```
@@ -129,8 +129,8 @@ required:
 $defs:
   DefinedTerm:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml
-x-jsonld-extra-terms:
-  schema: https://schema.org
+x-jsonld-prefixes:
+  schema: http://schema.org/
 
 ```
 
@@ -145,7 +145,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "@version": 1.1
   }
 }

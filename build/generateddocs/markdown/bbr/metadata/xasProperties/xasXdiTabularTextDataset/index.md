@@ -147,9 +147,9 @@ ex:xasXDIdownload_23463h a cdi:WideDataStructure ;
     cdi:hasHeader true ;
     cdi:has_DataStructureComponent [ a cdi:MeasureComponent ;
             cdi:has [ a cdi:ValueMapping ;
-                    cdi:hasIndex 2 ;
-                    cdi:haslength 12 ] ;
-            cdi:isDefinedBy_InstanceVariable xas:transmittedIntensityVariable ],
+                    cdi:hasIndex 3 ;
+                    cdi:haslength 13 ] ;
+            cdi:isDefinedBy_InstanceVariable xas:incidentIntensityVariable ],
         [ a cdi:IdentifierComponent ;
             cdi:has [ a cdi:ValueMapping ;
                     cdi:hasIndex 1 ;
@@ -157,9 +157,9 @@ ex:xasXDIdownload_23463h a cdi:WideDataStructure ;
             cdi:isDefinedBy_InstanceVariable xas:monochromatorEnergyVariable ],
         [ a cdi:MeasureComponent ;
             cdi:has [ a cdi:ValueMapping ;
-                    cdi:hasIndex 3 ;
-                    cdi:haslength 13 ] ;
-            cdi:isDefinedBy_InstanceVariable xas:incidentIntensityVariable ] ;
+                    cdi:hasIndex 2 ;
+                    cdi:haslength 12 ] ;
+            cdi:isDefinedBy_InstanceVariable xas:transmittedIntensityVariable ] ;
     cdi:headerRowCount 27 ;
     cdi:isDelimited false ;
     cdi:isFixedWidth true ;
@@ -234,8 +234,8 @@ required:
 - cdi:has_DataStructureComponent
 - cdi:hasHeader
 - cdi:headerRowCount
-x-jsonld-extra-terms:
-  schema: https://schema.org
+x-jsonld-prefixes:
+  schema: http://schema.org/
 
 ```
 
@@ -250,7 +250,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "@version": 1.1
   }
 }

@@ -422,24 +422,25 @@
           ]
         }
       },
-      "allOf": [
+      "anyOf": [
         {
           "required": [
             "schema:funder"
           ]
         },
         {
-          "anyOf": [
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            },
-            {
-              "required": [
-                "schema:name"
-              ]
-            }
+          "required": [
+            "schema:identifier"
+          ]
+        },
+        {
+          "required": [
+            "schema:name"
+          ]
+        },
+        {
+          "required": [
+            "schema:description"
           ]
         }
       ],
@@ -1001,8 +1002,8 @@
           "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema-oas3.0.json#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm_1"
         }
       },
-      "x-jsonld-extra-terms": {
-        "schema": "https://schema.org"
+      "x-jsonld-prefixes": {
+        "schema": "http://schema.org/"
       },
       "x-schema-source": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.json",
       "x-schema-version": "https://json-schema.org/draft/2020-12/schema"
@@ -1036,6 +1037,7 @@
         },
         "schema:encodingFormat": {
           "type": "array",
+          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse.",
           "items": {
             "type": "string"
           }

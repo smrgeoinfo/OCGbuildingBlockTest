@@ -142,8 +142,8 @@ allOf:
         required:
         - '@id'
       minContains: 1
-x-jsonld-extra-terms:
-  schema: https://schema.org
+x-jsonld-prefixes:
+  schema: http://schema.org/
 
 ```
 
@@ -158,7 +158,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "ex": "https://example.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dcterms": "http://purl.org/dc/terms/",

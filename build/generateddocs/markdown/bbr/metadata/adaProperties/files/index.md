@@ -22,33 +22,18 @@ description: Properties for any file in an ADA product distribution. GeneralType
   info based on broad categories of file format (tabular, image, dataCube, document).
   Type constraints (e.g. DataDownload) are applied at the composition level in profiles.
 allOf:
+- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.yaml
 - type: object
+  description: properties added for geochemical datasets
   properties:
-    '@id':
-      type: string
-    '@type':
-      type: array
-      items:
-        type: string
     schema:additionalType:
       type: array
-      description: The dataComponentType or supDocType
+      description: other classifier for the file. ada componentTypes are specified
+        in the specific file type schema attached by $refs
       items:
         type: string
-    schema:name:
-      type: string
-      description: String name of file, must be unique within the containing package
     schema:description:
       type: string
-    spdx:checksum:
-      type: object
-      description: A string value calculated from the content of the resource representation,
-        used to test if content has been modified.
-      properties:
-        spdx:algorithm:
-          type: string
-        spdx:checksumValue:
-          type: string
     schema:size:
       type: object
       properties:
@@ -59,18 +44,11 @@ allOf:
         schema:unitText:
           type: string
           default: byte
-    schema:encodingFormat:
-      type: array
-      items:
-        type: string
-      description: MIME type with extension; should indicate the serialization scheme
-        in sufficient detail that machine can know how to parse.
-    resultTarget:
-      $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/stringArray/stringArraySchema.json
     schema:relatedLink:
       type: array
       description: 'Links between files in the product. Use schema:name for path to
-        target in product, or use #id JSON-LD links.'
+        target in product, or use #id JSON-LD links. Used to link metadata files in
+        bundle to the data or supplementary files they document.'
       items:
         type: object
         properties:
@@ -92,14 +70,14 @@ allOf:
               schema:url:
                 type: string
 - anyOf:
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/image/imageSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/imageMap/imageMapSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/tabularData/tabularDataSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/collection/collectionSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/dataCube/dataCubeSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/document/documentSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/supDocImage/supDocImageSchema.json
-  - $ref: https://usgin.github.io/metadataBuildingBlocks/_sources/adaProperties/otherFile/otherFileSchema.json
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/image/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/imageMap/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/tabularData/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/collection/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/dataCube/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/document/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/supDocImage/schema.yaml
+  - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/adaProperties/otherFile/schema.yaml
   - type: object
     properties:
       '@type':
@@ -138,6 +116,7 @@ Links to the schema:
     "schema": "http://schema.org/",
     "ada": "https://ada.astromat.org/metadata/",
     "spdx": "http://spdx.org/rdf/terms#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "@version": 1.1
   }
 }

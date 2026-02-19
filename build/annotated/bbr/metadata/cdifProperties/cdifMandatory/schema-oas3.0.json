@@ -171,6 +171,7 @@
         },
         "schema:encodingFormat": {
           "type": "array",
+          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse.",
           "items": {
             "type": "string"
           }
@@ -859,8 +860,17 @@
           "description": "documentation of the serialization format for the API response, i.e. an implementation of the structure specified in the object type field",
           "properties": {
             "@type": {
-              "type": "string",
-              "default": "schema:DataDownload"
+              "type": "array",
+              "description": "Type of result object. Typically schema:DataDownload, but may include additional types.",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "enum": [
+                  "schema:DataDownload"
+                ]
+              },
+              "minItems": 1
             },
             "schema:encodingFormat": {
               "type": "array",

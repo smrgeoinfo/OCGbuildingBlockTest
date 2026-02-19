@@ -1,0 +1,119 @@
+Validation report for cdif.bbr.metadata.profiles.cdifProfiles.CDIFDataDescription - CDIF discovery and data description metadata
+Generated 2026-02-19T20:04:23.000770+00:00
+=== Files ===
+Using exampleCDIFDataDescription.json from examples
+JSON-LD context is present - uplifting
+Output JSON-LD example_1_1.jsonld created
+Output Turtle example_1_1.ttl created
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: {'@type': ['schema:WebAPI'], 'schema:serviceType': {'@type': 'schema:DefinedTerm', 'schema:name': 'OGC API - Features', 'schema:identifier': {'@type': 'schema:PropertyValue', 'schema:propertyID': 'https://www.ogc.org/standards', 'schema:value': 'ogcapi-features-1', 'schema:url': 'https://www.ogc.org/standard/ogcapi-features/'}, 'schema:inDefinedTermSet': 'https://www.ogc.org/standards', 'schema:termCode': 'ogcapi-features'}, 'schema:termsOfService': 'Open access, no authentication required', 'schema:documentation': {'@type': 'schema:CreativeWork', 'schema:name': 'OpenAPI specification for geochemistry data service', 'schema:url': 'http://example.com/api/v1/openapi.json'}, 'schema:potentialAction': [{'@type': 'schema:Action', 'schema:name': 'Query geochemistry features', 'schema:target': {'@type': 'schema:EntryPoint', 'schema:description': 'OGC API Features endpoint returning geochemistry observations as CSV', 'schema:urlTemplate': 'http://example.com/api/v1/collections/geochem/items?f={format}&limit={limit}&offset={offset}', 'schema:httpMethod': ['GET'], 'schema:contentType': ['text/csv', 'application/geo+json']}, 'schema:result': {'@type': ['schema:DataDownload'], 'schema:name': 'Geochemistry query results', 'schema:contentUrl': 'http://example.com/api/v1/collections/geochem/items?f=csv', 'schema:encodingFormat': ['text/csv'], 'cdi:isDelimited': True, 'csvw:delimiter': ',', 'csvw:header': True, 'csvw:headerRowCount': 1, 'cdi:hasPhysicalMapping': [{'cdi:index': 0, 'cdi:format': 'decimal', 'cdi:physicalDataType': 'float64', 'cdi:isRequired': True, 'cdi:formats_InstanceVariable': {'@id': 'ex:KJTFKurNFu'}}, {'cdi:index': 1, 'cdi:format': 'decimal', 'cdi:physicalDataType': 'float64', 'cdi:isRequired': False, 'cdi:formats_InstanceVariable': {'@id': 'ex:OjHgIDO'}}]}, 'schema:object': {'@type': 'schema:DataFeed', 'schema:description': 'Geochemistry observations collection'}, 'schema:query-input': [{'@type': 'schema:PropertyValueSpecification', 'schema:valueName': 'format', 'schema:description': 'Response format: csv or geojson', 'schema:valueRequired': False, 'schema:valuePattern': 'csv|geojson'}, {'@type': 'schema:PropertyValueSpecification', 'schema:valueName': 'limit', 'schema:description': 'Maximum number of features to return (default 100)', 'schema:valueRequired': False}, {'@type': 'schema:PropertyValueSpecification', 'schema:valueName': 'offset', 'schema:description': 'Starting index for pagination', 'schema:valueRequired': False}]}]} is not valid under any of the given schemas
+
+Failed validating 'anyOf' in schema['allOf'][1]['properties']['schema:distribution']['items']:
+    {'anyOf': [{'$ref': '#/$defs/DataDownload'},
+               {'allOf': [{'$ref': '#/$defs/DataDownload'},
+                          {'properties': {'@type': {'contains': {'enum': ['cdi:StructuredDataSet',
+                                                                          'cdi:TabularTextDataSet']},
+                                                    'items': {'type': 'string'},
+                                                    'minItems': 2,
+                                                    'type': 'array'}},
+                           'type': 'object'}],
+                'description': 'Distribution with CDIF dual typing for '
+                               'structured or tabular data'}]}
+
+On instance['schema:distribution'][4]:
+    {'@type': ['schema:WebAPI'],
+     'schema:documentation': {'@type': 'schema:CreativeWork',
+                              'schema:name': 'OpenAPI specification for '
+                                             'geochemistry data service',
+                              'schema:url': 'http://example.com/api/v1/openapi.json'},
+     'schema:potentialAction': [{'@type': 'schema:Action',
+                                 'schema:name': 'Query geochemistry '
+                                                'features',
+                                 'schema:object': {'@type': 'schema:DataFeed',
+                                                   'schema:description': 'Geochemistry '
+                                                                         'observations '
+                                                                         'collection'},
+                                 'schema:query-input': [{'@type': 'schema:PropertyValueSpecification',
+                                                         'schema:description': 'Response '
+                                                                               'format: '
+                                                                               'csv '
+                                                                               'or '
+                                                                               'geojson',
+                                                         'schema:valueName': 'format',
+                                                         'schema:valuePattern': 'csv|geojson',
+                                                         'schema:valueRequired': False},
+                                                        {'@type': 'schema:PropertyValueSpecification',
+                                                         'schema:description': 'Maximum '
+                                                                               'number '
+                                                                               'of '
+                                                                               'features '
+                                                                               'to '
+                                                                               'return '
+                                                                               '(default '
+                                                                               '100)',
+                                                         'schema:valueName': 'limit',
+                                                         'schema:valueRequired': False},
+                                                        {'@type': 'schema:PropertyValueSpecification',
+                                                         'schema:description': 'Starting '
+                                                                               'index '
+                                                                               'for '
+                                                                               'pagination',
+                                                         'schema:valueName': 'offset',
+                                                         'schema:valueRequired': False}],
+                                 'schema:result': {'@type': ['schema:DataDownload'],
+                                                   'cdi:hasPhysicalMapping': [{'cdi:format': 'decimal',
+                                                                               'cdi:formats_InstanceVariable': {'@id': 'ex:KJTFKurNFu'},
+                                                                               'cdi:index': 0,
+                                                                               'cdi:isRequired': True,
+                                                                               'cdi:physicalDataType': 'float64'},
+                                                                              {'cdi:format': 'decimal',
+                                                                               'cdi:formats_InstanceVariable': {'@id': 'ex:OjHgIDO'},
+                                                                               'cdi:index': 1,
+                                                                               'cdi:isRequired': False,
+                                                                               'cdi:physicalDataType': 'float64'}],
+                                                   'cdi:isDelimited': True,
+                                                   'csvw:delimiter': ',',
+                                                   'csvw:header': True,
+                                                   'csvw:headerRowCount': 1,
+                                                   'schema:contentUrl': 'http://example.com/api/v1/collections/geochem/items?f=csv',
+                                                   'schema:encodingFormat': ['text/csv'],
+                                                   'schema:name': 'Geochemistry '
+                                                                  'query '
+                                                                  'results'},
+                                 'schema:target': {'@type': 'schema:EntryPoint',
+                                                   'schema:contentType': ['text/csv',
+                                                                          'application/geo+json'],
+                                                   'schema:description': 'OGC '
+                                                                         'API '
+                                                                         'Features '
+                                                                         'endpoint '
+                                                                         'returning '
+                                                                         'geochemistry '
+                                                                         'observations '
+                                                                         'as '
+                                                                         'CSV',
+                                                   'schema:httpMethod': ['GET'],
+                                                   'schema:urlTemplate': 'http://example.com/api/v1/collections/geochem/items?f={format}&limit={limit}&offset={offset}'}}],
+     'schema:serviceType': {'@type': 'schema:DefinedTerm',
+                            'schema:identifier': {'@type': 'schema:PropertyValue',
+                                                  'schema:propertyID': 'https://www.ogc.org/standards',
+                                                  'schema:url': 'https://www.ogc.org/standard/ogcapi-features/',
+                                                  'schema:value': 'ogcapi-features-1'},
+                            'schema:inDefinedTermSet': 'https://www.ogc.org/standards',
+                            'schema:name': 'OGC API - Features',
+                            'schema:termCode': 'ogcapi-features'},
+     'schema:termsOfService': 'Open access, no authentication required'}
+=== End JSON Schema ===
+
+=== SHACL ===
+
+** Validation error **
+Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:
+Bad syntax (Prefix "dqv:" not bound) at ^ in:
+"...b'fd:qualityMeasurementNode\n\ta sh:NodeShape; \n\tsh:targetClass '^b'dqv:QualityMeasurement ;\n\t\n\tsh:target [\n\t  a sh:SPARQLTarget'..."
+=== End SHACL ===
+

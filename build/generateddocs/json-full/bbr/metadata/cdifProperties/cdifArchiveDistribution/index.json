@@ -1,0 +1,77 @@
+
+
+{
+  "itemIdentifier": "cdif.bbr.metadata.cdifProperties.cdifArchiveDistribution",
+  "$schema": "metaschema.yaml",
+  "name": "CDIF Archive Distribution",
+  "abstract": "Schema for a DataDownload distribution that is an archive containing multiple component files described via schema:hasPart, with optional CDIF data description extensions",
+  "status": "under-development",
+  "dateTimeAddition": "2026-02-19T00:00:00Z",
+  "itemClass": "schema",
+  "register": "cdif-building-block-register",
+  "version": "0.1",
+  "dateOfLastChange": "2026-02-19",
+  "link": "https://github.com/opengeospatial/bblock-template",
+  "sources": [
+    {
+      "title": "CDIF book",
+      "link": "https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#schema-org-implementation-of-cdif-metadata"
+    },
+    {
+      "title": "schema.org DataDownload",
+      "link": "https://schema.org/DataDownload"
+    }
+  ],
+  "maturity": "draft",
+  "scope": "unstable",
+  "tags": [
+    "CDIF",
+    "distribution",
+    "archive"
+  ],
+  "shaclShapes": {
+    "cdif.bbr.metadata.schemaorgProperties.dataDownload": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/dataDownload/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.person": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/person/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.organization": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/organization/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.identifier": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifTabularData": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifTabularData/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifPhysicalMapping": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifPhysicalMapping/rules.shacl"
+    ],
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifDataCube/rules.shacl"
+    ]
+  },
+  "dependsOn": [
+    "cdif.bbr.metadata.schemaorgProperties.dataDownload",
+    "cdif.bbr.metadata.cdifProperties.cdifTabularData",
+    "cdif.bbr.metadata.cdifProperties.cdifDataCube"
+  ],
+  "ldContext": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifArchiveDistribution/context.jsonld",
+  "schema": {
+    "application/yaml": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifArchiveDistribution/schema.yaml",
+    "application/json": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifArchiveDistribution/schema.json"
+  },
+  "sourceSchema": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifArchiveDistribution/schema.yaml",
+  "sourceLdContext": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifArchiveDistribution/context.jsonld",
+  "sourceFiles": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifArchiveDistribution/",
+  "rdfData": [],
+  "validationPassed": true,
+  "description": "Defines the structure for a DataDownload distribution that is an archive file (e.g. ZIP, tar.gz) containing multiple component files. The archive itself is typed as `schema:DataDownload` with standard properties (name, contentUrl, encodingFormat, checksum). Component files within the archive are listed in `schema:hasPart` and typed as `schema:MediaObject` (not `schema:DataDownload`, since they are not independently accessible via URL).\n\nEach hasPart item has:\n- `@id` \u2014 identifier for cross-references (e.g. from metadata sidecar files via `schema:about`)\n- `@type` \u2014 must include `schema:MediaObject`, must not include `schema:DataDownload`\n- `schema:name` \u2014 filename within the archive\n- `schema:encodingFormat` \u2014 MIME type(s)\n- `schema:size` \u2014 file size as `schema:QuantitativeValue`\n- `schema:description` \u2014 description of file content\n- `schema:about` \u2014 references to related files (for metadata sidecars)\n- `spdx:checksum` \u2014 integrity checksum\n\nComponent files may optionally include CDIF data description extensions to describe their internal data structure:\n- `cdifTabularData` \u2014 for delimited or fixed-width tabular text files (CSV, TSV), with CSVW properties and physical column mappings\n- `cdifDataCube` \u2014 for multi-dimensional structured datasets (NetCDF, HDF5), with locator-based physical mappings\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: CDIF Archive Distribution\ndescription: A DataDownload distribution that is an archive file (e.g. ZIP) containing\n  multiple component files described in schema:hasPart. The archive itself is typed\n  as schema:DataDownload; each component file is typed as schema:MediaObject (not\n  DataDownload, since they are not independently accessible via URL). Components may\n  optionally include CDIF data description extensions (cdifTabularData, cdifDataCube)\n  to describe their internal data structure.\ntype: object\nallOf:\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.yaml\n- type: object\n  properties:\n    schema:hasPart:\n      type: array\n      description: Array describing the files contained in the archive. Each item\n        represents a component file that is part of the archive and is not independently\n        accessible.\n      items:\n        allOf:\n        - type: object\n          properties:\n            '@id':\n              type: string\n              description: Identifier for this file, typically a hash-based anchor\n                (e.g. '#abc123'). Used for cross-references from schema:about in metadata\n                sidecar files.\n            '@type':\n              type: array\n              description: Must include schema:MediaObject. Must NOT include schema:DataDownload\n                since this file is not independently accessible. May include additional\n                types for categorization.\n              items:\n                type: string\n              contains:\n                const: schema:MediaObject\n              not:\n                contains:\n                  const: schema:DataDownload\n              minItems: 1\n            schema:name:\n              type: string\n              description: Filename of the component file within the archive.\n            schema:description:\n              type: string\n              description: Description of the file content. May include checksum information.\n            schema:encodingFormat:\n              type: array\n              description: MIME type(s) for this file.\n              items:\n                type: string\n            schema:size:\n              type: object\n              description: File size as a QuantitativeValue.\n              properties:\n                '@type':\n                  type: string\n                  const: schema:QuantitativeValue\n                schema:value:\n                  type: number\n                  description: Numeric size value.\n                schema:unitText:\n                  type: string\n                  description: Unit of measure for size (e.g. 'byte').\n            schema:about:\n              type: array\n              description: For metadata sidecar files, references the data file this\n                metadata describes.\n              items:\n                type: object\n                properties:\n                  '@id':\n                    type: string\n                    description: Reference to the @id of the data file described by\n                      this sidecar.\n            spdx:checksum:\n              type: object\n              description: Checksum for integrity verification of this component file.\n              properties:\n                spdx:algorithm:\n                  type: string\n                spdx:checksumValue:\n                  type: string\n          required:\n          - '@type'\n          - schema:name\n          - schema:encodingFormat\n        - anyOf:\n          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.yaml\n          - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.yaml\n          - {}\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  spdx: http://spdx.org/rdf/terms#\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  csvw: http://www.w3.org/ns/csvw#\n",
+  "gitRepository": "https://github.com/usgin/metadataBuildingBlocks",
+  "gitPath": "_sources/cdifProperties/cdifArchiveDistribution"
+}

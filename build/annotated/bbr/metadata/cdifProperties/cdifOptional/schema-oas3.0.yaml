@@ -260,14 +260,15 @@ x-defs:
                 externally; must be dereferenceable
         - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder/$defs/Person
         - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.funder/$defs/Organization
-    allOf:
+    anyOf:
     - required:
       - schema:funder
-    - anyOf:
-      - required:
-        - schema:identifier
-      - required:
-        - schema:name
+    - required:
+      - schema:identifier
+    - required:
+      - schema:name
+    - required:
+      - schema:description
     $defs:
       Person:
         $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.person
@@ -684,8 +685,8 @@ x-defs:
     $defs:
       DefinedTerm:
         $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifOptional/schema-oas3.0.yaml#/x-defs/cdif.bbr.metadata.schemaorgProperties.definedTerm
-    x-jsonld-extra-terms:
-      schema: https://schema.org
+    x-jsonld-prefixes:
+      schema: http://schema.org/
     x-schema-source: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/qualityProperties/qualityMeasure/schema.yaml
     x-schema-version: https://json-schema.org/draft/2020-12/schema
   cdif.bbr.metadata.schemaorgProperties.dataDownload:
@@ -712,6 +713,8 @@ x-defs:
         format: uri
       schema:encodingFormat:
         type: array
+        description: MIME type with extension; should indicate the serialization scheme
+          in sufficient detail that machine can know how to parse.
         items:
           type: string
       spdx:checksum:

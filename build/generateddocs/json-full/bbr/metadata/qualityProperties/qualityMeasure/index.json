@@ -10,7 +10,7 @@
   "itemClass": "schema",
   "register": "cdif-building-block-register",
   "version": "0.1",
-  "dateOfLastChange": "2026-02-16",
+  "dateOfLastChange": "2026-02-19",
   "link": "https://github.com/opengeospatial/bblock-template",
   "sources": [
     {
@@ -71,13 +71,13 @@
         },
         {
           "language": "ttl",
-          "code": "@prefix ns1: <schema:> .\n@prefix ns2: <dqv:> .\n\n[] a ns2:QualityMeasurement ;\n    ns2:isMeasurementOf [ a ns1:DefinedTerm ;\n            ns1:identifier \"qMsuTaeO\" ;\n            ns1:inDefinedTermSet \"GCjNHSplcIDSd\" ;\n            ns1:name \"LBp\" ;\n            ns1:termCode \"kVavhujDLioBbZc\" ] ;\n    ns2:value [ a ns1:DefinedTerm ;\n            ns1:identifier [ a ns1:PropertyValue ;\n                    ns1:propertyID \"bOQUqI\" ;\n                    ns1:url \"http://example.com/resource?foo=bar#fragment\" ;\n                    ns1:value \"dzkwRNhKqfDVhOu\" ] ;\n            ns1:inDefinedTermSet \"YYdmhomhxBnNBic\" ;\n            ns1:name \"aZrfr\" ;\n            ns1:termCode \"OgZwkLzhtqNSCcvMYKT\" ] .\n\n",
+          "code": "@prefix ns1: <dqv:> .\n@prefix schema1: <http://schema.org/> .\n\n[] a ns1:QualityMeasurement ;\n    ns1:isMeasurementOf [ a schema1:DefinedTerm ;\n            schema1:identifier \"qMsuTaeO\" ;\n            schema1:inDefinedTermSet \"GCjNHSplcIDSd\" ;\n            schema1:name \"LBp\" ;\n            schema1:termCode \"kVavhujDLioBbZc\" ] ;\n    ns1:value [ a schema1:DefinedTerm ;\n            schema1:identifier [ a schema1:PropertyValue ;\n                    schema1:propertyID \"bOQUqI\" ;\n                    schema1:url \"http://example.com/resource?foo=bar#fragment\" ;\n                    schema1:value \"dzkwRNhKqfDVhOu\" ] ;\n            schema1:inDefinedTermSet \"YYdmhomhxBnNBic\" ;\n            schema1:name \"aZrfr\" ;\n            schema1:termCode \"OgZwkLzhtqNSCcvMYKT\" ] .\n\n",
           "url": "https://usgin.github.io/metadataBuildingBlocks/build/tests/bbr/metadata/qualityProperties/qualityMeasure/example_1_1.ttl"
         }
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: definitions for simple quality measure property\ntype: object\nproperties:\n  '@type':\n    const: dqv:QualityMeasurement\n  dqv:isMeasurementOf:\n    description: specify the quality measure that is reported, by name, with an ID\n      ref, or as a Defined Term\n    anyOf:\n    - type: string\n    - type: object\n      properties:\n        '@id':\n          type: string\n          description: a resolvable reference to a representation of a quality measure\n    - $ref: '#/$defs/DefinedTerm'\n  dqv:value:\n    description: the reported result of the quality measure, either as a string or\n      a defined term from a vocabulary\n    anyOf:\n    - type: string\n    - $ref: '#/$defs/DefinedTerm'\nrequired:\n- dqv:isMeasurementOf\n- dqv:value\n$defs:\n  DefinedTerm:\n    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml\nx-jsonld-extra-terms:\n  schema: https://schema.org\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ntitle: definitions for simple quality measure property\ntype: object\nproperties:\n  '@type':\n    const: dqv:QualityMeasurement\n  dqv:isMeasurementOf:\n    description: specify the quality measure that is reported, by name, with an ID\n      ref, or as a Defined Term\n    anyOf:\n    - type: string\n    - type: object\n      properties:\n        '@id':\n          type: string\n          description: a resolvable reference to a representation of a quality measure\n    - $ref: '#/$defs/DefinedTerm'\n  dqv:value:\n    description: the reported result of the quality measure, either as a string or\n      a defined term from a vocabulary\n    anyOf:\n    - type: string\n    - $ref: '#/$defs/DefinedTerm'\nrequired:\n- dqv:isMeasurementOf\n- dqv:value\n$defs:\n  DefinedTerm:\n    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n",
   "gitRepository": "https://github.com/usgin/metadataBuildingBlocks",
   "gitPath": "_sources/qualityProperties/qualityMeasure"
 }

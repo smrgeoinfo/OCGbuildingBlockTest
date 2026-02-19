@@ -207,18 +207,13 @@ Example sample documentation, for use in XAS profile, use as value for schema:Ma
 ex:exampleSampel_357h a schema1:Product,
         schema1:Thing ;
     schema1:additionalProperty [ a schema1:PropertyValue ;
-            schema1:name "Parent sample" ;
-            schema1:propertyID "xas:parentSample" ;
-            schema1:value "igsn:10.3476/342573" ],
+            schema1:name "crystal unit cell" ;
+            schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
+            schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
         [ a schema1:PropertyValue ;
-            schema1:name "samplePreparation" ;
-            schema1:propertyID "xas:samplePreparation" ;
-            schema1:value "powder on tape, 6 layers" ],
-        [ a schema1:PropertyValue ;
-            schema1:name "sample mass" ;
-            schema1:propertyID "nxs:Field/NXsample/mass" ;
-            schema1:unitText "mg" ;
-            schema1:value "10" ],
+            schema1:name "crystal point group" ;
+            schema1:propertyID "nxs:Field/NXsample/point_group" ;
+            schema1:value "mm2" ],
         [ a schema1:PropertyValue ;
             schema1:name "sample material state" ;
             schema1:propertyID "xas:materialState" ;
@@ -229,17 +224,22 @@ ex:exampleSampel_357h a schema1:Product,
             schema1:unitText "percent" ;
             schema1:value "27" ],
         [ a schema1:PropertyValue ;
+            schema1:name "Parent sample" ;
+            schema1:propertyID "xas:parentSample" ;
+            schema1:value "igsn:10.3476/342573" ],
+        [ a schema1:PropertyValue ;
             schema1:name "stoichiometry" ;
             schema1:propertyID "xas:stoichiometry" ;
             schema1:value "Na2SeO4" ],
         [ a schema1:PropertyValue ;
-            schema1:name "crystal point group" ;
-            schema1:propertyID "nxs:Field/NXsample/point_group" ;
-            schema1:value "mm2" ],
+            schema1:name "sample mass" ;
+            schema1:propertyID "nxs:Field/NXsample/mass" ;
+            schema1:unitText "mg" ;
+            schema1:value "10" ],
         [ a schema1:PropertyValue ;
-            schema1:name "crystal unit cell" ;
-            schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
-            schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ] ;
+            schema1:name "samplePreparation" ;
+            schema1:propertyID "xas:samplePreparation" ;
+            schema1:value "powder on tape, 6 layers" ] ;
     schema1:additionalType "MaterialSample",
         "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample",
         "https://www.wikidata.org/wiki/Q485146" ;
@@ -322,8 +322,8 @@ $defs:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/identifier/schema.yaml
   AdditionalProperty:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/additionalProperty/schema.yaml
-x-jsonld-extra-terms:
-  schema: https://schema.org
+x-jsonld-prefixes:
+  schema: http://schema.org/
 
 ```
 
@@ -338,7 +338,7 @@ Links to the schema:
 ```jsonld
 {
   "@context": {
-    "schema": "https://schema.org",
+    "schema": "http://schema.org/",
     "nxs": "http://purl.org/nexusformat/definitions/",
     "@version": 1.1
   }

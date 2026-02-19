@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "CDIF complete metadata schema",
+  "description": "JSON schema for JSON-LD documents that describe science datasets for the CDIF complete profile, combining discovery metadata with data description and archive distribution extensions. Extends CDIFDiscovery (cdifMandatory + cdifOptional including variableMeasured) with distribution constraints supporting single-file DataDownloads with optional tabular/dataCube data description, archive distributions with hasPart component files, and WebAPI distributions with potentialAction result data description.",
+  "allOf": [
+    {
+      "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/profiles/cdifProfiles/CDIFDiscovery/schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema:distribution": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.json"
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.json"
+                      },
+                      {
+                        "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.json"
+                      },
+                      {}
+                    ]
+                  }
+                ]
+              },
+              {
+                "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifArchiveDistribution/schema.json"
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/webAPI/schema.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "schema:potentialAction": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "schema:result": {
+                              "allOf": [
+                                {
+                                  "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/dataDownload/schema.json"
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifDataCube/schema.json"
+                                    },
+                                    {
+                                      "$ref": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifTabularData/schema.json"
+                                    },
+                                    {}
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "x-jsonld-prefixes": {
+    "schema": "http://schema.org/",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "time": "http://www.w3.org/2006/time#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "csvw": "http://www.w3.org/ns/csvw#"
+  }
+}

@@ -368,8 +368,14 @@ $defs:
       an implementation of the structure specified in the object type field
     properties:
       '@type':
-        type: string
-        default: schema:DataDownload
+        type: array
+        description: Type of result object. Typically schema:DataDownload, but may
+          include additional types.
+        items:
+          type: string
+        contains:
+          const: schema:DataDownload
+        minItems: 1
       schema:encodingFormat:
         type: array
         items:
