@@ -66,18 +66,7 @@ physical mappings.
     "schema:relatedLink": [
         {
             "@type": "schema:LinkRole",
-            "schema:linkRelationship": {
-                "@type": "schema:DefinedTerm",
-                "schema:name": "lfCzUaoftdtTPAhMnpC",
-                "schema:identifier": {
-                    "@type": "schema:PropertyValue",
-                    "schema:propertyID": "ex:clbbbIvyDUyHNcOtU",
-                    "schema:value": "igcJkZMJiKehgkPjMCp",
-                    "schema:url": "http://example.com/resource/igcJkZMJiKehgkPjMCp"
-                },
-                "schema:inDefinedTermSet": "iTNLfdJYKNbvy",
-                "schema:termCode": "EaApZcUMYjOM"
-            },
+            "schema:linkRelationship": "lfCzUaoftdtTPAhMnpC",
             "target": {
                 "@type": "schema:EntryPoint",
                 "schema:encodingFormat": "gompgHAN",
@@ -87,18 +76,7 @@ physical mappings.
         },
         {
             "@type": "schema:LinkRole",
-            "schema:linkRelationship": {
-                "@type": "schema:DefinedTerm",
-                "schema:name": "BOoRREnpDEUrdNaV",
-                "schema:identifier": {
-                    "@type": "schema:PropertyValue",
-                    "schema:propertyID": "ex:lkjkRF",
-                    "schema:value": "OuJNu",
-                    "schema:url": "http://example.com/resource?foo=bar#fragment"
-                },
-                "schema:inDefinedTermSet": "OrtR",
-                "schema:termCode": "quWbxnaFyB"
-            },
+            "schema:linkRelationship": "BOoRREnpDEUrdNaV",
             "target": {
                 "@type": "schema:EntryPoint",
                 "schema:encodingFormat": "FNoslhw",
@@ -180,7 +158,11 @@ physical mappings.
                     "ex:IgH"
                 ]
             },
-            {"@id": "ex:jP"}
+            {
+                "@id": "ex:jP",
+                "@type": "schema:Person",
+                "schema:name": "Doe, Jane"
+            }
         ]
     },
     "schema:contributor": [
@@ -234,8 +216,16 @@ physical mappings.
         "schema:sameAs": ["Wildcats"]
     },
     "schema:provider": [
-        {"@id": "ex:gDiAxjl"},
-        {"@id": "ex:ihjJtFPNEKnGSFBcgS"},
+        {
+            "@id": "ex:gDiAxjl",
+            "@type": "schema:Organization",
+            "schema:name": "Example Data Center"
+        },
+        {
+            "@id": "ex:ihjJtFPNEKnGSFBcgS",
+            "@type": "schema:Person",
+            "schema:name": "Smith, Robert"
+        },
         {
             "@id": "https://ada.org/person/5489",
             "@type": "schema:Person",
@@ -250,34 +240,19 @@ physical mappings.
     "schema:funding": [
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": {
-                "@type": "schema:PropertyValue",
-                "schema:propertyID": "rzWiEbKxAiYPBQlfJ",
-                "schema:value": "lieopgXuumP",
-                "schema:url": "http://example.com/resource?foo=bar#fragment"
-            },
+            "schema:identifier": "lieopgXuumP",
             "schema:name": "fhhbzh",
             "schema:funder": {"@id": "https://ror.org/3572wjht"}
         },
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": {
-                "@type": "schema:PropertyValue",
-                "schema:propertyID": "Grant identifier",
-                "schema:value": "fMuiBjneudpV",
-                "schema:url": "http://example.com/resource?foo=bar#fragment"
-            },
+            "schema:identifier": "fMuiBjneudpV",
             "schema:name": "MWoPQAqRYHobey",
             "schema:funder": {"@id": "https://ror.org/fnjrj68"}
         },
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": {
-                "@type": "schema:PropertyValue",
-                "schema:propertyID": "HmJzdEZIaqUSLLte",
-                "schema:value": "LZpo",
-                "schema:url": "http://example.com/resource?foo=bar#fragment"
-            },
+            "schema:identifier": "LZpo",
             "schema:name": "ekckpBtI",
             "schema:funder": {"@id": "https://ror.org/sejer4w6u8"}
         }
@@ -355,7 +330,11 @@ physical mappings.
                         "schema:url": "http://example.com/resource/WPfhCJyxiDcwgdHMemJd"
                     }
                 },
-                {"@id": "ex:sr68lgy"}
+                {
+                    "@id": "ex:sr68lgy",
+                    "@type": "schema:Organization",
+                    "schema:name": "Another Provider Org"
+                }
             ]
         },
         {
@@ -517,7 +496,7 @@ physical mappings.
     ],
     "schema:variableMeasured": [
         {
-            "@type": ["schema:PropertyValue"],
+            "@type": ["schema:PropertyValue", "cdi:InstanceVariable"],
             "@id": "ex:KJTFKurNFu",
             "schema:name": "RbMivCtraTmzms",
             "schema:description": "EcbPmKQnMCgWozw",
@@ -533,7 +512,7 @@ physical mappings.
             "schema:url": "http://example.com/resource?foo=bar#furlong"
         },
         {
-            "@type": ["schema:PropertyValue"],
+            "@type": ["schema:PropertyValue", "cdi:InstanceVariable"],
             "@id": "ex:OjHgIDO",
             "schema:name": "jzgZCegiTFYBSmsSh",
             "schema:description": "RGKBMBkScTTNQ",
@@ -674,18 +653,7 @@ physical mappings.
   "schema:relatedLink": [
     {
       "@type": "schema:LinkRole",
-      "schema:linkRelationship": {
-        "@type": "schema:DefinedTerm",
-        "schema:name": "lfCzUaoftdtTPAhMnpC",
-        "schema:identifier": {
-          "@type": "schema:PropertyValue",
-          "schema:propertyID": "ex:clbbbIvyDUyHNcOtU",
-          "schema:value": "igcJkZMJiKehgkPjMCp",
-          "schema:url": "http://example.com/resource/igcJkZMJiKehgkPjMCp"
-        },
-        "schema:inDefinedTermSet": "iTNLfdJYKNbvy",
-        "schema:termCode": "EaApZcUMYjOM"
-      },
+      "schema:linkRelationship": "lfCzUaoftdtTPAhMnpC",
       "target": {
         "@type": "schema:EntryPoint",
         "schema:encodingFormat": "gompgHAN",
@@ -695,18 +663,7 @@ physical mappings.
     },
     {
       "@type": "schema:LinkRole",
-      "schema:linkRelationship": {
-        "@type": "schema:DefinedTerm",
-        "schema:name": "BOoRREnpDEUrdNaV",
-        "schema:identifier": {
-          "@type": "schema:PropertyValue",
-          "schema:propertyID": "ex:lkjkRF",
-          "schema:value": "OuJNu",
-          "schema:url": "http://example.com/resource?foo=bar#fragment"
-        },
-        "schema:inDefinedTermSet": "OrtR",
-        "schema:termCode": "quWbxnaFyB"
-      },
+      "schema:linkRelationship": "BOoRREnpDEUrdNaV",
       "target": {
         "@type": "schema:EntryPoint",
         "schema:encodingFormat": "FNoslhw",
@@ -791,7 +748,9 @@ physical mappings.
         ]
       },
       {
-        "@id": "ex:jP"
+        "@id": "ex:jP",
+        "@type": "schema:Person",
+        "schema:name": "Doe, Jane"
       }
     ]
   },
@@ -851,10 +810,14 @@ physical mappings.
   },
   "schema:provider": [
     {
-      "@id": "ex:gDiAxjl"
+      "@id": "ex:gDiAxjl",
+      "@type": "schema:Organization",
+      "schema:name": "Example Data Center"
     },
     {
-      "@id": "ex:ihjJtFPNEKnGSFBcgS"
+      "@id": "ex:ihjJtFPNEKnGSFBcgS",
+      "@type": "schema:Person",
+      "schema:name": "Smith, Robert"
     },
     {
       "@id": "https://ada.org/person/5489",
@@ -870,12 +833,7 @@ physical mappings.
   "schema:funding": [
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": {
-        "@type": "schema:PropertyValue",
-        "schema:propertyID": "rzWiEbKxAiYPBQlfJ",
-        "schema:value": "lieopgXuumP",
-        "schema:url": "http://example.com/resource?foo=bar#fragment"
-      },
+      "schema:identifier": "lieopgXuumP",
       "schema:name": "fhhbzh",
       "schema:funder": {
         "@id": "https://ror.org/3572wjht"
@@ -883,12 +841,7 @@ physical mappings.
     },
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": {
-        "@type": "schema:PropertyValue",
-        "schema:propertyID": "Grant identifier",
-        "schema:value": "fMuiBjneudpV",
-        "schema:url": "http://example.com/resource?foo=bar#fragment"
-      },
+      "schema:identifier": "fMuiBjneudpV",
       "schema:name": "MWoPQAqRYHobey",
       "schema:funder": {
         "@id": "https://ror.org/fnjrj68"
@@ -896,12 +849,7 @@ physical mappings.
     },
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": {
-        "@type": "schema:PropertyValue",
-        "schema:propertyID": "HmJzdEZIaqUSLLte",
-        "schema:value": "LZpo",
-        "schema:url": "http://example.com/resource?foo=bar#fragment"
-      },
+      "schema:identifier": "LZpo",
       "schema:name": "ekckpBtI",
       "schema:funder": {
         "@id": "https://ror.org/sejer4w6u8"
@@ -990,7 +938,9 @@ physical mappings.
           }
         },
         {
-          "@id": "ex:sr68lgy"
+          "@id": "ex:sr68lgy",
+          "@type": "schema:Organization",
+          "schema:name": "Another Provider Org"
         }
       ]
     },
@@ -1187,7 +1137,8 @@ physical mappings.
   "schema:variableMeasured": [
     {
       "@type": [
-        "schema:PropertyValue"
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
       ],
       "@id": "ex:KJTFKurNFu",
       "schema:name": "RbMivCtraTmzms",
@@ -1205,7 +1156,8 @@ physical mappings.
     },
     {
       "@type": [
-        "schema:PropertyValue"
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
       ],
       "@id": "ex:OjHgIDO",
       "schema:name": "jzgZCegiTFYBSmsSh",
@@ -1357,6 +1309,13 @@ ex:YOPx a schema1:Dataset ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
     schema1:distribution [ a schema1:DataDownload ;
             schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "VwuIdrCrJSsrGATePg" ;
+            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
+            spdx:checksum [ spdx:algorithm "MD5" ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
             schema1:encodingFormat "kpZDvhyVo",
                 "sMUGwSqxWzJOYEb",
                 "tNdpXaJgDeWbFkNM" ;
@@ -1365,13 +1324,6 @@ ex:YOPx a schema1:Dataset ;
                 ex:sr68lgy ;
             spdx:checksum [ spdx:algorithm "j" ;
                     spdx:checksumValue "h" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "VwuIdrCrJSsrGATePg" ;
-            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
-            spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
         [ a schema1:WebAPI ;
             schema1:documentation [ a schema1:CreativeWork ;
                     schema1:name "OpenAPI specification for geochemistry data service" ;
@@ -1381,10 +1333,6 @@ ex:YOPx a schema1:Dataset ;
                     schema1:object [ a schema1:DataFeed ;
                             schema1:description "Geochemistry observations collection" ] ;
                     schema1:query-input [ a schema1:PropertyValueSpecification ;
-                            schema1:description "Maximum number of features to return (default 100)" ;
-                            schema1:valueName "limit" ;
-                            schema1:valueRequired false ],
-                        [ a schema1:PropertyValueSpecification ;
                             schema1:description "Response format: csv or geojson" ;
                             schema1:valueName "format" ;
                             schema1:valuePattern "csv|geojson" ;
@@ -1392,6 +1340,10 @@ ex:YOPx a schema1:Dataset ;
                         [ a schema1:PropertyValueSpecification ;
                             schema1:description "Starting index for pagination" ;
                             schema1:valueName "offset" ;
+                            schema1:valueRequired false ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:description "Maximum number of features to return (default 100)" ;
+                            schema1:valueName "limit" ;
                             schema1:valueRequired false ] ;
                     schema1:result [ a schema1:DataDownload ;
                             cdi:hasPhysicalMapping [ cdi:format "decimal" ;
@@ -1426,35 +1378,6 @@ ex:YOPx a schema1:Dataset ;
                     schema1:name "OGC API - Features" ;
                     schema1:termCode "ogcapi-features" ] ;
             schema1:termsOfService "Open access, no authentication required" ],
-        [ a cdi:TabularTextDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:decimalPositions 4 ;
-                    cdi:defaultValue "0.0" ;
-                    cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:OjHgIDO ;
-                    cdi:index 1 ;
-                    cdi:isRequired false ;
-                    cdi:nullSequence "-9999" ;
-                    cdi:physicalDataType "float64" ],
-                [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:nullSequence "NA" ;
-                    cdi:physicalDataType "float64" ] ;
-            cdi:isDelimited true ;
-            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "Geochemistry analysis results" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
-            csvw:commentPrefix "#" ;
-            csvw:delimiter "," ;
-            csvw:header true ;
-            csvw:headerRowCount 1 ;
-            csvw:quoteChar "\"" ;
-            csvw:skipBlankRows true ;
-            csvw:skipRows 0 ],
         [ a cdi:StructuredDataSet,
                 schema1:DataDownload ;
             cdi:hasPhysicalMapping [ cdi:decimalPositions 6 ;
@@ -1476,28 +1399,48 @@ ex:YOPx a schema1:Dataset ;
             schema1:encodingFormat "application/x-netcdf" ;
             schema1:name "Gridded measurement data cube" ;
             spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ] ;
+                    spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ],
+        [ a cdi:TabularTextDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:nullSequence "NA" ;
+                    cdi:physicalDataType "float64" ],
+                [ cdi:decimalPositions 4 ;
+                    cdi:defaultValue "0.0" ;
+                    cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:OjHgIDO ;
+                    cdi:index 1 ;
+                    cdi:isRequired false ;
+                    cdi:nullSequence "-9999" ;
+                    cdi:physicalDataType "float64" ] ;
+            cdi:isDelimited true ;
+            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "Geochemistry analysis results" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
+            csvw:commentPrefix "#" ;
+            csvw:delimiter "," ;
+            csvw:header true ;
+            csvw:headerRowCount 1 ;
+            csvw:quoteChar "\"" ;
+            csvw:skipBlankRows true ;
+            csvw:skipRows 0 ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/fnjrj68> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "Grant identifier" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "fMuiBjneudpV" ] ;
-            schema1:name "MWoPQAqRYHobey" ],
+            schema1:funder <https://ror.org/3572wjht> ;
+            schema1:identifier "lieopgXuumP" ;
+            schema1:name "fhhbzh" ],
         [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/sejer4w6u8> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "HmJzdEZIaqUSLLte" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "LZpo" ] ;
+            schema1:identifier "LZpo" ;
             schema1:name "ekckpBtI" ],
         [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/3572wjht> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "rzWiEbKxAiYPBQlfJ" ;
-                    schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                    schema1:value "lieopgXuumP" ] ;
-            schema1:name "fhhbzh" ] ;
+            schema1:funder <https://ror.org/fnjrj68> ;
+            schema1:identifier "fMuiBjneudpV" ;
+            schema1:name "MWoPQAqRYHobey" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
@@ -1527,23 +1470,9 @@ ex:YOPx a schema1:Dataset ;
     schema1:publisher ex:exampleOrg_fW ;
     schema1:publishingPrinciples "rxZsrPAbJrIGGgDVJ" ;
     schema1:relatedLink [ a schema1:LinkRole ;
-            schema1:linkRelationship [ a schema1:DefinedTerm ;
-                    schema1:identifier [ a schema1:PropertyValue ;
-                            schema1:propertyID "ex:lkjkRF" ;
-                            schema1:url "http://example.com/resource?foo=bar#fragment" ;
-                            schema1:value "OuJNu" ] ;
-                    schema1:inDefinedTermSet "OrtR" ;
-                    schema1:name "BOoRREnpDEUrdNaV" ;
-                    schema1:termCode "quWbxnaFyB" ] ],
+            schema1:linkRelationship "BOoRREnpDEUrdNaV" ],
         [ a schema1:LinkRole ;
-            schema1:linkRelationship [ a schema1:DefinedTerm ;
-                    schema1:identifier [ a schema1:PropertyValue ;
-                            schema1:propertyID "ex:clbbbIvyDUyHNcOtU" ;
-                            schema1:url "http://example.com/resource/igcJkZMJiKehgkPjMCp" ;
-                            schema1:value "igcJkZMJiKehgkPjMCp" ] ;
-                    schema1:inDefinedTermSet "iTNLfdJYKNbvy" ;
-                    schema1:name "lfCzUaoftdtTPAhMnpC" ;
-                    schema1:termCode "EaApZcUMYjOM" ] ] ;
+            schema1:linkRelationship "lfCzUaoftdtTPAhMnpC" ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
             schema1:value "urn:idorg:test:p45689" ] ;
     schema1:subjectOf ex:BAaR ;
@@ -1574,6 +1503,15 @@ ex:exampleOrg_fW a schema1:Organization ;
             schema1:value "03m2x1q45" ] ;
     schema1:name "University of Arizona" ;
     schema1:sameAs "Wildcats" .
+
+ex:gDiAxjl a schema1:Organization ;
+    schema1:name "Example Data Center" .
+
+ex:ihjJtFPNEKnGSFBcgS a schema1:Person ;
+    schema1:name "Smith, Robert" .
+
+ex:jP a schema1:Person ;
+    schema1:name "Doe, Jane" .
 
 ex:lIZkH a schema1:DataCatalog ;
     schema1:identifier [ a schema1:PropertyValue ;
@@ -1607,6 +1545,9 @@ ex:mxxInaV a schema1:Organization ;
     schema1:name "AEbcNvM" ;
     schema1:sameAs "ex:IgH",
         "ex:pMPylNhiMvfC" .
+
+ex:sr68lgy a schema1:Organization ;
+    schema1:name "Another Provider Org" .
 
 ex:xblzSwEYJKBPpkK a schema1:Organization ;
     schema1:additionalType "schema:GovernmentOrganization",
@@ -1642,7 +1583,8 @@ ex:PersonExample_zZc a schema1:Person ;
     schema1:sameAs "https://ark.org/46737",
         "uri:test:43737" .
 
-ex:KJTFKurNFu a schema1:PropertyValue ;
+ex:KJTFKurNFu a cdi:InstanceVariable,
+        schema1:PropertyValue ;
     schema1:description "EcbPmKQnMCgWozw" ;
     schema1:maxValue 98 ;
     schema1:measurementTechnique "some measurement technique" ;
@@ -1654,7 +1596,8 @@ ex:KJTFKurNFu a schema1:PropertyValue ;
     schema1:unitText "furlongs" ;
     schema1:url "http://example.com/resource?foo=bar#furlong" .
 
-ex:OjHgIDO a schema1:PropertyValue ;
+ex:OjHgIDO a cdi:InstanceVariable,
+        schema1:PropertyValue ;
     schema1:description "RGKBMBkScTTNQ" ;
     schema1:maxValue 74 ;
     schema1:measurementTechnique [ a schema1:DefinedTerm ;
