@@ -67,8 +67,15 @@
       "description": "specifies the serialization scheme (encoding format, information model) for expected representation of the data",
       "properties": {
         "@type": {
-          "type": "string",
-          "default": "schema:DataDownload"
+          "type": "array",
+          "description": "Type of result object. Typically schema:DataDownload, but may include additional types.",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "schema:DataDownload"
+          },
+          "minItems": 1
         },
         "schema:encodingFormat": {
           "type": "array",

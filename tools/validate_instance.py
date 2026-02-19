@@ -126,10 +126,20 @@ class SchemaRegistry:
         self.schema_root = schema_root / "_sources" / "profiles"
         self._cache: dict[str, dict] = {}
 
+    def _find_schema_path(self, profile_name: str) -> Path:
+        """Search subdirectories for the profile's resolvedSchema.json."""
+        for subdir in self.schema_root.iterdir():
+            if subdir.is_dir():
+                candidate = subdir / profile_name / "resolvedSchema.json"
+                if candidate.exists():
+                    return candidate
+        # Legacy flat layout fallback
+        return self.schema_root / profile_name / "resolvedSchema.json"
+
     def get(self, profile_name: str) -> Optional[dict]:
         if profile_name in self._cache:
             return self._cache[profile_name]
-        path = self.schema_root / profile_name / "resolvedSchema.json"
+        path = self._find_schema_path(profile_name)
         if not path.exists():
             return None
         with open(path, "r", encoding="utf-8") as f:
@@ -138,7 +148,7 @@ class SchemaRegistry:
         return schema
 
     def schema_path(self, profile_name: str) -> Path:
-        return self.schema_root / profile_name / "resolvedSchema.json"
+        return self._find_schema_path(profile_name)
 
 
 # ---------------------------------------------------------------------------

@@ -318,9 +318,9 @@ Recursively resolves ALL `$ref` references from modular YAML/JSON source schemas
 
 **Usage:**
 ```bash
-# Resolve a profile by name (looks in _sources/profiles/{name}/schema.yaml)
+# Resolve a profile by name (searches _sources/profiles/{adaProfiles,cdifProfiles}/{name}/)
 python tools/resolve_schema.py adaProduct
-python tools/resolve_schema.py adaEMPA --flatten-allof -o _sources/profiles/adaEMPA/resolvedSchema.json
+python tools/resolve_schema.py adaEMPA --flatten-allof -o _sources/profiles/adaProfiles/adaEMPA/resolvedSchema.json
 
 # Resolve an arbitrary schema file
 python tools/resolve_schema.py --file path/to/any/schema.yaml
@@ -328,11 +328,11 @@ python tools/resolve_schema.py --file path/to/any/schema.yaml
 # Resolve all profiles (list from generate_profiles.py + manual ones)
 for p in adaProduct adaEMPA adaICPMS adaVNMIR adaXRD CDIFDiscovery \
          $(python tools/generate_profiles.py --list | awk '{print $1}'); do
-  python tools/resolve_schema.py $p --flatten-allof -o _sources/profiles/$p/resolvedSchema.json
+  python tools/resolve_schema.py $p --flatten-allof
 done
 ```
 
-**CLI options:** `profile` (positional, profile name), `--file` (arbitrary schema path), `-o`/`--output` (output file, default: stdout), `--flatten-allof` (merge allOf entries into single objects).
+**CLI options:** `profile` (positional, profile name), `--file` (arbitrary schema path), `--all` (resolve all schemas with external refs), `-o`/`--output` (output file, default: stdout; ignored with --all), `--flatten-allof` (merge allOf entries into single objects).
 
 **Requirements:** Python 3.6+ with `pyyaml`
 
@@ -344,7 +344,7 @@ done
 
 ## convert_for_jsonforms.py
 
-Reads `resolvedSchema.json` (from `_sources/profiles/{name}/`) and converts to JSON Forms-compatible Draft 7:
+Reads `resolvedSchema.json` (from `_sources/profiles/{adaProfiles,cdifProfiles}/{name}/`) and converts to JSON Forms-compatible Draft 7:
 - Converts `$schema` from Draft 2020-12 to Draft 7
 - Simplifies `anyOf` patterns for form rendering (single-item anyOf unwrapped, duplicate removal)
 - Converts `contains` → `enum`, `const` → `default`
@@ -359,7 +359,7 @@ python tools/convert_for_jsonforms.py adaProduct -v
 python tools/convert_for_jsonforms.py --all -v
 ```
 
-**Output:** `build/jsonforms/profiles/{name}/schema.json`
+**Output:** `build/jsonforms/profiles/{adaProfiles,cdifProfiles}/{name}/schema.json`
 
 ## generate_profiles.py
 
@@ -377,14 +377,12 @@ python tools/generate_profiles.py adaSEM
 python tools/generate_profiles.py --list
 ```
 
-**Output per profile:** `_sources/profiles/{name}/` with `schema.yaml`, `bblock.json`, `context.jsonld`, `description.md`, `examples.yaml`.
+**Output per profile:** `_sources/profiles/adaProfiles/{name}/` with `schema.yaml`, `bblock.json`, `context.jsonld`, `description.md`, `examples.yaml`.
 
 **After generating**, resolve schemas and validate:
 ```bash
 # Resolve all generated profiles
-for p in $(python tools/generate_profiles.py --list | awk '{print $1}'); do
-  python tools/resolve_schema.py $p --flatten-allof -o _sources/profiles/$p/resolvedSchema.json
-done
+python tools/resolve_schema.py --all
 
 # Validate test metadata
 python tools/validate_instance.py --dir /path/to/testJSONMetadata --termcode-fallback --summary
@@ -397,7 +395,7 @@ python tools/validate_instance.py --dir /path/to/testJSONMetadata --termcode-fal
 
 ## augment_register.py
 
-Adds `resolvedSchema` URLs to `build/register.json` for each profile building block. Scans bblock identifiers for `.profiles.{name}` patterns and checks whether `_sources/profiles/{name}/resolvedSchema.json` exists. If so, adds the GitHub Pages URL as `bblock.resolvedSchema`.
+Adds `resolvedSchema` URLs to `build/register.json` for each profile building block. Scans bblock identifiers for `.profiles.{name}` patterns and checks whether `_sources/profiles/{adaProfiles,cdifProfiles}/{name}/resolvedSchema.json` exists. If so, adds the GitHub Pages URL as `bblock.resolvedSchema`.
 
 **Usage:**
 ```bash
@@ -437,7 +435,7 @@ push → "Validate and process Building Blocks" (OGC postprocessor)
 # Verify distribution has oneOf only (no conflicting anyOf)
 python -c "
 import json
-with open('_sources/profiles/adaProduct/resolvedSchema.json') as f:
+with open('_sources/profiles/adaProfiles/adaProduct/resolvedSchema.json') as f:
     s = json.load(f)
 items = s['properties']['schema:distribution']['items']
 assert 'oneOf' in items, 'Missing oneOf'

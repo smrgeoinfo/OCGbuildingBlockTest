@@ -345,23 +345,44 @@ def flatten_allof(schema: Any) -> Any:
 # Profile entry point resolution
 # ---------------------------------------------------------------------------
 
+def _find_profile_dir(name: str) -> Path:
+    """Find the profile directory by searching subdirectories of profiles/."""
+    profiles_root = SOURCES_DIR / "profiles"
+    # Search subdirectories (adaProfiles/, cdifProfiles/)
+    for subdir in profiles_root.iterdir():
+        if subdir.is_dir():
+            candidate = subdir / name
+            if candidate.is_dir():
+                return candidate
+    # Fall back to direct child (legacy flat layout)
+    direct = profiles_root / name
+    if direct.is_dir():
+        return direct
+    raise FileNotFoundError(f"Profile directory not found: {name}")
+
+
 def find_profile_schema(name: str) -> Path:
     """Find the schema entry point for a profile name."""
-    # Try _sources/profiles/{name}/schema.yaml first
-    yaml_path = SOURCES_DIR / "profiles" / name / "schema.yaml"
+    try:
+        profile_dir = _find_profile_dir(name)
+    except FileNotFoundError:
+        print(f"ERROR: Cannot find schema for profile '{name}'", file=sys.stderr)
+        print(f"  Looked in: {SOURCES_DIR / 'profiles'}", file=sys.stderr)
+        sys.exit(1)
+
+    # Try schema.yaml first
+    yaml_path = profile_dir / "schema.yaml"
     if yaml_path.exists():
         return yaml_path
 
     # Fall back to any .json file in the profile directory (e.g., CDIFDiscoverySchema.json)
-    profile_dir = SOURCES_DIR / "profiles" / name
-    if profile_dir.is_dir():
-        json_files = sorted(profile_dir.glob("*Schema.json"))
-        if json_files:
-            return json_files[0]
-        # Try any .json that isn't bblock.json or example files
-        for jf in sorted(profile_dir.glob("*.json")):
-            if jf.name not in ("bblock.json",) and "example" not in jf.name.lower():
-                return jf
+    json_files = sorted(profile_dir.glob("*Schema.json"))
+    if json_files:
+        return json_files[0]
+    # Try any .json that isn't bblock.json or example files
+    for jf in sorted(profile_dir.glob("*.json")):
+        if jf.name not in ("bblock.json",) and "example" not in jf.name.lower():
+            return jf
 
     print(f"ERROR: Cannot find schema for profile '{name}'", file=sys.stderr)
     print(f"  Looked in: {profile_dir}", file=sys.stderr)

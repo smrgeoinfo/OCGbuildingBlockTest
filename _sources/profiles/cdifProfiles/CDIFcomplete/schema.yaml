@@ -1,0 +1,41 @@
+---
+$schema: https://json-schema.org/draft/2020-12/schema
+type: object
+title: CDIF complete metadata schema
+description: 'JSON schema for JSON-LD documents that describe science datasets for the CDIF
+  complete profile, combining discovery metadata with data description and archive distribution
+  extensions. Extends CDIFDiscovery (cdifMandatory + cdifOptional including variableMeasured)
+  with distribution constraints supporting single-file DataDownloads with optional
+  tabular/dataCube data description, archive distributions with hasPart component files,
+  and WebAPI distributions with potentialAction result data description.'
+allOf:
+- $ref: ../CDIFDiscovery/schema.yaml
+- type: object
+  properties:
+    schema:distribution:
+      type: array
+      items:
+        anyOf:
+        - allOf:
+          - $ref: ../../../schemaorgProperties/dataDownload/schema.yaml
+          - anyOf:
+            - $ref: ../../../cdifProperties/cdifDataCube/schema.yaml
+            - $ref: ../../../cdifProperties/cdifTabularData/schema.yaml
+            - {}
+        - $ref: ../../../cdifProperties/cdifArchiveDistribution/schema.yaml
+        - allOf:
+          - $ref: ../../../schemaorgProperties/webAPI/schema.yaml
+          - type: object
+            properties:
+              schema:potentialAction:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    schema:result:
+                      allOf:
+                      - $ref: ../../../schemaorgProperties/dataDownload/schema.yaml
+                      - anyOf:
+                        - $ref: ../../../cdifProperties/cdifDataCube/schema.yaml
+                        - $ref: ../../../cdifProperties/cdifTabularData/schema.yaml
+                        - {}

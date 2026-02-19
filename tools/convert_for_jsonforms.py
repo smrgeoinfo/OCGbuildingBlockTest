@@ -37,6 +37,54 @@ RESOLVED_DIR = REPO_ROOT / "_sources" / "profiles"
 OUTPUT_DIR = REPO_ROOT / "build" / "jsonforms" / "profiles"
 SOURCES_DIR = REPO_ROOT / "_sources" / "jsonforms" / "profiles"
 
+# Subdirectory mapping for profile categories
+_PROFILE_SUBDIR = {
+    "ada": "adaProfiles",
+    "CDIF": "cdifProfiles",
+}
+
+
+def _profile_subdir(name: str) -> str:
+    """Return the subdirectory name for a profile (adaProfiles or cdifProfiles)."""
+    for prefix, subdir in _PROFILE_SUBDIR.items():
+        if name.startswith(prefix):
+            return subdir
+    return ""
+
+
+def _find_resolved_schema(name: str) -> Path:
+    """Find the resolvedSchema.json for a profile, searching subdirectories."""
+    subdir = _profile_subdir(name)
+    if subdir:
+        candidate = RESOLVED_DIR / subdir / name / "resolvedSchema.json"
+        if candidate.exists():
+            return candidate
+    # Fallback: search all subdirectories
+    for child in RESOLVED_DIR.iterdir():
+        if child.is_dir():
+            candidate = child / name / "resolvedSchema.json"
+            if candidate.exists():
+                return candidate
+    # Legacy flat layout fallback
+    return RESOLVED_DIR / name / "resolvedSchema.json"
+
+
+def _find_sources_dir(name: str) -> Path:
+    """Find the jsonforms sources directory for a profile."""
+    subdir = _profile_subdir(name)
+    if subdir:
+        candidate = SOURCES_DIR / subdir / name
+        if candidate.is_dir():
+            return candidate
+    # Fallback: search all subdirectories
+    for child in SOURCES_DIR.iterdir():
+        if child.is_dir():
+            candidate = child / name
+            if candidate.is_dir():
+                return candidate
+    # Legacy flat layout fallback
+    return SOURCES_DIR / name
+
 ADA_PROFILES = [
     "adaProduct", "adaEMPA", "adaXRD", "adaICPMS", "adaVNMIR",
     "adaAIVA", "adaAMS", "adaARGT", "adaDSC", "adaEAIRMS",
@@ -1334,7 +1382,7 @@ def convert_profile_schema(
     Input:  _sources/profiles/{profile}/resolvedSchema.json
     Output: Fully simplified schema with no $ref, no $defs, Draft 7 compatible.
     """
-    schema_path = RESOLVED_DIR / profile_name / "resolvedSchema.json"
+    schema_path = _find_resolved_schema(profile_name)
 
     if not schema_path.exists():
         print(f"ERROR: Schema not found: {schema_path}", file=sys.stderr)
@@ -1405,16 +1453,19 @@ def main():
 
     for profile in profiles:
         schema = convert_profile_schema(profile, args.verbose)
-        output_path = OUTPUT_DIR / profile / "schema.json"
+        subdir = _profile_subdir(profile)
+        output_path = OUTPUT_DIR / subdir / profile / "schema.json" if subdir else OUTPUT_DIR / profile / "schema.json"
         save_json(schema, output_path)
         if args.verbose:
             print(f"  -> {output_path}", file=sys.stderr)
 
         # Copy uischema.json and defaults.json from _sources/ to build/
+        src_dir = _find_sources_dir(profile)
         for static_file in ("uischema.json", "defaults.json"):
-            src = SOURCES_DIR / profile / static_file
-            dst = OUTPUT_DIR / profile / static_file
+            src = src_dir / static_file
+            dst = output_path.parent / static_file
             if src.exists():
+                dst.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(str(src), str(dst))
                 if args.verbose:
                     print(f"  -> {dst} (copied from _sources)", file=sys.stderr)

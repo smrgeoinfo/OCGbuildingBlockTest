@@ -20,14 +20,11 @@ schema.yaml → resolve_schema.py → resolvedSchema.json → convert_for_jsonfo
 Recursively resolves all `$ref` references from modular YAML/JSON source schemas into one fully-inlined JSON Schema. Handles relative paths, fragment-only refs (`#/$defs/X`), cross-file fragments, and both YAML/JSON extensions. Optionally flattens `allOf` entries.
 
 ```bash
-# Resolve a profile by name
-python tools/resolve_schema.py adaProduct --flatten-allof -o _sources/profiles/adaProduct/resolvedSchema.json
+# Resolve a profile by name (searches adaProfiles/ and cdifProfiles/ subdirectories)
+python tools/resolve_schema.py adaProduct
 
-# Resolve all profiles (original + generated)
-for p in adaProduct adaEMPA adaICPMS adaVNMIR adaXRD CDIFDiscovery \
-         $(python tools/generate_profiles.py --list | awk '{print $1}'); do
-  python tools/resolve_schema.py $p --flatten-allof -o _sources/profiles/$p/resolvedSchema.json
-done
+# Resolve all building blocks with external $refs
+python tools/resolve_schema.py --all
 
 # Resolve an arbitrary schema file
 python tools/resolve_schema.py --file path/to/any/schema.yaml
@@ -64,7 +61,9 @@ python tools/augment_register.py
 
 The `generate-jsonforms` workflow runs this automatically after schema conversion.
 
-## Profiles (38 total)
+## Profiles (40 total)
+
+Profiles are organized into subdirectories: `_sources/profiles/adaProfiles/` (36 ADA profiles) and `_sources/profiles/cdifProfiles/` (4 CDIF profiles).
 
 | Profile | Description |
 |---|---|

@@ -1,0 +1,474 @@
+{
+    "@context": {
+        "schema": "http://schema.org/",
+        "dcterms": "http://purl.org/dc/terms/",
+        "geosparql": "http://www.opengis.net/ont/geosparql#",
+        "spdx": "http://spdx.org/rdf/terms#",
+        "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+        "csvw": "http://www.w3.org/ns/csvw#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "ex": "https://example.org/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@id": "ex:complete-dataset-001",
+    "@type": ["schema:Dataset"],
+    "schema:name": "Multi-technique geochemistry dataset with archive and API access",
+    "schema:description": "Comprehensive geochemistry dataset demonstrating the CDIF complete profile with single-file downloads, archive distribution with component files, and WebAPI access. Includes tabular CSV results, NetCDF data cubes, and an OGC API Features endpoint.",
+    "schema:additionalType": ["geochemistry analysis"],
+    "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "https://registry.identifiers.org/registry/doi",
+        "schema:value": "10.5880/example.complete.001",
+        "schema:url": "https://doi.org/10.5880/example.complete.001"
+    },
+    "schema:sameAs": [
+        {
+            "@type": "schema:PropertyValue",
+            "schema:value": "urn:example:geochem:complete-001"
+        }
+    ],
+    "schema:version": "1.0",
+    "schema:url": "https://example.org/datasets/complete-001",
+    "schema:inLanguage": "en",
+    "schema:dateModified": "2026-02-15",
+    "schema:datePublished": "2026-02-01",
+    "schema:license": ["https://creativecommons.org/licenses/by/4.0/"],
+    "schema:conditionsOfAccess": ["Open access; citation required"],
+    "schema:keywords": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "geochemistry",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "https://vocabularyserver.com/keyword",
+                "schema:value": "geochem-001",
+                "schema:url": "https://vocabularyserver.com/keyword/geochem-001"
+            },
+            "schema:inDefinedTermSet": "https://vocabularyserver.com/keyword",
+            "schema:termCode": "GEOCHEM"
+        },
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "spectral analysis",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "https://vocabularyserver.com/keyword",
+                "schema:value": "spectral-001",
+                "schema:url": "https://vocabularyserver.com/keyword/spectral-001"
+            },
+            "schema:inDefinedTermSet": "https://vocabularyserver.com/keyword",
+            "schema:termCode": "SPECTRAL"
+        }
+    ],
+    "schema:creator": {
+        "@list": [
+            {
+                "@id": "https://orcid.org/0000-0001-2345-6789",
+                "@type": "schema:Person",
+                "schema:name": "Smith, Jane",
+                "schema:alternateName": "J. Smith",
+                "schema:affiliation": {
+                    "@id": "https://ror.org/03m2x1q45",
+                    "@type": "schema:Organization",
+                    "schema:name": "University of Arizona"
+                },
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "jsmith@arizona.edu"
+                },
+                "schema:identifier": {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "https://orcid.org",
+                    "schema:value": "0000-0001-2345-6789",
+                    "schema:url": "https://orcid.org/0000-0001-2345-6789"
+                }
+            }
+        ]
+    },
+    "schema:publisher": {
+        "@id": "ex:ieda-publisher",
+        "@type": "schema:Organization",
+        "schema:name": "IEDA",
+        "schema:alternateName": "Interdisciplinary Earth Data Alliance",
+        "schema:identifier": {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "https://registry.identifiers.org/registry/ror",
+            "schema:value": "02fjgr047",
+            "schema:url": "https://ror.org/02fjgr047"
+        }
+    },
+    "schema:funding": [
+        {
+            "@type": "schema:MonetaryGrant",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "NSF award number",
+                "schema:value": "EAR-2026932",
+                "schema:url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=2026932"
+            },
+            "schema:name": "Geochemistry Data Infrastructure",
+            "schema:funder": {"@id": "https://ror.org/021nxhr62"}
+        }
+    ],
+    "schema:distribution": [
+        {
+            "@type": ["schema:DataDownload"],
+            "schema:name": "Geochemistry summary results",
+            "schema:contentUrl": "https://example.org/data/geochem-summary.csv",
+            "schema:encodingFormat": ["text/csv"],
+            "spdx:checksum": {
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+            }
+        },
+        {
+            "@type": ["schema:DataDownload", "cdi:TabularTextDataSet"],
+            "schema:name": "Detailed geochemistry analysis results",
+            "schema:contentUrl": "https://example.org/data/geochem-detailed.csv",
+            "schema:encodingFormat": ["text/csv"],
+            "spdx:checksum": {
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3"
+            },
+            "cdi:isDelimited": true,
+            "csvw:delimiter": ",",
+            "csvw:header": true,
+            "csvw:headerRowCount": 1,
+            "countRows": 461,
+            "countColumns": 3,
+            "cdi:hasPhysicalMapping": [
+                {
+                    "cdi:index": 0,
+                    "cdi:format": "string",
+                    "cdi:physicalDataType": "string",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "ex:var-sampleID"}
+                },
+                {
+                    "cdi:index": 1,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float64",
+                    "cdi:nullSequence": "NA",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "ex:var-concentration"}
+                },
+                {
+                    "cdi:index": 2,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float64",
+                    "cdi:nullSequence": "-9999",
+                    "cdi:isRequired": false,
+                    "cdi:formats_InstanceVariable": {"@id": "ex:var-uncertainty"}
+                }
+            ]
+        },
+        {
+            "@type": ["schema:DataDownload", "cdi:StructuredDataSet"],
+            "schema:name": "Spectral data cube",
+            "schema:contentUrl": "https://example.org/data/spectra-cube.nc",
+            "schema:encodingFormat": ["application/x-netcdf"],
+            "spdx:checksum": {
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+            },
+            "cdi:hasPhysicalMapping": [
+                {
+                    "cdi:index": 0,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float32",
+                    "cdi:locator": "/spectra/wavelength",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "ex:var-wavelength"}
+                },
+                {
+                    "cdi:index": 1,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float32",
+                    "cdi:locator": "/spectra/intensity",
+                    "cdi:scale": 1000,
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "ex:var-intensity"}
+                }
+            ]
+        },
+        {
+            "@type": ["schema:DataDownload"],
+            "schema:name": "Complete data package",
+            "schema:contentUrl": "https://example.org/data/geochem-package.zip",
+            "schema:encodingFormat": ["application/zip"],
+            "schema:description": "Archive containing all data files. Component files are listed as parts and are not individually accessible.",
+            "spdx:checksum": {
+                "spdx:algorithm": "SHA256",
+                "spdx:checksumValue": "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5"
+            },
+            "schema:hasPart": [
+                {
+                    "@type": ["schema:MediaObject"],
+                    "@id": "#part-results-csv",
+                    "schema:name": "geochem-detailed.csv",
+                    "schema:description": "Detailed geochemistry analysis results in tabular format.",
+                    "schema:encodingFormat": ["text/csv"],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 10860,
+                        "schema:unitText": "byte"
+                    },
+                    "spdx:checksum": {
+                        "spdx:algorithm": "SHA256",
+                        "spdx:checksumValue": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3"
+                    }
+                },
+                {
+                    "@type": ["schema:MediaObject", "cdi:TabularTextDataSet"],
+                    "@id": "#part-measurements-csv",
+                    "schema:name": "geochem-measurements.csv",
+                    "schema:description": "Measurement data with column structure described via CSVW and physical mappings.",
+                    "schema:encodingFormat": ["text/csv"],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 6249,
+                        "schema:unitText": "byte"
+                    },
+                    "cdi:isDelimited": true,
+                    "csvw:delimiter": ",",
+                    "csvw:header": true,
+                    "csvw:headerRowCount": 1,
+                    "countRows": 144,
+                    "countColumns": 3,
+                    "cdi:hasPhysicalMapping": [
+                        {
+                            "cdi:index": 0,
+                            "cdi:format": "string",
+                            "cdi:physicalDataType": "string",
+                            "cdi:isRequired": true
+                        },
+                        {
+                            "cdi:index": 1,
+                            "cdi:format": "decimal",
+                            "cdi:physicalDataType": "float64",
+                            "cdi:nullSequence": "NA",
+                            "cdi:isRequired": true
+                        },
+                        {
+                            "cdi:index": 2,
+                            "cdi:format": "decimal",
+                            "cdi:physicalDataType": "float64",
+                            "cdi:nullSequence": "NA",
+                            "cdi:isRequired": false
+                        }
+                    ]
+                },
+                {
+                    "@type": ["schema:MediaObject", "cdi:StructuredDataSet"],
+                    "@id": "#part-spectra-nc",
+                    "schema:name": "spectra-cube.nc",
+                    "schema:description": "Spectral data cube with wavelength and intensity dimensions.",
+                    "schema:encodingFormat": ["application/x-netcdf"],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 13743003,
+                        "schema:unitText": "byte"
+                    },
+                    "cdi:hasPhysicalMapping": [
+                        {
+                            "cdi:index": 0,
+                            "cdi:format": "decimal",
+                            "cdi:physicalDataType": "float32",
+                            "cdi:locator": "/spectra/wavelength",
+                            "cdi:isRequired": true
+                        },
+                        {
+                            "cdi:index": 1,
+                            "cdi:format": "decimal",
+                            "cdi:physicalDataType": "float32",
+                            "cdi:locator": "/spectra/intensity",
+                            "cdi:isRequired": true
+                        }
+                    ]
+                },
+                {
+                    "@type": ["schema:MediaObject"],
+                    "@id": "#part-method-pdf",
+                    "schema:name": "analysis-method.pdf",
+                    "schema:description": "Method description document for the analysis.",
+                    "schema:encodingFormat": ["application/pdf"],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 56062,
+                        "schema:unitText": "byte"
+                    }
+                },
+                {
+                    "@type": ["schema:MediaObject"],
+                    "@id": "#part-metadata-yaml",
+                    "schema:name": "geochem-detailed-metadata.yaml",
+                    "schema:description": "Metadata sidecar for the results CSV file.",
+                    "schema:encodingFormat": ["application/yaml"],
+                    "schema:size": {
+                        "@type": "schema:QuantitativeValue",
+                        "schema:value": 2281,
+                        "schema:unitText": "byte"
+                    },
+                    "schema:about": [{"@id": "#part-results-csv"}]
+                }
+            ]
+        },
+        {
+            "@type": ["schema:WebAPI"],
+            "schema:serviceType": {
+                "@type": "schema:DefinedTerm",
+                "schema:name": "OGC API - Features",
+                "schema:identifier": {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "https://www.ogc.org/standards",
+                    "schema:value": "ogcapi-features-1",
+                    "schema:url": "https://www.ogc.org/standard/ogcapi-features/"
+                },
+                "schema:inDefinedTermSet": "https://www.ogc.org/standards",
+                "schema:termCode": "ogcapi-features"
+            },
+            "schema:termsOfService": "Open access, no authentication required",
+            "schema:documentation": {
+                "@type": "schema:CreativeWork",
+                "schema:name": "OpenAPI specification for geochemistry data service",
+                "schema:url": "https://example.org/api/v1/openapi.json"
+            },
+            "schema:potentialAction": [
+                {
+                    "@type": "schema:Action",
+                    "schema:name": "Query geochemistry features",
+                    "schema:target": {
+                        "@type": "schema:EntryPoint",
+                        "schema:description": "OGC API Features endpoint returning geochemistry observations as CSV",
+                        "schema:urlTemplate": "https://example.org/api/v1/collections/geochem/items?f={format}&limit={limit}&offset={offset}",
+                        "schema:httpMethod": ["GET"],
+                        "schema:contentType": ["text/csv", "application/geo+json"]
+                    },
+                    "schema:result": {
+                        "@type": ["schema:DataDownload"],
+                        "schema:name": "Geochemistry query results",
+                        "schema:contentUrl": "https://example.org/api/v1/collections/geochem/items?f=csv",
+                        "schema:encodingFormat": ["text/csv"],
+                        "cdi:isDelimited": true,
+                        "csvw:delimiter": ",",
+                        "csvw:header": true,
+                        "csvw:headerRowCount": 1,
+                        "cdi:hasPhysicalMapping": [
+                            {
+                                "cdi:index": 0,
+                                "cdi:format": "decimal",
+                                "cdi:physicalDataType": "float64",
+                                "cdi:isRequired": true,
+                                "cdi:formats_InstanceVariable": {"@id": "ex:var-concentration"}
+                            },
+                            {
+                                "cdi:index": 1,
+                                "cdi:format": "decimal",
+                                "cdi:physicalDataType": "float64",
+                                "cdi:isRequired": false,
+                                "cdi:formats_InstanceVariable": {"@id": "ex:var-uncertainty"}
+                            }
+                        ]
+                    },
+                    "schema:object": {
+                        "@type": "schema:DataFeed",
+                        "schema:description": "Geochemistry observations collection"
+                    },
+                    "schema:query-input": [
+                        {
+                            "@type": "schema:PropertyValueSpecification",
+                            "schema:valueName": "format",
+                            "schema:description": "Response format: csv or geojson",
+                            "schema:valueRequired": false,
+                            "schema:valuePattern": "csv|geojson"
+                        },
+                        {
+                            "@type": "schema:PropertyValueSpecification",
+                            "schema:valueName": "limit",
+                            "schema:description": "Maximum number of features to return",
+                            "schema:valueRequired": false
+                        },
+                        {
+                            "@type": "schema:PropertyValueSpecification",
+                            "schema:valueName": "offset",
+                            "schema:description": "Starting index for pagination",
+                            "schema:valueRequired": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "schema:variableMeasured": [
+        {
+            "@type": ["schema:PropertyValue"],
+            "@id": "ex:var-sampleID",
+            "schema:name": "Sample identifier",
+            "schema:description": "Unique identifier for each sample",
+            "schema:propertyID": ["urn:example:property:sampleID"]
+        },
+        {
+            "@type": ["schema:PropertyValue"],
+            "@id": "ex:var-concentration",
+            "schema:name": "Element concentration",
+            "schema:description": "Measured element concentration in parts per million",
+            "schema:propertyID": ["urn:example:property:concentration"],
+            "schema:measurementTechnique": "ICP-MS",
+            "schema:unitText": "ppm",
+            "schema:unitCode": "59",
+            "schema:minValue": 0.01,
+            "schema:maxValue": 5000
+        },
+        {
+            "@type": ["schema:PropertyValue"],
+            "@id": "ex:var-uncertainty",
+            "schema:name": "Measurement uncertainty",
+            "schema:description": "2-sigma uncertainty on concentration measurement",
+            "schema:propertyID": ["urn:example:property:uncertainty"],
+            "schema:unitText": "ppm",
+            "schema:unitCode": "59"
+        },
+        {
+            "@type": ["schema:PropertyValue"],
+            "@id": "ex:var-wavelength",
+            "schema:name": "Wavelength",
+            "schema:description": "Spectral wavelength",
+            "schema:propertyID": ["urn:example:property:wavelength"],
+            "schema:unitText": "nm",
+            "schema:minValue": 200,
+            "schema:maxValue": 2500
+        },
+        {
+            "@type": ["schema:PropertyValue"],
+            "@id": "ex:var-intensity",
+            "schema:name": "Spectral intensity",
+            "schema:description": "Measured spectral intensity",
+            "schema:propertyID": ["urn:example:property:intensity"],
+            "schema:unitText": "counts"
+        }
+    ],
+    "schema:subjectOf": {
+        "@type": "schema:Dataset",
+        "@id": "ex:metadata-record-001",
+        "schema:about": {"@id": "ex:complete-dataset-001"},
+        "dcterms:conformsTo": [
+            {"@id": "https://example.org/profiles/CDIFcomplete/v0.1"}
+        ],
+        "schema:maintainer": {
+            "@id": "https://orcid.org/0000-0001-2345-6789",
+            "@type": "schema:Person",
+            "schema:name": "Smith, Jane",
+            "schema:contactPoint": {
+                "@type": "schema:ContactPoint",
+                "schema:email": "jsmith@arizona.edu"
+            }
+        },
+        "schema:sdDatePublished": "2026-02-19",
+        "schema:includedInDataCatalog": {
+            "@id": "ex:ieda-catalog",
+            "@type": "schema:DataCatalog",
+            "schema:name": "IEDA Data Catalog",
+            "schema:url": "https://www.earthchem.org/"
+        }
+    }
+}

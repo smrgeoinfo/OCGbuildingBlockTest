@@ -853,7 +853,7 @@ def _generate_examples_yaml(cfg: dict) -> str:
 
 def generate_profile(name: str, cfg: dict, base_dir: Path) -> None:
     """Generate all files for a single profile."""
-    profile_dir = base_dir / "_sources" / "profiles" / name
+    profile_dir = base_dir / "_sources" / "profiles" / "adaProfiles" / name
     profile_dir.mkdir(parents=True, exist_ok=True)
 
     files = {
@@ -914,7 +914,7 @@ def main():
     else:
         to_generate = PROFILES
 
-    print(f"Generating {len(to_generate)} profile(s) in {base_dir}/_sources/profiles/")
+    print(f"Generating {len(to_generate)} profile(s) in {base_dir}/_sources/profiles/adaProfiles/")
     for name, cfg in sorted(to_generate.items()):
         generate_profile(name, cfg, base_dir)
     print("Done.")

@@ -1,0 +1,64 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "title": "CDIF complete metadata schema",
+    "description": "JSON schema for JSON-LD documents that describe science datasets for the CDIF complete profile, combining discovery metadata with data description and archive distribution extensions. Extends CDIFDiscovery (cdifMandatory + cdifOptional including variableMeasured) with distribution constraints supporting single-file DataDownloads with optional tabular/dataCube data description, archive distributions with hasPart component files, and WebAPI distributions with potentialAction result data description.",
+    "allOf": [
+        {"$ref": "../CDIFDiscovery/CDIFDiscoverySchema.json"},
+        {
+            "type": "object",
+            "properties": {
+                "schema:distribution": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {"$ref": "../../../schemaorgProperties/dataDownload/dataDownloadSchema.json"},
+                                    {
+                                        "anyOf": [
+                                            {"$ref": "../../../cdifProperties/cdifDataCube/cdifDataCubeSchema.json"},
+                                            {"$ref": "../../../cdifProperties/cdifTabularData/cdifTabularDataSchema.json"},
+                                            {}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {"$ref": "../../../cdifProperties/cdifArchiveDistribution/cdifArchiveDistributionSchema.json"},
+                            {
+                                "allOf": [
+                                    {"$ref": "../../../schemaorgProperties/webAPI/webAPISchema.json"},
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "schema:potentialAction": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "schema:result": {
+                                                            "allOf": [
+                                                                {"$ref": "../../../schemaorgProperties/dataDownload/dataDownloadSchema.json"},
+                                                                {
+                                                                    "anyOf": [
+                                                                        {"$ref": "../../../cdifProperties/cdifDataCube/cdifDataCubeSchema.json"},
+                                                                        {"$ref": "../../../cdifProperties/cdifTabularData/cdifTabularDataSchema.json"},
+                                                                        {}
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

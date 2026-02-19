@@ -31,6 +31,7 @@
         },
         "schema:encodingFormat": {
           "type": "array",
+          "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse.",
           "items": {
             "type": "string"
           }
@@ -75,6 +76,61 @@
                   "schema:name": {
                     "type": "string",
                     "description": "string label for person that is meaningful for human users"
+                  },
+                  "schema:description": {
+                    "type": "string"
+                  },
+                  "schema:identifier": {
+                    "description": "identifier for person, recommend ORCID",
+                    "anyOf": [
+                      {
+                        "description": "Properties for a schema.org identifier",
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "type": "string",
+                            "const": "schema:PropertyValue"
+                          },
+                          "schema:propertyID": {
+                            "type": "string",
+                            "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                          },
+                          "schema:value": {
+                            "type": "string",
+                            "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                          },
+                          "schema:url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                          }
+                        },
+                        "allOf": [
+                          {
+                            "required": [
+                              "@type"
+                            ]
+                          },
+                          {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "schema:value"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "schema:url"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
                   },
                   "schema:alternateName": {
                     "type": "string",
@@ -142,8 +198,8 @@
                                           "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
                                         },
                                         "schema:url": {
-                                          "format": "uri",
                                           "type": "string",
+                                          "format": "uri",
                                           "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
                                         }
                                       },
@@ -239,8 +295,8 @@
                                 "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
                               },
                               "schema:url": {
-                                "format": "uri",
                                 "type": "string",
+                                "format": "uri",
                                 "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
                               }
                             },
@@ -299,10 +355,10 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "description": "if affiliation is present, value must be a schema:Organization."
                   },
                   "schema:contactPoint": {
-                    "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
                     "type": "object",
                     "properties": {
                       "@type": {
@@ -313,62 +369,8 @@
                       "schema:email": {
                         "type": "string"
                       }
-                    }
-                  },
-                  "schema:description": {
-                    "type": "string"
-                  },
-                  "schema:identifier": {
-                    "description": "identifier for person, recommend ORCID",
-                    "anyOf": [
-                      {
-                        "description": "Properties for a schema.org identifier",
-                        "type": "object",
-                        "properties": {
-                          "@type": {
-                            "type": "string",
-                            "const": "schema:PropertyValue"
-                          },
-                          "schema:propertyID": {
-                            "type": "string",
-                            "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-                          },
-                          "schema:value": {
-                            "type": "string",
-                            "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-                          },
-                          "schema:url": {
-                            "format": "uri",
-                            "type": "string",
-                            "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "required": [
-                              "@type"
-                            ]
-                          },
-                          {
-                            "anyOf": [
-                              {
-                                "required": [
-                                  "schema:value"
-                                ]
-                              },
-                              {
-                                "required": [
-                                  "schema:url"
-                                ]
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "type": "string"
-                      }
-                    ]
+                    },
+                    "description": "restrict to email only. Schema.org allows telephone and postal contacts as well"
                   },
                   "schema:sameAs": {
                     "type": "array",
@@ -462,8 +464,8 @@
                                       "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
                                     },
                                     "schema:url": {
-                                      "format": "uri",
                                       "type": "string",
+                                      "format": "uri",
                                       "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
                                     }
                                   },
@@ -559,8 +561,8 @@
                             "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
                           },
                           "schema:url": {
-                            "format": "uri",
                             "type": "string",
+                            "format": "uri",
                             "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
                           }
                         },
