@@ -122,7 +122,7 @@
             "items": {
               "type": "string"
             },
-            "description": "MIME type(s) (DataDownload)"
+            "description": "MIME type with extension; should indicate the serialization scheme in sufficient detail that machine can know how to parse."
           },
           "spdx:checksum": {
             "type": "object",
@@ -133,7 +133,8 @@
               "spdx:checksumValue": {
                 "type": "string"
               }
-            }
+            },
+            "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload."
           },
           "schema:serviceType": {
             "type": "string",
@@ -142,6 +143,28 @@
           "schema:documentation": {
             "type": "string",
             "description": "URL to API documentation (WebAPI)"
+          },
+          "@id": {
+            "type": "string"
+          },
+          "schema:provider": {
+            "type": "array",
+            "description": "Party who maintains this particular distribution option.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "string",
+                  "default": "schema:Organization"
+                },
+                "schema:name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schema:name"
+              ]
+            }
           },
           "schema:additionalType": {
             "type": "array",
@@ -200,30 +223,76 @@
               }
             }
           },
-          "schema:provider": {
-            "type": "array",
-            "description": "Party who maintains this particular distribution option.",
-            "items": {
-              "type": "object",
-              "properties": {
-                "@type": {
-                  "type": "string",
-                  "default": "schema:Organization"
-                },
-                "schema:name": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "schema:name"
-              ]
-            }
-          },
           "schema:hasPart": {
             "type": "array",
             "description": "Array describing the files in the zip archive.",
             "items": {
               "properties": {
+                "@id": {
+                  "type": "string"
+                },
+                "@type": {
+                  "type": "array",
+                  "description": "implement as array because extensions might need to add additional types",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "schema:DataDownload"
+                    ]
+                  }
+                },
+                "schema:name": {
+                  "type": "string"
+                },
+                "schema:contentUrl": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "schema:encodingFormat": {
+                  "type": "array",
+                  "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
+                  "items": {
+                    "type": "string"
+                  },
+                  "enum": [
+                    "text/plain",
+                    "model/obj",
+                    "model/stl",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "application/octet-stream"
+                  ]
+                },
+                "spdx:checksum": {
+                  "type": "object",
+                  "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
+                  "properties": {
+                    "spdx:algorithm": {
+                      "type": "string"
+                    },
+                    "spdx:checksumValue": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "schema:provider": {
+                  "type": "array",
+                  "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "type": "string",
+                        "default": "schema:Organization"
+                      },
+                      "schema:name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "schema:name"
+                    ]
+                  }
+                },
                 "schema:additionalType": {
                   "type": "array",
                   "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
@@ -567,16 +636,6 @@
                 "_original_name": {
                   "type": "string"
                 },
-                "schema:encodingFormat": {
-                  "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
-                  "enum": [
-                    "text/plain",
-                    "model/obj",
-                    "model/stl",
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    "application/octet-stream"
-                  ]
-                },
                 "formatDescription": {
                   "type": "string",
                   "description": "Free text explanation of file format, or a link to a publicly accessible specification for the format."
@@ -891,17 +950,14 @@
                       "type": "boolean"
                     }
                   }
-                },
-                "@type": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 }
               },
+              "required": [
+                "schema:contentUrl",
+                "@type"
+              ],
               "title": "Files Type",
               "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-              "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
               "type": "object"
             }
           },
@@ -1153,6 +1209,71 @@
             "oneOf": [
               {
                 "properties": {
+                  "@id": {
+                    "type": "string"
+                  },
+                  "@type": {
+                    "type": "array",
+                    "description": "implement as array because extensions might need to add additional types",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "schema:DataDownload"
+                      ]
+                    }
+                  },
+                  "schema:name": {
+                    "type": "string"
+                  },
+                  "schema:contentUrl": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "schema:encodingFormat": {
+                    "type": "array",
+                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
+                    "items": {
+                      "type": "string"
+                    },
+                    "enum": [
+                      "text/plain",
+                      "model/obj",
+                      "model/stl",
+                      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                      "application/octet-stream"
+                    ]
+                  },
+                  "spdx:checksum": {
+                    "type": "object",
+                    "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
+                    "properties": {
+                      "spdx:algorithm": {
+                        "type": "string"
+                      },
+                      "spdx:checksumValue": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "schema:provider": {
+                    "type": "array",
+                    "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string",
+                          "default": "schema:Organization"
+                        },
+                        "schema:name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "schema:name"
+                      ]
+                    }
+                  },
                   "schema:additionalType": {
                     "type": "array",
                     "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
@@ -1496,16 +1617,6 @@
                   "_original_name": {
                     "type": "string"
                   },
-                  "schema:encodingFormat": {
-                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
-                    "enum": [
-                      "text/plain",
-                      "model/obj",
-                      "model/stl",
-                      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                      "application/octet-stream"
-                    ]
-                  },
                   "formatDescription": {
                     "type": "string",
                     "description": "Free text explanation of file format, or a link to a publicly accessible specification for the format."
@@ -1820,24 +1931,83 @@
                         "type": "boolean"
                       }
                     }
-                  },
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "schema:DataDownload"
-                      ]
-                    }
                   }
                 },
+                "required": [
+                  "schema:contentUrl",
+                  "@type"
+                ],
                 "title": "Files Type",
                 "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                 "type": "object"
               },
               {
                 "properties": {
+                  "@id": {
+                    "type": "string"
+                  },
+                  "@type": {
+                    "type": "array",
+                    "description": "implement as array because extensions might need to add additional types",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "schema:DataDownload"
+                      ]
+                    }
+                  },
+                  "schema:name": {
+                    "type": "string"
+                  },
+                  "schema:contentUrl": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "schema:encodingFormat": {
+                    "type": "array",
+                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
+                    "items": {
+                      "type": "string"
+                    },
+                    "enum": [
+                      "text/plain",
+                      "model/obj",
+                      "model/stl",
+                      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                      "application/octet-stream"
+                    ]
+                  },
+                  "spdx:checksum": {
+                    "type": "object",
+                    "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
+                    "properties": {
+                      "spdx:algorithm": {
+                        "type": "string"
+                      },
+                      "spdx:checksumValue": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "schema:provider": {
+                    "type": "array",
+                    "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string",
+                          "default": "schema:Organization"
+                        },
+                        "schema:name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "schema:name"
+                      ]
+                    }
+                  },
                   "schema:additionalType": {
                     "type": "array",
                     "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
@@ -2181,16 +2351,6 @@
                   "_original_name": {
                     "type": "string"
                   },
-                  "schema:encodingFormat": {
-                    "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
-                    "enum": [
-                      "text/plain",
-                      "model/obj",
-                      "model/stl",
-                      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                      "application/octet-stream"
-                    ]
-                  },
                   "formatDescription": {
                     "type": "string",
                     "description": "Free text explanation of file format, or a link to a publicly accessible specification for the format."
@@ -2504,15 +2664,6 @@
                       "watertight": {
                         "type": "boolean"
                       }
-                    }
-                  },
-                  "@type": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": [
-                        "schema:DataDownload"
-                      ]
                     }
                   },
                   "schema:hasPart": {
@@ -2520,6 +2671,71 @@
                     "description": "Files within the archive result.",
                     "items": {
                       "properties": {
+                        "@id": {
+                          "type": "string"
+                        },
+                        "@type": {
+                          "type": "array",
+                          "description": "implement as array because extensions might need to add additional types",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "schema:DataDownload"
+                            ]
+                          }
+                        },
+                        "schema:name": {
+                          "type": "string"
+                        },
+                        "schema:contentUrl": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "schema:encodingFormat": {
+                          "type": "array",
+                          "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
+                          "items": {
+                            "type": "string"
+                          },
+                          "enum": [
+                            "text/plain",
+                            "model/obj",
+                            "model/stl",
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "application/octet-stream"
+                          ]
+                        },
+                        "spdx:checksum": {
+                          "type": "object",
+                          "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
+                          "properties": {
+                            "spdx:algorithm": {
+                              "type": "string"
+                            },
+                            "spdx:checksumValue": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "schema:provider": {
+                          "type": "array",
+                          "description": "Party who maintains this particular distribution option for the dataset. Use this property if there are multiple distributions from different providers",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "@type": {
+                                "type": "string",
+                                "default": "schema:Organization"
+                              },
+                              "schema:name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "schema:name"
+                            ]
+                          }
+                        },
                         "schema:additionalType": {
                           "type": "array",
                           "description": "other classifier for the file. ada componentTypes are specified in the specific file type schema attached by $refs",
@@ -2863,16 +3079,6 @@
                         "_original_name": {
                           "type": "string"
                         },
-                        "schema:encodingFormat": {
-                          "description": "One of the approved non-standard file formats: 'Spectral Data Exchange File (.emsa)'-->text/plain; '3D model file (.obj)'-->model/obj; 'Standard Triangle Language (.stl)'-->model/stl; 'Open XML workbook (.xlsx)'-->application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 'Neptune Plus export (.exp)'-->application/octet-stream",
-                          "enum": [
-                            "text/plain",
-                            "model/obj",
-                            "model/stl",
-                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                            "application/octet-stream"
-                          ]
-                        },
                         "formatDescription": {
                           "type": "string",
                           "description": "Free text explanation of file format, or a link to a publicly accessible specification for the format."
@@ -3187,24 +3393,24 @@
                               "type": "boolean"
                             }
                           }
-                        },
-                        "@type": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
                         }
                       },
+                      "required": [
+                        "schema:contentUrl",
+                        "@type"
+                      ],
                       "title": "Files Type",
                       "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                      "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                       "type": "object"
                     }
                   }
                 },
+                "required": [
+                  "schema:contentUrl",
+                  "@type"
+                ],
                 "title": "Files Type",
                 "description": "Properties for any file in an ADA product distribution. GeneralType provides info based on broad categories of file format (tabular, image, dataCube, document). Type constraints (e.g. DataDownload) are applied at the composition level in profiles.",
-                "$comment": "file not found: C:\\Users\\smrTu\\OneDrive\\Documents\\GithubC\\smrgeoinfo\\IEDADataSubmission\\BuildingBlockSubmodule\\_sources\\adaProperties\\schemaorgProperties\\dataDownload.yaml",
                 "type": "object"
               }
             ]
