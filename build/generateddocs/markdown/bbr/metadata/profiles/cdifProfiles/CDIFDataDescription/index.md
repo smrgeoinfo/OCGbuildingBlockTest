@@ -44,8 +44,8 @@ physical mappings.
     "schema:sameAs": [
         {
             "@type": "schema:PropertyValue",
+            "schema:propertyID": "urn:idorg:test",
             "schema:value": "urn:idorg:test:p45689"
-            
         }
     ],
     "schema:version": "OVVAYgJhmFkXyVyedlVo",
@@ -161,7 +161,11 @@ physical mappings.
             {
                 "@id": "ex:jP",
                 "@type": "schema:Person",
-                "schema:name": "Doe, Jane"
+                "schema:name": "Doe, Jane",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "jdoe@example.org"
+                }
             }
         ]
     },
@@ -224,7 +228,11 @@ physical mappings.
         {
             "@id": "ex:ihjJtFPNEKnGSFBcgS",
             "@type": "schema:Person",
-            "schema:name": "Smith, Robert"
+            "schema:name": "Smith, Robert",
+            "schema:contactPoint": {
+                "@type": "schema:ContactPoint",
+                "schema:email": "rsmith@example.org"
+            }
         },
         {
             "@id": "https://ada.org/person/5489",
@@ -247,6 +255,7 @@ physical mappings.
             "@type": "schema:MonetaryGrant",
             "schema:identifier": {
                 "@type": "schema:PropertyValue",
+                "schema:propertyID": "grant-id",
                 "schema:value": "lieopgXuumP"
             },
             "schema:name": "fhhbzh",
@@ -256,6 +265,7 @@ physical mappings.
             "@type": "schema:MonetaryGrant",
             "schema:identifier": {
                 "@type": "schema:PropertyValue",
+                "schema:propertyID": "grant-id",
                 "schema:value": "fMuiBjneudpV"
             },
             "schema:name": "MWoPQAqRYHobey",
@@ -265,6 +275,7 @@ physical mappings.
             "@type": "schema:MonetaryGrant",
             "schema:identifier": {
                 "@type": "schema:PropertyValue",
+                "schema:propertyID": "grant-id",
                 "schema:value": "LZpo"
             },
             "schema:name": "ekckpBtI",
@@ -521,8 +532,8 @@ physical mappings.
             "schema:measurementTechnique": "some measurement technique",
             "schema:unitText": "furlongs",
             "schema:unitCode": "F",
-            "schema:minValue": 67,
-            "schema:maxValue": 98,
+            "schema:minValue": 67.0,
+            "schema:maxValue": 98.0,
             "schema:url": "http://example.com/resource?foo=bar#furlong"
         },
         {
@@ -548,8 +559,8 @@ physical mappings.
             },
             "schema:unitText": "stone",
             "schema:unitCode": "S",
-            "schema:minValue": 36,
-            "schema:maxValue": 74,
+            "schema:minValue": 36.0,
+            "schema:maxValue": 74.0,
             "schema:url": "http://example.com/resource?foo=bar#stone"
         }
     ],
@@ -646,6 +657,7 @@ physical mappings.
   "schema:sameAs": [
     {
       "@type": "schema:PropertyValue",
+      "schema:propertyID": "urn:idorg:test",
       "schema:value": "urn:idorg:test:p45689"
     }
   ],
@@ -764,7 +776,11 @@ physical mappings.
       {
         "@id": "ex:jP",
         "@type": "schema:Person",
-        "schema:name": "Doe, Jane"
+        "schema:name": "Doe, Jane",
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "jdoe@example.org"
+        }
       }
     ]
   },
@@ -831,7 +847,11 @@ physical mappings.
     {
       "@id": "ex:ihjJtFPNEKnGSFBcgS",
       "@type": "schema:Person",
-      "schema:name": "Smith, Robert"
+      "schema:name": "Smith, Robert",
+      "schema:contactPoint": {
+        "@type": "schema:ContactPoint",
+        "schema:email": "rsmith@example.org"
+      }
     },
     {
       "@id": "https://ada.org/person/5489",
@@ -854,6 +874,7 @@ physical mappings.
       "@type": "schema:MonetaryGrant",
       "schema:identifier": {
         "@type": "schema:PropertyValue",
+        "schema:propertyID": "grant-id",
         "schema:value": "lieopgXuumP"
       },
       "schema:name": "fhhbzh",
@@ -865,6 +886,7 @@ physical mappings.
       "@type": "schema:MonetaryGrant",
       "schema:identifier": {
         "@type": "schema:PropertyValue",
+        "schema:propertyID": "grant-id",
         "schema:value": "fMuiBjneudpV"
       },
       "schema:name": "MWoPQAqRYHobey",
@@ -876,6 +898,7 @@ physical mappings.
       "@type": "schema:MonetaryGrant",
       "schema:identifier": {
         "@type": "schema:PropertyValue",
+        "schema:propertyID": "grant-id",
         "schema:value": "LZpo"
       },
       "schema:name": "ekckpBtI",
@@ -1178,8 +1201,8 @@ physical mappings.
       "schema:measurementTechnique": "some measurement technique",
       "schema:unitText": "furlongs",
       "schema:unitCode": "F",
-      "schema:minValue": 67,
-      "schema:maxValue": 98,
+      "schema:minValue": 67.0,
+      "schema:maxValue": 98.0,
       "schema:url": "http://example.com/resource?foo=bar#furlong"
     },
     {
@@ -1208,8 +1231,8 @@ physical mappings.
       },
       "schema:unitText": "stone",
       "schema:unitCode": "S",
-      "schema:minValue": 36,
-      "schema:maxValue": 74,
+      "schema:minValue": 36.0,
+      "schema:maxValue": 74.0,
       "schema:url": "http://example.com/resource?foo=bar#stone"
     }
   ],
@@ -1338,36 +1361,7 @@ ex:YOPx a schema1:Dataset ;
     schema1:dateModified "2020-10-15" ;
     schema1:datePublished "2021-09-05" ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
-    schema1:distribution [ a cdi:TabularTextDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:nullSequence "NA" ;
-                    cdi:physicalDataType "float64" ],
-                [ cdi:decimalPositions 4 ;
-                    cdi:defaultValue "0.0" ;
-                    cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:OjHgIDO ;
-                    cdi:index 1 ;
-                    cdi:isRequired false ;
-                    cdi:nullSequence "-9999" ;
-                    cdi:physicalDataType "float64" ] ;
-            cdi:isDelimited true ;
-            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "Geochemistry analysis results" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
-            csvw:commentPrefix "#" ;
-            csvw:delimiter "," ;
-            csvw:header true ;
-            csvw:headerRowCount 1 ;
-            csvw:quoteChar "\"" ;
-            csvw:skipBlankRows true ;
-            csvw:skipRows 0 ],
-        [ a cdi:StructuredDataSet,
+    schema1:distribution [ a cdi:StructuredDataSet,
                 schema1:DataDownload ;
             cdi:hasPhysicalMapping [ cdi:format "decimal" ;
                     cdi:formats_InstanceVariable ex:KJTFKurNFu ;
@@ -1389,16 +1383,6 @@ ex:YOPx a schema1:Dataset ;
             schema1:name "Gridded measurement data cube" ;
             spdx:checksum [ spdx:algorithm "SHA256" ;
                     spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "kpZDvhyVo",
-                "sMUGwSqxWzJOYEb",
-                "tNdpXaJgDeWbFkNM" ;
-            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
-            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
-                ex:sr68lgy ;
-            spdx:checksum [ spdx:algorithm "j" ;
-                    spdx:checksumValue "h" ] ],
         [ a schema1:WebAPI ;
             schema1:documentation [ a schema1:CreativeWork ;
                     schema1:name "OpenAPI specification for geochemistry data service" ;
@@ -1422,14 +1406,14 @@ ex:YOPx a schema1:Dataset ;
                             schema1:valueRequired false ] ;
                     schema1:result [ a schema1:DataDownload ;
                             cdi:hasPhysicalMapping [ cdi:format "decimal" ;
-                                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                                    cdi:index 0 ;
-                                    cdi:isRequired true ;
-                                    cdi:physicalDataType "float64" ],
-                                [ cdi:format "decimal" ;
                                     cdi:formats_InstanceVariable ex:OjHgIDO ;
                                     cdi:index 1 ;
                                     cdi:isRequired false ;
+                                    cdi:physicalDataType "float64" ],
+                                [ cdi:format "decimal" ;
+                                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                                    cdi:index 0 ;
+                                    cdi:isRequired true ;
                                     cdi:physicalDataType "float64" ] ;
                             cdi:isDelimited true ;
                             schema1:contentUrl "http://example.com/api/v1/collections/geochem/items?f=csv" ;
@@ -1459,22 +1443,64 @@ ex:YOPx a schema1:Dataset ;
             schema1:name "VwuIdrCrJSsrGATePg" ;
             schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
             spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "kpZDvhyVo",
+                "sMUGwSqxWzJOYEb",
+                "tNdpXaJgDeWbFkNM" ;
+            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
+            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
+                ex:sr68lgy ;
+            spdx:checksum [ spdx:algorithm "j" ;
+                    spdx:checksumValue "h" ] ],
+        [ a cdi:TabularTextDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:nullSequence "NA" ;
+                    cdi:physicalDataType "float64" ],
+                [ cdi:decimalPositions 4 ;
+                    cdi:defaultValue "0.0" ;
+                    cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:OjHgIDO ;
+                    cdi:index 1 ;
+                    cdi:isRequired false ;
+                    cdi:nullSequence "-9999" ;
+                    cdi:physicalDataType "float64" ] ;
+            cdi:isDelimited true ;
+            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "Geochemistry analysis results" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
+            csvw:commentPrefix "#" ;
+            csvw:delimiter "," ;
+            csvw:header true ;
+            csvw:headerRowCount 1 ;
+            csvw:quoteChar "\"" ;
+            csvw:skipBlankRows true ;
+            csvw:skipRows 0 ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/sejer4w6u8> ;
+            schema1:funder <https://ror.org/fnjrj68> ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:value "LZpo" ] ;
-            schema1:name "ekckpBtI" ],
+                    schema1:propertyID "grant-id" ;
+                    schema1:value "fMuiBjneudpV" ] ;
+            schema1:name "MWoPQAqRYHobey" ],
         [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/3572wjht> ;
             schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "grant-id" ;
                     schema1:value "lieopgXuumP" ] ;
             schema1:name "fhhbzh" ],
         [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/fnjrj68> ;
+            schema1:funder <https://ror.org/sejer4w6u8> ;
             schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:value "fMuiBjneudpV" ] ;
-            schema1:name "MWoPQAqRYHobey" ] ;
+                    schema1:propertyID "grant-id" ;
+                    schema1:value "LZpo" ] ;
+            schema1:name "ekckpBtI" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
@@ -1508,6 +1534,7 @@ ex:YOPx a schema1:Dataset ;
         [ a schema1:LinkRole ;
             schema1:linkRelationship "BOoRREnpDEUrdNaV" ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
+            schema1:propertyID "urn:idorg:test" ;
             schema1:value "urn:idorg:test:p45689" ] ;
     schema1:subjectOf ex:BAaR ;
     schema1:url "http://example.com/resource?foo=bar#fragment" ;
@@ -1542,9 +1569,13 @@ ex:gDiAxjl a schema1:Organization ;
     schema1:name "Example Data Center" .
 
 ex:ihjJtFPNEKnGSFBcgS a schema1:Person ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "rsmith@example.org" ] ;
     schema1:name "Smith, Robert" .
 
 ex:jP a schema1:Person ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "jdoe@example.org" ] ;
     schema1:name "Doe, Jane" .
 
 ex:lIZkH a schema1:DataCatalog ;
@@ -1620,9 +1651,9 @@ ex:PersonExample_zZc a schema1:Person ;
 ex:KJTFKurNFu a cdi:InstanceVariable,
         schema1:PropertyValue ;
     schema1:description "EcbPmKQnMCgWozw" ;
-    schema1:maxValue 98 ;
+    schema1:maxValue 9.8e+01 ;
     schema1:measurementTechnique "some measurement technique" ;
-    schema1:minValue 67 ;
+    schema1:minValue 6.7e+01 ;
     schema1:name "RbMivCtraTmzms" ;
     schema1:propertyID "https://ark.org/bXEOCTwvICRc",
         "urn:test:GigjbPysIJ" ;
@@ -1633,7 +1664,7 @@ ex:KJTFKurNFu a cdi:InstanceVariable,
 ex:OjHgIDO a cdi:InstanceVariable,
         schema1:PropertyValue ;
     schema1:description "RGKBMBkScTTNQ" ;
-    schema1:maxValue 74 ;
+    schema1:maxValue 7.4e+01 ;
     schema1:measurementTechnique [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "https://identifiers.org" ;
@@ -1642,7 +1673,7 @@ ex:OjHgIDO a cdi:InstanceVariable,
             schema1:inDefinedTermSet "https://identifiers.org/technique/vocabulary" ;
             schema1:name "a good technique" ;
             schema1:termCode "agt" ] ;
-    schema1:minValue 36 ;
+    schema1:minValue 3.6e+01 ;
     schema1:name "jzgZCegiTFYBSmsSh" ;
     schema1:propertyID "ex:CUXfWZLdRkEAG",
         "urn:properties:tzysaGTv" ;
