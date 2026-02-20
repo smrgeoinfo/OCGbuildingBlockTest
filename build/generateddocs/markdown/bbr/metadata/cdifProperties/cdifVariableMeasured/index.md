@@ -144,6 +144,20 @@ properties:
             description: reference to a skos concept for the data type
       - $ref: '#/$defs/DefinedTerm'
     description: identifier or name for the data type concept.
+  cdi:intendedDataType:
+    type: string
+    description: The intended data type for values of this variable, from DDI-CDI
+      RepresentedVariable.hasIntendedDataType. Recommended values are XML Schema datatypes
+      (e.g. https://www.w3.org/TR/xmlschema-2/#decimal).
+  cdi:role:
+    type: string
+    description: Specifies the relation of the variable to the data structure, corresponding
+      to DDI-CDI DataStructureComponent subtypes. Values should be one of {MeasureComponent,
+      AttributeComponent, DimensionComponent}.
+  cdi:describedUnitOfMeasure:
+    description: A structured unit of measure from a controlled vocabulary, from DDI-CDI
+      RepresentedVariable.describedUnitOfMeasure.
+    $ref: '#/$defs/DefinedTerm'
   cdi:simpleUnitOfMeasure:
     anyOf:
     - type: string
@@ -154,12 +168,25 @@ properties:
           description: reference to a skos concept for the data type
     - $ref: '#/$defs/DefinedTerm'
   cdi:uses:
-    type: string
-    description: reference to a skos concept for the data type
+    type: array
+    items:
+      anyOf:
+      - type: string
+      - type: object
+        properties:
+          '@id':
+            type: string
+            description: reference to a skos concept for the property
+      - $ref: '#/$defs/DefinedTerm'
+    description: Essentially the same as schema:propertyID. References to concepts
+      that this variable measures or represents.
   cdi:name:
     type: string
+    description: DDI-CDI Concept.name. The name of this variable in the DDI-CDI model.
   cdi:displayLabel:
     type: string
+    description: DDI-CDI Concept.displayLabel. A human-readable label for display
+      purposes.
 $defs:
   DefinedTerm:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml

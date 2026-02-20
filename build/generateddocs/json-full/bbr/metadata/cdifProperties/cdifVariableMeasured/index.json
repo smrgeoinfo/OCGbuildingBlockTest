@@ -27,19 +27,19 @@
     "cdif.bbr.metadata.cdifProperties.cdifVariableMeasured": [
       "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifVariableMeasured/rules.shacl"
     ],
-    "cdif.bbr.metadata.schemaorgProperties.variableMeasured": [
-      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/variableMeasured/rules.shacl"
-    ],
     "cdif.bbr.metadata.schemaorgProperties.definedTerm": [
       "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/definedTerm/rules.shacl"
     ],
     "cdif.bbr.metadata.schemaorgProperties.identifier": [
       "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/identifier/rules.shacl"
+    ],
+    "cdif.bbr.metadata.schemaorgProperties.variableMeasured": [
+      "https://usgin.github.io/metadataBuildingBlocks/_sources/schemaorgProperties/variableMeasured/rules.shacl"
     ]
   },
   "dependsOn": [
-    "cdif.bbr.metadata.schemaorgProperties.variableMeasured",
-    "cdif.bbr.metadata.schemaorgProperties.definedTerm"
+    "cdif.bbr.metadata.schemaorgProperties.definedTerm",
+    "cdif.bbr.metadata.schemaorgProperties.variableMeasured"
   ],
   "ldContext": "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifVariableMeasured/context.jsonld",
   "schema": {
@@ -50,7 +50,7 @@
   "sourceLdContext": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifVariableMeasured/context.jsonld",
   "sourceFiles": "https://usgin.github.io/metadataBuildingBlocks/_sources/cdifProperties/cdifVariableMeasured/",
   "rdfData": [],
-  "validationPassed": true,
+  "validationPassed": false,
   "testOutputs": "https://github.com/usgin/metadataBuildingBlocks/blob/main/build/tests/bbr/metadata/cdifProperties/cdifVariableMeasured/",
   "description": "## additional Property, Property Value properties\n\nDefines a set of properties for use describing a soft-typed PropertyValue for the schema.org implementation of the [Cross Domain Interoperability Framework](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/schemaorgimplementation.html#implementation-of-metadata-content-items) (CDIF) discovery profile.  Use for values of schema:additionalProperty, typically in the context of extension profiles. Not used in CDIF Mandatory or CDIF Optional.",
   "examples": [
@@ -82,7 +82,7 @@
       ]
     }
   ],
-  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: Extends cdif variableMeasured with properties for DDI-CDI InstanceVariable\ntype: object\nproperties:\n  '@type':\n    type: array\n    description: require additional type besided schema:PropertyValue required by\n      CDIF variableMeasured, so min items should add up to 2 (we'll see if this works....)\n    items:\n      type: string\n      enum:\n      - schema:PropertyValue\n      - cdi:InstanceVariable\n    minItems: 2\n  cdi:identifier:\n    type: string\n  cdi:physicalDataType:\n    type: array\n    items:\n      anyOf:\n      - type: string\n      - type: object\n        properties:\n          '@id':\n            type: string\n            description: reference to a skos concept for the data type\n      - $ref: '#/$defs/DefinedTerm'\n    description: identifier or name for the data type concept.\n  cdi:simpleUnitOfMeasure:\n    anyOf:\n    - type: string\n    - type: object\n      properties:\n        '@id':\n          type: string\n          description: reference to a skos concept for the data type\n    - $ref: '#/$defs/DefinedTerm'\n  cdi:uses:\n    type: string\n    description: reference to a skos concept for the data type\n  cdi:name:\n    type: string\n  cdi:displayLabel:\n    type: string\n$defs:\n  DefinedTerm:\n    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml\nallOf:\n- required:\n  - '@type'\n  - cdi:physicalDataType\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  spdx: http://spdx.org/rdf/terms#\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  skos: http://www.w3.org/2004/02/skos/core#\n  xas: https://xas.org/dictionary/\n  nxs: http://purl.org/nexusformat/definitions/\n  prov: http://www.w3.org/ns/prov#\n",
+  "annotatedSchema": "$schema: https://json-schema.org/draft/2020-12/schema\ndescription: Extends cdif variableMeasured with properties for DDI-CDI InstanceVariable\ntype: object\nproperties:\n  '@type':\n    type: array\n    description: require additional type besided schema:PropertyValue required by\n      CDIF variableMeasured, so min items should add up to 2 (we'll see if this works....)\n    items:\n      type: string\n      enum:\n      - schema:PropertyValue\n      - cdi:InstanceVariable\n    minItems: 2\n  cdi:identifier:\n    type: string\n  cdi:physicalDataType:\n    type: array\n    items:\n      anyOf:\n      - type: string\n      - type: object\n        properties:\n          '@id':\n            type: string\n            description: reference to a skos concept for the data type\n      - $ref: '#/$defs/DefinedTerm'\n    description: identifier or name for the data type concept.\n  cdi:intendedDataType:\n    type: string\n    description: The intended data type for values of this variable, from DDI-CDI\n      RepresentedVariable.hasIntendedDataType. Recommended values are XML Schema datatypes\n      (e.g. https://www.w3.org/TR/xmlschema-2/#decimal).\n  cdi:role:\n    type: string\n    description: Specifies the relation of the variable to the data structure, corresponding\n      to DDI-CDI DataStructureComponent subtypes. Values should be one of {MeasureComponent,\n      AttributeComponent, DimensionComponent}.\n  cdi:describedUnitOfMeasure:\n    description: A structured unit of measure from a controlled vocabulary, from DDI-CDI\n      RepresentedVariable.describedUnitOfMeasure.\n    $ref: '#/$defs/DefinedTerm'\n  cdi:simpleUnitOfMeasure:\n    anyOf:\n    - type: string\n    - type: object\n      properties:\n        '@id':\n          type: string\n          description: reference to a skos concept for the data type\n    - $ref: '#/$defs/DefinedTerm'\n  cdi:uses:\n    type: array\n    items:\n      anyOf:\n      - type: string\n      - type: object\n        properties:\n          '@id':\n            type: string\n            description: reference to a skos concept for the property\n      - $ref: '#/$defs/DefinedTerm'\n    description: Essentially the same as schema:propertyID. References to concepts\n      that this variable measures or represents.\n  cdi:name:\n    type: string\n    description: DDI-CDI Concept.name. The name of this variable in the DDI-CDI model.\n  cdi:displayLabel:\n    type: string\n    description: DDI-CDI Concept.displayLabel. A human-readable label for display\n      purposes.\n$defs:\n  DefinedTerm:\n    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/definedTerm/schema.yaml\nallOf:\n- required:\n  - '@type'\n  - cdi:physicalDataType\n- $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/variableMeasured/schema.yaml\nx-jsonld-prefixes:\n  schema: http://schema.org/\n  spdx: http://spdx.org/rdf/terms#\n  cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/\n  skos: http://www.w3.org/2004/02/skos/core#\n  xas: https://xas.org/dictionary/\n  nxs: http://purl.org/nexusformat/definitions/\n  prov: http://www.w3.org/ns/prov#\n",
   "gitRepository": "https://github.com/usgin/metadataBuildingBlocks",
   "gitPath": "_sources/cdifProperties/cdifVariableMeasured"
 }
