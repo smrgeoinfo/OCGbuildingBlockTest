@@ -8,6 +8,7 @@
         "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
         "time": "http://www.w3.org/2006/time#",
         "skos": "http://www.w3.org/2004/02/skos/core#",
+        "csvw": "http://www.w3.org/ns/csvw#",
         "xas": "https://xas.org/dictionary/",
         "nxs": "http://purl.org/nexusformat/definitions/",
         "prov": "http://www.w3.org/ns/prov#"
@@ -66,73 +67,46 @@
     "schema:license": ["https://creativecommons.org/publicdomain/zero/1.0/"],
     "schema:distribution": [
         {
-            "@type": [
-                "schema:DataDownload",
-                "PhysicalDataSet"
-            ],
+            "@type": ["schema:DataDownload"],
+            "schema:name": "XDI data file for Se K-edge XAS",
             "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
-            "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
-            "schema:contentSize": "30 kb",
+            "schema:description": "Fixed-width text file conformant with XDI specification. Contains three data columns: monochromator energy (eV), transmitted intensity (counts), and incident intensity (counts). 27-line header with comment prefix '#'.",
             "schema:encodingFormat": ["text/plain"],
-            "dcterms:conformsTo": ["https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"],
-            "allowsDuplicates": false,
-            "isStructuredBy": {
-                "@type": "WideDataStructure",
-                "has_DataStructureComponent": [
-                    {
-                        "@type": "IdentifierComponent",
-                        "isDefinedBy_InstanceVariable": {"@id": "xas:monochromatorEnergy"},
-                        "has": {
-                            "@type": "ValueMapping",
-                            "hasIndex": 1,
-                            "length": 12
-                        }
-                    },
-                    {
-                        "@type": "MeasureComponent",
-                        "isDefinedBy_InstanceVariable": {"@id": "xas:incidentIntensity"},
-                        "has": {
-                            "@type": "ValueMapping",
-                            "hasIndex": 3,
-                            "length": 13
-                        }
-                    },
-                    {
-                        "@type": "MeasureComponent",
-                        "isDefinedBy_InstanceVariable": {"@id": "xas:transmittedIntensity"},
-                        "has": {
-                            "@type": "ValueMapping",
-                            "hasIndex": 2,
-                            "length": 12
-                        }
-                    }
-                ],
-                "allowsDuplicates": false,
-                "arrayBase": 1,
-                "commentPrefix": "#",
-                "hasHeader": true,
-                "headerRowCount": 27,
-                "skipInitialSpace": true,
-                "isDelimited": false,
-                "isFixedWidth": true
-            }
+            "dcterms:conformsTo": [
+                {"@id": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"}
+            ],
+            "cdi:hasPhysicalMapping": [
+                {
+                    "cdi:index": 0,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float64",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "xas:monochromatorEnergy"}
+                },
+                {
+                    "cdi:index": 1,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float64",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "xas:transmittedIntensity"}
+                },
+                {
+                    "cdi:index": 2,
+                    "cdi:format": "decimal",
+                    "cdi:physicalDataType": "float64",
+                    "cdi:isRequired": true,
+                    "cdi:formats_InstanceVariable": {"@id": "xas:incidentIntensity"}
+                }
+            ]
         }
     ],
-    "schema:measurementTechnique": [
-        {
-            "@type": "schema:DefinedTerm",
-            "schema:name": "X-Ray Absorption Spectroscopy",
-            "schema:termCode": "XAS",
-            "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
-            "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl"
-        },
-        {
-            "@type": "schema:DefinedTerm",
-            "schema:name": "Transmission",
-            "schema:identifier": "missing",
-            "schema:inDefinedTermSet": "nxs:Field/NXxas/ENTRY/DATA/mode"
-        }
-    ],
+    "schema:measurementTechnique": {
+        "@type": "schema:DefinedTerm",
+        "schema:name": "X-Ray Absorption Spectroscopy (Transmission mode)",
+        "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
+        "schema:termCode": "XAS",
+        "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl"
+    },
     "schema:keywords": [
         {
             "@type": "schema:DefinedTerm",
@@ -149,7 +123,7 @@
             "schema:inDefinedTermSet": "http://sweetontology.net/matrElement"
         }
     ],
-    "prov:wasGeneratedBy": {
+    "prov:wasGeneratedBy": [{
         "@type": [
             "schema:Event",
             "xas:AnalysisEvent",
@@ -412,12 +386,12 @@
                 }
             ]
         }
-    },
+    }],
     "schema:variableMeasured": [
         {
             "@id": "xas:monochromatorEnergy",
             "@type": [
-                "InstanceVariable",
+                "cdi:InstanceVariable",
                 "schema:PropertyValue"
             ],
             "schema:name": "energy",
@@ -435,7 +409,7 @@
         {
             "@id": "xas:incidentIntensity",
             "@type": [
-                "InstanceVariable",
+                "cdi:InstanceVariable",
                 "schema:PropertyValue"
             ],
             "schema:name": "i0 monitory intensity",
@@ -452,7 +426,7 @@
         {
             "@id": "xas:transmittedIntensity",
             "@type": [
-                "InstanceVariable",
+                "cdi:InstanceVariable",
                 "schema:PropertyValue"
             ],
             "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
