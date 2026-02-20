@@ -1,5 +1,5 @@
 Validation report for cdif.bbr.metadata.profiles.adaProfiles.adaSVRUEC - ADA SV-RUEC Profile
-Generated 2026-02-20T15:15:33.818595+00:00
+Generated 2026-02-20T17:57:54.914344+00:00
 === Files ===
 Using example_1_1.json from examples
 JSON-LD context is present - uplifting
@@ -34,8 +34,232 @@ On instance:
 === SHACL ===
 
 ** Validation error **
-Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:
-Bad syntax (Prefix "dqv:" not bound) at ^ in:
-"...b'fd:qualityMeasurementNode\n\ta sh:NodeShape; \n\tsh:targetClass '^b'dqv:QualityMeasurement ;\n\t\n\tsh:target [\n\t  a sh:SPARQLTarget'..."
+Validation result for _sources/profiles/adaProfiles/adaSVRUEC/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("SV-RUEC products must have a schema:additionalType matching a valid SV-RUEC type.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:hasValue Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)") ] [ sh:hasValue Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants") ] ) ; sh:path schema1:additionalType ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Value Node: Literal("ada:DataDeliveryPackage")
+  	Result Path: schema1:additionalType
+  	Message: SV-RUEC products must have a schema:additionalType matching a valid SV-RUEC type.
+  
+Focus nodes for _sources/profiles/adaProfiles/adaSVRUEC/rules.shacl:
+ - Shape _:n33fcd30980184c20a014a59d8dc5d290b4: *none*
+ - Shape cdifd:svruecProductShape: *none*
+ - Shape cdifd:svruecProductShape/sh:property/sh:or/rdf:first: *none*
+
+
+** Validation error **
+Validation result for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (3):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must have at least one creator (schema:creator).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:creator ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Result Path: schema1:creator
+  	Message: ADA products must have at least one creator (schema:creator).
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path prov:wasGeneratedBy ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Result Path: prov:wasGeneratedBy
+  	Message: ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must have at least one distribution (schema:distribution).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:distribution ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Result Path: schema1:distribution
+  	Message: ADA products must have at least one distribution (schema:distribution).
+  
+Focus nodes for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+ - Shape cdifd:adaVariableMeasuredShape: *none*
+ - Shape cdifd:adaProductShape: *none*
+ - Shape cdifd:adaActivityShape: *none*
+
+
+** Validation error **
+Error parsing SHACL validator for _sources/adaProperties/laboratory/rules.shacl: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery}, found '/'  (at char 307), (line:9, col:38)
+for SPARQL query
+ 1: PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ 2: PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ 3: PREFIX owl: <http://www.w3.org/2002/07/owl#>
+ 4: 
+ 5: 
+ 6:             PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+ 7:             SELECT ?this
+ 8:             WHERE {
+ 9:                 ?this a nxs:BaseClass/NXsource .
+10:             }
+11:         
+
+** Validation error **
+Validation result for _sources/cdifProperties/cdifOptional/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (2):
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Warning
+  	Source Shape: [ sh:message Literal("A dataset should identify its creator(s) (schema:creator).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:creator ; sh:severity sh:Warning ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Result Path: schema1:creator
+  	Message: A dataset should identify its creator(s) (schema:creator).
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Warning
+  	Source Shape: [ sh:message Literal("A dataset should have keywords (schema:keywords) for discoverability.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:keywords ; sh:severity sh:Warning ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Seismic Velocities and Rock Ultrasonic Elastic Constants (SV-RUEC) data") ; schema1:name Literal("SV-RUEC Analysis of Sample") ]
+  	Result Path: schema1:keywords
+  	Message: A dataset should have keywords (schema:keywords) for discoverability.
+  
+Focus nodes for _sources/cdifProperties/cdifOptional/rules.shacl:
+ - Shape cdifd:CDIFDatasetOptionalShape: *none*
+
+Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:
+ - Shape cdifd:CDIFLabeledLinkShape: *none*
+
+Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:
+ - Shape cdifd:CDIFDataDownloadShape: *none*
+
+Validation result for _sources/schemaorgProperties/organization/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:
+ - Shape cdifd:CDIFOrganizationShape: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b20: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b25: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b23: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b10: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b11: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b21: *none*
+ - Shape _:n57fca458fa764bb2976ed2aea50a5f18b22: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb5: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb7: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb10: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb4: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb8: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb6: *none*
+ - Shape _:n3a51bced719f42f8a29f0f4f69c2605fb23: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/person/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/person/rules.shacl:
+ - Shape cdifd:CDIFContactPointShape: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+ - Shape _:n5f53346a38df4580bf3c8a5d3a96b148b4: *none*
+ - Shape _:n5f53346a38df4580bf3c8a5d3a96b148b17: *none*
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:timePositionNode: *none*
+ - Shape _:n5f53346a38df4580bf3c8a5d3a96b148b5: *none*
+ - Shape cdifd:timeInstantNode: *none*
+ - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n5f53346a38df4580bf3c8a5d3a96b148b3: *none*
+ - Shape cdifd:timeIntervalNode: *none*
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*
+
 === End SHACL ===
+
+=== Unknown errors ===
+
+** Validation error **
+Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validate.py", line 197, in _validate_resource
+    result = validator.validate(filename, output_filename, report,
+,  File "/src/ogc/bblocks/validation/rdf.py", line 410, in validate
+    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(
+,  File "/src/ogc/bblocks/validation/rdf.py", line 39, in shacl_validate
+    conforms, shacl_result, shacl_report = validator.run()
+,  File "/venv/lib/python3.10/site-packages/pyshacl/validate.py", line 265, in run
+    _is_conform, _reports = s.validate(
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 440, in validate
+    focus = self.focus_nodes(target_graph)
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 365, in focus_nodes
+    results = data_graph.query(select, initBindings=None)
+,  File "/venv/lib/python3.10/site-packages/rdflib/graph.py", line 1567, in query
+    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py", line 137, in query
+    query = translateQuery(parsetree, base, initNs)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 934, in translateQuery
+    q[1] = traverse(
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 469, in traverse
+    r = _traverse(tree, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 429, in _traverse
+    _e = visitPost(e)  # type: ignore[unreachable]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 197, in translatePName
+    return prologue.absolutize(p)  # type: ignore[return-value]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 430, in absolutize
+    return self.resolvePName(iri.prefix, iri.localname)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 412, in resolvePName
+    raise Exception("Unknown namespace prefix : %s" % prefix)
+,Exception: Unknown namespace prefix : dqv
+
+=== End Unknown errors ===
 

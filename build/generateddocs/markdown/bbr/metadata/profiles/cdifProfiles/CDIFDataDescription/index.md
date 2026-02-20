@@ -233,26 +233,40 @@ physical mappings.
                 "@type": "schema:ContactPoint",
                 "schema:email": "a.king@nhm.ac.uk"
             },
-            "schema:identifier": "https://orcid.org/0000-0001-6113-5417",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "https://orcid.org",
+                "schema:value": "0000-0001-6113-5417",
+                "schema:url": "https://orcid.org/0000-0001-6113-5417"
+            },
             "schema:name": "King, Ashley"
         }
     ],
     "schema:funding": [
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": "lieopgXuumP",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:value": "lieopgXuumP"
+            },
             "schema:name": "fhhbzh",
             "schema:funder": {"@id": "https://ror.org/3572wjht"}
         },
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": "fMuiBjneudpV",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:value": "fMuiBjneudpV"
+            },
             "schema:name": "MWoPQAqRYHobey",
             "schema:funder": {"@id": "https://ror.org/fnjrj68"}
         },
         {
             "@type": "schema:MonetaryGrant",
-            "schema:identifier": "LZpo",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:value": "LZpo"
+            },
             "schema:name": "ekckpBtI",
             "schema:funder": {"@id": "https://ror.org/sejer4w6u8"}
         }
@@ -826,14 +840,22 @@ physical mappings.
         "@type": "schema:ContactPoint",
         "schema:email": "a.king@nhm.ac.uk"
       },
-      "schema:identifier": "https://orcid.org/0000-0001-6113-5417",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:propertyID": "https://orcid.org",
+        "schema:value": "0000-0001-6113-5417",
+        "schema:url": "https://orcid.org/0000-0001-6113-5417"
+      },
       "schema:name": "King, Ashley"
     }
   ],
   "schema:funding": [
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": "lieopgXuumP",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:value": "lieopgXuumP"
+      },
       "schema:name": "fhhbzh",
       "schema:funder": {
         "@id": "https://ror.org/3572wjht"
@@ -841,7 +863,10 @@ physical mappings.
     },
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": "fMuiBjneudpV",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:value": "fMuiBjneudpV"
+      },
       "schema:name": "MWoPQAqRYHobey",
       "schema:funder": {
         "@id": "https://ror.org/fnjrj68"
@@ -849,7 +874,10 @@ physical mappings.
     },
     {
       "@type": "schema:MonetaryGrant",
-      "schema:identifier": "LZpo",
+      "schema:identifier": {
+        "@type": "schema:PropertyValue",
+        "schema:value": "LZpo"
+      },
       "schema:name": "ekckpBtI",
       "schema:funder": {
         "@id": "https://ror.org/sejer4w6u8"
@@ -1269,7 +1297,10 @@ physical mappings.
 <https://ada.org/person/5489> a schema1:Person ;
     schema1:contactPoint [ a schema1:ContactPoint ;
             schema1:email "a.king@nhm.ac.uk" ] ;
-    schema1:identifier "https://orcid.org/0000-0001-6113-5417" ;
+    schema1:identifier [ a schema1:PropertyValue ;
+            schema1:propertyID "https://orcid.org" ;
+            schema1:url "https://orcid.org/0000-0001-6113-5417" ;
+            schema1:value "0000-0001-6113-5417" ] ;
     schema1:name "King, Ashley" .
 
 ex:ABYcNWHKYhTiLLNEzJx a schema1:Person ;
@@ -1307,7 +1338,68 @@ ex:YOPx a schema1:Dataset ;
     schema1:dateModified "2020-10-15" ;
     schema1:datePublished "2021-09-05" ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
-    schema1:distribution [ a schema1:WebAPI ;
+    schema1:distribution [ a cdi:TabularTextDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:nullSequence "NA" ;
+                    cdi:physicalDataType "float64" ],
+                [ cdi:decimalPositions 4 ;
+                    cdi:defaultValue "0.0" ;
+                    cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:OjHgIDO ;
+                    cdi:index 1 ;
+                    cdi:isRequired false ;
+                    cdi:nullSequence "-9999" ;
+                    cdi:physicalDataType "float64" ] ;
+            cdi:isDelimited true ;
+            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "Geochemistry analysis results" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
+            csvw:commentPrefix "#" ;
+            csvw:delimiter "," ;
+            csvw:header true ;
+            csvw:headerRowCount 1 ;
+            csvw:quoteChar "\"" ;
+            csvw:skipBlankRows true ;
+            csvw:skipRows 0 ],
+        [ a cdi:StructuredDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:locator "/measurements/wavelength" ;
+                    cdi:nullSequence "NaN" ;
+                    cdi:physicalDataType "float32" ],
+                [ cdi:decimalPositions 6 ;
+                    cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:OjHgIDO ;
+                    cdi:index 1 ;
+                    cdi:isRequired true ;
+                    cdi:locator "/measurements/intensity" ;
+                    cdi:physicalDataType "float32" ;
+                    cdi:scale 1000 ] ;
+            schema1:contentUrl "http://example.com/data/measurement-cube.nc" ;
+            schema1:encodingFormat "application/x-netcdf" ;
+            schema1:name "Gridded measurement data cube" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "kpZDvhyVo",
+                "sMUGwSqxWzJOYEb",
+                "tNdpXaJgDeWbFkNM" ;
+            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
+            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
+                ex:sr68lgy ;
+            spdx:checksum [ spdx:algorithm "j" ;
+                    spdx:checksumValue "h" ] ],
+        [ a schema1:WebAPI ;
             schema1:documentation [ a schema1:CreativeWork ;
                     schema1:name "OpenAPI specification for geochemistry data service" ;
                     schema1:url "http://example.com/api/v1/openapi.json" ] ;
@@ -1316,13 +1408,13 @@ ex:YOPx a schema1:Dataset ;
                     schema1:object [ a schema1:DataFeed ;
                             schema1:description "Geochemistry observations collection" ] ;
                     schema1:query-input [ a schema1:PropertyValueSpecification ;
-                            schema1:description "Starting index for pagination" ;
-                            schema1:valueName "offset" ;
-                            schema1:valueRequired false ],
-                        [ a schema1:PropertyValueSpecification ;
                             schema1:description "Response format: csv or geojson" ;
                             schema1:valueName "format" ;
                             schema1:valuePattern "csv|geojson" ;
+                            schema1:valueRequired false ],
+                        [ a schema1:PropertyValueSpecification ;
+                            schema1:description "Starting index for pagination" ;
+                            schema1:valueName "offset" ;
                             schema1:valueRequired false ],
                         [ a schema1:PropertyValueSpecification ;
                             schema1:description "Maximum number of features to return (default 100)" ;
@@ -1363,84 +1455,26 @@ ex:YOPx a schema1:Dataset ;
             schema1:termsOfService "Open access, no authentication required" ],
         [ a schema1:DataDownload ;
             schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "kpZDvhyVo",
-                "sMUGwSqxWzJOYEb",
-                "tNdpXaJgDeWbFkNM" ;
-            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
-            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
-                ex:sr68lgy ;
-            spdx:checksum [ spdx:algorithm "j" ;
-                    spdx:checksumValue "h" ] ],
-        [ a cdi:StructuredDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:locator "/measurements/wavelength" ;
-                    cdi:nullSequence "NaN" ;
-                    cdi:physicalDataType "float32" ],
-                [ cdi:decimalPositions 6 ;
-                    cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:OjHgIDO ;
-                    cdi:index 1 ;
-                    cdi:isRequired true ;
-                    cdi:locator "/measurements/intensity" ;
-                    cdi:physicalDataType "float32" ;
-                    cdi:scale 1000 ] ;
-            schema1:contentUrl "http://example.com/data/measurement-cube.nc" ;
-            schema1:encodingFormat "application/x-netcdf" ;
-            schema1:name "Gridded measurement data cube" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
             schema1:encodingFormat "text/csv" ;
             schema1:name "VwuIdrCrJSsrGATePg" ;
             schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
             spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
-        [ a cdi:TabularTextDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:decimalPositions 4 ;
-                    cdi:defaultValue "0.0" ;
-                    cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:OjHgIDO ;
-                    cdi:index 1 ;
-                    cdi:isRequired false ;
-                    cdi:nullSequence "-9999" ;
-                    cdi:physicalDataType "float64" ],
-                [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:nullSequence "NA" ;
-                    cdi:physicalDataType "float64" ] ;
-            cdi:isDelimited true ;
-            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "Geochemistry analysis results" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
-            csvw:commentPrefix "#" ;
-            csvw:delimiter "," ;
-            csvw:header true ;
-            csvw:headerRowCount 1 ;
-            csvw:quoteChar "\"" ;
-            csvw:skipBlankRows true ;
-            csvw:skipRows 0 ] ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/fnjrj68> ;
-            schema1:identifier "fMuiBjneudpV" ;
-            schema1:name "MWoPQAqRYHobey" ],
+            schema1:funder <https://ror.org/sejer4w6u8> ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:value "LZpo" ] ;
+            schema1:name "ekckpBtI" ],
         [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/3572wjht> ;
-            schema1:identifier "lieopgXuumP" ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:value "lieopgXuumP" ] ;
             schema1:name "fhhbzh" ],
         [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/sejer4w6u8> ;
-            schema1:identifier "LZpo" ;
-            schema1:name "ekckpBtI" ] ;
+            schema1:funder <https://ror.org/fnjrj68> ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:value "fMuiBjneudpV" ] ;
+            schema1:name "MWoPQAqRYHobey" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
@@ -1470,9 +1504,9 @@ ex:YOPx a schema1:Dataset ;
     schema1:publisher ex:exampleOrg_fW ;
     schema1:publishingPrinciples "rxZsrPAbJrIGGgDVJ" ;
     schema1:relatedLink [ a schema1:LinkRole ;
-            schema1:linkRelationship "BOoRREnpDEUrdNaV" ],
+            schema1:linkRelationship "lfCzUaoftdtTPAhMnpC" ],
         [ a schema1:LinkRole ;
-            schema1:linkRelationship "lfCzUaoftdtTPAhMnpC" ] ;
+            schema1:linkRelationship "BOoRREnpDEUrdNaV" ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
             schema1:value "urn:idorg:test:p45689" ] ;
     schema1:subjectOf ex:BAaR ;

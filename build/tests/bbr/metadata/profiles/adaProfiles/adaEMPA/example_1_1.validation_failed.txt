@@ -1,5 +1,5 @@
 Validation report for cdif.bbr.metadata.profiles.adaProfiles.adaEMPA - ADA EMPA Profile
-Generated 2026-02-20T15:15:32.085757+00:00
+Generated 2026-02-20T17:57:50.820879+00:00
 === Files ===
 Using exampleadaEMPA.json from examples
 JSON-LD context is present - uplifting
@@ -14,8 +14,226 @@ Validation passed
 === SHACL ===
 
 ** Validation error **
-Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:
-Bad syntax (Prefix "dqv:" not bound) at ^ in:
-"...b'fd:qualityMeasurementNode\n\ta sh:NodeShape; \n\tsh:targetClass '^b'dqv:QualityMeasurement ;\n\t\n\tsh:target [\n\t  a sh:SPARQLTarget'..."
+Validation result for _sources/profiles/adaProfiles/adaEMPA/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("EMPA products must have a schema:additionalType matching a valid EMPA type.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:hasValue Literal("Electron Microprobe Analysis (EMPA) Collection") ] [ sh:hasValue Literal("Electron Microprobe Analysis Image (EMPA)") ] [ sh:hasValue Literal("Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)") ] [ sh:hasValue Literal("Electron Microprobe Analysis (EMPA)") ] [ sh:hasValue Literal("Electron microprobe analysis") ] ) ; sh:path schema1:additionalType ]
+  	Focus Node: ex:adaEMPA-example-001
+  	Value Node: Literal("ada:DataDeliveryPackage")
+  	Result Path: schema1:additionalType
+  	Message: EMPA products must have a schema:additionalType matching a valid EMPA type.
+  
+Focus nodes for _sources/profiles/adaProfiles/adaEMPA/rules.shacl:
+ - Shape _:n43781d992909428eb506bb91f725b89bb7: *none*
+ - Shape cdifd:empaProductShape: *none*
+ - Shape _:n43781d992909428eb506bb91f725b89bb6: *none*
+ - Shape cdifd:empaProductShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n43781d992909428eb506bb91f725b89bb5: *none*
+ - Shape _:n43781d992909428eb506bb91f725b89bb4: *none*
+
+Validation result for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+ - Shape cdifd:adaVariableMeasuredShape: *none*
+ - Shape cdifd:adaProductShape: *none*
+ - Shape cdifd:adaActivityShape: *none*
+
+
+** Validation error **
+Error parsing SHACL validator for _sources/adaProperties/laboratory/rules.shacl: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery}, found '/'  (at char 307), (line:9, col:38)
+for SPARQL query
+ 1: PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ 2: PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ 3: PREFIX owl: <http://www.w3.org/2002/07/owl#>
+ 4: 
+ 5: 
+ 6:             PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+ 7:             SELECT ?this
+ 8:             WHERE {
+ 9:                 ?this a nxs:BaseClass/NXsource .
+10:             }
+11:         
+Validation result for _sources/cdifProperties/cdifOptional/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/cdifProperties/cdifOptional/rules.shacl:
+ - Shape cdifd:CDIFDatasetOptionalShape: *none*
+
+Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:
+ - Shape cdifd:CDIFLabeledLinkShape: *none*
+
+Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:
+ - Shape cdifd:CDIFDataDownloadShape: ex:adaEMPA-example-001/schema1:distribution
+
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/organization/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:CDIFOrganizationShape
+  	Focus Node: [ rdf:type schema1:Organization ; schema1:additionalType Literal("schema:FundingAgency") ; schema1:name Literal("NASA") ]
+  	Value Node: [ rdf:type schema1:Organization ; schema1:additionalType Literal("schema:FundingAgency") ; schema1:name Literal("NASA") ]
+  	Message: Organization must have an @id IRI, a name or an identifier that is a string
+  
+Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:
+ - Shape cdifd:CDIFOrganizationShape: ex:adaEMPA-example-001/schema1:funding/schema1:funder,ex:adaEMPA-metadata-001/schema1:maintainer,ex:adaEMPA-example-001/schema1:distribution/schema1:provider,ex:adaEMPA-example-001/schema1:creator/rdf:first/schema1:affiliation,_:N45726085ac7648c8a8464769305a9812
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb23: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb22: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb21: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb10: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb25: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb20: *none*
+ - Shape _:n4fb023c515704f9aa0520c25f29adcbeb11: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:CDIFDefinedTermShape
+  	Focus Node: [ rdf:type schema1:DefinedTerm ; schema1:inDefinedTermSet Literal("https://ada.astromat.org/vocabulary/techniques") ; schema1:name Literal("EMPA") ; schema1:termCode Literal("EMPA") ]
+  	Value Node: [ rdf:type schema1:DefinedTerm ; schema1:inDefinedTermSet Literal("https://ada.astromat.org/vocabulary/techniques") ; schema1:name Literal("EMPA") ; schema1:termCode Literal("EMPA") ]
+  	Message: A DefinedTerm must have a name (label) OR an identifier. Both are recommended.
+  
+Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b8: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b23: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b5: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b4: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b6: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b7: *none*
+ - Shape _:nb7216728cbdc4d8c8b7b01c35c0927e5b10: *none*
+
+
+** Validation error **
+Validation result for _sources/schemaorgProperties/person/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: cdifd:contactPointProperty
+  	Focus Node: [ rdf:type schema1:Person ; schema1:affiliation [ rdf:type schema1:Organization ; schema1:name Literal("NASA Johnson Space Center") ] ; schema1:identifier Literal("https://orcid.org/0000-0002-9876-5432") ; schema1:name Literal("Researcher, John Q.") ]
+  	Result Path: schema1:contactPoint
+  	Message: Less than 1 values on [ rdf:type schema1:Person ; schema1:affiliation [ rdf:type schema1:Organization ; schema1:name Literal("NASA Johnson Space Center") ] ; schema1:identifier Literal("https://orcid.org/0000-0002-9876-5432") ; schema1:name Literal("Researcher, John Q.") ]->schema1:contactPoint
+  
+Focus nodes for _sources/schemaorgProperties/person/rules.shacl:
+ - Shape cdifd:CDIFContactPointShape: ex:adaEMPA-example-001/schema1:contributor/schema1:contributor/schema1:contactPoint,ex:adaEMPA-example-001/schema1:creator/rdf:first/schema1:contactPoint
+ - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape: ex:adaEMPA-example-001/schema1:contributor/schema1:contributor,ex:adaEMPA-example-001/schema1:creator/rdf:first,ex:adaEMPA-example-001/schema1:creator/rdf:rest/rdf:first
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:timePositionNode: *none*
+ - Shape _:nd01374577cee4c74ae274ac3e7841638b3: *none*
+ - Shape _:nd01374577cee4c74ae274ac3e7841638b4: *none*
+ - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:nd01374577cee4c74ae274ac3e7841638b17: *none*
+ - Shape cdifd:timeInstantNode: *none*
+ - Shape cdifd:timeIntervalNode: *none*
+ - Shape _:nd01374577cee4c74ae274ac3e7841638b5: *none*
+
 === End SHACL ===
+
+=== Unknown errors ===
+
+** Validation error **
+Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validate.py", line 197, in _validate_resource
+    result = validator.validate(filename, output_filename, report,
+,  File "/src/ogc/bblocks/validation/rdf.py", line 410, in validate
+    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(
+,  File "/src/ogc/bblocks/validation/rdf.py", line 39, in shacl_validate
+    conforms, shacl_result, shacl_report = validator.run()
+,  File "/venv/lib/python3.10/site-packages/pyshacl/validate.py", line 265, in run
+    _is_conform, _reports = s.validate(
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 440, in validate
+    focus = self.focus_nodes(target_graph)
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 365, in focus_nodes
+    results = data_graph.query(select, initBindings=None)
+,  File "/venv/lib/python3.10/site-packages/rdflib/graph.py", line 1567, in query
+    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py", line 137, in query
+    query = translateQuery(parsetree, base, initNs)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 934, in translateQuery
+    q[1] = traverse(
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 469, in traverse
+    r = _traverse(tree, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 429, in _traverse
+    _e = visitPost(e)  # type: ignore[unreachable]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 197, in translatePName
+    return prologue.absolutize(p)  # type: ignore[return-value]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 430, in absolutize
+    return self.resolvePName(iri.prefix, iri.localname)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 412, in resolvePName
+    raise Exception("Unknown namespace prefix : %s" % prefix)
+,Exception: Unknown namespace prefix : dqv
+
+=== End Unknown errors ===
 

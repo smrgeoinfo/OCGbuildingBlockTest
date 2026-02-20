@@ -1,5 +1,5 @@
 Validation report for cdif.bbr.metadata.profiles.adaProfiles.adaTEM - ADA TEM Profile
-Generated 2026-02-20T15:15:33.889464+00:00
+Generated 2026-02-20T17:57:55.140286+00:00
 === Files ===
 Using example_1_1.json from examples
 JSON-LD context is present - uplifting
@@ -33,8 +33,239 @@ On instance:
 === SHACL ===
 
 ** Validation error **
-Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:
-Bad syntax (Prefix "dqv:" not bound) at ^ in:
-"...b'fd:qualityMeasurementNode\n\ta sh:NodeShape; \n\tsh:targetClass '^b'dqv:QualityMeasurement ;\n\t\n\tsh:target [\n\t  a sh:SPARQLTarget'..."
+Validation result for _sources/profiles/adaProfiles/adaTEM/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("TEM products must have a schema:additionalType matching a valid TEM type.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:hasValue Literal("Transmission Electron Microscopy (TEM) Image") ] [ sh:hasValue Literal("Transmission Electron Microscopy (TEM) Patterns Image") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy (STEM) Image") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Cube") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tabular") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy Energy Dispersive X-ray Spectroscopy (STEMEDS) Tomography") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Cube") ] [ sh:hasValue Literal("Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Tabular") ] [ sh:hasValue Literal("Transmission Electron Microscopy") ] ) ; sh:path schema1:additionalType ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Value Node: Literal("ada:DataDeliveryPackage")
+  	Result Path: schema1:additionalType
+  	Message: TEM products must have a schema:additionalType matching a valid TEM type.
+  
+Focus nodes for _sources/profiles/adaProfiles/adaTEM/rules.shacl:
+ - Shape cdifd:temProductShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b4: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b6: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b8: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b9: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b7: *none*
+ - Shape cdifd:temProductShape: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b11: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b5: *none*
+ - Shape _:n2aaf896117654517ab39f27e014654a0b10: *none*
+
+
+** Validation error **
+Validation result for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (3):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must have at least one creator (schema:creator).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:creator ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Result Path: schema1:creator
+  	Message: ADA products must have at least one creator (schema:creator).
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path prov:wasGeneratedBy ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Result Path: prov:wasGeneratedBy
+  	Message: ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:message Literal("ADA products must have at least one distribution (schema:distribution).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:distribution ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Result Path: schema1:distribution
+  	Message: ADA products must have at least one distribution (schema:distribution).
+  
+Focus nodes for _sources/profiles/adaProfiles/adaProduct/rules.shacl:
+ - Shape cdifd:adaVariableMeasuredShape: *none*
+ - Shape cdifd:adaProductShape: *none*
+ - Shape cdifd:adaActivityShape: *none*
+
+
+** Validation error **
+Error parsing SHACL validator for _sources/adaProperties/laboratory/rules.shacl: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery}, found '/'  (at char 307), (line:9, col:38)
+for SPARQL query
+ 1: PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ 2: PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ 3: PREFIX owl: <http://www.w3.org/2002/07/owl#>
+ 4: 
+ 5: 
+ 6:             PREFIX nxs: <http://purl.org/nexusformat/definitions/>
+ 7:             SELECT ?this
+ 8:             WHERE {
+ 9:                 ?this a nxs:BaseClass/NXsource .
+10:             }
+11:         
+
+** Validation error **
+Validation result for _sources/cdifProperties/cdifOptional/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (2):
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Warning
+  	Source Shape: [ sh:message Literal("A dataset should identify its creator(s) (schema:creator).") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:creator ; sh:severity sh:Warning ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Result Path: schema1:creator
+  	Message: A dataset should identify its creator(s) (schema:creator).
+  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Warning
+  	Source Shape: [ sh:message Literal("A dataset should have keywords (schema:keywords) for discoverability.") ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:path schema1:keywords ; sh:severity sh:Warning ]
+  	Focus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal("Transmission Electron Microscopy (TEM) Image"), Literal("ada:DataDeliveryPackage") ; schema1:description Literal("Transmission Electron Microscopy (TEM) data") ; schema1:name Literal("TEM Analysis of Sample") ]
+  	Result Path: schema1:keywords
+  	Message: A dataset should have keywords (schema:keywords) for discoverability.
+  
+Focus nodes for _sources/cdifProperties/cdifOptional/rules.shacl:
+ - Shape cdifd:CDIFDatasetOptionalShape: *none*
+
+Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:
+ - Shape cdifd:CDIFLabeledLinkShape: *none*
+
+Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:
+ - Shape cdifd:CDIFDataDownloadShape: *none*
+
+Validation result for _sources/schemaorgProperties/organization/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:
+ - Shape cdifd:CDIFOrganizationShape: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb11: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb10: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb21: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb20: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb22: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb23: *none*
+ - Shape _:n30853f27d5314c97b34c4c2ac95aba2eb25: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+
+Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:nd327ed11397d48518217bc1792efe072b6: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b10: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b7: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b8: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b4: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b5: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:nd327ed11397d48518217bc1792efe072b23: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+
+Validation result for _sources/schemaorgProperties/person/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/person/rules.shacl:
+ - Shape cdifd:CDIFContactPointShape: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*
+
+Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:
+ - Shape cdifd:timePositionNode: *none*
+ - Shape _:n1ac5e63dbc944f84b96c62f1711e7d5db3: *none*
+ - Shape cdifd:timeInstantNode: *none*
+ - Shape _:n1ac5e63dbc944f84b96c62f1711e7d5db4: *none*
+ - Shape cdifd:timeIntervalNode: *none*
+ - Shape _:n1ac5e63dbc944f84b96c62f1711e7d5db5: *none*
+ - Shape _:n1ac5e63dbc944f84b96c62f1711e7d5db17: *none*
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*
+ - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*
+
 === End SHACL ===
+
+=== Unknown errors ===
+
+** Validation error **
+Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validate.py", line 197, in _validate_resource
+    result = validator.validate(filename, output_filename, report,
+,  File "/src/ogc/bblocks/validation/rdf.py", line 410, in validate
+    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(
+,  File "/src/ogc/bblocks/validation/rdf.py", line 39, in shacl_validate
+    conforms, shacl_result, shacl_report = validator.run()
+,  File "/venv/lib/python3.10/site-packages/pyshacl/validate.py", line 265, in run
+    _is_conform, _reports = s.validate(
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 440, in validate
+    focus = self.focus_nodes(target_graph)
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 365, in focus_nodes
+    results = data_graph.query(select, initBindings=None)
+,  File "/venv/lib/python3.10/site-packages/rdflib/graph.py", line 1567, in query
+    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py", line 137, in query
+    query = translateQuery(parsetree, base, initNs)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 934, in translateQuery
+    q[1] = traverse(
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 469, in traverse
+    r = _traverse(tree, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 429, in _traverse
+    _e = visitPost(e)  # type: ignore[unreachable]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 197, in translatePName
+    return prologue.absolutize(p)  # type: ignore[return-value]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 430, in absolutize
+    return self.resolvePName(iri.prefix, iri.localname)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 412, in resolvePName
+    raise Exception("Unknown namespace prefix : %s" % prefix)
+,Exception: Unknown namespace prefix : dqv
+
+=== End Unknown errors ===
 

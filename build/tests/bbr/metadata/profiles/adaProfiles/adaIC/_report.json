@@ -2,7 +2,7 @@
   "title": "Validation report for cdif.bbr.metadata.profiles.adaProfiles.adaIC - ADA IC Profile",
   "bblockName": "ADA IC Profile",
   "bblockId": "cdif.bbr.metadata.profiles.adaProfiles.adaIC",
-  "generated": "2026-02-20T15:15:32.422389+00:00",
+  "generated": "2026-02-20T17:57:51.585664+00:00",
   "result": false,
   "items": [
     {
@@ -63,15 +63,332 @@
         {
           "name": "SHACL",
           "title": "SHACL",
-          "entries": []
+          "entries": [
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/profiles/adaProfiles/adaIC/rules.shacl",
+              "graph": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode [ a schema1:Dataset,\n                        schema1:Product ;\n                    schema1:additionalType \"Ion Chromatography (IC)\",\n                        \"ada:DataDeliveryPackage\" ;\n                    schema1:description \"Ion Chromatography (IC) data\" ;\n                    schema1:name \"IC Analysis of Sample\" ] ;\n            sh:resultMessage \"IC products must have a schema:additionalType matching a valid IC type.\" ;\n            sh:resultPath schema1:additionalType ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:OrConstraintComponent ;\n            sh:sourceShape [ sh:message \"IC products must have a schema:additionalType matching a valid IC type.\" ;\n                    sh:minCount 1 ;\n                    sh:or ( [ sh:hasValue \"Ion Chromatography (IC)\" ] [ sh:hasValue \"Ion Chromatography\" ] ) ;\n                    sh:path schema1:additionalType ] ;\n            sh:value \"ada:DataDeliveryPackage\" ] .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/profiles/adaProfiles/adaIC/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (1):\n  Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"IC products must have a schema:additionalType matching a valid IC type.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:or ( [ sh:hasValue Literal(\"Ion Chromatography (IC)\") ] [ sh:hasValue Literal(\"Ion Chromatography\") ] ) ; sh:path schema1:additionalType ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tValue Node: Literal(\"ada:DataDeliveryPackage\")\n  \tResult Path: schema1:additionalType\n  \tMessage: IC products must have a schema:additionalType matching a valid IC type.\n  "
+            },
+            {
+              "shaclFile": "_sources/profiles/adaProfiles/adaIC/rules.shacl",
+              "focusNodes": {
+                "cdifd:icProductShape": {
+                  "nodes": []
+                },
+                "cdifd:icProductShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n575b6fb2efbd4eea93e67be8ec07d668b4": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/profiles/adaProfiles/adaIC/rules.shacl:\n - Shape cdifd:icProductShape: *none*\n - Shape cdifd:icProductShape/sh:property/sh:or/rdf:first: *none*\n - Shape _:n575b6fb2efbd4eea93e67be8ec07d668b4: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/profiles/adaProfiles/adaProduct/rules.shacl",
+              "graph": "@prefix prov: <http://www.w3.org/ns/prov#> .\n@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode _:N2ae2dc1de4ce4839b70017ce253a088f ;\n            sh:resultMessage \"ADA products must have at least one distribution (schema:distribution).\" ;\n            sh:resultPath schema1:distribution ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"ADA products must have at least one distribution (schema:distribution).\" ;\n                    sh:minCount 1 ;\n                    sh:path schema1:distribution ] ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:N2ae2dc1de4ce4839b70017ce253a088f ;\n            sh:resultMessage \"ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).\" ;\n            sh:resultPath prov:wasGeneratedBy ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).\" ;\n                    sh:minCount 1 ;\n                    sh:path prov:wasGeneratedBy ] ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:N2ae2dc1de4ce4839b70017ce253a088f ;\n            sh:resultMessage \"ADA products must have at least one creator (schema:creator).\" ;\n            sh:resultPath schema1:creator ;\n            sh:resultSeverity sh:Violation ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"ADA products must have at least one creator (schema:creator).\" ;\n                    sh:minCount 1 ;\n                    sh:path schema1:creator ] ] .\n\n_:N2ae2dc1de4ce4839b70017ce253a088f a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"Ion Chromatography (IC)\",\n        \"ada:DataDeliveryPackage\" ;\n    schema1:description \"Ion Chromatography (IC) data\" ;\n    schema1:name \"IC Analysis of Sample\" .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/profiles/adaProfiles/adaProduct/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (3):\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"ADA products must have at least one creator (schema:creator).\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema1:creator ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tResult Path: schema1:creator\n  \tMessage: ADA products must have at least one creator (schema:creator).\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path prov:wasGeneratedBy ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tResult Path: prov:wasGeneratedBy\n  \tMessage: ADA products must describe the analysis event(s) that generated the data (prov:wasGeneratedBy).\n  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Violation\n  \tSource Shape: [ sh:message Literal(\"ADA products must have at least one distribution (schema:distribution).\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema1:distribution ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tResult Path: schema1:distribution\n  \tMessage: ADA products must have at least one distribution (schema:distribution).\n  "
+            },
+            {
+              "shaclFile": "_sources/profiles/adaProfiles/adaProduct/rules.shacl",
+              "focusNodes": {
+                "cdifd:adaVariableMeasuredShape": {
+                  "nodes": []
+                },
+                "cdifd:adaProductShape": {
+                  "nodes": []
+                },
+                "cdifd:adaActivityShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/profiles/adaProfiles/adaProduct/rules.shacl:\n - Shape cdifd:adaVariableMeasuredShape: *none*\n - Shape cdifd:adaProductShape: *none*\n - Shape cdifd:adaActivityShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/cdifProperties/cdifOptional/rules.shacl",
+              "graph": "@prefix schema1: <http://schema.org/> .\n@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms false ;\n    sh:result [ a sh:ValidationResult ;\n            sh:focusNode _:N2ae2dc1de4ce4839b70017ce253a088f ;\n            sh:resultMessage \"A dataset should identify its creator(s) (schema:creator).\" ;\n            sh:resultPath schema1:creator ;\n            sh:resultSeverity sh:Warning ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"A dataset should identify its creator(s) (schema:creator).\" ;\n                    sh:minCount 1 ;\n                    sh:path schema1:creator ;\n                    sh:severity sh:Warning ] ],\n        [ a sh:ValidationResult ;\n            sh:focusNode _:N2ae2dc1de4ce4839b70017ce253a088f ;\n            sh:resultMessage \"A dataset should have keywords (schema:keywords) for discoverability.\" ;\n            sh:resultPath schema1:keywords ;\n            sh:resultSeverity sh:Warning ;\n            sh:sourceConstraintComponent sh:MinCountConstraintComponent ;\n            sh:sourceShape [ sh:message \"A dataset should have keywords (schema:keywords) for discoverability.\" ;\n                    sh:minCount 1 ;\n                    sh:path schema1:keywords ;\n                    sh:severity sh:Warning ] ] .\n\n_:N2ae2dc1de4ce4839b70017ce253a088f a schema1:Dataset,\n        schema1:Product ;\n    schema1:additionalType \"Ion Chromatography (IC)\",\n        \"ada:DataDeliveryPackage\" ;\n    schema1:description \"Ion Chromatography (IC) data\" ;\n    schema1:name \"IC Analysis of Sample\" .\n\n",
+              "isError": true,
+              "message": "Validation result for _sources/cdifProperties/cdifOptional/rules.shacl:\n  Validation Report\n  Conforms: False\n  Results (2):\n  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Warning\n  \tSource Shape: [ sh:message Literal(\"A dataset should identify its creator(s) (schema:creator).\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema1:creator ; sh:severity sh:Warning ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tResult Path: schema1:creator\n  \tMessage: A dataset should identify its creator(s) (schema:creator).\n  Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n  \tSeverity: sh:Warning\n  \tSource Shape: [ sh:message Literal(\"A dataset should have keywords (schema:keywords) for discoverability.\") ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path schema1:keywords ; sh:severity sh:Warning ]\n  \tFocus Node: [ rdf:type schema1:Dataset, schema1:Product ; schema1:additionalType Literal(\"Ion Chromatography (IC)\"), Literal(\"ada:DataDeliveryPackage\") ; schema1:description Literal(\"Ion Chromatography (IC) data\") ; schema1:name Literal(\"IC Analysis of Sample\") ]\n  \tResult Path: schema1:keywords\n  \tMessage: A dataset should have keywords (schema:keywords) for discoverability.\n  "
+            },
+            {
+              "shaclFile": "_sources/cdifProperties/cdifOptional/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDatasetOptionalShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/cdifProperties/cdifOptional/rules.shacl:\n - Shape cdifd:CDIFDatasetOptionalShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/labeledLink/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/labeledLink/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFLabeledLinkShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/labeledLink/rules.shacl:\n - Shape cdifd:CDIFLabeledLinkShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/dataDownload/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/dataDownload/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDataDownloadShape": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/dataDownload/rules.shacl:\n - Shape cdifd:CDIFDataDownloadShape: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/organization/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/organization/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFOrganizationShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFOrganizationShape/sh:or/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/organization/rules.shacl:\n - Shape cdifd:CDIFOrganizationShape: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFOrganizationShape/sh:or/rdf:first: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/identifier/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/identifier/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/identifier/rules.shacl",
+              "focusNodes": {
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb21": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb22": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb11": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb23": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb10": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb25": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFIdentifierTypeTermShape": {
+                  "nodes": []
+                },
+                "_:n1f06ef4b50864520a52fbafbeda5c96cb20": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb21: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb22: *none*\n - Shape cdifd:CDIFIdentifierShape: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb11: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb23: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb10: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb25: *none*\n - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFIdentifierTypeTermShape: *none*\n - Shape _:n1f06ef4b50864520a52fbafbeda5c96cb20: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/definedTerm/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/definedTerm/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b8": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b4": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b7": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b5": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b10": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b23": {
+                  "nodes": []
+                },
+                "cdifd:CDIFDefinedTermShape": {
+                  "nodes": []
+                },
+                "_:n9b2f0d8c880745d1a0c3d66c97550185b6": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:\n - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b8: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b4: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b7: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b5: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b10: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b23: *none*\n - Shape cdifd:CDIFDefinedTermShape: *none*\n - Shape _:n9b2f0d8c880745d1a0c3d66c97550185b6: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/person/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/person/rules.shacl",
+              "focusNodes": {
+                "cdifd:CDIFContactPointShape": {
+                  "nodes": []
+                },
+                "cdifd:contactPointProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:affiliationProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:CDIFPersonShape": {
+                  "nodes": []
+                },
+                "cdifd:CDIFPersonShape/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/person/rules.shacl:\n - Shape cdifd:CDIFContactPointShape: *none*\n - Shape cdifd:contactPointProperty/sh:or/rdf:first: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:first: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:CDIFPersonShape: *none*\n - Shape cdifd:CDIFPersonShape/sh:or/rdf:first: *none*\n - Shape cdifd:affiliationProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:contactPointProperty/sh:or/rdf:rest/rdf:first: *none*\n"
+            },
+            {
+              "op": "shacl-report",
+              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
+              "graph": "@prefix sh: <http://www.w3.org/ns/shacl#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n[] a sh:ValidationReport ;\n    sh:conforms true .\n\n",
+              "isError": false,
+              "message": "Validation result for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n  Validation Report\n  Conforms: True\n  "
+            },
+            {
+              "shaclFile": "_sources/schemaorgProperties/temporalExtent/rules.shacl",
+              "focusNodes": {
+                "_:n8d819ab12af14f1ba78f00bccf67e484b17": {
+                  "nodes": []
+                },
+                "cdifd:timePositionNode": {
+                  "nodes": []
+                },
+                "_:n8d819ab12af14f1ba78f00bccf67e484b3": {
+                  "nodes": []
+                },
+                "_:n8d819ab12af14f1ba78f00bccf67e484b4": {
+                  "nodes": []
+                },
+                "cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:timeInstantNode": {
+                  "nodes": []
+                },
+                "cdifd:temporalExtentProperty/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "cdifd:timeIntervalNode": {
+                  "nodes": []
+                },
+                "cdifd:timePositionNode/sh:property/sh:or/rdf:first": {
+                  "nodes": []
+                },
+                "_:n8d819ab12af14f1ba78f00bccf67e484b5": {
+                  "nodes": []
+                }
+              },
+              "isError": false,
+              "message": "Focus nodes for _sources/schemaorgProperties/temporalExtent/rules.shacl:\n - Shape _:n8d819ab12af14f1ba78f00bccf67e484b17: *none*\n - Shape cdifd:timePositionNode: *none*\n - Shape _:n8d819ab12af14f1ba78f00bccf67e484b3: *none*\n - Shape _:n8d819ab12af14f1ba78f00bccf67e484b4: *none*\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:rest/rdf:first: *none*\n - Shape cdifd:timeInstantNode: *none*\n - Shape cdifd:temporalExtentProperty/sh:or/rdf:first: *none*\n - Shape cdifd:timeIntervalNode: *none*\n - Shape cdifd:timePositionNode/sh:property/sh:or/rdf:first: *none*\n - Shape _:n8d819ab12af14f1ba78f00bccf67e484b5: *none*\n"
+            }
+          ]
+        },
+        {
+          "name": "UNKNOWN",
+          "title": "Unknown errors",
+          "entries": [
+            {
+              "exception": "Exception",
+              "isError": true,
+              "message": "Traceback (most recent call last):\n,  File \"/src/ogc/bblocks/validate.py\", line 197, in _validate_resource\n    result = validator.validate(filename, output_filename, report,\n,  File \"/src/ogc/bblocks/validation/rdf.py\", line 410, in validate\n    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(\n,  File \"/src/ogc/bblocks/validation/rdf.py\", line 39, in shacl_validate\n    conforms, shacl_result, shacl_report = validator.run()\n,  File \"/venv/lib/python3.10/site-packages/pyshacl/validate.py\", line 265, in run\n    _is_conform, _reports = s.validate(\n,  File \"/venv/lib/python3.10/site-packages/pyshacl/shape.py\", line 440, in validate\n    focus = self.focus_nodes(target_graph)\n,  File \"/venv/lib/python3.10/site-packages/pyshacl/shape.py\", line 365, in focus_nodes\n    results = data_graph.query(select, initBindings=None)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/graph.py\", line 1567, in query\n    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py\", line 137, in query\n    query = translateQuery(parsetree, base, initNs)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 934, in translateQuery\n    q[1] = traverse(\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 469, in traverse\n    r = _traverse(tree, visitPre, visitPost)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 426, in _traverse\n    e[k] = _traverse(val, visitPre, visitPost)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 426, in _traverse\n    e[k] = _traverse(val, visitPre, visitPost)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in _traverse\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in <listcomp>\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 426, in _traverse\n    e[k] = _traverse(val, visitPre, visitPost)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in _traverse\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in <listcomp>\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in _traverse\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 419, in <listcomp>\n    return [_traverse(x, visitPre, visitPost) for x in e]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 429, in _traverse\n    _e = visitPost(e)  # type: ignore[unreachable]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py\", line 197, in translatePName\n    return prologue.absolutize(p)  # type: ignore[return-value]\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py\", line 430, in absolutize\n    return self.resolvePName(iri.prefix, iri.localname)\n,  File \"/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py\", line 412, in resolvePName\n    raise Exception(\"Unknown namespace prefix : %s\" % prefix)\n,Exception: Unknown namespace prefix : dqv\n"
+            }
+          ]
         }
       ]
     }
   ],
   "globalErrors": {
     "SHACL": {
+      "exception": "ParseException",
+      "errorMessage": "\nfor SPARQL query\n 1: PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n 2: PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n 3: PREFIX owl: <http://www.w3.org/2002/07/owl#>\n 4: \n 5: \n 6:             PREFIX nxs: <http://purl.org/nexusformat/definitions/>\n 7:             SELECT ?this\n 8:             WHERE {\n 9:                 ?this a nxs:BaseClass/NXsource .\n10:             }\n11:         ",
+      "shaclFile": "_sources/adaProperties/laboratory/rules.shacl",
       "isError": true,
-      "message": "Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:\nBad syntax (Prefix \"dqv:\" not bound) at ^ in:\n\"...b'fd:qualityMeasurementNode\\n\\ta sh:NodeShape; \\n\\tsh:targetClass '^b'dqv:QualityMeasurement ;\\n\\t\\n\\tsh:target [\\n\\t  a sh:SPARQLTarget'...\""
+      "message": "Error parsing SHACL validator for _sources/adaProperties/laboratory/rules.shacl: Expected {SelectQuery | ConstructQuery | DescribeQuery | AskQuery}, found '/'  (at char 307), (line:9, col:38)\nfor SPARQL query\n 1: PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n 2: PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n 3: PREFIX owl: <http://www.w3.org/2002/07/owl#>\n 4: \n 5: \n 6:             PREFIX nxs: <http://purl.org/nexusformat/definitions/>\n 7:             SELECT ?this\n 8:             WHERE {\n 9:                 ?this a nxs:BaseClass/NXsource .\n10:             }\n11:         "
     }
   },
   "counts": {

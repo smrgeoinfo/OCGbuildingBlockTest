@@ -1,5 +1,5 @@
 Validation report for cdif.bbr.metadata.qualityProperties.qualityMeasure - Simple quality measurement properties
-Generated 2026-02-20T15:15:28.442970+00:00
+Generated 2026-02-20T17:57:44.857152+00:00
 === Files ===
 Using exampleQualityMeasure.json from examples
 JSON-LD context is present - uplifting
@@ -11,11 +11,57 @@ Output Turtle example_1_1.ttl created
 Validation passed
 === End JSON Schema ===
 
-=== SHACL ===
+=== Unknown errors ===
 
 ** Validation error **
-Error processing _sources/qualityProperties/qualityMeasure/rules.shacl: at line 12 of <>:
-Bad syntax (Prefix "dqv:" not bound) at ^ in:
-"...b'fd:qualityMeasurementNode\n\ta sh:NodeShape; \n\tsh:targetClass '^b'dqv:QualityMeasurement ;\n\t\n\tsh:target [\n\t  a sh:SPARQLTarget'..."
-=== End SHACL ===
+Traceback (most recent call last):
+,  File "/src/ogc/bblocks/validate.py", line 197, in _validate_resource
+    result = validator.validate(filename, output_filename, report,
+,  File "/src/ogc/bblocks/validation/rdf.py", line 410, in validate
+    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(
+,  File "/src/ogc/bblocks/validation/rdf.py", line 39, in shacl_validate
+    conforms, shacl_result, shacl_report = validator.run()
+,  File "/venv/lib/python3.10/site-packages/pyshacl/validate.py", line 265, in run
+    _is_conform, _reports = s.validate(
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 440, in validate
+    focus = self.focus_nodes(target_graph)
+,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 365, in focus_nodes
+    results = data_graph.query(select, initBindings=None)
+,  File "/venv/lib/python3.10/site-packages/rdflib/graph.py", line 1567, in query
+    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py", line 137, in query
+    query = translateQuery(parsetree, base, initNs)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 934, in translateQuery
+    q[1] = traverse(
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 469, in traverse
+    r = _traverse(tree, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
+    e[k] = _traverse(val, visitPre, visitPost)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
+    return [_traverse(x, visitPre, visitPost) for x in e]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 429, in _traverse
+    _e = visitPost(e)  # type: ignore[unreachable]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 197, in translatePName
+    return prologue.absolutize(p)  # type: ignore[return-value]
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 430, in absolutize
+    return self.resolvePName(iri.prefix, iri.localname)
+,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 412, in resolvePName
+    raise Exception("Unknown namespace prefix : %s" % prefix)
+,Exception: Unknown namespace prefix : dqv
+
+=== End Unknown errors ===
 
