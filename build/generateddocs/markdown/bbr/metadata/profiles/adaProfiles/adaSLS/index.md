@@ -76,7 +76,7 @@ Mock data for validation and testing.
     "schema:name": "SLS Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example Structured Light Scanning (SLS) product metadata demonstrating all properties defined by the adaSLS profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "SLSIndividualScanCollection",
+        "Structured Light Scanning (SLS) Individual Scan Collection",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -408,7 +408,7 @@ Mock data for validation and testing.
   "schema:name": "SLS Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example Structured Light Scanning (SLS) product metadata demonstrating all properties defined by the adaSLS profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "SLSIndividualScanCollection",
+    "Structured Light Scanning (SLS) Individual Scan Collection",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -720,7 +720,7 @@ Mock data for validation and testing.
 
 ex:adaSLS-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "SLSIndividualScanCollection",
+    schema1:additionalType "Structured Light Scanning (SLS) Individual Scan Collection",
         "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
@@ -886,9 +886,8 @@ allOf:
       description: Must include a SLS product type identifier.
       contains:
         enum:
-        - SLSIndividualScanCollection
+        - Structured Light Scanning (SLS) Individual Scan Collection
         - Structured Light Scanning (SLS) Shape Model
-        - Structured Light Scanning
     schema:distribution:
       items:
         properties:

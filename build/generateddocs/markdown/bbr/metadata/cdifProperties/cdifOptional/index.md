@@ -63,7 +63,11 @@ Example CDIF record with mandatory and optional properties.
             {
                 "@type": "schema:Person",
                 "schema:name": "Example, Author",
-                "schema:identifier": "https://orcid.org/0000-0001-2345-6789"
+                "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "author@example.org"
+                }
             }
         ]
     },
@@ -135,7 +139,11 @@ Example CDIF record with mandatory and optional properties.
       {
         "@type": "schema:Person",
         "schema:name": "Example, Author",
-        "schema:identifier": "https://orcid.org/0000-0001-2345-6789"
+        "schema:identifier": "https://orcid.org/0000-0001-2345-6789",
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "author@example.org"
+        }
       }
     ]
   },
@@ -156,6 +164,8 @@ ex:cdifOptional_23578 a schema1:Dataset ;
     schema1:additionalType "" ;
     schema1:conditionsOfAccess ex:LabeledLinkExample_qZc ;
     schema1:creator ( [ a schema1:Person ;
+                schema1:contactPoint [ a schema1:ContactPoint ;
+                        schema1:email "author@example.org" ] ;
                 schema1:identifier "https://orcid.org/0000-0001-2345-6789" ;
                 schema1:name "Example, Author" ] ) ;
     schema1:dateModified "2022-12-12" ;

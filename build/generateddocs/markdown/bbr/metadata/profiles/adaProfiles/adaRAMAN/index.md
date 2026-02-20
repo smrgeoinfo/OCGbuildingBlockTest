@@ -69,7 +69,7 @@ Mock data for validation and testing.
     "schema:name": "RAMAN Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example Raman Spectroscopy (RAMAN) product metadata demonstrating all properties defined by the adaRAMAN profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "RAMAN Raw",
+        "Raman vibrational spectroscopy",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -400,7 +400,7 @@ Mock data for validation and testing.
   "schema:name": "RAMAN Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example Raman Spectroscopy (RAMAN) product metadata demonstrating all properties defined by the adaRAMAN profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "RAMAN Raw",
+    "Raman vibrational spectroscopy",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -711,7 +711,7 @@ Mock data for validation and testing.
 
 ex:adaRAMAN-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "RAMAN Raw",
+    schema1:additionalType "Raman vibrational spectroscopy",
         "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
@@ -874,9 +874,7 @@ allOf:
     schema:additionalType:
       description: Must include a RAMAN product type identifier.
       contains:
-        enum:
-        - RAMAN Raw
-        - Raman vibrational spectroscopy
+        const: Raman vibrational spectroscopy
     schema:distribution:
       items:
         properties:

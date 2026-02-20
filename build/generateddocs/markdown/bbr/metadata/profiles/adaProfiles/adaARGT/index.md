@@ -74,7 +74,7 @@ Mock data for validation and testing.
     "schema:name": "ARGT Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example Argon Geochronology and Thermochronology (ARGT) product metadata demonstrating all properties defined by the adaARGT profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "⁴⁰Ar/³⁹Ar Geochronology and Thermochronology (ARGT)",
+        "40Ar/39Ar Geochronology and Thermochronology (ARGT)",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -406,7 +406,7 @@ Mock data for validation and testing.
   "schema:name": "ARGT Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example Argon Geochronology and Thermochronology (ARGT) product metadata demonstrating all properties defined by the adaARGT profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "\u2074\u2070Ar/\u00b3\u2079Ar Geochronology and Thermochronology (ARGT)",
+    "40Ar/39Ar Geochronology and Thermochronology (ARGT)",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -718,8 +718,8 @@ Mock data for validation and testing.
 
 ex:adaARGT-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "ada:DataDeliveryPackage",
-        "⁴⁰Ar/³⁹Ar Geochronology and Thermochronology (ARGT)" ;
+    schema1:additionalType "40Ar/39Ar Geochronology and Thermochronology (ARGT)",
+        "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
             schema1:contributor [ a schema1:Person ;
@@ -884,7 +884,7 @@ allOf:
       description: Must include a ARGT product type identifier.
       contains:
         enum:
-        - "\u2074\u2070Ar/\xB3\u2079Ar Geochronology and Thermochronology (ARGT)"
+        - 40Ar/39Ar Geochronology and Thermochronology (ARGT)
         - 40Ar/39Ar geochronology and thermochronology
     schema:distribution:
       items:

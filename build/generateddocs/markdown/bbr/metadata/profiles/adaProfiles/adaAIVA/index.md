@@ -71,7 +71,7 @@ Mock data for validation and testing.
     "schema:name": "AIVA Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example AI-driven Visual Analysis (AIVA) product metadata demonstrating all properties defined by the adaAIVA profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)",
+        "Advanced Imaging and Visualization of Astromaterials (AIVA)",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -403,7 +403,7 @@ Mock data for validation and testing.
   "schema:name": "AIVA Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example AI-driven Visual Analysis (AIVA) product metadata demonstrating all properties defined by the adaAIVA profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)",
+    "Advanced Imaging and Visualization of Astromaterials (AIVA)",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -715,7 +715,7 @@ Mock data for validation and testing.
 
 ex:adaAIVA-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)",
+    schema1:additionalType "Advanced Imaging and Visualization of Astromaterials (AIVA)",
         "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
@@ -880,7 +880,7 @@ allOf:
       description: Must include a AIVA product type identifier.
       contains:
         enum:
-        - Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)
+        - Advanced Imaging and Visualization of Astromaterials (AIVA)
         - Advanced Imaging and Visualization of Astromaterials
     schema:distribution:
       items:

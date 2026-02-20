@@ -76,7 +76,7 @@ Mock data for validation and testing.
     "schema:name": "QRIS Analysis of Meteorite ALH 84001 Fragment",
     "schema:description": "Example Quantitative Reflectance Imaging Spectroscopy (QRIS) product metadata demonstrating all properties defined by the adaQRIS profile. Contains mock data for testing and validation.",
     "schema:additionalType": [
-        "Quantitative Reflective Imaging System (QRIS) Calibrated",
+        "Quantitative Reflective Imaging System (QRIS)",
         "ada:DataDeliveryPackage"
     ],
     "schema:identifier": {
@@ -408,7 +408,7 @@ Mock data for validation and testing.
   "schema:name": "QRIS Analysis of Meteorite ALH 84001 Fragment",
   "schema:description": "Example Quantitative Reflectance Imaging Spectroscopy (QRIS) product metadata demonstrating all properties defined by the adaQRIS profile. Contains mock data for testing and validation.",
   "schema:additionalType": [
-    "Quantitative Reflective Imaging System (QRIS) Calibrated",
+    "Quantitative Reflective Imaging System (QRIS)",
     "ada:DataDeliveryPackage"
   ],
   "schema:identifier": {
@@ -720,7 +720,7 @@ Mock data for validation and testing.
 
 ex:adaQRIS-example-001 a schema1:Dataset,
         schema1:Product ;
-    schema1:additionalType "Quantitative Reflective Imaging System (QRIS) Calibrated",
+    schema1:additionalType "Quantitative Reflective Imaging System (QRIS)",
         "ada:DataDeliveryPackage" ;
     schema1:conditionsOfAccess "Unrestricted access for research purposes" ;
     schema1:contributor [ a schema1:Role ;
@@ -886,8 +886,7 @@ allOf:
       description: Must include a QRIS product type identifier.
       contains:
         enum:
-        - Quantitative Reflective Imaging System (QRIS) Calibrated
-        - Quantitative Reflective Imaging System (QRIS) Raw
+        - Quantitative Reflective Imaging System (QRIS)
         - Quantitative Reflective Imaging System
     schema:distribution:
       items:
