@@ -40,7 +40,7 @@ bring together all required properties.
         "schema:value": "MgxVV",
         "schema:url": "http://example.com/resource?foo=bar#fragment"
     },
-    "schema:dateModified": "hTGGhUVjEPFRl",
+    "schema:dateModified": "2025-06-15",
     "schema:conditionsOfAccess": ["eiSzBJBNrAKINEAkjBAz"],
     "schema:license": ["lWbw", "ZoTXfsfevzu", "ogAgtO", "wVK"],
     "schema:url": "http://example.com/resource?foo=bar#fragment",
@@ -86,7 +86,11 @@ bring together all required properties.
         "schema:maintainer": {
             "@id": "nKwywfsuBh",
             "@type": "schema:Person",
-            "schema:name": "GyadRNhaueALkWVhXdP"
+            "schema:name": "Cataloger, Example Data",
+            "schema:contactPoint": {
+                "@type": "schema:ContactPoint",
+                "schema:email": "cataloger@example.org"
+            }
         },
         "schema:sdDatePublished": "2025-08-15T06:45:40Z",
         "schema:includedInDataCatalog": {
@@ -156,8 +160,8 @@ bring together all required properties.
             "schema:additionalProperty": [
                 {
                     "@type": "schema:PropertyValue",
-                    "schema:propertyID": ["crl"],
-                    "schema:name": "nNp",
+                    "schema:propertyID": ["https://example.org/vocab/sample-prep"],
+                    "schema:name": "sample preparation method",
                     "schema:value": "uUUTOmBQ"
                 },
                 {
@@ -237,7 +241,7 @@ bring together all required properties.
     "schema:value": "MgxVV",
     "schema:url": "http://example.com/resource?foo=bar#fragment"
   },
-  "schema:dateModified": "hTGGhUVjEPFRl",
+  "schema:dateModified": "2025-06-15",
   "schema:conditionsOfAccess": [
     "eiSzBJBNrAKINEAkjBAz"
   ],
@@ -310,7 +314,11 @@ bring together all required properties.
     "schema:maintainer": {
       "@id": "nKwywfsuBh",
       "@type": "schema:Person",
-      "schema:name": "GyadRNhaueALkWVhXdP"
+      "schema:name": "Cataloger, Example Data",
+      "schema:contactPoint": {
+        "@type": "schema:ContactPoint",
+        "schema:email": "cataloger@example.org"
+      }
     },
     "schema:sdDatePublished": "2025-08-15T06:45:40Z",
     "schema:includedInDataCatalog": {
@@ -401,9 +409,9 @@ bring together all required properties.
           {
             "@type": "schema:PropertyValue",
             "schema:propertyID": [
-              "crl"
+              "https://example.org/vocab/sample-prep"
             ],
-            "schema:name": "nNp",
+            "schema:name": "sample preparation method",
             "schema:value": "uUUTOmBQ"
           },
           {
@@ -463,7 +471,7 @@ bring together all required properties.
 <file:///github/workspace/NVohEbchV> a schema1:Dataset,
         schema1:Product ;
     schema1:conditionsOfAccess "eiSzBJBNrAKINEAkjBAz" ;
-    schema1:dateModified "hTGGhUVjEPFRl" ;
+    schema1:dateModified "2025-06-15" ;
     schema1:distribution <file:///github/workspace/RNdlTIf>,
         <file:///github/workspace/lMtIx> ;
     schema1:identifier [ a schema1:PropertyValue ;
@@ -471,15 +479,15 @@ bring together all required properties.
             schema1:url "http://example.com/resource?foo=bar#fragment" ;
             schema1:value "MgxVV" ] ;
     schema1:keywords [ a schema1:DefinedTerm ;
-            schema1:identifier "hYtRv" ;
-            schema1:inDefinedTermSet "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md" ;
-            schema1:name "K-edge" ;
-            schema1:termCode "K" ],
-        [ a schema1:DefinedTerm ;
             schema1:identifier "http://sweetontology.net/matrElement/Selenium" ;
             schema1:inDefinedTermSet "http://sweetontology.net/matrElement" ;
             schema1:name "Selenium" ;
-            schema1:termCode "Se" ] ;
+            schema1:termCode "Se" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier "hYtRv" ;
+            schema1:inDefinedTermSet "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md" ;
+            schema1:name "K-edge" ;
+            schema1:termCode "K" ] ;
     schema1:license "ZoTXfsfevzu",
         "lWbw",
         "ogAgtO",
@@ -499,13 +507,13 @@ bring together all required properties.
     prov:wasGeneratedBy [ schema1:mainEntity [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "sample preparation method" ;
+                            schema1:propertyID "https://example.org/vocab/sample-prep" ;
+                            schema1:value "uUUTOmBQ" ],
+                        [ a schema1:PropertyValue ;
                             schema1:name "qqcHFymGZzaJLKGN" ;
                             schema1:propertyID "EiAnJhZyLsQAxKd" ;
-                            schema1:value "rljVqQklQEuNZF" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "nNp" ;
-                            schema1:propertyID "crl" ;
-                            schema1:value "uUUTOmBQ" ] ;
+                            schema1:value "rljVqQklQEuNZF" ] ;
                     schema1:additionalType "MaterialSample",
                         "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample" ;
                     schema1:description "ahjWwyayQYhnB" ;
@@ -514,32 +522,32 @@ bring together all required properties.
             prov:used [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "d-spacing" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
-                            schema1:unitText "Angstrom" ;
-                            schema1:value "3.13550" ],
+                            schema1:name "x-ray source" ;
+                            schema1:propertyID "nxs:Field/NXsource/type" ;
+                            schema1:value "Synchrotron X-ray Source" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "Probe" ;
+                            schema1:propertyID "nxs:Field/NXsource/probe" ;
+                            schema1:value "x-ray" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
+                    schema1:name "kVLmQxSource" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "reflection plane (hkl)" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                            schema1:value "1,1,1" ],
                         [ a schema1:PropertyValue ;
                             schema1:name "crystal type" ;
                             schema1:propertyID "nxs:Field/NXcrystal/type" ;
                             schema1:value "mRqWz" ],
                         [ a schema1:PropertyValue ;
-                            schema1:name "reflection plane (hkl)" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
-                            schema1:value "1,1,1" ] ;
+                            schema1:name "d-spacing" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
+                            schema1:unitText "Angstrom" ;
+                            schema1:value "3.13550" ] ;
                     schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
-                    schema1:name "Si 111" ],
-                [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Probe" ;
-                            schema1:propertyID "nxs:Field/NXsource/probe" ;
-                            schema1:value "x-ray" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "x-ray source" ;
-                            schema1:propertyID "nxs:Field/NXsource/type" ;
-                            schema1:value "Synchrotron X-ray Source" ] ;
-                    schema1:additionalType "nxs:BaseClass/NXsource" ;
-                    schema1:name "kVLmQxSource" ] ] .
+                    schema1:name "Si 111" ] ] .
 
 <file:///github/workspace/RNdlTIf> a schema1:DataDownload ;
     schema1:contentUrl "http://example.com/resource/34h5ykl" ;
@@ -569,7 +577,9 @@ bring together all required properties.
             spdx:checksumValue "F" ] .
 
 <file:///github/workspace/nKwywfsuBh> a schema1:Person ;
-    schema1:name "GyadRNhaueALkWVhXdP" .
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "cataloger@example.org" ] ;
+    schema1:name "Cataloger, Example Data" .
 
 <file:///github/workspace/nbUunSyw> a schema1:DataCatalog ;
     schema1:name "hFcgszRnAnrDNlkluJ" ;

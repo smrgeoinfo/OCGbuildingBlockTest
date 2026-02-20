@@ -57,7 +57,20 @@ Example CDIF record with mandatory and optional properties.
             }
         }
     ],
-    "schema:publishingPrinciples": ["https://example.org/principles/3478"]
+    "schema:publishingPrinciples": ["https://example.org/principles/3478"],
+    "schema:creator": {
+        "@list": [
+            {
+                "@type": "schema:Person",
+                "schema:name": "Example, Author",
+                "schema:identifier": "https://orcid.org/0000-0001-2345-6789"
+            }
+        ]
+    },
+    "schema:keywords": [
+        "bathymetry",
+        "ocean floor"
+    ]
 }
 ```
 
@@ -116,6 +129,19 @@ Example CDIF record with mandatory and optional properties.
   ],
   "schema:publishingPrinciples": [
     "https://example.org/principles/3478"
+  ],
+  "schema:creator": {
+    "@list": [
+      {
+        "@type": "schema:Person",
+        "schema:name": "Example, Author",
+        "schema:identifier": "https://orcid.org/0000-0001-2345-6789"
+      }
+    ]
+  },
+  "schema:keywords": [
+    "bathymetry",
+    "ocean floor"
   ]
 }
 ```
@@ -123,16 +149,22 @@ Example CDIF record with mandatory and optional properties.
 #### ttl
 ```ttl
 @prefix ex: <https://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema1: <http://schema.org/> .
 
 ex:cdifOptional_23578 a schema1:Dataset ;
     schema1:additionalType "" ;
     schema1:conditionsOfAccess ex:LabeledLinkExample_qZc ;
+    schema1:creator ( [ a schema1:Person ;
+                schema1:identifier "https://orcid.org/0000-0001-2345-6789" ;
+                schema1:name "Example, Author" ] ) ;
     schema1:dateModified "2022-12-12" ;
     schema1:datePublished "2021-11-14" ;
     schema1:description "description of resource" ;
     schema1:identifier "https://doi.org/23566/aslry" ;
     schema1:inLanguage "en" ;
+    schema1:keywords "bathymetry",
+        "ocean floor" ;
     schema1:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     schema1:name "Bathymetry Bay of Biscay" ;
     schema1:publishingPrinciples "https://example.org/principles/3478" ;
