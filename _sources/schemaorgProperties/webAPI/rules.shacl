@@ -10,13 +10,14 @@
 cdifd:webAPINode
 	a sh:NodeShape; 
 	sh:targetClass schema:WebAPI ;
-	sh:property 	
+	sh:property
 		[sh:path schema:serviceType ;
-			sh:or ( [sh:nodeKind sh:IRI] 
+			sh:or ( [sh:nodeKind sh:IRI]
+				[sh:class schema:DefinedTerm]
 				[sh:datatype xsd:string;
 				  sh:minLength 3 ;] ) ;
 			sh:minCount 1 ;
-			sh:message "A WebAPI node must specify a service type with a string or IRI. string must have length >=3";
+			sh:message "A WebAPI node must specify a service type with a string, IRI, or DefinedTerm";
 		];
 	sh:property 
 		[sh:path schema:documentation;
