@@ -530,14 +530,14 @@ bring together all required properties.
                             schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
                             schema1:value "1,1,1" ],
                         [ a schema1:PropertyValue ;
+                            schema1:name "crystal type" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                            schema1:value "mRqWz" ],
+                        [ a schema1:PropertyValue ;
                             schema1:name "d-spacing" ;
                             schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
                             schema1:unitText "Angstrom" ;
-                            schema1:value "3.13550" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "crystal type" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
-                            schema1:value "mRqWz" ] ;
+                            schema1:value "3.13550" ] ;
                     schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
                     schema1:name "Si 111" ] ] .
 
