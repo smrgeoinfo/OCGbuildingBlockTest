@@ -33,12 +33,14 @@ cdifd:xctProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "X-ray Computed Tomography (XCT) Image Collection"]
         [sh:hasValue "X-ray computed tomography"]
-        ) ;
-        sh:message "XCT products must have a schema:additionalType matching a valid XCT type." ;
+            )
+        ] ;
+        sh:message "XCT products must have at least one schema:additionalType matching a valid XCT type." ;
     ] ;
     sh:message "XCT technique profile: additionalType must identify a valid XCT product type." ;
     .

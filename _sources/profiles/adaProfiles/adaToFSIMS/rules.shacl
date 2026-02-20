@@ -33,12 +33,14 @@ cdifd:tofsimsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Time-of-flight secondary ion mass spectrometry (TOFSIMS)"]
         [sh:hasValue "Time-of-Flight Secondary Ion Mass Spectrometry"]
-        ) ;
-        sh:message "ToF-SIMS products must have a schema:additionalType matching a valid ToF-SIMS type." ;
+            )
+        ] ;
+        sh:message "ToF-SIMS products must have at least one schema:additionalType matching a valid ToF-SIMS type." ;
     ] ;
     sh:message "ToF-SIMS technique profile: additionalType must identify a valid ToF-SIMS product type." ;
     .

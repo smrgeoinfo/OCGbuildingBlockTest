@@ -33,14 +33,16 @@ cdifd:icpoesProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Raw"]
         [sh:hasValue "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Intermediate"]
         [sh:hasValue "Inductively Coupled Plasma - Optical Emission Spectroscopy (ICPOES) Processed"]
         [sh:hasValue "Inductively coupled plasma - optical emission spectrometry"]
-        ) ;
-        sh:message "ICP-OES products must have a schema:additionalType matching a valid ICP-OES type." ;
+            )
+        ] ;
+        sh:message "ICP-OES products must have at least one schema:additionalType matching a valid ICP-OES type." ;
     ] ;
     sh:message "ICP-OES technique profile: additionalType must identify a valid ICP-OES product type." ;
     .

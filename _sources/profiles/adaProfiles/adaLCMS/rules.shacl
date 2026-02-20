@@ -33,12 +33,14 @@ cdifd:lcmsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Liquid Chromatography - Mass Spectrometry (LCMS) Collection"]
         [sh:hasValue "Liquid chromatography-mass spectrometry"]
-        ) ;
-        sh:message "LC-MS products must have a schema:additionalType matching a valid LC-MS type." ;
+            )
+        ] ;
+        sh:message "LC-MS products must have at least one schema:additionalType matching a valid LC-MS type." ;
     ] ;
     sh:message "LC-MS technique profile: additionalType must identify a valid LC-MS product type." ;
     .

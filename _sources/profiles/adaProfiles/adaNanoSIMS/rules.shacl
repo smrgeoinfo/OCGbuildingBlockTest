@@ -33,14 +33,16 @@ cdifd:nanosimsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Raw"]
         [sh:hasValue "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Image"]
         [sh:hasValue "Nanoscale Secondary Ion Mass Spectrometry (NanoSIMS) Tabular"]
         [sh:hasValue "Nanoscale secondary ion mass spectrometry"]
-        ) ;
-        sh:message "NanoSIMS products must have a schema:additionalType matching a valid NanoSIMS type." ;
+            )
+        ] ;
+        sh:message "NanoSIMS products must have at least one schema:additionalType matching a valid NanoSIMS type." ;
     ] ;
     sh:message "NanoSIMS technique profile: additionalType must identify a valid NanoSIMS product type." ;
     .

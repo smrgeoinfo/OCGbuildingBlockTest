@@ -33,12 +33,14 @@ cdifd:icProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Ion Chromatography (IC)"]
         [sh:hasValue "Ion Chromatography"]
-        ) ;
-        sh:message "IC products must have a schema:additionalType matching a valid IC type." ;
+            )
+        ] ;
+        sh:message "IC products must have at least one schema:additionalType matching a valid IC type." ;
     ] ;
     sh:message "IC technique profile: additionalType must identify a valid IC product type." ;
     .

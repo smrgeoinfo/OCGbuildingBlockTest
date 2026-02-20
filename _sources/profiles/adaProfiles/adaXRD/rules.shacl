@@ -33,12 +33,14 @@ cdifd:xrdProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "X-ray Diffraction (XRD) Tabular"]
         [sh:hasValue "X-ray diffraction"]
-        ) ;
-        sh:message "XRD products must have a schema:additionalType matching a valid XRD type." ;
+            )
+        ] ;
+        sh:message "XRD products must have at least one schema:additionalType matching a valid XRD type." ;
     ] ;
     sh:message "XRD technique profile: additionalType must identify a valid XRD product type." ;
     .

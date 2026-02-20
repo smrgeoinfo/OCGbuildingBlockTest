@@ -33,12 +33,14 @@ cdifd:psfdProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Particle Size Frequency Distribution (PSFD)"]
         [sh:hasValue "Particle Size Frequency Distribution"]
-        ) ;
-        sh:message "PSFD products must have a schema:additionalType matching a valid PSFD type." ;
+            )
+        ] ;
+        sh:message "PSFD products must have at least one schema:additionalType matching a valid PSFD type." ;
     ] ;
     sh:message "PSFD technique profile: additionalType must identify a valid PSFD product type." ;
     .

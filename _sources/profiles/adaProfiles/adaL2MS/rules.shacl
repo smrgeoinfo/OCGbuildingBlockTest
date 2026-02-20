@@ -33,12 +33,14 @@ cdifd:l2msProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Microprobe Two-Step Laser Mass Spectrometry (L2MS)"]
         [sh:hasValue "Microprobe Two-Step Laser Mass Spectrometry"]
-        ) ;
-        sh:message "L2MS products must have a schema:additionalType matching a valid L2MS type." ;
+            )
+        ] ;
+        sh:message "L2MS products must have at least one schema:additionalType matching a valid L2MS type." ;
     ] ;
     sh:message "L2MS technique profile: additionalType must identify a valid L2MS product type." ;
     .

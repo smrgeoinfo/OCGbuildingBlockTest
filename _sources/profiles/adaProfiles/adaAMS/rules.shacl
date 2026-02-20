@@ -33,12 +33,14 @@ cdifd:amsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Accelerator Mass Spectrometry (AMS)"]
         [sh:hasValue "Accelerator Mass Spectrometry"]
-        ) ;
-        sh:message "AMS products must have a schema:additionalType matching a valid AMS type." ;
+            )
+        ] ;
+        sh:message "AMS products must have at least one schema:additionalType matching a valid AMS type." ;
     ] ;
     sh:message "AMS technique profile: additionalType must identify a valid AMS product type." ;
     .

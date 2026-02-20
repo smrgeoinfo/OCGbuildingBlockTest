@@ -33,12 +33,14 @@ cdifd:uvfmProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Fluorescence Microscopy (UVFM) Image"]
         [sh:hasValue "UV Fluorescence Microscopy"]
-        ) ;
-        sh:message "UVFM products must have a schema:additionalType matching a valid UVFM type." ;
+            )
+        ] ;
+        sh:message "UVFM products must have at least one schema:additionalType matching a valid UVFM type." ;
     ] ;
     sh:message "UVFM technique profile: additionalType must identify a valid UVFM product type." ;
     .

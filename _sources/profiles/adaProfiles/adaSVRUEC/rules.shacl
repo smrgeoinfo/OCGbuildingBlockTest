@@ -33,12 +33,14 @@ cdifd:svruecProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Seismic Velocities and Rock Ultrasonic Elastic Constants (SVRUEC)"]
         [sh:hasValue "Seismic Velocities and Rock Ultrasonic Elastic Constants"]
-        ) ;
-        sh:message "SV-RUEC products must have a schema:additionalType matching a valid SV-RUEC type." ;
+            )
+        ] ;
+        sh:message "SV-RUEC products must have at least one schema:additionalType matching a valid SV-RUEC type." ;
     ] ;
     sh:message "SV-RUEC technique profile: additionalType must identify a valid SV-RUEC product type." ;
     .

@@ -33,12 +33,14 @@ cdifd:dscProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Differential Scanning Calorimetry (DSC)"]
         [sh:hasValue "Differential Scanning Calorimetry"]
-        ) ;
-        sh:message "DSC products must have a schema:additionalType matching a valid DSC type." ;
+            )
+        ] ;
+        sh:message "DSC products must have at least one schema:additionalType matching a valid DSC type." ;
     ] ;
     sh:message "DSC technique profile: additionalType must identify a valid DSC product type." ;
     .

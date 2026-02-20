@@ -33,8 +33,9 @@ cdifd:temProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Transmission Electron Microscopy (TEM) Image"]
         [sh:hasValue "Transmission Electron Microscopy (TEM) Patterns Image"]
         [sh:hasValue "Scanning Transmission Electron Microscopy (STEM) Image"]
@@ -44,8 +45,9 @@ cdifd:temProductShape
         [sh:hasValue "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Cube"]
         [sh:hasValue "Scanning Transmission Electron Microscopy Electron Energy-loss Spectra (STEMEELS) Tabular"]
         [sh:hasValue "Transmission Electron Microscopy"]
-        ) ;
-        sh:message "TEM products must have a schema:additionalType matching a valid TEM type." ;
+            )
+        ] ;
+        sh:message "TEM products must have at least one schema:additionalType matching a valid TEM type." ;
     ] ;
     sh:message "TEM technique profile: additionalType must identify a valid TEM product type." ;
     .

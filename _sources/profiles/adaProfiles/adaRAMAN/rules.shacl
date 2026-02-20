@@ -33,12 +33,14 @@ cdifd:ramanProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "RAMAN Raw"]
         [sh:hasValue "Raman vibrational spectroscopy"]
-        ) ;
-        sh:message "RAMAN products must have a schema:additionalType matching a valid RAMAN type." ;
+            )
+        ] ;
+        sh:message "RAMAN products must have at least one schema:additionalType matching a valid RAMAN type." ;
     ] ;
     sh:message "RAMAN technique profile: additionalType must identify a valid RAMAN product type." ;
     .

@@ -33,12 +33,14 @@ cdifd:gcmsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Gas Chromatography-Mass Spectrometry (GCMS)"]
         [sh:hasValue "Gas Chromatography-Mass Spectrometry"]
-        ) ;
-        sh:message "GC-MS products must have a schema:additionalType matching a valid GC-MS type." ;
+            )
+        ] ;
+        sh:message "GC-MS products must have at least one schema:additionalType matching a valid GC-MS type." ;
     ] ;
     sh:message "GC-MS technique profile: additionalType must identify a valid GC-MS product type." ;
     .

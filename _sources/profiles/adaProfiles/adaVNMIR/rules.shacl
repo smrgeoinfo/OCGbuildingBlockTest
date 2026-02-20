@@ -33,14 +33,16 @@ cdifd:vnmirProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Point"]
         [sh:hasValue "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Overview Image"]
         [sh:hasValue "Visible, near-infrared, and mid-infrared Spectroscopy (VNMIR) Spectral Map"]
         [sh:hasValue "Visible, near-, and mid-infrared spectroscopy"]
-        ) ;
-        sh:message "VNMIR products must have a schema:additionalType matching a valid VNMIR type." ;
+            )
+        ] ;
+        sh:message "VNMIR products must have at least one schema:additionalType matching a valid VNMIR type." ;
     ] ;
     sh:message "VNMIR technique profile: additionalType must identify a valid VNMIR product type." ;
     .

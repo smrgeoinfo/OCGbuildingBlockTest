@@ -33,12 +33,14 @@ cdifd:eairmsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Elemental Analysis-Isotope Ratio Mass Spectrometry (EA-IRMS)"]
         [sh:hasValue "Elemental analysis - isotope ratio mass spectrometry"]
-        ) ;
-        sh:message "EA-IRMS products must have a schema:additionalType matching a valid EA-IRMS type." ;
+            )
+        ] ;
+        sh:message "EA-IRMS products must have at least one schema:additionalType matching a valid EA-IRMS type." ;
     ] ;
     sh:message "EA-IRMS technique profile: additionalType must identify a valid EA-IRMS product type." ;
     .

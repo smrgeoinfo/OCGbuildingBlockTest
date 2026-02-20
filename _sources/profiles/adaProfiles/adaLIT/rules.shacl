@@ -33,13 +33,15 @@ cdifd:litProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Lock-In Thermography (LIT) image"]
         [sh:hasValue "Lock-In Thermography (LIT) Collection"]
         [sh:hasValue "Lock-In Thermography"]
-        ) ;
-        sh:message "LIT products must have a schema:additionalType matching a valid LIT type." ;
+            )
+        ] ;
+        sh:message "LIT products must have at least one schema:additionalType matching a valid LIT type." ;
     ] ;
     sh:message "LIT technique profile: additionalType must identify a valid LIT product type." ;
     .

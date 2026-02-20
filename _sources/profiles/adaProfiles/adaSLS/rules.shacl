@@ -33,13 +33,15 @@ cdifd:slsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "SLSIndividualScanCollection"]
         [sh:hasValue "Structured Light Scanning (SLS) Shape Model"]
         [sh:hasValue "Structured Light Scanning"]
-        ) ;
-        sh:message "SLS products must have a schema:additionalType matching a valid SLS type." ;
+            )
+        ] ;
+        sh:message "SLS products must have at least one schema:additionalType matching a valid SLS type." ;
     ] ;
     sh:message "SLS technique profile: additionalType must identify a valid SLS product type." ;
     .

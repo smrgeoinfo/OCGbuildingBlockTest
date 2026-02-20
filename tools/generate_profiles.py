@@ -818,11 +818,13 @@ cdifd:{short_lower}ProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
 {or_block}
-        ) ;
-        sh:message "{short} products must have a schema:additionalType matching a valid {short} type." ;
+            )
+        ] ;
+        sh:message "{short} products must have at least one schema:additionalType matching a valid {short} type." ;
     ] ;
     sh:message "{short} technique profile: additionalType must identify a valid {short} product type." ;
     .

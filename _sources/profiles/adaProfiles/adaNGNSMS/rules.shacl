@@ -33,13 +33,15 @@ cdifd:ngnsmsProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Processed"]
         [sh:hasValue "Noble Gas and Nitrogen Static Mass Spectrometry (NGNSMS) Raw"]
         [sh:hasValue "Noble gas and Nitrogen Static Mass Spectrometry"]
-        ) ;
-        sh:message "NG-NS-MS products must have a schema:additionalType matching a valid NG-NS-MS type." ;
+            )
+        ] ;
+        sh:message "NG-NS-MS products must have at least one schema:additionalType matching a valid NG-NS-MS type." ;
     ] ;
     sh:message "NG-NS-MS technique profile: additionalType must identify a valid NG-NS-MS product type." ;
     .

@@ -33,14 +33,16 @@ cdifd:nanoirProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Nanoscale Infrared Mapping (NanoIR) Background"]
         [sh:hasValue "Nanoscale Infrared Mapping (NanoIR) MapCollection"]
         [sh:hasValue "Nanoscale Infrared Mapping (NanoIR) Point Data"]
         [sh:hasValue "Nanoscale Infrared Mapping"]
-        ) ;
-        sh:message "NanoIR products must have a schema:additionalType matching a valid NanoIR type." ;
+            )
+        ] ;
+        sh:message "NanoIR products must have at least one schema:additionalType matching a valid NanoIR type." ;
     ] ;
     sh:message "NanoIR technique profile: additionalType must identify a valid NanoIR product type." ;
     .

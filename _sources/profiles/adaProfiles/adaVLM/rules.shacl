@@ -33,13 +33,15 @@ cdifd:vlmProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Visible Light Microscopy (VLM) Image"]
         [sh:hasValue "Basemap"]
         [sh:hasValue "Visible Light Microscopy"]
-        ) ;
-        sh:message "VLM products must have a schema:additionalType matching a valid VLM type." ;
+            )
+        ] ;
+        sh:message "VLM products must have at least one schema:additionalType matching a valid VLM type." ;
     ] ;
     sh:message "VLM technique profile: additionalType must identify a valid VLM product type." ;
     .

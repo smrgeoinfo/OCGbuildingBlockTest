@@ -33,12 +33,14 @@ cdifd:xanesProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "X-ray Absorption Near Edge Structure Hyperspectral Image Stack (XANES)"]
         [sh:hasValue "X-ray absorption near edge structure (XANES) spectroscopy"]
-        ) ;
-        sh:message "XANES products must have a schema:additionalType matching a valid XANES type." ;
+            )
+        ] ;
+        sh:message "XANES products must have at least one schema:additionalType matching a valid XANES type." ;
     ] ;
     sh:message "XANES technique profile: additionalType must identify a valid XANES product type." ;
     .

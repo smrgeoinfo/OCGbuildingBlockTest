@@ -33,13 +33,15 @@ cdifd:qrisProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Quantitative Reflective Imaging System (QRIS) Calibrated"]
         [sh:hasValue "Quantitative Reflective Imaging System (QRIS) Raw"]
         [sh:hasValue "Quantitative Reflective Imaging System"]
-        ) ;
-        sh:message "QRIS products must have a schema:additionalType matching a valid QRIS type." ;
+            )
+        ] ;
+        sh:message "QRIS products must have at least one schema:additionalType matching a valid QRIS type." ;
     ] ;
     sh:message "QRIS technique profile: additionalType must identify a valid QRIS product type." ;
     .

@@ -33,15 +33,17 @@ cdifd:empaProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Electron Microprobe Analysis (EMPA) Collection"]
         [sh:hasValue "Electron Microprobe Analysis Image (EMPA)"]
         [sh:hasValue "Electron Microprobe Analysis Quantitative Elemental Abundances (EMPAQEA)"]
         [sh:hasValue "Electron Microprobe Analysis (EMPA)"]
         [sh:hasValue "Electron microprobe analysis"]
-        ) ;
-        sh:message "EMPA products must have a schema:additionalType matching a valid EMPA type." ;
+            )
+        ] ;
+        sh:message "EMPA products must have at least one schema:additionalType matching a valid EMPA type." ;
     ] ;
     sh:message "EMPA technique profile: additionalType must identify a valid EMPA product type." ;
     .

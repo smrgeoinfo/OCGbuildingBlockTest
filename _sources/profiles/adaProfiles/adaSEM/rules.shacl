@@ -33,16 +33,18 @@ cdifd:semProductShape
     ] ;
     sh:property [
         sh:path schema:additionalType ;
-        sh:minCount 1 ;
-        sh:or (
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:or (
         [sh:hasValue "Scanning Electron Microscopy (SEM) Image"]
         [sh:hasValue "Scanning Electron Microscopy Electron Backscatter Diffraction (SEMEBSD) Grain Image"]
         [sh:hasValue "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) image"]
         [sh:hasValue "Scanning Electron Microscopy Energy Dispersive X-ray Spectroscopy (SEMEDS) Point Data"]
         [sh:hasValue "Scanning Electron Microscopy High Resolution Cathodoluminescence (SEMHRCL) image"]
         [sh:hasValue "Scanning electron microscopy"]
-        ) ;
-        sh:message "SEM products must have a schema:additionalType matching a valid SEM type." ;
+            )
+        ] ;
+        sh:message "SEM products must have at least one schema:additionalType matching a valid SEM type." ;
     ] ;
     sh:message "SEM technique profile: additionalType must identify a valid SEM product type." ;
     .
