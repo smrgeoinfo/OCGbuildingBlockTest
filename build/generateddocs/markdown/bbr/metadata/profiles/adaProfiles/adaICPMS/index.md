@@ -112,6 +112,10 @@ Mock data for validation and testing.
                 "schema:affiliation": {
                     "@type": "schema:Organization",
                     "schema:name": "NASA Johnson Space Center"
+                },
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "researcher@example.org"
                 }
             }
         ]
@@ -145,7 +149,7 @@ Mock data for validation and testing.
                 "schema:additionalType": [
                     "schema:FundingAgency"
                 ],
-                "schema:name": "NASA"
+                "schema:name": "NASA - National Aeronautics and Space Administration"
             }
         }
     ],
@@ -439,6 +443,10 @@ Mock data for validation and testing.
         "schema:affiliation": {
           "@type": "schema:Organization",
           "schema:name": "NASA Johnson Space Center"
+        },
+        "schema:contactPoint": {
+          "@type": "schema:ContactPoint",
+          "schema:email": "researcher@example.org"
         }
       }
     ]
@@ -472,7 +480,7 @@ Mock data for validation and testing.
         "schema:additionalType": [
           "schema:FundingAgency"
         ],
-        "schema:name": "NASA"
+        "schema:name": "NASA - National Aeronautics and Space Administration"
       }
     }
   ],
@@ -715,6 +723,8 @@ ex:adaICPMS-example-001 a schema1:Dataset,
                 schema1:name "Analytica, Maria" ] [ a schema1:Person ;
                 schema1:affiliation [ a schema1:Organization ;
                         schema1:name "NASA Johnson Space Center" ] ;
+                schema1:contactPoint [ a schema1:ContactPoint ;
+                        schema1:email "researcher@example.org" ] ;
                 schema1:identifier "https://orcid.org/0000-0002-9876-5432" ;
                 schema1:name "Researcher, John Q." ] ) ;
     schema1:dateModified "2026-01-15" ;
@@ -737,7 +747,7 @@ ex:adaICPMS-example-001 a schema1:Dataset,
     schema1:funding [ a schema1:MonetaryGrant ;
             schema1:funder [ a schema1:Organization ;
                     schema1:additionalType "schema:FundingAgency" ;
-                    schema1:name "NASA" ] ;
+                    schema1:name "NASA - National Aeronautics and Space Administration" ] ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "award number" ;
                     schema1:value "NNX17AE48G" ] ;

@@ -1361,28 +1361,74 @@ ex:YOPx a schema1:Dataset ;
     schema1:dateModified "2020-10-15" ;
     schema1:datePublished "2021-09-05" ;
     schema1:description "Auto generated from JSON schema, values are gobbledegoop. For testing" ;
-    schema1:distribution [ a cdi:StructuredDataSet,
+    schema1:distribution [ a cdi:TabularTextDataSet,
                 schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+            cdi:hasPhysicalMapping [ cdi:decimalPositions 4 ;
+                    cdi:defaultValue "0.0" ;
+                    cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:OjHgIDO ;
+                    cdi:index 1 ;
+                    cdi:isRequired false ;
+                    cdi:nullSequence "-9999" ;
+                    cdi:physicalDataType "float64" ],
+                [ cdi:format "decimal" ;
                     cdi:formats_InstanceVariable ex:KJTFKurNFu ;
                     cdi:index 0 ;
                     cdi:isRequired true ;
-                    cdi:locator "/measurements/wavelength" ;
-                    cdi:nullSequence "NaN" ;
-                    cdi:physicalDataType "float32" ],
-                [ cdi:decimalPositions 6 ;
+                    cdi:nullSequence "NA" ;
+                    cdi:physicalDataType "float64" ] ;
+            cdi:isDelimited true ;
+            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "Geochemistry analysis results" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
+            csvw:commentPrefix "#" ;
+            csvw:delimiter "," ;
+            csvw:header true ;
+            csvw:headerRowCount 1 ;
+            csvw:quoteChar "\"" ;
+            csvw:skipBlankRows true ;
+            csvw:skipRows 0 ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "kpZDvhyVo",
+                "sMUGwSqxWzJOYEb",
+                "tNdpXaJgDeWbFkNM" ;
+            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
+            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
+                ex:sr68lgy ;
+            spdx:checksum [ spdx:algorithm "j" ;
+                    spdx:checksumValue "h" ] ],
+        [ a cdi:StructuredDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:decimalPositions 6 ;
                     cdi:format "decimal" ;
                     cdi:formats_InstanceVariable ex:OjHgIDO ;
                     cdi:index 1 ;
                     cdi:isRequired true ;
                     cdi:locator "/measurements/intensity" ;
                     cdi:physicalDataType "float32" ;
-                    cdi:scale 1000 ] ;
+                    cdi:scale 1000 ],
+                [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:locator "/measurements/wavelength" ;
+                    cdi:nullSequence "NaN" ;
+                    cdi:physicalDataType "float32" ] ;
             schema1:contentUrl "http://example.com/data/measurement-cube.nc" ;
             schema1:encodingFormat "application/x-netcdf" ;
             schema1:name "Gridded measurement data cube" ;
             spdx:checksum [ spdx:algorithm "SHA256" ;
                     spdx:checksumValue "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5" ] ],
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "VwuIdrCrJSsrGATePg" ;
+            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
+            spdx:checksum [ spdx:algorithm "MD5" ;
+                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ],
         [ a schema1:WebAPI ;
             schema1:documentation [ a schema1:CreativeWork ;
                     schema1:name "OpenAPI specification for geochemistry data service" ;
@@ -1436,60 +1482,8 @@ ex:YOPx a schema1:Dataset ;
                     schema1:inDefinedTermSet "https://www.ogc.org/standards" ;
                     schema1:name "OGC API - Features" ;
                     schema1:termCode "ogcapi-features" ] ;
-            schema1:termsOfService "Open access, no authentication required" ],
-        [ a cdi:TabularTextDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:decimalPositions 4 ;
-                    cdi:defaultValue "0.0" ;
-                    cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:OjHgIDO ;
-                    cdi:index 1 ;
-                    cdi:isRequired false ;
-                    cdi:nullSequence "-9999" ;
-                    cdi:physicalDataType "float64" ],
-                [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:KJTFKurNFu ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:nullSequence "NA" ;
-                    cdi:physicalDataType "float64" ] ;
-            cdi:isDelimited true ;
-            schema1:contentUrl "http://example.com/data/geochem-results.csv" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "Geochemistry analysis results" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ;
-            csvw:commentPrefix "#" ;
-            csvw:delimiter "," ;
-            csvw:header true ;
-            csvw:headerRowCount 1 ;
-            csvw:quoteChar "\"" ;
-            csvw:skipBlankRows true ;
-            csvw:skipRows 0 ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "kpZDvhyVo",
-                "sMUGwSqxWzJOYEb",
-                "tNdpXaJgDeWbFkNM" ;
-            schema1:name "MVMpmnCGAggEnsoEgJXH" ;
-            schema1:provider <file:///github/workspace/kNKPZsCSWMc>,
-                ex:sr68lgy ;
-            spdx:checksum [ spdx:algorithm "j" ;
-                    spdx:checksumValue "h" ] ],
-        [ a schema1:DataDownload ;
-            schema1:contentUrl "http://example.com/resource?foo=bar#fragment" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "VwuIdrCrJSsrGATePg" ;
-            schema1:provider ex:ABYcNWHKYhTiLLNEzJx ;
-            spdx:checksum [ spdx:algorithm "MD5" ;
-                    spdx:checksumValue "MITGLcmBjeFYWmjP" ] ] ;
+            schema1:termsOfService "Open access, no authentication required" ] ;
     schema1:funding [ a schema1:MonetaryGrant ;
-            schema1:funder <https://ror.org/sejer4w6u8> ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "grant-id" ;
-                    schema1:value "LZpo" ] ;
-            schema1:name "ekckpBtI" ],
-        [ a schema1:MonetaryGrant ;
             schema1:funder <https://ror.org/fnjrj68> ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "grant-id" ;
@@ -1500,7 +1494,13 @@ ex:YOPx a schema1:Dataset ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "grant-id" ;
                     schema1:value "lieopgXuumP" ] ;
-            schema1:name "fhhbzh" ] ;
+            schema1:name "fhhbzh" ],
+        [ a schema1:MonetaryGrant ;
+            schema1:funder <https://ror.org/sejer4w6u8> ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "grant-id" ;
+                    schema1:value "LZpo" ] ;
+            schema1:name "ekckpBtI" ] ;
     schema1:identifier [ a schema1:PropertyValue ;
             schema1:propertyID "uSNzhqeEQPKhCj" ;
             schema1:url "http://identifiers.org/sandbox/uSNzhqeEQPKhCj" ] ;
@@ -1530,9 +1530,9 @@ ex:YOPx a schema1:Dataset ;
     schema1:publisher ex:exampleOrg_fW ;
     schema1:publishingPrinciples "rxZsrPAbJrIGGgDVJ" ;
     schema1:relatedLink [ a schema1:LinkRole ;
-            schema1:linkRelationship "lfCzUaoftdtTPAhMnpC" ],
+            schema1:linkRelationship "BOoRREnpDEUrdNaV" ],
         [ a schema1:LinkRole ;
-            schema1:linkRelationship "BOoRREnpDEUrdNaV" ] ;
+            schema1:linkRelationship "lfCzUaoftdtTPAhMnpC" ] ;
     schema1:sameAs [ a schema1:PropertyValue ;
             schema1:propertyID "urn:idorg:test" ;
             schema1:value "urn:idorg:test:p45689" ] ;
