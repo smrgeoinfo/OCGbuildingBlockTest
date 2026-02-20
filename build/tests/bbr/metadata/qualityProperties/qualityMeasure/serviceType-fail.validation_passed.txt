@@ -1,5 +1,5 @@
 Validation report for cdif.bbr.metadata.qualityProperties.qualityMeasure - Simple quality measurement properties
-Generated 2026-02-20T18:14:54.226243+00:00
+Generated 2026-02-20T18:27:19.600095+00:00
 === General ===
 Test was expected to fail and it did.
 === End General ===
@@ -207,57 +207,63 @@ On instance:
                                'schema:url': 'http://example.com/resource?foo=bar#fragment'}}
 === End JSON Schema ===
 
-=== Unknown errors ===
+=== SHACL ===
+Validation result for _sources/qualityProperties/qualityMeasure/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/qualityProperties/qualityMeasure/rules.shacl:
+ - Shape _:n763930db27ca4de8a71f8085e6576490b4: *none*
+ - Shape cdifd:qualityMeasurementNode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n763930db27ca4de8a71f8085e6576490b11: *none*
+ - Shape cdifd:qualityMeasurementNode/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n763930db27ca4de8a71f8085e6576490b5: *none*
+ - Shape cdifd:qualityMeasurementNode: *none*
+
+Validation result for _sources/schemaorgProperties/definedTerm/rules.shacl:
+  Validation Report
+  Conforms: True
+  
+Focus nodes for _sources/schemaorgProperties/definedTerm/rules.shacl:
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db6: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db10: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db5: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:rest/rdf:first: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db7: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db23: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db8: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFDefinedTermShape: *none*
+ - Shape cdifd:CDIFDefinedTermShape/sh:or/rdf:first: *none*
+ - Shape _:n7a5fb621d5294e6cbfa77093a07ebc4db4: *none*
+
 
 ** Validation error **
-Traceback (most recent call last):
-,  File "/src/ogc/bblocks/validate.py", line 197, in _validate_resource
-    result = validator.validate(filename, output_filename, report,
-,  File "/src/ogc/bblocks/validation/rdf.py", line 410, in validate
-    shacl_conforms, shacl_result, shacl_report, focus_nodes = shacl_validate(
-,  File "/src/ogc/bblocks/validation/rdf.py", line 39, in shacl_validate
-    conforms, shacl_result, shacl_report = validator.run()
-,  File "/venv/lib/python3.10/site-packages/pyshacl/validate.py", line 265, in run
-    _is_conform, _reports = s.validate(
-,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 440, in validate
-    focus = self.focus_nodes(target_graph)
-,  File "/venv/lib/python3.10/site-packages/pyshacl/shape.py", line 365, in focus_nodes
-    results = data_graph.query(select, initBindings=None)
-,  File "/venv/lib/python3.10/site-packages/rdflib/graph.py", line 1567, in query
-    return result(processor.query(query_object, initBindings, initNs, **kwargs))  # type: ignore[arg-type]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/processor.py", line 137, in query
-    query = translateQuery(parsetree, base, initNs)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 934, in translateQuery
-    q[1] = traverse(
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 469, in traverse
-    r = _traverse(tree, visitPre, visitPost)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
-    e[k] = _traverse(val, visitPre, visitPost)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
-    e[k] = _traverse(val, visitPre, visitPost)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 426, in _traverse
-    e[k] = _traverse(val, visitPre, visitPost)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in _traverse
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 419, in <listcomp>
-    return [_traverse(x, visitPre, visitPost) for x in e]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 429, in _traverse
-    _e = visitPost(e)  # type: ignore[unreachable]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/algebra.py", line 197, in translatePName
-    return prologue.absolutize(p)  # type: ignore[return-value]
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 430, in absolutize
-    return self.resolvePName(iri.prefix, iri.localname)
-,  File "/venv/lib/python3.10/site-packages/rdflib/plugins/sparql/sparql.py", line 412, in resolvePName
-    raise Exception("Unknown namespace prefix : %s" % prefix)
-,Exception: Unknown namespace prefix : dqv
+Validation result for _sources/schemaorgProperties/identifier/rules.shacl:
+  Validation Report
+  Conforms: False
+  Results (1):
+  Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+  	Severity: sh:Violation
+  	Source Shape: [ sh:minCount Literal("1", datatype=xsd:integer) ; sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ; sh:minLength Literal("5", datatype=xsd:integer) ] [ sh:class schema1:DefinedTerm ] ) ; sh:path schema1:propertyID ]
+  	Focus Node: [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]
+  	Result Path: schema1:propertyID
+  	Message: Less than 1 values on [ rdf:type schema1:PropertyValue ; schema1:url Literal("http://ogc.org/defs/g35408y") ; schema1:value Literal("g35408y") ]->schema1:propertyID
+  
+Focus nodes for _sources/schemaorgProperties/identifier/rules.shacl:
+ - Shape cdifd:CDIFIdentifierShape/sh:property/sh:or/rdf:first: *none*
+ - Shape cdifd:CDIFIdentifierShape: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb21: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb20: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb23: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb25: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb11: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:first: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb22: *none*
+ - Shape cdifd:CDIFIdentifierTypeTermShape/sh:property/sh:or/rdf:first: *none*
+ - Shape _:n86b684aa7b3c4cec89e99bd46160fc7bb10: *none*
+ - Shape cdifd:CDIFIdentifierShape/sh:or/rdf:rest/rdf:first: *none*
 
-=== End Unknown errors ===
+=== End SHACL ===
 
