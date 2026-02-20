@@ -831,21 +831,22 @@ cdifd:{short_lower}ProductShape
 """
 
 
-def _generate_examples_yaml(cfg: dict) -> str:
+def _generate_examples_yaml(cfg: dict, profile_name: str) -> str:
     """Generate examples.yaml content for a profile."""
-    first_label = cfg["additional_type_labels"][0]
     short = cfg["short_name"]
     return f"""- title: {short} Product Example
-  comment: Example {short} product metadata (placeholder)
+  content: |-
+    Example {cfg['full_name']} product metadata with all properties populated.
+    Mock data for validation and testing.
+  prefixes:
+    schema: http://schema.org/
+    ada: https://ada.astromat.org/metadata/
+    cdi: http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/
+    prov: http://www.w3.org/ns/prov#
+    dcterms: http://purl.org/dc/terms/
   snippets:
     - language: json
-      code: |
-        {{
-          "@type": ["schema:Dataset", "schema:Product"],
-          "schema:additionalType": ["{first_label}", "ada:DataDeliveryPackage"],
-          "schema:name": "{short} Analysis of Sample",
-          "schema:description": "{cfg['full_name']} data"
-        }}
+      ref: example{profile_name}.json
 """
 
 
@@ -863,7 +864,7 @@ def generate_profile(name: str, cfg: dict, base_dir: Path) -> None:
         "bblock.json": _generate_bblock_json(cfg),
         "context.jsonld": _generate_context_jsonld(),
         "description.md": _generate_description_md(cfg),
-        "examples.yaml": _generate_examples_yaml(cfg),
+        "examples.yaml": _generate_examples_yaml(cfg, name),
         "rules.shacl": _generate_rules_shacl(cfg),
     }
 
