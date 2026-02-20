@@ -41,7 +41,7 @@ PROFILES = {
         "termcodes": ["ARGT"],
         "product_types": ["ARGTDocument", "ARGTCollection"],
         "additional_type_labels": [
-            "\u2074\u2070Ar/\u00b3\u2079Ar Geochronology and Thermochronology (ARGT)",
+            "40Ar/39Ar Geochronology and Thermochronology (ARGT)",
             "40Ar/39Ar geochronology and thermochronology",
         ],
         "component_types": [
@@ -216,8 +216,7 @@ PROFILES = {
             "QRISCalibrationFile",
         ],
         "additional_type_labels": [
-            "Quantitative Reflective Imaging System (QRIS) Calibrated",
-            "Quantitative Reflective Imaging System (QRIS) Raw",
+            "Quantitative Reflective Imaging System (QRIS)",
             "Quantitative Reflective Imaging System",
         ],
         "component_types": [
@@ -235,9 +234,8 @@ PROFILES = {
         "termcodes": ["SLS"],
         "product_types": ["SLSShapeModel", "SLSPartialScan", "ShapeModelImage"],
         "additional_type_labels": [
-            "SLSIndividualScanCollection",
+            "Structured Light Scanning (SLS) Individual Scan Collection",
             "Structured Light Scanning (SLS) Shape Model",
-            "Structured Light Scanning",
         ],
         "component_types": [
             "SLSShapeModel", "SLSPartialScan", "ShapeModelImage",
@@ -271,7 +269,7 @@ PROFILES = {
         "termcodes": ["AIVA"],
         "product_types": ["AIVAImage", "AIVAImageCollection"],
         "additional_type_labels": [
-            "Analysis Advanced Imaging and Visualization of Astromaterials (AIVA)",
+            "Advanced Imaging and Visualization of Astromaterials (AIVA)",
             "Advanced Imaging and Visualization of Astromaterials",
         ],
         "component_types": [
@@ -428,7 +426,6 @@ PROFILES = {
         "termcodes": ["RAMAN"],
         "product_types": ["RAMANRawTabular"],
         "additional_type_labels": [
-            "RAMAN Raw",
             "Raman vibrational spectroscopy",
         ],
         "component_types": [
