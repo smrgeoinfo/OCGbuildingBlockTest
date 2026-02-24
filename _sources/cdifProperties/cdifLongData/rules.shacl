@@ -9,13 +9,42 @@
 
 # Validates long data structure nodes typed as cdi:LongStructureDataSet.
 # JSON schema requires @type containing cdi:LongStructureDataSet.
+# SHACL enforces the cross-reference constraint that formatted variables
+# include exactly one DescriptorComponent and at least one ReferenceValueComponent.
 cdifd:longDataShape
     a sh:NodeShape ;
     sh:targetClass cdi:LongStructureDataSet ;
+
+    # Must have at least one physical mapping
     sh:property [
         sh:path cdi:hasPhysicalMapping ;
         sh:minCount 1 ;
         sh:severity sh:Warning ;
         sh:message "A LongStructureDataSet should have physical mappings (cdi:hasPhysicalMapping) linking variables to columns." ;
+    ] ;
+
+    # Exactly one formatted variable must have role DescriptorComponent.
+    # Path: cdi:hasPhysicalMapping -> cdi:formats_InstanceVariable -> cdi:role
+    sh:property [
+        sh:path ( cdi:hasPhysicalMapping cdi:formats_InstanceVariable cdi:role ) ;
+        sh:qualifiedValueShape [
+            sh:hasValue "DescriptorComponent" ;
+        ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A LongStructureDataSet must format exactly one InstanceVariable with cdi:role 'DescriptorComponent' (the column identifying which variable each row measures)." ;
+    ] ;
+
+    # At least one formatted variable must have role ReferenceValueComponent.
+    # Path: cdi:hasPhysicalMapping -> cdi:formats_InstanceVariable -> cdi:role
+    sh:property [
+        sh:path ( cdi:hasPhysicalMapping cdi:formats_InstanceVariable cdi:role ) ;
+        sh:qualifiedValueShape [
+            sh:hasValue "ReferenceValueComponent" ;
+        ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A LongStructureDataSet must format at least one InstanceVariable with cdi:role 'ReferenceValueComponent' (the column holding the actual measured values)." ;
     ] ;
     .
