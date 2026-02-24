@@ -1257,25 +1257,25 @@ xas:487y54 a schema1:Dataset,
                     schema1:url "http://protocols.io/link/to/calibrationMethod" ;
                     schema1:value "description of calibration procedure" ],
                 [ a schema1:PropertyValue ;
-                    schema1:name "Absorption edge" ;
-                    schema1:propertyID "xas:edge_energy" ;
-                    schema1:unitText "eV" ;
-                    schema1:value "12658.0" ],
-                [ a schema1:PropertyValue ;
                     schema1:name "Installed Options" ;
                     schema1:propertyID "xas:installedOptions" ;
                     schema1:value "Description of extra equipment installed on the base instrument(?)" ],
-                [ a schema1:PropertyValue ;
-                    schema1:name "Instrument configuration" ;
-                    schema1:propertyID "nxs:Group/NXentry/experiment_documentation" ;
-                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
-                    schema1:value "description of instrument configuration" ],
                 [ a schema1:PropertyValue ;
                     schema1:description "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential" ;
                     schema1:name "experiment environment-pressure" ;
                     schema1:propertyID "xas:pressure" ;
                     schema1:unitText "KPa" ;
-                    schema1:value "3567" ] ;
+                    schema1:value "3567" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Absorption edge" ;
+                    schema1:propertyID "xas:edge_energy" ;
+                    schema1:unitText "eV" ;
+                    schema1:value "12658.0" ],
+                [ a schema1:PropertyValue ;
+                    schema1:name "Instrument configuration" ;
+                    schema1:propertyID "nxs:Group/NXentry/experiment_documentation" ;
+                    schema1:url "http://protocols.io/link/to/calibrationMethod" ;
+                    schema1:value "description of instrument configuration" ] ;
             schema1:identifier "20241111_DSC_NU_OREX-803224-0_1" ;
             schema1:location <ex:xasfacility_37yht> ;
             schema1:mainEntity [ a schema1:Product,
@@ -1285,9 +1285,10 @@ xas:487y54 a schema1:Dataset,
                             schema1:propertyID "nxs:Field/NXsample/unit_cell" ;
                             schema1:value "cubic; Z = 4; a = 5.46; V = 162.77" ],
                         [ a schema1:PropertyValue ;
-                            schema1:name "crystallographic point group" ;
-                            schema1:propertyID "nxs:Field/NXsample/point_group" ;
-                            schema1:value "mm2" ],
+                            schema1:name "Porosity" ;
+                            schema1:propertyID "xas:porosity" ;
+                            schema1:unitText "percent" ;
+                            schema1:value "27" ],
                         [ a schema1:PropertyValue ;
                             schema1:name "material state" ;
                             schema1:propertyID "xas:materialState" ;
@@ -1310,10 +1311,9 @@ xas:487y54 a schema1:Dataset,
                             schema1:propertyID "xas:samplePreparation" ;
                             schema1:value "powder on tape, 6 layers" ],
                         [ a schema1:PropertyValue ;
-                            schema1:name "Porosity" ;
-                            schema1:propertyID "xas:porosity" ;
-                            schema1:unitText "percent" ;
-                            schema1:value "27" ] ;
+                            schema1:name "crystallographic point group" ;
+                            schema1:propertyID "nxs:Field/NXsample/point_group" ;
+                            schema1:value "mm2" ] ;
                     schema1:additionalType "MaterialSample",
                         "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample" ;
                     schema1:description "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list..." ;
@@ -1321,61 +1321,6 @@ xas:487y54 a schema1:Dataset,
                     schema1:name "Na2SeO4" ] ;
             schema1:startDate "2008-04-10T21:58:50" ;
             prov:used [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "chemical formula" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
-                            schema1:value "Si" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "crystal type" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
-                            schema1:value "missing" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "d-spacing" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
-                            schema1:unitText "Angstrom" ;
-                            schema1:value "3.13550" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "reflection plane (hkl)" ;
-                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
-                            schema1:value "1,1,1" ] ;
-                    schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
-                    schema1:name "Si 111" ],
-                [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "monitor mode" ;
-                            schema1:propertyID "nxs:Field/NXmonitor/mode" ;
-                            schema1:value "monitor" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:alternateName "transmitted flux measurement method" ;
-                            schema1:name "detector mode it" ;
-                            schema1:propertyID "xas:detector.it" ;
-                            schema1:value "10cm  N2" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:alternateName "incident flux measurement method" ;
-                            schema1:name "detector mode i0" ;
-                            schema1:propertyID "xas:detector.i0" ;
-                            schema1:value "10cm  N2" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "monitor preset" ;
-                            schema1:propertyID "nxs:Field/NXmonitor/preset" ;
-                            schema1:value "N.A." ] ;
-                    schema1:additionalType "nxs:BaseClass/NXmonitor" ],
-                [ a schema1:Product,
-                        schema1:Thing ;
-                    schema1:additionalProperty [ a schema1:PropertyValue ;
-                            schema1:name "Probe" ;
-                            schema1:propertyID "nxs:Field/NXsource/probe" ;
-                            schema1:value "x-ray" ],
-                        [ a schema1:PropertyValue ;
-                            schema1:name "x-ray source" ;
-                            schema1:propertyID "nxs:Field/NXsource/type" ;
-                            schema1:value "Synchrotron X-ray Source" ] ;
-                    schema1:additionalType "nxs:BaseClass/NXsource" ;
-                    schema1:identifier "should have a registry with URIs" ;
-                    schema1:name "source, made up for this example" ],
-                [ a schema1:Product,
                         schema1:Thing ;
                     schema1:additionalProperty [ a schema1:PropertyValue ;
                             schema1:name "collimation technique" ;
@@ -1391,7 +1336,62 @@ xas:487y54 a schema1:Dataset,
                             schema1:value "???" ] ;
                     schema1:additionalType "xas:Beamline" ;
                     schema1:identifier "should have a registry with URIs" ;
-                    schema1:name "13-BM-D" ] ] .
+                    schema1:name "13-BM-D" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "d-spacing" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/d_spacing" ;
+                            schema1:unitText "Angstrom" ;
+                            schema1:value "3.13550" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "chemical formula" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/chemical_formula" ;
+                            schema1:value "Si" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "reflection plane (hkl)" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/reflection" ;
+                            schema1:value "1,1,1" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "crystal type" ;
+                            schema1:propertyID "nxs:Field/NXcrystal/type" ;
+                            schema1:value "missing" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonochromator" ;
+                    schema1:name "Si 111" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "x-ray source" ;
+                            schema1:propertyID "nxs:Field/NXsource/type" ;
+                            schema1:value "Synchrotron X-ray Source" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "Probe" ;
+                            schema1:propertyID "nxs:Field/NXsource/probe" ;
+                            schema1:value "x-ray" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXsource" ;
+                    schema1:identifier "should have a registry with URIs" ;
+                    schema1:name "source, made up for this example" ],
+                [ a schema1:Product,
+                        schema1:Thing ;
+                    schema1:additionalProperty [ a schema1:PropertyValue ;
+                            schema1:name "monitor preset" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/preset" ;
+                            schema1:value "N.A." ],
+                        [ a schema1:PropertyValue ;
+                            schema1:alternateName "incident flux measurement method" ;
+                            schema1:name "detector mode i0" ;
+                            schema1:propertyID "xas:detector.i0" ;
+                            schema1:value "10cm  N2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:alternateName "transmitted flux measurement method" ;
+                            schema1:name "detector mode it" ;
+                            schema1:propertyID "xas:detector.it" ;
+                            schema1:value "10cm  N2" ],
+                        [ a schema1:PropertyValue ;
+                            schema1:name "monitor mode" ;
+                            schema1:propertyID "nxs:Field/NXmonitor/mode" ;
+                            schema1:value "monitor" ] ;
+                    schema1:additionalType "nxs:BaseClass/NXmonitor" ] ] .
 
 <ex:xasfacility_37yht> a schema1:Place ;
     schema1:additionalProperty [ a schema1:PropertyValue ;
