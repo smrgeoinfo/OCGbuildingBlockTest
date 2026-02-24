@@ -438,7 +438,7 @@ $defs:
   TemporalExtent:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/schemaorgProperties/temporalExtent/schema.yaml
   GeneratedBy:
-    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/provProperties/generatedBy/schema.yaml
+    $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifProv/schema.yaml
   DerivedFrom:
     $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/provProperties/derivedFrom/schema.yaml
   QualityMeasure:
@@ -466,6 +466,7 @@ Links to the schema:
     "schema": "http://schema.org/",
     "time": "http://www.w3.org/2006/time#",
     "prov": "http://www.w3.org/ns/prov#",
+    "nxs": "http://purl.org/nexusformat/definitions/",
     "@version": 1.1
   }
 }
