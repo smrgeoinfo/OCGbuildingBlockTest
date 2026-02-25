@@ -247,6 +247,10 @@ def _inline_unresolved_defs(node: Any, defs: dict, base_dir: Path, seen: set) ->
 
 def _resolve_ref(ref: str, base_dir: Path, defs: dict, seen: set) -> Any:
     """Parse and resolve a $ref string."""
+    if ref == "#":
+        # Bare self-reference (recursive schema) -- mark as circular
+        return {"$comment": "circular-ref"}
+
     if ref.startswith("#/"):
         # Fragment-only ref (e.g., #/$defs/Identifier)
         pointer = ref[1:]  # Strip leading #

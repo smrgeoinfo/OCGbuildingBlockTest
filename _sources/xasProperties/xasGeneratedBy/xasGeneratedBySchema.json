@@ -32,7 +32,24 @@
         "schema:startDate": {"type": "string"},
         "prov:used": {
             "type": "array",
-            "items": {"$ref": "#/$defs/Instrument"}
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": ["schema:instrument"],
+                        "properties": {
+                            "schema:instrument": {"$ref": "#/$defs/Instrument"}
+                        }
+                    },
+                    {"type": "string"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {"type": "string"}
+                        }
+                    }
+                ]
+            }
         },
         "schema:additionalProperty": {
             "type": "array",
@@ -65,7 +82,10 @@
             }
         },
         "schema:location": {"$ref": "#/$defs/Facility"},
-        "schema:mainEntity": {"$ref": "#/$defs/Sample"}
+        "schema:object": {
+            "description": "Sample being analyzed (per Ocean Info Hub recommendation)",
+            "$ref": "#/$defs/Sample"
+        }
     },
     "$defs": {
         "Identifier": {"$ref": "../../schemaorgProperties/identifier/identifierSchema.json"},

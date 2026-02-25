@@ -45,6 +45,21 @@
             "type": "array",
             "description": "AdditionalProperty propertyID will depend on the kind of instrument; validation in that detail is a future project",
             "items": {"$ref": "#/$defs/AdditionalProperty"}
+        },
+        "schema:hasPart": {
+            "type": "array",
+            "description": "Sub-components of the instrument system",
+            "items": {
+                "anyOf": [
+                    {"$ref": "#/$defs/Instrument"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "@id": {"type": "string"}
+                        }
+                    }
+                ]
+            }
         }
     },
     "required": [
@@ -54,6 +69,7 @@
     ],
     "$defs": {
         "Identifier": {"$ref": "../../schemaorgProperties/identifier/identifierSchema.json"},
-        "AdditionalProperty": {"$ref": "../../schemaorgProperties/additionalProperty/additionalPropertySchema.json"}
+        "AdditionalProperty": {"$ref": "../../schemaorgProperties/additionalProperty/additionalPropertySchema.json"},
+        "Instrument": {"$ref": "../../schemaorgProperties/instrument/instrumentSchema.json"}
     }
 }

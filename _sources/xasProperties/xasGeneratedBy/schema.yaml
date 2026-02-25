@@ -28,7 +28,18 @@ properties:
   'prov:used':
     type: array
     items:
-      $ref: '#/$defs/Instrument'
+      anyOf:
+      - type: object
+        required:
+        - 'schema:instrument'
+        properties:
+          'schema:instrument':
+            $ref: '#/$defs/Instrument'
+      - type: string
+      - type: object
+        properties:
+          '@id':
+            type: string
   'schema:additionalProperty':
     type: array
     description: add additional property propertyIDs:xas:edge_energy, calibration method, Instrument configuration,
@@ -50,7 +61,8 @@ properties:
                 - 'xas:installedOptions'
   'schema:location':
     $ref: '#/$defs/Facility'
-  'schema:mainEntity':
+  'schema:object':
+    description: Sample being analyzed (per Ocean Info Hub recommendation)
     $ref: '#/$defs/Sample'
 $defs:
   Identifier:

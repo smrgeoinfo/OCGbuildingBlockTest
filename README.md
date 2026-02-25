@@ -83,7 +83,7 @@ See [agents.md](agents.md) for the full building block structure, authoring rule
 
 | Category | Directory | Description |
 |----------|-----------|-------------|
-| schemaorgProperties | `_sources/schemaorgProperties/` | schema.org vocabulary building blocks (person, organization, identifier, definedTerm, etc.) |
+| schemaorgProperties | `_sources/schemaorgProperties/` | schema.org vocabulary building blocks (person, organization, identifier, definedTerm, instrument, etc.) |
 | cdifProperties | `_sources/cdifProperties/` | CDIF-specific properties (mandatory, optional, provenance, tabular data, long data, etc.) |
 | ddiProperties | `_sources/ddiProperties/` | DDI-CDI vocabulary building blocks |
 | provProperties | `_sources/provProperties/` | PROV-O provenance (generatedBy, derivedFrom) |
@@ -98,7 +98,40 @@ DDI-CDI vocabulary building blocks for communities using the DDI Cross-Domain In
 
 | Building Block | Description |
 |----------------|-------------|
-| `ddicdiProv` | DDI-CDI native provenance activity — expresses workflows using `cdi:Activity`, `cdi:Step`, `cdi:ProcessingAgent`, and `cdi:Parameter`. Alternative to the schema.org/PROV-based `cdifProv` building block. Includes JSON Schema with `anyOf [inline-type, id-reference]` pattern for graph node links, SHACL validation shapes, and a soil chemistry analysis example as a multi-node `@graph` document. |
+| `ddicdiProv` | DDI-CDI native provenance activity -- expresses workflows using `cdi:Activity`, `cdi:Step`, `cdi:ProcessingAgent`, and `cdi:Parameter`. Alternative to the schema.org/PROV-based `cdifProv` building block. Includes JSON Schema with `anyOf [inline-type, id-reference]` pattern for graph node links, SHACL validation shapes, and a soil chemistry analysis example as a multi-node `@graph` document. |
+
+### schemaorgProperties
+
+Schema.org vocabulary building blocks for reusable metadata components.
+
+| Building Block | Description |
+|----------------|-------------|
+| `instrument` | Generic instrument or instrument system -- uses `schema:Thing` base type with optional `schema:Product` typing. Supports hierarchical instrument systems via `schema:hasPart` for sub-components. Instruments are nested within `prov:used` items via a `schema:instrument` sub-key (instruments are `prov:Entity` subclasses). Referenced by `cdifProv`, `provActivity`, and `xasInstrument`. |
+
+### provProperties
+
+PROV-O provenance building blocks.
+
+| Building Block | Description |
+|----------------|-------------|
+| `generatedBy` | Base provenance activity -- minimal `prov:Activity` with `prov:used`. Extended by `cdifProv` and `provActivity`. |
+| `provActivity` | PROV-O native provenance activity -- extends `generatedBy` with W3C PROV-O properties (`prov:wasAssociatedWith`, `prov:startedAtTime`, `prov:endedAtTime`, `prov:atLocation`, `prov:wasInformedBy`, `prov:generated`). Uses schema.org fallbacks only where PROV-O has no equivalent (name, description, methodology, status). Instruments nested in `prov:used` via `schema:instrument` sub-key. |
+| `derivedFrom` | Provenance derivation -- `prov:wasDerivedFrom` linking. |
+
+### cdifProperties (provenance)
+
+| Building Block | Description |
+|----------------|-------------|
+| `cdifProv` | Extended provenance activity for CDIF -- extends `generatedBy` with schema.org Action properties (`schema:agent`, `schema:actionProcess`, `schema:object`, `schema:result`, temporal bounds, location). Requires multi-typed `@type: ["schema:Action", "prov:Activity"]`. Instruments nested in `prov:used` via `schema:instrument` sub-key. |
+
+### xasProperties (instrument changes)
+
+| Building Block | Change |
+|----------------|--------|
+| `xasInstrument` | Added `schema:hasPart` for hierarchical instrument sub-components (refs generic instrument building block). |
+| `xasGeneratedBy` | `prov:used` restructured to accept instrument wrappers (`schema:instrument` sub-key), strings, or `@id` refs. `schema:mainEntity` renamed to `schema:object` (per Ocean Info Hub recommendation). |
+| `xasRequired` | NXsource/NXmonochromator constraints moved into `prov:used > contains > schema:instrument > schema:hasPart`. `schema:mainEntity` renamed to `schema:object`. |
+| `xasOptional` | Same restructuring as `xasRequired`. |
 
 ## License
 
