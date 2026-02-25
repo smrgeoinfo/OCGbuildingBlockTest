@@ -1189,13 +1189,7 @@ ex:complete-dataset-001 a schema1:Dataset ;
     schema1:dateModified "2026-02-15" ;
     schema1:datePublished "2026-02-01" ;
     schema1:description "Comprehensive geochemistry dataset demonstrating the CDIF complete profile with single-file downloads, archive distribution with component files, and WebAPI access. Includes tabular CSV results, NetCDF data cubes, and an OGC API Features endpoint." ;
-    schema1:distribution [ a schema1:DataDownload ;
-            schema1:contentUrl "https://example.org/data/geochem-summary.csv" ;
-            schema1:encodingFormat "text/csv" ;
-            schema1:name "Geochemistry summary results" ;
-            spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ],
-        [ a cdi:TabularTextDataSet,
+    schema1:distribution [ a cdi:TabularTextDataSet,
                 schema1:DataDownload ;
             cdi:hasPhysicalMapping [ cdi:format "string" ;
                     cdi:formats_InstanceVariable ex:var-sampleID ;
@@ -1223,26 +1217,12 @@ ex:complete-dataset-001 a schema1:Dataset ;
             csvw:delimiter "," ;
             csvw:header true ;
             csvw:headerRowCount 1 ],
-        [ a cdi:StructuredDataSet,
-                schema1:DataDownload ;
-            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:var-wavelength ;
-                    cdi:index 0 ;
-                    cdi:isRequired true ;
-                    cdi:locator "/spectra/wavelength" ;
-                    cdi:physicalDataType "float32" ],
-                [ cdi:format "decimal" ;
-                    cdi:formats_InstanceVariable ex:var-intensity ;
-                    cdi:index 1 ;
-                    cdi:isRequired true ;
-                    cdi:locator "/spectra/intensity" ;
-                    cdi:physicalDataType "float32" ;
-                    cdi:scale 1000 ] ;
-            schema1:contentUrl "https://example.org/data/spectra-cube.nc" ;
-            schema1:encodingFormat "application/x-netcdf" ;
-            schema1:name "Spectral data cube" ;
+        [ a schema1:DataDownload ;
+            schema1:contentUrl "https://example.org/data/geochem-summary.csv" ;
+            schema1:encodingFormat "text/csv" ;
+            schema1:name "Geochemistry summary results" ;
             spdx:checksum [ spdx:algorithm "SHA256" ;
-                    spdx:checksumValue "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4" ] ],
+                    spdx:checksumValue "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" ] ],
         [ a schema1:DataDownload ;
             schema1:contentUrl "https://example.org/data/geochem-package.zip" ;
             schema1:description "Archive containing all data files. Component files are listed as parts and are not individually accessible." ;
@@ -1255,6 +1235,26 @@ ex:complete-dataset-001 a schema1:Dataset ;
             schema1:name "Complete data package" ;
             spdx:checksum [ spdx:algorithm "SHA256" ;
                     spdx:checksumValue "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5" ] ],
+        [ a cdi:StructuredDataSet,
+                schema1:DataDownload ;
+            cdi:hasPhysicalMapping [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:var-intensity ;
+                    cdi:index 1 ;
+                    cdi:isRequired true ;
+                    cdi:locator "/spectra/intensity" ;
+                    cdi:physicalDataType "float32" ;
+                    cdi:scale 1000 ],
+                [ cdi:format "decimal" ;
+                    cdi:formats_InstanceVariable ex:var-wavelength ;
+                    cdi:index 0 ;
+                    cdi:isRequired true ;
+                    cdi:locator "/spectra/wavelength" ;
+                    cdi:physicalDataType "float32" ] ;
+            schema1:contentUrl "https://example.org/data/spectra-cube.nc" ;
+            schema1:encodingFormat "application/x-netcdf" ;
+            schema1:name "Spectral data cube" ;
+            spdx:checksum [ spdx:algorithm "SHA256" ;
+                    spdx:checksumValue "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4" ] ],
         [ a schema1:WebAPI ;
             schema1:documentation [ a schema1:CreativeWork ;
                     schema1:name "OpenAPI specification for geochemistry data service" ;
@@ -1264,6 +1264,10 @@ ex:complete-dataset-001 a schema1:Dataset ;
                     schema1:object [ a schema1:DataFeed ;
                             schema1:description "Geochemistry observations collection" ] ;
                     schema1:query-input [ a schema1:PropertyValueSpecification ;
+                            schema1:description "Maximum number of features to return" ;
+                            schema1:valueName "limit" ;
+                            schema1:valueRequired false ],
+                        [ a schema1:PropertyValueSpecification ;
                             schema1:description "Response format: csv or geojson" ;
                             schema1:valueName "format" ;
                             schema1:valuePattern "csv|geojson" ;
@@ -1271,21 +1275,17 @@ ex:complete-dataset-001 a schema1:Dataset ;
                         [ a schema1:PropertyValueSpecification ;
                             schema1:description "Starting index for pagination" ;
                             schema1:valueName "offset" ;
-                            schema1:valueRequired false ],
-                        [ a schema1:PropertyValueSpecification ;
-                            schema1:description "Maximum number of features to return" ;
-                            schema1:valueName "limit" ;
                             schema1:valueRequired false ] ;
                     schema1:result [ a schema1:DataDownload ;
                             cdi:hasPhysicalMapping [ cdi:format "decimal" ;
-                                    cdi:formats_InstanceVariable ex:var-uncertainty ;
-                                    cdi:index 1 ;
-                                    cdi:isRequired false ;
-                                    cdi:physicalDataType "float64" ],
-                                [ cdi:format "decimal" ;
                                     cdi:formats_InstanceVariable ex:var-concentration ;
                                     cdi:index 0 ;
                                     cdi:isRequired true ;
+                                    cdi:physicalDataType "float64" ],
+                                [ cdi:format "decimal" ;
+                                    cdi:formats_InstanceVariable ex:var-uncertainty ;
+                                    cdi:index 1 ;
+                                    cdi:isRequired false ;
                                     cdi:physicalDataType "float64" ] ;
                             cdi:isDelimited true ;
                             schema1:contentUrl "https://example.org/api/v1/collections/geochem/items?f=csv" ;
@@ -1324,19 +1324,19 @@ ex:complete-dataset-001 a schema1:Dataset ;
     schema1:keywords [ a schema1:DefinedTerm ;
             schema1:identifier [ a schema1:PropertyValue ;
                     schema1:propertyID "https://vocabularyserver.com/keyword" ;
-                    schema1:url "https://vocabularyserver.com/keyword/spectral-001" ;
-                    schema1:value "spectral-001" ] ;
-            schema1:inDefinedTermSet "https://vocabularyserver.com/keyword" ;
-            schema1:name "spectral analysis" ;
-            schema1:termCode "SPECTRAL" ],
-        [ a schema1:DefinedTerm ;
-            schema1:identifier [ a schema1:PropertyValue ;
-                    schema1:propertyID "https://vocabularyserver.com/keyword" ;
                     schema1:url "https://vocabularyserver.com/keyword/geochem-001" ;
                     schema1:value "geochem-001" ] ;
             schema1:inDefinedTermSet "https://vocabularyserver.com/keyword" ;
             schema1:name "geochemistry" ;
-            schema1:termCode "GEOCHEM" ] ;
+            schema1:termCode "GEOCHEM" ],
+        [ a schema1:DefinedTerm ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "https://vocabularyserver.com/keyword" ;
+                    schema1:url "https://vocabularyserver.com/keyword/spectral-001" ;
+                    schema1:value "spectral-001" ] ;
+            schema1:inDefinedTermSet "https://vocabularyserver.com/keyword" ;
+            schema1:name "spectral analysis" ;
+            schema1:termCode "SPECTRAL" ] ;
     schema1:license "https://creativecommons.org/licenses/by/4.0/" ;
     schema1:name "Multi-technique geochemistry dataset with archive and API access" ;
     schema1:publisher ex:ieda-publisher ;
