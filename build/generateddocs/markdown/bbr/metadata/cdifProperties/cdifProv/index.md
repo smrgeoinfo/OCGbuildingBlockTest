@@ -21,6 +21,15 @@ allOf:
 - $ref: https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/provProperties/generatedBy/schema.yaml
 - type: object
   properties:
+    '@type':
+      type: array
+      items:
+        type: string
+      minItems: 2
+      contains:
+        const: schema:Action
+      description: Must include both schema:Action and prov:Activity (prov:Activity
+        required by base generatedBy schema)
     schema:name:
       type: string
       description: Human-readable name for the activity
