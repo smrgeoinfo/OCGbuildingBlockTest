@@ -7,6 +7,9 @@
         "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
         "csvw": "http://www.w3.org/ns/csvw#",
         "prov": "http://www.w3.org/ns/prov#",
+        "time": "http://www.w3.org/2006/time#",
+        "dqv": "http://www.w3.org/ns/dqv#",
+        "sf": "http://www.opengis.net/ont/sf#",
         "ex": "https://example.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
@@ -67,6 +70,7 @@
                 "@type": "schema:Person",
                 "schema:name": "Smith, Jane",
                 "schema:alternateName": "J. Smith",
+                "schema:description": "Geochemistry researcher specializing in trace element analysis and environmental mineralogy",
                 "schema:affiliation": {
                     "@id": "https://ror.org/03m2x1q45",
                     "@type": "schema:Organization",
@@ -90,6 +94,7 @@
         "@type": "schema:Organization",
         "schema:name": "IEDA",
         "schema:alternateName": "Interdisciplinary Earth Data Alliance",
+        "schema:description": "An NSF-supported data facility for geochemistry and related disciplines",
         "schema:identifier": {
             "@type": "schema:PropertyValue",
             "schema:propertyID": "https://registry.identifiers.org/registry/ror",
@@ -110,6 +115,125 @@
             "schema:funder": {"@id": "https://ror.org/021nxhr62"}
         }
     ],
+    "schema:provider": [
+        {
+            "@id": "https://ror.org/02fjgr047",
+            "@type": "schema:Organization",
+            "schema:name": "IEDA",
+            "schema:url": "https://www.earthchem.org/"
+        }
+    ],
+    "schema:contributor": [
+        {
+            "@type": "schema:Role",
+            "schema:roleName": {
+                "@type": "schema:DefinedTerm",
+                "schema:name": "Data Manager",
+                "schema:inDefinedTermSet": "https://credit.niso.org/",
+                "schema:termCode": "data-curation"
+            },
+            "schema:contributor": {
+                "@id": "https://orcid.org/0000-0003-5555-7777",
+                "@type": "schema:Person",
+                "schema:name": "Lee, Robert",
+                "schema:contactPoint": {
+                    "@type": "schema:ContactPoint",
+                    "schema:email": "rlee@example.org"
+                }
+            }
+        },
+        {
+            "@id": "https://ror.org/03m2x1q45",
+            "@type": "schema:Organization",
+            "schema:name": "University of Arizona"
+        }
+    ],
+    "schema:measurementTechnique": {
+        "@type": "schema:DefinedTerm",
+        "schema:name": "Inductively Coupled Plasma Mass Spectrometry",
+        "schema:identifier": {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "https://vocab.nerc.ac.uk/collection/L05/current/",
+            "schema:value": "LAB21",
+            "schema:url": "https://vocab.nerc.ac.uk/collection/L05/current/LAB21/"
+        },
+        "schema:inDefinedTermSet": "https://vocab.nerc.ac.uk/collection/L05/current/",
+        "schema:termCode": "ICP-MS"
+    },
+    "schema:spatialCoverage": [
+        {
+            "@type": "schema:Place",
+            "schema:name": [
+                "Great Basin",
+                {
+                    "@type": "schema:DefinedTerm",
+                    "schema:name": "Great Basin physiographic province",
+                    "schema:identifier": {
+                        "@type": "schema:PropertyValue",
+                        "schema:propertyID": "https://www.geonames.org/",
+                        "schema:value": "5509151",
+                        "schema:url": "https://www.geonames.org/5509151"
+                    },
+                    "schema:inDefinedTermSet": "https://www.geonames.org/",
+                    "schema:termCode": "5509151"
+                }
+            ],
+            "schema:geo": {
+                "@type": "schema:GeoShape",
+                "schema:box": "36.0 -120.0 42.0 -114.0"
+            },
+            "geosparql:hasGeometry": {
+                "@type": "sf:Polygon",
+                "geosparql:asWKT": {
+                    "@type": "geosparql:wktLiteral",
+                    "@value": "POLYGON((-120.0 36.0, -114.0 36.0, -114.0 42.0, -120.0 42.0, -120.0 36.0))"
+                },
+                "geosparql:crs": {
+                    "@id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+                }
+            }
+        }
+    ],
+    "schema:temporalCoverage": [
+        {
+            "@type": "time:ProperInterval",
+            "schema:description": "Field sampling and laboratory analysis period",
+            "time:hasBeginning": {
+                "@type": "time:Instant",
+                "time:inXSDDate": "2025-06-01"
+            },
+            "time:hasEnd": {
+                "@type": "time:Instant",
+                "time:inXSDDate": "2025-09-30"
+            }
+        },
+        "2025-06-01/2025-09-30"
+    ],
+    "schema:relatedLink": [
+        {
+            "@type": "schema:LinkRole",
+            "schema:linkRelationship": {
+                "@type": "schema:DefinedTerm",
+                "schema:name": "related dataset",
+                "schema:inDefinedTermSet": "https://www.iana.org/assignments/link-relations/",
+                "schema:termCode": "related"
+            },
+            "target": {
+                "@type": "schema:EntryPoint",
+                "schema:name": "Regional geology map of the Great Basin",
+                "schema:url": "https://example.org/maps/great-basin-geology",
+                "schema:encodingFormat": "image/png"
+            }
+        }
+    ],
+    "schema:publishingPrinciples": [
+        {
+            "@type": "schema:CreativeWork",
+            "schema:name": "IEDA Data Management Plan",
+            "schema:description": "Describes data curation, versioning, and long-term preservation policies for IEDA-hosted datasets",
+            "schema:url": "https://www.iedadata.org/help/data-publication/"
+        }
+    ],
     "schema:distribution": [
         {
             "@type": ["schema:DataDownload"],
@@ -119,7 +243,14 @@
             "spdx:checksum": {
                 "spdx:algorithm": "SHA256",
                 "spdx:checksumValue": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
-            }
+            },
+            "schema:provider": [
+                {
+                    "@id": "https://ror.org/02fjgr047",
+                    "@type": "schema:Organization",
+                    "schema:name": "IEDA"
+                }
+            ]
         },
         {
             "@type": ["schema:DataDownload", "cdi:TabularTextDataSet"],
@@ -131,9 +262,24 @@
                 "spdx:checksumValue": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3"
             },
             "cdi:isDelimited": true,
+            "cdi:isFixedWidth": false,
             "csvw:delimiter": ",",
             "csvw:header": true,
             "csvw:headerRowCount": 1,
+            "cdi:arrayBase": 0,
+            "csvw:commentPrefix": "#",
+            "csvw:lineTerminators": "LF",
+            "csvw:quoteChar": "\"",
+            "csvw:skipBlankRows": false,
+            "csvw:skipColumns": 0,
+            "csvw:skipInitialSpace": true,
+            "csvw:skipRows": 0,
+            "cdi:escapeCharacter": "\\",
+            "cdi:headerIsCaseSensitive": false,
+            "cdi:treatConsecutiveDelimitersAsOne": false,
+            "csvw:tableDirection": "Ltr",
+            "csvw:textDirection": "Auto",
+            "csvw:trim": "true",
             "countRows": 461,
             "countColumns": 3,
             "cdi:hasPhysicalMapping": [
@@ -142,6 +288,9 @@
                     "cdi:format": "string",
                     "cdi:physicalDataType": "string",
                     "cdi:isRequired": true,
+                    "cdi:defaultValue": "UNKNOWN",
+                    "cdi:minimumLength": 3,
+                    "cdi:maximumLength": 40,
                     "cdi:formats_InstanceVariable": {"@id": "ex:var-sampleID"}
                 },
                 {
@@ -150,6 +299,7 @@
                     "cdi:physicalDataType": "float64",
                     "cdi:nullSequence": "NA",
                     "cdi:isRequired": true,
+                    "cdi:decimalPositions": 4,
                     "cdi:formats_InstanceVariable": {"@id": "ex:var-concentration"}
                 },
                 {
@@ -158,6 +308,8 @@
                     "cdi:physicalDataType": "float64",
                     "cdi:nullSequence": "-9999",
                     "cdi:isRequired": false,
+                    "cdi:decimalPositions": 4,
+                    "cdi:length": 12,
                     "cdi:formats_InstanceVariable": {"@id": "ex:var-uncertainty"}
                 }
             ]
@@ -411,8 +563,10 @@
             "@type": ["schema:PropertyValue"],
             "@id": "ex:var-concentration",
             "schema:name": "Element concentration",
+            "schema:alternateName": ["concentration_ppm", "element_conc"],
             "schema:description": "Measured element concentration in parts per million",
             "schema:propertyID": ["urn:example:property:concentration"],
+            "schema:url": "https://example.org/docs/variables/concentration",
             "schema:measurementTechnique": "ICP-MS",
             "schema:unitText": "ppm",
             "schema:unitCode": "59",
@@ -445,6 +599,157 @@
             "schema:description": "Measured spectral intensity",
             "schema:propertyID": ["urn:example:property:intensity"],
             "schema:unitText": "counts"
+        }
+    ],
+    "prov:wasGeneratedBy": [
+        {
+            "@id": "ex:activity-geochem-analysis",
+            "@type": ["schema:Action", "prov:Activity"],
+            "schema:name": "Soil Geochemistry Analysis - Great Basin Transect 2025",
+            "schema:description": "Major and trace element analysis of soil samples from Great Basin transect sites using ICP-MS with EPA Method 6200 protocols.",
+            "schema:identifier": {
+                "@type": "schema:PropertyValue",
+                "schema:propertyID": "https://example.org/activities",
+                "schema:value": "GEOCHEM-GB-2025-001",
+                "schema:url": "https://example.org/activities/GEOCHEM-GB-2025-001"
+            },
+            "prov:used": [
+                {
+                    "schema:instrument": {
+                        "@type": ["schema:Thing", "schema:DefinedTerm"],
+                        "schema:name": "Inductively Coupled Plasma Mass Spectrometry",
+                        "schema:termCode": "ICP-MS",
+                        "schema:inDefinedTermSet": "https://vocab.nerc.ac.uk/collection/L05/current/",
+                        "schema:alternateName": "Thermo Fisher iCAP RQ ICP-MS",
+                        "schema:additionalProperty": [
+                            {
+                                "@type": "schema:PropertyValue",
+                                "schema:propertyID": ["detectionLimit"],
+                                "schema:name": "Typical Detection Limit",
+                                "schema:value": "0.01 mg/kg for trace elements"
+                            }
+                        ],
+                        "schema:hasPart": [
+                            {
+                                "@type": ["schema:Thing"],
+                                "schema:name": "Autosampler",
+                                "schema:alternateName": "CETAC ASX-560"
+                            },
+                            {
+                                "@type": ["schema:Thing"],
+                                "schema:name": "Spray chamber",
+                                "schema:alternateName": "Peltier-cooled cyclonic"
+                            }
+                        ]
+                    }
+                },
+                "https://vocab.nerc.ac.uk/collection/L05/current/LAB02",
+                "Soil core samples collected June 2025, sites GB-001 through GB-045, dried and sieved to <2 mm fraction",
+                {
+                    "@type": "schema:CreativeWork",
+                    "schema:name": "EPA Method 6200 - XRF Analysis of Soils",
+                    "schema:url": "https://www.epa.gov/hw-sw846/sw-846-test-method-6200-field-portable-x-ray-fluorescence-spectrometry-determination"
+                }
+            ],
+            "schema:agent": {
+                "@id": "https://orcid.org/0000-0001-2345-6789",
+                "@type": "schema:Person",
+                "schema:name": "Smith, Jane",
+                "schema:identifier": {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
+                    "schema:value": "0000-0001-2345-6789",
+                    "schema:url": "https://orcid.org/0000-0001-2345-6789"
+                }
+            },
+            "schema:participant": [
+                {
+                    "@type": "schema:Role",
+                    "schema:roleName": "Lab Technician",
+                    "schema:contributor": {
+                        "@id": "https://orcid.org/0000-0003-5555-7777",
+                        "@type": "schema:Person",
+                        "schema:name": "Lee, Robert"
+                    }
+                }
+            ],
+            "schema:object": "Dried and sieved soil samples (<2 mm fraction) from Great Basin transect",
+            "schema:result": {"@id": "ex:complete-dataset-001"},
+            "schema:actionStatus": "schema:CompletedActionStatus",
+            "schema:startTime": "2025-07-15T08:00:00Z",
+            "schema:endTime": "2025-09-30T17:00:00Z",
+            "schema:location": {
+                "@type": "schema:Place",
+                "schema:name": "Nevada Bureau of Mines and Geology Analytical Lab",
+                "schema:address": "University of Nevada, Reno, 1664 N. Virginia Street, Reno, NV 89557",
+                "schema:url": "https://www.unr.edu/nbmg"
+            },
+            "schema:actionProcess": {
+                "@type": "schema:HowTo",
+                "schema:name": "EPA 6200 / ICP-MS Soil Geochemistry Protocol",
+                "schema:description": "Combined XRF screening and ICP-MS confirmatory analysis for major and trace elements in soils.",
+                "schema:step": [
+                    {
+                        "@type": "schema:HowToStep",
+                        "schema:name": "Sample preparation and acid digestion",
+                        "schema:description": "Homogenize dried samples, split 0.5 g aliquots, digest with HNO3-HCl-HF mixture at 190 C for 20 min in a microwave system.",
+                        "schema:url": "https://example.org/protocols/digestion-procedure",
+                        "schema:position": 1
+                    },
+                    {
+                        "@type": "schema:HowToStep",
+                        "schema:name": "ICP-MS measurement and calibration",
+                        "schema:description": "Analyze digested solutions by ICP-MS using external calibration with NIST SRM 2711a (Montana II Soil).",
+                        "schema:url": "https://example.org/protocols/icpms-measurement",
+                        "schema:position": 2
+                    }
+                ]
+            },
+            "schema:error": "",
+            "schema:additionalProperty": [
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": ["batchID"],
+                    "schema:name": "Analysis Batch Identifier",
+                    "schema:value": "GB-2025-BATCH-03"
+                }
+            ]
+        }
+    ],
+    "prov:wasDerivedFrom": [
+        {
+            "prov:wasDerivedFrom": [
+                "https://example.org/fieldwork/gb-transect-2025/raw-samples",
+                {"@id": "https://doi.org/10.5880/example.field.001"},
+                {
+                    "@type": "schema:CreativeWork",
+                    "schema:name": "USGS Great Basin Geochemical Survey (2020)",
+                    "schema:description": "Prior regional geochemical survey used for site selection and comparative analysis",
+                    "schema:url": "https://pubs.usgs.gov/of/2020/example-great-basin"
+                }
+            ]
+        }
+    ],
+    "dqv:hasQualityMeasurement": [
+        {
+            "@type": "dqv:QualityMeasurement",
+            "dqv:isMeasurementOf": {
+                "@type": "schema:DefinedTerm",
+                "schema:name": "Completeness",
+                "schema:inDefinedTermSet": "https://www.w3.org/TR/vocab-dqv/",
+                "schema:termCode": "completeness"
+            },
+            "dqv:value": "98.5% of planned sample sites successfully analyzed"
+        },
+        {
+            "@type": "dqv:QualityMeasurement",
+            "dqv:isMeasurementOf": "Analytical precision (2-sigma RSD on NIST SRM 2711a replicates)",
+            "dqv:value": {
+                "@type": "schema:DefinedTerm",
+                "schema:name": "High",
+                "schema:inDefinedTermSet": "https://example.org/quality-levels/",
+                "schema:termCode": "HIGH"
+            }
         }
     ],
     "schema:subjectOf": {
