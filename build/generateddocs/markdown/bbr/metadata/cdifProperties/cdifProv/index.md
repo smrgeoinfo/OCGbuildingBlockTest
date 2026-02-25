@@ -7,6 +7,246 @@ Extended provenance activity for CDIF metadata, adding schema.org Action propert
 
 [*Status*](http://www.opengis.net/def/status): Under development
 
+## Examples
+
+### Example CDIF provenance activity.
+Soil chemistry analysis activity demonstrating extended cdifProv building
+block features: multi-typed activity (schema:Action + prov:Activity), agent
+with ORCID, DefinedTerm instrument with detection limit, prov:used array
+(vocab URI, string, CreativeWork), action chaining via schema:object/result,
+schema:actionProcess HowTo with ordered steps, and facility location.
+#### json
+```json
+{
+    "@context": {
+        "schema": "http://schema.org/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "ex": "https://example.org/"
+    },
+    "@id": "ex:activity-soil-chem-analysis",
+    "@type": ["schema:Action", "prov:Activity"],
+    "schema:name": "Soil Chemistry Analysis - Great Basin Transect 2025",
+    "schema:description": "Major and trace element analysis of soil samples collected along a 200 km transect across the Great Basin, using ICP-MS and XRF spectrometry with certified reference materials.",
+    "prov:used": [
+        "https://vocab.nerc.ac.uk/collection/L05/current/LAB02",
+        "Soil core samples collected June 2025, sites GB-001 through GB-045",
+        {
+            "@type": "schema:CreativeWork",
+            "schema:name": "EPA Method 6200 - XRF Analysis of Soils",
+            "schema:url": "https://www.epa.gov/hw-sw846/sw-846-test-method-6200-field-portable-x-ray-fluorescence-spectrometry-determination"
+        }
+    ],
+    "schema:agent": {
+        "@type": "schema:Person",
+        "schema:name": "Dr. Maria Chen",
+        "schema:identifier": {
+            "@type": "schema:PropertyValue",
+            "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
+            "schema:value": "0000-0002-8765-4321",
+            "schema:url": "https://orcid.org/0000-0002-8765-4321"
+        }
+    },
+    "schema:instrument": [
+        {
+            "@type": "schema:DefinedTerm",
+            "schema:name": "Inductively Coupled Plasma Mass Spectrometry",
+            "schema:termCode": "ICP-MS",
+            "schema:inDefinedTermSet": "https://vocab.nerc.ac.uk/collection/L05/current/",
+            "schema:alternateName": "Thermo Fisher iCAP RQ ICP-MS",
+            "schema:additionalProperty": [
+                {
+                    "@type": "schema:PropertyValue",
+                    "schema:propertyID": ["detectionLimit"],
+                    "schema:name": "Typical Detection Limit",
+                    "schema:value": "0.01 mg/kg for trace elements"
+                }
+            ]
+        }
+    ],
+    "schema:object": "Dried and sieved soil samples (<2 mm fraction) from Great Basin transect",
+    "schema:result": {"@id": "ex:dataset-soil-chem-gb-2025"},
+    "schema:actionStatus": "schema:CompletedActionStatus",
+    "schema:startTime": "2025-07-15T08:00:00Z",
+    "schema:endTime": "2025-09-30T17:00:00Z",
+    "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "Nevada Bureau of Mines and Geology Analytical Lab",
+        "schema:address": "University of Nevada, Reno, 1664 N. Virginia Street, Reno, NV 89557",
+        "schema:url": "https://www.unr.edu/nbmg"
+    },
+    "schema:actionProcess": {
+        "@type": "schema:HowTo",
+        "schema:name": "EPA 6200 / ICP-MS Soil Geochemistry Protocol",
+        "schema:description": "Combined XRF screening and ICP-MS confirmatory analysis for major and trace elements in soil matrices.",
+        "schema:step": [
+            {
+                "@type": "schema:HowToStep",
+                "schema:name": "Sample preparation and acid digestion",
+                "schema:description": "Homogenize dried samples, split 0.5 g aliquots, digest with HNO3-HCl-HF mixture at 190 C in closed vessels.",
+                "schema:position": 1
+            },
+            {
+                "@type": "schema:HowToStep",
+                "schema:name": "ICP-MS measurement and calibration",
+                "schema:description": "Analyze digested solutions by ICP-MS using external calibration with NIST SRM 2710a and 2711a as quality control standards.",
+                "schema:position": 2
+            }
+        ]
+    }
+}
+
+```
+
+#### jsonld
+```jsonld
+{
+  "@context": [
+    {
+      "schema": "http://schema.org/",
+      "prov": "http://www.w3.org/ns/prov#"
+    },
+    "https://usgin.github.io/metadataBuildingBlocks/build/annotated/bbr/metadata/cdifProperties/cdifProv/context.jsonld",
+    {
+      "schema": "http://schema.org/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "ex": "https://example.org/"
+    }
+  ],
+  "@id": "ex:activity-soil-chem-analysis",
+  "@type": [
+    "schema:Action",
+    "prov:Activity"
+  ],
+  "schema:name": "Soil Chemistry Analysis - Great Basin Transect 2025",
+  "schema:description": "Major and trace element analysis of soil samples collected along a 200 km transect across the Great Basin, using ICP-MS and XRF spectrometry with certified reference materials.",
+  "prov:used": [
+    "https://vocab.nerc.ac.uk/collection/L05/current/LAB02",
+    "Soil core samples collected June 2025, sites GB-001 through GB-045",
+    {
+      "@type": "schema:CreativeWork",
+      "schema:name": "EPA Method 6200 - XRF Analysis of Soils",
+      "schema:url": "https://www.epa.gov/hw-sw846/sw-846-test-method-6200-field-portable-x-ray-fluorescence-spectrometry-determination"
+    }
+  ],
+  "schema:agent": {
+    "@type": "schema:Person",
+    "schema:name": "Dr. Maria Chen",
+    "schema:identifier": {
+      "@type": "schema:PropertyValue",
+      "schema:propertyID": "https://registry.identifiers.org/registry/orcid",
+      "schema:value": "0000-0002-8765-4321",
+      "schema:url": "https://orcid.org/0000-0002-8765-4321"
+    }
+  },
+  "schema:instrument": [
+    {
+      "@type": "schema:DefinedTerm",
+      "schema:name": "Inductively Coupled Plasma Mass Spectrometry",
+      "schema:termCode": "ICP-MS",
+      "schema:inDefinedTermSet": "https://vocab.nerc.ac.uk/collection/L05/current/",
+      "schema:alternateName": "Thermo Fisher iCAP RQ ICP-MS",
+      "schema:additionalProperty": [
+        {
+          "@type": "schema:PropertyValue",
+          "schema:propertyID": [
+            "detectionLimit"
+          ],
+          "schema:name": "Typical Detection Limit",
+          "schema:value": "0.01 mg/kg for trace elements"
+        }
+      ]
+    }
+  ],
+  "schema:object": "Dried and sieved soil samples (<2 mm fraction) from Great Basin transect",
+  "schema:result": {
+    "@id": "ex:dataset-soil-chem-gb-2025"
+  },
+  "schema:actionStatus": "schema:CompletedActionStatus",
+  "schema:startTime": "2025-07-15T08:00:00Z",
+  "schema:endTime": "2025-09-30T17:00:00Z",
+  "schema:location": {
+    "@type": "schema:Place",
+    "schema:name": "Nevada Bureau of Mines and Geology Analytical Lab",
+    "schema:address": "University of Nevada, Reno, 1664 N. Virginia Street, Reno, NV 89557",
+    "schema:url": "https://www.unr.edu/nbmg"
+  },
+  "schema:actionProcess": {
+    "@type": "schema:HowTo",
+    "schema:name": "EPA 6200 / ICP-MS Soil Geochemistry Protocol",
+    "schema:description": "Combined XRF screening and ICP-MS confirmatory analysis for major and trace elements in soil matrices.",
+    "schema:step": [
+      {
+        "@type": "schema:HowToStep",
+        "schema:name": "Sample preparation and acid digestion",
+        "schema:description": "Homogenize dried samples, split 0.5 g aliquots, digest with HNO3-HCl-HF mixture at 190 C in closed vessels.",
+        "schema:position": 1
+      },
+      {
+        "@type": "schema:HowToStep",
+        "schema:name": "ICP-MS measurement and calibration",
+        "schema:description": "Analyze digested solutions by ICP-MS using external calibration with NIST SRM 2710a and 2711a as quality control standards.",
+        "schema:position": 2
+      }
+    ]
+  }
+}
+```
+
+#### ttl
+```ttl
+@prefix ex: <https://example.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:activity-soil-chem-analysis a schema1:Action,
+        prov:Activity ;
+    schema1:actionProcess [ a schema1:HowTo ;
+            schema1:description "Combined XRF screening and ICP-MS confirmatory analysis for major and trace elements in soil matrices." ;
+            schema1:name "EPA 6200 / ICP-MS Soil Geochemistry Protocol" ;
+            schema1:step [ a schema1:HowToStep ;
+                    schema1:description "Homogenize dried samples, split 0.5 g aliquots, digest with HNO3-HCl-HF mixture at 190 C in closed vessels." ;
+                    schema1:name "Sample preparation and acid digestion" ;
+                    schema1:position 1 ],
+                [ a schema1:HowToStep ;
+                    schema1:description "Analyze digested solutions by ICP-MS using external calibration with NIST SRM 2710a and 2711a as quality control standards." ;
+                    schema1:name "ICP-MS measurement and calibration" ;
+                    schema1:position 2 ] ] ;
+    schema1:actionStatus "schema:CompletedActionStatus" ;
+    schema1:agent [ a schema1:Person ;
+            schema1:identifier [ a schema1:PropertyValue ;
+                    schema1:propertyID "https://registry.identifiers.org/registry/orcid" ;
+                    schema1:url "https://orcid.org/0000-0002-8765-4321" ;
+                    schema1:value "0000-0002-8765-4321" ] ;
+            schema1:name "Dr. Maria Chen" ] ;
+    schema1:description "Major and trace element analysis of soil samples collected along a 200 km transect across the Great Basin, using ICP-MS and XRF spectrometry with certified reference materials." ;
+    schema1:endTime "2025-09-30T17:00:00Z" ;
+    schema1:instrument [ a schema1:DefinedTerm ;
+            schema1:additionalProperty [ a schema1:PropertyValue ;
+                    schema1:name "Typical Detection Limit" ;
+                    schema1:propertyID "detectionLimit" ;
+                    schema1:value "0.01 mg/kg for trace elements" ] ;
+            schema1:alternateName "Thermo Fisher iCAP RQ ICP-MS" ;
+            schema1:inDefinedTermSet "https://vocab.nerc.ac.uk/collection/L05/current/" ;
+            schema1:name "Inductively Coupled Plasma Mass Spectrometry" ;
+            schema1:termCode "ICP-MS" ] ;
+    schema1:location [ a schema1:Place ;
+            schema1:address "University of Nevada, Reno, 1664 N. Virginia Street, Reno, NV 89557" ;
+            schema1:name "Nevada Bureau of Mines and Geology Analytical Lab" ;
+            schema1:url "https://www.unr.edu/nbmg" ] ;
+    schema1:name "Soil Chemistry Analysis - Great Basin Transect 2025" ;
+    schema1:object "Dried and sieved soil samples (<2 mm fraction) from Great Basin transect" ;
+    schema1:result ex:dataset-soil-chem-gb-2025 ;
+    schema1:startTime "2025-07-15T08:00:00Z" ;
+    prov:used [ a schema1:CreativeWork ;
+            schema1:name "EPA Method 6200 - XRF Analysis of Soils" ;
+            schema1:url "https://www.epa.gov/hw-sw846/sw-846-test-method-6200-field-portable-x-ray-fluorescence-spectrometry-determination" ],
+        "Soil core samples collected June 2025, sites GB-001 through GB-045",
+        "https://vocab.nerc.ac.uk/collection/L05/current/LAB02" .
+
+
+```
+
 ## Schema
 
 ```yaml
