@@ -79,6 +79,27 @@ Run `python tools/generate_profiles.py --list` to see all generated profiles wit
 
 See [agents.md](agents.md) for the full building block structure, authoring rules, and composition hierarchy.
 
+## Building Block Categories
+
+| Category | Directory | Description |
+|----------|-----------|-------------|
+| schemaorgProperties | `_sources/schemaorgProperties/` | schema.org vocabulary building blocks (person, organization, identifier, definedTerm, etc.) |
+| cdifProperties | `_sources/cdifProperties/` | CDIF-specific properties (mandatory, optional, provenance, tabular data, long data, etc.) |
+| ddiProperties | `_sources/ddiProperties/` | DDI-CDI vocabulary building blocks |
+| provProperties | `_sources/provProperties/` | PROV-O provenance (generatedBy, derivedFrom) |
+| qualityProperties | `_sources/qualityProperties/` | DQV data quality measures |
+| adaProperties | `_sources/adaProperties/` | ADA (IEDA Analytics & Data Archive) domain properties |
+| xasProperties | `_sources/xasProperties/` | X-ray Absorption Spectroscopy domain properties |
+| profiles | `_sources/profiles/` | Composed profiles (ADA technique profiles, CDIF discovery/data profiles) |
+
+### ddiProperties
+
+DDI-CDI vocabulary building blocks for communities using the DDI Cross-Domain Integration standard natively.
+
+| Building Block | Description |
+|----------------|-------------|
+| `ddicdiProv` | DDI-CDI native provenance activity — expresses workflows using `cdi:Activity`, `cdi:Step`, `cdi:ProcessingAgent`, and `cdi:Parameter`. Alternative to the schema.org/PROV-based `cdifProv` building block. Includes JSON Schema with `anyOf [inline-type, id-reference]` pattern for graph node links, SHACL validation shapes, and a soil chemistry analysis example as a multi-node `@graph` document. |
+
 ## License
 
 This material is based upon work supported by the National Science Foundation (NSF) under awards 2012893, 2012748, and 2012593.
