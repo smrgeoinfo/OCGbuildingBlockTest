@@ -12,8 +12,16 @@
                     "type": "array",
                     "items": {"type": "string"},
                     "minItems": 2,
-                    "contains": {"const": "schema:Action"},
-                    "description": "Must include both schema:Action and prov:Activity (prov:Activity required by base generatedBy schema)"
+                    "contains": {
+                        "enum": [
+                            "schema:Action",
+                            "schema:SearchAction",
+                            "schema:CreateAction",
+                            "schema:MoveAction",
+                            "schema:UpdateAction"
+                        ]
+                    },
+                    "description": "Must include both an Action type and prov:Activity (prov:Activity required by base generatedBy schema)"
                 },
                 "schema:name": {
                     "type": "string",
