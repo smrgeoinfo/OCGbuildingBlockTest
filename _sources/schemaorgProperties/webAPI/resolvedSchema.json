@@ -20,7 +20,97 @@
           "type": "string"
         },
         {
-          "$ref": "#/$defs/DefinedTerm"
+          "description": "schema.org Defined Term schema",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "schema:DefinedTerm"
+            },
+            "schema:name": {
+              "type": "string",
+              "description": "text label for the term that is useful to human user"
+            },
+            "schema:identifier": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "description": "Properties for a schema.org identifier",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string",
+                      "const": "schema:PropertyValue"
+                    },
+                    "schema:propertyID": {
+                      "type": "string",
+                      "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                    },
+                    "schema:value": {
+                      "type": "string",
+                      "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                    },
+                    "schema:url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "required": [
+                        "@type"
+                      ]
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "schema:value"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "schema:url"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "schema:inDefinedTermSet": {
+              "type": "string",
+              "description": "Identifier for the controlled vocabulary responsible for this keyword."
+            },
+            "schema:termCode": {
+              "type": "string",
+              "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+            }
+          },
+          "allOf": [
+            {
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "schema:name"
+                  ]
+                },
+                {
+                  "required": [
+                    "schema:identifier"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "description": "specify the kind of service. Ideally this should be a resolvable identifier. Currently there is no widely adopted registry for serviceType identifiers, in large part because services might be defined at different levels of granularity, and classifications might focus on function, data formats, thematic content, security, or other aspects of the service definition. For interoperability, there must be an external arrangement between data providers and consumers on the strings that will be used to specify service types."
@@ -32,7 +122,29 @@
           "type": "string"
         },
         {
-          "$ref": "#/$defs/LabeledLink"
+          "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "default": "schema:CreativeWork",
+              "const": "schema:CreativeWork"
+            },
+            "schema:name": {
+              "type": "string"
+            },
+            "schema:description": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "@type",
+            "schema:url"
+          ]
         }
       ]
     },
@@ -43,7 +155,29 @@
           "type": "string"
         },
         {
-          "$ref": "#/$defs/LabeledLink"
+          "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "default": "schema:CreativeWork",
+              "const": "schema:CreativeWork"
+            },
+            "schema:name": {
+              "type": "string"
+            },
+            "schema:description": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "@type",
+            "schema:url"
+          ]
         }
       ]
     },
@@ -51,440 +185,549 @@
       "type": "array",
       "description": "actions that can be invoked via the API",
       "items": {
-        "$ref": "#/$defs/Action"
+        "title": "Action ",
+        "type": "object",
+        "description": "this element defines an action (operation) that can be invoked via messages using the protocol defined. In most cases this will be an http request via TCP/IP, but in desktop or LAN environments, other protocols might be used. The target property defines the endpoint and syntax for invoking the action. Result specifies the encoding format for the (possible) response(s) when the action is invoked. Object specifies the information model for the resource that is the object of the action. This approach is an adoptation of the Action Blog Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) ",
+        "properties": {
+          "@type": {
+            "type": "string",
+            "description": "TBD, recognize other actions, e.g. SearchAction, UpdateAction..., others?",
+            "default": "schema:Action",
+            "const": "schema:Action"
+          },
+          "schema:name": {
+            "type": "string",
+            "description": "text label for the action"
+          },
+          "schema:target": {
+            "type": "object",
+            "description": "specifies the request target location and request syntax",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:EntryPoint",
+                "const": "schema:EntryPoint"
+              },
+              "schema:description": {
+                "type": "string"
+              },
+              "schema:urlTemplate": {
+                "type": "string",
+                "description": "a templated URL; parameters are enclosed in curly braces ({..}); parameters are not required. If included, parameters MUST be documented in the query-input element. Template should be consitent with URI Template (https://datatracker.ietf.org/doc/html/rfc6570) examples: - http://portal.chordsrt.com/api/v1/data.{encoding}; single parameter - http://portal.chordsrt.com/api/v1/data.{encoding}?instruments={instruments}&start={start}&end={end} ; multiple parameters - {endpoint}{encoding}; endpoint URL path is a parameter,should only appear in potential actions for API specification descriptions, which are generic-not specific to a particular endpoint."
+              },
+              "schema:httpMethod": {
+                "title": "HTTP Method",
+                "description": "only applicable if protocol is http or a protocol that tunnels on http",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "default": "GET",
+                  "enum": [
+                    "GET",
+                    "PUT",
+                    "POST",
+                    "PATCH",
+                    "DELETE",
+                    "COPY",
+                    "HEAD",
+                    "OPTIONS",
+                    "PROPFIND"
+                  ]
+                }
+              },
+              "schema:contentType": {
+                "type": "array",
+                "description": "The supported content type(s) for an EntryPoint response. a MIME type (https://www.iana.org/assignments/media-types/media-types.xhtml) that specifies the content type for messages in resonses from the service endpoint. This is a schema.org property, and is redundant with encodingFormat in the result property for the Action.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "schema:urlTemplate"
+            ]
+          },
+          "schema:result": {
+            "type": "object",
+            "description": "specifies the serialization scheme (encoding format, information model) for expected representation of the data",
+            "properties": {
+              "@type": {
+                "type": "array",
+                "description": "Type of result object. Typically schema:DataDownload, but may include additional types.",
+                "items": {
+                  "type": "string"
+                },
+                "contains": {
+                  "const": "schema:DataDownload"
+                },
+                "minItems": 1
+              },
+              "schema:encodingFormat": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "schema:description": {
+                "type": "string"
+              }
+            }
+          },
+          "schema:object": {
+            "type": "object",
+            "description": "specification of information model/schema for target resource. Only necessary if the request allow specifying the fields to include in the response",
+            "properties": {
+              "@type": {
+                "type": "string",
+                "default": "schema:DataFeed",
+                "const": "schema:DataFeed"
+              },
+              "schema:description": {
+                "type": "string"
+              },
+              "schema:variableMeasured": {
+                "type": "array",
+                "items": {
+                  "description": "CDIF schema.org implemenation of PropertyValue to use as values for variableMeasured",
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "const": "schema:PropertyValue"
+                      },
+                      "minItems": 1
+                    },
+                    "@id": {
+                      "type": "string"
+                    },
+                    "schema:name": {
+                      "type": "string",
+                      "description": "this is the string label that is expected to be associated with the variable in the dataset serialization"
+                    },
+                    "schema:description": {
+                      "type": "string",
+                      "default": "missing"
+                    },
+                    "schema:alternateName": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "human intelligible name for variable that conveys semantics"
+                      }
+                    },
+                    "schema:propertyID": {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "@id": {
+                                "type": "string",
+                                "description": "reference to a skos concept for the property"
+                              }
+                            }
+                          },
+                          {
+                            "description": "schema.org Defined Term schema",
+                            "type": "object",
+                            "properties": {
+                              "@type": {
+                                "const": "schema:DefinedTerm"
+                              },
+                              "schema:name": {
+                                "type": "string",
+                                "description": "text label for the term that is useful to human user"
+                              },
+                              "schema:identifier": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "description": "Properties for a schema.org identifier",
+                                    "type": "object",
+                                    "properties": {
+                                      "@type": {
+                                        "type": "string",
+                                        "const": "schema:PropertyValue"
+                                      },
+                                      "schema:propertyID": {
+                                        "type": "string",
+                                        "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                                      },
+                                      "schema:value": {
+                                        "type": "string",
+                                        "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                                      },
+                                      "schema:url": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                                      }
+                                    },
+                                    "allOf": [
+                                      {
+                                        "required": [
+                                          "@type"
+                                        ]
+                                      },
+                                      {
+                                        "anyOf": [
+                                          {
+                                            "required": [
+                                              "schema:value"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "schema:url"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "schema:inDefinedTermSet": {
+                                "type": "string",
+                                "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                              },
+                              "schema:termCode": {
+                                "type": "string",
+                                "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+                              }
+                            },
+                            "allOf": [
+                              {
+                                "required": [
+                                  "@type"
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "required": [
+                                      "schema:name"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "schema:identifier"
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
+                    },
+                    "schema:measurementTechnique": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@id": {
+                              "type": "string",
+                              "description": "reference to a skos concept for the property"
+                            }
+                          }
+                        },
+                        {
+                          "description": "schema.org Defined Term schema",
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "schema:DefinedTerm"
+                            },
+                            "schema:name": {
+                              "type": "string",
+                              "description": "text label for the term that is useful to human user"
+                            },
+                            "schema:identifier": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "description": "Properties for a schema.org identifier",
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "type": "string",
+                                      "const": "schema:PropertyValue"
+                                    },
+                                    "schema:propertyID": {
+                                      "type": "string",
+                                      "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                                    },
+                                    "schema:value": {
+                                      "type": "string",
+                                      "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                                    },
+                                    "schema:url": {
+                                      "type": "string",
+                                      "format": "uri",
+                                      "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                                    }
+                                  },
+                                  "allOf": [
+                                    {
+                                      "required": [
+                                        "@type"
+                                      ]
+                                    },
+                                    {
+                                      "anyOf": [
+                                        {
+                                          "required": [
+                                            "schema:value"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "schema:url"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "schema:inDefinedTermSet": {
+                              "type": "string",
+                              "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                            },
+                            "schema:termCode": {
+                              "type": "string",
+                              "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+                            }
+                          },
+                          "allOf": [
+                            {
+                              "required": [
+                                "@type"
+                              ]
+                            },
+                            {
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "schema:name"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "schema:identifier"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A text description of the measurement method used to determine values for this variable. If standard measurement protocols are defined and registered, these can be identified via http URI's."
+                    },
+                    "schema:unitText": {
+                      "type": "string",
+                      "description": "A string that identifies a unit of measurement that applies to all values for this variable."
+                    },
+                    "schema:unitCode": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@id": {
+                              "type": "string",
+                              "description": "reference to a skos concept for the property"
+                            }
+                          }
+                        },
+                        {
+                          "description": "schema.org Defined Term schema",
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "schema:DefinedTerm"
+                            },
+                            "schema:name": {
+                              "type": "string",
+                              "description": "text label for the term that is useful to human user"
+                            },
+                            "schema:identifier": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "description": "Properties for a schema.org identifier",
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "type": "string",
+                                      "const": "schema:PropertyValue"
+                                    },
+                                    "schema:propertyID": {
+                                      "type": "string",
+                                      "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+                                    },
+                                    "schema:value": {
+                                      "type": "string",
+                                      "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
+                                    },
+                                    "schema:url": {
+                                      "type": "string",
+                                      "format": "uri",
+                                      "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
+                                    }
+                                  },
+                                  "allOf": [
+                                    {
+                                      "required": [
+                                        "@type"
+                                      ]
+                                    },
+                                    {
+                                      "anyOf": [
+                                        {
+                                          "required": [
+                                            "schema:value"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "schema:url"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "schema:inDefinedTermSet": {
+                              "type": "string",
+                              "description": "Identifier for the controlled vocabulary responsible for this keyword."
+                            },
+                            "schema:termCode": {
+                              "type": "string",
+                              "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
+                            }
+                          },
+                          "allOf": [
+                            {
+                              "required": [
+                                "@type"
+                              ]
+                            },
+                            {
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "schema:name"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "schema:identifier"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "Value is expected to be TEXT or URL. We recommend providing an HTTP URI that identifies a unit of measure from a vocabulary accessible on the web. The QUDT unit vocabulary provides and extensive set of registered units of measure that can be used to populate the schema:unitCode property to specify the units of measure used to report datavalues when that is appropriate."
+                    },
+                    "schema:minValue": {
+                      "type": "number",
+                      "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
+                    },
+                    "schema:maxValue": {
+                      "type": "number",
+                      "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
+                    },
+                    "schema:url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "required": [
+                        "@type",
+                        "schema:name",
+                        "schema:description"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "schema:query-input": {
+            "type": "array",
+            "description": "set of explanations of the parameters in the URL template for the target.",
+            "minItems": 0,
+            "items": {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                },
+                "@type": {
+                  "type": "string",
+                  "default": "schema:PropertyValueSpecification",
+                  "const": "schema:PropertyValueSpecification"
+                },
+                "schema:valueName": {
+                  "type": "string"
+                },
+                "schema:description": {
+                  "type": "string"
+                },
+                "schema:valueRequired": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "schema:valuePattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schema:valueName",
+                "schema:description"
+              ]
+            }
+          }
+        },
+        "required": [
+          "schema:name",
+          "schema:target"
+        ]
       }
     }
   },
   "required": [
     "schema:serviceType",
     "schema:potentialAction"
-  ],
-  "$defs": {
-    "LabeledLink": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string",
-          "default": "schema:CreativeWork",
-          "const": "schema:CreativeWork"
-        },
-        "schema:name": {
-          "type": "string"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:url": {
-          "type": "string",
-          "format": "uri"
-        }
-      },
-      "required": [
-        "@type",
-        "schema:url"
-      ]
-    },
-    "Identifier": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "description": "Properties for a schema.org identifier",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string",
-          "const": "schema:PropertyValue"
-        },
-        "schema:propertyID": {
-          "type": "string",
-          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
-        },
-        "schema:value": {
-          "type": "string",
-          "description": "the identifier string. E.g. 10.5066/F7VX0DMQ"
-        },
-        "schema:url": {
-          "format": "uri",
-          "type": "string",
-          "description": "web-resolveable string for the identifier; host name part is location of a resolver that will return some representation for the given identifier value. E.g. https://doi.org/10.5066/F7VX0DMQ "
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:value"
-              ]
-            },
-            {
-              "required": [
-                "schema:url"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "DefinedTerm": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "description": "schema.org Defined Term schema",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "const": "schema:DefinedTerm"
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "text label for the term that is useful to human user"
-        },
-        "schema:identifier": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/Identifier"
-            }
-          ]
-        },
-        "schema:inDefinedTermSet": {
-          "type": "string",
-          "description": "Identifier for the controlled vocabulary responsible for this keyword."
-        },
-        "schema:termCode": {
-          "type": "string",
-          "description": "A representative code for this keyword in the controlled vocabulary (Optional).  Analogous to skos:Notation"
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type"
-          ]
-        },
-        {
-          "anyOf": [
-            {
-              "required": [
-                "schema:name"
-              ]
-            },
-            {
-              "required": [
-                "schema:identifier"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "target_type": {
-      "type": "object",
-      "description": "documentation of the URL end point and syntax to invoke the service. This schema doesn't handle post requests",
-      "properties": {
-        "@type": {
-          "type": "string",
-          "default": "schema:EntryPoint",
-          "const": "schema:EntryPoint"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:urlTemplate": {
-          "type": "string",
-          "description": "a templated URL; parameters are enclosed in curly braces ('{..}'); parameters are not required. If included, parameters MUST be documented in the query-input element. Template should be consitent with URI Template (https://datatracker.ietf.org/doc/html/rfc6570)",
-          "examples": [
-            "http://portal.chordsrt.com/api/v1/data.{encoding}; single parameter",
-            "http://portal.chordsrt.com/api/v1/data.{encoding}?instruments={instruments}&start={start}&end={end} ; multiple parameters",
-            "{endpoint}{encoding}; endpoint URL path is a parameter,should only appear in potential actions for API specification descriptions, which are generic-not specific to a particular endpoint."
-          ]
-        },
-        "schema:httpMethod": {
-          "title": "HTTP Method",
-          "description": "only applicable if protocol is http or a protocol that tunnels on http",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "default": "GET",
-            "enum": [
-              "GET",
-              "PUT",
-              "POST",
-              "PATCH",
-              "DELETE",
-              "COPY",
-              "HEAD",
-              "OPTIONS",
-              "PROPFIND"
-            ]
-          }
-        },
-        "schema:contentType": {
-          "type": "array",
-          "description": "The supported content type(s) for an EntryPoint response. a MIME type (https://www.iana.org/assignments/media-types/media-types.xhtml) that specifies the content type for messages in resonses from the service endpoint. This is a schema.org property, and is redundant with encodingFormat in the result property for the Action.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "schema:urlTemplate"
-      ]
-    },
-    "result_type": {
-      "type": "object",
-      "description": "documentation of the serialization format for the API response, i.e. an implementation of the structure specified in the object type field",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "description": "Type of result object. Typically schema:DataDownload, but may include additional types.",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "schema:DataDownload"
-          },
-          "minItems": 1
-        },
-        "schema:encodingFormat": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "schema:description": {
-          "type": "string"
-        }
-      }
-    },
-    "query-input_type": {
-      "type": "array",
-      "description": "object that maps the parameters (in braces '{  }' in the url template to specifications for the kind of value expected. parameters must all be strings in the URL",
-      "minItems": 0,
-      "items": {
-        "type": "object",
-        "properties": {
-          "@id": {
-            "type": "string"
-          },
-          "@type": {
-            "type": "string",
-            "default": "schema:PropertyValueSpecification",
-            "const": "schema:PropertyValueSpecification"
-          },
-          "schema:valueName": {
-            "type": "string"
-          },
-          "schema:description": {
-            "type": "string"
-          },
-          "schema:valueRequired": {
-            "type": "boolean",
-            "default": true
-          },
-          "schema:valuePattern": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "schema:valueName",
-          "schema:description"
-        ]
-      }
-    },
-    "object_type": {
-      "type": "object",
-      "description": "description of the data structure of the return object",
-      "properties": {
-        "@type": {
-          "type": "string",
-          "default": "schema:DataFeed",
-          "const": "schema:DataFeed"
-        },
-        "schema:description": {
-          "type": "string"
-        },
-        "schema:variableMeasured": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/VariableMeasured"
-          }
-        }
-      }
-    },
-    "VariableMeasured": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "description": "CDIF schema.org implemenation of PropertyValue to use as values for variableMeasured",
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "schema:PropertyValue"
-          },
-          "minItems": 1
-        },
-        "@id": {
-          "type": "string"
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "this is the string label that is expected to be associated with the variable in the dataset serialization"
-        },
-        "schema:description": {
-          "type": "string",
-          "default": "missing"
-        },
-        "schema:alternateName": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "human intelligible name for variable that conveys semantics"
-          }
-        },
-        "schema:propertyID": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string",
-                    "description": "reference to a skos concept for the property"
-                  }
-                }
-              },
-              {
-                "$ref": "#/$defs/DefinedTerm"
-              }
-            ]
-          },
-          "description": "identifier or name for the property concept quantified by the values in this variable slot. Multiple values can specify the property at different levels of granularity."
-        },
-        "schema:measurementTechnique": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "@id": {
-                  "type": "string",
-                  "description": "reference to a skos concept for the property"
-                }
-              }
-            },
-            {
-              "$ref": "#/$defs/DefinedTerm"
-            }
-          ],
-          "description": "A text description of the measurement method used to determine values for this variable. If standard measurement protocols are defined and registered, these can be identified via http URI's."
-        },
-        "schema:unitText": {
-          "type": "string",
-          "description": "A string that identifies a unit of measurement that applies to all values for this variable."
-        },
-        "schema:unitCode": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "@id": {
-                  "type": "string",
-                  "description": "reference to a skos concept for the property"
-                }
-              }
-            },
-            {
-              "$ref": "#/$defs/DefinedTerm"
-            }
-          ],
-          "description": "Value is expected to be TEXT or URL. We recommend providing an HTTP URI that identifies a unit of measure from a vocabulary accessible on the web. The QUDT unit vocabulary provides and extensive set of registered units of measure that can be used to populate the schema:unitCode property to specify the units of measure used to report datavalues when that is appropriate."
-        },
-        "schema:minValue": {
-          "type": "number",
-          "description": " If the value for the variable is numeric, this is the minimum value that occurs in the dataset. Not useful for other value types."
-        },
-        "schema:maxValue": {
-          "type": "number",
-          "description": " If the value for the variable is numeric, this is the maximum value that occurs in the dataset. Not useful for other value types."
-        },
-        "schema:url": {
-          "format": "uri",
-          "type": "string",
-          "description": "Any schema:Thing can have a URL property, but because the value is simply a url the relationship of the linked resource can not be expressed. Usage is optional. The recommendation is that schema:url should link to a web page that would be useful for a person to interpret the variable, but is not intended to be machine-actionable."
-        }
-      },
-      "allOf": [
-        {
-          "required": [
-            "@type",
-            "schema:name",
-            "schema:description"
-          ]
-        }
-      ]
-    },
-    "Action": {
-      "$schema": "https://json-schema.org/draft/2020-12/schema",
-      "title": "Action ",
-      "type": "object",
-      "description": "this element defines an action (operation) that can be invoked via messages using the protocol defined. In most cases this will be an http request via TCP/IP, but in desktop or LAN environments, other protocols might be used. The target property defines the endpoint and syntax for invoking the action. Result specifies the encoding format for the (possible) response(s) when the action is invoked. Object specifies the information model for the resource that is the object of the action. This approach is an adoptation of the Action Blog Post from schema.org (see https://schema.org/docs/actions.html, and https://github.com/schemaorg/suggestions-questions-brainstorming/issues/62) ",
-      "properties": {
-        "@type": {
-          "type": "string",
-          "description": "The type of action. Use schema:Action for a generic action, or a more specific subclass.",
-          "default": "schema:Action",
-          "enum": [
-            "schema:Action",
-            "schema:SearchAction",
-            "schema:CreateAction",
-            "schema:MoveAction",
-            "schema:UpdateAction"
-          ]
-        },
-        "schema:name": {
-          "type": "string",
-          "description": "text label for the action"
-        },
-        "schema:target": {
-          "$ref": "#/$defs/target_type",
-          "description": "specifies the request target location and request syntax"
-        },
-        "schema:result": {
-          "$ref": "#/$defs/result_type",
-          "description": "specifies the serialization scheme (encoding format, information model) for expected representation of the data"
-        },
-        "schema:object": {
-          "$ref": "#/$defs/object_type",
-          "description": "specification of information model/schema for target resource. Only necessary if the request allow specifying the fields to include in the response"
-        },
-        "schema:query-input": {
-          "$ref": "#/$defs/query-input_type",
-          "description": "set of explanations of the parameters in the URL template for the target."
-        }
-      },
-      "required": [
-        "schema:name",
-        "schema:target"
-      ]
-    }
-  }
+  ]
 }

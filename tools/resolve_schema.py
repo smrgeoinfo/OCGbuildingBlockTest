@@ -9,7 +9,7 @@ with no form simplifications.
 $ref patterns handled:
   1. Relative path:       $ref: ../detailEMPA/schema.yaml
   2. Fragment-only:       $ref: '#/$defs/Identifier'
-  3. Cross-file fragment: $ref: ../metaMetadata/schema.yaml#/$defs/conformsTo_item
+  3. Cross-file fragment: $ref: ../cdifCatalogRecord/schema.yaml#/$defs/conformsTo_item
   4. Both YAML and JSON file extensions
 
 Usage:
