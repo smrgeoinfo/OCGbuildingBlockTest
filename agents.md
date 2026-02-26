@@ -27,8 +27,9 @@ metadataBuildingBlocks/
 │   │   ├── funder/                  # schema:funder / schema:Grant
 │   │   ├── webAPI/                  # schema:WebAPI
 │   │   ├── action/                  # schema:Action
-│   │   ├── agentInRole/             # schema:Role wrapping Person/Org
-│   │   ├── metaMetadata/            # dcterms:conformsTo metadata-about-metadata
+│   │   └── agentInRole/             # schema:Role wrapping Person/Org
+│   ├── cdifProperties/              # CDIF-specific property types
+│   │   ├── cdifCatalogRecord/       # dcat:CatalogRecord metadata-about-metadata
 │   │   ├── cdifMandatory/           # CDIF mandatory property group
 │   │   └── cdifOptional/            # CDIF optional property group
 │   ├── adaProperties/               # ADA (Astromat Data Archive) property types
@@ -139,10 +140,10 @@ $defs:
 
    ```yaml
    # CORRECT
-   $ref: ../../schemaorgProperties/metaMetadata/schema.yaml
+   $ref: ../../cdifProperties/cdifCatalogRecord/schema.yaml
 
    # WRONG — will cause 404 in validation
-   $ref: ../../schemaorgProperties/metaMetadata/metaMetadataSchema.json
+   $ref: ../../cdifProperties/cdifCatalogRecord/cdifCatalogRecordSchema.json
    ```
 
 2. **Use correct relative paths.** Paths are relative to the current `schema.yaml` file. Building blocks in `xasProperties/` that reference `schemaorgProperties/` need `../../schemaorgProperties/...`, not `../...`.
@@ -195,6 +196,7 @@ If the workflow fails, check the error log for:
 | `csvw` | `http://www.w3.org/ns/csvw#` | Tabular data descriptions |
 | `spdx` | `http://spdx.org/rdf/terms#` | File checksums |
 | `dcterms` | `http://purl.org/dc/terms/` | Conformance declarations |
+| `dcat` | `http://www.w3.org/ns/dcat#` | Catalog record typing (cdifCatalogRecord) |
 | `geosparql` | `http://www.opengis.net/ont/geosparql#` | Spatial geometry types |
 
 ## ADA Building Blocks
@@ -313,7 +315,7 @@ Recursively resolves ALL `$ref` references from modular YAML/JSON source schemas
 **$ref patterns handled:**
 1. Relative path: `$ref: ../detailEMPA/schema.yaml`
 2. Fragment-only: `$ref: '#/$defs/Identifier'`
-3. Cross-file fragment: `$ref: ../metaMetadata/schema.yaml#/$defs/conformsTo_item`
+3. Cross-file fragment: `$ref: ../cdifCatalogRecord/schema.yaml#/$defs/conformsTo_item`
 4. Both YAML and JSON file extensions
 
 **Usage:**
